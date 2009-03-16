@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirNavigationRaceLive", "AirNavigationRaceLive\AirNavigationRaceLive.csproj", "{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dom", "dom\dom.csproj", "{7AA4DA4A-C0F5-407E-84A8-16F55473E85A}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -17,6 +19,10 @@ Global
 		{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AA4DA4A-C0F5-407E-84A8-16F55473E85A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AA4DA4A-C0F5-407E-84A8-16F55473E85A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AA4DA4A-C0F5-407E-84A8-16F55473E85A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AA4DA4A-C0F5-407E-84A8-16F55473E85A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
