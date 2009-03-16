@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirNavigationRaceLive", "AirNavigationRaceLive\AirNavigationRaceLive.csproj", "{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.GEPluginCtrls", "..\FC.GEPluginCtrls\FC.GEPluginCtrls\FC.GEPluginCtrls.csproj", "{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", "..\FC.GEPluginCtrls\WindowsFormsApplication1\WindowsFormsApplication1.csproj", "{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dom", "dom", "{356A1F05-7D5D-490F-8E3B-FCF47A693977}"
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -33,32 +27,8 @@ Global
 		{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{180521F9-C8C8-411C-AAF7-46CCBB4FE34E}.Release|x86.ActiveCfg = Release|Any CPU
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Debug|x86.ActiveCfg = Debug|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Debug|x86.Build.0 = Debug|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Release|Any CPU.ActiveCfg = Release|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Release|Mixed Platforms.Build.0 = Release|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Release|x86.ActiveCfg = Release|x86
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617}.Release|x86.Build.0 = Release|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Debug|x86.ActiveCfg = Debug|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Debug|x86.Build.0 = Debug|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Release|Any CPU.ActiveCfg = Release|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Release|Mixed Platforms.Build.0 = Release|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Release|x86.ActiveCfg = Release|x86
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{FED2C69C-DB1B-4AB1-AC71-F572E5F2F4F2} = {356A1F05-7D5D-490F-8E3B-FCF47A693977}
-		{C06F0F75-6B29-4BA2-9EC5-BBFA3CA28617} = {356A1F05-7D5D-490F-8E3B-FCF47A693977}
 	EndGlobalSection
 EndGlobal
