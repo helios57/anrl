@@ -9,8 +9,8 @@ namespace AirNavigationRaceLive
     {
         static void Main(string[] args)
         {
-            Metro.Logging.PacketLogger logger = new Metro.Logging.PacketLogger("log");
-            Metro.Logging.ArpLogger Test = new Metro.Logging.ArpLogger(logger);
+            //Metro.Logging.PacketLogger logger = new Metro.Logging.PacketLogger("log");
+            //Metro.Logging.ArpLogger Test = new Metro.Logging.ArpLogger(logger);
         }
     }
 }
