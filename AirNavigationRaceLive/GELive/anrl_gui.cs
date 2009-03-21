@@ -46,13 +46,13 @@ namespace GELive
             geWebBrowser1.PluginReady += new GEWebBorwserEventHandeler(geWebBrowser1_PluginReady);
 
             // This event is raised by the loadKmlCallBack javascript function in the holding page
-            //geWebBrowser1.KmlLoaded += new GEWebBorwserEventHandeler(geWebBrowser1_KmlLoaded);
+            geWebBrowser1.KmlLoaded += new GEWebBorwserEventHandeler(geWebBrowser1_KmlLoaded);
 
             // This event is raised if there is a javascript error (it can also be raised manually)
             geWebBrowser1.ScriptError += new GEWebBorwserEventHandeler(geWebBrowser1_ScriptError);
 
             // This event is raised if there is an active kml event
-            //geWebBrowser1.KmlEvent += new GEWebBorwserEventHandeler(geWebBrowser1_KmlEvent);
+            geWebBrowser1.KmlEvent += new GEWebBorwserEventHandeler(geWebBrowser1_KmlEvent);
         }
 
         /// <summary>
@@ -168,6 +168,42 @@ namespace GELive
         }
 
         /// <summary>
+        /// Handles incomming KmlEvents from any added Event Listeners
+        /// </summary>
+        /// <param name="sender">The Kml event</param>
+        /// <param name="e">message:eventId</param>
+        void geWebBrowser1_KmlEvent(object sender, GEEventArgs e)
+        {
+            // if it is a mouse event
+            if (null != sender as IKmlMouseEvent)
+            {
+                handleKmlMouseEvents((IKmlMouseEvent)sender, e.Message);
+            }
+            else
+            {
+                MessageBox.Show(GEHelpers.GetTypeFromRcw(sender).ToString());
+            }
+        }
+
+        /// <summary>
+        /// Handles the Kml Loaded event
+        /// </summary>
+        /// <param name="sender">The Kml object</param>
+        /// <param name="e">Empty arguments</param>
+        void geWebBrowser1_KmlLoaded(object sender, GEEventArgs e)
+        {
+            // The kml object returned from javascript
+            //string type = GEHelpers.GetType(sender);
+            IKmlObject kmlObject = (IKmlObject)sender;
+
+            // Add the kml to the plugin 
+            ge.getFeatures().appendChild(kmlObject);
+
+            // Add the kml into the tree view control
+            //kmlTreeView1.ParsekmlObject(kmlObject);
+        }
+
+        /// <summary>
         /// Handles the script error event
         /// </summary>
         /// <param name="sender">The sending object</param>
@@ -180,5 +216,111 @@ namespace GELive
                 + e.Message,
                 "Error " + e.Data);
         }
+
+        //temporary
+        #region Private fields
+
+        /// <summary>
+        /// Use the IGEPlugin COM interface. 
+        /// Equivalent to QueryInterface for COM objects
+        /// </summary>
+        private IGEPlugin geplugin = null;
+
+        /// <summary>
+        /// An instance of the current document
+        /// </summary>
+        private HtmlDocument htmlDocument = null;
+
+        /// <summary>
+        /// An instance of the current browser
+        /// </summary>
+        private GEWebBrowser gewb = null;
+
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        /// Set the browser instance for the control to work with
+        /// </summary>
+        /// <param name="browser">The GEWebBrowser instance</param>
+        public void SetBrowserInstance(GEWebBrowser browser)
+        {
+            this.gewb = browser;
+            this.geplugin = browser.GetPlugin();
+            this.htmlDocument = browser.Document;
+        }
+
+        #endregion
+
+        #region Private methods
+
+        /// <summary>
+        /// Invokes the javascript function 'doGeocode'
+        /// Automatically flys to the location if one is found
+        /// </summary>
+        /// <param name="input">the location to geocode</param>
+        /// <returns>the point object (if any)</returns>
+        private IKmlPoint InvokeDoGeocode(string input)
+        {
+            if (this.htmlDocument == null)
+            {
+                return null;
+            }
+
+            return (IKmlPoint)this.htmlDocument.InvokeScript("jsDoGeocode", new object[] { input });
+        }
+
+        /// <summary>
+        /// Invokes the javascitp function 'LoadKml'
+        /// </summary>
+        /// <param name="url">The url of the file to load</param>
+        /// <returns>The resulting kml object (if any)</returns>
+        private IKmlObject InvokeLoadKml(string url)
+        {
+            if (this.htmlDocument == null)
+            {
+                return null;
+            }
+
+            return (IKmlObject)this.htmlDocument.InvokeScript("jsFetchKml", new object[] { url });
+        }
+
+        #endregion
+
+
+        #region Event handlers
+
+        /// <summary>
+        /// Called when the 'start' button is clicked
+        /// </summary>
+        /// <param name="sender">The 'start' button</param>
+        /// <param name="e">Event arguments</param>
+        private void LoadKml_Click(object sender, EventArgs e)
+        {
+            string input = "http://www.webcams.travel/webcams.kml";
+            if (input.Length > 1)
+            {
+                if (input.StartsWith("http", true, System.Globalization.CultureInfo.CurrentCulture))
+                {
+                    try
+                    {
+                        new Uri(input);
+                    }
+                    catch (UriFormatException)
+                    {
+                        return;
+                    }
+
+                    this.InvokeLoadKml(input);
+                }
+                else
+                {
+                    this.InvokeDoGeocode(input);
+                }
+            }
+        }
+
+        #endregion
     }
 }

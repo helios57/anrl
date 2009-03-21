@@ -63,6 +63,7 @@
     <Compile Include="GEWebBrowser.designer.cs">
       <DependentUpon>GEWebBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="IGEControls.cs" />
     <Compile Include="IHTMLScriptElement.cs" />
     <Compile Include="Maths.cs" />
     <Compile Include="Program.cs" />
