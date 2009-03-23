@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using GEPlugin;
 
@@ -42,8 +40,12 @@ namespace GELive
 
         #region Public methods
 
+        /// <summary>
+        /// Loads a kml file in the GEWebBrowser.
+        /// </summary>
         public void LoadKml()
         {
+            // this hardcoded string will be replaced by a webservice reference
             string input = "http://www.webcams.travel/webcams.kml";
             if (input.Length > 1)
             {

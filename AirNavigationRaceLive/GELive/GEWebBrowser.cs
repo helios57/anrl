@@ -19,12 +19,10 @@
 namespace GELive
 {
     using System;
-    using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.IO;
     using System.Reflection;
-    using System.Security.Permissions;
     using System.Windows.Forms;
     using GEPlugin;
 
@@ -38,7 +36,6 @@ namespace GELive
     /// <summary>
     /// This control simplifies working with the Google Earth Plugin
     /// </summary>
-    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public partial class GEWebBrowser : WebBrowser
     {
         #region Private fields
@@ -69,7 +66,6 @@ namespace GELive
             this.external.KmlLoaded += new ExternalEventHandeler(this.External_KmlLoaded);
             this.external.PluginReady += new ExternalEventHandeler(this.External_PluginReady);
             this.external.ScriptError += new ExternalEventHandeler(this.External_ScriptError);
-            this.external.KmlEvent += new ExternalEventHandeler(this.External_KmlEvent);
 
             // Setup the control
             this.AllowNavigation = false;
@@ -235,49 +231,6 @@ namespace GELive
                 new object[] { feature, action });
         }
 
-        /// <summary>
-        /// Take a 'screen grab' of the current GEWebBrowser view
-        /// </summary>
-        /// <returns>bitmap image</returns>
-        public Bitmap ScreenGrab()
-        {
-            try
-            {
-                Rectangle rectangle = this.DisplayRectangle;
-                Bitmap bitmap =
-                    new Bitmap(
-                        rectangle.Width,
-                        rectangle.Height,
-                        PixelFormat.Format32bppArgb);
-                Graphics graphics = Graphics.FromImage(bitmap);
-                Point point = new Point();
-                graphics.CopyFromScreen(
-                    this.PointToScreen(point),
-                    point,
-                    new Size(rectangle.Width, rectangle.Height));
-                graphics.Dispose();
-                return bitmap;
-            }
-            catch (Exception)
-            {
-                return new Bitmap(0, 0);
-            }
-        }
-
-        /// <summary>
-        /// Kills all running geplugin processes on the system
-        /// </summary>
-        public void KillAllPluginProcesses()
-        {
-            System.Diagnostics.Process[] gep =
-                System.Diagnostics.Process.GetProcessesByName("geplugin");
-
-            while (gep.Length > 0)
-            {
-                gep[gep.Length - 1].Kill();
-            }
-        }
-
         #endregion
 
         #region Protected methods
@@ -292,19 +245,6 @@ namespace GELive
             if (this.PluginReady != null)
             {
                 this.PluginReady(plugin, e);
-            }
-        }
-
-        /// <summary>
-        /// Protected method for raising the KmlEvent event
-        /// </summary>
-        /// <param name="kmlEvent">the kml event</param>
-        /// <param name="e">The eventid</param>
-        protected virtual void OnKmlEvent(object kmlEvent, GEEventArgs e)
-        {
-            if (this.KmlEvent != null)
-            {
-                this.KmlEvent(kmlEvent, e);
             }
         }
 
@@ -365,16 +305,6 @@ namespace GELive
 
             // Raise the ready event
             this.OnPluginReady(this.geplugin, e);
-        }
-
-        /// <summary>
-        /// Called when there is a Kml event 
-        /// </summary>
-        /// <param name="kmlEvent">the kml event</param>
-        /// <param name="e">The eventId</param>
-        private void External_KmlEvent(object kmlEvent, GEEventArgs e)
-        {
-            this.OnKmlEvent(kmlEvent, e);
         }
 
         /// <summary>
