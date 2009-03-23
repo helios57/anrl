@@ -85,11 +85,6 @@ namespace GELive
         public event GEWebBorwserEventHandeler PluginReady;
 
         /// <summary>
-        /// Raised when there is a kmlEvent
-        /// </summary>
-        public event GEWebBorwserEventHandeler KmlEvent;
-
-        /// <summary>
         /// Raised when a kml/kmz file has loaded
         /// </summary>
         public event GEWebBorwserEventHandeler KmlLoaded;
