@@ -135,7 +135,7 @@ namespace GELive
             if (ge != null)
             {
                 // Tell various the controls the browser instance to work with
-                //geToolStrip1.SetBrowserInstance(geWebBrowser1);
+                geToolStrip1.SetBrowserInstance(geWebBrowser1);
                 //kmlTreeView1.SetBrowserInstance(geWebBrowser1);
 
                 // Load some kml 
@@ -215,6 +215,11 @@ namespace GELive
                 + Environment.NewLine
                 + e.Message,
                 "Error " + e.Data);
+        }
+
+        private void LoadKml_Click(object sender, EventArgs e)
+        {
+            geToolStrip1.LoadKml();
         }
     }
 }

@@ -57,6 +57,12 @@
     <Compile Include="External.cs" />
     <Compile Include="GEEventArgs.cs" />
     <Compile Include="GEHelpers.cs" />
+    <Compile Include="GEToolStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GEToolStrip.Designer.cs">
+      <DependentUpon>GEToolStrip.cs</DependentUpon>
+    </Compile>
     <Compile Include="GEWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
