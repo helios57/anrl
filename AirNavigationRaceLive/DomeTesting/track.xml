@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml>
+  <ANRL>
+    <ID>1245</ID>
+    <Flugzeug_ID>2</Flugzeug_ID>
+    <Timestamp>3/1/2008 7:00:00 AM</Timestamp>
+    <Tstart>3/1/2008 6:50:10 AM</Tstart>
+    <Tend>3/1/2008 6:50:10 AM</Tend>
+    <Speed>80</Speed>
+    <Penalty>10</Penalty>  
+  </ANRL>
+  <Document>
+    <name>KmlFile</name>
+    <Style id="yellowLineGreenPoly">
+      <LineStyle>
+        <color>7f00ffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>7f00ff00</color>
+      </PolyStyle>
+    </Style>
+    <Placemark>
+      <name>Absolute Extruded</name>
+      <visibility>1</visibility>
+      <description>Transparent green wall with yellow outlines</description>
+      <styleUrl>#yellowLineGreenPoly</styleUrl>
+      <LineString>
+        <extrude>1</extrude>
+        <tessellate>1</tessellate>
+        <altitudeMode>absolute</altitudeMode>
+        <coordinates>
+          -112.2595218489022,36.08584355239394,2357
+          -112.2608216347552,36.08612634548589,2357
+          -112.262073428656,36.08626019085147,2000
+          -112.2633204928495,36.08621519860091,2180
+          -112.2644963846444,36.08627897945274,2357
+          -112.2656969554589,36.08649599090644,2357
+        </coordinates>
+      </LineString>
+    </Placemark>
+  </Document>
+</kml>
