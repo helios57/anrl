@@ -17,6 +17,7 @@ namespace DomeTesting
             
             KmlBuilder kmlBuilder = new KmlBuilder();
             XmlDocument xml = kmlBuilder.BuildKml(1, 4, TimeStamp, -112.2595218489022, 36.08584355239394, -112.2608216347552, 36.08612634548589, 2357, 2100, Tstart, Tend, 200, 10);
+            Console.WriteLine(xml.InnerXml);
             Console.ReadKey();
         }        
     }
