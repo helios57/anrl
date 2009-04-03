@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Xml;
 
 /// <summary>
@@ -11,7 +12,7 @@ using System.Xml;
 /// </summary>
 public class KmlBuilder
 {    
-    public XmlDocument BuildKml(int ID, int Flugzeug_ID, DateTime Timestamp, double Xstart, double Xend, double Ystart, double Yend, double Zstart, double Zend, DateTime Tstart, DateTime Tend, double Speed, int Pentalty)
+    public XmlDocument BuildKml(string ID, string Flugzeug_ID, string Timestamp, string Xstart, string Xend, string Ystart, string Yend, string Zstart, string Zend, string Tstart, string Tend, string Speed, string Pentalty)
     {
         // checking of parameters needed?
 
@@ -19,10 +20,21 @@ public class KmlBuilder
         try
         {
             kml.Load("track.xml");
+
+            // maybe a dynamic possibility to add each parameter-value to its appropriate xmlNode
+            kml.GetElementsByTagName("ID").Item(0).Value = ID;
+            kml.GetElementsByTagName("Flugzeug_ID").Item(0).Value = Flugzeug_ID;
+            kml.GetElementsByTagName("Timestamp").Item(0).Value = Timestamp;
+            kml.GetElementsByTagName("Tstart").Item(0).Value = Tstart;
+            kml.GetElementsByTagName("Tend").Item(0).Value = Tend;
+            kml.GetElementsByTagName("Speed").Item(0).Value = Speed;
+            kml.GetElementsByTagName("Pentalty").Item(0).Value = Pentalty;
+            string Coordinates = Xstart + "," + Xend + "," + Zstart + "\r\n" + Ystart + "," + Yend + "," + Zend;
+            kml.GetElementsByTagName("coordinates").Item(0).Value = Coordinates;
         }
         catch (Exception err)
         {
-            Console.WriteLine(err.Message);
+            // here should be some intelligent error-handling
         }
         return kml;
     }
