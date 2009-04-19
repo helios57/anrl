@@ -1,6 +1,0 @@
-C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\AirNavigationRaceLive\bin\Debug\AirNavigationRaceLive.exe
-C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\AirNavigationRaceLive\bin\Debug\AirNavigationRaceLive.pdb
-C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\AirNavigationRaceLive\obj\Debug\ResolveAssemblyReference.cache
-C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\AirNavigationRaceLive\obj\Debug\AirNavigationRaceLive.exe
-C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\AirNavigationRaceLive\obj\Debug\AirNavigationRaceLive.pdb
-C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\AirNavigationRaceLive\bin\Debug\AirNavigationRaceLive.exe.config
