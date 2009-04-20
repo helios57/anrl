@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KmlBuilder", "KmlBuilder\Km
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D18C18FB-8BC7-455A-A213-E870A2DF5430}"
 	ProjectSection(SolutionItems) = preProject
-		Taskliste.txt = Taskliste.txt
+		Taskliste.xls = Taskliste.xls
 	EndProjectSection
 EndProject
 Global
