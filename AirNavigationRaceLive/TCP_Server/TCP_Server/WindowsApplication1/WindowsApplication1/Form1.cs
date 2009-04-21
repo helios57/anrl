@@ -32,7 +32,11 @@ namespace TCPServerTutorial
 
         public void AddTextDelegate(string s)
         {
-            textBox1.Text += s;
+            String[] GPScoords= s.Split(',');
+            textBox1.Text+= "\r\n";
+            foreach (String ss in GPScoords){
+            textBox1.Text += ss+"  ";
+            }
         }
 
         public void Send()
