@@ -7,6 +7,8 @@ namespace TCPReciever
 {
     static class Program
     {
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,7 +17,8 @@ namespace TCPReciever
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Control c = new Control();
+            Application.Run(new Control());
         }
     }
 }

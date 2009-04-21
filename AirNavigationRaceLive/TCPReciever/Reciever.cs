@@ -6,7 +6,7 @@ using System.Net;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 //http://www.switchonthecode.com/tutorials/csharp-tutorial-simple-threaded-tcp-server
-namespace TCPServerTutorial
+namespace TCPReciever
 {
     class Server
     {
@@ -93,4 +93,33 @@ namespace TCPServerTutorial
             }
         }
     }
+
+    /*    How to use ...    
+     *  public delegate void AddText(string message);
+        Server server;
+        public AddText MyDelegate;
+        public Form1()
+        {
+            InitializeComponent();
+            server = new Server();
+            server.MessageReceived += new TCPServerTutorial.Server.MessageReceivedHandler(Message_Received);
+        }
+        void Message_Received(string message)
+        {
+            MyDelegate = new AddText(AddTextDelegate);
+            this.Invoke(MyDelegate, new string[]{message});
+            //MyDelegate = new AddText(AddTextDelegate);
+            //MyDelegate.Method.
+            //this.Invoke(MyDelegate);
+        }
+
+        public void AddTextDelegate(string s)
+        {
+            String[] GPScoords= s.Split(',');
+            textBox1.Text+= "\r\n";
+            foreach (String ss in GPScoords){
+            textBox1.Text += ss+"  ";
+            }
+        }
+     */
 }
