@@ -107,7 +107,6 @@ namespace TCPReciever
                 string messageString = encoder.GetString(message, 0, bytesRead);
                 if (this.MessageReceived != null)
                     this.MessageReceived(messageString);
-                    cmd.CommandText = "INSERT t_GPS_IN (ID,IMEI,Status,GPS_fix,TimestampTracker,longitude,latitude,altitude,speed,heading,nr_used_sat,HDOP,Timestamp) VALUES ('Beispieleintrag')";
             }
             tcpClient.Close();
         }
