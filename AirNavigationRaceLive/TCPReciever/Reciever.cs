@@ -31,6 +31,12 @@ namespace TCPReciever
             this.listenThread.Start();
             DataContext db = new DataContext("C:\\daten\\gibb.ch\\306\\AirNavigationRaceLiveC#\\AirNavigationRaceLive\\DataService\\App_Data\\Database.mdf");
             Table<t_GPS_IN> Customers = db.GetTable<t_GPS_IN>();
+            t_GPS_IN test = new t_GPS_IN();
+            test.IMEI = "32R342";
+            //Customers.Attach(test);
+            Customers.InsertOnSubmit(test);
+            db.SubmitChanges();
+            Customers = db.GetTable<t_GPS_IN>();
             foreach (t_GPS_IN a in Customers)
             {
                 MessageBox.Show("test");
