@@ -16,7 +16,7 @@ namespace DataService.LINQ_Tables
     [Table(Name="t_GPS_IN")]
     public class t_GPS_IN
     {
-        [Column(IsPrimaryKey = true)]
+        [Column(IsPrimaryKey = true,IsDbGenerated = true)]
         public int ID;
         [Column]
         public string IMEI;

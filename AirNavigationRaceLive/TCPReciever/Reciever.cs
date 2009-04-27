@@ -51,21 +51,8 @@ namespace TCPReciever
             Customers = db.GetTable<t_GPS_IN>();
             foreach (t_GPS_IN a in Customers)
             {
-                MessageBox.Show("test");
+                MessageBox.Show(a.ToString());
             }
-            /*
-            SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=..\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
-            SqlCommand command = new SqlCommand("INSERT INTO BLA", SQL);
-            command.Connection.Open();
-            command.ExecuteNonQuery();
-            /*
-            cmd = new System.Data.SqlClient.SqlCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Connection = SQL;
-            cmd.Connection.Open();
-            cmd.
-            SQL.Open();*/
-
         }
 
         private void ListenForClients()
