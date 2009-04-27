@@ -25,6 +25,11 @@ namespace TCPReciever
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
             SqlConnection SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
+            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.Connection = SQL;
+            SQL.Open();
+
         }
 
         private void ListenForClients()
@@ -78,6 +83,7 @@ namespace TCPReciever
                 string messageString = encoder.GetString(message, 0, bytesRead);
                 if (this.MessageReceived != null)
                     this.MessageReceived(messageString);
+                    cmd.CommandText = "INSERT t_GPS_IN (ID,IMEI,Status,GPS_fix,TimestampTracker,longitude,latitude,altitude,speed,heading,nr_used_sat,HDOP,Timestamp) VALUES ('Beispieleintrag')";
             }
             tcpClient.Close();
         }
