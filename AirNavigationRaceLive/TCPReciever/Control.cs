@@ -11,6 +11,7 @@ namespace TCPReciever
         public RecievedGPS MyDelegate;
         Server server;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
         public bool running;
 
         public Control()
@@ -37,6 +38,7 @@ namespace TCPReciever
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -49,18 +51,28 @@ namespace TCPReciever
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 41);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(268, 20);
+            this.textBox1.TabIndex = 1;
+            // 
             // Control
             // 
             this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "Control";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            server.ProcessRecievedGPSData(textBox1.Text);
         }
     }
 }

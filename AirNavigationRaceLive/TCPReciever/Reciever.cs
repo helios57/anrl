@@ -69,7 +69,6 @@ namespace TCPReciever
                                     Int32.Parse(GPScoords[5].Substring(0, 2)),
                                     Int32.Parse(GPScoords[5].Substring(2, 2)),
                                     Int32.Parse(GPScoords[5].Substring(4, 2)));
-                //DateTime.Parse(GPScoords[4]+','+ GPScoords[5]
             test.longitude = GPScoords[6];
             test.latitude = GPScoords[7];
             test.altitude = GPScoords[8];
