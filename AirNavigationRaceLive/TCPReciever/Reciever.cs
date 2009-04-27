@@ -33,6 +33,18 @@ namespace TCPReciever
             Table<t_GPS_IN> Customers = db.GetTable<t_GPS_IN>();
             t_GPS_IN test = new t_GPS_IN();
             test.IMEI = "32R342";
+            test.Status = 1;
+            test.GPS_fix = 1;
+            test.TimestampTracker = DateTime.Now;
+            test.longitude = "longi";
+            test.latitude = "Lati";
+            test.altitude = "alti";
+            test.speed = "speed";
+            test.heading = "head";
+            test.nr_used_sat = 2;
+            test.HDOP = "hd";
+            test.Timestamp = DateTime.Now;
+
             //Customers.Attach(test);
             Customers.InsertOnSubmit(test);
             db.SubmitChanges();

@@ -25,7 +25,7 @@ namespace DataService.LINQ_Tables
         [Column]
         public int GPS_fix;
         [Column]
-        public string TimestampTracker;
+        public DateTime TimestampTracker;
         [Column]
         public string longitude;
         [Column]
@@ -41,6 +41,6 @@ namespace DataService.LINQ_Tables
         [Column]
         public string HDOP;
         [Column]
-        public string Timestamp;
+        public DateTime Timestamp;
     }
 }
