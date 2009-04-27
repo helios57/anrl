@@ -5,6 +5,7 @@ using System.Threading;
 using System.Net;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.Linq;
 //http://www.switchonthecode.com/tutorials/csharp-tutorial-simple-threaded-tcp-server
 namespace TCPReciever
 {
@@ -18,6 +19,7 @@ namespace TCPReciever
         public bool running;
         private System.Data.SqlClient.SqlCommand cmd;
         List<Thread> ThreadList = new List<Thread>();
+        SqlConnection SQL;
 
         public Server()
         {
@@ -25,11 +27,20 @@ namespace TCPReciever
             this.tcpListener = new TcpListener(IPAddress.Any, 5000);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-            SqlConnection SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=..\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
+            DataContext db = new DataContext("C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\DataService\App_Data\Database.mdf");
+
+            /*
+            SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=..\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
+            SqlCommand command = new SqlCommand("INSERT INTO BLA", SQL);
+            command.Connection.Open();
+            command.ExecuteNonQuery();
+            /*
             cmd = new System.Data.SqlClient.SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = SQL;
-            SQL.Open();
+            cmd.Connection.Open();
+            cmd.
+            SQL.Open();*/
 
         }
 
