@@ -8,8 +8,8 @@ namespace TCPReciever
     class Control:System.Windows.Forms.Form
     {
         public delegate void RecievedGPS(string message);
-        Server server;
         public RecievedGPS MyDelegate;
+        Server server;
         private System.Windows.Forms.Button button1;
         public bool running;
 
@@ -17,7 +17,7 @@ namespace TCPReciever
         {
             running = true;
             server = new Server();
-            server.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received);
+            //server.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received);
             InitializeComponent();
             Show();
         }
@@ -32,12 +32,6 @@ namespace TCPReciever
         public void ProcessRecievedGPSData(string GPSData)
         {
             String[] GPScoords = GPSData.Split(new char[] {',','*'});
-
-           /* textBox1.Text += "\r\n";
-            foreach (String ss in GPScoords)
-            {
-                textBox1.Text += ss + "  ";
-            }*/
         }
 
         private void InitializeComponent()

@@ -19,10 +19,13 @@ namespace TCPReciever
 
         public delegate void MessageReceivedHandler(string message);
         public event MessageReceivedHandler MessageReceived;
+
+        public delegate void RecievedGPS(string message);
+        public RecievedGPS MyDelegate;
+
         public bool running;
-        private System.Data.SqlClient.SqlCommand cmd;
         List<Thread> ThreadList = new List<Thread>();
-        SqlConnection SQL;
+        DataContext db;
 
         public Server()
         {
@@ -31,37 +34,53 @@ namespace TCPReciever
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
 
-#region Get DB - Path
-            string executableName = Application.ExecutablePath;
-            FileInfo executableFileInfo = new FileInfo(executableName);
-            string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
-            String DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
-#endregion
+            #region Get DB - Path
+                string executableName = Application.ExecutablePath;
+                FileInfo executableFileInfo = new FileInfo(executableName);
+                string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
+                String DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
+            #endregion
 
             DataContext db = new DataContext(DB_PATH);
-            Table<t_GPS_IN> Customers = db.GetTable<t_GPS_IN>();
+            this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
+        }
+
+        public void Message_Received_Processor(string message)
+        {
+            MyDelegate = new RecievedGPS(ProcessRecievedGPSData);
+            // this.invoke (MyDelegate, new string[] { message });
+            MyDelegate.Invoke(message);
+        }
+
+        public void ProcessRecievedGPSData(string GPSData)
+        {
+            String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
+            String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
+
+            Table<t_GPS_IN> GPS_IN = db.GetTable<t_GPS_IN>();
             t_GPS_IN test = new t_GPS_IN();
-            test.IMEI = "32R342";
-            test.Status = 1;
-            test.GPS_fix = 1;
-            test.TimestampTracker = DateTime.Now;
-            test.longitude = "longi";
-            test.latitude = "Lati";
-            test.altitude = "alti";
-            test.speed = "speed";
-            test.heading = "head";
-            test.nr_used_sat = 2;
-            test.HDOP = "hd";
+            test.IMEI = GPScoords[1];
+            test.Status =Int32.Parse(GPScoords[2]);
+            test.GPS_fix =Int32.Parse(GPScoords[3]);
+            test.TimestampTracker = new DateTime(
+                                    Int32.Parse("20" + GPScoords[4].Substring(4, 2)),
+                                    Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                    Int32.Parse(GPScoords[4].Substring(0, 2)),
+                                    Int32.Parse(GPScoords[5].Substring(0, 2)),
+                                    Int32.Parse(GPScoords[5].Substring(2, 2)),
+                                    Int32.Parse(GPScoords[5].Substring(4, 2)));
+                //DateTime.Parse(GPScoords[4]+','+ GPScoords[5]
+            test.longitude = GPScoords[6];
+            test.latitude = GPScoords[7];
+            test.altitude = GPScoords[8];
+            test.speed = GPScoords[9];
+            test.heading = GPScoords[10];
+            test.nr_used_sat = Int32.Parse(GPScoords[11]);
+            test.HDOP = GPScoords[12];
             test.Timestamp = DateTime.Now;
 
-            //Customers.Attach(test);
-            Customers.InsertOnSubmit(test);
+            GPS_IN.InsertOnSubmit(test);
             db.SubmitChanges();
-            Customers = db.GetTable<t_GPS_IN>();
-            foreach (t_GPS_IN a in Customers)
-            {
-                MessageBox.Show(a.ToString());
-            }
         }
 
         private void ListenForClients()
@@ -130,33 +149,4 @@ namespace TCPReciever
             }
         }
     }
-
-    /*    How to use ...    
-     *  public delegate void AddText(string message);
-        Server server;
-        public AddText MyDelegate;
-        public Form1()
-        {
-            InitializeComponent();
-            server = new Server();
-            server.MessageReceived += new TCPServerTutorial.Server.MessageReceivedHandler(Message_Received);
-        }
-        void Message_Received(string message)
-        {
-            MyDelegate = new AddText(AddTextDelegate);
-            this.Invoke(MyDelegate, new string[]{message});
-            //MyDelegate = new AddText(AddTextDelegate);
-            //MyDelegate.Method.
-            //this.Invoke(MyDelegate);
-        }
-
-        public void AddTextDelegate(string s)
-        {
-            String[] GPScoords= s.Split(',');
-            textBox1.Text+= "\r\n";
-            foreach (String ss in GPScoords){
-            textBox1.Text += ss+"  ";
-            }
-        }
-     */
 }
