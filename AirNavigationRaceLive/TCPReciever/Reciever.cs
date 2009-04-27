@@ -17,6 +17,7 @@ namespace TCPReciever
         public event MessageReceivedHandler MessageReceived;
         public bool running;
         List<Thread> ThreadList = new List<Thread>();
+        System.Data.SqlClient.SqlCommand cmd;
 
         public Server()
         {
@@ -25,7 +26,7 @@ namespace TCPReciever
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
             SqlConnection SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=..\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+            cmd = new System.Data.SqlClient.SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = SQL;
             SQL.Open();
