@@ -24,7 +24,7 @@ namespace TCPReciever
             this.tcpListener = new TcpListener(IPAddress.Any, 5000);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-            SqlConnection SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=App_Data\C:\daten\gibb.ch\306\AirNavigationRaceLiveC#\AirNavigationRaceLive\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
+            SqlConnection SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=..\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
             System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.Connection = SQL;
