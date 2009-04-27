@@ -31,7 +31,7 @@ namespace TCPReciever
 
         public void ProcessRecievedGPSData(string GPSData)
         {
-            String[] GPScoords = GPSData.Split(',');
+            String[] GPScoords = GPSData.Split(new char[] {',','*'});
 
            /* textBox1.Text += "\r\n";
             foreach (String ss in GPScoords)

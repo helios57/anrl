@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data.Linq;
 using DataService.LINQ_Tables;
 using System.Windows.Forms;
+using System.IO;
 //http://www.switchonthecode.com/tutorials/csharp-tutorial-simple-threaded-tcp-server
 namespace TCPReciever
 {
@@ -29,7 +30,15 @@ namespace TCPReciever
             this.tcpListener = new TcpListener(IPAddress.Any, 5000);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-            DataContext db = new DataContext("C:\\daten\\gibb.ch\\306\\AirNavigationRaceLiveC#\\AirNavigationRaceLive\\DataService\\App_Data\\Database.mdf");
+
+#region Get DB - Path
+            string executableName = Application.ExecutablePath;
+            FileInfo executableFileInfo = new FileInfo(executableName);
+            string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
+            String DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
+#endregion
+
+            DataContext db = new DataContext(DB_PATH);
             Table<t_GPS_IN> Customers = db.GetTable<t_GPS_IN>();
             t_GPS_IN test = new t_GPS_IN();
             test.IMEI = "32R342";
