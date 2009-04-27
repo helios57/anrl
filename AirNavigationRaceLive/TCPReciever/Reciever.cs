@@ -16,8 +16,8 @@ namespace TCPReciever
         public delegate void MessageReceivedHandler(string message);
         public event MessageReceivedHandler MessageReceived;
         public bool running;
+        private System.Data.SqlClient.SqlCommand cmd;
         List<Thread> ThreadList = new List<Thread>();
-        System.Data.SqlClient.SqlCommand cmd;
 
         public Server()
         {
