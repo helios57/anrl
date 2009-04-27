@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.Linq;
 using DataService.LINQ_Tables;
+using System.Windows.Forms;
 //http://www.switchonthecode.com/tutorials/csharp-tutorial-simple-threaded-tcp-server
 namespace TCPReciever
 {
@@ -30,7 +31,10 @@ namespace TCPReciever
             this.listenThread.Start();
             DataContext db = new DataContext("C:\\daten\\gibb.ch\\306\\AirNavigationRaceLiveC#\\AirNavigationRaceLive\\DataService\\App_Data\\Database.mdf");
             Table<t_GPS_IN> Customers = db.GetTable<t_GPS_IN>();
-
+            foreach (t_GPS_IN a in Customers)
+            {
+                MessageBox.Show("test");
+            }
             /*
             SQL = new SqlConnection(@"Data Source=.;AttachDbFilename=..\DataService\App_Data\Database.mdf;Integrated Security=True;Connect Timeout=30;User Instance=True");
             SqlCommand command = new SqlCommand("INSERT INTO BLA", SQL);
