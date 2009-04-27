@@ -26,6 +26,7 @@ namespace TCPReciever
         public bool running;
         List<Thread> ThreadList = new List<Thread>();
         DataContext db;
+        String DB_PATH;
 
         public Server()
         {
@@ -38,7 +39,7 @@ namespace TCPReciever
                 string executableName = Application.ExecutablePath;
                 FileInfo executableFileInfo = new FileInfo(executableName);
                 string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
-                String DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
+                DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
             #endregion
 
             DataContext db = new DataContext(DB_PATH);
@@ -57,25 +58,26 @@ namespace TCPReciever
             String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
             String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
+            DataContext db = new DataContext(DB_PATH);
             Table<t_GPS_IN> GPS_IN = db.GetTable<t_GPS_IN>();
             t_GPS_IN test = new t_GPS_IN();
-            test.IMEI = GPScoords[1];
-            test.Status =Int32.Parse(GPScoords[2]);
-            test.GPS_fix =Int32.Parse(GPScoords[3]);
+            test.IMEI = GPScoords[0];
+            test.Status =Int32.Parse(GPScoords[1]);
+            test.GPS_fix =Int32.Parse(GPScoords[2]);
             test.TimestampTracker = new DateTime(
-                                    Int32.Parse("20" + GPScoords[4].Substring(4, 2)),
-                                    Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                    Int32.Parse("20" + GPScoords[3].Substring(4, 2)),
+                                    Int32.Parse(GPScoords[3].Substring(2, 2)),
+                                    Int32.Parse(GPScoords[3].Substring(0, 2)),
                                     Int32.Parse(GPScoords[4].Substring(0, 2)),
-                                    Int32.Parse(GPScoords[5].Substring(0, 2)),
-                                    Int32.Parse(GPScoords[5].Substring(2, 2)),
-                                    Int32.Parse(GPScoords[5].Substring(4, 2)));
-            test.longitude = GPScoords[6];
-            test.latitude = GPScoords[7];
-            test.altitude = GPScoords[8];
-            test.speed = GPScoords[9];
-            test.heading = GPScoords[10];
-            test.nr_used_sat = Int32.Parse(GPScoords[11]);
-            test.HDOP = GPScoords[12];
+                                    Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                    Int32.Parse(GPScoords[4].Substring(4, 2)));
+            test.longitude = GPScoords[5];
+            test.latitude = GPScoords[6];
+            test.altitude = GPScoords[7];
+            test.speed = GPScoords[8];
+            test.heading = GPScoords[9];
+            test.nr_used_sat = Int32.Parse(GPScoords[10]);
+            test.HDOP = GPScoords[11];
             test.Timestamp = DateTime.Now;
 
             GPS_IN.InsertOnSubmit(test);
