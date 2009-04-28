@@ -72,7 +72,10 @@
       <DependentUpon>ANRLDataService.svc</DependentUpon>
     </Compile>
     <Compile Include="IANRLDataService.cs" />
+    <Compile Include="LINQ_Tables\t_Daten.cs" />
+    <Compile Include="LINQ_Tables\t_Flugzeug.cs" />
     <Compile Include="LINQ_Tables\t_GPS_IN.cs" />
+    <Compile Include="LINQ_Tables\t_Tracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

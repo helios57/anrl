@@ -1,6 +1,6 @@
 ﻿namespace TCPReciever
 {
-    partial class Service1
+    partial class GPSReciever
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            this.ServiceName = "ANRL GPS Reciever";
         }
 
         #endregion

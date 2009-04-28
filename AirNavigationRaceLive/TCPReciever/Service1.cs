@@ -9,9 +9,9 @@ using System.Text;
 
 namespace TCPReciever
 {
-    partial class Service1 : ServiceBase
+    partial class GPSReciever : ServiceBase
     {
-        public Service1()
+        public GPSReciever()
         {
             InitializeComponent();
         }

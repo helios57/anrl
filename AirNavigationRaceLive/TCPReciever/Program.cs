@@ -18,7 +18,9 @@ namespace TCPReciever
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Control c = new Control();
-            Application.Run(new Control());
+            //Application.Run(new Control());
+            GPSReciever Test = new GPSReciever();
+            Test.
         }
     }
 }
