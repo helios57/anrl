@@ -43,12 +43,13 @@ namespace GELive
         /// <summary>
         /// Loads a kml file in the GEWebBrowser.
         /// </summary>
-        public void InvokeLoadKml(String kml)
+        public void InvokeLoadKml()
         {
-            Object[] args = new Object[1];
-            args[0] = (Object)kml;
-            htmlDocument.InvokeScript("loadKml", args);
-         
+            WSManager ws = new WSManager();     // this line of code has to be updated when the webservice works
+            string kml = ws.GetKml();           // this line of code has to be updated when the webservice works
+            Object[] objArray = new Object[1];
+            objArray[0] = (Object)kml;
+            htmlDocument.InvokeScript("loadKml", objArray);
         }
         
         /// <summary>

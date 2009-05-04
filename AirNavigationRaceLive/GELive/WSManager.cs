@@ -11,18 +11,9 @@ namespace GELive
     {
         public string GetKml()
         {
-            //XmlDocument kml = new XmlDocument();
-            //return kml.ToString();
             // kml file loaded by resource file instead of webservice
             // change this when webservice is implemented
-            GELive.anrlWebService.ANRLDataServiceClient client = new ANRLDataServiceClient();
-            
-            // trackerId as paramater
-            anrlWebService.t_Daten data = client.GetPathData(1);
-
-            
             return GELive.Properties.Resources.track;
-
         }
         
     }
