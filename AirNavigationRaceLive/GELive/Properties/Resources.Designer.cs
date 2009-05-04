@@ -81,5 +81,37 @@ namespace GELive.Properties {
                 return ResourceManager.GetString("Plugin", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+        ///&lt;!-- KML Regionator 485 --&gt;
+        ///&lt;kml xmlns=&quot;http://earth.google.com/kml/2.1&quot;&gt;
+        ///&lt;Document&gt;
+        ///&lt;name&gt;webcams.travel&lt;/name&gt;
+        ///&lt;Snippet&gt;Webcams Worldwide&lt;/Snippet&gt;
+        ///&lt;NetworkLink&gt;
+        ///&lt;name&gt;Webcams Worldwide&lt;/name&gt;
+        ///&lt;Style&gt;
+        ///&lt;ListStyle&gt;
+        ///&lt;listItemType&gt;checkHideChildren&lt;/listItemType&gt;
+        ///&lt;/ListStyle&gt;
+        ///&lt;/Style&gt;
+        ///&lt;Region&gt;
+        ///&lt;Lod&gt;
+        ///&lt;minLodPixels&gt;256&lt;/minLodPixels&gt;
+        ///&lt;maxLodPixels&gt;-1&lt;/maxLodPixels&gt;
+        ///&lt;/Lod&gt;
+        ///&lt;LatLonAltBox&gt;
+        ///&lt;north&gt;180.0&lt;/north&gt;
+        ///&lt;south&gt;-180.0&lt;/south&gt;
+        ///&lt;east&gt;180.0&lt;/east&gt;
+        ///&lt;west&gt;-180.0&lt;/west&gt;
+        ///&lt;/Lat [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string track {
+            get {
+                return ResourceManager.GetString("track", resourceCulture);
+            }
+        }
     }
 }

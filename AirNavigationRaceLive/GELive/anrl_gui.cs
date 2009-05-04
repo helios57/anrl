@@ -80,7 +80,8 @@ namespace GELive
 
         private void LoadKml_Click(object sender, EventArgs e)
         {
-            geToolStrip1.LoadKml();
+            WSManager wsManager = new WSManager();
+            geToolStrip1.InvokeLoadKml(wsManager.GetKml());
         }
     }
 }

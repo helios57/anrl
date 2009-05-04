@@ -80,6 +80,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
   *
   */
   
+  function loadKml(kml)
+  {
+	kml = ge.parseKml(kml);//parse the kml
+	ge.getFeatures().appendChild(kml);//add the kml data to ge
+  }
+  
   var jsEvaluate = function(script)
   {
     return eval(script);

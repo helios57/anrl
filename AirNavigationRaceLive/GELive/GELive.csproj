@@ -108,11 +108,13 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\webcams.kml" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="WSManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="GEPlugin">
@@ -126,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Plugin.html" />
+    <None Include="Resources\track.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

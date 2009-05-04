@@ -43,30 +43,12 @@ namespace GELive
         /// <summary>
         /// Loads a kml file in the GEWebBrowser.
         /// </summary>
-        public void LoadKml()
+        public void InvokeLoadKml(String kml)
         {
-            // this hardcoded string will be replaced by a webservice reference
-            string input = "http://www.webcams.travel/webcams.kml";
-            if (input.Length > 1)
-            {
-                if (input.StartsWith("http", true, System.Globalization.CultureInfo.CurrentCulture))
-                {
-                    try
-                    {
-                        new Uri(input);
-                    }
-                    catch (UriFormatException)
-                    {
-                        return;
-                    }
-
-                    this.InvokeLoadKml(input);
-                }
-                else
-                {
-                    this.InvokeDoGeocode(input);
-                }
-            }
+            Object[] args = new Object[1];
+            args[0] = (Object)kml;
+            htmlDocument.InvokeScript("loadKml", args);
+         
         }
         
         /// <summary>
@@ -106,15 +88,15 @@ namespace GELive
         /// </summary>
         /// <param name="url">The url of the file to load</param>
         /// <returns>The resulting kml object (if any)</returns>
-        private IKmlObject InvokeLoadKml(string url)
-        {
-            if (this.htmlDocument == null)
-            {
-                return null;
-            }
+        //private IKmlObject InvokeLoadKml(string url)
+        //{
+        //    if (this.htmlDocument == null)
+        //    {
+        //        return null;
+        //    }
 
-            return (IKmlObject)this.htmlDocument.InvokeScript("jsFetchKml", new object[] { url });
-        }
+        //    return (IKmlObject)this.htmlDocument.InvokeScript("jsFetchKml", new object[] { url });
+        //}
 
         #endregion
 

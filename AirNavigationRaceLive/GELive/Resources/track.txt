@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- KML Regionator 485 -->
+<kml xmlns="http://earth.google.com/kml/2.1">
+<Document>
+<name>webcams.travel</name>
+<Snippet>Webcams Worldwide</Snippet>
+<NetworkLink>
+<name>Webcams Worldwide</name>
+<Style>
+<ListStyle>
+<listItemType>checkHideChildren</listItemType>
+</ListStyle>
+</Style>
+<Region>
+<Lod>
+<minLodPixels>256</minLodPixels>
+<maxLodPixels>-1</maxLodPixels>
+</Lod>
+<LatLonAltBox>
+<north>180.0</north>
+<south>-180.0</south>
+<east>180.0</east>
+<west>-180.0</west>
+</LatLonAltBox>
+</Region>
+<Link>
+<href>regions/1.kml</href>
+<viewRefreshMode>onRegion</viewRefreshMode>
+<viewFormat/>
+</Link>
+</NetworkLink>
+</Document>
+</kml>
