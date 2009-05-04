@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="91344e19-c80f-4d4e-9fc2-8a872fda4757" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:1325/ANRLDataService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ANRLDataService.disco" MetadataType="Disco" ID="6f0fc3a1-5af6-4e58-8269-1d85ed3a2105" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?disco" />
+    <MetadataFile FileName="ANRLDataService.xsd" MetadataType="Schema" ID="7b2ddc1e-f6a9-4abb-afea-511ce0b08afc" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ANRLDataService.wsdl" MetadataType="Wsdl" ID="b0a55e66-6ad5-4864-9bb4-8b020cb4dc9d" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?wsdl" />
+    <MetadataFile FileName="ANRLDataService1.xsd" MetadataType="Schema" ID="17b57b43-c62f-4755-bfad-ddeb6f3bd6ac" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
