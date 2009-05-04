@@ -43,9 +43,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ManualTest1.mht" />
+    <Shadow Include="Test References\DataService.accessor" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AuthoringTests.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataService\DataService.csproj">
+      <Project>{2D2F75FD-F155-451B-A49F-EAECB277F282}</Project>
+      <Name>DataService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

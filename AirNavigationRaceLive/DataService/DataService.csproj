@@ -95,6 +95,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GELive\GELive.csproj">
+      <Project>{1A2526F5-9A18-40D7-A4C1-479A131F1698}</Project>
+      <Name>GELive</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KmlBuilder\KmlBuilder.csproj">
       <Project>{90EC52E1-3A1B-44DF-B7E0-706DC50E74EF}</Project>
       <Name>KmlBuilder</Name>
@@ -115,7 +119,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1325</DevelopmentServerPort>
+          <DevelopmentServerPort>1326</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
