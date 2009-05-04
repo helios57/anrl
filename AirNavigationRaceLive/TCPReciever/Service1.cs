@@ -17,6 +17,10 @@ namespace TCPReciever
             InitializeComponent();
         }
 
+        public void Start()
+        {
+            OnStart(null);
+        }
         protected override void OnStart(string[] args)
         {
             GPS = new Server();

@@ -15,12 +15,12 @@ namespace TCPReciever
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
             //Control c = new Control();
             //Application.Run(new Control());
-            GPSReciever Test = new GPSReciever();
-            //Test.
+            GPSReciever Service_test = new GPSReciever();
+            Service_test.Start();
         }
     }
 }
