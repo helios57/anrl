@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2D2F75FD-F155-451B-A49F-EAECB277F282}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -71,12 +71,34 @@
     <Compile Include="ANRLDataService.svc.cs">
       <DependentUpon>ANRLDataService.svc</DependentUpon>
     </Compile>
+    <Compile Include="DBModel.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBModel.dbml</DependentUpon>
+    </Compile>
     <Compile Include="IANRLDataService.cs" />
-    <Compile Include="LINQ_Tables\t_Daten.cs" />
-    <Compile Include="LINQ_Tables\t_Flugzeug.cs" />
-    <Compile Include="LINQ_Tables\t_GPS_IN.cs" />
-    <Compile Include="LINQ_Tables\t_Tracker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBModel.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DBModel.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DBModel.dbml.layout">
+      <DependentUpon>DBModel.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KmlBuilder\KmlBuilder.csproj">
+      <Project>{90EC52E1-3A1B-44DF-B7E0-706DC50E74EF}</Project>
+      <Name>KmlBuilder</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

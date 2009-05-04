@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="DataService.Service1" CodeBehind="ANRLDataService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="DataService.ANRLDataService" CodeBehind="ANRLDataService.svc.cs" %>

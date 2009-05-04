@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Database" Class="DBModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_Daten" Member="t_Datens">
+    <Type Name="t_Daten">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Flugzeug" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="XStart" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="XEnd" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="YStart" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="YEnd" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ZStart" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ZEnd" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Speed" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Penalty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="t_Flugzeug_t_Daten" Member="t_Flugzeug" ThisKey="ID_Flugzeug" Type="t_Flugzeug" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Tracker" Member="t_Trackers">
+    <Type Name="t_Tracker">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="t_Tracker_t_Flugzeug" Member="t_Flugzeugs" OtherKey="ID_GPS_Tracker" Type="t_Flugzeug" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Flugzeug" Member="t_Flugzeugs">
+    <Type Name="t_Flugzeug">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Flugzeug" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="Pilot" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="ID_GPS_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" OtherKey="ID_Flugzeug" Type="t_Daten" />
+      <Association Name="t_Tracker_t_Flugzeug" Member="t_Tracker" ThisKey="ID_GPS_Tracker" Type="t_Tracker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
+    <Type Name="t_GPS_IN">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GPS_fix" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimestampTracker" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="longitude" Type="System.String" DbType="NChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.String" DbType="NChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="altitude" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="speed" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="heading" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="nr_used_sat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HDOP" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
