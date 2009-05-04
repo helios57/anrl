@@ -6,7 +6,6 @@ using System.Net;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.Linq;
-using DataService.LINQ_Tables;
 using System.Windows.Forms;
 using System.IO;
 //http://www.switchonthecode.com/tutorials/csharp-tutorial-simple-threaded-tcp-server
