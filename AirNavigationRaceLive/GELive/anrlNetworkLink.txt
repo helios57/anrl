@@ -1,0 +1,16 @@
+﻿<NetworkLink xmlns="http://earth.google.com/kml/2.1">
+	/* Feature definition */
+	<name>Air Navigation Race LIVE</name>
+	<visibility>1</visibility>
+	<Snippet maxLines="2" >This is a project developed by gibb.ch students sponsored by FAI GAC (General Aviation Commission) and the main goal is to improve the multimedia presence of Air Nav Race!</Snippet>
+	<description>Air Navigation Race Live is a Visualisation Software to track and show airplanes with the corresponding GPS-Tracker on Google Earth. </description>
+	/* Networklink definition */
+	<refreshVisibility>1</refreshVisibility>
+	/* Link definition */
+	<Link>
+		<href>c:\\track.kml</href>
+		<refreshMode>onInterval</refreshMode>
+		/* Indicates to refresh the file every n seconds. */
+		<refreshInterval>5</refreshInterval>		
+	</Link>
+</NetworkLink>
