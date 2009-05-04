@@ -20,7 +20,7 @@ namespace TCPReciever
             //Control c = new Control();
             //Application.Run(new Control());
             GPSReciever Test = new GPSReciever();
-            Test.
+            //Test.
         }
     }
 }

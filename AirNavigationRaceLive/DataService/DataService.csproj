@@ -78,6 +78,10 @@
     </Compile>
     <Compile Include="IANRLDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LINQ_Tables\t_Daten.cs" />
+    <Compile Include="LINQ_Tables\t_Flugzeug.cs" />
+    <Compile Include="LINQ_Tables\t_GPS_IN.cs" />
+    <Compile Include="LINQ_Tables\t_Tracker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DBModel.dbml">
