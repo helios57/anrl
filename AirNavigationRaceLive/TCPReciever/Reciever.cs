@@ -57,31 +57,34 @@ namespace TCPReciever
         {
             String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
             String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
+     
+            //DataContext db = new DataContext(DB_PATH);
 
-            DataContext db = new DataContext(DB_PATH);
-            Table<t_GPS_IN> GPS_IN = db.GetTable<t_GPS_IN>();
-            t_GPS_IN test = new t_GPS_IN();
-            test.IMEI = GPScoords[0];
-            test.Status =Int32.Parse(GPScoords[1]);
-            test.GPS_fix =Int32.Parse(GPScoords[2]);
-            test.TimestampTracker = new DateTime(
+            DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
+            new_position.IMEI = GPScoords[0];
+            new_position.Status = Int32.Parse(GPScoords[1]);
+            new_position.GPS_fix = Int32.Parse(GPScoords[2]);
+            new_position.TimestampTracker = new DateTime(
                                     Int32.Parse("20" + GPScoords[3].Substring(4, 2)),
                                     Int32.Parse(GPScoords[3].Substring(2, 2)),
                                     Int32.Parse(GPScoords[3].Substring(0, 2)),
                                     Int32.Parse(GPScoords[4].Substring(0, 2)),
                                     Int32.Parse(GPScoords[4].Substring(2, 2)),
                                     Int32.Parse(GPScoords[4].Substring(4, 2)));
-            test.longitude = GPScoords[5];
-            test.latitude = GPScoords[6];
-            test.altitude = GPScoords[7];
-            test.speed = GPScoords[8];
-            test.heading = GPScoords[9];
-            test.nr_used_sat = Int32.Parse(GPScoords[10]);
-            test.HDOP = GPScoords[11];
-            test.Timestamp = DateTime.Now;
+            new_position.longitude = GPScoords[5];
+            new_position.latitude = GPScoords[6];
+            new_position.altitude = GPScoords[7];
+            new_position.speed = GPScoords[8];
+            new_position.heading = GPScoords[9];
+            new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
+            new_position.HDOP = GPScoords[11];
+            new_position.Timestamp = DateTime.Now;
 
-            GPS_IN.InsertOnSubmit(test);
-            db.SubmitChanges();
+
+            DataService.DBModelDataContext dataContext = new DataService.DBModelDataContext();
+            dataContext.t_GPS_INs.InsertOnSubmit(new_position);
+            dataContext.SubmitChanges();
+
         }
 
         private void ListenForClients()
