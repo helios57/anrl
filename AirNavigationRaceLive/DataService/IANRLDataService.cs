@@ -13,6 +13,6 @@ namespace DataService
     public interface IANRLDataService
     {
         [OperationContract]
-        string GetKml(int trackerID);
+        t_Daten GetPathData(int trackerID);
     }
 }

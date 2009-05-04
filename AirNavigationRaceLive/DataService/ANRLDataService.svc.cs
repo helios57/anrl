@@ -17,17 +17,18 @@ namespace DataService
         /// </summary>
         /// <param name="trackerID">Tracker ID</param>
         /// <returns>KML-string</returns>
-        public string GetKml(int trackerID)
+        public t_Daten GetPathData(int trackerID)
         {
             using (DBModelDataContext dataContext = new DBModelDataContext())
             {
                 KmlBuilder kb = new KmlBuilder();
-                t_Daten data = dataContext.t_Datens.
+                return dataContext.t_Datens.
                                 Where(d => d.t_Flugzeug.ID_GPS_Tracker == trackerID).
                                 OrderByDescending(t => t.Timestamp).
                                 First();
 
-                return kb.BuildKml(
+
+                /*return kb.BuildKml(
                                         data.ID.ToString(),
                                         data.ID_Flugzeug.ToString(),
                                         data.Timestamp.ToString(),
@@ -41,7 +42,7 @@ namespace DataService
                                         data.TEnd.Value.ToString(),
                                         data.Speed,
                                         data.Penalty.Value.ToString()
-                                    ).OuterXml;
+                                    ).OuterXml;*/
             }
         }
 

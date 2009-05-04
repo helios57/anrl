@@ -23,9 +23,11 @@
     <MetadataFile FileName="ANRLDataService.disco" MetadataType="Disco" ID="6f0fc3a1-5af6-4e58-8269-1d85ed3a2105" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?disco" />
     <MetadataFile FileName="ANRLDataService.xsd" MetadataType="Schema" ID="7b2ddc1e-f6a9-4abb-afea-511ce0b08afc" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd1" />
     <MetadataFile FileName="ANRLDataService.wsdl" MetadataType="Wsdl" ID="b0a55e66-6ad5-4864-9bb4-8b020cb4dc9d" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?wsdl" />
+    <MetadataFile FileName="ANRLDataService2.xsd" MetadataType="Schema" ID="3ba748b7-a732-4e7f-8405-16143fac9130" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd2" />
     <MetadataFile FileName="ANRLDataService1.xsd" MetadataType="Schema" ID="17b57b43-c62f-4755-bfad-ddeb6f3bd6ac" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
   </Extensions>
 </ReferenceGroup>

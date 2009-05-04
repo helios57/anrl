@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KmlBuilder", "KmlBuilder\Km
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D18C18FB-8BC7-455A-A213-E870A2DF5430}"
 	ProjectSection(SolutionItems) = preProject
+		AirNavigationRaceLive.vsmdi = AirNavigationRaceLive.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		Taskliste.xls = Taskliste.xls
 	EndProjectSection
 EndProject
@@ -16,10 +18,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPReciever", "TCPReciever\
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ANRL_Setup", "ANRL_Setup\ANRL_Setup.vdproj", "{140392C5-A237-4271-9956-5F90BED18D7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGPSReciever", "TestGPSReciever\TestGPSReciever.csproj", "{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AirNavigationRaceLive.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +109,21 @@ Global
 		{140392C5-A237-4271-9956-5F90BED18D7A}.Release|Any CPU.ActiveCfg = Release
 		{140392C5-A237-4271-9956-5F90BED18D7A}.Release|Mixed Platforms.ActiveCfg = Release
 		{140392C5-A237-4271-9956-5F90BED18D7A}.Release|x86.ActiveCfg = Release
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Default|x86.ActiveCfg = Debug|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

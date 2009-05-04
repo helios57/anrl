@@ -18,7 +18,7 @@ namespace GELive
             GELive.anrlWebService.ANRLDataServiceClient client = new ANRLDataServiceClient();
             
             // trackerId as paramater
-            string kml = client.GetKml(1);
+            anrlWebService.t_Daten data = client.GetPathData(1);
 
             
             return GELive.Properties.Resources.track;
