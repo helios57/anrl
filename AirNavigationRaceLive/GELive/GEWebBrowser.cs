@@ -1,28 +1,7 @@
-﻿// <copyright file="GEWebBrowser.cs" company="FC">
-// Copyright (c) 2008 Fraser Chapman
-// </copyright>
-// <author>Fraser Chapman</author>
-// <email>fraser.chapman@gmail.com</email>
-// <date>2008-12-22</date>
-// <summary>This program is part of FC.GEPluginCtrls
-// FC.GEPluginCtrls is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see http://www.gnu.org/licenses/.
-// </summary>
-namespace GELive
+﻿namespace GELive
 {
     using System;
-    using System.Drawing;
-    using System.Drawing.Imaging;
     using System.IO;
-    using System.Reflection;
     using System.Windows.Forms;
     using GEPlugin;
 
@@ -135,95 +114,6 @@ namespace GELive
             catch (Exception)
             {
             }
-        }
-
-        /// <summary>
-        /// Load a kml/kmz file 
-        /// This function requires a 'twin' LoadKml function in javascript
-        /// this twin function will call "google.earth.fetchKml"
-        /// </summary>
-        /// <param name="url">path to a kml/kmz file</param>
-        public void FetchKml(string url)
-        {
-            if (this.Document != null)
-            {
-                this.Document.InvokeScript("jsFetchKml", new object[] { url });
-            }
-        }
-
-        /// <summary>
-        /// Inject a javascript element into the document head
-        /// </summary>
-        /// <param name="javascript">the script code</param>
-        public void InjectJavascript(string javascript)
-        {
-            if (this.Document != null)
-            {
-                try
-                {
-                    HtmlElement head = this.Document.GetElementsByTagName("head")[0];
-                    HtmlElement script = this.Document.CreateElement("script");
-                    script.SetAttribute("type", "text/javascript");
-                    IHTMLScriptElement element = (IHTMLScriptElement)script.DomElement;
-                    element.Text = "/* <![CDATA[ */ " + javascript + " /* ]]> */";
-                    head.AppendChild(script);
-                }
-                catch (Exception e)
-                {
-                    this.OnScriptError(
-                        this,
-                        new GEEventArgs(e.Message, e.InnerException.ToString()));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Executes a script function defined in the currently loaded document. 
-        /// </summary>
-        /// <param name="function">The name of the function to invoke</param>
-        /// <returns>The result of the evaluated function</returns>
-        public object InvokeJavascript(string function)
-        {
-            if (this.Document != null)
-            {
-                // see http://msdn.microsoft.com/en-us/library/4b1a88bz.aspx
-                return this.Document.InvokeScript(function, new object[] { });
-            }
-            else
-            {
-                return new object { };
-            }
-        }
-
-        /// <summary>
-        /// Executes a script function that is defined in the currently loaded document. 
-        /// </summary>
-        /// <param name="function">The name of the function to invoke</param>
-        /// <param name="args">any arguments</param>
-        /// <returns>The result of the evaluated function</returns>
-        public object InvokeJavascript(string function, object[] args)
-        {
-            if (this.Document != null)
-            {
-                // see http://msdn.microsoft.com/en-us/library/4b1a88bz.aspx
-                return this.Document.InvokeScript(function, args);
-            }
-            else
-            {
-                return new object { };
-            }
-        }
-
-        /// <summary>
-        /// Wrapper for the the google.earth.addEventListener method
-        /// </summary>
-        /// <param name="feature">The target object</param>
-        /// <param name="action">The event Id</param>
-        public void AddEventListener(object feature, string action)
-        {
-            this.InvokeJavascript(
-                "jsAddEventListener",
-                new object[] { feature, action });
         }
 
         #endregion

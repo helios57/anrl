@@ -66,40 +66,5 @@ namespace GELive
 
         #endregion
 
-        #region Private methods
-
-        /// <summary>
-        /// Invokes the javascript function 'doGeocode'
-        /// Automatically flys to the location if one is found
-        /// </summary>
-        /// <param name="input">the location to geocode</param>
-        /// <returns>the point object (if any)</returns>
-        private IKmlPoint InvokeDoGeocode(string input)
-        {
-            if (this.htmlDocument == null)
-            {
-                return null;
-            }
-
-            return (IKmlPoint)this.htmlDocument.InvokeScript("jsDoGeocode", new object[] { input });
-        }
-
-        /// <summary>
-        /// Invokes the javascitp function 'LoadKml'
-        /// </summary>
-        /// <param name="url">The url of the file to load</param>
-        /// <returns>The resulting kml object (if any)</returns>
-        //private IKmlObject InvokeLoadKml(string url)
-        //{
-        //    if (this.htmlDocument == null)
-        //    {
-        //        return null;
-        //    }
-
-        //    return (IKmlObject)this.htmlDocument.InvokeScript("jsFetchKml", new object[] { url });
-        //}
-
-        #endregion
-
     }
 }

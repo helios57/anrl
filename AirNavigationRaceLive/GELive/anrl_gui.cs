@@ -10,7 +10,11 @@ namespace GELive
         /// The plugin instance
         /// </summary>
         private IGEPlugin ge = null;
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="anrl_gui"/> class.
+        /// Loads the html directly from the library.
+        /// </summary>
         public anrl_gui()
         {
             InitializeComponent();
@@ -20,9 +24,6 @@ namespace GELive
 
             // This event is raised by the initCallBack javascript function in the holding page
             geWebBrowser1.PluginReady += new GEWebBorwserEventHandeler(geWebBrowser1_PluginReady);
-
-            // This event is raised by the loadKmlCallBack javascript function in the holding page
-            geWebBrowser1.KmlLoaded += new GEWebBorwserEventHandeler(geWebBrowser1_KmlLoaded);
 
             // This event is raised if there is a javascript error (it can also be raised manually)
             geWebBrowser1.ScriptError += new GEWebBorwserEventHandeler(geWebBrowser1_ScriptError);
@@ -43,25 +44,7 @@ namespace GELive
             {
                 // Tell various the controls the browser instance to work with
                 geToolStrip1.SetBrowserInstance(geWebBrowser1);
-                //kmlTreeView1.SetBrowserInstance(geWebBrowser1);
             }
-        }
-
-        /// <summary>
-        /// Handles the Kml Loaded event
-        /// </summary>
-        /// <param name="sender">The Kml object</param>
-        /// <param name="e">Empty arguments</param>
-        void geWebBrowser1_KmlLoaded(object sender, GEEventArgs e)
-        {
-            // The kml object returned from javascript
-            IKmlObject kmlObject = (IKmlObject)sender;
-
-            // Add the kml to the plugin 
-            ge.getFeatures().appendChild(kmlObject);
-
-            // Add the kml into the tree view control
-            //kmlTreeView1.ParsekmlObject(kmlObject);
         }
 
         /// <summary>
@@ -78,6 +61,11 @@ namespace GELive
                 "Error " + e.Data);
         }
 
+        /// <summary>
+        /// Invokes geToolStrip1.InvokeLoadKml(); to load the kml.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void LoadKml_Click(object sender, EventArgs e)
         {
             geToolStrip1.InvokeLoadKml();
