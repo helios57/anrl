@@ -17,14 +17,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:1325/ANRLDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:1326/ANRLDataService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ANRLDataService.disco" MetadataType="Disco" ID="6f0fc3a1-5af6-4e58-8269-1d85ed3a2105" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?disco" />
-    <MetadataFile FileName="ANRLDataService.xsd" MetadataType="Schema" ID="7b2ddc1e-f6a9-4abb-afea-511ce0b08afc" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd1" />
-    <MetadataFile FileName="ANRLDataService.wsdl" MetadataType="Wsdl" ID="b0a55e66-6ad5-4864-9bb4-8b020cb4dc9d" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?wsdl" />
-    <MetadataFile FileName="ANRLDataService2.xsd" MetadataType="Schema" ID="3ba748b7-a732-4e7f-8405-16143fac9130" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd2" />
-    <MetadataFile FileName="ANRLDataService1.xsd" MetadataType="Schema" ID="17b57b43-c62f-4755-bfad-ddeb6f3bd6ac" SourceId="1" SourceUrl="http://localhost:1325/ANRLDataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ANRLDataService3.xsd" MetadataType="Schema" ID="b776e82a-0862-42ad-9dde-0af89564d094" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ANRLDataService1.wsdl" MetadataType="Wsdl" ID="75ca5ffd-72db-4f91-ac94-23e48a1bf8d1" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?wsdl" />
+    <MetadataFile FileName="ANRLDataService31.xsd" MetadataType="Schema" ID="72505af0-32ea-4867-b6b7-1bc41e7421b1" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ANRLDataService32.xsd" MetadataType="Schema" ID="6b65879b-98fc-42cf-87ed-77bb1ba27679" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ANRLDataService1.disco" MetadataType="Disco" ID="917d8390-cf3e-4d14-97cb-cc682107e0ba" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />

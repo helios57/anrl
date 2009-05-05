@@ -20,13 +20,7 @@
         <elementListCompartment Id="e2bce624-150b-4457-8d13-935f93f80e49" absoluteBounds="3.515, 2.21, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="042b2506-baa1-4c39-8ed7-16cacc689477" absoluteBounds="3, 4.375, 2, 2.9039737955729166">
-      <DataClassMoniker Name="/DBModelDataContext/t_GPS_IN" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b9a66d42-aff9-42f9-a82b-da4401d39e61" absoluteBounds="3.015, 4.835, 1.9700000000000002, 2.3439737955729165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(5.5 : 2.46242390950521); (6.25 : 2.46242390950521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.46242390950521); (6.25 : 2.46242390950521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBModelDataContext/t_Flugzeug/t_Flugzeug_t_Daten" />
       <nodes>
         <classShapeMoniker Id="e7221e3a-29a7-46ad-8d8f-7beab494cf9b" />
@@ -38,6 +32,19 @@
       <nodes>
         <classShapeMoniker Id="1601bef8-e4ce-44cd-bba7-18e3f0c36960" />
         <classShapeMoniker Id="e7221e3a-29a7-46ad-8d8f-7beab494cf9b" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="8334eb36-1dc1-4702-a250-8503c00efde4" absoluteBounds="3, 4.375, 2, 3.0683211263020831">
+      <DataClassMoniker Name="/DBModelDataContext/t_GPS_IN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5440783b-4c31-49a0-a324-420bfbc17ddd" absoluteBounds="3.015, 4.835, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3 : 5.90916056315104); (1.75 : 5.90916056315104); (1.75 : 3.09615315755208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBModelDataContext/t_GPS_IN/t_GPS_IN_t_Tracker" />
+      <nodes>
+        <classShapeMoniker Id="8334eb36-1dc1-4702-a250-8503c00efde4" />
+        <classShapeMoniker Id="1601bef8-e4ce-44cd-bba7-18e3f0c36960" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

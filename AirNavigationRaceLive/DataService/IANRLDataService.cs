@@ -13,6 +13,6 @@ namespace DataService
     public interface IANRLDataService
     {
         [OperationContract]
-        t_Daten GetPathData(int trackerID);
+        List<t_Daten> GetPathData(DateTime timestamp);
     }
 }

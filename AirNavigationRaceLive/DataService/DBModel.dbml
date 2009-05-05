@@ -17,14 +17,15 @@
       <Column Name="Speed" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="Penalty" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="t_Flugzeug_t_Daten" Member="t_Flugzeug" ThisKey="ID_Flugzeug" Type="t_Flugzeug" IsForeignKey="true" />
+      <Association Name="t_Flugzeug_t_Daten" Member="t_Flugzeug" ThisKey="ID_Flugzeug" OtherKey="ID" Type="t_Flugzeug" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Tracker" Member="t_Trackers">
     <Type Name="t_Tracker">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="t_Tracker_t_Flugzeug" Member="t_Flugzeugs" OtherKey="ID_GPS_Tracker" Type="t_Flugzeug" />
+      <Association Name="t_Tracker_t_Flugzeug" Member="t_Flugzeugs" ThisKey="ID" OtherKey="ID_GPS_Tracker" Type="t_Flugzeug" />
+      <Association Name="t_GPS_IN_t_Tracker" Member="t_GPS_IN" ThisKey="IMEI" OtherKey="IMEI" Type="t_GPS_IN" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Flugzeug" Member="t_Flugzeugs">
@@ -33,8 +34,8 @@
       <Column Name="Flugzeug" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
       <Column Name="Pilot" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
       <Column Name="ID_GPS_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" OtherKey="ID_Flugzeug" Type="t_Daten" />
-      <Association Name="t_Tracker_t_Flugzeug" Member="t_Tracker" ThisKey="ID_GPS_Tracker" Type="t_Tracker" IsForeignKey="true" />
+      <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Flugzeug" Type="t_Daten" />
+      <Association Name="t_Tracker_t_Flugzeug" Member="t_Tracker" ThisKey="ID_GPS_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
@@ -52,6 +53,8 @@
       <Column Name="nr_used_sat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="HDOP" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Processed" Type="System.Boolean" DbType="Bit" CanBeNull="false" />
+      <Association Name="t_GPS_IN_t_Tracker" Member="t_Trackers" ThisKey="IMEI" OtherKey="IMEI" Type="t_Tracker" />
     </Type>
   </Table>
 </Database>

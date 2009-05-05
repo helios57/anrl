@@ -45,7 +45,7 @@ namespace DataService
     #endregion
 		
 		public DBModelDataContext() : 
-				base(global::GELive.Properties.Settings.Default.DatabaseConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -534,6 +534,8 @@ namespace DataService
 		
 		private EntitySet<t_Flugzeug> _t_Flugzeugs;
 		
+		private EntityRef<t_GPS_IN> _t_GPS_IN;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -547,6 +549,7 @@ namespace DataService
 		public t_Tracker()
 		{
 			this._t_Flugzeugs = new EntitySet<t_Flugzeug>(new Action<t_Flugzeug>(this.attach_t_Flugzeugs), new Action<t_Flugzeug>(this.detach_t_Flugzeugs));
+			this._t_GPS_IN = default(EntityRef<t_GPS_IN>);
 			OnCreated();
 		}
 		
@@ -581,6 +584,10 @@ namespace DataService
 			{
 				if ((this._IMEI != value))
 				{
+					if (this._t_GPS_IN.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnIMEIChanging(value);
 					this.SendPropertyChanging();
 					this._IMEI = value;
@@ -600,6 +607,40 @@ namespace DataService
 			set
 			{
 				this._t_Flugzeugs.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_GPS_IN_t_Tracker", Storage="_t_GPS_IN", ThisKey="IMEI", OtherKey="IMEI", IsForeignKey=true)]
+		public t_GPS_IN t_GPS_IN
+		{
+			get
+			{
+				return this._t_GPS_IN.Entity;
+			}
+			set
+			{
+				t_GPS_IN previousValue = this._t_GPS_IN.Entity;
+				if (((previousValue != value) 
+							|| (this._t_GPS_IN.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_GPS_IN.Entity = null;
+						previousValue.t_Trackers.Remove(this);
+					}
+					this._t_GPS_IN.Entity = value;
+					if ((value != null))
+					{
+						value.t_Trackers.Add(this);
+						this._IMEI = value.IMEI;
+					}
+					else
+					{
+						this._IMEI = default(string);
+					}
+					this.SendPropertyChanged("t_GPS_IN");
+				}
 			}
 		}
 		
@@ -871,6 +912,10 @@ namespace DataService
 		
 		private System.DateTime _Timestamp;
 		
+		private bool _Processed;
+		
+		private EntitySet<t_Tracker> _t_Trackers;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -901,10 +946,13 @@ namespace DataService
     partial void OnHDOPChanged();
     partial void OnTimestampChanging(System.DateTime value);
     partial void OnTimestampChanged();
+    partial void OnProcessedChanging(bool value);
+    partial void OnProcessedChanged();
     #endregion
 		
 		public t_GPS_IN()
 		{
+			this._t_Trackers = new EntitySet<t_Tracker>(new Action<t_Tracker>(this.attach_t_Trackers), new Action<t_Tracker>(this.detach_t_Trackers));
 			OnCreated();
 		}
 		
@@ -1168,6 +1216,39 @@ namespace DataService
 			}
 		}
 		
+		[Column(Storage="_Processed", DbType="Bit")]
+		public bool Processed
+		{
+			get
+			{
+				return this._Processed;
+			}
+			set
+			{
+				if ((this._Processed != value))
+				{
+					this.OnProcessedChanging(value);
+					this.SendPropertyChanging();
+					this._Processed = value;
+					this.SendPropertyChanged("Processed");
+					this.OnProcessedChanged();
+				}
+			}
+		}
+		
+		[Association(Name="t_GPS_IN_t_Tracker", Storage="_t_Trackers", ThisKey="IMEI", OtherKey="IMEI")]
+		public EntitySet<t_Tracker> t_Trackers
+		{
+			get
+			{
+				return this._t_Trackers;
+			}
+			set
+			{
+				this._t_Trackers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1186,6 +1267,18 @@ namespace DataService
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_t_Trackers(t_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPS_IN = this;
+		}
+		
+		private void detach_t_Trackers(t_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPS_IN = null;
 		}
 	}
 }

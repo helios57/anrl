@@ -425,6 +425,9 @@ namespace GELive.anrlWebService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private GELive.anrlWebService.t_Flugzeug[] t_FlugzeugsField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.anrlWebService.t_GPS_IN t_GPS_INField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -474,6 +477,288 @@ namespace GELive.anrlWebService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.anrlWebService.t_GPS_IN t_GPS_IN {
+            get {
+                return this.t_GPS_INField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_GPS_INField, value) != true)) {
+                    this.t_GPS_INField = value;
+                    this.RaisePropertyChanged("t_GPS_IN");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_GPS_IN", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_GPS_IN : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GPS_fixField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HDOPField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IMEIField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ProcessedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestampField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimestampTrackerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string altitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string headingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string latitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string longitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int nr_used_satField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string speedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.anrlWebService.t_Tracker[] t_TrackersField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int GPS_fix {
+            get {
+                return this.GPS_fixField;
+            }
+            set {
+                if ((this.GPS_fixField.Equals(value) != true)) {
+                    this.GPS_fixField = value;
+                    this.RaisePropertyChanged("GPS_fix");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string HDOP {
+            get {
+                return this.HDOPField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HDOPField, value) != true)) {
+                    this.HDOPField = value;
+                    this.RaisePropertyChanged("HDOP");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IMEI {
+            get {
+                return this.IMEIField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IMEIField, value) != true)) {
+                    this.IMEIField = value;
+                    this.RaisePropertyChanged("IMEI");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Processed {
+            get {
+                return this.ProcessedField;
+            }
+            set {
+                if ((this.ProcessedField.Equals(value) != true)) {
+                    this.ProcessedField = value;
+                    this.RaisePropertyChanged("Processed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Timestamp {
+            get {
+                return this.TimestampField;
+            }
+            set {
+                if ((this.TimestampField.Equals(value) != true)) {
+                    this.TimestampField = value;
+                    this.RaisePropertyChanged("Timestamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime TimestampTracker {
+            get {
+                return this.TimestampTrackerField;
+            }
+            set {
+                if ((this.TimestampTrackerField.Equals(value) != true)) {
+                    this.TimestampTrackerField = value;
+                    this.RaisePropertyChanged("TimestampTracker");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string altitude {
+            get {
+                return this.altitudeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.altitudeField, value) != true)) {
+                    this.altitudeField = value;
+                    this.RaisePropertyChanged("altitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string heading {
+            get {
+                return this.headingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.headingField, value) != true)) {
+                    this.headingField = value;
+                    this.RaisePropertyChanged("heading");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string latitude {
+            get {
+                return this.latitudeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.latitudeField, value) != true)) {
+                    this.latitudeField = value;
+                    this.RaisePropertyChanged("latitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string longitude {
+            get {
+                return this.longitudeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.longitudeField, value) != true)) {
+                    this.longitudeField = value;
+                    this.RaisePropertyChanged("longitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int nr_used_sat {
+            get {
+                return this.nr_used_satField;
+            }
+            set {
+                if ((this.nr_used_satField.Equals(value) != true)) {
+                    this.nr_used_satField = value;
+                    this.RaisePropertyChanged("nr_used_sat");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string speed {
+            get {
+                return this.speedField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.speedField, value) != true)) {
+                    this.speedField = value;
+                    this.RaisePropertyChanged("speed");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.anrlWebService.t_Tracker[] t_Trackers {
+            get {
+                return this.t_TrackersField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_TrackersField, value) != true)) {
+                    this.t_TrackersField = value;
+                    this.RaisePropertyChanged("t_Trackers");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -489,7 +774,7 @@ namespace GELive.anrlWebService {
     public interface IANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
-        GELive.anrlWebService.t_Daten GetPathData(int trackerID);
+        GELive.anrlWebService.t_Daten[] GetPathData(System.DateTime timestamp);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -519,8 +804,8 @@ namespace GELive.anrlWebService {
                 base(binding, remoteAddress) {
         }
         
-        public GELive.anrlWebService.t_Daten GetPathData(int trackerID) {
-            return base.Channel.GetPathData(trackerID);
+        public GELive.anrlWebService.t_Daten[] GetPathData(System.DateTime timestamp) {
+            return base.Channel.GetPathData(timestamp);
         }
     }
 }

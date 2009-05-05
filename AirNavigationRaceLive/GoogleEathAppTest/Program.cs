@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace GELive
+namespace GoogleEathAppTest
 {
     static class Program
     {
@@ -15,9 +15,7 @@ namespace GELive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //WSManager test = new WSManager();
-            //string bla = test.GetKml();
-            Application.Run(new anrl_gui());
+            Application.Run(new Form1());
         }
     }
 }

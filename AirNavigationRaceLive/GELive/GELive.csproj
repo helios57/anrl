@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1A2526F5-9A18-40D7-A4C1-479A131F1698}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -91,6 +91,7 @@
     <Compile Include="GEWebBrowser.designer.cs">
       <DependentUpon>GEWebBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="GoogleEarthAppTest.cs" />
     <Compile Include="IGEControls.cs" />
     <Compile Include="IHTMLScriptElement.cs" />
     <Compile Include="Maths.cs" />
@@ -139,8 +140,21 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
+    <None Include="Resources\KMLTemplates\footer.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\KMLTemplates\header.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\KMLTemplates\KML_Samples.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Service References\anrlWebService\ANRLDataService1.disco" />
+    <None Include="Service References\anrlWebService\ANRLDataService1.wsdl" />
+    <None Include="Service References\anrlWebService\ANRLDataService3.xsd" />
+    <None Include="Service References\anrlWebService\ANRLDataService31.xsd" />
+    <None Include="Service References\anrlWebService\ANRLDataService32.xsd" />
     <None Include="Service References\anrlWebService\configuration91.svcinfo" />
-    <None Include="Service References\anrlWebService\ANRLDataService2.xsd" />
     <None Include="Service References\anrlWebService\GELive.anrlWebService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -149,12 +163,8 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\anrlWebService\configuration.svcinfo" />
-    <None Include="Service References\anrlWebService\ANRLDataService.disco" />
     <None Include="app.config" />
     <None Include="Resources\track.txt" />
-    <None Include="Service References\anrlWebService\ANRLDataService.wsdl" />
-    <None Include="Service References\anrlWebService\ANRLDataService.xsd" />
-    <None Include="Service References\anrlWebService\ANRLDataService1.xsd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

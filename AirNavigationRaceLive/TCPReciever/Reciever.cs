@@ -83,6 +83,7 @@ namespace TCPReciever
                 new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
                 new_position.HDOP = GPScoords[11];
                 new_position.Timestamp = DateTime.Now;
+                new_position.Processed = false;
 
 
                 DataService.DBModelDataContext dataContext = new DataService.DBModelDataContext(DB_PATH);
