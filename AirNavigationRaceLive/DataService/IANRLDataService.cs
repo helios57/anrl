@@ -8,10 +8,17 @@ using System.Xml;
 
 namespace DataService
 {
-    // NOTE: If you change the interface name "IService1" here, you must also update the reference to "IService1" in Web.config.
+    /// <summary>
+    /// Interface for the WCF-Communication
+    /// </summary>
     [ServiceContract]
     public interface IANRLDataService
     {
+        /// <summary>
+        /// Returns the most actual flight path data as a list of t_Daten
+        /// </summary>
+        /// <param name="timestamp">The timestamp associated with the data</param>
+        /// <returns>List of t_Daten</returns>
         [OperationContract]
         List<t_Daten> GetPathData(DateTime timestamp);
     }

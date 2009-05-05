@@ -8,22 +8,24 @@ using System.Xml;
 
 namespace DataService
 {
+    /// <summary>
+    /// Interface implementation for the WCF-Communication
+    /// </summary>
     public class ANRLDataService : IANRLDataService
     {
         #region IANRLDataService Members
 
         /// <summary>
-        /// Returns an KML-string containing the latest position of the GPS-Tracker
+        /// Returns the most actual flight path data as a list of t_Daten
         /// </summary>
-        /// <param name="trackerID">Tracker ID</param>
-        /// <returns>KML-string</returns>
-        public t_Daten[] GetPathData(DateTime timestamp)
+        /// <param name="timestamp">The timestamp associated with the datas</param>
+        /// <returns>List of t_Daten</returns>
+        public List<t_Daten> GetPathData(DateTime timestamp)
         {
             using (DBModelDataContext dataContext = new DBModelDataContext())
             {
-                KmlBuilder kb = new KmlBuilder();
                 return dataContext.t_Datens.
-                                Where(d => d.TStart >= timestamp && d.TEnd < timestamp).ToArray();
+                                Where(d => d.TStart >= timestamp && d.TEnd < timestamp).ToList();
             }
         }
 

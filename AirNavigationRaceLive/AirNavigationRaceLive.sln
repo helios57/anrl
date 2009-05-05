@@ -20,14 +20,9 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ANRL_Setup", "ANRL_Setup\AN
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGPSReciever", "TestGPSReciever\TestGPSReciever.csproj", "{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfHostingHelper", "SelfHostingHelper\SelfHostingHelper.csproj", "{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}"
+EndProject
 Global
-	GlobalSection(SubversionScc) = preSolution
-		Svn-Managed = True
-		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = AirNavigationRaceLive.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -124,8 +119,27 @@ Global
 		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9FA8DF50-A5F0-434D-B11B-51E71050F3D6}.Release|x86.ActiveCfg = Release|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|x86.ActiveCfg = Debug|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
 	EndGlobalSection
 EndGlobal
