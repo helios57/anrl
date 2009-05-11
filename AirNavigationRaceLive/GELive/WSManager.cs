@@ -26,7 +26,6 @@ namespace GELive
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
             Client = new ANRLDataServiceClient();
-            
         }
 
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
