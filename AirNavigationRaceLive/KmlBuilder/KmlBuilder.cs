@@ -12,6 +12,23 @@ using System.Xml;
 /// </summary>
 public class KmlBuilder
 {    
+    /// <summary>
+    /// Generate the KML File for the Gui
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="Flugzeug_ID"></param>
+    /// <param name="Timestamp"></param>
+    /// <param name="Xstart"></param>
+    /// <param name="Xend"></param>
+    /// <param name="Ystart"></param>
+    /// <param name="Yend"></param>
+    /// <param name="Zstart"></param>
+    /// <param name="Zend"></param>
+    /// <param name="Tstart"></param>
+    /// <param name="Tend"></param>
+    /// <param name="Speed"></param>
+    /// <param name="Pentalty"></param>
+    /// <returns></returns>
     public XmlDocument BuildKml(string ID, string Flugzeug_ID, string Timestamp, string Xstart, string Xend, string Ystart, string Yend, string Zstart, string Zend, string Tstart, string Tend, string Speed, string Pentalty)
     {
         // checking of parameters needed?

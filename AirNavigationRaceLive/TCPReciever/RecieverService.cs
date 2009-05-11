@@ -15,11 +15,18 @@ namespace TCPReciever
     {
         Server GPS;
         Timer CalculateTabels;
+
+        /// <summary>
+        /// Creates a new GPS-Reciever Service Object
+        /// </summary>
         public GPSReciever()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Starts the GPS-Reciever Service
+        /// </summary>
         public void Start()
         {
             OnStart(null);

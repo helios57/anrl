@@ -9,12 +9,18 @@ using System.IO;
 
 namespace GELive
 {
+    /// <summary>
+    /// Webservice-Client Manager
+    /// </summary>
     public class WSManager
     {
         List<t_Daten> DatenListe = new List<t_Daten>();
         Timer UpdateData = new Timer(5000);
         anrlWebService.ANRLDataServiceClient Client;
 
+        /// <summary>
+        /// Creates a new Instance of the Webservice-Client Object
+        /// </summary>
         public WSManager()
         {
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
@@ -28,6 +34,10 @@ namespace GELive
             DatenListe.AddRange(Data);
         }
 
+        /// <summary>
+        /// Generates a KML-File with alle needed Points and Lines to be displayed on the Gui
+        /// </summary>
+        /// <returns>KML as String</returns>
         public string GetKml()
         {
             //kml file loaded by resource file instead of webservice

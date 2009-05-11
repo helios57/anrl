@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Data.Linq;
 using System.Windows.Forms;
 using System.IO;
-//http://www.switchonthecode.com/tutorials/csharp-tutorial-simple-threaded-tcp-server
+
 namespace TCPReciever
 {
     class Server
