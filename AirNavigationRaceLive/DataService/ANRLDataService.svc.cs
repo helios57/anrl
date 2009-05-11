@@ -22,10 +22,13 @@ namespace DataService
         /// <returns>List of t_Daten</returns>
         public List<t_Daten> GetPathData(DateTime timestamp)
         {
-            using (DBModelDataContext dataContext = new DBModelDataContext())
+            using (DatabaseEntities dataContext = new DatabaseEntities())
             {
-                return dataContext.t_Datens.
-                                Where(d => d.TStart >= timestamp && d.TEnd < timestamp).ToList();
+                return dataContext.t_Daten.
+                    Include("t_Flugzeug").
+                    Include("t_Flugzeug.t_Tracker").
+                    Where(d => d.TStart >= timestamp && d.TEnd < timestamp).
+                    ToList();
             }
         }
 

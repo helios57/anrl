@@ -86,9 +86,9 @@ namespace TCPReciever
                 new_position.Processed = false;
 
 
-                DataService.DBModelDataContext dataContext = new DataService.DBModelDataContext(DB_PATH);
-                dataContext.t_GPS_INs.InsertOnSubmit(new_position);
-                dataContext.SubmitChanges();
+                DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(DB_PATH);
+                dataContext.AddTot_GPS_IN(new_position);
+                dataContext.SaveChanges();
          //   }
           //  catch
           //  {
