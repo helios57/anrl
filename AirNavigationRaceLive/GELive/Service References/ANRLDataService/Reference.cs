@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GELive.anrlWebService {
+namespace GELive.ANRLDataService {
     using System.Runtime.Serialization;
     using System;
     
@@ -17,7 +17,7 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="t_Daten", Namespace="http://schemas.datacontract.org/2004/07/DataService", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class t_Daten : GELive.anrlWebService.EntityObject {
+    public partial class t_Daten : GELive.ANRLDataService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
@@ -59,10 +59,10 @@ namespace GELive.anrlWebService {
         private System.Nullable<decimal> ZStartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.t_Flugzeug t_FlugzeugField;
+        private GELive.ANRLDataService.t_Flugzeug t_FlugzeugField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD t_FlugzeugReferenceField;
+        private GELive.ANRLDataService.EntityReferenceOft_Flugzeug1U8vXZAD t_FlugzeugReferenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ID {
@@ -234,7 +234,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.t_Flugzeug t_Flugzeug {
+        public GELive.ANRLDataService.t_Flugzeug t_Flugzeug {
             get {
                 return this.t_FlugzeugField;
             }
@@ -247,7 +247,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD t_FlugzeugReference {
+        public GELive.ANRLDataService.EntityReferenceOft_Flugzeug1U8vXZAD t_FlugzeugReference {
             get {
                 return this.t_FlugzeugReferenceField;
             }
@@ -264,10 +264,10 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="StructuralObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityObject))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Flugzeug))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Tracker))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Daten))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Flugzeug))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Tracker))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Daten))]
     public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -297,16 +297,16 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Flugzeug))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Tracker))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Daten))]
-    public partial class EntityObject : GELive.anrlWebService.StructuralObject {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Flugzeug))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Tracker))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Daten))]
+    public partial class EntityObject : GELive.ANRLDataService.StructuralObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.EntityKey EntityKeyField;
+        private GELive.ANRLDataService.EntityKey EntityKeyField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.EntityKey EntityKey {
+        public GELive.ANRLDataService.EntityKey EntityKey {
             get {
                 return this.EntityKeyField;
             }
@@ -323,7 +323,7 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="t_Flugzeug", Namespace="http://schemas.datacontract.org/2004/07/DataService", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class t_Flugzeug : GELive.anrlWebService.EntityObject {
+    public partial class t_Flugzeug : GELive.ANRLDataService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FlugzeugField;
@@ -335,13 +335,13 @@ namespace GELive.anrlWebService {
         private string PilotField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.anrlWebService.t_Daten> t_DatenField;
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_DatenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.t_Tracker t_TrackerField;
+        private GELive.ANRLDataService.t_Tracker t_TrackerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD t_TrackerReferenceField;
+        private GELive.ANRLDataService.EntityReferenceOft_Tracker1U8vXZAD t_TrackerReferenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Flugzeug {
@@ -383,7 +383,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.anrlWebService.t_Daten> t_Daten {
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_Daten {
             get {
                 return this.t_DatenField;
             }
@@ -396,7 +396,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.t_Tracker t_Tracker {
+        public GELive.ANRLDataService.t_Tracker t_Tracker {
             get {
                 return this.t_TrackerField;
             }
@@ -409,7 +409,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD t_TrackerReference {
+        public GELive.ANRLDataService.EntityReferenceOft_Tracker1U8vXZAD t_TrackerReference {
             get {
                 return this.t_TrackerReferenceField;
             }
@@ -426,7 +426,7 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="t_Tracker", Namespace="http://schemas.datacontract.org/2004/07/DataService", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class t_Tracker : GELive.anrlWebService.EntityObject {
+    public partial class t_Tracker : GELive.ANRLDataService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
@@ -435,7 +435,7 @@ namespace GELive.anrlWebService {
         private string IMEIField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.anrlWebService.t_Flugzeug> t_FlugzeugField;
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug> t_FlugzeugField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ID {
@@ -464,7 +464,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.anrlWebService.t_Flugzeug> t_Flugzeug {
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug> t_Flugzeug {
             get {
                 return this.t_FlugzeugField;
             }
@@ -490,7 +490,7 @@ namespace GELive.anrlWebService {
         private string EntityContainerNameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.anrlWebService.EntityKeyMember> EntityKeyValuesField;
+        private System.Collections.Generic.List<GELive.ANRLDataService.EntityKeyMember> EntityKeyValuesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EntitySetNameField;
@@ -519,7 +519,7 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.anrlWebService.EntityKeyMember> EntityKeyValues {
+        public System.Collections.Generic.List<GELive.ANRLDataService.EntityKeyMember> EntityKeyValues {
             get {
                 return this.EntityKeyValuesField;
             }
@@ -558,26 +558,26 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOft_Flugzeug1U8vXZAD", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class EntityReferenceOft_Flugzeug1U8vXZAD : GELive.anrlWebService.EntityReference {
+    public partial class EntityReferenceOft_Flugzeug1U8vXZAD : GELive.ANRLDataService.EntityReference {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityKeyMember", Namespace="http://schemas.datacontract.org/2004/07/System.Data")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.anrlWebService.t_Daten>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Daten))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Flugzeug))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Tracker))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.anrlWebService.t_Flugzeug>))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityObject))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.StructuralObject))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReference))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.RelatedEnd))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityKey))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.anrlWebService.EntityKeyMember>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityKey))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.ANRLDataService.EntityKeyMember>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.StructuralObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Tracker1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.RelatedEnd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.ANRLDataService.t_Daten>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Daten))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Flugzeug))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Tracker))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug>))]
     public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -639,22 +639,22 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOft_Tracker1U8vXZAD", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class EntityReferenceOft_Tracker1U8vXZAD : GELive.anrlWebService.EntityReference {
+    public partial class EntityReferenceOft_Tracker1U8vXZAD : GELive.ANRLDataService.EntityReference {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EntityReference", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD))]
-    public partial class EntityReference : GELive.anrlWebService.RelatedEnd {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Tracker1U8vXZAD))]
+    public partial class EntityReference : GELive.ANRLDataService.RelatedEnd {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.EntityKey EntityKeyField;
+        private GELive.ANRLDataService.EntityKey EntityKeyField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.EntityKey EntityKey {
+        public GELive.ANRLDataService.EntityKey EntityKey {
             get {
                 return this.EntityKeyField;
             }
@@ -671,9 +671,9 @@ namespace GELive.anrlWebService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RelatedEnd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReference))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Tracker1U8vXZAD))]
     public partial class RelatedEnd : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -700,20 +700,20 @@ namespace GELive.anrlWebService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="anrlWebService.IANRLDataService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ANRLDataService.IANRLDataService")]
     public interface IANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
-        System.Collections.Generic.List<GELive.anrlWebService.t_Daten> GetPathData(System.DateTime timestamp);
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface IANRLDataServiceChannel : GELive.anrlWebService.IANRLDataService, System.ServiceModel.IClientChannel {
+    public interface IANRLDataServiceChannel : GELive.ANRLDataService.IANRLDataService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ANRLDataServiceClient : System.ServiceModel.ClientBase<GELive.anrlWebService.IANRLDataService>, GELive.anrlWebService.IANRLDataService {
+    public partial class ANRLDataServiceClient : System.ServiceModel.ClientBase<GELive.ANRLDataService.IANRLDataService>, GELive.ANRLDataService.IANRLDataService {
         
         public ANRLDataServiceClient() {
         }
@@ -734,7 +734,7 @@ namespace GELive.anrlWebService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<GELive.anrlWebService.t_Daten> GetPathData(System.DateTime timestamp) {
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp) {
             return base.Channel.GetPathData(timestamp);
         }
     }

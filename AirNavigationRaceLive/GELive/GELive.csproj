@@ -122,7 +122,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Service References\anrlWebService\Reference.cs">
+    <Compile Include="Service References\ANRLDataService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -142,7 +142,16 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
-    <None Include="Service References\anrlWebService\item.disco" />
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ANRLDataService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ANRLDataService\configuration.svcinfo" />
+    <None Include="Service References\ANRLDataService\configuration91.svcinfo" />
+    <None Include="Service References\ANRLDataService\ANRLDataService.disco" />
     <None Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -152,23 +161,14 @@
     <None Include="Resources\KMLTemplates\KML_Samples.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\anrlWebService\ANRLDataService.wsdl" />
-    <None Include="Service References\anrlWebService\configuration91.svcinfo" />
-    <None Include="Service References\anrlWebService\GELive.anrlWebService.t_Daten.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\anrlWebService\item.xsd" />
-    <None Include="Service References\anrlWebService\item1.xsd" />
-    <None Include="Service References\anrlWebService\item2.xsd" />
-    <None Include="Service References\anrlWebService\item3.xsd" />
-    <None Include="Service References\anrlWebService\item4.xsd" />
-    <None Include="Service References\anrlWebService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\anrlWebService\configuration.svcinfo" />
     <None Include="app.config" />
     <None Include="Resources\track.txt" />
+    <None Include="Service References\ANRLDataService\ANRLDataService.wsdl" />
+    <None Include="Service References\ANRLDataService\ANRLDataService.xsd" />
+    <None Include="Service References\ANRLDataService\ANRLDataService1.xsd" />
+    <None Include="Service References\ANRLDataService\ANRLDataService2.xsd" />
+    <None Include="Service References\ANRLDataService\ANRLDataService3.xsd" />
+    <None Include="Service References\ANRLDataService\ANRLDataService4.xsd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -206,7 +206,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\anrlWebService\" />
+    <WCFMetadataStorage Include="Service References\ANRLDataService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

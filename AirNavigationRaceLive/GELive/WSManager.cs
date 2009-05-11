@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using GELive.anrlWebService;
+using GELive.ANRLDataService ;
 using System.Timers;
 using System.IO;
 
@@ -16,7 +16,7 @@ namespace GELive
     {
         List<t_Daten> DatenListe = new List<t_Daten>();
         Timer UpdateData = new Timer(5000);
-        anrlWebService.ANRLDataServiceClient Client;
+        ANRLDataServiceClient Client;
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
