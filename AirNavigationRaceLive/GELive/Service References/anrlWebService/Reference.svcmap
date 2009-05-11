@@ -8,7 +8,9 @@
     <GenerateInternalTypes>false</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
-    <CollectionMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
@@ -17,14 +19,16 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:1326/ANRLDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:5555" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ANRLDataService3.xsd" MetadataType="Schema" ID="b776e82a-0862-42ad-9dde-0af89564d094" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd0" />
-    <MetadataFile FileName="ANRLDataService1.wsdl" MetadataType="Wsdl" ID="75ca5ffd-72db-4f91-ac94-23e48a1bf8d1" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?wsdl" />
-    <MetadataFile FileName="ANRLDataService31.xsd" MetadataType="Schema" ID="72505af0-32ea-4867-b6b7-1bc41e7421b1" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd1" />
-    <MetadataFile FileName="ANRLDataService32.xsd" MetadataType="Schema" ID="6b65879b-98fc-42cf-87ed-77bb1ba27679" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd2" />
-    <MetadataFile FileName="ANRLDataService1.disco" MetadataType="Disco" ID="917d8390-cf3e-4d14-97cb-cc682107e0ba" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?disco" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="6b6dc370-9b51-4fe1-b360-5b03ac548260" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd1" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="6422d062-3834-4687-875d-4014d7995576" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="d4afefd7-4fdc-4742-a732-28f865c996fe" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd2" />
+    <MetadataFile FileName="ANRLDataService.wsdl" MetadataType="Wsdl" ID="f1694b0d-f986-48ba-b3f8-0a691576be2b" SourceId="1" SourceUrl="http://localhost:5555/?wsdl" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="955ef855-82b8-4782-bab2-704fbdcb2af1" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd3" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="29b47bc7-0fc0-4509-984e-ccc72c1577ca" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd4" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="0228766b-d6d6-4b32-89c9-28811afd9b19" SourceId="1" SourceUrl="http://localhost:5555/?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />

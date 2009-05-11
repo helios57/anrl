@@ -15,18 +15,12 @@ namespace GELive.anrlWebService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="t_Daten", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Daten", Namespace="http://schemas.datacontract.org/2004/07/DataService", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class t_Daten : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+    public partial class t_Daten : GELive.anrlWebService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ID_FlugzeugField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ID_PolygonField;
@@ -67,15 +61,8 @@ namespace GELive.anrlWebService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private GELive.anrlWebService.t_Flugzeug t_FlugzeugField;
         
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD t_FlugzeugReferenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ID {
@@ -86,19 +73,6 @@ namespace GELive.anrlWebService {
                 if ((this.IDField.Equals(value) != true)) {
                     this.IDField = value;
                     this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID_Flugzeug {
-            get {
-                return this.ID_FlugzeugField;
-            }
-            set {
-                if ((this.ID_FlugzeugField.Equals(value) != true)) {
-                    this.ID_FlugzeugField = value;
-                    this.RaisePropertyChanged("ID_Flugzeug");
                 }
             }
         }
@@ -272,6 +246,43 @@ namespace GELive.anrlWebService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD t_FlugzeugReference {
+            get {
+                return this.t_FlugzeugReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_FlugzeugReferenceField, value) != true)) {
+                    this.t_FlugzeugReferenceField = value;
+                    this.RaisePropertyChanged("t_FlugzeugReference");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StructuralObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Flugzeug))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Tracker))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Daten))]
+    public partial class StructuralObject : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -284,12 +295,35 @@ namespace GELive.anrlWebService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="t_Flugzeug", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityObject", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class t_Flugzeug : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Flugzeug))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Tracker))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Daten))]
+    public partial class EntityObject : GELive.anrlWebService.StructuralObject {
         
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.anrlWebService.EntityKey EntityKeyField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.anrlWebService.EntityKey EntityKey {
+            get {
+                return this.EntityKeyField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityKeyField, value) != true)) {
+                    this.EntityKeyField = value;
+                    this.RaisePropertyChanged("EntityKey");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Flugzeug", Namespace="http://schemas.datacontract.org/2004/07/DataService", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class t_Flugzeug : GELive.anrlWebService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FlugzeugField;
@@ -298,26 +332,16 @@ namespace GELive.anrlWebService {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> ID_GPS_TrackerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PilotField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.t_Daten[] t_DatensField;
+        private System.Collections.Generic.List<GELive.anrlWebService.t_Daten> t_DatenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private GELive.anrlWebService.t_Tracker t_TrackerField;
         
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD t_TrackerReferenceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Flugzeug {
@@ -346,19 +370,6 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> ID_GPS_Tracker {
-            get {
-                return this.ID_GPS_TrackerField;
-            }
-            set {
-                if ((this.ID_GPS_TrackerField.Equals(value) != true)) {
-                    this.ID_GPS_TrackerField = value;
-                    this.RaisePropertyChanged("ID_GPS_Tracker");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Pilot {
             get {
                 return this.PilotField;
@@ -372,14 +383,14 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.t_Daten[] t_Datens {
+        public System.Collections.Generic.List<GELive.anrlWebService.t_Daten> t_Daten {
             get {
-                return this.t_DatensField;
+                return this.t_DatenField;
             }
             set {
-                if ((object.ReferenceEquals(this.t_DatensField, value) != true)) {
-                    this.t_DatensField = value;
-                    this.RaisePropertyChanged("t_Datens");
+                if ((object.ReferenceEquals(this.t_DatenField, value) != true)) {
+                    this.t_DatenField = value;
+                    this.RaisePropertyChanged("t_Daten");
                 }
             }
         }
@@ -397,24 +408,25 @@ namespace GELive.anrlWebService {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD t_TrackerReference {
+            get {
+                return this.t_TrackerReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_TrackerReferenceField, value) != true)) {
+                    this.t_TrackerReferenceField = value;
+                    this.RaisePropertyChanged("t_TrackerReference");
+                }
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="t_Tracker", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Tracker", Namespace="http://schemas.datacontract.org/2004/07/DataService", IsReference=true)]
     [System.SerializableAttribute()]
-    public partial class t_Tracker : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+    public partial class t_Tracker : GELive.anrlWebService.EntityObject {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
@@ -423,20 +435,7 @@ namespace GELive.anrlWebService {
         private string IMEIField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.t_Flugzeug[] t_FlugzeugsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.t_GPS_IN t_GPS_INField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
+        private System.Collections.Generic.List<GELive.anrlWebService.t_Flugzeug> t_FlugzeugField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int ID {
@@ -465,27 +464,82 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.t_Flugzeug[] t_Flugzeugs {
+        public System.Collections.Generic.List<GELive.anrlWebService.t_Flugzeug> t_Flugzeug {
             get {
-                return this.t_FlugzeugsField;
+                return this.t_FlugzeugField;
             }
             set {
-                if ((object.ReferenceEquals(this.t_FlugzeugsField, value) != true)) {
-                    this.t_FlugzeugsField = value;
-                    this.RaisePropertyChanged("t_Flugzeugs");
+                if ((object.ReferenceEquals(this.t_FlugzeugField, value) != true)) {
+                    this.t_FlugzeugField = value;
+                    this.RaisePropertyChanged("t_Flugzeug");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityKey", Namespace="http://schemas.datacontract.org/2004/07/System.Data", IsReference=true)]
+    [System.SerializableAttribute()]
+    public partial class EntityKey : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntityContainerNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.anrlWebService.EntityKeyMember> EntityKeyValuesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EntitySetNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EntityContainerName {
+            get {
+                return this.EntityContainerNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntityContainerNameField, value) != true)) {
+                    this.EntityContainerNameField = value;
+                    this.RaisePropertyChanged("EntityContainerName");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.t_GPS_IN t_GPS_IN {
+        public System.Collections.Generic.List<GELive.anrlWebService.EntityKeyMember> EntityKeyValues {
             get {
-                return this.t_GPS_INField;
+                return this.EntityKeyValuesField;
             }
             set {
-                if ((object.ReferenceEquals(this.t_GPS_INField, value) != true)) {
-                    this.t_GPS_INField = value;
-                    this.RaisePropertyChanged("t_GPS_IN");
+                if ((object.ReferenceEquals(this.EntityKeyValuesField, value) != true)) {
+                    this.EntityKeyValuesField = value;
+                    this.RaisePropertyChanged("EntityKeyValues");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EntitySetName {
+            get {
+                return this.EntitySetNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EntitySetNameField, value) != true)) {
+                    this.EntitySetNameField = value;
+                    this.RaisePropertyChanged("EntitySetName");
                 }
             }
         }
@@ -502,57 +556,38 @@ namespace GELive.anrlWebService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="t_GPS_IN", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOft_Flugzeug1U8vXZAD", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
     [System.SerializableAttribute()]
-    public partial class t_GPS_IN : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class EntityReferenceOft_Flugzeug1U8vXZAD : GELive.anrlWebService.EntityReference {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityKeyMember", Namespace="http://schemas.datacontract.org/2004/07/System.Data")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.anrlWebService.t_Daten>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Daten))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Flugzeug))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.t_Tracker))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.anrlWebService.t_Flugzeug>))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.StructuralObject))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.RelatedEnd))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityKey))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.anrlWebService.EntityKeyMember>))]
+    public partial class EntityKeyMember : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int GPS_fixField;
+        private string KeyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HDOPField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IMEIField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ProcessedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int StatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimestampField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimestampTrackerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string altitudeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string headingField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string latitudeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string longitudeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int nr_used_satField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string speedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.anrlWebService.t_Tracker[] t_TrackersField;
+        private object ValueField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -565,197 +600,92 @@ namespace GELive.anrlWebService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int GPS_fix {
+        public string Key {
             get {
-                return this.GPS_fixField;
+                return this.KeyField;
             }
             set {
-                if ((this.GPS_fixField.Equals(value) != true)) {
-                    this.GPS_fixField = value;
-                    this.RaisePropertyChanged("GPS_fix");
+                if ((object.ReferenceEquals(this.KeyField, value) != true)) {
+                    this.KeyField = value;
+                    this.RaisePropertyChanged("Key");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HDOP {
+        public object Value {
             get {
-                return this.HDOPField;
+                return this.ValueField;
             }
             set {
-                if ((object.ReferenceEquals(this.HDOPField, value) != true)) {
-                    this.HDOPField = value;
-                    this.RaisePropertyChanged("HDOP");
+                if ((object.ReferenceEquals(this.ValueField, value) != true)) {
+                    this.ValueField = value;
+                    this.RaisePropertyChanged("Value");
                 }
             }
         }
         
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReferenceOft_Tracker1U8vXZAD", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    public partial class EntityReferenceOft_Tracker1U8vXZAD : GELive.anrlWebService.EntityReference {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntityReference", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD))]
+    public partial class EntityReference : GELive.anrlWebService.RelatedEnd {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.anrlWebService.EntityKey EntityKeyField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
+        public GELive.anrlWebService.EntityKey EntityKey {
             get {
-                return this.IDField;
+                return this.EntityKeyField;
             }
             set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
+                if ((object.ReferenceEquals(this.EntityKeyField, value) != true)) {
+                    this.EntityKeyField = value;
+                    this.RaisePropertyChanged("EntityKey");
                 }
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RelatedEnd", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReference))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.anrlWebService.EntityReferenceOft_Tracker1U8vXZAD))]
+    public partial class RelatedEnd : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string IMEI {
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
-                return this.IMEIField;
+                return this.extensionDataField;
             }
             set {
-                if ((object.ReferenceEquals(this.IMEIField, value) != true)) {
-                    this.IMEIField = value;
-                    this.RaisePropertyChanged("IMEI");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Processed {
-            get {
-                return this.ProcessedField;
-            }
-            set {
-                if ((this.ProcessedField.Equals(value) != true)) {
-                    this.ProcessedField = value;
-                    this.RaisePropertyChanged("Processed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Timestamp {
-            get {
-                return this.TimestampField;
-            }
-            set {
-                if ((this.TimestampField.Equals(value) != true)) {
-                    this.TimestampField = value;
-                    this.RaisePropertyChanged("Timestamp");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime TimestampTracker {
-            get {
-                return this.TimestampTrackerField;
-            }
-            set {
-                if ((this.TimestampTrackerField.Equals(value) != true)) {
-                    this.TimestampTrackerField = value;
-                    this.RaisePropertyChanged("TimestampTracker");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string altitude {
-            get {
-                return this.altitudeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.altitudeField, value) != true)) {
-                    this.altitudeField = value;
-                    this.RaisePropertyChanged("altitude");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string heading {
-            get {
-                return this.headingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.headingField, value) != true)) {
-                    this.headingField = value;
-                    this.RaisePropertyChanged("heading");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string latitude {
-            get {
-                return this.latitudeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.latitudeField, value) != true)) {
-                    this.latitudeField = value;
-                    this.RaisePropertyChanged("latitude");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string longitude {
-            get {
-                return this.longitudeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.longitudeField, value) != true)) {
-                    this.longitudeField = value;
-                    this.RaisePropertyChanged("longitude");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int nr_used_sat {
-            get {
-                return this.nr_used_satField;
-            }
-            set {
-                if ((this.nr_used_satField.Equals(value) != true)) {
-                    this.nr_used_satField = value;
-                    this.RaisePropertyChanged("nr_used_sat");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string speed {
-            get {
-                return this.speedField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.speedField, value) != true)) {
-                    this.speedField = value;
-                    this.RaisePropertyChanged("speed");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.anrlWebService.t_Tracker[] t_Trackers {
-            get {
-                return this.t_TrackersField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.t_TrackersField, value) != true)) {
-                    this.t_TrackersField = value;
-                    this.RaisePropertyChanged("t_Trackers");
-                }
+                this.extensionDataField = value;
             }
         }
         
@@ -774,7 +704,7 @@ namespace GELive.anrlWebService {
     public interface IANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
-        GELive.anrlWebService.t_Daten[] GetPathData(System.DateTime timestamp);
+        System.Collections.Generic.List<GELive.anrlWebService.t_Daten> GetPathData(System.DateTime timestamp);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -804,7 +734,7 @@ namespace GELive.anrlWebService {
                 base(binding, remoteAddress) {
         }
         
-        public GELive.anrlWebService.t_Daten[] GetPathData(System.DateTime timestamp) {
+        public System.Collections.Generic.List<GELive.anrlWebService.t_Daten> GetPathData(System.DateTime timestamp) {
             return base.Channel.GetPathData(timestamp);
         }
     }

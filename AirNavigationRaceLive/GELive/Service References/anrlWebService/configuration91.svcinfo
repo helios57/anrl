@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="gbUJ8TObJmMUEBI+WTRcSXspTXo=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="ii9OnCGXmDo9cdzP6isd6Jl5SRM=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpBinding" name="WSHttpBinding_IANRLDataService">
       <properties>
@@ -115,10 +115,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="WSHttpBinding_IANRLDataService" contract="anrlWebService.IANRLDataService" bindingType="wsHttpBinding" address="http://localhost:1326/ANRLDataService.svc" bindingConfiguration="WSHttpBinding_IANRLDataService">
+    <endpoint name="WSHttpBinding_IANRLDataService" contract="anrlWebService.IANRLDataService" bindingType="wsHttpBinding" address="http://localhost:5555/" bindingConfiguration="WSHttpBinding_IANRLDataService">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://localhost:1326/ANRLDataService.svc</serializedValue>
+          <serializedValue>http://localhost:5555/</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
