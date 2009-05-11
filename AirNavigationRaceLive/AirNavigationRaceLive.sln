@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GELive", "GELive\GELive.csproj", "{1A2526F5-9A18-40D7-A4C1-479A131F1698}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2D2F75FD-F155-451B-A49F-EAECB277F282} = {2D2F75FD-F155-451B-A49F-EAECB277F282}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KmlBuilder", "KmlBuilder\KmlBuilder.csproj", "{90EC52E1-3A1B-44DF-B7E0-706DC50E74EF}"
 EndProject

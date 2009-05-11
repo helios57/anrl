@@ -26,11 +26,12 @@ namespace GELive
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
             Client = new ANRLDataServiceClient();
+            
         }
 
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
-            t_Daten[] Data = Client.GetPathData(DateTime.Now.AddMinutes(-1));
+            List<t_Daten> Data = Client.GetPathData(DateTime.Now.AddMinutes(-1));
             DatenListe.AddRange(Data);
         }
 

@@ -25,8 +25,8 @@ namespace DataService
             using (DatabaseEntities dataContext = new DatabaseEntities())
             {
                 return dataContext.t_Daten.
-                    Include("t_Flugzeug").
-                    Include("t_Flugzeug.t_Tracker").
+                    /*Include("t_Flugzeug").
+                    Include("t_Flugzeug.t_Tracker").*/
                     Where(d => d.TStart >= timestamp && d.TEnd < timestamp).
                     ToList();
             }

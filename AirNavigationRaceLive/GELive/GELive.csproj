@@ -142,6 +142,7 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
+    <None Include="Service References\anrlWebService\item.disco" />
     <None Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -151,15 +152,16 @@
     <None Include="Resources\KMLTemplates\KML_Samples.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\anrlWebService\ANRLDataService1.disco" />
-    <None Include="Service References\anrlWebService\ANRLDataService1.wsdl" />
-    <None Include="Service References\anrlWebService\ANRLDataService3.xsd" />
-    <None Include="Service References\anrlWebService\ANRLDataService31.xsd" />
-    <None Include="Service References\anrlWebService\ANRLDataService32.xsd" />
+    <None Include="Service References\anrlWebService\ANRLDataService.wsdl" />
     <None Include="Service References\anrlWebService\configuration91.svcinfo" />
     <None Include="Service References\anrlWebService\GELive.anrlWebService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\anrlWebService\item.xsd" />
+    <None Include="Service References\anrlWebService\item1.xsd" />
+    <None Include="Service References\anrlWebService\item2.xsd" />
+    <None Include="Service References\anrlWebService\item3.xsd" />
+    <None Include="Service References\anrlWebService\item4.xsd" />
     <None Include="Service References\anrlWebService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
