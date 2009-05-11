@@ -24,7 +24,6 @@ namespace TCPReciever
 
         public bool running;
         List<Thread> ThreadList = new List<Thread>();
-        DataContext db;
         public String DB_PATH;
 
         public Server()
