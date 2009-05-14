@@ -28,6 +28,13 @@ namespace GELive
     /// </summary>
     public static class GEHelpers
     {
+        /// <summary>
+        /// Draws the line string.
+        /// </summary>
+        /// <param name="ge">The ge.</param>
+        /// <param name="p1">The p1.</param>
+        /// <param name="p2">The p2.</param>
+        /// <returns></returns>
         public static IKmlPlacemark DrawLineString(IGEPlugin ge, IKmlPoint p1, IKmlPoint p2)
         {
             IKmlPlacemark lineStringPlacemark = ge.createPlacemark(String.Empty);
