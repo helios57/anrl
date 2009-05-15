@@ -46,15 +46,21 @@ namespace GELive
             string result = "";
             result += GetKMLTemplateContent("header");
             List<Points> test = new List<Points>();
+            foreach (t_Daten d in DatenListe)
+            {
+                Points pStart = new Points((decimal)d.XStart, (decimal)d.YStart, (decimal)d.ZStart);
+                Points pEnd = new Points((decimal)d.XEnd, (decimal)d.YEnd, (decimal)d.ZEnd);
+                test.Add(pStart);
+                test.Add(pEnd);
+            }
+
             test.Add(new Points((decimal)(7 + (23.7066) / 60), (decimal)(46 + (56.2789) / 60), (decimal)(570.1)));
             test.Add(new Points((decimal)(7 + (23.4459) / 60), (decimal)(46 + (56.1450) / 60), (decimal)(690.5)));   
-            result += AddLine(test, Colors.Blue);
+            
+            result += AddLine(test, Colors.Red);
             result += GetKMLTemplateContent("footer");
 
-
-
-
-            return result;//GELive.Properties.Resources.track;
+            return result;
         }
 
         internal string GetKMLTemplateContent(string Filename)
