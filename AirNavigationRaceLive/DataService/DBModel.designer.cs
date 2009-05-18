@@ -48,7 +48,7 @@ namespace DataService
         }
         partial void OnContextCreated();
         /// <summary>
-        /// There are no comments for t_Daten in the schema.
+        /// Table with all calcualted Data.
         /// </summary>
         public global::System.Data.Objects.ObjectQuery<t_Daten> t_Daten
         {
@@ -63,7 +63,7 @@ namespace DataService
         }
         private global::System.Data.Objects.ObjectQuery<t_Daten> _t_Daten;
         /// <summary>
-        /// There are no comments for t_Flugzeug in the schema.
+        /// Table with all Airplane infos.
         /// </summary>
         public global::System.Data.Objects.ObjectQuery<t_Flugzeug> t_Flugzeug
         {
@@ -78,7 +78,7 @@ namespace DataService
         }
         private global::System.Data.Objects.ObjectQuery<t_Flugzeug> _t_Flugzeug;
         /// <summary>
-        /// There are no comments for t_GPS_IN in the schema.
+        /// Table with all Data from the GPS-Trackers.
         /// </summary>
         public global::System.Data.Objects.ObjectQuery<t_GPS_IN> t_GPS_IN
         {
@@ -93,7 +93,7 @@ namespace DataService
         }
         private global::System.Data.Objects.ObjectQuery<t_GPS_IN> _t_GPS_IN;
         /// <summary>
-        /// There are no comments for t_Tracker in the schema.
+        /// Table with all Tracker infos.
         /// </summary>
         public global::System.Data.Objects.ObjectQuery<t_Tracker> t_Tracker
         {
@@ -108,7 +108,7 @@ namespace DataService
         }
         private global::System.Data.Objects.ObjectQuery<t_Tracker> _t_Tracker;
         /// <summary>
-        /// There are no comments for t_Daten in the schema.
+        /// This Tabel contains all Calculated Data required for showing the Tracks
         /// </summary>
         public void AddTot_Daten(t_Daten t_Daten)
         {

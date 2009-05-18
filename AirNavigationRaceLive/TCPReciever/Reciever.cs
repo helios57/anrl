@@ -100,7 +100,7 @@ namespace TCPReciever
             new_position.Processed = false;
 
 
-            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(DB_PATH);
+            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities();
             dataContext.AddTot_GPS_IN(new_position);
             dataContext.SaveChanges();
         }

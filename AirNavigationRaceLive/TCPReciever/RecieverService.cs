@@ -90,32 +90,36 @@ namespace TCPReciever
         /// <param name="e"></param>
         void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
         {
-            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(GPS.DB_PATH);
+            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(/* GPS.DB_PATH*/);
             List<t_GPS_IN> Positions = dataContext.t_GPS_IN.Where(a => !a.Processed 
                                         ).OrderBy(t=>t.Timestamp).ToList();
             List<t_Tracker> Trackers = dataContext.t_Tracker.ToList();
             List<t_Flugzeug> Flugzeuge = dataContext.t_Flugzeug.ToList();
 
-            foreach (t_Tracker tr in Trackers)
+            try
             {
-                List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a=> a.Timestamp).ToList();
-                t_Daten InsertData = new t_Daten();
-                InsertData.Timestamp = DateTime.Now;
-                InsertData.t_Flugzeug = Flugzeuge.Where(a => a.t_Tracker.ID == tr.ID).OrderByDescending(a=>a.ID).ToArray()[0];
-                //InsertData.ID_Flugzeug = InsertData.t_Flugzeug.ID;
-                InsertData.TStart = Positions_Tracker.First().Timestamp;
-                InsertData.TEnd = Positions_Tracker.Last().Timestamp;
-                
-                InsertData.XStart = ConvertCoordinates(Positions_Tracker.First().latitude);
-                InsertData.XEnd = ConvertCoordinates(Positions_Tracker.Last().latitude);
-                InsertData.YStart = ConvertCoordinates(Positions_Tracker.First().longitude);
-                InsertData.YEnd = ConvertCoordinates(Positions_Tracker.Last().longitude);
-                InsertData.ZStart = ConvertCoordinates(Positions_Tracker.First().altitude);
-                InsertData.ZEnd = ConvertCoordinates(Positions_Tracker.Last().altitude);
+                foreach (t_Tracker tr in Trackers)
+                {
+                    List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.Timestamp).ToList();
+                    t_Daten InsertData = new t_Daten();
+                    InsertData.Timestamp = DateTime.Now;
+                    InsertData.t_Flugzeug = Flugzeuge.Where(a => a.t_Tracker.ID == tr.ID).OrderByDescending(a => a.ID).ToArray()[0];
+                    //InsertData.ID_Flugzeug = InsertData.t_Flugzeug.ID;
+                    InsertData.TStart = Positions_Tracker.First().Timestamp;
+                    InsertData.TEnd = Positions_Tracker.Last().Timestamp;
 
-                dataContext.AddTot_Daten(InsertData);
+                    InsertData.XStart = ConvertCoordinates(Positions_Tracker.First().latitude);
+                    InsertData.XEnd = ConvertCoordinates(Positions_Tracker.Last().latitude);
+                    InsertData.YStart = ConvertCoordinates(Positions_Tracker.First().longitude);
+                    InsertData.YEnd = ConvertCoordinates(Positions_Tracker.Last().longitude);
+                    InsertData.ZStart = ConvertCoordinates(Positions_Tracker.First().altitude);
+                    InsertData.ZEnd = ConvertCoordinates(Positions_Tracker.Last().altitude);
 
+                    dataContext.AddTot_Daten(InsertData);
+
+                }
             }
+            catch { Console.WriteLine("Error while Wrinting calculated data"); }
             dataContext.SaveChanges();
         }
 
