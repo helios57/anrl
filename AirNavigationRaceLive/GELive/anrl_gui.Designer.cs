@@ -76,7 +76,7 @@
             this.Controls.Add(this.geWebBrowser1);
             this.Controls.Add(this.geToolStrip1);
             this.Name = "anrl_gui";
-            this.Text = "Form1";
+            this.Text = "Air Navigation Race LIVE";
             this.geToolStrip1.ResumeLayout(false);
             this.geToolStrip1.PerformLayout();
             this.ResumeLayout(false);
