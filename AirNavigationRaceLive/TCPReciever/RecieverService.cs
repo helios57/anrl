@@ -38,6 +38,10 @@ namespace TCPReciever
             OnStart(null);
         }
 
+        /// <summary>
+        /// The Start Event of the Server
+        /// </summary>
+        /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
             GPS = new Server();
@@ -46,6 +50,11 @@ namespace TCPReciever
             CalculateTabels.Start();
         }
 
+        /// <summary>
+        /// Converting the Coordinates from String wsg84 to Decimal
+        /// </summary>
+        /// <param name="wsg84Coords"></param>
+        /// <returns></returns>
         private decimal ConvertCoordinates(string wsg84Coords)
         {
             decimal result = 0;
@@ -73,6 +82,12 @@ namespace TCPReciever
             return result;
         }
 
+        /// <summary>
+        /// Calculate the Tables of t_Data and Insert all needed Entries
+        /// Will be trigered form a 5 sec-Timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
         {
             DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(GPS.DB_PATH);
@@ -104,6 +119,9 @@ namespace TCPReciever
             dataContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Stop The Service
+        /// </summary>
         protected override void OnStop()
         {
             GPS.Stop();
