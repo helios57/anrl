@@ -11,10 +11,16 @@ using DataService;
 
 namespace TCPReciever
 {
+    /// <summary>
+    /// Service of the GPSReciever, which wil be Installed as Systemservice (in future) 
+    /// Now it will be started from the Programm.cs
+    /// </summary>
     partial class GPSReciever : ServiceBase
     {
+        #region Variablen und Deklarationen
         Server GPS;
         Timer CalculateTabels;
+        #endregion
 
         /// <summary>
         /// Creates a new GPS-Reciever Service Object
@@ -31,6 +37,7 @@ namespace TCPReciever
         {
             OnStart(null);
         }
+
         protected override void OnStart(string[] args)
         {
             GPS = new Server();

@@ -12,7 +12,7 @@ using System.IO;
 namespace TCPReciever
 {
     /// <summary>
-    /// Class of the TCP-Reciever Service
+    /// Class of the TCP-Reciever Server
     /// </summary>
     class Server
     {
@@ -30,6 +30,9 @@ namespace TCPReciever
         List<Thread> ThreadList = new List<Thread>();
         public String DB_PATH;
         #endregion
+        /// <summary>
+        /// Create an new Instance of the TCP-Listener on Port 5000
+        /// </summary>
         public Server()
         {
             running = true;
@@ -48,6 +51,10 @@ namespace TCPReciever
             this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
         }
 
+        /// <summary>
+        /// Handels recieved Messages
+        /// </summary>
+        /// <param name="message">The Message recieved ofer TCP</param>
         public void Message_Received_Processor(string message)
         {
             MyDelegate = new RecievedGPS(ProcessRecievedGPSData);
@@ -55,51 +62,53 @@ namespace TCPReciever
             MyDelegate.Invoke(message);
         }
 
+        /// <summary>
+        /// Handels the Data recieved and processed in the Message_Received_Processor
+        /// Adds the Data to the Database
+        /// For Threat-Security
+        /// </summary>
+        /// <param name="GPSData">THe Data</param>
         public void ProcessRecievedGPSData(string GPSData)
-        {
-           // try
-           // {
-                String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
-                String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
+    {
+            String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
+            String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
-                //DataContext db = new DataContext(DB_PATH);
+            //DataContext db = new DataContext(DB_PATH);
 
-                DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
-                new_position.IMEI = GPScoords[0];
-                new_position.Status = Int32.Parse(GPScoords[1]);
-                new_position.GPS_fix = Int32.Parse(GPScoords[2]);
-                string yy = GPScoords[3].Substring(4, 2);
-                string mm = GPScoords[3].Substring(2, 2);
-                string dd = GPScoords[3].Substring(0, 2);
-                new_position.TimestampTracker = new DateTime(
-                                        Int32.Parse("20" + yy),
-                                        Int32.Parse(mm),
-                                        Int32.Parse(dd),
-                                        Int32.Parse(GPScoords[4].Substring(0, 2)),
-                                        Int32.Parse(GPScoords[4].Substring(2, 2)),
-                                        Int32.Parse(GPScoords[4].Substring(4, 2)));
-                new_position.longitude = GPScoords[5];
-                new_position.latitude = GPScoords[6];
-                new_position.altitude = GPScoords[7];
-                new_position.speed = GPScoords[8];
-                new_position.heading = GPScoords[9];
-                new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
-                new_position.HDOP = GPScoords[11];
-                new_position.Timestamp = DateTime.Now;
-                new_position.Processed = false;
+            DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
+            new_position.IMEI = GPScoords[0];
+            new_position.Status = Int32.Parse(GPScoords[1]);
+            new_position.GPS_fix = Int32.Parse(GPScoords[2]);
+            string yy = GPScoords[3].Substring(4, 2);
+            string mm = GPScoords[3].Substring(2, 2);
+            string dd = GPScoords[3].Substring(0, 2);
+            new_position.TimestampTracker = new DateTime(
+                                    Int32.Parse("20" + yy),
+                                    Int32.Parse(mm),
+                                    Int32.Parse(dd),
+                                    Int32.Parse(GPScoords[4].Substring(0, 2)),
+                                    Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                    Int32.Parse(GPScoords[4].Substring(4, 2)));
+            new_position.longitude = GPScoords[5];
+            new_position.latitude = GPScoords[6];
+            new_position.altitude = GPScoords[7];
+            new_position.speed = GPScoords[8];
+            new_position.heading = GPScoords[9];
+            new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
+            new_position.HDOP = GPScoords[11];
+            new_position.Timestamp = DateTime.Now;
+            new_position.Processed = false;
 
 
-                DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(DB_PATH);
-                dataContext.AddTot_GPS_IN(new_position);
-                dataContext.SaveChanges();
-         //   }
-          //  catch
-          //  {
-                //Write some log ?
-          //  }
-
+            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(DB_PATH);
+            dataContext.AddTot_GPS_IN(new_position);
+            dataContext.SaveChanges();
         }
 
+        /// <summary>
+        /// Start the Thread for listening for Clients
+        /// For every Client a ne Thread is started
+        /// </summary>
         private void ListenForClients()
         {
             this.tcpListener.Start();
@@ -117,6 +126,10 @@ namespace TCPReciever
             }
         }
 
+        /// <summary>
+        /// Handels when an new Client Connected, in an new Thread
+        /// </summary>
+        /// <param name="client"></param>
         private void HandleClientComm(object client)
         {
             TcpClient tcpClient = (TcpClient)client;
@@ -155,6 +168,9 @@ namespace TCPReciever
             tcpClient.Close();
         }
 
+        /// <summary>
+        /// Tries to shut down each Connection and Free the connections
+        /// </summary>
         public void Stop()
         {
             this.tcpListener.Stop();
