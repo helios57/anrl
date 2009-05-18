@@ -109,12 +109,12 @@ namespace TCPReciever
                     InsertData.TStart = Positions_Tracker.First().Timestamp;
                     InsertData.TEnd = Positions_Tracker.Last().Timestamp;
 
-                    InsertData.XStart = ConvertCoordinates(Positions_Tracker.First().latitude);
-                    InsertData.XEnd = ConvertCoordinates(Positions_Tracker.Last().latitude);
-                    InsertData.YStart = ConvertCoordinates(Positions_Tracker.First().longitude);
-                    InsertData.YEnd = ConvertCoordinates(Positions_Tracker.Last().longitude);
-                    InsertData.ZStart = decimal.Parse(Positions_Tracker.First().altitude);
-                    InsertData.ZEnd = decimal.Parse(Positions_Tracker.Last().altitude);
+                    InsertData.XStart = decimal.Round(ConvertCoordinates(Positions_Tracker.First().latitude),16);
+                    InsertData.XEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().latitude),16);
+                    InsertData.YStart = decimal.Round(ConvertCoordinates(Positions_Tracker.First().longitude),16);
+                    InsertData.YEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().longitude),16);
+                    InsertData.ZStart = decimal.Round(decimal.Parse(Positions_Tracker.First().altitude),16);
+                    InsertData.ZEnd = decimal.Round(decimal.Parse(Positions_Tracker.Last().altitude),16);
 
                     dataContext.AddTot_Daten(InsertData);
                     Positions_Tracker.First().Processed = true;
