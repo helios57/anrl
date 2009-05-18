@@ -15,9 +15,9 @@ namespace DataService
     public interface IANRLDataService
     {
         /// <summary>
-        /// Returns the most actual flight path data as a list of t_Daten
+        /// Returns the flight path data as a list of t_Daten at a Given Timestamp
         /// </summary>
-        /// <param name="timestamp">The timestamp associated with the data</param>
+        /// <param name="timestamp">The Timestamp for which the Data is requested</param>
         /// <returns>List of t_Daten</returns>
         [OperationContract]
         List<t_Daten> GetPathData(DateTime timestamp);
