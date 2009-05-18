@@ -74,35 +74,37 @@ namespace TCPReciever
             String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
             //DataContext db = new DataContext(DB_PATH);
-
-            DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
-            new_position.IMEI = GPScoords[0];
-            new_position.Status = Int32.Parse(GPScoords[1]);
-            new_position.GPS_fix = Int32.Parse(GPScoords[2]);
             string yy = GPScoords[3].Substring(4, 2);
             string mm = GPScoords[3].Substring(2, 2);
             string dd = GPScoords[3].Substring(0, 2);
-            new_position.TimestampTracker = new DateTime(
-                                    Int32.Parse("20" + yy),
-                                    Int32.Parse(mm),
-                                    Int32.Parse(dd),
-                                    Int32.Parse(GPScoords[4].Substring(0, 2)),
-                                    Int32.Parse(GPScoords[4].Substring(2, 2)),
-                                    Int32.Parse(GPScoords[4].Substring(4, 2)));
-            new_position.longitude = GPScoords[5];
-            new_position.latitude = GPScoords[6];
-            new_position.altitude = GPScoords[7];
-            new_position.speed = GPScoords[8];
-            new_position.heading = GPScoords[9];
-            new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
-            new_position.HDOP = GPScoords[11];
-            new_position.Timestamp = DateTime.Now;
-            new_position.Processed = false;
+            if (yy != "00" && mm != "00" && dd != "00") //Only save sensefull data
+            {
+                DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
+                new_position.IMEI = GPScoords[0];
+                new_position.Status = Int32.Parse(GPScoords[1]);
+                new_position.GPS_fix = Int32.Parse(GPScoords[2]);
+                new_position.TimestampTracker = new DateTime(
+                                        Int32.Parse("20" + yy),
+                                        Int32.Parse(mm),
+                                        Int32.Parse(dd),
+                                        Int32.Parse(GPScoords[4].Substring(0, 2)),
+                                        Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                        Int32.Parse(GPScoords[4].Substring(4, 2)));
+                new_position.longitude = GPScoords[5];
+                new_position.latitude = GPScoords[6];
+                new_position.altitude = GPScoords[7];
+                new_position.speed = GPScoords[8];
+                new_position.heading = GPScoords[9];
+                new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
+                new_position.HDOP = GPScoords[11];
+                new_position.Timestamp = DateTime.Now;
+                new_position.Processed = false;
 
 
-            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities();
-            dataContext.AddTot_GPS_IN(new_position);
-            dataContext.SaveChanges();
+                DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities();
+                dataContext.AddTot_GPS_IN(new_position);
+                dataContext.SaveChanges();
+            }
         }
 
         /// <summary>
