@@ -27,6 +27,10 @@ namespace GELive
         /// </summary>
         private GEWebBrowser gewb = null;
 
+        /// <summary>
+        /// WebServiceClient manager, generates KML-FIles
+        /// </summary>
+        WSManager ws;
         #endregion
 
         /// <summary>
@@ -36,6 +40,16 @@ namespace GELive
             : base()
         {
             this.InitializeComponent();
+            //Tmp aktiualisierung ....
+            Timer UpdateTimerTmp = new Timer();
+            UpdateTimerTmp.Tick += new EventHandler(UpdateTimerTmp_Tick);
+            UpdateTimerTmp.Interval = 5000;
+            UpdateTimerTmp.Start();
+        }
+
+        void UpdateTimerTmp_Tick(object sender, EventArgs e)
+        {
+            InvokeLoadKml();
         }
 
         #region Public methods
@@ -45,7 +59,10 @@ namespace GELive
         /// </summary>
         public void InvokeLoadKml()
         {
-            WSManager ws = new WSManager();     // this line of code has to be updated when the webservice works
+            if (ws == null)
+            {
+                ws = new WSManager();     // this line of code has to be updated when the webservice works
+            }
             string kml = ws.GetKml();           // this line of code has to be updated when the webservice works
             Object[] objArray = new Object[1];
             objArray[0] = (Object)kml;

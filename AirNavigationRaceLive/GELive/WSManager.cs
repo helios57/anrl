@@ -17,6 +17,7 @@ namespace GELive
         List<t_Daten> DatenListe = new List<t_Daten>();
         Timer UpdateData = new Timer(5000);
         ANRLDataServiceClient Client;
+        bool ListLocked = false;
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
@@ -36,8 +37,14 @@ namespace GELive
         /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
+            while (ListLocked)
+            {
+                System.Threading.Thread.Sleep(20); 
+            }
+            ListLocked = true;
             List<t_Daten> Data = Client.GetPathData(DateTime.Now.AddMinutes(-1));
             DatenListe.AddRange(Data);
+            ListLocked = false;
         }
 
         /// <summary>
@@ -52,6 +59,11 @@ namespace GELive
             string result = "";
             result += GetKMLTemplateContent("header");
             List<Points> test = new List<Points>();
+            while (ListLocked)
+            {
+                System.Threading.Thread.Sleep(20);
+            }
+            ListLocked = true;
             foreach (t_Daten d in DatenListe)
             {
                 Points pStart = new Points((decimal)d.XStart, (decimal)d.YStart, (decimal)d.ZStart);
@@ -59,9 +71,10 @@ namespace GELive
                 test.Add(pStart);
                 test.Add(pEnd);
             }
+            ListLocked = false;
 
-            test.Add(new Points((decimal)(7 + (23.7066) / 60), (decimal)(46 + (56.2789) / 60), (decimal)(570.1)));
-            test.Add(new Points((decimal)(7 + (23.4459) / 60), (decimal)(46 + (56.1450) / 60), (decimal)(690.5)));   
+           // test.Add(new Points((decimal)(7 + (23.7066) / 60), (decimal)(46 + (56.2789) / 60), (decimal)(570.1)));
+            //test.Add(new Points((decimal)(7 + (23.4459) / 60), (decimal)(46 + (56.1450) / 60), (decimal)(690.5)));   
             
             result += AddLine(test, Colors.Red);
             result += GetKMLTemplateContent("footer");

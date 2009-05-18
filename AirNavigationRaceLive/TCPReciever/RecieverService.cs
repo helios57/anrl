@@ -79,7 +79,7 @@ namespace TCPReciever
             {
                 throw new Exception("Wrong Coordinate format") ;
             }
-            return result;
+            return decimal.Round(result,17);
         }
 
         /// <summary>
@@ -96,11 +96,12 @@ namespace TCPReciever
             List<t_Tracker> Trackers = dataContext.t_Tracker.ToList();
             List<t_Flugzeug> Flugzeuge = dataContext.t_Flugzeug.ToList();
 
-            try
+
+            foreach (t_Tracker tr in Trackers)
             {
-                foreach (t_Tracker tr in Trackers)
+                List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.Timestamp).ToList();
+                if (Positions_Tracker.Count > 0)
                 {
-                    List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.Timestamp).ToList();
                     t_Daten InsertData = new t_Daten();
                     InsertData.Timestamp = DateTime.Now;
                     InsertData.t_Flugzeug = Flugzeuge.Where(a => a.t_Tracker.ID == tr.ID).OrderByDescending(a => a.ID).ToArray()[0];
@@ -112,14 +113,16 @@ namespace TCPReciever
                     InsertData.XEnd = ConvertCoordinates(Positions_Tracker.Last().latitude);
                     InsertData.YStart = ConvertCoordinates(Positions_Tracker.First().longitude);
                     InsertData.YEnd = ConvertCoordinates(Positions_Tracker.Last().longitude);
-                    InsertData.ZStart = ConvertCoordinates(Positions_Tracker.First().altitude);
-                    InsertData.ZEnd = ConvertCoordinates(Positions_Tracker.Last().altitude);
+                    InsertData.ZStart = decimal.Parse(Positions_Tracker.First().altitude);
+                    InsertData.ZEnd = decimal.Parse(Positions_Tracker.Last().altitude);
 
                     dataContext.AddTot_Daten(InsertData);
-
+                    Positions_Tracker.First().Processed = true;
+                    Positions_Tracker.Last().Processed = true;
                 }
+
             }
-            catch { Console.WriteLine("Error while Wrinting calculated data"); }
+
             dataContext.SaveChanges();
         }
 
