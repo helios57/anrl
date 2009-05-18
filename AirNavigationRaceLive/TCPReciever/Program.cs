@@ -11,6 +11,7 @@ namespace TCPReciever
 
         /// <summary>
         /// The main entry point for the application.
+        /// Starts the Service, which will be installable as service later
         /// </summary>
         [STAThread]
         static void Main()

@@ -20,6 +20,7 @@ namespace GELive
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
+        /// Respondable for Updateing, getting the local Data-Cache and generating the KML-File with the lines
         /// </summary>
         public WSManager()
         {
@@ -28,6 +29,11 @@ namespace GELive
             Client = new ANRLDataServiceClient();
         }
 
+        /// <summary>
+        /// Event-Handler for Updating the local Cache of Data to be displayed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
             List<t_Daten> Data = Client.GetPathData(DateTime.Now.AddMinutes(-1));
@@ -64,9 +70,9 @@ namespace GELive
         }
 
         /// <summary>
-        /// Gets the content of the KML template.
+        /// Reads the filecontent of a template for generating the KML-File
         /// </summary>
-        /// <param name="Filename">The filename.</param>
+        /// <param name="Filename">Name of the Template in the Folder Resources\KMLTemplates</param>
         /// <returns></returns>
         internal string GetKMLTemplateContent(string Filename)
         {
@@ -79,10 +85,10 @@ namespace GELive
         }
 
         /// <summary>
-        /// Adds the line.
+        /// Add a line with the given Points to the KML-File
         /// </summary>
-        /// <param name="Points">The points.</param>
-        /// <param name="Color">The color.</param>
+        /// <param name="Points">List of Points</param>
+        /// <param name="Color">Color</param>
         /// <returns></returns>
         private string AddLine(List<Points> Points, Colors Color)
         {
@@ -116,7 +122,7 @@ namespace GELive
         }
 
         /// <summary>
-        /// 
+        /// Class for Points in decimal, to be used for AddLine 
         /// </summary>
         class Points
         {
@@ -130,6 +136,9 @@ namespace GELive
             public decimal Y;
             public decimal Z;
         }
+        /// <summary>
+        /// Enum of Colors which are supported by AddLine-Function
+        /// </summary>
         enum Colors:int
         {
             Red = 1,

@@ -11,8 +11,12 @@ using System.IO;
 
 namespace TCPReciever
 {
+    /// <summary>
+    /// Class of the TCP-Reciever Service
+    /// </summary>
     class Server
     {
+        #region Variablen Deklaration
         private TcpListener tcpListener;
         private Thread listenThread;
 
@@ -25,7 +29,7 @@ namespace TCPReciever
         public bool running;
         List<Thread> ThreadList = new List<Thread>();
         public String DB_PATH;
-
+        #endregion
         public Server()
         {
             running = true;
