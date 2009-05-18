@@ -63,6 +63,11 @@ namespace GELive
             return result;
         }
 
+        /// <summary>
+        /// Gets the content of the KML template.
+        /// </summary>
+        /// <param name="Filename">The filename.</param>
+        /// <returns></returns>
         internal string GetKMLTemplateContent(string Filename)
         {
             FileStream file = new FileStream("Resources\\KMLTemplates\\"+Filename+".kml",FileMode.Open, FileAccess.Read);
@@ -72,6 +77,13 @@ namespace GELive
             file.Close();
             return result;
         }
+
+        /// <summary>
+        /// Adds the line.
+        /// </summary>
+        /// <param name="Points">The points.</param>
+        /// <param name="Color">The color.</param>
+        /// <returns></returns>
         private string AddLine(List<Points> Points, Colors Color)
         {
             string result = "<Placemark>";
@@ -103,6 +115,9 @@ namespace GELive
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         class Points
         {
             public Points(decimal X, decimal Y, decimal Z)
