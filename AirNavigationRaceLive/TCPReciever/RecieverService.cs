@@ -79,7 +79,7 @@ namespace TCPReciever
             {
                 throw new Exception("Wrong Coordinate format") ;
             }
-            return decimal.Round(result,17);
+            return decimal.Round(result,18);
         }
 
         /// <summary>

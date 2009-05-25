@@ -21,15 +21,16 @@
     <HelpTitle>Air Navigation Race Live Dokumentation</HelpTitle>
     <DocumentationSources>
       <DocumentationSource sourceFile="DataService\bin\DataService.dll" xmlns="" />
-<DocumentationSource sourceFile="DataService\bin\DataService.xml" xmlns="" />
-<DocumentationSource sourceFile="KmlBuilder\bin\Debug\DomeTesting.exe" xmlns="" />
-<DocumentationSource sourceFile="KmlBuilder\bin\Debug\DomeTesting.XML" xmlns="" />
-<DocumentationSource sourceFile="GELive\bin\Debug\GELive.exe" xmlns="" />
-<DocumentationSource sourceFile="GELive\bin\Debug\GELive.xml" xmlns="" />
-<DocumentationSource sourceFile="SelfHostingHelper\bin\Debug\SelfHostingHelper.exe" xmlns="" />
-<DocumentationSource sourceFile="SelfHostingHelper\bin\Debug\SelfHostingHelper.XML" xmlns="" />
-<DocumentationSource sourceFile="TCPReciever\bin\Debug\TCPReciever.exe" xmlns="" />
-<DocumentationSource sourceFile="TCPReciever\bin\Debug\TCPReciever.XML" xmlns="" /></DocumentationSources>
+      <DocumentationSource sourceFile="DataService\bin\DataService.xml" xmlns="" />
+      <DocumentationSource sourceFile="KmlBuilder\bin\Debug\DomeTesting.exe" xmlns="" />
+      <DocumentationSource sourceFile="KmlBuilder\bin\Debug\DomeTesting.XML" xmlns="" />
+      <DocumentationSource sourceFile="GELive\bin\Debug\GELive.exe" xmlns="" />
+      <DocumentationSource sourceFile="GELive\bin\Debug\GELive.xml" xmlns="" />
+      <DocumentationSource sourceFile="SelfHostingHelper\bin\Debug\SelfHostingHelper.exe" xmlns="" />
+      <DocumentationSource sourceFile="SelfHostingHelper\bin\Debug\SelfHostingHelper.XML" xmlns="" />
+      <DocumentationSource sourceFile="TCPReciever\bin\Debug\TCPReciever.exe" xmlns="" />
+      <DocumentationSource sourceFile="TCPReciever\bin\Debug\TCPReciever.XML" xmlns="" />
+    </DocumentationSources>
     <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, TypeParameter</MissingTags>
     <HelpFileFormat>Website</HelpFileFormat>
   </PropertyGroup>

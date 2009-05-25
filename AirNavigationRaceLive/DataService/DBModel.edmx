@@ -26,12 +26,12 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ID_Flugzeug" Type="int" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
-          <Property Name="XStart" Type="numeric" />
-          <Property Name="XEnd" Type="numeric" />
-          <Property Name="YStart" Type="numeric" />
-          <Property Name="YEnd" Type="numeric" />
-          <Property Name="ZStart" Type="numeric" />
-          <Property Name="ZEnd" Type="numeric" />
+          <Property Name="XStart" Type="decimal" />
+          <Property Name="XEnd" Type="decimal" />
+          <Property Name="YStart" Type="decimal" />
+          <Property Name="YEnd" Type="decimal" />
+          <Property Name="ZStart" Type="decimal" />
+          <Property Name="ZEnd" Type="decimal" />
           <Property Name="TStart" Type="datetime" />
           <Property Name="TEnd" Type="datetime" />
           <Property Name="Speed" Type="nchar" MaxLength="10" />
