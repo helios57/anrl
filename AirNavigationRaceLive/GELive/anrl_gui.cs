@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using GEPlugin;
+using GELive.ANRLDataService;
+using System.Collections.Generic;
 
 namespace GELive
 {    
@@ -27,6 +29,8 @@ namespace GELive
 
             // This event is raised if there is a javascript error (it can also be raised manually)
             geWebBrowser1.ScriptError += new GEWebBorwserEventHandeler(geWebBrowser1_ScriptError);
+
+        
         }
 
         /// <summary>
@@ -68,7 +72,10 @@ namespace GELive
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void LoadKml_Click(object sender, EventArgs e)
         {
+            geToolStrip1.UpdateTimerTmp.Start();
             geToolStrip1.InvokeLoadKml();
+            Delay_Select d = new Delay_Select(geToolStrip1);
+            d.Show();
         }
     }
 }

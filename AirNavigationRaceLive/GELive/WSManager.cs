@@ -18,6 +18,8 @@ namespace GELive
         Timer UpdateData = new Timer(5000);
         ANRLDataServiceClient Client;
         bool ListLocked = false;
+        public DateTime delaytimestamp;
+        public TimeSpan Delay;
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
@@ -42,8 +44,19 @@ namespace GELive
                 System.Threading.Thread.Sleep(20); 
             }
             ListLocked = true;
-            List<t_Daten> Data = Client.GetPathData(DateTime.Now.AddMinutes(-1));
+            DateTime DisplayTime = DateTime.Now.AddMinutes(-1);
+            if (Delay != null)
+            {
+                DisplayTime = DisplayTime.Add(-Delay); 
+            }
+
+            List<t_Daten> Data = Client.GetPathData(DisplayTime);
             DatenListe.AddRange(Data);
+            //Debug
+            if (Data.Count > 0)
+            {
+                Console.WriteLine("Got Data");
+            }
             ListLocked = false;
         }
 
@@ -127,7 +140,7 @@ namespace GELive
             result += "<coordinates>";
             foreach (Points p in Points)
             {
-                result += p.X + "," + p.Y + "," + p.Z + " ";
+                result += p.Y + "," + p.X + "," + p.Z + " ";
             }
             result += "</coordinates>";
             result += "</LineString></Placemark>";

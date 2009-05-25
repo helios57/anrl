@@ -28,6 +28,7 @@
     <MetadataFile FileName="ANRLDataService1.xsd" MetadataType="Schema" ID="b740fe25-4f06-44a6-bc60-8d5a66c98e72" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd1" />
     <MetadataFile FileName="ANRLDataService2.xsd" MetadataType="Schema" ID="ef2958b9-c20d-4432-ba43-939b1d42c609" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd3" />
     <MetadataFile FileName="ANRLDataService3.xsd" MetadataType="Schema" ID="c8b235a4-47bd-4957-89db-14812704021d" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ANRLDataService5.xsd" MetadataType="Schema" ID="80158347-6dd5-4d9a-8d81-cc5734cb8956" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd5" />
     <MetadataFile FileName="ANRLDataService4.xsd" MetadataType="Schema" ID="0455dae0-937a-4104-bfa5-15a02cc34352" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>

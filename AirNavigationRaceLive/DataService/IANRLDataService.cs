@@ -21,5 +21,12 @@ namespace DataService
         /// <returns>List of t_Daten</returns>
         [OperationContract]
         List<t_Daten> GetPathData(DateTime timestamp);
+
+        /// <summary>
+        /// List of timestamps with Data available for Delay
+        /// </summary>
+        /// <returns>List of Timestamps</returns>
+        [OperationContract]
+        List<DateTime> GetTimestamps();
     }
 }

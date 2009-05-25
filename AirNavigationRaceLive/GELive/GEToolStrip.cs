@@ -30,9 +30,10 @@ namespace GELive
         /// <summary>
         /// WebServiceClient manager, generates KML-FIles
         /// </summary>
-        WSManager ws;
+        public WSManager ws;
         #endregion
 
+        public Timer UpdateTimerTmp;
         /// <summary>
         /// Initializes a new instance of the GEToolStrip class.
         /// </summary>
@@ -41,10 +42,10 @@ namespace GELive
         {
             this.InitializeComponent();
             //Tmp aktiualisierung ....
-            Timer UpdateTimerTmp = new Timer();
+            
+            UpdateTimerTmp = new Timer();
             UpdateTimerTmp.Tick += new EventHandler(UpdateTimerTmp_Tick);
             UpdateTimerTmp.Interval = 5000;
-            UpdateTimerTmp.Start();
         }
 
         void UpdateTimerTmp_Tick(object sender, EventArgs e)

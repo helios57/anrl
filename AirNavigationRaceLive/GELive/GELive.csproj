@@ -78,6 +78,12 @@
     <Compile Include="anrl_gui.Designer.cs">
       <DependentUpon>anrl_gui.cs</DependentUpon>
     </Compile>
+    <Compile Include="Delay-Select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Delay-Select.Designer.cs">
+      <DependentUpon>Delay-Select.cs</DependentUpon>
+    </Compile>
     <Compile Include="External.cs" />
     <Compile Include="GEEventArgs.cs" />
     <Compile Include="GEHelpers.cs" />
@@ -102,6 +108,9 @@
     <EmbeddedResource Include="anrl_gui.resx">
       <DependentUpon>anrl_gui.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delay-Select.resx">
+      <DependentUpon>Delay-Select.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -142,6 +151,7 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
+    <None Include="Service References\ANRLDataService\ANRLDataService5.xsd" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

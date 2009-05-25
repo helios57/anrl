@@ -573,6 +573,7 @@ namespace GELive.ANRLDataService {
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReference))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.RelatedEnd))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.EntityReferenceOft_Flugzeug1U8vXZAD))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<System.DateTime>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Collections.Generic.List<GELive.ANRLDataService.t_Daten>))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Daten))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(GELive.ANRLDataService.t_Flugzeug))]
@@ -705,6 +706,9 @@ namespace GELive.ANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
         System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTimestamps", ReplyAction="http://tempuri.org/IANRLDataService/GetTimestampsResponse")]
+        System.Collections.Generic.List<System.DateTime> GetTimestamps();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -736,6 +740,10 @@ namespace GELive.ANRLDataService {
         
         public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp) {
             return base.Channel.GetPathData(timestamp);
+        }
+        
+        public System.Collections.Generic.List<System.DateTime> GetTimestamps() {
+            return base.Channel.GetTimestamps();
         }
     }
 }
