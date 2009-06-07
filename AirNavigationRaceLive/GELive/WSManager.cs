@@ -44,10 +44,10 @@ namespace GELive
                 System.Threading.Thread.Sleep(20); 
             }
             ListLocked = true;
-            DateTime DisplayTime = DateTime.Now.AddMinutes(-1);
+            DateTime DisplayTime = DateTime.Now.AddMinutes(0); //Set to 1 for Delayed Display
             if (Delay != null)
             {
-                DisplayTime = DisplayTime.Add(-Delay); 
+                DisplayTime = DisplayTime.Add(-Delay);
             }
 
             List<t_Daten> Data = Client.GetPathData(DisplayTime);
