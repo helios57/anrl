@@ -15,7 +15,7 @@ namespace TCPReciever
     /// Service of the GPSReciever, which wil be Installed as Systemservice (in future) 
     /// Now it will be started from the Programm.cs
     /// </summary>
-    partial class GPSReciever : ServiceBase
+    public partial class GPSReciever : ServiceBase
     {
         #region Variablen und Deklarationen
         Server GPS;
@@ -39,11 +39,27 @@ namespace TCPReciever
         }
 
         /// <summary>
+        /// Starts the GPS-Reciever Service with DB-Path
+        /// </summary>
+        public void Start(String DB_Path)
+        {
+            OnStart(new String[] {DB_Path});
+        }
+
+        /// <summary>
         /// The Start Event of the Server
         /// </summary>
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
+            if (args.Length == 1)
+            {
+                GPS = new Server(args[0]);
+            }
+            else
+            {
+
+            }
             GPS = new Server();
             CalculateTabels = new Timer(5000);
             CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);

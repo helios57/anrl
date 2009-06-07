@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPReciever", "TCPReciever\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfHostingHelper", "SelfHostingHelper\SelfHostingHelper.csproj", "{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllCenter", "ControllCenter\ControllCenter.csproj", "{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -113,6 +115,21 @@ Global
 		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|x86.ActiveCfg = Release|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Default|x86.ActiveCfg = Debug|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

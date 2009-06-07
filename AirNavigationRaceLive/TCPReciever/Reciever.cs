@@ -41,11 +41,26 @@ namespace TCPReciever
             this.listenThread.Start();
 
             #region Get DB - Path
-                string executableName = Application.ExecutablePath;
-                FileInfo executableFileInfo = new FileInfo(executableName);
-                string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
-                DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
+            string executableName = Application.ExecutablePath;
+            FileInfo executableFileInfo = new FileInfo(executableName);
+            string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
+            DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
             #endregion
+
+            DataContext db = new DataContext(DB_PATH);
+            this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
+        }
+        /// <summary>
+        /// Create an new Instance of the TCP-Listener on Port 5000
+        /// </summary>
+        public Server(String DB_Path)
+        {
+            running = true;
+            this.tcpListener = new TcpListener(IPAddress.Any, 5000);
+            this.listenThread = new Thread(new ThreadStart(ListenForClients));
+            this.listenThread.Start();
+
+            DB_PATH = DB_Path;
 
             DataContext db = new DataContext(DB_PATH);
             this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
