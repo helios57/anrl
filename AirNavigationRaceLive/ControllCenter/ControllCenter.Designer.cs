@@ -37,7 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnStartWebservice = new System.Windows.Forms.Button();
             this.lblStatusWebservice = new System.Windows.Forms.Label();
-            this.btnStartANRLGUI = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -123,16 +122,6 @@
             this.lblStatusWebservice.TabIndex = 8;
             this.lblStatusWebservice.Text = "Stopped";
             // 
-            // btnStartANRLGUI
-            // 
-            this.btnStartANRLGUI.Location = new System.Drawing.Point(131, 87);
-            this.btnStartANRLGUI.Name = "btnStartANRLGUI";
-            this.btnStartANRLGUI.Size = new System.Drawing.Size(168, 23);
-            this.btnStartANRLGUI.TabIndex = 10;
-            this.btnStartANRLGUI.Text = "Starte ANRL GUI";
-            this.btnStartANRLGUI.UseVisualStyleBackColor = true;
-            this.btnStartANRLGUI.Click += new System.EventHandler(this.btnStartANRLGUI_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -147,7 +136,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 299);
-            this.Controls.Add(this.btnStartANRLGUI);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblStatusWebservice);
             this.Controls.Add(this.btnStartWebservice);
@@ -160,6 +148,7 @@
             this.Controls.Add(this.txtPfad);
             this.Name = "ControllCenter";
             this.Text = "ANRL - Air Navigation Race Live Controll Center";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControllCenter_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,7 +165,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnStartWebservice;
         private System.Windows.Forms.Label lblStatusWebservice;
-        private System.Windows.Forms.Button btnStartANRLGUI;
         private System.Windows.Forms.Label label4;
     }
 }

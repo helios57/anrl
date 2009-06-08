@@ -41,6 +41,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -74,6 +75,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -89,10 +91,6 @@
     <ProjectReference Include="..\DataService\DataService.csproj">
       <Project>{2D2F75FD-F155-451B-A49F-EAECB277F282}</Project>
       <Name>DataService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GELive\GELive.csproj">
-      <Project>{1A2526F5-9A18-40D7-A4C1-479A131F1698}</Project>
-      <Name>GELive</Name>
     </ProjectReference>
     <ProjectReference Include="..\TCPReciever\TCPReciever.csproj">
       <Project>{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}</Project>
