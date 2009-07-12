@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService", "DataService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPReciever", "TCPReciever\TCPReciever.csproj", "{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfHostingHelper", "SelfHostingHelper\SelfHostingHelper.csproj", "{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllCenter", "ControllCenter\ControllCenter.csproj", "{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}"
 EndProject
 Global
@@ -76,21 +74,6 @@ Global
 		{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}.Release|x86.ActiveCfg = Release|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Default|x86.ActiveCfg = Debug|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{07A0E998-50CF-4E3C-A71F-4E5DB9B90A00}.Release|x86.ActiveCfg = Release|Any CPU
 		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7420F403-082D-42FE-B1A3-CE4FA97CEDC2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
