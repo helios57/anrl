@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ARNL_DB_Access">
+  <DataContextMoniker Name="/ARNL_DB_AccessDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9a94c280-ff1a-4b04-9055-ddec76cec72c" absoluteBounds="2.75, 0.5, 2, 3.0683211263020831">
+      <DataClassMoniker Name="/ARNL_DB_AccessDataContext/t_Daten" />
+      <nestedChildShapes>
+        <elementListCompartment Id="295b27d2-7609-45d7-a2a5-0bfa1dd82eba" absoluteBounds="2.765, 0.96, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c1e431b6-6fe6-42ac-a844-0d91a740f7ad" absoluteBounds="5.625, 2.125, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/ARNL_DB_AccessDataContext/t_Flugzeug" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34a99e73-09f7-4953-993c-872927ae9ece" absoluteBounds="5.64, 2.585, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.625 : 2.83742390950521); (4.75 : 2.83742390950521)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ARNL_DB_AccessDataContext/t_Flugzeug/t_Flugzeug_t_Daten" />
+      <nodes>
+        <classShapeMoniker Id="c1e431b6-6fe6-42ac-a844-0d91a740f7ad" />
+        <classShapeMoniker Id="9a94c280-ff1a-4b04-9055-ddec76cec72c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="849c2c71-f940-4c95-a9f6-3543d634b12e" absoluteBounds="0.5, 0.5, 2, 3.0683211263020831">
+      <DataClassMoniker Name="/ARNL_DB_AccessDataContext/t_GPS_IN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a9bba216-9cf7-42a9-b270-a6a4a8189da8" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ef4aa80d-bcdd-484d-9fbb-14d67803f652" absoluteBounds="5.625, 0.5, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/ARNL_DB_AccessDataContext/t_Tracker" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0c2e4469-7cd1-489c-ac24-4f09007820be" absoluteBounds="5.6400000000000006, 0.96, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.625 : 1.59615315755208); (6.625 : 2.125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ARNL_DB_AccessDataContext/t_Tracker/t_Tracker_t_Flugzeug" />
+      <nodes>
+        <classShapeMoniker Id="ef4aa80d-bcdd-484d-9fbb-14d67803f652" />
+        <classShapeMoniker Id="c1e431b6-6fe6-42ac-a844-0d91a740f7ad" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -52,7 +52,7 @@ namespace TCPReciever
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
-            if (args.Length == 1)
+            if (args != null && args.Length == 1)
             {
                 GPS = new Server(args[0]);
             }
