@@ -29,54 +29,30 @@ namespace TCPReciever
         public bool running;
         List<Thread> ThreadList = new List<Thread>();
         public String DB_PATH;
+
         #endregion
-        /// <summary>
-        /// Create an new Instance of the TCP-Listener on Port 5000
-        /// </summary>
-        public Server()
-        {
-            running = true;
-            this.tcpListener = new TcpListener(IPAddress.Any, 5000);
-            this.listenThread = new Thread(new ThreadStart(ListenForClients));
-            this.listenThread.Start();
-
-            #region Get DB - Path
-            string executableName = Application.ExecutablePath;
-            FileInfo executableFileInfo = new FileInfo(executableName);
-            string executableDirectoryName = executableFileInfo.Directory.Parent.Parent.Parent.FullName;
-            DB_PATH = executableDirectoryName + "\\DataService\\App_Data\\Database.mdf";
-            #endregion
-
-            DataContext db = new DataContext(DB_PATH);
-            this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
-        }
         /// <summary>
         /// Create an new Instance of the TCP-Listener on Port 5000
         /// </summary>
         public Server(String DB_Path)
         {
+            this.DB_PATH = DB_Path;
             running = true;
             this.tcpListener = new TcpListener(IPAddress.Any, 5000);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-
-            DB_PATH = DB_Path;
-
-            DataContext db = new DataContext(DB_PATH);
             this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
         }
 
         /// <summary>
         /// Handels recieved Messages
         /// </summary>
-        /// <param name="message">The Message recieved ofer TCP</param>
+        /// <param name="message">The Message recieved from TCP</param>
         public void Message_Received_Processor(string message)
         {
             MyDelegate = new RecievedGPS(ProcessRecievedGPSData);
-            // this.invoke (MyDelegate, new string[] { message });
             MyDelegate.Invoke(message);
         }
-
         /// <summary>
         /// Handels the Data recieved and processed in the Message_Received_Processor
         /// Adds the Data to the Database
@@ -88,7 +64,6 @@ namespace TCPReciever
             String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
             String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
-            //DataContext db = new DataContext(DB_PATH);
             string yy = GPScoords[3].Substring(4, 2);
             string mm = GPScoords[3].Substring(2, 2);
             string dd = GPScoords[3].Substring(0, 2);
@@ -116,9 +91,9 @@ namespace TCPReciever
                 new_position.Processed = false;
 
 
-                DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities();
-                dataContext.AddTot_GPS_IN(new_position);
-                dataContext.SaveChanges();
+                DataService.DatabaseDataContext dataContext = new DataService.DatabaseDataContext(DB_PATH);
+                dataContext.t_GPS_INs.InsertOnSubmit(new_position);
+                dataContext.SubmitChanges();
             }
         }
 
@@ -190,13 +165,17 @@ namespace TCPReciever
         /// </summary>
         public void Stop()
         {
-            this.tcpListener.Stop();
-            running = false;
-            listenThread.Abort();
-            foreach (Thread t in ThreadList)
+            try
             {
-                t.Abort();
+                this.tcpListener.Stop();
+                running = false;
+                listenThread.Abort();
+                foreach (Thread t in ThreadList)
+                {
+                    t.Abort();
+                }
             }
+            catch { }
         }
     }
 }

@@ -19,17 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:1326/ANRLDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:5555" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ANRLDataService.wsdl" MetadataType="Wsdl" ID="880eaaf3-57a6-4ed2-8013-12fefad57225" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?wsdl" />
-    <MetadataFile FileName="ANRLDataService.disco" MetadataType="Disco" ID="d5f1e191-56e9-4f12-aec5-4604e182fe76" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?disco" />
-    <MetadataFile FileName="ANRLDataService.xsd" MetadataType="Schema" ID="2b5de15b-b118-4ecc-8a86-5e639bf01081" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd4" />
-    <MetadataFile FileName="ANRLDataService1.xsd" MetadataType="Schema" ID="b740fe25-4f06-44a6-bc60-8d5a66c98e72" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd1" />
-    <MetadataFile FileName="ANRLDataService2.xsd" MetadataType="Schema" ID="ef2958b9-c20d-4432-ba43-939b1d42c609" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd3" />
-    <MetadataFile FileName="ANRLDataService3.xsd" MetadataType="Schema" ID="c8b235a4-47bd-4957-89db-14812704021d" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd0" />
-    <MetadataFile FileName="ANRLDataService5.xsd" MetadataType="Schema" ID="80158347-6dd5-4d9a-8d81-cc5734cb8956" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd5" />
-    <MetadataFile FileName="ANRLDataService4.xsd" MetadataType="Schema" ID="0455dae0-937a-4104-bfa5-15a02cc34352" SourceId="1" SourceUrl="http://localhost:1326/ANRLDataService.svc?xsd=xsd2" />
+    <MetadataFile FileName="item1.disco" MetadataType="Disco" ID="09b0f319-9039-4210-b38d-aee253f59ef1" SourceId="1" SourceUrl="http://localhost:5555/?disco" />
+    <MetadataFile FileName="item6.xsd" MetadataType="Schema" ID="c4b57415-4509-4c5d-a044-e2476728f002" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd2" />
+    <MetadataFile FileName="item7.xsd" MetadataType="Schema" ID="418bb515-0c2d-4f2d-a7f0-f0f6a1ac1b69" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd3" />
+    <MetadataFile FileName="ANRLDataService11.wsdl" MetadataType="Wsdl" ID="17cbca2b-bcc8-4636-9bcc-9c80de10da0f" SourceId="1" SourceUrl="http://localhost:5555/?wsdl" />
+    <MetadataFile FileName="item8.xsd" MetadataType="Schema" ID="856de7c7-e262-4ce2-b5f2-9f52574144c9" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd0" />
+    <MetadataFile FileName="item9.xsd" MetadataType="Schema" ID="09ea1f4a-a5b3-47a2-b15c-b7179d97e9fa" SourceId="1" SourceUrl="http://localhost:5555/?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -151,17 +151,21 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
-    <None Include="Service References\ANRLDataService\ANRLDataService5.xsd" />
+    <None Include="Service References\ANRLDataService\ANRLDataService11.wsdl" />
+    <None Include="Service References\ANRLDataService\item1.disco" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ANRLDataService\item6.xsd" />
+    <None Include="Service References\ANRLDataService\item7.xsd" />
+    <None Include="Service References\ANRLDataService\item8.xsd" />
+    <None Include="Service References\ANRLDataService\item9.xsd" />
     <None Include="Service References\ANRLDataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\ANRLDataService\configuration.svcinfo" />
     <None Include="Service References\ANRLDataService\configuration91.svcinfo" />
-    <None Include="Service References\ANRLDataService\ANRLDataService.disco" />
     <None Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -173,12 +177,6 @@
     </None>
     <None Include="app.config" />
     <None Include="Resources\track.txt" />
-    <None Include="Service References\ANRLDataService\ANRLDataService.wsdl" />
-    <None Include="Service References\ANRLDataService\ANRLDataService.xsd" />
-    <None Include="Service References\ANRLDataService\ANRLDataService1.xsd" />
-    <None Include="Service References\ANRLDataService\ANRLDataService2.xsd" />
-    <None Include="Service References\ANRLDataService\ANRLDataService3.xsd" />
-    <None Include="Service References\ANRLDataService\ANRLDataService4.xsd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

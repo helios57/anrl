@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Database">
+  <DataContextMoniker Name="/DatabaseDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c3a6437e-8506-4ca3-b8ea-d2601f6961ee" absoluteBounds="4.125, 4.5, 2, 3.0683211263020831">
+      <DataClassMoniker Name="/DatabaseDataContext/t_Daten" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bc1a6a61-6bc9-4065-81ad-caa22ffca91d" absoluteBounds="4.14, 4.96, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3c9faf90-c0ba-4e09-b89d-21ac9f7d5be1" absoluteBounds="1.75, 2.75, 2, 1.0961531575520835">
+      <DataClassMoniker Name="/DatabaseDataContext/t_Tracker" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1184a436-cb33-4e02-9158-fb91106328c1" absoluteBounds="1.7650000000000001, 3.21, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f93f50a1-21b2-4a6e-aed0-bebd443f5bfe" absoluteBounds="4.125, 2.75, 2, 1.4248478190104166">
+      <DataClassMoniker Name="/DatabaseDataContext/t_Flugzeug" />
+      <nestedChildShapes>
+        <elementListCompartment Id="673169e9-7273-4b1a-9025-a511f881248f" absoluteBounds="4.1400000000000006, 3.21, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4cf3e74b-15e7-4cba-a3e0-a90cc7e1e8c0" absoluteBounds="1.75, 4, 2, 3.0683211263020826">
+      <DataClassMoniker Name="/DatabaseDataContext/t_GPS_IN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="56db232d-2b6e-4e6b-98f6-abe8bcc1e42d" absoluteBounds="1.7650000000000001, 4.46, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 4.17484781901042); (5.125 : 4.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DatabaseDataContext/t_Flugzeug/t_Flugzeug_t_Daten" />
+      <nodes>
+        <classShapeMoniker Id="f93f50a1-21b2-4a6e-aed0-bebd443f5bfe" />
+        <classShapeMoniker Id="c3a6437e-8506-4ca3-b8ea-d2601f6961ee" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.75 : 3.29807657877604); (4.125 : 3.29807657877604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DatabaseDataContext/t_Tracker/t_Tracker_t_Flugzeug" />
+      <nodes>
+        <classShapeMoniker Id="3c9faf90-c0ba-4e09-b89d-21ac9f7d5be1" />
+        <classShapeMoniker Id="f93f50a1-21b2-4a6e-aed0-bebd443f5bfe" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

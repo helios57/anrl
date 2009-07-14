@@ -5,7 +5,7 @@ using GELive.ANRLDataService;
 using System.Collections.Generic;
 
 namespace GELive
-{    
+{
     public partial class anrl_gui : Form
     {
         /// <summary>

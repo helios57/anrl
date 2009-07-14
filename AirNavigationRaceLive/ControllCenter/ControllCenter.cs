@@ -9,52 +9,110 @@ using System.Windows.Forms;
 using TCPReciever;
 using DataService;
 using System.ServiceModel;
+using System.Data.Linq;
 
 namespace ControllCenter
 {
     public partial class ControllCenter : Form
     {
         GPSReciever Service_test;
+
+        
         ServiceHost host;
+        bool GPS_Service_running = false;
+        bool Service_Host_running = false;
+        String DB_Path = "";
+        bool DB_Valid = false;
 
         public ControllCenter()
         {
             InitializeComponent();
+            btnStartReciever.Enabled = false;
+            btnStartWebservice.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog f = new OpenFileDialog();
+            f.Filter = "DB |*.mdf";
             f.ShowDialog();
-            txtPfad.Text = f.FileName;
+            DB_Path = f.FileName;
+            try
+            {
+                DataContext db = new DataContext(DB_Path);
+                db.SubmitChanges();
+                txtPfad.Text = DB_Path;
+                DB_Valid = true;
+                btnStartReciever.Enabled = true;
+                btnStartWebservice.Enabled = true;
+            }
+            catch
+            {
+                MessageBox.Show("Fehler beim öffnen der DB, bitte DB überprüfen");
+            }
         }
 
         private void btnStartReciever_Click(object sender, EventArgs e)
         {
-            Service_test = new GPSReciever();
-            Service_test.Start();
-            lblRecieverStatus.Text = "Started";
+            try
+            {
+                Service_test = new GPSReciever(DB_Path);
+                Service_test.Start();
+                lblRecieverStatus.Text = "Started";
+                GPS_Service_running = true;
+                btnStartReciever.Enabled = false;
+            }
+            catch
+            {
+                MessageBox.Show("Fehler beim starten des Reciever-Services");
+            }
         }
 
         private void btnStartWebservice_Click(object sender, EventArgs e)
         {
-            host = new ServiceHost(typeof(ANRLDataService), new Uri("http://localhost:5555"));
-            host.Open();
-            lblStatusWebservice.Text = "Started";
+            ExitForm ef = new ExitForm();
+            try
+             {
+                ef.label1.Text = "Bitte Warten, der Webservice wird gestartet";
+                ef.Show();
+                ANRLDataService ds = new ANRLDataService(DB_Path);
+                host = new ServiceHost(ds, new Uri("http://localhost:5555"));
+            
+                host.Open();
+                lblStatusWebservice.Text = "Started";
+                Service_Host_running = true;
+                btnStartWebservice.Enabled = false;
+            }
+            catch
+            {
+                MessageBox.Show("Fehler beim Starten des Webservices");
+            }
+            ef.Close();            
         }
 
         private void ControllCenter_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ExitForm ef = new ExitForm();
             try
             {
-                Service_test.Stop();
-                host.Close();
+                ef.label1.Text = "Beenden, Bitte Warten";
+                ef.Show();
+                if (GPS_Service_running)
+                {
+                    ef.label1.Text = "Bitte Warten, Reciever-Service wird beendet";
+                    Service_test.Stop();
+                }
+                if (Service_Host_running)
+                {
+                    ef.label1.Text = "Bitte Warten, Web-Service wird beendet";
+                    host.Close();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error while Closing, end remaining Threads" + ex.InnerException);
             }
+            ef.Close();
         }
-
     }
 }

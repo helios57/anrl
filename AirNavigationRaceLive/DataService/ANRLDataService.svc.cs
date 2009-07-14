@@ -11,8 +11,18 @@ namespace DataService
     /// <summary>
     /// Interface implementation for the WCF-Communication
     /// </summary>
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single )]   
     public class ANRLDataService : IANRLDataService
     {
+        /// <summary>
+        /// Starting an new Instance of the Webservice 
+        /// </summary>
+        /// <param name="DB_Path">path to the current DB</param>
+        public ANRLDataService(String DB_Path)
+        {
+            this.DB_PATH = DB_Path;
+        }
+        String DB_PATH;
         #region IANRLDataService Members
 
         /// <summary>
@@ -22,15 +32,29 @@ namespace DataService
         /// <returns>List of t_Daten</returns>
         public List<t_Daten> GetPathData(DateTime timestamp)
         {
-            using (DatabaseEntities dataContext = new DatabaseEntities())
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+
+            DateTime end = timestamp.AddSeconds(-6);
+
+            List<t_Daten> tmp = new List<t_Daten>();
+
+            t_Daten tmp_t_Daten = new t_Daten();
+            foreach (t_Daten t in dataContext.t_Datens.Where(d => d.TStart <= timestamp && d.TEnd > end))
             {
-                DateTime end = timestamp.AddSeconds(-6);
-                return dataContext.t_Daten.
-                    /*Include("t_Flugzeug").
-                    Include("t_Flugzeug.t_Tracker").*/
-                    Where(d => d.TStart <= timestamp && d.TEnd > end).
-                    ToList();
+                tmp_t_Daten.ID = t.ID;
+                tmp_t_Daten.Timestamp = t.Timestamp;
+                tmp_t_Daten.TStart = t.TStart;
+                tmp_t_Daten.TEnd = t.TEnd;
+                tmp_t_Daten.XStart = t.XStart;
+                tmp_t_Daten.XEnd = t.XEnd;
+                tmp_t_Daten.YStart = t.YStart;
+                tmp_t_Daten.YEnd = t.YEnd;
+                tmp_t_Daten.ZStart = t.ZStart;
+                tmp_t_Daten.ZEnd = t.ZEnd;
+                tmp.Add(tmp_t_Daten);
             }
+
+            return tmp;
         }
 
         /// <summary>
@@ -40,12 +64,10 @@ namespace DataService
         public List<DateTime> GetTimestamps()
         {
             List<DateTime> timestamplist = new List<DateTime>();
-            using (DatabaseEntities dataContext = new DatabaseEntities())
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            foreach (t_Daten row in dataContext.t_Datens)
             {
-                foreach (t_Daten row in dataContext.t_Daten)
-                {
-                    timestamplist.Add((DateTime)row.TStart);
-                }
+                timestamplist.Add((DateTime)row.TStart);
             }
             return timestamplist;
         }

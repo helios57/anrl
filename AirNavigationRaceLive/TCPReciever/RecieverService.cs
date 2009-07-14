@@ -20,13 +20,15 @@ namespace TCPReciever
         #region Variablen und Deklarationen
         Server GPS;
         Timer CalculateTabels;
+        String DB_PATH;
         #endregion
 
         /// <summary>
         /// Creates a new GPS-Reciever Service Object
         /// </summary>
-        public GPSReciever()
+        public GPSReciever(String DB_Path)
         {
+            this.DB_PATH = DB_Path;
             InitializeComponent();
         }
 
@@ -35,32 +37,15 @@ namespace TCPReciever
         /// </summary>
         public void Start()
         {
-            OnStart(null);
-        }
-
-        /// <summary>
-        /// Starts the GPS-Reciever Service with DB-Path
-        /// </summary>
-        public void Start(String DB_Path)
-        {
-            OnStart(new String[] {DB_Path});
+            OnStart();
         }
 
         /// <summary>
         /// The Start Event of the Server
         /// </summary>
-        /// <param name="args"></param>
-        protected override void OnStart(string[] args)
+        protected void OnStart()
         {
-            if (args != null && args.Length == 1)
-            {
-                GPS = new Server(args[0]);
-            }
-            else
-            {
-
-            }
-            GPS = new Server();
+            GPS = new Server(DB_PATH);
             CalculateTabels = new Timer(5000);
             CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);
             CalculateTabels.Start();
@@ -106,11 +91,11 @@ namespace TCPReciever
         /// <param name="e"></param>
         void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
         {
-            DataService.DatabaseEntities dataContext = new DataService.DatabaseEntities(/* GPS.DB_PATH*/);
-            List<t_GPS_IN> Positions = dataContext.t_GPS_IN.Where(a => !a.Processed 
-                                        ).OrderBy(t=>t.Timestamp).ToList();
-            List<t_Tracker> Trackers = dataContext.t_Tracker.ToList();
-            List<t_Flugzeug> Flugzeuge = dataContext.t_Flugzeug.ToList();
+            DataService.DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<t_GPS_IN> Positions = dataContext.t_GPS_INs.Where(a => !a.Processed
+                                        ).OrderBy(t => t.Timestamp).ToList();
+            List<t_Tracker> Trackers = dataContext.t_Trackers.ToList();
+            List<t_Flugzeug> Flugzeuge = dataContext.t_Flugzeugs.ToList();
 
 
             foreach (t_Tracker tr in Trackers)
@@ -132,14 +117,14 @@ namespace TCPReciever
                     InsertData.ZStart = decimal.Round(decimal.Parse(Positions_Tracker.First().altitude),16);
                     InsertData.ZEnd = decimal.Round(decimal.Parse(Positions_Tracker.Last().altitude),16);
 
-                    dataContext.AddTot_Daten(InsertData);
+                    dataContext.t_Datens.InsertOnSubmit(InsertData);
                     Positions_Tracker.First().Processed = true;
                     Positions_Tracker.Last().Processed = true;
                 }
 
             }
 
-            dataContext.SaveChanges();
+            dataContext.SubmitChanges();
         }
 
         /// <summary>
