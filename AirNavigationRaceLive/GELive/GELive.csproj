@@ -99,9 +99,14 @@
     <Compile Include="GEWebBrowser.designer.cs">
       <DependentUpon>GEWebBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="GoogleEarthAppTest.cs" />
     <Compile Include="IGEControls.cs" />
     <Compile Include="IHTMLScriptElement.cs" />
+    <Compile Include="KmlTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KmlTreeView.designer.cs">
+      <DependentUpon>KmlTreeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Maths.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Delay-Select.resx">
       <DependentUpon>Delay-Select.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KmlTreeView.resx">
+      <DependentUpon>KmlTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,6 +159,15 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
+    <None Include="Resources\KMLTemplates\blue.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\KMLTemplates\green.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\KMLTemplates\red.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Service References\ANRLDataService\ANRLDataService11.wsdl" />
     <None Include="Service References\ANRLDataService\item1.disco" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">

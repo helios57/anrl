@@ -15,8 +15,6 @@ namespace GELive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //WSManager test = new WSManager();
-            //string bla = test.GetKml();
             Application.Run(new anrl_gui());
         }
     }

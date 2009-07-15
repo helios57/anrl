@@ -65,9 +65,15 @@ namespace GELive
                 ws = new WSManager();     // this line of code has to be updated when the webservice works
             }
             string kml = ws.GetKml();           // this line of code has to be updated when the webservice works
-            Object[] objArray = new Object[1];
-            objArray[0] = (Object)kml;
-            htmlDocument.InvokeScript("loadKml", objArray);
+
+            IKmlObject obj = geplugin.parseKml(kml);
+            //IKmlObject objAir = geplugin.parseKml(ws.getAriplane(0));
+
+            geplugin.getFeatures().appendChild(obj);
+            //geplugin.getFeatures().appendChild(objAir);
+            //geplugin.getFeatures().replaceChild(obj,geplugin.getFeatures().getLastChild());
+            gewb.Invalidate();
+            gewb.Update();
         }
         
         /// <summary>

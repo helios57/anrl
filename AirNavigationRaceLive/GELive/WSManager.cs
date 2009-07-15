@@ -96,6 +96,15 @@ namespace GELive
         }
 
         /// <summary>
+        /// Returns the KML of an Airplane
+        /// </summary>
+        /// <param name="index">Index needed for color</param>
+        /// <returns>KML-String</returns>
+        public string getAriplane(int index)
+        {
+            return GetKMLTemplateContent("blue");
+        }
+        /// <summary>
         /// Reads the filecontent of a template for generating the KML-File
         /// </summary>
         /// <param name="Filename">Name of the Template in the Folder Resources\KMLTemplates</param>
