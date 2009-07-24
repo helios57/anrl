@@ -51,4 +51,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOft_Flugzeug" nillable="true" type="tns:ArrayOft_Flugzeug" />
+  <xs:complexType name="ArrayOft_PolygonPoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_PolygonPoint" nillable="true" type="tns:t_PolygonPoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_PolygonPoint" nillable="true" type="tns:ArrayOft_PolygonPoint" />
+  <xs:complexType name="t_PolygonPoint">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Polygon" type="xs:int" />
+      <xs:element minOccurs="0" name="altitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="latitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="longitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="t_Polygon" nillable="true" type="tns:t_Polygon" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_PolygonPoint" nillable="true" type="tns:t_PolygonPoint" />
+  <xs:complexType name="t_Polygon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="t_PolygonPoints" nillable="true" type="tns:ArrayOft_PolygonPoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_Polygon" nillable="true" type="tns:t_Polygon" />
 </xs:schema>

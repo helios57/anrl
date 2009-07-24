@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="Database" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_Daten" Member="t_Datens">
     <Type Name="t_Daten">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -52,6 +53,22 @@
       <Column Name="HDOP" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Processed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Polygon" Member="t_Polygons">
+    <Type Name="t_Polygon">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="t_Polygon_t_PolygonPoint" Member="t_PolygonPoints" ThisKey="ID" OtherKey="ID_Polygon" Type="t_PolygonPoint" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PolygonPoints" Member="t_PolygonPoints">
+    <Type Name="t_PolygonPoint">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="longitude" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="altitude" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Polygon_t_PolygonPoint" Member="t_Polygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_Polygon" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

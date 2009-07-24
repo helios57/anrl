@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ANRLClient.cs" />
     <Compile Include="anrl_gui.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,16 +160,16 @@
   <ItemGroup>
     <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
-    <None Include="Resources\KMLTemplates\blue.kml">
+    <None Include="Resources\KMLTemplates\footerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\KMLTemplates\green.kml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\KMLTemplates\red.kml">
+    <None Include="Resources\KMLTemplates\headerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Service References\ANRLDataService\ANRLDataService11.wsdl" />
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_PolygonPoint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ANRLDataService\item1.disco" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

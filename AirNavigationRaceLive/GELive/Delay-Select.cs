@@ -12,14 +12,14 @@ namespace GELive
 {
     public partial class Delay_Select : Form
     {
-        GEToolStrip ts;
+        WSManager wsm;
         /// <summary>
         /// Constructor of Delay-Selection
         /// </summary>
         /// <param name="ts">Tool-Strip</param>
-        public Delay_Select(GEToolStrip ts)
+        public Delay_Select(WSManager wsm)
         {
-            this.ts = ts;
+            this.wsm = wsm;
             InitializeComponent();
 
             //Add Delay-Selector
@@ -35,8 +35,8 @@ namespace GELive
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ts.ws.delaytimestamp = (DateTime) listBox1.SelectedItem;
-            ts.ws.Delay = DateTime.Now - ts.ws.delaytimestamp;
+            wsm.delaytimestamp = (DateTime)listBox1.SelectedItem;
+            wsm.Delay = DateTime.Now - wsm.delaytimestamp;
         }
     }
 }

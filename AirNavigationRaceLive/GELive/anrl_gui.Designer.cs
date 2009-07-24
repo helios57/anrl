@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(anrl_gui));
             this.geWebBrowser1 = new GELive.GEWebBrowser();
             this.geToolStrip1 = new GELive.GEToolStrip();
-            this.LoadKml = new System.Windows.Forms.ToolStripButton();
+            this.ToolStrip1 = new System.Windows.Forms.ToolStripButton();
             this.geToolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,22 +51,22 @@
             // geToolStrip1
             // 
             this.geToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.LoadKml});
+            this.ToolStrip1});
             this.geToolStrip1.Location = new System.Drawing.Point(0, 0);
             this.geToolStrip1.Name = "geToolStrip1";
             this.geToolStrip1.Size = new System.Drawing.Size(633, 25);
             this.geToolStrip1.TabIndex = 1;
             this.geToolStrip1.Text = "geToolStrip1";
             // 
-            // LoadKml
+            // ToolStrip1
             // 
-            this.LoadKml.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.LoadKml.Image = ((System.Drawing.Image)(resources.GetObject("LoadKml.Image")));
-            this.LoadKml.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.LoadKml.Name = "LoadKml";
-            this.LoadKml.Size = new System.Drawing.Size(82, 22);
-            this.LoadKml.Text = "Load Kml File";
-            this.LoadKml.Click += new System.EventHandler(this.LoadKml_Click);
+            this.ToolStrip1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ToolStrip1.Image = ((System.Drawing.Image)(resources.GetObject("ToolStrip1.Image")));
+            this.ToolStrip1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolStrip1.Name = "ToolStrip1";
+            this.ToolStrip1.Size = new System.Drawing.Size(72, 22);
+            this.ToolStrip1.Text = "Load Kml File";
+            this.ToolStrip1.Click += new System.EventHandler(this.LoadKml_Click);
             // 
             // anrl_gui
             // 
@@ -87,7 +87,7 @@
         #endregion
 
         private GEToolStrip geToolStrip1;
-        private System.Windows.Forms.ToolStripButton LoadKml;
+        private System.Windows.Forms.ToolStripButton ToolStrip1;
         private GEWebBrowser geWebBrowser1;
 
 

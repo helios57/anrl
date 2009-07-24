@@ -72,6 +72,31 @@ namespace DataService
             return timestamplist;
         }
 
+
+        /// <summary>
+        /// List of all PolygonPoints
+        /// </summary>
+        /// <returns>List of PolygonPoints</returns>
+        public List<t_PolygonPoint> GetPolygons()
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+
+            List<t_PolygonPoint> tmp = new List<t_PolygonPoint>();
+
+            t_PolygonPoint tmp_t_PolygonPoint = new t_PolygonPoint();
+
+            foreach (t_PolygonPoint t in dataContext.t_PolygonPoints)
+            {
+                tmp_t_PolygonPoint.ID = t.ID;
+                tmp_t_PolygonPoint.latitude = t.latitude;
+                tmp_t_PolygonPoint.altitude = t.altitude;
+                tmp_t_PolygonPoint.longitude = t.longitude;
+                tmp_t_PolygonPoint.ID_Polygon = t.ID_Polygon;
+                tmp.Add(tmp_t_PolygonPoint);
+            }
+            return tmp;
+        }
+
         #endregion
     }
 }

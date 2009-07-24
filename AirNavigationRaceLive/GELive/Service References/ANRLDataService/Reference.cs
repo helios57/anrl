@@ -484,6 +484,192 @@ namespace GELive.ANRLDataService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_PolygonPoint", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_PolygonPoint : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ID_PolygonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal altitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal latitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal longitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Polygon t_PolygonField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID_Polygon {
+            get {
+                return this.ID_PolygonField;
+            }
+            set {
+                if ((this.ID_PolygonField.Equals(value) != true)) {
+                    this.ID_PolygonField = value;
+                    this.RaisePropertyChanged("ID_Polygon");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal altitude {
+            get {
+                return this.altitudeField;
+            }
+            set {
+                if ((this.altitudeField.Equals(value) != true)) {
+                    this.altitudeField = value;
+                    this.RaisePropertyChanged("altitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal latitude {
+            get {
+                return this.latitudeField;
+            }
+            set {
+                if ((this.latitudeField.Equals(value) != true)) {
+                    this.latitudeField = value;
+                    this.RaisePropertyChanged("latitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal longitude {
+            get {
+                return this.longitudeField;
+            }
+            set {
+                if ((this.longitudeField.Equals(value) != true)) {
+                    this.longitudeField = value;
+                    this.RaisePropertyChanged("longitude");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Polygon t_Polygon {
+            get {
+                return this.t_PolygonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonField, value) != true)) {
+                    this.t_PolygonField = value;
+                    this.RaisePropertyChanged("t_Polygon");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Polygon", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_Polygon : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> t_PolygonPointsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> t_PolygonPoints {
+            get {
+                return this.t_PolygonPointsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonPointsField, value) != true)) {
+                    this.t_PolygonPointsField = value;
+                    this.RaisePropertyChanged("t_PolygonPoints");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ANRLDataService.IANRLDataService")]
     public interface IANRLDataService {
@@ -493,6 +679,9 @@ namespace GELive.ANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTimestamps", ReplyAction="http://tempuri.org/IANRLDataService/GetTimestampsResponse")]
         System.Collections.Generic.List<System.DateTime> GetTimestamps();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPolygons", ReplyAction="http://tempuri.org/IANRLDataService/GetPolygonsResponse")]
+        System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -528,6 +717,10 @@ namespace GELive.ANRLDataService {
         
         public System.Collections.Generic.List<System.DateTime> GetTimestamps() {
             return base.Channel.GetTimestamps();
+        }
+        
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons() {
+            return base.Channel.GetPolygons();
         }
     }
 }

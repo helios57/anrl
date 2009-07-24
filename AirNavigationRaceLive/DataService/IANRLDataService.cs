@@ -28,5 +28,13 @@ namespace DataService
         /// <returns>List of Timestamps</returns>
         [OperationContract]
         List<DateTime> GetTimestamps();
+
+        /// <summary>
+        /// List of all PolygonPoints
+        /// </summary>
+        /// <returns>List of PolygonPoints</returns>
+        [OperationContract]
+        List<t_PolygonPoint> GetPolygons();
+
     }
 }

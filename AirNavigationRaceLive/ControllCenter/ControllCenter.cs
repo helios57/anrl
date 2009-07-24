@@ -22,7 +22,6 @@ namespace ControllCenter
         bool GPS_Service_running = false;
         bool Service_Host_running = false;
         String DB_Path = "";
-        bool DB_Valid = false;
 
         public ControllCenter()
         {
@@ -42,7 +41,6 @@ namespace ControllCenter
                 DataContext db = new DataContext(DB_Path);
                 db.SubmitChanges();
                 txtPfad.Text = DB_Path;
-                DB_Valid = true;
                 btnStartReciever.Enabled = true;
                 btnStartWebservice.Enabled = true;
             }
@@ -75,6 +73,7 @@ namespace ControllCenter
              {
                 ef.label1.Text = "Bitte Warten, der Webservice wird gestartet";
                 ef.Show();
+                ef.Refresh();
                 ANRLDataService ds = new ANRLDataService(DB_Path);
                 host = new ServiceHost(ds, new Uri("http://localhost:5555"));
             
@@ -97,6 +96,7 @@ namespace ControllCenter
             {
                 ef.label1.Text = "Beenden, Bitte Warten";
                 ef.Show();
+                ef.Refresh();
                 if (GPS_Service_running)
                 {
                     ef.label1.Text = "Bitte Warten, Reciever-Service wird beendet";

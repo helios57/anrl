@@ -6,6 +6,8 @@ using System.Xml;
 using GELive.ANRLDataService ;
 using System.Timers;
 using System.IO;
+using GEPlugin;
+using System.Windows.Forms;
 
 namespace GELive
 {
@@ -15,21 +17,33 @@ namespace GELive
     public class WSManager
     {
         List<t_Daten> DatenListe = new List<t_Daten>();
-        Timer UpdateData = new Timer(5000);
+        List<t_PolygonPoint> PolygonPoints;
+        System.Timers.Timer UpdateData = new System.Timers.Timer(5000);
         ANRLDataServiceClient Client;
         bool ListLocked = false;
         public DateTime delaytimestamp;
         public TimeSpan Delay;
+        private GEWebBrowser gweb;
+        private GEFeatureContainerCoClass Container;
+        private IGEPlugin ge;
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
         /// Respondable for Updateing, getting the local Data-Cache and generating the KML-File with the lines
         /// </summary>
-        public WSManager()
+        public WSManager(GEWebBrowser gweb)
         {
+            this.gweb = gweb;
+            ge = gweb.GetPlugin();
+            Container = ge.getFeatures();
+            Container.appendChild(ge.parseKml(GetKml()));
+
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
             Client = new ANRLDataServiceClient();
+            PolygonPoints = Client.GetPolygons();
+            PolygonPoints.OrderBy(p => p.ID_Polygon);
+            Container.appendChild(ge.parseKml(GetPolygonKml()));
         }
 
         /// <summary>
@@ -52,12 +66,19 @@ namespace GELive
 
             List<t_Daten> Data = Client.GetPathData(DisplayTime);
             DatenListe.AddRange(Data);
-            //Debug
-            if (Data.Count > 0)
-            {
-                Console.WriteLine("Got Data");
-            }
             ListLocked = false;
+
+            UpdateGWebBrowser();
+        }
+
+        private void UpdateGWebBrowser()
+        {
+            String kml = GetKml();
+            Container.replaceChild(ge.parseKml(GetKml()), Container.getFirstChild());
+            gweb.Invalidate();
+            
+            gweb.Invoke(new MethodInvoker(gweb.Update));
+            //gweb.Update();
         }
 
         /// <summary>
@@ -71,27 +92,71 @@ namespace GELive
             //return GELive.Properties.Resources.track;
             string result = "";
             result += GetKMLTemplateContent("header");
-            List<Points> test = new List<Points>();
+            List<Tracker> TrackList = new List<Tracker>();
+
             while (ListLocked)
             {
                 System.Threading.Thread.Sleep(20);
             }
             ListLocked = true;
+
+            //Get all Trackers in the Datacache
+            int Trackercount = 0;
+            foreach (t_Daten d in DatenListe)
+            {
+                if (TrackList.Count(p => p.id == d.ID_Flugzeug) == 0)
+                {
+                    TrackList.Add(new Tracker(d.ID_Flugzeug));
+                    Trackercount++;
+                    if (Trackercount >= 4) break;
+                }
+            }
+
             foreach (t_Daten d in DatenListe)
             {
                 Points pStart = new Points((decimal)d.XStart, (decimal)d.YStart, (decimal)d.ZStart);
                 Points pEnd = new Points((decimal)d.XEnd, (decimal)d.YEnd, (decimal)d.ZEnd);
-                test.Add(pStart);
-                test.Add(pEnd);
+                Tracker t = TrackList.Find(p => p.id == d.ID_Flugzeug);
+                t.Pointlist.Add(pStart);
+                t.Pointlist.Add(pEnd);
             }
             ListLocked = false;
 
-           // test.Add(new Points((decimal)(7 + (23.7066) / 60), (decimal)(46 + (56.2789) / 60), (decimal)(570.1)));
-            //test.Add(new Points((decimal)(7 + (23.4459) / 60), (decimal)(46 + (56.1450) / 60), (decimal)(690.5)));   
-            
-            result += AddLine(test, Colors.Red);
+            int ColorId = 1;
+            TrackList.OrderBy(p=>p.id);
+            foreach (Tracker t in TrackList)
+            {
+                result += AddLine(t.Pointlist, (Colors)ColorId++);
+            }
+
             result += GetKMLTemplateContent("footer");
 
+            return result;
+        }
+
+        private string GetPolygonKml()
+        {
+            String result = "";
+            result += GetKMLTemplateContent("headerPolygon");
+            List<int> PolygonIdList = new List<int>();
+            foreach (t_PolygonPoint poly in PolygonPoints)
+            {
+                if (!PolygonIdList.Contains(poly.ID_Polygon))
+                {
+                    PolygonIdList.Add(poly.ID_Polygon);
+                }
+            }
+            foreach (int i in PolygonIdList)
+            {
+                result += @"<Placemark><name>Polygon" + i + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
+                foreach (t_PolygonPoint tp in PolygonPoints.Where(p => p.ID_Polygon == i))
+                {
+                    result += tp.longitude+","+tp.latitude+","+tp.altitude+" ";
+                }
+                result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
+            }
+
+            result += GetKMLTemplateContent("footerPolygon");
             return result;
         }
 
@@ -180,6 +245,18 @@ namespace GELive
             Blue = 2,
             Green = 3,
             Yellow = 4
+        }
+        /// <summary>
+        /// Tracker vor displaying
+        /// </summary>
+        class Tracker
+        {
+            public List<Points> Pointlist = new List<Points>();
+            public int id;
+            public Tracker(int id)
+            {
+                this.id = id;
+            }
         }
     }
 }

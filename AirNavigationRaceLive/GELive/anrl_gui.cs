@@ -8,6 +8,7 @@ namespace GELive
 {
     public partial class anrl_gui : Form
     {
+
         /// <summary>
         /// The plugin instance
         /// </summary>
@@ -72,10 +73,12 @@ namespace GELive
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void LoadKml_Click(object sender, EventArgs e)
         {
-            geToolStrip1.UpdateTimerTmp.Start();
-            geToolStrip1.InvokeLoadKml();
-            Delay_Select d = new Delay_Select(geToolStrip1);
-            d.Show();
+            if (ge != null)
+            {
+                WSManager ws = new WSManager(geWebBrowser1);
+                Delay_Select d = new Delay_Select(ws);
+                d.Show();
+            }
         }
     }
 }
