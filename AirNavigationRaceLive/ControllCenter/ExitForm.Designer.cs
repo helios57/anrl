@@ -39,9 +39,11 @@
             this.label1.Size = new System.Drawing.Size(318, 40);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
+            this.label1.UseWaitCursor = true;
             // 
             // ExitForm
             // 
+            this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
@@ -55,8 +57,10 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExitForm";
             this.TopMost = true;
+            this.UseWaitCursor = true;
             this.ResumeLayout(false);
 
         }

@@ -96,7 +96,90 @@ namespace DataService
             }
             return tmp;
         }
-
+        /// <summary>
+        /// Return a list of all Trackers
+        /// </summary>
+        /// <returns>List of Trackers</returns>
+        public List<TrackerListEntry> GetTrackers()
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<TrackerListEntry> lstTrackers = new List<TrackerListEntry>();
+            foreach (t_Tracker t in dataContext.t_Trackers)
+            {
+                TrackerListEntry tle = new TrackerListEntry(t.ID, t.IMEI);
+                #region Check airplanes attached ?
+                //Remove GPS-Trackers if added to may Airplanes
+                if (dataContext.t_Flugzeugs.Count(p => p.ID_GPS_Tracker == t.ID) == 1)
+                {
+                    t_Flugzeug f = dataContext.t_Flugzeugs.Single(p => p.ID_GPS_Tracker == t.ID);
+                    tle.ID_Flugzeug = f.ID;
+                    tle.Pilot = f.Pilot;
+                    tle.Flugzeug = f.Flugzeug;
+                }
+                #endregion
+                lstTrackers.Add(tle);
+            }
+            return lstTrackers;
+        }
+        /// <summary>
+        /// Return a list of all Airplanes
+        /// </summary>
+        /// <returns>List of Airplanes</returns>
+        public List<AirplaneListEntry> GetAirplanes()
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<AirplaneListEntry> tmp = new List<AirplaneListEntry>();
+            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == 0 || p.ID_GPS_Tracker == null))
+            {
+                tmp.Add(new AirplaneListEntry(f));
+            }
+            return tmp;
+        }
+        /// <summary>
+        /// Remove this Tracker from any Airplane
+        /// </summary>
+        /// <param name="TrackerID"> ID of the Tracker</param>
+        public void CleanTracker(int TrackerID)
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == TrackerID))
+            {
+                f.ID_GPS_Tracker = 0;
+            }
+            dataContext.SubmitChanges();
+        }
+        /// <summary>
+        /// Add a new Airplane to a tracker
+        /// </summary>
+        /// <param name="Flugzeug">Airplane Type/Name</param>
+        /// <param name="Pilot">Pilot Name</param>
+        /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
+        public void AddAirplane(String Flugzeug, String Pilot, int TrackerID)
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            t_Flugzeug f = new t_Flugzeug();
+            f.ID_GPS_Tracker = TrackerID;
+            f.Pilot = Pilot;
+            f.Flugzeug = Flugzeug;
+            dataContext.t_Flugzeugs.InsertOnSubmit(f);
+            dataContext.SubmitChanges();
+        }
+        /// <summary>
+        /// Add an existing Airplane to a Tracker
+        /// </summary>
+        /// <param name="FlugzeugID">Id of the Airplane</param>
+        /// <param name="TrackerID">ID of the Tracker</param>
+        public void AddAirplane(int FlugzeugID, int TrackerID)
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == TrackerID))
+            {
+                f.ID_GPS_Tracker = 0;
+            }
+            t_Flugzeug fl = dataContext.t_Flugzeugs.Single(p => p.ID == FlugzeugID);
+            fl.ID_GPS_Tracker = TrackerID;
+            dataContext.SubmitChanges();
+        }
         #endregion
     }
 }

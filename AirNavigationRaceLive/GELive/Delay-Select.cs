@@ -10,13 +10,17 @@ using GELive.ANRLDataService;
 
 namespace GELive
 {
+    /// <summary>
+    /// For demo and Debug-Use
+    /// Select a delay to show old Data
+    /// </summary>
     public partial class Delay_Select : Form
     {
         WSManager wsm;
         /// <summary>
         /// Constructor of Delay-Selection
         /// </summary>
-        /// <param name="ts">Tool-Strip</param>
+        /// <param name="wsm">Tool-Strip</param>
         public Delay_Select(WSManager wsm)
         {
             this.wsm = wsm;

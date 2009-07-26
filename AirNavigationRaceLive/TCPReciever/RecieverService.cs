@@ -31,6 +31,10 @@ namespace TCPReciever
             this.DB_PATH = DB_Path;
             InitializeComponent();
         }
+        /// <summary>
+        /// Fires when a new Tracker has connected
+        /// </summary>
+        public event EventHandler OnTrackerAddded;
 
         /// <summary>
         /// Starts the GPS-Reciever Service
@@ -46,9 +50,15 @@ namespace TCPReciever
         protected void OnStart()
         {
             GPS = new Server(DB_PATH);
+            GPS.OnTrackerAddded += new EventHandler(GPS_OnTrackerAddded);
             CalculateTabels = new Timer(5000);
             CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);
             CalculateTabels.Start();
+        }
+
+        void GPS_OnTrackerAddded(object sender, EventArgs e)
+        {
+            OnTrackerAddded.Invoke(null, null);
         }
 
         /// <summary>

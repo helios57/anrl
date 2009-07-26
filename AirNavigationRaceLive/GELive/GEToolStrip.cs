@@ -9,7 +9,6 @@ namespace GELive
     /// </summary>
     public partial class GEToolStrip : ToolStrip, IGEControls
     {
-        public Timer UpdateTimerTmp;
         /// <summary>
         /// Initializes a new instance of the GEToolStrip class.
         /// </summary>

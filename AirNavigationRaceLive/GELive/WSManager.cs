@@ -21,7 +21,13 @@ namespace GELive
         System.Timers.Timer UpdateData = new System.Timers.Timer(5000);
         ANRLDataServiceClient Client;
         bool ListLocked = false;
+        /// <summary>
+        /// The Timestamp of the Selected Entrie used as reference for delaying
+        /// </summary>
         public DateTime delaytimestamp;
+        /// <summary>
+        /// The Delay to be used when whowing Data
+        /// </summary>
         public TimeSpan Delay;
         private GEWebBrowser gweb;
         private GEFeatureContainerCoClass Container;
@@ -40,6 +46,7 @@ namespace GELive
 
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
+
             Client = new ANRLDataServiceClient();
             PolygonPoints = Client.GetPolygons();
             PolygonPoints.OrderBy(p => p.ID_Polygon);

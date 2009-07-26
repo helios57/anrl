@@ -14,32 +14,12 @@
         <elementListCompartment Id="1184a436-cb33-4e02-9158-fb91106328c1" absoluteBounds="1.7650000000000001, 3.21, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f93f50a1-21b2-4a6e-aed0-bebd443f5bfe" absoluteBounds="4.125, 2.75, 2, 1.4248478190104166">
-      <DataClassMoniker Name="/DatabaseDataContext/t_Flugzeug" />
-      <nestedChildShapes>
-        <elementListCompartment Id="673169e9-7273-4b1a-9025-a511f881248f" absoluteBounds="4.1400000000000006, 3.21, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="4cf3e74b-15e7-4cba-a3e0-a90cc7e1e8c0" absoluteBounds="1.75, 4, 2, 3.0683211263020826">
       <DataClassMoniker Name="/DatabaseDataContext/t_GPS_IN" />
       <nestedChildShapes>
         <elementListCompartment Id="56db232d-2b6e-4e6b-98f6-abe8bcc1e42d" absoluteBounds="1.7650000000000001, 4.46, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.125 : 4.17484781901042); (5.125 : 4.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DatabaseDataContext/t_Flugzeug/t_Flugzeug_t_Daten" />
-      <nodes>
-        <classShapeMoniker Id="f93f50a1-21b2-4a6e-aed0-bebd443f5bfe" />
-        <classShapeMoniker Id="c3a6437e-8506-4ca3-b8ea-d2601f6961ee" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(3.75 : 3.29807657877604); (4.125 : 3.29807657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DatabaseDataContext/t_Tracker/t_Tracker_t_Flugzeug" />
-      <nodes>
-        <classShapeMoniker Id="3c9faf90-c0ba-4e09-b89d-21ac9f7d5be1" />
-        <classShapeMoniker Id="f93f50a1-21b2-4a6e-aed0-bebd443f5bfe" />
-      </nodes>
-    </associationConnector>
     <classShape Id="59227d99-9254-478e-a150-89560dd876cf" absoluteBounds="6.75, 2.75, 2, 0.93180582682291679">
       <DataClassMoniker Name="/DatabaseDataContext/t_Polygon" />
       <nestedChildShapes>
@@ -52,11 +32,31 @@
         <elementListCompartment Id="0d09ff76-b4b5-482a-be3a-f8f05a166e85" absoluteBounds="6.765, 4.46, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.75 : 3.68180582682292); (7.75 : 4)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(7.75 : 3.68180582682292); (7.75 : 4)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DatabaseDataContext/t_Polygon/t_Polygon_t_PolygonPoint" />
       <nodes>
         <classShapeMoniker Id="59227d99-9254-478e-a150-89560dd876cf" />
         <classShapeMoniker Id="95f63861-38d0-4297-840c-74f1b4762bf7" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="624727a5-f99a-452e-a2df-fd749a6782b5" absoluteBounds="4.125, 2.625, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/DatabaseDataContext/t_Flugzeug" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d2d2e2ff-da3c-4602-859d-42e2d3d240a1" absoluteBounds="4.14, 3.085, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 4.04984781901042); (5.125 : 4.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DatabaseDataContext/t_Flugzeug/t_Flugzeug_t_Daten" />
+      <nodes>
+        <classShapeMoniker Id="624727a5-f99a-452e-a2df-fd749a6782b5" />
+        <classShapeMoniker Id="c3a6437e-8506-4ca3-b8ea-d2601f6961ee" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.75 : 3.29807657877604); (4.125 : 3.29807657877604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DatabaseDataContext/t_Tracker/t_Tracker_t_Flugzeug" />
+      <nodes>
+        <classShapeMoniker Id="3c9faf90-c0ba-4e09-b89d-21ac9f7d5be1" />
+        <classShapeMoniker Id="624727a5-f99a-452e-a2df-fd749a6782b5" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -27,16 +27,6 @@
       <Association Name="t_Tracker_t_Flugzeug" Member="t_Flugzeugs" ThisKey="ID" OtherKey="ID_GPS_Tracker" Type="t_Flugzeug" />
     </Type>
   </Table>
-  <Table Name="dbo.t_Flugzeug" Member="t_Flugzeugs">
-    <Type Name="t_Flugzeug">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Flugzeug" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
-      <Column Name="Pilot" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
-      <Column Name="ID_GPS_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Flugzeug" Type="t_Daten" />
-      <Association Name="t_Tracker_t_Flugzeug" Member="t_Tracker" ThisKey="ID_GPS_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
     <Type Name="t_GPS_IN">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -69,6 +59,16 @@
       <Column Name="altitude" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Polygon_t_PolygonPoint" Member="t_Polygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_Polygon" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Flugzeug" Member="t_Flugzeugs">
+    <Type Name="t_Flugzeug">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Flugzeug" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="Pilot" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
+      <Column Name="ID_GPS_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Flugzeug" Type="t_Daten" />
+      <Association Name="t_Tracker_t_Flugzeug" Member="t_Tracker" ThisKey="ID_GPS_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

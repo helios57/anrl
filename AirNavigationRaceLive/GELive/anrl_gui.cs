@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace GELive
 {
+    /// <summary>
+    /// The Client Gui
+    /// </summary>
     public partial class anrl_gui : Form
     {
 
@@ -41,8 +44,8 @@ namespace GELive
         /// <param name="e">The API version</param>
         void geWebBrowser1_PluginReady(object sender, GEEventArgs e)
         {
-            /// Here we can cast the sender to the IGEPlugin interface
-            /// Once this is done once can work with the plugin almost seemlessly
+            // Here we can cast the sender to the IGEPlugin interface
+            // Once this is done once can work with the plugin almost seemlessly
             ge = sender as IGEPlugin;
 
             if (ge != null)

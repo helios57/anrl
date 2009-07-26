@@ -8,6 +8,8 @@ using System.Data.SqlClient;
 using System.Data.Linq;
 using System.Windows.Forms;
 using System.IO;
+using DataService;
+using System.Linq;
 
 namespace TCPReciever
 {
@@ -29,6 +31,8 @@ namespace TCPReciever
         public bool running;
         List<Thread> ThreadList = new List<Thread>();
         public String DB_PATH;
+
+        public event EventHandler OnTrackerAddded;
 
         #endregion
         /// <summary>
@@ -90,8 +94,14 @@ namespace TCPReciever
                 new_position.Timestamp = DateTime.Now;
                 new_position.Processed = false;
 
-
-                DataService.DatabaseDataContext dataContext = new DataService.DatabaseDataContext(DB_PATH);
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                if (dataContext.t_Trackers.Count(p => p.IMEI == new_position.IMEI) == 0)
+                {
+                    t_Tracker t = new t_Tracker();
+                    t.IMEI = new_position.IMEI;
+                    dataContext.t_Trackers.InsertOnSubmit(t);
+                    OnTrackerAddded.Invoke(null, null);
+                }
                 dataContext.t_GPS_INs.InsertOnSubmit(new_position);
                 dataContext.SubmitChanges();
             }

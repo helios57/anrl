@@ -36,5 +36,43 @@ namespace DataService
         [OperationContract]
         List<t_PolygonPoint> GetPolygons();
 
+        /// <summary>
+        /// Return a list of all Trackers
+        /// </summary>
+        /// <returns>List of Trackers</returns>
+        [OperationContract]
+        List<TrackerListEntry> GetTrackers();
+
+        /// <summary>
+        /// Return a list of all Airplanes
+        /// </summary>
+        /// <returns>List of Airplanes</returns>
+        [OperationContract]
+        List<AirplaneListEntry> GetAirplanes();
+
+        /// <summary>
+        /// Remove this Tracker from any Airplane
+        /// </summary>
+        /// <param name="TrackerID"> ID of the Tracker</param>
+        [OperationContract]
+        void CleanTracker(int TrackerID);
+
+        /// <summary>
+        /// Add a new Airplane to a tracker
+        /// </summary>
+        /// <param name="Flugzeug">Airplane Type/Name</param>
+        /// <param name="Pilot">Pilot Name</param>
+        /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
+        [OperationContract]
+        void AddAirplane(String Flugzeug, String Pilot, int TrackerID);
+
+        /// <summary>
+        /// Add an existing Airplane to a Tracker
+        /// </summary>
+        /// <param name="FlugzeugID">Id of the Airplane</param>
+        /// <param name="TrackerID">ID of the Tracker</param>
+        [OperationContract]
+        void AddAirplane(int FlugzeugID, int TrackerID);
+
     }
 }

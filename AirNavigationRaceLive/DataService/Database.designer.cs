@@ -36,9 +36,6 @@ namespace DataService
     partial void Insertt_Tracker(t_Tracker instance);
     partial void Updatet_Tracker(t_Tracker instance);
     partial void Deletet_Tracker(t_Tracker instance);
-    partial void Insertt_Flugzeug(t_Flugzeug instance);
-    partial void Updatet_Flugzeug(t_Flugzeug instance);
-    partial void Deletet_Flugzeug(t_Flugzeug instance);
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
@@ -48,6 +45,9 @@ namespace DataService
     partial void Insertt_PolygonPoint(t_PolygonPoint instance);
     partial void Updatet_PolygonPoint(t_PolygonPoint instance);
     partial void Deletet_PolygonPoint(t_PolygonPoint instance);
+    partial void Insertt_Flugzeug(t_Flugzeug instance);
+    partial void Updatet_Flugzeug(t_Flugzeug instance);
+    partial void Deletet_Flugzeug(t_Flugzeug instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -96,14 +96,6 @@ namespace DataService
 			}
 		}
 		
-		public System.Data.Linq.Table<t_Flugzeug> t_Flugzeugs
-		{
-			get
-			{
-				return this.GetTable<t_Flugzeug>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_GPS_IN> t_GPS_INs
 		{
 			get
@@ -125,6 +117,14 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_PolygonPoint>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Flugzeug> t_Flugzeugs
+		{
+			get
+			{
+				return this.GetTable<t_Flugzeug>();
 			}
 		}
 	}
@@ -655,209 +655,6 @@ namespace DataService
 		{
 			this.SendPropertyChanging();
 			entity.t_Tracker = null;
-		}
-	}
-	
-	[Table(Name="dbo.t_Flugzeug")]
-	public partial class t_Flugzeug : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Flugzeug;
-		
-		private string _Pilot;
-		
-		private int _ID_GPS_Tracker;
-		
-		private EntitySet<t_Daten> _t_Datens;
-		
-		private EntityRef<t_Tracker> _t_Tracker;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnFlugzeugChanging(string value);
-    partial void OnFlugzeugChanged();
-    partial void OnPilotChanging(string value);
-    partial void OnPilotChanged();
-    partial void OnID_GPS_TrackerChanging(int value);
-    partial void OnID_GPS_TrackerChanged();
-    #endregion
-		
-		public t_Flugzeug()
-		{
-			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
-			this._t_Tracker = default(EntityRef<t_Tracker>);
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Flugzeug", DbType="NChar(100)")]
-		public string Flugzeug
-		{
-			get
-			{
-				return this._Flugzeug;
-			}
-			set
-			{
-				if ((this._Flugzeug != value))
-				{
-					this.OnFlugzeugChanging(value);
-					this.SendPropertyChanging();
-					this._Flugzeug = value;
-					this.SendPropertyChanged("Flugzeug");
-					this.OnFlugzeugChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Pilot", DbType="NChar(100)")]
-		public string Pilot
-		{
-			get
-			{
-				return this._Pilot;
-			}
-			set
-			{
-				if ((this._Pilot != value))
-				{
-					this.OnPilotChanging(value);
-					this.SendPropertyChanging();
-					this._Pilot = value;
-					this.SendPropertyChanged("Pilot");
-					this.OnPilotChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ID_GPS_Tracker", DbType="Int NOT NULL")]
-		public int ID_GPS_Tracker
-		{
-			get
-			{
-				return this._ID_GPS_Tracker;
-			}
-			set
-			{
-				if ((this._ID_GPS_Tracker != value))
-				{
-					if (this._t_Tracker.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_GPS_TrackerChanging(value);
-					this.SendPropertyChanging();
-					this._ID_GPS_Tracker = value;
-					this.SendPropertyChanged("ID_GPS_Tracker");
-					this.OnID_GPS_TrackerChanged();
-				}
-			}
-		}
-		
-		[Association(Name="t_Flugzeug_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Flugzeug")]
-		public EntitySet<t_Daten> t_Datens
-		{
-			get
-			{
-				return this._t_Datens;
-			}
-			set
-			{
-				this._t_Datens.Assign(value);
-			}
-		}
-		
-		[Association(Name="t_Tracker_t_Flugzeug", Storage="_t_Tracker", ThisKey="ID_GPS_Tracker", OtherKey="ID", IsForeignKey=true)]
-		public t_Tracker t_Tracker
-		{
-			get
-			{
-				return this._t_Tracker.Entity;
-			}
-			set
-			{
-				t_Tracker previousValue = this._t_Tracker.Entity;
-				if (((previousValue != value) 
-							|| (this._t_Tracker.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_Tracker.Entity = null;
-						previousValue.t_Flugzeugs.Remove(this);
-					}
-					this._t_Tracker.Entity = value;
-					if ((value != null))
-					{
-						value.t_Flugzeugs.Add(this);
-						this._ID_GPS_Tracker = value.ID;
-					}
-					else
-					{
-						this._ID_GPS_Tracker = default(int);
-					}
-					this.SendPropertyChanged("t_Tracker");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Flugzeug = this;
-		}
-		
-		private void detach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Flugzeug = null;
 		}
 	}
 	
@@ -1521,6 +1318,209 @@ namespace DataService
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[Table(Name="dbo.t_Flugzeug")]
+	public partial class t_Flugzeug : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Flugzeug;
+		
+		private string _Pilot;
+		
+		private System.Nullable<int> _ID_GPS_Tracker;
+		
+		private EntitySet<t_Daten> _t_Datens;
+		
+		private EntityRef<t_Tracker> _t_Tracker;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnFlugzeugChanging(string value);
+    partial void OnFlugzeugChanged();
+    partial void OnPilotChanging(string value);
+    partial void OnPilotChanged();
+    partial void OnID_GPS_TrackerChanging(System.Nullable<int> value);
+    partial void OnID_GPS_TrackerChanged();
+    #endregion
+		
+		public t_Flugzeug()
+		{
+			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
+			this._t_Tracker = default(EntityRef<t_Tracker>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Flugzeug", DbType="NChar(100)")]
+		public string Flugzeug
+		{
+			get
+			{
+				return this._Flugzeug;
+			}
+			set
+			{
+				if ((this._Flugzeug != value))
+				{
+					this.OnFlugzeugChanging(value);
+					this.SendPropertyChanging();
+					this._Flugzeug = value;
+					this.SendPropertyChanged("Flugzeug");
+					this.OnFlugzeugChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Pilot", DbType="NChar(100)")]
+		public string Pilot
+		{
+			get
+			{
+				return this._Pilot;
+			}
+			set
+			{
+				if ((this._Pilot != value))
+				{
+					this.OnPilotChanging(value);
+					this.SendPropertyChanging();
+					this._Pilot = value;
+					this.SendPropertyChanged("Pilot");
+					this.OnPilotChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ID_GPS_Tracker", DbType="Int")]
+		public System.Nullable<int> ID_GPS_Tracker
+		{
+			get
+			{
+				return this._ID_GPS_Tracker;
+			}
+			set
+			{
+				if ((this._ID_GPS_Tracker != value))
+				{
+					if (this._t_Tracker.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_GPS_TrackerChanging(value);
+					this.SendPropertyChanging();
+					this._ID_GPS_Tracker = value;
+					this.SendPropertyChanged("ID_GPS_Tracker");
+					this.OnID_GPS_TrackerChanged();
+				}
+			}
+		}
+		
+		[Association(Name="t_Flugzeug_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Flugzeug")]
+		public EntitySet<t_Daten> t_Datens
+		{
+			get
+			{
+				return this._t_Datens;
+			}
+			set
+			{
+				this._t_Datens.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_Tracker_t_Flugzeug", Storage="_t_Tracker", ThisKey="ID_GPS_Tracker", OtherKey="ID", IsForeignKey=true)]
+		public t_Tracker t_Tracker
+		{
+			get
+			{
+				return this._t_Tracker.Entity;
+			}
+			set
+			{
+				t_Tracker previousValue = this._t_Tracker.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Tracker.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Tracker.Entity = null;
+						previousValue.t_Flugzeugs.Remove(this);
+					}
+					this._t_Tracker.Entity = value;
+					if ((value != null))
+					{
+						value.t_Flugzeugs.Add(this);
+						this._ID_GPS_Tracker = value.ID;
+					}
+					else
+					{
+						this._ID_GPS_Tracker = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_Tracker");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Flugzeug = this;
+		}
+		
+		private void detach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Flugzeug = null;
 		}
 	}
 }
