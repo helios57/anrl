@@ -35,7 +35,6 @@ namespace ControllCenter
             f.FileOk += new CancelEventHandler(f_FileOk);
 
         }
-
         void f_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog f = (OpenFileDialog)sender;
