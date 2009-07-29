@@ -64,7 +64,7 @@ namespace DataService
         /// <param name="Pilot">Pilot Name</param>
         /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
         [OperationContract]
-        void AddAirplane(String Flugzeug, String Pilot, int TrackerID);
+        void AddNewAirplane(String Flugzeug, String Pilot, int TrackerID);
 
         /// <summary>
         /// Add an existing Airplane to a Tracker

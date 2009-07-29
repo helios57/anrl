@@ -40,4 +40,67 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTrackers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTrackersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetTrackersResult" nillable="true" type="q4:ArrayOfTrackerListEntry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAirplanes">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAirplanesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetAirplanesResult" nillable="true" type="q5:ArrayOfAirplaneListEntry" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CleanTracker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TrackerID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CleanTrackerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddNewAirplane">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Flugzeug" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Pilot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TrackerID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddNewAirplaneResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAirplane">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FlugzeugID" type="xs:int" />
+        <xs:element minOccurs="0" name="TrackerID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddAirplaneResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

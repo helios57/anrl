@@ -157,13 +157,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Service References\ANRLDataService\ANRLDataService11.wsdl" />
-    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_PolygonPoint.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\ANRLDataService\item1.disco" />
-    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Service References\ANRLDataService\item10.xsd" />
     <None Include="Service References\ANRLDataService\item6.xsd" />
     <None Include="Service References\ANRLDataService\item7.xsd" />
     <None Include="Service References\ANRLDataService\item8.xsd" />

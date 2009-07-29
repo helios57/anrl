@@ -154,7 +154,7 @@ namespace DataService
         /// <param name="Flugzeug">Airplane Type/Name</param>
         /// <param name="Pilot">Pilot Name</param>
         /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
-        public void AddAirplane(String Flugzeug, String Pilot, int TrackerID)
+        public void AddNewAirplane(String Flugzeug, String Pilot, int TrackerID)
         {
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             t_Flugzeug f = new t_Flugzeug();
@@ -179,7 +179,9 @@ namespace DataService
             t_Flugzeug fl = dataContext.t_Flugzeugs.Single(p => p.ID == FlugzeugID);
             fl.ID_GPS_Tracker = TrackerID;
             dataContext.SubmitChanges();
+            
         }
+
         #endregion
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:5555/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Windows.Forms" />
   <xs:complexType name="ArrayOft_Daten">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Daten" nillable="true" type="tns:t_Daten" />
@@ -30,7 +31,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Flugzeug" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="ID_GPS_Tracker" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_GPS_Tracker" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Pilot" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="t_Datens" nillable="true" type="tns:ArrayOft_Daten" />
       <xs:element minOccurs="0" name="t_Tracker" nillable="true" type="tns:t_Tracker" />
@@ -75,4 +76,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="t_Polygon" nillable="true" type="tns:t_Polygon" />
+  <xs:complexType name="ArrayOfTrackerListEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TrackerListEntry" nillable="true" type="tns:TrackerListEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTrackerListEntry" nillable="true" type="tns:ArrayOfTrackerListEntry" />
+  <xs:complexType name="TrackerListEntry">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Windows.Forms" base="q1:ListViewItem" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TrackerListEntry" nillable="true" type="tns:TrackerListEntry" />
+  <xs:complexType name="ArrayOfAirplaneListEntry">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AirplaneListEntry" nillable="true" type="tns:AirplaneListEntry" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAirplaneListEntry" nillable="true" type="tns:ArrayOfAirplaneListEntry" />
+  <xs:complexType name="AirplaneListEntry">
+    <xs:sequence>
+      <xs:element name="Flugzeug" nillable="true" type="xs:string" />
+      <xs:element name="ID" type="xs:int" />
+      <xs:element name="Pilot" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AirplaneListEntry" nillable="true" type="tns:AirplaneListEntry" />
 </xs:schema>

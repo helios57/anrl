@@ -32,6 +32,13 @@ namespace ControllCenter
             OpenFileDialog f = new OpenFileDialog();
             f.Filter = "DB |*.mdf";
             f.ShowDialog();
+            f.FileOk += new CancelEventHandler(f_FileOk);
+
+        }
+
+        void f_FileOk(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog f = (OpenFileDialog)sender;
             DB_Path = f.FileName;
             try
             {

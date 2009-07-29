@@ -6,6 +6,7 @@ namespace DataService
     /// <summary>
     /// Class to bee Added to an ListView-Controll, contains information about a Tracker
     /// </summary>
+    [Serializable]
     public class TrackerListEntry : ListViewItem
     {
         /// <summary>
@@ -58,6 +59,7 @@ namespace DataService
     /// <summary>
     /// Class for Displaying an Airplane with Pilot in a Line
     /// </summary>
+    [Serializable]
     public class AirplaneListEntry
     {
         /// <summary>

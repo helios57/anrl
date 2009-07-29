@@ -298,7 +298,7 @@ namespace GELive.ANRLDataService {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ID_GPS_TrackerField;
+        private System.Nullable<int> ID_GPS_TrackerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PilotField;
@@ -346,7 +346,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID_GPS_Tracker {
+        public System.Nullable<int> ID_GPS_Tracker {
             get {
                 return this.ID_GPS_TrackerField;
             }
@@ -670,57 +670,8 @@ namespace GELive.ANRLDataService {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ANRLDataService.IANRLDataService")]
-    public interface IANRLDataService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
-        System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTimestamps", ReplyAction="http://tempuri.org/IANRLDataService/GetTimestampsResponse")]
-        System.Collections.Generic.List<System.DateTime> GetTimestamps();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPolygons", ReplyAction="http://tempuri.org/IANRLDataService/GetPolygonsResponse")]
-        System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons();
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface IANRLDataServiceChannel : GELive.ANRLDataService.IANRLDataService, System.ServiceModel.IClientChannel {
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ANRLDataServiceClient : System.ServiceModel.ClientBase<GELive.ANRLDataService.IANRLDataService>, GELive.ANRLDataService.IANRLDataService {
-        
-        public ANRLDataServiceClient() {
-        }
-        
-        public ANRLDataServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
-        }
-        
-        public ANRLDataServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ANRLDataServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
-        }
-        
-        public ANRLDataServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
-        }
-        
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp) {
-            return base.Channel.GetPathData(timestamp);
-        }
-        
-        public System.Collections.Generic.List<System.DateTime> GetTimestamps() {
-            return base.Channel.GetTimestamps();
-        }
-        
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons() {
-            return base.Channel.GetPolygons();
-        }
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    public class TrackerListEntry {
     }
 }
