@@ -31,8 +31,8 @@ namespace ControllCenter
         {
             OpenFileDialog f = new OpenFileDialog();
             f.Filter = "DB |*.mdf";
-            f.ShowDialog();
             f.FileOk += new CancelEventHandler(f_FileOk);
+            f.ShowDialog();
 
         }
         void f_FileOk(object sender, CancelEventArgs e)

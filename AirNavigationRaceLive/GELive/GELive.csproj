@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1A2526F5-9A18-40D7-A4C1-479A131F1698}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -116,6 +116,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Delay-Select.resx">
       <DependentUpon>Delay-Select.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="KmlTreeView.resx">
       <DependentUpon>KmlTreeView.cs</DependentUpon>
