@@ -23,6 +23,23 @@ namespace Controlls
             //@todo Fill the List with information
             List<List<List<double>>> ForbiddenZones = new List<List<List<double>>>();
 
+            //Loop through all Forbiddenzones
+            for (int i = 0; i < 10; i++)
+            {
+                List<List<double>> Zone = new List<List<double>>();
+                //Loop through all Points
+                for (int j = 0; j < 10; j++)
+                {
+                    List<double> Point = new List<double>();
+                    double longitude = i * j;
+                    double latitude = Math.Abs((i - j) * j / i);
+                    Point.Add(longitude);
+                    Point.Add(latitude);
+                    Zone.Add(Point);
+                }
+                ForbiddenZones.Add(Zone);
+            }
+
             dataContext.AddPolygons(ForbiddenZones);
         }
     }
