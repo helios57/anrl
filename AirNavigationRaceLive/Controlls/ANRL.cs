@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Controlls.ANRL_Service_reference;
 
 namespace Controlls
 {
@@ -18,8 +19,6 @@ namespace Controlls
 
         private void btnAddForbiddenZones_Click(object sender, EventArgs e)
         {
-            ANRL_Service_reference.ANRLDataServiceClient dataContext = new Controlls.ANRL_Service_reference.ANRLDataServiceClient();
-            
             //@todo Fill the List with information
             List<List<List<double>>> ForbiddenZones = new List<List<List<double>>>();
 
@@ -32,7 +31,7 @@ namespace Controlls
                 {
                     List<double> Point = new List<double>();
                     double longitude = i * j;
-                    double latitude = Math.Abs((i - j) * j / i);
+                    double latitude = Math.Abs((i - j) * j / (i+1));
                     Point.Add(longitude);
                     Point.Add(latitude);
                     Zone.Add(Point);
@@ -40,6 +39,7 @@ namespace Controlls
                 ForbiddenZones.Add(Zone);
             }
 
+            ANRLDataServiceClient dataContext = new ANRLDataServiceClient();
             dataContext.AddPolygons(ForbiddenZones);
         }
     }

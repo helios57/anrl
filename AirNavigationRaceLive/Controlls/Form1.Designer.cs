@@ -28,12 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.anrl1 = new Controlls.ANRL();
+            this.SuspendLayout();
+            // 
+            // anrl1
+            // 
+            this.anrl1.Location = new System.Drawing.Point(12, 12);
+            this.anrl1.Name = "anrl1";
+            this.anrl1.Size = new System.Drawing.Size(234, 139);
+            this.anrl1.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.anrl1);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private ANRL anrl1;
     }
 }
 
