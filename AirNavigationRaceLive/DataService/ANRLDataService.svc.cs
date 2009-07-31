@@ -100,21 +100,23 @@ namespace DataService
         /// Return a list of all Trackers
         /// </summary>
         /// <returns>List of Trackers</returns>
-        public List<TrackerListEntry> GetTrackers()
+        public List<String[]> GetTrackers()
         {
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<TrackerListEntry> lstTrackers = new List<TrackerListEntry>();
+            List<String[]> lstTrackers = new List<String[]>();
             foreach (t_Tracker t in dataContext.t_Trackers)
             {
-                TrackerListEntry tle = new TrackerListEntry(t.ID, t.IMEI);
+                String[] tle = new String[5];
+                tle[0] = t.ID.ToString();
+                tle[1] = t.IMEI.Trim();
                 #region Check airplanes attached ?
                 //Remove GPS-Trackers if added to may Airplanes
                 if (dataContext.t_Flugzeugs.Count(p => p.ID_GPS_Tracker == t.ID) == 1)
                 {
                     t_Flugzeug f = dataContext.t_Flugzeugs.Single(p => p.ID_GPS_Tracker == t.ID);
-                    tle.ID_Flugzeug = f.ID;
-                    tle.Pilot = f.Pilot;
-                    tle.Flugzeug = f.Flugzeug;
+                    tle[2] = f.ID.ToString().Trim();
+                    tle[3] = f.Pilot.Trim();
+                    tle[4] = f.Flugzeug.Trim();
                 }
                 #endregion
                 lstTrackers.Add(tle);
@@ -125,13 +127,13 @@ namespace DataService
         /// Return a list of all Airplanes
         /// </summary>
         /// <returns>List of Airplanes</returns>
-        public List<AirplaneListEntry> GetAirplanes()
+        public List<String[]> GetAirplanes()
         {
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<AirplaneListEntry> tmp = new List<AirplaneListEntry>();
+            List<String[]> tmp = new List<string[]>();
             foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == 0 || p.ID_GPS_Tracker == null))
             {
-                tmp.Add(new AirplaneListEntry(f));
+                tmp.Add(new String[] {f.ID.ToString().Trim(),f.Flugzeug.Trim(),f.Pilot.Trim()});
             }
             return tmp;
         }
@@ -179,7 +181,7 @@ namespace DataService
             t_Flugzeug fl = dataContext.t_Flugzeugs.Single(p => p.ID == FlugzeugID);
             fl.ID_GPS_Tracker = TrackerID;
             dataContext.SubmitChanges();
-            
+           
         }
 
         #endregion

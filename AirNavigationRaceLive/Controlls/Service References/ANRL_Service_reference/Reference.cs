@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GELive.ANRLDataService {
+namespace Controlls.ANRL_Service_reference {
     using System.Runtime.Serialization;
     using System;
     
@@ -65,7 +65,7 @@ namespace GELive.ANRLDataService {
         private System.Nullable<decimal> ZStartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.ANRLDataService.t_Flugzeug t_FlugzeugField;
+        private Controlls.ANRL_Service_reference.t_Flugzeug t_FlugzeugField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -260,7 +260,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.ANRLDataService.t_Flugzeug t_Flugzeug {
+        public Controlls.ANRL_Service_reference.t_Flugzeug t_Flugzeug {
             get {
                 return this.t_FlugzeugField;
             }
@@ -304,10 +304,10 @@ namespace GELive.ANRLDataService {
         private string PilotField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_DatensField;
+        private System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_Daten> t_DatensField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.ANRLDataService.t_Tracker t_TrackerField;
+        private Controlls.ANRL_Service_reference.t_Tracker t_TrackerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -372,7 +372,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_Datens {
+        public System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_Daten> t_Datens {
             get {
                 return this.t_DatensField;
             }
@@ -385,7 +385,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.ANRLDataService.t_Tracker t_Tracker {
+        public Controlls.ANRL_Service_reference.t_Tracker t_Tracker {
             get {
                 return this.t_TrackerField;
             }
@@ -423,7 +423,7 @@ namespace GELive.ANRLDataService {
         private string IMEIField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug> t_FlugzeugsField;
+        private System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_Flugzeug> t_FlugzeugsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -462,7 +462,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug> t_Flugzeugs {
+        public System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_Flugzeug> t_Flugzeugs {
             get {
                 return this.t_FlugzeugsField;
             }
@@ -509,7 +509,7 @@ namespace GELive.ANRLDataService {
         private decimal longitudeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.ANRLDataService.t_Polygon t_PolygonField;
+        private Controlls.ANRL_Service_reference.t_Polygon t_PolygonField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -587,7 +587,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.ANRLDataService.t_Polygon t_Polygon {
+        public Controlls.ANRL_Service_reference.t_Polygon t_Polygon {
             get {
                 return this.t_PolygonField;
             }
@@ -622,7 +622,7 @@ namespace GELive.ANRLDataService {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> t_PolygonPointsField;
+        private System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_PolygonPoint> t_PolygonPointsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -648,7 +648,7 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> t_PolygonPoints {
+        public System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_PolygonPoint> t_PolygonPoints {
             get {
                 return this.t_PolygonPointsField;
             }
@@ -671,17 +671,17 @@ namespace GELive.ANRLDataService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ANRLDataService.IANRLDataService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ANRL_Service_reference.IANRLDataService")]
     public interface IANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
-        System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp);
+        System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_Daten> GetPathData(System.DateTime timestamp);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTimestamps", ReplyAction="http://tempuri.org/IANRLDataService/GetTimestampsResponse")]
         System.Collections.Generic.List<System.DateTime> GetTimestamps();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPolygons", ReplyAction="http://tempuri.org/IANRLDataService/GetPolygonsResponse")]
-        System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons();
+        System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_PolygonPoint> GetPolygons();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTrackers", ReplyAction="http://tempuri.org/IANRLDataService/GetTrackersResponse")]
         System.Collections.Generic.List<System.Collections.Generic.List<string>> GetTrackers();
@@ -700,12 +700,12 @@ namespace GELive.ANRLDataService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public interface IANRLDataServiceChannel : GELive.ANRLDataService.IANRLDataService, System.ServiceModel.IClientChannel {
+    public interface IANRLDataServiceChannel : Controlls.ANRL_Service_reference.IANRLDataService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-    public partial class ANRLDataServiceClient : System.ServiceModel.ClientBase<GELive.ANRLDataService.IANRLDataService>, GELive.ANRLDataService.IANRLDataService {
+    public partial class ANRLDataServiceClient : System.ServiceModel.ClientBase<Controlls.ANRL_Service_reference.IANRLDataService>, Controlls.ANRL_Service_reference.IANRLDataService {
         
         public ANRLDataServiceClient() {
         }
@@ -726,7 +726,7 @@ namespace GELive.ANRLDataService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp) {
+        public System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_Daten> GetPathData(System.DateTime timestamp) {
             return base.Channel.GetPathData(timestamp);
         }
         
@@ -734,7 +734,7 @@ namespace GELive.ANRLDataService {
             return base.Channel.GetTimestamps();
         }
         
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons() {
+        public System.Collections.Generic.List<Controlls.ANRL_Service_reference.t_PolygonPoint> GetPolygons() {
             return base.Channel.GetPolygons();
         }
         

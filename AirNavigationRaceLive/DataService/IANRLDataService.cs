@@ -41,14 +41,14 @@ namespace DataService
         /// </summary>
         /// <returns>List of Trackers</returns>
         [OperationContract]
-        List<TrackerListEntry> GetTrackers();
+        List<String[]> GetTrackers();
 
         /// <summary>
         /// Return a list of all Airplanes
         /// </summary>
         /// <returns>List of Airplanes</returns>
         [OperationContract]
-        List<AirplaneListEntry> GetAirplanes();
+        List<String[]> GetAirplanes();
 
         /// <summary>
         /// Remove this Tracker from any Airplane
