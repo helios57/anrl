@@ -697,6 +697,9 @@ namespace Controlls.ANRL_Service_reference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddAirplane", ReplyAction="http://tempuri.org/IANRLDataService/AddAirplaneResponse")]
         void AddAirplane(int FlugzeugID, int TrackerID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPolygons", ReplyAction="http://tempuri.org/IANRLDataService/AddPolygonsResponse")]
+        void AddPolygons(System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<double>>> PolygonList);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -756,6 +759,10 @@ namespace Controlls.ANRL_Service_reference {
         
         public void AddAirplane(int FlugzeugID, int TrackerID) {
             base.Channel.AddAirplane(FlugzeugID, TrackerID);
+        }
+        
+        public void AddPolygons(System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<double>>> PolygonList) {
+            base.Channel.AddPolygons(PolygonList);
         }
     }
 }

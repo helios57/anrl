@@ -103,4 +103,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddPolygons">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PolygonList" nillable="true" type="q6:ArrayOfArrayOfArrayOfdouble" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPolygonsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

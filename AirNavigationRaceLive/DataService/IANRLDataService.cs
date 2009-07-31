@@ -74,5 +74,12 @@ namespace DataService
         [OperationContract]
         void AddAirplane(int FlugzeugID, int TrackerID);
 
+        /// <summary>
+        /// Add the forbidden Zones to the DB
+        /// </summary>
+        /// <param name="PolygonList">A List of Polygons saved as a List of Polygon-Points saved in an Array {longitude, latitude}</param>
+        [OperationContract]
+        void AddPolygons(List<List<List<double>>> PolygonList);
+
     }
 }

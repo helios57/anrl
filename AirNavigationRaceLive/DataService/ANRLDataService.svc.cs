@@ -184,6 +184,31 @@ namespace DataService
            
         }
 
+        /// <summary>
+        /// Add the forbidden Zones to the DB
+        /// </summary>
+        /// <param name="PolygonList">A List of Polygons saved as a List of Polygon-Points saved in an Array {longitude, latitude}</param>
+        public void AddPolygons(List<List<List<double>>> PolygonList)
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext();
+            dataContext.t_PolygonPoints.DeleteAllOnSubmit(dataContext.t_PolygonPoints);
+            dataContext.t_Polygons.DeleteAllOnSubmit(dataContext.t_Polygons);
+            dataContext.SubmitChanges();
+            foreach (List<List<double>> Polygonlist in PolygonList)
+            {
+                t_Polygon p = new t_Polygon();
+                dataContext.t_Polygons.InsertOnSubmit(p);
+                dataContext.SubmitChanges();
+                foreach (List<double> Point in Polygonlist)
+                {
+                    t_PolygonPoint point = new t_PolygonPoint();
+                    point.longitude =(decimal) Point[0];
+                    point.latitude =(decimal) Point[1];
+                    point.ID_Polygon = p.ID;
+                    dataContext.t_PolygonPoints.InsertOnSubmit(point);
+                }
+            }
+        }
         #endregion
     }
 }
