@@ -33,12 +33,17 @@ namespace ControllCenter
             f.Filter = "DB |*.mdf";
             f.FileOk += new CancelEventHandler(f_FileOk);
             f.ShowDialog();
+            f.FileOk += new CancelEventHandler(f_FileOk);
 
         }
         void f_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog f = (OpenFileDialog)sender;
             DB_Path = f.FileName;
+            ExitForm ef = new ExitForm();
+            ef.label1.Text = "Bitte warte, die Datenbank wird geladen.";
+            ef.Show();
+            ef.Refresh();
             try
             {
                 DataContext db = new DataContext(DB_Path);
@@ -49,9 +54,11 @@ namespace ControllCenter
                 btnStartReciever.Enabled = true;
                 btnStartWebservice.Enabled = true;
                 RefreshTrackerList();
+                ef.Close();
             }
             catch
             {
+                ef.Close();
                 MessageBox.Show("Fehler beim öffnen der DB, bitte DB überprüfen");
             }
         }
