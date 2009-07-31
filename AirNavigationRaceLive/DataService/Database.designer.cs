@@ -39,15 +39,15 @@ namespace DataService
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
-    partial void Insertt_Polygon(t_Polygon instance);
-    partial void Updatet_Polygon(t_Polygon instance);
-    partial void Deletet_Polygon(t_Polygon instance);
     partial void Insertt_PolygonPoint(t_PolygonPoint instance);
     partial void Updatet_PolygonPoint(t_PolygonPoint instance);
     partial void Deletet_PolygonPoint(t_PolygonPoint instance);
     partial void Insertt_Flugzeug(t_Flugzeug instance);
     partial void Updatet_Flugzeug(t_Flugzeug instance);
     partial void Deletet_Flugzeug(t_Flugzeug instance);
+    partial void Insertt_Polygon(t_Polygon instance);
+    partial void Updatet_Polygon(t_Polygon instance);
+    partial void Deletet_Polygon(t_Polygon instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -104,14 +104,6 @@ namespace DataService
 			}
 		}
 		
-		public System.Data.Linq.Table<t_Polygon> t_Polygons
-		{
-			get
-			{
-				return this.GetTable<t_Polygon>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_PolygonPoint> t_PolygonPoints
 		{
 			get
@@ -125,6 +117,14 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_Flugzeug>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Polygon> t_Polygons
+		{
+			get
+			{
+				return this.GetTable<t_Polygon>();
 			}
 		}
 	}
@@ -1032,96 +1032,6 @@ namespace DataService
 		}
 	}
 	
-	[Table(Name="dbo.t_Polygon")]
-	public partial class t_Polygon : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private EntitySet<t_PolygonPoint> _t_PolygonPoints;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    #endregion
-		
-		public t_Polygon()
-		{
-			this._t_PolygonPoints = new EntitySet<t_PolygonPoint>(new Action<t_PolygonPoint>(this.attach_t_PolygonPoints), new Action<t_PolygonPoint>(this.detach_t_PolygonPoints));
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Association(Name="t_Polygon_t_PolygonPoint", Storage="_t_PolygonPoints", ThisKey="ID", OtherKey="ID_Polygon")]
-		public EntitySet<t_PolygonPoint> t_PolygonPoints
-		{
-			get
-			{
-				return this._t_PolygonPoints;
-			}
-			set
-			{
-				this._t_PolygonPoints.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_PolygonPoints(t_PolygonPoint entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Polygon = this;
-		}
-		
-		private void detach_t_PolygonPoints(t_PolygonPoint entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Polygon = null;
-		}
-	}
-	
 	[Table(Name="dbo.t_PolygonPoints")]
 	public partial class t_PolygonPoint : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1137,8 +1047,6 @@ namespace DataService
 		private decimal _altitude;
 		
 		private int _ID_Polygon;
-		
-		private EntityRef<t_Polygon> _t_Polygon;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1158,7 +1066,6 @@ namespace DataService
 		
 		public t_PolygonPoint()
 		{
-			this._t_Polygon = default(EntityRef<t_Polygon>);
 			OnCreated();
 		}
 		
@@ -1253,49 +1160,11 @@ namespace DataService
 			{
 				if ((this._ID_Polygon != value))
 				{
-					if (this._t_Polygon.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnID_PolygonChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Polygon = value;
 					this.SendPropertyChanged("ID_Polygon");
 					this.OnID_PolygonChanged();
-				}
-			}
-		}
-		
-		[Association(Name="t_Polygon_t_PolygonPoint", Storage="_t_Polygon", ThisKey="ID_Polygon", OtherKey="ID", IsForeignKey=true)]
-		public t_Polygon t_Polygon
-		{
-			get
-			{
-				return this._t_Polygon.Entity;
-			}
-			set
-			{
-				t_Polygon previousValue = this._t_Polygon.Entity;
-				if (((previousValue != value) 
-							|| (this._t_Polygon.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_Polygon.Entity = null;
-						previousValue.t_PolygonPoints.Remove(this);
-					}
-					this._t_Polygon.Entity = value;
-					if ((value != null))
-					{
-						value.t_PolygonPoints.Add(this);
-						this._ID_Polygon = value.ID;
-					}
-					else
-					{
-						this._ID_Polygon = default(int);
-					}
-					this.SendPropertyChanged("t_Polygon");
 				}
 			}
 		}
@@ -1521,6 +1390,68 @@ namespace DataService
 		{
 			this.SendPropertyChanging();
 			entity.t_Flugzeug = null;
+		}
+	}
+	
+	[Table(Name="dbo.t_Polygon")]
+	public partial class t_Polygon : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    #endregion
+		
+		public t_Polygon()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

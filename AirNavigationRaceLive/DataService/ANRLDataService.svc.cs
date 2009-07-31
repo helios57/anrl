@@ -190,15 +190,16 @@ namespace DataService
         /// <param name="PolygonList">A List of Polygons saved as a List of Polygon-Points saved in an Array {longitude, latitude}</param>
         public void AddPolygons(List<List<List<double>>> PolygonList)
         {
-            DatabaseDataContext dataContext = new DatabaseDataContext();
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             dataContext.t_PolygonPoints.DeleteAllOnSubmit(dataContext.t_PolygonPoints);
             dataContext.t_Polygons.DeleteAllOnSubmit(dataContext.t_Polygons);
             dataContext.SubmitChanges();
+            int i = 1;
             foreach (List<List<double>> Polygonlist in PolygonList)
             {
                 t_Polygon p = new t_Polygon();
-                dataContext.t_Polygons.InsertOnSubmit(p);
-                dataContext.SubmitChanges();
+                p.ID = i++;
+    
                 foreach (List<double> Point in Polygonlist)
                 {
                     t_PolygonPoint point = new t_PolygonPoint();
@@ -207,7 +208,9 @@ namespace DataService
                     point.ID_Polygon = p.ID;
                     dataContext.t_PolygonPoints.InsertOnSubmit(point);
                 }
+                dataContext.t_Polygons.InsertOnSubmit(p);
             }
+            dataContext.SubmitChanges();
         }
         #endregion
     }

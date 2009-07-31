@@ -45,12 +45,6 @@
       <Column Name="Processed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.t_Polygon" Member="t_Polygons">
-    <Type Name="t_Polygon">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Association Name="t_Polygon_t_PolygonPoint" Member="t_PolygonPoints" ThisKey="ID" OtherKey="ID_Polygon" Type="t_PolygonPoint" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_PolygonPoints" Member="t_PolygonPoints">
     <Type Name="t_PolygonPoint">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -58,7 +52,6 @@
       <Column Name="latitude" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="altitude" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Polygon_t_PolygonPoint" Member="t_Polygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_Polygon" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Flugzeug" Member="t_Flugzeugs">
@@ -69,6 +62,11 @@
       <Column Name="ID_GPS_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Flugzeug" Type="t_Daten" />
       <Association Name="t_Tracker_t_Flugzeug" Member="t_Tracker" ThisKey="ID_GPS_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Polygon" Member="t_Polygons">
+    <Type Name="t_Polygon">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

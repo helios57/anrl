@@ -40,7 +40,8 @@ namespace Controlls
             }
 
             ANRLDataServiceClient dataContext = new ANRLDataServiceClient();
-            dataContext.AddPolygons(ForbiddenZones);
+
+            dataContext.AddPolygons(ForbiddenZones.ToList());
         }
     }
 }
