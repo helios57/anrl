@@ -16,6 +16,7 @@ namespace GELive
         /// The plugin instance
         /// </summary>
         private IGEPlugin ge = null;
+        RankingForm rankingForm = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="anrl_gui"/> class.
@@ -91,7 +92,7 @@ namespace GELive
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void ShowRanking_Click(object sender, EventArgs e)
         {
-            RankingForm rankingForm = new RankingForm();
+            rankingForm = new RankingForm();
             rankingForm.Show();
         }
     }
