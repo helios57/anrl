@@ -66,7 +66,7 @@
             this.ToolStrip1.Image = ((System.Drawing.Image)(resources.GetObject("ToolStrip1.Image")));
             this.ToolStrip1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolStrip1.Name = "ToolStrip1";
-            this.ToolStrip1.Size = new System.Drawing.Size(82, 22);
+            this.ToolStrip1.Size = new System.Drawing.Size(72, 22);
             this.ToolStrip1.Text = "Load Kml File";
             this.ToolStrip1.Click += new System.EventHandler(this.LoadKml_Click);
             // 
@@ -76,7 +76,7 @@
             this.ShowRanking.Image = ((System.Drawing.Image)(resources.GetObject("ShowRanking.Image")));
             this.ShowRanking.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ShowRanking.Name = "ShowRanking";
-            this.ShowRanking.Size = new System.Drawing.Size(86, 22);
+            this.ShowRanking.Size = new System.Drawing.Size(78, 22);
             this.ShowRanking.Text = "Show Ranking";
             this.ShowRanking.Click += new System.EventHandler(this.ShowRanking_Click);
             // 
@@ -100,8 +100,8 @@
 
         private GEToolStrip geToolStrip1;
         private System.Windows.Forms.ToolStripButton ToolStrip1;
-        private GEWebBrowser geWebBrowser1;
         private System.Windows.Forms.ToolStripButton ShowRanking;
+        public GEWebBrowser geWebBrowser1;
 
 
     }

@@ -20,6 +20,7 @@ namespace GELive
         List<t_PolygonPoint> PolygonPoints;
         System.Timers.Timer UpdateData = new System.Timers.Timer(5000);
         ANRLDataServiceClient Client;
+        anrl_gui gui;
         bool ListLocked = false;
         /// <summary>
         /// The Timestamp of the Selected Entrie used as reference for delaying
@@ -37,9 +38,10 @@ namespace GELive
         /// Creates a new Instance of the Webservice-Client Object
         /// Respondable for Updateing, getting the local Data-Cache and generating the KML-File with the lines
         /// </summary>
-        public WSManager(GEWebBrowser gweb)
+        public WSManager(GEWebBrowser gweb,anrl_gui gui)
         {
             this.gweb = gweb;
+            this.gui = gui;
             ge = gweb.GetPlugin();
             Container = ge.getFeatures();
             Container.appendChild(ge.parseKml(GetKml()));
@@ -74,8 +76,10 @@ namespace GELive
             List<t_Daten> Data = Client.GetPathData(DisplayTime);
             DatenListe.AddRange(Data);
             ListLocked = false;
-
             UpdateGWebBrowser();
+            if (gui.rankingForm != null && gui.rankingForm.Visible)
+            {
+            }
         }
 
         private void UpdateGWebBrowser()

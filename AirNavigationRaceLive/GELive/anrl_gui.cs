@@ -16,7 +16,7 @@ namespace GELive
         /// The plugin instance
         /// </summary>
         private IGEPlugin ge = null;
-        RankingForm rankingForm = null;
+        public RankingForm rankingForm = null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="anrl_gui"/> class.
@@ -79,7 +79,7 @@ namespace GELive
         {
             if (ge != null)
             {
-                WSManager ws = new WSManager(geWebBrowser1);
+                WSManager ws = new WSManager(geWebBrowser1,this);
                 Delay_Select d = new Delay_Select(ws);
                 d.Show();
             }
