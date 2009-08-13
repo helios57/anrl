@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblFirst = new System.Windows.Forms.Label();
+            this.TestRanking = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,7 @@
             // lblFourth
             // 
             this.lblFourth.AutoSize = true;
-            this.lblFourth.Location = new System.Drawing.Point(96, 266);
+            this.lblFourth.Location = new System.Drawing.Point(97, 266);
             this.lblFourth.Name = "lblFourth";
             this.lblFourth.Size = new System.Drawing.Size(35, 13);
             this.lblFourth.TabIndex = 7;
@@ -75,7 +76,7 @@
             // lblThird
             // 
             this.lblThird.AutoSize = true;
-            this.lblThird.Location = new System.Drawing.Point(96, 185);
+            this.lblThird.Location = new System.Drawing.Point(97, 185);
             this.lblThird.Name = "lblThird";
             this.lblThird.Size = new System.Drawing.Size(35, 13);
             this.lblThird.TabIndex = 6;
@@ -84,7 +85,7 @@
             // lblSecond
             // 
             this.lblSecond.AutoSize = true;
-            this.lblSecond.Location = new System.Drawing.Point(96, 93);
+            this.lblSecond.Location = new System.Drawing.Point(97, 93);
             this.lblSecond.Name = "lblSecond";
             this.lblSecond.Size = new System.Drawing.Size(35, 13);
             this.lblSecond.TabIndex = 5;
@@ -129,17 +130,28 @@
             // lblFirst
             // 
             this.lblFirst.AutoSize = true;
-            this.lblFirst.Location = new System.Drawing.Point(96, 0);
+            this.lblFirst.Location = new System.Drawing.Point(97, 0);
             this.lblFirst.Name = "lblFirst";
             this.lblFirst.Size = new System.Drawing.Size(35, 13);
             this.lblFirst.TabIndex = 4;
             this.lblFirst.Text = "label5";
+            // 
+            // TestRanking
+            // 
+            this.TestRanking.Location = new System.Drawing.Point(70, 13);
+            this.TestRanking.Name = "TestRanking";
+            this.TestRanking.Size = new System.Drawing.Size(75, 23);
+            this.TestRanking.TabIndex = 1;
+            this.TestRanking.Text = "button1";
+            this.TestRanking.UseVisualStyleBackColor = true;
+            this.TestRanking.Click += new System.EventHandler(this.TestRanking_Click);
             // 
             // RankingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(423, 429);
+            this.Controls.Add(this.TestRanking);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "RankingForm";
             this.Text = "Ranking";
@@ -161,5 +173,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblFirst;
+        private System.Windows.Forms.Button TestRanking;
     }
 }

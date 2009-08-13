@@ -21,11 +21,30 @@ namespace GELive
 
         }
 
-        public void SetData(List<RankingEntry> RankingList)
+        public void SetData(List<RankingEntry> RankingEntries)
         {
+            // RankingEntries.Sort();
+            string bla = "blubber";
+        }
 
+        private void TestRanking_Click(object sender, EventArgs e)
+        {
+            List<RankingEntry> rankingEntries = new List<RankingEntry>();
+
+            for (int i = 1; i < 5; i++)
+            {
+                RankingEntry rankingEntry = new RankingEntry();
+                rankingEntry.Flugzeug = "Flugzeug" + i;
+                rankingEntry.Pilot = "Pilot" + i;
+                rankingEntry.Punkte = i;
+
+                rankingEntries.Add(rankingEntry);
+            }
+
+            SetData(rankingEntries);
         }
     }
+
     public class RankingEntry
     {
         public String Flugzeug;
