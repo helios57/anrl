@@ -84,6 +84,11 @@ namespace GELive
             }
         }
 
+        /// <summary>
+        /// Opens a new form to show the ranking.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void ShowRanking_Click(object sender, EventArgs e)
         {
             RankingForm rankingForm = new RankingForm();
