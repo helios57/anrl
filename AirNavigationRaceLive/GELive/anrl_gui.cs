@@ -83,5 +83,11 @@ namespace GELive
                 d.Show();
             }
         }
+
+        private void ShowRanking_Click(object sender, EventArgs e)
+        {
+            RankingForm rankingForm = new RankingForm();
+            rankingForm.Show();
+        }
     }
 }
