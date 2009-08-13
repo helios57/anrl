@@ -21,9 +21,15 @@ namespace GELive
 
         }
 
-        public void SetData()
+        public void SetData(List<RankingEntry> RankingList)
         {
 
         }
+    }
+    public class RankingEntry
+    {
+        public String Flugzeug;
+        public String Pilot;
+        public int Punkte;
     }
 }
