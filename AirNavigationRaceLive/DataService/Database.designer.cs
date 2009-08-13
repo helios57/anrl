@@ -51,7 +51,7 @@ namespace DataService
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString, mappingSource)
+				base(global::GELive.Properties.Settings.Default.DatabaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
