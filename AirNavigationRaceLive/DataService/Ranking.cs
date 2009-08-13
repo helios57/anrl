@@ -34,7 +34,7 @@ namespace DataService
             return Result;
         }
     }
-    class RankingEntry
+    public class RankingEntry
     {
         public String Flugzeug;
         public String Pilot;
