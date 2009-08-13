@@ -30,7 +30,7 @@ namespace DataService
             {
                 foreach (t_PolygonPoint ppPolygon in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon== pPolygon.ID))
                 {
-                    points.Add(new PolygonPoint(ppPolygon.latitude, ppPolygon.longitude));
+                    points.Add(new PolygonPoint(Convert.ToDouble(ppPolygon.latitude), Convert.ToDouble(ppPolygon.longitude)));
                 }
                 //@todo implement check for penalty zones here
             }
@@ -52,10 +52,10 @@ namespace DataService
     }
     public class PolygonPoint
     {
-        public int laltitude;
-        public int longitude;
+        public double laltitude;
+        public double longitude;
 
-        public PolygonPoint(int laltitude, int longitude)
+        public PolygonPoint(double laltitude, double longitude)
         {
             this.laltitude = laltitude;
             this.longitude = longitude;
