@@ -79,6 +79,7 @@ namespace GELive
             UpdateGWebBrowser();
             if (gui.rankingForm != null && gui.rankingForm.Visible)
             {
+
             }
         }
 

@@ -50,12 +50,6 @@ namespace DataService
     partial void Deletet_Polygon(t_Polygon instance);
     #endregion
 		
-		public DatabaseDataContext() : 
-				base(global::GELive.Properties.Settings.Default.DatabaseConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
-		
 		public DatabaseDataContext(string connection) : 
 				base(connection, mappingSource)
 		{

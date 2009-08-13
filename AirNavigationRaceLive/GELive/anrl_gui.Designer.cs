@@ -101,7 +101,7 @@
         private GEToolStrip geToolStrip1;
         private System.Windows.Forms.ToolStripButton ToolStrip1;
         private System.Windows.Forms.ToolStripButton ShowRanking;
-        public GEWebBrowser geWebBrowser1;
+        private GEWebBrowser geWebBrowser1;
 
 
     }
