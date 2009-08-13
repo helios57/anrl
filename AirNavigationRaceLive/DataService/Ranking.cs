@@ -23,7 +23,17 @@ namespace DataService
         public List<RankingEntry> getRanking()
         {
             List<RankingEntry> Result = new List<RankingEntry>();
+
+            List<PolygonPoint> points = new List<PolygonPoint>();
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            foreach (t_Polygon pPolygon in dataContext.t_Polygons)
+            {
+                foreach (t_PolygonPoint ppPolygon in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon== pPolygon.ID))
+                {
+                    points.Add(new PolygonPoint(ppPolygon.latitude, ppPolygon.longitude));
+                }
+                //@todo implement check for penalty zones here
+            }
             //dataContext.t_Polygons Polygons mit id's
             //dataContext.t_PolygonPoints alle punkte kannst du nach polygon-id aufteilen
             //dataContext.t_Trackers tracker-id's
@@ -39,5 +49,17 @@ namespace DataService
         public String Flugzeug;
         public String Pilot;
         public int Punkte;
+    }
+    public class PolygonPoint
+    {
+        public int laltitude;
+        public int longitude;
+
+        public PolygonPoint(int laltitude, int longitude)
+        {
+            this.laltitude = laltitude;
+            this.longitude = longitude;
+        }
+
     }
 }
