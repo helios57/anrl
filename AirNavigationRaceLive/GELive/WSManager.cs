@@ -79,7 +79,17 @@ namespace GELive
             UpdateGWebBrowser();
             if (gui.rankingForm != null && gui.rankingForm.Visible)
             {
+                AddRankingData();
+            }
+        }
 
+        private void AddRankingData()
+        {
+            if (gui.rankingForm != null && gui.rankingForm.Visible)
+            {
+                List<RankingEntry> RList = new List<RankingEntry>();
+
+                gui.rankingForm.SetData(RList);
             }
         }
 

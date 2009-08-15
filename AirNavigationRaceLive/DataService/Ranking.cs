@@ -56,12 +56,13 @@ namespace DataService
                     points.Add(new PolygonPoint(Convert.ToDouble(ppPolygon.latitude), Convert.ToDouble(ppPolygon.longitude)));
                 }
                 Penaltyzones.Add(new Polygon(points.ToArray()));
-                points.Clear();
+                points.Clear();// Funktioniert nicht, weil die Liste dann bei allen Penalty-zones diesebe ist und leer !
+                //points = new List<PolygonPoint>(); würde gehen
                 
             }
 
             //Check wether a polygon contains any of the planes and adds 6 penalty points (for 6 seconds in penalty zone approximately)
-            foreach(t_Daten tData in dataContext.t_Datens.Where(p => p.Penalty == null))
+            foreach(t_Daten tData in dataContext.t_Datens.Where(p => p.Penalty == null))//überprüft immer alle datenpunkte die nicht in einer Penalty-Zone sind ?? performance ?
             {
                 foreach (Polygon poly in Penaltyzones)
                 {
@@ -175,6 +176,9 @@ namespace DataService
             //int y2 = ypoints[0];
             double y2 = polygonpoints[0].laltitude;
 
+
+
+            //Der Algorithmus ist mir zu kompliziert, den müsstest du mir mal erklären ^^
             bool startUeber = y1 >= y ? true : false;
             for (int i = 1; i < polygonpoints.Length; i++)
             {
