@@ -13,10 +13,17 @@ using System.Collections.Generic;
 
 namespace DataService
 {
+    /// <summary>
+    /// Ranking Class
+    /// </summary>
     public class Ranking
     {
         string DB_PATH;
         List<RankingEntry> Result = new List<RankingEntry>();
+        /// <summary>
+        /// Constructor for ranking
+        /// </summary>
+        /// <param name="DB_PATH"></param>
         public Ranking(String DB_PATH)
         {
             this.DB_PATH = DB_PATH;
@@ -31,6 +38,10 @@ namespace DataService
                 Result.Add(rank);
             }
         }
+        /// <summary>
+        /// Returns the current Ranking
+        /// </summary>
+        /// <returns>Result</returns>
         public List<RankingEntry> getRanking()
         {
             List<Polygon> Penaltyzones = new List<Polygon>();
@@ -79,18 +90,43 @@ namespace DataService
             //@todo berechungen ;-)
             return Result;
         }
-
+        /// <summary>
+        /// Ranking Entry class
+        /// </summary>
     public class RankingEntry
     {
+        /// <summary>
+        /// Resembles a plane
+        /// </summary>
         public String Flugzeug;
+        /// <summary>
+        /// The Pilot flying the plane
+        /// </summary>
         public String Pilot;
+        /// <summary>
+        /// The count of points
+        /// </summary>
         public int Punkte;
     }
+        /// <summary>
+        /// A single Point of a Polygon
+        /// </summary>
     public class PolygonPoint
     {
+        /// <summary>
+        /// the latitude
+        /// </summary>
         public double laltitude;
+        /// <summary>
+        /// the longitude
+        /// </summary>
         public double longitude;
 
+        /// <summary>
+        /// Constructor for PolygonPoint
+        /// </summary>
+        /// <param name="laltitude"></param>
+        /// <param name="longitude"></param>
         public PolygonPoint(double laltitude, double longitude)
         {
             this.laltitude = laltitude;
@@ -98,16 +134,31 @@ namespace DataService
         }
 
     }
-
+        /// <summary>
+        /// Resembles a Polygon containing an array of polygonpoints
+        /// </summary>
     public class Polygon
     {
+        /// <summary>
+        /// Polygonpoints array
+        /// </summary>
         public PolygonPoint[] polygonpoints;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="polygonpoints"></param>
         public Polygon(PolygonPoint[] polygonpoints)
         {
             this.polygonpoints = polygonpoints;
         }
 
+        /// <summary>
+        /// Checks wether polygon contains the given params
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public bool contains(double x, double y)
         {
             bool inside = false;
