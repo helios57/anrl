@@ -16,16 +16,28 @@ namespace DataService
     public class Ranking
     {
         string DB_PATH;
+        List<RankingEntry> Result = new List<RankingEntry>();
         public Ranking(String DB_PATH)
         {
             this.DB_PATH = DB_PATH;
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            //initialize ranking
+            foreach (t_Flugzeug flug in dataContext.t_Flugzeugs)
+            {
+                RankingEntry rank = new RankingEntry();
+                rank.Flugzeug = flug.Flugzeug;
+                rank.Pilot = flug.Pilot;
+                rank.Punkte = 0;
+                Result.Add(rank);
+            }
         }
         public List<RankingEntry> getRanking()
         {
-            List<RankingEntry> Result = new List<RankingEntry>();
             List<Polygon> Penaltyzones = new List<Polygon>();
             List<PolygonPoint> points = new List<PolygonPoint>();
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+
+            //Get Penalty Zones
             foreach (t_Polygon pPolygon in dataContext.t_Polygons)
             {
                 foreach (t_PolygonPoint ppPolygon in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon== pPolygon.ID))
@@ -34,6 +46,27 @@ namespace DataService
                 }
                 Penaltyzones.Add(new Polygon(points.ToArray()));
                 points.Clear();
+                
+            }
+
+            //Check wether a polygon contains any of the planes and adds 6 penalty points (for 6 seconds in penalty zone approximately)
+            foreach(t_Daten tData in dataContext.t_Datens.Where(p => p.Penalty == null))
+            {
+                foreach (Polygon poly in Penaltyzones)
+                {
+                    if (poly.contains(Convert.ToDouble(tData.XEnd), Convert.ToDouble(tData.YEnd)))
+                    {
+                        t_Flugzeug flugi = (t_Flugzeug)dataContext.t_Flugzeugs.Where(p => p.ID == tData.ID_Flugzeug);
+                        foreach (RankingEntry ran in Result)
+                        {
+                            if (ran.Pilot == flugi.Pilot)
+                            {
+                                ran.Punkte += 6;
+                            }
+                        }
+
+                    }
+                }
                 
             }
             //dataContext.t_Polygons Polygons mit id's
