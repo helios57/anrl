@@ -56,6 +56,7 @@ namespace DataService
                 {
                     if (poly.contains(Convert.ToDouble(tData.XEnd), Convert.ToDouble(tData.YEnd)))
                     {
+                        tData.Penalty = 1;
                         t_Flugzeug flugi = (t_Flugzeug)dataContext.t_Flugzeugs.Where(p => p.ID == tData.ID_Flugzeug);
                         foreach (RankingEntry ran in Result)
                         {
