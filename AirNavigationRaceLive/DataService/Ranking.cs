@@ -90,6 +90,7 @@ namespace DataService
             //@todo berechungen ;-)
             return Result;
         }
+
         /// <summary>
         /// Ranking Entry class
         /// </summary>
@@ -108,6 +109,7 @@ namespace DataService
         /// </summary>
         public int Punkte;
     }
+
         /// <summary>
         /// A single Point of a Polygon
         /// </summary>
@@ -134,6 +136,7 @@ namespace DataService
         }
 
     }
+
         /// <summary>
         /// Resembles a Polygon containing an array of polygonpoints
         /// </summary>
