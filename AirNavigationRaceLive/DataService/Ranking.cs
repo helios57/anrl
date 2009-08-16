@@ -56,9 +56,8 @@ namespace DataService
                     points.Add(new PolygonPoint(Convert.ToDouble(ppPolygon.latitude), Convert.ToDouble(ppPolygon.longitude)));
                 }
                 Penaltyzones.Add(new Polygon(points.ToArray()));
-                points.Clear();// Funktioniert nicht, weil die Liste dann bei allen Penalty-zones diesebe ist und leer !
-                //points = new List<PolygonPoint>(); würde gehen
-                
+                //points.Clear();// Funktioniert nicht, weil die Liste dann bei allen Penalty-zones diesebe ist und leer !
+                points = new List<PolygonPoint>(); 
             }
 
             //Check wether a polygon contains any of the planes and adds 6 penalty points (for 6 seconds in penalty zone approximately)
