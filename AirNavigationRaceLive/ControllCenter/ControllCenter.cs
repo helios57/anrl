@@ -33,8 +33,6 @@ namespace ControllCenter
             f.Filter = "DB |*.mdf";
             f.FileOk += new CancelEventHandler(f_FileOk);
             f.ShowDialog();
-            f.FileOk += new CancelEventHandler(f_FileOk);
-
         }
         void f_FileOk(object sender, CancelEventArgs e)
         {
@@ -247,6 +245,37 @@ namespace ControllCenter
         private void drpAirplane_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckButtons();
+        }
+
+        private void btnImportPenalty_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fp = new OpenFileDialog();
+            fp.Filter = "Penalty-Zonen |*.dxf";
+            fp.FileOk += new CancelEventHandler(fp_FileOk);
+            fp.ShowDialog();
+        }
+
+        void fp_FileOk(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog f = (OpenFileDialog)sender;
+            String DxfFilePath = f.FileName;
+            ExitForm ef = new ExitForm();
+            ef.label1.Text = "Bitte warte, Penaltyzonen werden geladen.";
+            ef.Show();
+            ef.Refresh();
+            try
+            {
+                ImportPenaltyZones.importFromDxf(DxfFilePath, DB_Path);
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
+                int count = dataContext.t_Polygons.Count();
+                lblPenaltyZonenLoaded.Text = count.ToString() + "Penalty Zonen geladen";
+                ef.Close();
+            }
+            catch
+            {
+                ef.Close();
+                MessageBox.Show("Fehler beim laden der Penalty-Zonen");
+            }
         }
     }
 }

@@ -70,6 +70,7 @@
     <Compile Include="ExitForm.Designer.cs">
       <DependentUpon>ExitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportPenaltyZones.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControllCenter.resx">

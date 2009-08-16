@@ -56,6 +56,8 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.btnRemvAirplaneFromTracker = new System.Windows.Forms.Button();
+            this.btnImportPenalty = new System.Windows.Forms.Button();
+            this.lblPenaltyZonenLoaded = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtPfad
@@ -308,11 +310,33 @@
             this.btnRemvAirplaneFromTracker.UseVisualStyleBackColor = true;
             this.btnRemvAirplaneFromTracker.Click += new System.EventHandler(this.btnRemvAirplaneFromTracker_Click);
             // 
+            // btnImportPenalty
+            // 
+            this.btnImportPenalty.Enabled = false;
+            this.btnImportPenalty.Location = new System.Drawing.Point(15, 348);
+            this.btnImportPenalty.Name = "btnImportPenalty";
+            this.btnImportPenalty.Size = new System.Drawing.Size(337, 23);
+            this.btnImportPenalty.TabIndex = 24;
+            this.btnImportPenalty.Text = "Import Penalty-Zonen von dxf";
+            this.btnImportPenalty.UseVisualStyleBackColor = true;
+            this.btnImportPenalty.Click += new System.EventHandler(this.btnImportPenalty_Click);
+            // 
+            // lblPenaltyZonenLoaded
+            // 
+            this.lblPenaltyZonenLoaded.AutoSize = true;
+            this.lblPenaltyZonenLoaded.Location = new System.Drawing.Point(358, 358);
+            this.lblPenaltyZonenLoaded.Name = "lblPenaltyZonenLoaded";
+            this.lblPenaltyZonenLoaded.Size = new System.Drawing.Size(120, 13);
+            this.lblPenaltyZonenLoaded.TabIndex = 25;
+            this.lblPenaltyZonenLoaded.Text = "0 Penalty Zonen loaded";
+            // 
             // ControllCenter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 357);
+            this.ClientSize = new System.Drawing.Size(710, 377);
+            this.Controls.Add(this.lblPenaltyZonenLoaded);
+            this.Controls.Add(this.btnImportPenalty);
             this.Controls.Add(this.btnRemvAirplaneFromTracker);
             this.Controls.Add(this.lstTrackers);
             this.Controls.Add(this.btnRefresh);
@@ -374,6 +398,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Button btnRemvAirplaneFromTracker;
+        private System.Windows.Forms.Button btnImportPenalty;
+        private System.Windows.Forms.Label lblPenaltyZonenLoaded;
     }
 }
 
