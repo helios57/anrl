@@ -50,6 +50,7 @@ namespace ControllCenter
                                 GpsPoint gp = new GpsPoint(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000, GpsPointFormatImport.Swiss);
                                 point.longitude = (decimal)gp.Longitude;
                                 point.latitude = (decimal)gp.Latitude;
+                                point.altitude = 100;
                                 point.ID_Polygon = p.ID;
                                 dataContext.t_PolygonPoints.InsertOnSubmit(point);
                             }
