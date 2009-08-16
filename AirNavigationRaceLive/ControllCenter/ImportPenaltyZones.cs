@@ -19,7 +19,12 @@ namespace ControllCenter
 
             StreamReader sr = new StreamReader(filepath);
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            dataContext.t_PolygonPoints.DeleteAllOnSubmit(dataContext.t_PolygonPoints);
+            foreach (t_PolygonPoint tp in dataContext.t_PolygonPoints)
+            {
+                dataContext.t_PolygonPoints.DeleteOnSubmit(tp);
+            }
+           ///dataContext.t_PolygonPoints.DeleteAllOnSubmit(dataContext.t_PolygonPoints.ToList());
+            dataContext.SubmitChanges();
             dataContext.t_Polygons.DeleteAllOnSubmit(dataContext.t_Polygons);
             dataContext.SubmitChanges();
             int id = 1;
@@ -50,7 +55,6 @@ namespace ControllCenter
                                 GpsPoint gp = new GpsPoint(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000, GpsPointFormatImport.Swiss);
                                 point.longitude = (decimal)gp.Longitude;
                                 point.latitude = (decimal)gp.Latitude;
-                                point.altitude = 100;
                                 point.ID_Polygon = p.ID;
                                 dataContext.t_PolygonPoints.InsertOnSubmit(point);
                             }
@@ -141,8 +145,8 @@ namespace ControllCenter
                         this.Longitude = longitude;
                         break;
                     case GpsPointFormatImport.Swiss:
-                        this.Longitude = LongitudeChToWgs84(longitude, latitude);
-                        this.Latitude = LatitudeChToWgs84(longitude, latitude);
+                        this.Longitude = CHtoWGSlng(longitude, latitude);
+                        this.Latitude = CHtoWGSlat(longitude, latitude);
                         break;
                     default:
                         this.Latitude = latitude;
@@ -240,6 +244,49 @@ namespace ControllCenter
                     default:
                         return sign + component.ToString();
                 }
+            }
+
+            // Convert CH y/x to WGS lat
+            private static double CHtoWGSlat(double y, double x)
+            {
+                // Converts militar to civil and  to unit = 1000km
+                // Axiliary values (% Bern)
+                double y_aux = (y - 600000) / 1000000;
+                double x_aux = (x - 200000) / 1000000;
+
+                // Process lat
+                double lat = 16.9023892
+                    + 3.238272 * x_aux
+                    - 0.270978 * Math.Pow(y_aux, 2)
+                    - 0.002528 * Math.Pow(x_aux, 2)
+                    - 0.0447 * Math.Pow(y_aux, 2) * x_aux
+                    - 0.0140 * Math.Pow(x_aux, 3);
+
+                // Unit 10000" to 1 " and converts seconds to degrees (dec)
+                lat = lat * 100 / 36;
+
+                return lat;
+            }
+
+            // Convert CH y/x to WGS long
+            private static double CHtoWGSlng(double y, double x)
+            {
+                // Converts militar to civil and  to unit = 1000km
+                // Axiliary values (% Bern)
+                double y_aux = (y - 600000) / 1000000;
+                double x_aux = (x - 200000) / 1000000;
+
+                // Process long
+                double lng = 2.6779094
+                    + 4.728982 * y_aux
+                    + 0.791484 * y_aux * x_aux
+                    + 0.1306 * y_aux * Math.Pow(x_aux, 2)
+                    - 0.0436 * Math.Pow(y_aux, 3);
+
+                // Unit 10000" to 1 " and converts seconds to degrees (dec)
+                lng = lng * 100 / 36;
+
+                return lng;
             }
 
             static public double LongitudeChToWgs84(double y, double x)

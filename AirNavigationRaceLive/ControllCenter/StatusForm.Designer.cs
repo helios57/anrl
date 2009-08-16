@@ -1,6 +1,6 @@
 ﻿namespace ControllCenter
 {
-    partial class ExitForm
+    partial class StatusForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@
             this.label1.Text = "label1";
             this.label1.UseWaitCursor = true;
             // 
-            // ExitForm
+            // StatusForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -53,12 +53,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ExitForm";
+            this.Name = "StatusForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ExitForm";
+            this.Text = "StatusForm";
             this.TopMost = true;
             this.UseWaitCursor = true;
             this.ResumeLayout(false);

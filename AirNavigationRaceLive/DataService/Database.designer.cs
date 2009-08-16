@@ -39,16 +39,22 @@ namespace DataService
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
-    partial void Insertt_PolygonPoint(t_PolygonPoint instance);
-    partial void Updatet_PolygonPoint(t_PolygonPoint instance);
-    partial void Deletet_PolygonPoint(t_PolygonPoint instance);
     partial void Insertt_Flugzeug(t_Flugzeug instance);
     partial void Updatet_Flugzeug(t_Flugzeug instance);
     partial void Deletet_Flugzeug(t_Flugzeug instance);
     partial void Insertt_Polygon(t_Polygon instance);
     partial void Updatet_Polygon(t_Polygon instance);
     partial void Deletet_Polygon(t_Polygon instance);
+    partial void Insertt_PolygonPoint(t_PolygonPoint instance);
+    partial void Updatet_PolygonPoint(t_PolygonPoint instance);
+    partial void Deletet_PolygonPoint(t_PolygonPoint instance);
     #endregion
+		
+		public DatabaseDataContext() : 
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public DatabaseDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -98,14 +104,6 @@ namespace DataService
 			}
 		}
 		
-		public System.Data.Linq.Table<t_PolygonPoint> t_PolygonPoints
-		{
-			get
-			{
-				return this.GetTable<t_PolygonPoint>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_Flugzeug> t_Flugzeugs
 		{
 			get
@@ -119,6 +117,14 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_Polygon>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_PolygonPoint> t_PolygonPoints
+		{
+			get
+			{
+				return this.GetTable<t_PolygonPoint>();
 			}
 		}
 	}
@@ -1026,164 +1032,6 @@ namespace DataService
 		}
 	}
 	
-	[Table(Name="dbo.t_PolygonPoints")]
-	public partial class t_PolygonPoint : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private decimal _longitude;
-		
-		private decimal _latitude;
-		
-		private decimal _altitude;
-		
-		private int _ID_Polygon;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnlongitudeChanging(decimal value);
-    partial void OnlongitudeChanged();
-    partial void OnlatitudeChanging(decimal value);
-    partial void OnlatitudeChanged();
-    partial void OnaltitudeChanging(decimal value);
-    partial void OnaltitudeChanged();
-    partial void OnID_PolygonChanging(int value);
-    partial void OnID_PolygonChanged();
-    #endregion
-		
-		public t_PolygonPoint()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_longitude", DbType="Decimal(18,0) NOT NULL")]
-		public decimal longitude
-		{
-			get
-			{
-				return this._longitude;
-			}
-			set
-			{
-				if ((this._longitude != value))
-				{
-					this.OnlongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._longitude = value;
-					this.SendPropertyChanged("longitude");
-					this.OnlongitudeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_latitude", DbType="Decimal(18,0) NOT NULL")]
-		public decimal latitude
-		{
-			get
-			{
-				return this._latitude;
-			}
-			set
-			{
-				if ((this._latitude != value))
-				{
-					this.OnlatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._latitude = value;
-					this.SendPropertyChanged("latitude");
-					this.OnlatitudeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_altitude", DbType="Decimal(18,0) NOT NULL")]
-		public decimal altitude
-		{
-			get
-			{
-				return this._altitude;
-			}
-			set
-			{
-				if ((this._altitude != value))
-				{
-					this.OnaltitudeChanging(value);
-					this.SendPropertyChanging();
-					this._altitude = value;
-					this.SendPropertyChanged("altitude");
-					this.OnaltitudeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ID_Polygon", DbType="Int NOT NULL")]
-		public int ID_Polygon
-		{
-			get
-			{
-				return this._ID_Polygon;
-			}
-			set
-			{
-				if ((this._ID_Polygon != value))
-				{
-					this.OnID_PolygonChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Polygon = value;
-					this.SendPropertyChanged("ID_Polygon");
-					this.OnID_PolygonChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[Table(Name="dbo.t_Flugzeug")]
 	public partial class t_Flugzeug : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1424,6 +1272,164 @@ namespace DataService
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.t_PolygonPoints")]
+	public partial class t_PolygonPoint : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private decimal _longitude;
+		
+		private decimal _latitude;
+		
+		private decimal _altitude;
+		
+		private int _ID_Polygon;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnlongitudeChanging(decimal value);
+    partial void OnlongitudeChanged();
+    partial void OnlatitudeChanging(decimal value);
+    partial void OnlatitudeChanged();
+    partial void OnaltitudeChanging(decimal value);
+    partial void OnaltitudeChanged();
+    partial void OnID_PolygonChanging(int value);
+    partial void OnID_PolygonChanged();
+    #endregion
+		
+		public t_PolygonPoint()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_longitude", DbType="Decimal(24,14) NOT NULL")]
+		public decimal longitude
+		{
+			get
+			{
+				return this._longitude;
+			}
+			set
+			{
+				if ((this._longitude != value))
+				{
+					this.OnlongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_latitude", DbType="Decimal(24,14) NOT NULL")]
+		public decimal latitude
+		{
+			get
+			{
+				return this._latitude;
+			}
+			set
+			{
+				if ((this._latitude != value))
+				{
+					this.OnlatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._latitude = value;
+					this.SendPropertyChanged("latitude");
+					this.OnlatitudeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_altitude", DbType="Decimal(24,14) NOT NULL")]
+		public decimal altitude
+		{
+			get
+			{
+				return this._altitude;
+			}
+			set
+			{
+				if ((this._altitude != value))
+				{
+					this.OnaltitudeChanging(value);
+					this.SendPropertyChanging();
+					this._altitude = value;
+					this.SendPropertyChanged("altitude");
+					this.OnaltitudeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ID_Polygon", DbType="Int NOT NULL")]
+		public int ID_Polygon
+		{
+			get
+			{
+				return this._ID_Polygon;
+			}
+			set
+			{
+				if ((this._ID_Polygon != value))
+				{
+					this.OnID_PolygonChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Polygon = value;
+					this.SendPropertyChanged("ID_Polygon");
+					this.OnID_PolygonChanged();
 				}
 			}
 		}

@@ -38,7 +38,7 @@ namespace ControllCenter
         {
             OpenFileDialog f = (OpenFileDialog)sender;
             DB_Path = f.FileName;
-            ExitForm ef = new ExitForm();
+            StatusForm ef = new StatusForm();
             ef.label1.Text = "Bitte warte, die Datenbank wird geladen.";
             ef.Show();
             ef.Refresh();
@@ -82,7 +82,7 @@ namespace ControllCenter
         }
         private void btnStartWebservice_Click(object sender, EventArgs e)
         {
-            ExitForm ef = new ExitForm();
+            StatusForm ef = new StatusForm();
             try
              {
                 ef.label1.Text = "Bitte Warten, der Webservice wird gestartet";
@@ -104,7 +104,7 @@ namespace ControllCenter
         }
         private void ControllCenter_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ExitForm ef = new ExitForm();
+            StatusForm ef = new StatusForm();
             try
             {
                 ef.label1.Text = "Beenden, Bitte Warten";
@@ -254,13 +254,14 @@ namespace ControllCenter
             fp.Filter = "Penalty-Zonen |*.dxf";
             fp.FileOk += new CancelEventHandler(fp_FileOk);
             fp.ShowDialog();
+
         }
 
         void fp_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog f = (OpenFileDialog)sender;
             String DxfFilePath = f.FileName;
-            ExitForm ef = new ExitForm();
+            StatusForm ef = new StatusForm();
             ef.label1.Text = "Bitte warte, Penaltyzonen werden geladen.";
             ef.Show();
             ef.Refresh();
@@ -269,7 +270,7 @@ namespace ControllCenter
                 ImportPenaltyZones.importFromDxf(DxfFilePath, DB_Path);
                 DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
                 int count = dataContext.t_Polygons.Count();
-                lblPenaltyZonenLoaded.Text = count.ToString() + "Penalty Zonen geladen";
+                lblPenaltyZonenLoaded.Text = count.ToString() + " Penalty Zonen geladen";
                 ef.Close();
             }
             catch

@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ControllCenter
 {
-    public partial class ExitForm : Form
+    public partial class StatusForm : Form
     {
-        public ExitForm()
+        public StatusForm()
         {
             InitializeComponent();
         }

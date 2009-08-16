@@ -20,12 +20,6 @@
         <elementListCompartment Id="56db232d-2b6e-4e6b-98f6-abe8bcc1e42d" absoluteBounds="1.7650000000000001, 4.46, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="95f63861-38d0-4297-840c-74f1b4762bf7" absoluteBounds="6.75, 4, 2, 1.5891951497395831">
-      <DataClassMoniker Name="/DatabaseDataContext/t_PolygonPoint" />
-      <nestedChildShapes>
-        <elementListCompartment Id="0d09ff76-b4b5-482a-be3a-f8f05a166e85" absoluteBounds="6.765, 4.46, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="624727a5-f99a-452e-a2df-fd749a6782b5" absoluteBounds="4.125, 2.625, 2, 1.4248478190104168">
       <DataClassMoniker Name="/DatabaseDataContext/t_Flugzeug" />
       <nestedChildShapes>
@@ -46,10 +40,16 @@
         <classShapeMoniker Id="624727a5-f99a-452e-a2df-fd749a6782b5" />
       </nodes>
     </associationConnector>
-    <classShape Id="fd31941f-2479-48ea-95e1-dcfcc224f5a2" absoluteBounds="6.75, 2.875, 2, 0.93180582682291679">
+    <classShape Id="267d09fe-42d3-45d1-b3a3-3538dc576921" absoluteBounds="6.25, 2.625, 2, 0.93180582682291679">
       <DataClassMoniker Name="/DatabaseDataContext/t_Polygon" />
       <nestedChildShapes>
-        <elementListCompartment Id="02ea3709-3f97-4d07-b46e-b58bdeb07318" absoluteBounds="6.765, 3.335, 1.9700000000000002, 0.37180582682291669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3c711f2f-036b-49bd-96ed-442515704240" absoluteBounds="6.265, 3.085, 1.9700000000000002, 0.37180582682291669" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6813575a-51fd-40c9-9100-996a260be8f5" absoluteBounds="6.25, 3.75, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/DatabaseDataContext/t_PolygonPoint" />
+      <nestedChildShapes>
+        <elementListCompartment Id="09ba728d-ff81-4993-9466-0f9a64a7dac0" absoluteBounds="6.265, 4.21, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

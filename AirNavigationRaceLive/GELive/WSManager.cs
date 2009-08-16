@@ -173,7 +173,7 @@ namespace GELive
                 result += @"<Placemark><name>Polygon" + i + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 foreach (t_PolygonPoint tp in PolygonPoints.Where(p => p.ID_Polygon == i))
                 {
-                    result += tp.longitude+","+tp.latitude+","+tp.altitude+" ";
+                    result += tp.longitude+","+tp.latitude+","+/*tp.altitude+"*/ "100 " ;
                 }
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
