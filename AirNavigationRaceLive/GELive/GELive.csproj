@@ -166,18 +166,14 @@
     <None Include="Resources\KMLTemplates\headerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\ANRLDataService\ANRLDataService11.wsdl" />
+    <None Include="Service References\ANRLDataService\Arrays.xsd" />
+    <None Include="Service References\ANRLDataService\DataService.xsd" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_PolygonPoint.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ANRLDataService\item1.disco" />
-    <None Include="Service References\ANRLDataService\item6.xsd" />
-    <None Include="Service References\ANRLDataService\item7.xsd" />
-    <None Include="Service References\ANRLDataService\item8.xsd" />
-    <None Include="Service References\ANRLDataService\item9.xsd" />
     <None Include="Service References\ANRLDataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -195,6 +191,9 @@
     </None>
     <None Include="app.config" />
     <None Include="Resources\track.txt" />
+    <None Include="Service References\ANRLDataService\service.wsdl" />
+    <None Include="Service References\ANRLDataService\service.xsd" />
+    <None Include="Service References\ANRLDataService\service1.xsd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

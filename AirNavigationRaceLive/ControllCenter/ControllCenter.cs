@@ -90,7 +90,6 @@ namespace ControllCenter
                 ef.Refresh();
                 ANRLDataService ds = new ANRLDataService(DB_Path);
                 host = new ServiceHost(ds, new Uri("http://localhost:5555"));
-            
                 host.Open();
                 lblStatusWebservice.Text = "Started";
                 Service_Host_running = true;
@@ -247,7 +246,6 @@ namespace ControllCenter
         {
             CheckButtons();
         }
-
         private void btnImportPenalty_Click(object sender, EventArgs e)
         {
             OpenFileDialog fp = new OpenFileDialog();
@@ -256,7 +254,6 @@ namespace ControllCenter
             fp.ShowDialog();
 
         }
-
         void fp_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog f = (OpenFileDialog)sender;
