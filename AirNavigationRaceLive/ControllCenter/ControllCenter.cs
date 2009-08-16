@@ -191,6 +191,7 @@ namespace ControllCenter
             txtAirplane.Enabled = all && !TrackerHasAirplane;
             txtPilot.Enabled = all && !TrackerHasAirplane;
             btnRemvAirplaneFromTracker.Enabled = all && TrackerHasAirplane;
+            btnImportPenalty.Enabled = refresh;
         }
         private void btnRemvAirplaneFromTracker_Click(object sender, EventArgs e)
         {
