@@ -83,10 +83,11 @@ namespace DataService
 
             List<t_PolygonPoint> tmp = new List<t_PolygonPoint>();
 
-            t_PolygonPoint tmp_t_PolygonPoint = new t_PolygonPoint();
+            t_PolygonPoint tmp_t_PolygonPoint;
 
             foreach (t_PolygonPoint t in dataContext.t_PolygonPoints)
             {
+                tmp_t_PolygonPoint = new t_PolygonPoint();
                 tmp_t_PolygonPoint.ID = t.ID;
                 tmp_t_PolygonPoint.latitude = t.latitude;
                 tmp_t_PolygonPoint.altitude = t.altitude;
