@@ -40,12 +40,20 @@ namespace TCPReciever
         /// </summary>
         public Server(String DB_Path)
         {
-            this.DB_PATH = DB_Path;
-            running = true;
-            this.tcpListener = new TcpListener(IPAddress.Any, 5000);
-            this.listenThread = new Thread(new ThreadStart(ListenForClients));
-            this.listenThread.Start();
-            this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
+            LogManager.AddLog(DB_Path, 4, "Reciever.cs", "Server Started");
+            try
+            {
+                this.DB_PATH = DB_Path;
+                running = true;
+                this.tcpListener = new TcpListener(IPAddress.Any, 5000);
+                this.listenThread = new Thread(new ThreadStart(ListenForClients));
+                this.listenThread.Start();
+                this.MessageReceived += new TCPReciever.Server.MessageReceivedHandler(Message_Received_Processor);
+            }
+            catch
+            {
+                LogManager.AddLog(DB_Path,0, "Reciever.cs", "Constructor threw Error");
+            }
         }
 
         /// <summary>
@@ -54,6 +62,7 @@ namespace TCPReciever
         /// <param name="message">The Message recieved from TCP</param>
         public void Message_Received_Processor(string message)
         {
+            LogManager.AddLog(DB_PATH, 4, "Reciever.cs:Message_Received_Processor", message);
             MyDelegate = new RecievedGPS(ProcessRecievedGPSData);
             MyDelegate.Invoke(message);
         }
@@ -64,47 +73,56 @@ namespace TCPReciever
         /// </summary>
         /// <param name="GPSData">THe Data</param>
         public void ProcessRecievedGPSData(string GPSData)
-    {
-            String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
-            String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
-
-            string yy = GPScoords[3].Substring(4, 2);
-            string mm = GPScoords[3].Substring(2, 2);
-            string dd = GPScoords[3].Substring(0, 2);
-            if (yy != "00" && mm != "00" && dd != "00") //Only save sensefull data
+        {
+            LogManager.AddLog(DB_PATH, 4, "Reciever.cs:ProcessRecievedGPSData:Start", GPSData);
+            try
             {
-                DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
-                new_position.IMEI = GPScoords[0];
-                new_position.Status = Int32.Parse(GPScoords[1]);
-                new_position.GPS_fix = Int32.Parse(GPScoords[2]);
-                new_position.TimestampTracker = new DateTime(
-                                        Int32.Parse("20" + yy),
-                                        Int32.Parse(mm),
-                                        Int32.Parse(dd),
-                                        Int32.Parse(GPScoords[4].Substring(0, 2)),
-                                        Int32.Parse(GPScoords[4].Substring(2, 2)),
-                                        Int32.Parse(GPScoords[4].Substring(4, 2)));
-                new_position.longitude = GPScoords[5];
-                new_position.latitude = GPScoords[6];
-                new_position.altitude = GPScoords[7];
-                new_position.speed = GPScoords[8];
-                new_position.heading = GPScoords[9];
-                new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
-                new_position.HDOP = GPScoords[11];
-                new_position.Timestamp = DateTime.Now;
-                new_position.Processed = false;
+                String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
+                String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
-                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-                if (dataContext.t_Trackers.Count(p => p.IMEI == new_position.IMEI) == 0)
+                string yy = GPScoords[3].Substring(4, 2);
+                string mm = GPScoords[3].Substring(2, 2);
+                string dd = GPScoords[3].Substring(0, 2);
+                if (yy != "00" && mm != "00" && dd != "00") //Only save sensefull data
                 {
-                    t_Tracker t = new t_Tracker();
-                    t.IMEI = new_position.IMEI;
-                    dataContext.t_Trackers.InsertOnSubmit(t);
-                    OnTrackerAddded.Invoke(null, null);
+                    DataService.t_GPS_IN new_position = new DataService.t_GPS_IN();
+                    new_position.IMEI = GPScoords[0];
+                    new_position.Status = Int32.Parse(GPScoords[1]);
+                    new_position.GPS_fix = Int32.Parse(GPScoords[2]);
+                    new_position.TimestampTracker = new DateTime(
+                                            Int32.Parse("20" + yy),
+                                            Int32.Parse(mm),
+                                            Int32.Parse(dd),
+                                            Int32.Parse(GPScoords[4].Substring(0, 2)),
+                                            Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                            Int32.Parse(GPScoords[4].Substring(4, 2)));
+                    new_position.longitude = GPScoords[5];
+                    new_position.latitude = GPScoords[6];
+                    new_position.altitude = GPScoords[7];
+                    new_position.speed = GPScoords[8];
+                    new_position.heading = GPScoords[9];
+                    new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
+                    new_position.HDOP = GPScoords[11];
+                    new_position.Timestamp = DateTime.Now;
+                    new_position.Processed = false;
+
+                    DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                    if (dataContext.t_Trackers.Count(p => p.IMEI == new_position.IMEI) == 0)
+                    {
+                        t_Tracker t = new t_Tracker();
+                        t.IMEI = new_position.IMEI;
+                        dataContext.t_Trackers.InsertOnSubmit(t);
+                        OnTrackerAddded.Invoke(null, null);
+                    }
+                    dataContext.t_GPS_INs.InsertOnSubmit(new_position);
+                    dataContext.SubmitChanges();
                 }
-                dataContext.t_GPS_INs.InsertOnSubmit(new_position);
-                dataContext.SubmitChanges();
             }
+            catch
+            {
+                LogManager.AddLog(DB_PATH, 0, "Reciever.cs:ProcessRecievedGPSData:Error", GPSData);
+            }
+            LogManager.AddLog(DB_PATH, 4, "Reciever.cs:ProcessRecievedGPSData:Ende", "");
         }
 
         /// <summary>
@@ -117,14 +135,24 @@ namespace TCPReciever
 
             while (running)
             {
-                //blocks until a client has connected to the server
-                TcpClient client = this.tcpListener.AcceptTcpClient();
+                try
+                {
+                    LogManager.AddLog(DB_PATH, 4, "Reciever.cs:ListenForClients", "Waiting for Clients");
+                    //blocks until a client has connected to the server
+                    TcpClient client = this.tcpListener.AcceptTcpClient();
+                    LogManager.AddLog(DB_PATH, 4, "Reciever.cs:ListenForClients", "Client Connected");
 
-                //create a thread to handle communication
-                //with connected client
-                Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
-                ThreadList.Add(clientThread);
-                clientThread.Start(client);
+                    //create a thread to handle communication
+                    //with connected client
+                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                    ThreadList.Add(clientThread);
+                    clientThread.Start(client);
+                    LogManager.AddLog(DB_PATH, 4, "Reciever.cs:ListenForClients", "Client Thread Started");
+                }
+                catch
+                {
+                    LogManager.AddLog(DB_PATH, 0, "Reciever.cs:ListenForClients", "Error while Client is connecting");
+                }
             }
         }
 
@@ -134,40 +162,49 @@ namespace TCPReciever
         /// <param name="client"></param>
         private void HandleClientComm(object client)
         {
-            TcpClient tcpClient = (TcpClient)client;
-            NetworkStream clientStream = tcpClient.GetStream();
-
-            byte[] message = new byte[4096];
-            int bytesRead;
-
-            while (true)
+            try
             {
-                bytesRead = 0;
+                LogManager.AddLog(DB_PATH, 4, "Reciever.cs:HandleClientComm", "GetClientStream");
 
-                try
-                {
-                    //blocks until a client sends a message
-                    bytesRead = clientStream.Read(message, 0, 4096);
-                }
-                catch
-                {
-                    //a socket error has occured
-                    break;
-                }
+                TcpClient tcpClient = (TcpClient)client;
+                NetworkStream clientStream = tcpClient.GetStream();
 
-                if (bytesRead == 0)
-                {
-                    //the client has disconnected from the server
-                    break;
-                }
+                byte[] message = new byte[4096];
+                int bytesRead;
 
-                //message has successfully been received
-                ASCIIEncoding encoder = new ASCIIEncoding();
-                string messageString = encoder.GetString(message, 0, bytesRead);
-                if (this.MessageReceived != null)
-                    this.MessageReceived(messageString);
+                while (true)
+                {
+                    bytesRead = 0;
+
+                    try
+                    {
+                        //blocks until a client sends a message
+                        bytesRead = clientStream.Read(message, 0, 4096);
+                    }
+                    catch
+                    {
+                        //a socket error has occured
+                        break;
+                    }
+
+                    if (bytesRead == 0)
+                    {
+                        //the client has disconnected from the server
+                        break;
+                    }
+
+                    //message has successfully been received
+                    ASCIIEncoding encoder = new ASCIIEncoding();
+                    string messageString = encoder.GetString(message, 0, bytesRead);
+                    if (this.MessageReceived != null)
+                        this.MessageReceived(messageString);
+                }
+                tcpClient.Close();
             }
-            tcpClient.Close();
+            catch
+            {
+                LogManager.AddLog(DB_PATH, 0, "Reciever.cs:HandleClientComm", "Error while recieving Client Stream");
+            }
         }
 
         /// <summary>
@@ -175,6 +212,8 @@ namespace TCPReciever
         /// </summary>
         public void Stop()
         {
+
+            LogManager.AddLog(DB_PATH, 4, "Reciever.cs:Stop", "Try to Stop all client threads");
             try
             {
                 this.tcpListener.Stop();
@@ -185,7 +224,10 @@ namespace TCPReciever
                     t.Abort();
                 }
             }
-            catch { }
+            catch 
+            {
+                LogManager.AddLog(DB_PATH, 0, "Reciever.cs:Stop", "Error while stopping listenThreads");
+            }
         }
     }
 }

@@ -45,12 +45,12 @@ namespace DataService
                 tmp_t_Daten.Timestamp = t.Timestamp;
                 tmp_t_Daten.TStart = t.TStart;
                 tmp_t_Daten.TEnd = t.TEnd;
-                tmp_t_Daten.XStart = t.XStart;
-                tmp_t_Daten.XEnd = t.XEnd;
-                tmp_t_Daten.YStart = t.YStart;
-                tmp_t_Daten.YEnd = t.YEnd;
-                tmp_t_Daten.ZStart = t.ZStart;
-                tmp_t_Daten.ZEnd = t.ZEnd;
+                tmp_t_Daten.LatitudeStart = t.LatitudeStart;
+                tmp_t_Daten.LatitudeEnd = t.LatitudeEnd;
+                tmp_t_Daten.LongitudeStart = t.LongitudeStart;
+                tmp_t_Daten.LongitudeEnd = t.LongitudeEnd;
+                tmp_t_Daten.AltitudeStart = t.AltitudeStart;
+                tmp_t_Daten.AltitudeEnd = t.AltitudeEnd;
                 tmp.Add(tmp_t_Daten);
             }
 

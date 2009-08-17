@@ -65,7 +65,7 @@ namespace DataService
             {
                 foreach (Polygon poly in Penaltyzones)
                 {
-                    if (poly.contains(Convert.ToDouble(tData.XEnd), Convert.ToDouble(tData.YEnd)))
+                    if (poly.contains(Convert.ToDouble(tData.LongitudeEnd), Convert.ToDouble(tData.LongitudeEnd)))
                     {
                         tData.Penalty = 1;
                         t_Flugzeug flugi = (t_Flugzeug)dataContext.t_Flugzeugs.Where(p => p.ID == tData.ID_Flugzeug);

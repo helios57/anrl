@@ -137,7 +137,7 @@ namespace GELive
 
             foreach (t_Daten d in DatenListe)
             {
-                Points pStart = new Points((decimal)d.XStart, (decimal)d.YStart, (decimal)d.ZStart);
+                Points pStart = new Points((decimal) d.XStart, (decimal)d.YStart, (decimal)d.ZStart);
                 Points pEnd = new Points((decimal)d.XEnd, (decimal)d.YEnd, (decimal)d.ZEnd);
                 Tracker t = TrackList.Find(p => p.id == d.ID_Flugzeug);
                 t.Pointlist.Add(pStart);
