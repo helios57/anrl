@@ -50,6 +50,7 @@ namespace GELive
             UpdateData.Start();
 
             Client = new ANRLDataServiceClient();
+            SetClientCredentials.SetCredentials(Client);
             PolygonPoints = Client.GetPolygons();
             PolygonPoints.OrderBy(p => p.ID_Polygon);
             Container.appendChild(ge.parseKml(GetPolygonKml()));

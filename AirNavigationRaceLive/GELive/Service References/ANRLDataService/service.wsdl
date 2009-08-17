@@ -653,9 +653,9 @@
   </wsdl:binding>
   <wsdl:service name="ANRLDataService">
     <wsdl:port name="WSHttpBinding_IANRLDataService" binding="tns:WSHttpBinding_IANRLDataService">
-      <soap12:address location="http://localhost:5555/" />
+      <soap12:address location="http://92.51.137.17:5555/" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:5555/</wsa10:Address>
+        <wsa10:Address>http://92.51.137.17:5555/</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

@@ -89,7 +89,7 @@ namespace ControllCenter
                 ef.Show();
                 ef.Refresh();
                 ANRLDataService ds = new ANRLDataService(DB_Path);
-                host = new ServiceHost(ds, new Uri("http://localhost:5555"));
+                host = new ServiceHost(ds, new Uri("http://92.51.137.17:5555"));
                 host.Open();
                 lblStatusWebservice.Text = "Started";
                 Service_Host_running = true;

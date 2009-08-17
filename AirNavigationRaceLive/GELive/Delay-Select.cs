@@ -29,6 +29,8 @@ namespace GELive
             //Add Delay-Selector
 
             ANRLDataServiceClient Client = new ANRLDataServiceClient();
+            SetClientCredentials.SetCredentials(Client);
+
             List<DateTime> Timestamps = Client.GetTimestamps();
             foreach (DateTime d in Timestamps)
             {
