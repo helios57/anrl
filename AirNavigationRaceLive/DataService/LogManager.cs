@@ -9,6 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
+using System.Collections.Generic;
 
 namespace DataService
 {
@@ -34,6 +35,19 @@ namespace DataService
             LogEntry.timestamp = DateTime.Now;
             dataContext.t_Logs.InsertOnSubmit(LogEntry);
             dataContext.SubmitChanges();
+        }
+        /// <summary>
+        /// Return Log Entries
+        /// </summary>
+        /// <param name="DB_Path"></param>
+        /// <param name="Count"></param>
+        /// <returns></returns>
+        static public List<t_Log> GetLogEntries(string DB_Path, int Count)
+        {
+            List<t_Log> Result = new List<t_Log>();
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
+            Result = dataContext.t_Logs.Where(p => p.id > dataContext.t_Logs.Max(pp => pp.id) - Count).OrderBy(p => p.id).ToList();
+            return Result;
         }
     }
 }

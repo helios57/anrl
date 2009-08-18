@@ -19,7 +19,8 @@ namespace ControllCenter
         ServiceHost host;
         bool GPS_Service_running = false;
         bool Service_Host_running = false;
-        String DB_Path = "";
+        public String DB_Path = "";
+        DebugWindow d;
 
         public ControllCenter()
         {
@@ -298,6 +299,11 @@ namespace ControllCenter
                 ef.Close();
                 MessageBox.Show("Fehler beim laden der Penalty-Zonen");
             }
+        }
+        private void btnShowDebug_Click(object sender, EventArgs e)
+        {
+            d = new DebugWindow(this);
+            d.Show();
         }
     }
 }

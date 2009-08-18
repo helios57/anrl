@@ -58,6 +58,7 @@
             this.btnRemvAirplaneFromTracker = new System.Windows.Forms.Button();
             this.btnImportPenalty = new System.Windows.Forms.Button();
             this.lblPenaltyZonenLoaded = new System.Windows.Forms.Label();
+            this.btnShowDebug = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtPfad
@@ -330,11 +331,22 @@
             this.lblPenaltyZonenLoaded.TabIndex = 25;
             this.lblPenaltyZonenLoaded.Text = "0 Penalty Zonen loaded";
             // 
+            // btnShowDebug
+            // 
+            this.btnShowDebug.Location = new System.Drawing.Point(612, 358);
+            this.btnShowDebug.Name = "btnShowDebug";
+            this.btnShowDebug.Size = new System.Drawing.Size(96, 20);
+            this.btnShowDebug.TabIndex = 26;
+            this.btnShowDebug.Text = "Debug-Window";
+            this.btnShowDebug.UseVisualStyleBackColor = true;
+            this.btnShowDebug.Click += new System.EventHandler(this.btnShowDebug_Click);
+            // 
             // ControllCenter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 377);
+            this.ClientSize = new System.Drawing.Size(710, 380);
+            this.Controls.Add(this.btnShowDebug);
             this.Controls.Add(this.lblPenaltyZonenLoaded);
             this.Controls.Add(this.btnImportPenalty);
             this.Controls.Add(this.btnRemvAirplaneFromTracker);
@@ -400,6 +412,7 @@
         private System.Windows.Forms.Button btnRemvAirplaneFromTracker;
         private System.Windows.Forms.Button btnImportPenalty;
         private System.Windows.Forms.Label lblPenaltyZonenLoaded;
+        private System.Windows.Forms.Button btnShowDebug;
     }
 }
 
