@@ -20,6 +20,9 @@ namespace DataService
     {
         string DB_PATH;
         List<RankingEntry> Result = new List<RankingEntry>();
+        List<Polygon> Penaltyzones = new List<Polygon>();
+        List<PolygonPoint> points = new List<PolygonPoint>();
+
         /// <summary>
         /// Constructor for ranking
         /// </summary>
@@ -37,6 +40,18 @@ namespace DataService
                 rank.Punkte = 0;
                 Result.Add(rank);
             }
+
+            //Get Penalty Zones
+            foreach (t_Polygon pPolygon in dataContext.t_Polygons)
+            {
+                foreach (t_PolygonPoint ppPolygon in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon == pPolygon.ID))
+                {
+                    points.Add(new PolygonPoint(Convert.ToDouble(ppPolygon.latitude), Convert.ToDouble(ppPolygon.longitude)));
+                }
+                Penaltyzones.Add(new Polygon(points.ToArray()));
+                //points.Clear();// Funktioniert nicht, weil die Liste dann bei allen Penalty-zones diesebe ist und leer !
+                points = new List<PolygonPoint>();
+            }
         }
         /// <summary>
         /// Returns the current Ranking
@@ -44,28 +59,14 @@ namespace DataService
         /// <returns>Result</returns>
         public List<RankingEntry> getRanking()
         {
-            List<Polygon> Penaltyzones = new List<Polygon>();
-            List<PolygonPoint> points = new List<PolygonPoint>();
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
 
-            //Get Penalty Zones
-            foreach (t_Polygon pPolygon in dataContext.t_Polygons)
-            {
-                foreach (t_PolygonPoint ppPolygon in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon== pPolygon.ID))
-                {
-                    points.Add(new PolygonPoint(Convert.ToDouble(ppPolygon.latitude), Convert.ToDouble(ppPolygon.longitude)));
-                }
-                Penaltyzones.Add(new Polygon(points.ToArray()));
-                //points.Clear();// Funktioniert nicht, weil die Liste dann bei allen Penalty-zones diesebe ist und leer !
-                points = new List<PolygonPoint>(); 
-            }
-
             //Check wether a polygon contains any of the planes and adds 6 penalty points (for 6 seconds in penalty zone approximately)
-            foreach(t_Daten tData in dataContext.t_Datens.Where(p => p.Penalty == null))//überprüft immer alle datenpunkte die nicht in einer Penalty-Zone sind ?? performance ?
+            foreach(t_Daten tData in dataContext.t_Datens.Where(p => p.Penalty == -1))//überprüft immer alle datenpunkte die nicht in einer Penalty-Zone sind ?? performance ?
             {
                 foreach (Polygon poly in Penaltyzones)
                 {
-                    if (poly.contains(Convert.ToDouble(tData.LongitudeEnd), Convert.ToDouble(tData.LongitudeEnd)))
+                    if (poly.contains(Convert.ToDouble(tData.LongitudeEnd), Convert.ToDouble(tData.LatitudeEnd)))
                     {
                         tData.Penalty = 1;
                         t_Flugzeug flugi = (t_Flugzeug)dataContext.t_Flugzeugs.Where(p => p.ID == tData.ID_Flugzeug);
@@ -78,6 +79,10 @@ namespace DataService
                         }
 
                     }
+                }
+                if (tData.Penalty == -1)
+                {
+                    tData.Penalty = 0;
                 }
                 
             }

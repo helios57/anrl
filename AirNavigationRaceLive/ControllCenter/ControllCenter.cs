@@ -53,6 +53,7 @@ namespace ControllCenter
                 btnStartWebservice.Enabled = true;
                 RefreshTrackerList();
                 ef.Close();
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:f_FileOk", "DB_Path Set");
             }
             catch
             {
@@ -64,20 +65,24 @@ namespace ControllCenter
         {
             try
             {
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:btnStartReciever_Click", "Start");
                 Service_test = new GPSReciever(DB_Path);
                 Service_test.Start();
                 lblRecieverStatus.Text = "Started";
                 GPS_Service_running = true;
                 btnStartReciever.Enabled = false;
                 Service_test.OnTrackerAddded += new EventHandler(Service_test_OnTrackerAddded);
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:btnStartReciever_Click", "Successfull");
             }
             catch
             {
+                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:btnStartReciever_Click", "Fehler beim starten des Reciever-Services");
                 MessageBox.Show("Fehler beim starten des Reciever-Services");
             }
         }
         void Service_test_OnTrackerAddded(object sender, EventArgs e)
         {
+            LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:Service_test_OnTrackerAddded", "");
             RefreshTrackerList();
         }
         private void btnStartWebservice_Click(object sender, EventArgs e)
@@ -85,6 +90,7 @@ namespace ControllCenter
             StatusForm ef = new StatusForm();
             try
              {
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:btnStartWebservice_Click", "Start");
                 ef.label1.Text = "Bitte Warten, der Webservice wird gestartet";
                 ef.Show();
                 ef.Refresh();
@@ -94,9 +100,11 @@ namespace ControllCenter
                 lblStatusWebservice.Text = "Started";
                 Service_Host_running = true;
                 btnStartWebservice.Enabled = false;
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:btnStartWebservice_Click", "Successfull");
             }
             catch
             {
+                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:btnStartWebservice_Click", "Fehler beim Starten des Webservices");
                 MessageBox.Show("Fehler beim Starten des Webservices");
             }
             ef.Close();            
@@ -106,22 +114,29 @@ namespace ControllCenter
             StatusForm ef = new StatusForm();
             try
             {
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:ControllCenter_FormClosing", "Start");
                 ef.label1.Text = "Beenden, Bitte Warten";
                 ef.Show();
                 ef.Refresh();
                 if (GPS_Service_running)
                 {
                     ef.label1.Text = "Bitte Warten, Reciever-Service wird beendet";
+                    ef.Refresh();
                     Service_test.Stop();
                 }
                 if (Service_Host_running)
                 {
                     ef.label1.Text = "Bitte Warten, Web-Service wird beendet";
+                    ef.Refresh();
                     host.Close();
                 }
+
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:ControllCenter_FormClosing", "Successfull");
             }
             catch (Exception ex)
             {
+
+                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:ControllCenter_FormClosing", "Error while Closing, end remaining Threads" + ex.InnerException);
                 MessageBox.Show("Error while Closing, end remaining Threads" + ex.InnerException);
             }
             ef.Close();
@@ -132,6 +147,7 @@ namespace ControllCenter
         }
         private void RefreshTrackerList()
         {
+            LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:RefreshTrackerList", "Start");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
             lstTrackers.Items.Clear();
             foreach (t_Tracker t in dataContext.t_Trackers)
@@ -165,6 +181,7 @@ namespace ControllCenter
                 drpAirplane.Items.Add(new AirplaneListEntry(f));
             }
             CheckButtons();
+            LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:RefreshTrackerList", "Ende");
         }
         private void CheckButtons()
         {
@@ -256,6 +273,8 @@ namespace ControllCenter
         }
         void fp_FileOk(object sender, CancelEventArgs e)
         {
+
+            LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:fp_FileOk", "Start");
             OpenFileDialog f = (OpenFileDialog)sender;
             String DxfFilePath = f.FileName;
             StatusForm ef = new StatusForm();
@@ -269,9 +288,13 @@ namespace ControllCenter
                 int count = dataContext.t_Polygons.Count();
                 lblPenaltyZonenLoaded.Text = count.ToString() + " Penalty Zonen geladen";
                 ef.Close();
+
+                LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:fp_FileOk", "Ende");
             }
-            catch
+            catch (Exception ex)
             {
+
+                LogManager.AddLog(DB_Path,0, "ControllCenter.cs:fp_FileOk:Error", ex.ToString());
                 ef.Close();
                 MessageBox.Show("Fehler beim laden der Penalty-Zonen");
             }
