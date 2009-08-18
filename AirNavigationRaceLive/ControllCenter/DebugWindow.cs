@@ -41,8 +41,8 @@ namespace ControllCenter
     {
         public override int Compare(t_Log x, t_Log y)
         {
-            if (((int)x.id) > ((int)y.id)) return 1;
-            if (((int)x.id) < ((int)y.id)) return -1;
+            if (((int)x.id) < ((int)y.id)) return 1;
+            if (((int)x.id) > ((int)y.id)) return -1;
             return 0;
         }
     }
