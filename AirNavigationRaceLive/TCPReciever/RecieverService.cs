@@ -144,7 +144,7 @@ namespace TCPReciever
                         InsertData.TEnd = Positions_Tracker.Last().Timestamp;
 
                         InsertData.LatitudeStart = decimal.Round(ConvertCoordinates(Positions_Tracker.First().latitude), 16);
-                        InsertData.LongitudeEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().latitude), 16);
+                        InsertData.LatitudeEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().latitude), 16);
                         InsertData.LongitudeStart = decimal.Round(ConvertCoordinates(Positions_Tracker.First().longitude), 16);
                         InsertData.LongitudeEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().longitude), 16);
                         InsertData.AltitudeStart = decimal.Round(decimal.Parse(Positions_Tracker.First().altitude), 16);

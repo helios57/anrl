@@ -23,6 +23,12 @@ namespace GELive.ANRLDataService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AltitudeEndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> AltitudeStartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -32,7 +38,19 @@ namespace GELive.ANRLDataService {
         private System.Nullable<int> ID_PolygonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> PenaltyField;
+        private System.Nullable<decimal> LatitudeEndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> LatitudeStartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> LongitudeEndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> LongitudeStartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PenaltyField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SpeedField;
@@ -47,24 +65,6 @@ namespace GELive.ANRLDataService {
         private System.DateTime TimestampField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> XEndField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> XStartField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> YEndField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> YStartField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> ZEndField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<decimal> ZStartField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private GELive.ANRLDataService.t_Flugzeug t_FlugzeugField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -74,6 +74,32 @@ namespace GELive.ANRLDataService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AltitudeEnd {
+            get {
+                return this.AltitudeEndField;
+            }
+            set {
+                if ((this.AltitudeEndField.Equals(value) != true)) {
+                    this.AltitudeEndField = value;
+                    this.RaisePropertyChanged("AltitudeEnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> AltitudeStart {
+            get {
+                return this.AltitudeStartField;
+            }
+            set {
+                if ((this.AltitudeStartField.Equals(value) != true)) {
+                    this.AltitudeStartField = value;
+                    this.RaisePropertyChanged("AltitudeStart");
+                }
             }
         }
         
@@ -117,7 +143,59 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Penalty {
+        public System.Nullable<decimal> LatitudeEnd {
+            get {
+                return this.LatitudeEndField;
+            }
+            set {
+                if ((this.LatitudeEndField.Equals(value) != true)) {
+                    this.LatitudeEndField = value;
+                    this.RaisePropertyChanged("LatitudeEnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> LatitudeStart {
+            get {
+                return this.LatitudeStartField;
+            }
+            set {
+                if ((this.LatitudeStartField.Equals(value) != true)) {
+                    this.LatitudeStartField = value;
+                    this.RaisePropertyChanged("LatitudeStart");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> LongitudeEnd {
+            get {
+                return this.LongitudeEndField;
+            }
+            set {
+                if ((this.LongitudeEndField.Equals(value) != true)) {
+                    this.LongitudeEndField = value;
+                    this.RaisePropertyChanged("LongitudeEnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<decimal> LongitudeStart {
+            get {
+                return this.LongitudeStartField;
+            }
+            set {
+                if ((this.LongitudeStartField.Equals(value) != true)) {
+                    this.LongitudeStartField = value;
+                    this.RaisePropertyChanged("LongitudeStart");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Penalty {
             get {
                 return this.PenaltyField;
             }
@@ -182,84 +260,6 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> XEnd {
-            get {
-                return this.XEndField;
-            }
-            set {
-                if ((this.XEndField.Equals(value) != true)) {
-                    this.XEndField = value;
-                    this.RaisePropertyChanged("XEnd");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> XStart {
-            get {
-                return this.XStartField;
-            }
-            set {
-                if ((this.XStartField.Equals(value) != true)) {
-                    this.XStartField = value;
-                    this.RaisePropertyChanged("XStart");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> YEnd {
-            get {
-                return this.YEndField;
-            }
-            set {
-                if ((this.YEndField.Equals(value) != true)) {
-                    this.YEndField = value;
-                    this.RaisePropertyChanged("YEnd");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> YStart {
-            get {
-                return this.YStartField;
-            }
-            set {
-                if ((this.YStartField.Equals(value) != true)) {
-                    this.YStartField = value;
-                    this.RaisePropertyChanged("YStart");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> ZEnd {
-            get {
-                return this.ZEndField;
-            }
-            set {
-                if ((this.ZEndField.Equals(value) != true)) {
-                    this.ZEndField = value;
-                    this.RaisePropertyChanged("ZEnd");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<decimal> ZStart {
-            get {
-                return this.ZStartField;
-            }
-            set {
-                if ((this.ZStartField.Equals(value) != true)) {
-                    this.ZStartField = value;
-                    this.RaisePropertyChanged("ZStart");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public GELive.ANRLDataService.t_Flugzeug t_Flugzeug {
             get {
                 return this.t_FlugzeugField;
@@ -305,9 +305,6 @@ namespace GELive.ANRLDataService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_DatensField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GELive.ANRLDataService.t_Tracker t_TrackerField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -380,96 +377,6 @@ namespace GELive.ANRLDataService {
                 if ((object.ReferenceEquals(this.t_DatensField, value) != true)) {
                     this.t_DatensField = value;
                     this.RaisePropertyChanged("t_Datens");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GELive.ANRLDataService.t_Tracker t_Tracker {
-            get {
-                return this.t_TrackerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.t_TrackerField, value) != true)) {
-                    this.t_TrackerField = value;
-                    this.RaisePropertyChanged("t_Tracker");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="t_Tracker", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
-    [System.SerializableAttribute()]
-    public partial class t_Tracker : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IMEIField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug> t_FlugzeugsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string IMEI {
-            get {
-                return this.IMEIField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IMEIField, value) != true)) {
-                    this.IMEIField = value;
-                    this.RaisePropertyChanged("IMEI");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_Flugzeug> t_Flugzeugs {
-            get {
-                return this.t_FlugzeugsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.t_FlugzeugsField, value) != true)) {
-                    this.t_FlugzeugsField = value;
-                    this.RaisePropertyChanged("t_Flugzeugs");
                 }
             }
         }

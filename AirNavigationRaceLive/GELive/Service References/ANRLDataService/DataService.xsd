@@ -8,20 +8,20 @@
   <xs:element name="ArrayOft_Daten" nillable="true" type="tns:ArrayOft_Daten" />
   <xs:complexType name="t_Daten">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AltitudeEnd" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AltitudeStart" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="ID_Flugzeug" type="xs:int" />
       <xs:element minOccurs="0" name="ID_Polygon" nillable="true" type="xs:int" />
-      <xs:element minOccurs="0" name="Penalty" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LatitudeEnd" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LatitudeStart" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LongitudeEnd" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LongitudeStart" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Penalty" type="xs:int" />
       <xs:element minOccurs="0" name="Speed" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TEnd" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TStart" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="XEnd" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="XStart" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="YEnd" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="YStart" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ZEnd" nillable="true" type="xs:decimal" />
-      <xs:element minOccurs="0" name="ZStart" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="t_Flugzeug" nillable="true" type="tns:t_Flugzeug" />
     </xs:sequence>
   </xs:complexType>
@@ -33,24 +33,9 @@
       <xs:element minOccurs="0" name="ID_GPS_Tracker" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Pilot" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="t_Datens" nillable="true" type="tns:ArrayOft_Daten" />
-      <xs:element minOccurs="0" name="t_Tracker" nillable="true" type="tns:t_Tracker" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="t_Flugzeug" nillable="true" type="tns:t_Flugzeug" />
-  <xs:complexType name="t_Tracker">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="IMEI" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="t_Flugzeugs" nillable="true" type="tns:ArrayOft_Flugzeug" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="t_Tracker" nillable="true" type="tns:t_Tracker" />
-  <xs:complexType name="ArrayOft_Flugzeug">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Flugzeug" nillable="true" type="tns:t_Flugzeug" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOft_Flugzeug" nillable="true" type="tns:ArrayOft_Flugzeug" />
   <xs:complexType name="ArrayOft_PolygonPoint">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="t_PolygonPoint" nillable="true" type="tns:t_PolygonPoint" />

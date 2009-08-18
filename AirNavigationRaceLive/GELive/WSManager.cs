@@ -38,7 +38,7 @@ namespace GELive
         /// Creates a new Instance of the Webservice-Client Object
         /// Respondable for Updateing, getting the local Data-Cache and generating the KML-File with the lines
         /// </summary>
-        public WSManager(GEWebBrowser gweb,anrl_gui gui)
+        public WSManager(GEWebBrowser gweb, anrl_gui gui)
         {
             this.gweb = gweb;
             this.gui = gui;
@@ -51,16 +51,9 @@ namespace GELive
 
             Client = new ANRLDataServiceClient();
             SetClientCredentials.SetCredentials(Client);
-            try
-            {
-                PolygonPoints = Client.GetPolygons();
-                PolygonPoints.OrderBy(p => p.ID_Polygon);
+            PolygonPoints = Client.GetPolygons();
+            PolygonPoints.OrderBy(p => p.ID_Polygon);
             Container.appendChild(ge.parseKml(GetPolygonKml()));
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         /// <summary>
@@ -72,7 +65,7 @@ namespace GELive
         {
             while (ListLocked)
             {
-                System.Threading.Thread.Sleep(20); 
+                System.Threading.Thread.Sleep(20);
             }
             ListLocked = true;
             DateTime DisplayTime = DateTime.Now.AddMinutes(0); //Set to 1 for Delayed Display
@@ -81,19 +74,14 @@ namespace GELive
                 DisplayTime = DisplayTime.Add(-Delay);
             }
 
-            try
+            List<t_Daten> Data = Client.GetPathData(DisplayTime);
+            DatenListe.AddRange(Data);
+            ListLocked = false;
+            UpdateGWebBrowser();
+            if (gui.rankingForm != null && gui.rankingForm.Visible)
             {
-                List<t_Daten> Data = Client.GetPathData(DisplayTime);
-                DatenListe.AddRange(Data);
-                ListLocked = false;
-                UpdateGWebBrowser();
-                if (gui.rankingForm != null && gui.rankingForm.Visible)
-                {
-                    AddRankingData();
-                }
+                AddRankingData();
             }
-            catch (Exception ex)
-            { }
         }
 
         private void AddRankingData()
@@ -111,7 +99,7 @@ namespace GELive
             String kml = GetKml();
             Container.replaceChild(ge.parseKml(GetKml()), Container.getFirstChild());
             gweb.Invalidate();
-            
+
             gweb.Invoke(new MethodInvoker(gweb.Update));
             //gweb.Update();
         }
@@ -149,8 +137,8 @@ namespace GELive
 
             foreach (t_Daten d in DatenListe)
             {
-                Points pStart = new Points((decimal) d.XStart, (decimal)d.YStart, (decimal)d.ZStart);
-                Points pEnd = new Points((decimal)d.XEnd, (decimal)d.YEnd, (decimal)d.ZEnd);
+                Points pStart = new Points((decimal)d.LongitudeStart, (decimal)d.LatitudeStart, (decimal)d.AltitudeStart);
+                Points pEnd = new Points((decimal)d.LongitudeEnd, (decimal)d.LatitudeEnd, (decimal)d.AltitudeEnd);
                 Tracker t = TrackList.Find(p => p.id == d.ID_Flugzeug);
                 t.Pointlist.Add(pStart);
                 t.Pointlist.Add(pEnd);
@@ -158,7 +146,7 @@ namespace GELive
             ListLocked = false;
 
             int ColorId = 1;
-            TrackList.OrderBy(p=>p.id);
+            TrackList.OrderBy(p => p.id);
             foreach (Tracker t in TrackList)
             {
                 result += AddLine(t.Pointlist, (Colors)ColorId++);
@@ -186,7 +174,7 @@ namespace GELive
                 result += @"<Placemark><name>Polygon" + i + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 foreach (t_PolygonPoint tp in PolygonPoints.Where(p => p.ID_Polygon == i))
                 {
-                    result += tp.longitude+","+tp.latitude+","+/*tp.altitude+"*/ "300 " ;
+                    result += tp.longitude + "," + tp.latitude + "," +/*tp.altitude+"*/ "300 ";
                 }
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
@@ -211,7 +199,7 @@ namespace GELive
         /// <returns></returns>
         internal string GetKMLTemplateContent(string Filename)
         {
-            FileStream file = new FileStream("Resources\\KMLTemplates\\"+Filename+".kml",FileMode.Open, FileAccess.Read);
+            FileStream file = new FileStream("Resources\\KMLTemplates\\" + Filename + ".kml", FileMode.Open, FileAccess.Read);
             StreamReader SR = new StreamReader(file);
             string result = SR.ReadToEnd();
             SR.Close();
@@ -249,7 +237,7 @@ namespace GELive
             result += "<coordinates>";
             foreach (Points p in Points)
             {
-                result += p.Y + "," + p.X + "," + p.Z + " ";
+                result += p.X + "," + p.Y + "," + p.Z + " ";
             }
             result += "</coordinates>";
             result += "</LineString></Placemark>";
@@ -274,7 +262,7 @@ namespace GELive
         /// <summary>
         /// Enum of Colors which are supported by AddLine-Function
         /// </summary>
-        enum Colors:int
+        enum Colors : int
         {
             Red = 1,
             Blue = 2,
