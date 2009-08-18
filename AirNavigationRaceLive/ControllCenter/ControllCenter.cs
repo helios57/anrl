@@ -56,10 +56,10 @@ namespace ControllCenter
                 ef.Close();
                 LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:f_FileOk", "DB_Path Set");
             }
-            catch
+            catch (Exception ex)
             {
                 ef.Close();
-                MessageBox.Show("Fehler beim öffnen der DB, bitte DB überprüfen");
+                MessageBox.Show("Fehler beim öffnen der DB, bitte DB überprüfen " + ex.ToString() );
             }
         }
         private void btnStartReciever_Click(object sender, EventArgs e)

@@ -32,6 +32,7 @@ namespace DataService
         /// <returns>List of t_Daten</returns>
         public List<t_Daten> GetPathData(DateTime timestamp)
         {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", timestamp.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
 
             DateTime end = timestamp.AddSeconds(-6);
@@ -63,6 +64,7 @@ namespace DataService
         /// <returns>List of Datetime Timestamps</returns>
         public List<DateTime> GetTimestamps()
         {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTimestamps", "");
             List<DateTime> timestamplist = new List<DateTime>();
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             foreach (t_Daten row in dataContext.t_Datens)
@@ -79,6 +81,7 @@ namespace DataService
         /// <returns>List of PolygonPoints</returns>
         public List<t_PolygonPoint> GetPolygons()
         {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPolygons", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
 
             List<t_PolygonPoint> tmp = new List<t_PolygonPoint>();
@@ -103,6 +106,7 @@ namespace DataService
         /// <returns>List of Trackers</returns>
         public List<String[]> GetTrackers()
         {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTrackers", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             List<String[]> lstTrackers = new List<String[]>();
             foreach (t_Tracker t in dataContext.t_Trackers)
@@ -130,6 +134,8 @@ namespace DataService
         /// <returns>List of Airplanes</returns>
         public List<String[]> GetAirplanes()
         {
+
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             List<String[]> tmp = new List<string[]>();
             foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == 0 || p.ID_GPS_Tracker == null))
@@ -144,6 +150,7 @@ namespace DataService
         /// <param name="TrackerID"> ID of the Tracker</param>
         public void CleanTracker(int TrackerID)
         {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:CleanTracker", TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == TrackerID))
             {
@@ -159,6 +166,7 @@ namespace DataService
         /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
         public void AddNewAirplane(String Flugzeug, String Pilot, int TrackerID)
         {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", Flugzeug + Pilot + TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             t_Flugzeug f = new t_Flugzeug();
             f.ID_GPS_Tracker = TrackerID;
@@ -174,6 +182,8 @@ namespace DataService
         /// <param name="TrackerID">ID of the Tracker</param>
         public void AddAirplane(int FlugzeugID, int TrackerID)
         {
+
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddAirplane", FlugzeugID.ToString() + " " + TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == TrackerID))
             {

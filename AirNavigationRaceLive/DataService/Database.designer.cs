@@ -42,6 +42,9 @@ namespace DataService
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
+    partial void Insertt_Log(t_Log instance);
+    partial void Updatet_Log(t_Log instance);
+    partial void Deletet_Log(t_Log instance);
     partial void Insertt_Polygon(t_Polygon instance);
     partial void Updatet_Polygon(t_Polygon instance);
     partial void Deletet_Polygon(t_Polygon instance);
@@ -1175,8 +1178,10 @@ namespace DataService
 	}
 	
 	[Table(Name="dbo.t_Log")]
-	public partial class t_Log
+	public partial class t_Log : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
@@ -1188,11 +1193,28 @@ namespace DataService
 		
 		private string _Text;
 		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntimestampChanging(System.DateTime value);
+    partial void OntimestampChanged();
+    partial void OnlevelChanging(int value);
+    partial void OnlevelChanged();
+    partial void OnprojectChanging(string value);
+    partial void OnprojectChanged();
+    partial void OnTextChanging(string value);
+    partial void OnTextChanged();
+    #endregion
+		
 		public t_Log()
 		{
+			OnCreated();
 		}
 		
-		[Column(Storage="_id", AutoSync=AutoSync.Always, DbType="Int NOT NULL IDENTITY", IsDbGenerated=true)]
+		[Column(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -1203,7 +1225,11 @@ namespace DataService
 			{
 				if ((this._id != value))
 				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
 					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -1219,7 +1245,11 @@ namespace DataService
 			{
 				if ((this._timestamp != value))
 				{
+					this.OntimestampChanging(value);
+					this.SendPropertyChanging();
 					this._timestamp = value;
+					this.SendPropertyChanged("timestamp");
+					this.OntimestampChanged();
 				}
 			}
 		}
@@ -1235,7 +1265,11 @@ namespace DataService
 			{
 				if ((this._level != value))
 				{
+					this.OnlevelChanging(value);
+					this.SendPropertyChanging();
 					this._level = value;
+					this.SendPropertyChanged("level");
+					this.OnlevelChanged();
 				}
 			}
 		}
@@ -1251,7 +1285,11 @@ namespace DataService
 			{
 				if ((this._project != value))
 				{
+					this.OnprojectChanging(value);
+					this.SendPropertyChanging();
 					this._project = value;
+					this.SendPropertyChanged("project");
+					this.OnprojectChanged();
 				}
 			}
 		}
@@ -1267,8 +1305,32 @@ namespace DataService
 			{
 				if ((this._Text != value))
 				{
+					this.OnTextChanging(value);
+					this.SendPropertyChanging();
 					this._Text = value;
+					this.SendPropertyChanged("Text");
+					this.OnTextChanged();
 				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
