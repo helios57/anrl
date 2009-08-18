@@ -28,8 +28,8 @@ namespace TCPReciever
         /// </summary>
         public GPSReciever(String DB_Path)
         {
-            LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:GPSReciever", DB_Path);
             this.DB_PATH = DB_Path;
+            LogManager.AddLog(DB_Path, 4, "RecieverService.cs:GPSReciever", DB_Path);
             InitializeComponent();
         }
         /// <summary>

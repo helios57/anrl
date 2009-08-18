@@ -75,9 +75,9 @@ namespace ControllCenter
                 Service_test.OnTrackerAddded += new EventHandler(Service_test_OnTrackerAddded);
                 LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:btnStartReciever_Click", "Successfull");
             }
-            catch
+            catch (Exception ex)
             {
-                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:btnStartReciever_Click", "Fehler beim starten des Reciever-Services");
+                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:btnStartReciever_Click", "Fehler beim starten des Reciever-Services" + ex.ToString());
                 MessageBox.Show("Fehler beim starten des Reciever-Services");
             }
         }
