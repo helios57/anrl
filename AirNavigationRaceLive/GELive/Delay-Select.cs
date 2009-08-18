@@ -31,18 +31,31 @@ namespace GELive
             ANRLDataServiceClient Client = new ANRLDataServiceClient();
             SetClientCredentials.SetCredentials(Client);
 
-            List<DateTime> Timestamps = Client.GetTimestamps();
-            foreach (DateTime d in Timestamps)
+            try
             {
-                listBox1.Items.Add(d);
+                List<DateTime> Timestamps = Client.GetTimestamps();
+                foreach (DateTime d in Timestamps)
+                {
+                    listBox1.Items.Add(d);
+                }
+                if (listBox1.Items.Count > 0)
+                {
+                    listBox1.SelectedIndex = 0;
+                }
             }
-            listBox1.SelectedIndex = 0;
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            wsm.delaytimestamp = (DateTime)listBox1.SelectedItem;
-            wsm.Delay = DateTime.Now - wsm.delaytimestamp;
+            if (listBox1.Items.Count > 0)
+            {
+                wsm.delaytimestamp = (DateTime)listBox1.SelectedItem;
+                wsm.Delay = DateTime.Now - wsm.delaytimestamp;
+            }
         }
     }
 }

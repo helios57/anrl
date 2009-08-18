@@ -51,9 +51,16 @@ namespace GELive
 
             Client = new ANRLDataServiceClient();
             SetClientCredentials.SetCredentials(Client);
-            PolygonPoints = Client.GetPolygons();
-            PolygonPoints.OrderBy(p => p.ID_Polygon);
+            try
+            {
+                PolygonPoints = Client.GetPolygons();
+                PolygonPoints.OrderBy(p => p.ID_Polygon);
             Container.appendChild(ge.parseKml(GetPolygonKml()));
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         /// <summary>
@@ -74,14 +81,19 @@ namespace GELive
                 DisplayTime = DisplayTime.Add(-Delay);
             }
 
-            List<t_Daten> Data = Client.GetPathData(DisplayTime);
-            DatenListe.AddRange(Data);
-            ListLocked = false;
-            UpdateGWebBrowser();
-            if (gui.rankingForm != null && gui.rankingForm.Visible)
+            try
             {
-                AddRankingData();
+                List<t_Daten> Data = Client.GetPathData(DisplayTime);
+                DatenListe.AddRange(Data);
+                ListLocked = false;
+                UpdateGWebBrowser();
+                if (gui.rankingForm != null && gui.rankingForm.Visible)
+                {
+                    AddRankingData();
+                }
             }
+            catch (Exception ex)
+            { }
         }
 
         private void AddRankingData()
