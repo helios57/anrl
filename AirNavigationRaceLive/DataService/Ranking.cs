@@ -30,6 +30,9 @@ namespace DataService
         public Ranking(String DB_PATH)
         {
             this.DB_PATH = DB_PATH;
+
+            LogManager.AddLog(DB_PATH, 4, "Ranking.cs:Ranking", DB_PATH);
+
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             //initialize ranking
             foreach (t_Flugzeug flug in dataContext.t_Flugzeugs)
@@ -52,6 +55,10 @@ namespace DataService
                 //points.Clear();// Funktioniert nicht, weil die Liste dann bei allen Penalty-zones diesebe ist und leer !
                 points = new List<PolygonPoint>();
             }
+
+            LogManager.AddLog(DB_PATH, 4, "Ranking.cs:Ranking", 
+                "PolygonCount="+Penaltyzones.Count + 
+                " FlugzeugCount="+Result.Count);
         }
         /// <summary>
         /// Returns the current Ranking
@@ -59,6 +66,8 @@ namespace DataService
         /// <returns>Result</returns>
         public List<RankingEntry> getRanking()
         {
+
+            LogManager.AddLog(DB_PATH, 4, "Ranking.cs:getRanking", "Started");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
 
             //Check wether a polygon contains any of the planes and adds 6 penalty points (for 6 seconds in penalty zone approximately)
@@ -93,6 +102,8 @@ namespace DataService
             //dataContext.t_Datens alle geloggten daten mit flugzeug-id
 
             //@todo berechungen ;-)
+
+            LogManager.AddLog(DB_PATH, 4, "Ranking.cs:getRanking", "Ended");
             return Result;
         }
 
