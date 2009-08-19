@@ -161,9 +161,9 @@ namespace TCPReciever
 
                 LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:CalculateTabels_Elapsed:Submittet Changes", "");
             }
-            catch
+            catch (Exception ex)
             {
-                LogManager.AddLog(DB_PATH, 0, "RecieverService.cs:CalculateTabels_Elapsed:Error", "");
+                LogManager.AddLog(DB_PATH, 0, "RecieverService.cs:CalculateTabels_Elapsed:Error", ex.ToString());
             }
         }
 
