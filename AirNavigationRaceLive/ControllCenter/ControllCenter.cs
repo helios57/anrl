@@ -156,28 +156,28 @@ namespace ControllCenter
                 TrackerListEntry tle = new TrackerListEntry(t.ID, t.IMEI);
                 #region Check airplanes attached ?
                 //Remove GPS-Trackers if added to may Airplanes
-                int Count = dataContext.t_Flugzeugs.Count(p => p.ID_GPS_Tracker == t.ID);
+                int Count = dataContext.t_Pilots.Count(p => p.ID_Tracker == t.ID);
                 if (Count > 1)
                 {
-                    foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == t.ID))
+                    foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == t.ID))
                     {
-                        f.ID_GPS_Tracker = null;
+                        f.ID_Tracker = 0;
                     }
                     dataContext.SubmitChanges();
                 }
                 else if (Count == 1)
                 {
-                    t_Flugzeug f = dataContext.t_Flugzeugs.Single(p=>p.ID_GPS_Tracker==t.ID);
-                    tle.ID_Flugzeug = f.ID;
-                    tle.Pilot = f.Pilot;
-                    tle.Flugzeug = f.Flugzeug;
+                    t_Pilot f = dataContext.t_Pilots.Single(p=>p.ID_Tracker==t.ID);
+                    tle.ID_Pilot = f.ID;
+                    tle.SureName = f.SureName;
+                    tle.LastName = f.LastName;
                 }
                 #endregion
                 tle.Set();
                 lstTrackers.Items.Add(tle);
             }
             drpAirplane.Items.Clear();
-            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p=>p.ID_GPS_Tracker == 0 || p.ID_GPS_Tracker ==null))
+            foreach (t_Pilot f in dataContext.t_Pilots.Where(p=>p.ID_Tracker == 0))
             {
                 drpAirplane.Items.Add(new AirplaneListEntry(f));
             }
@@ -217,9 +217,9 @@ namespace ControllCenter
                 TrackerListEntry tle = (TrackerListEntry)lstTrackers.SelectedItems[0];
 
                 DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
-                foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == tle.ID_Tracker))
+                foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == tle.ID_Tracker))
                 {
-                    f.ID_GPS_Tracker = 0;
+                    f.ID_Tracker = 0;
                 }
 
                 dataContext.SubmitChanges();
@@ -232,12 +232,12 @@ namespace ControllCenter
             {
                 TrackerListEntry tle = (TrackerListEntry)lstTrackers.SelectedItems[0];
                 DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
-                foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == tle.ID_Tracker))
+                foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == tle.ID_Tracker))
                 {
-                    f.ID_GPS_Tracker = 0;
+                    f.ID_Tracker = 0;
                 }
-                t_Flugzeug fl = dataContext.t_Flugzeugs.Single(p=>p.ID == ((AirplaneListEntry)drpAirplane.SelectedItem).ID);
-                fl.ID_GPS_Tracker = tle.ID_Tracker;
+                t_Pilot fl = dataContext.t_Pilots.Single(p=>p.ID == ((AirplaneListEntry)drpAirplane.SelectedItem).ID);
+                fl.ID_Tracker = tle.ID_Tracker;
                 dataContext.SubmitChanges();
                 RefreshTrackerList();
             }
@@ -247,11 +247,11 @@ namespace ControllCenter
             if (lstTrackers.SelectedItems.Count == 1)
             {
                 DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
-                t_Flugzeug f = new t_Flugzeug();
-                f.ID_GPS_Tracker = ((TrackerListEntry)lstTrackers.SelectedItems[0]).ID_Tracker;
-                f.Pilot = txtPilot.Text;
-                f.Flugzeug = txtAirplane.Text;
-                dataContext.t_Flugzeugs.InsertOnSubmit(f);
+                t_Pilot f = new t_Pilot();
+                f.ID_Tracker = ((TrackerListEntry)lstTrackers.SelectedItems[0]).ID_Tracker;
+                f.LastName = txtPilot.Text;
+                f.SureName = txtAirplane.Text;
+                dataContext.t_Pilots.InsertOnSubmit(f);
                 dataContext.SubmitChanges();
                 RefreshTrackerList();
             }

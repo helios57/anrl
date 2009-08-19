@@ -4,35 +4,20 @@
   <Table Name="dbo.t_Daten" Member="t_Datens">
     <Type Name="t_Daten">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Flugzeug" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="LongitudeStart" Type="System.Decimal" DbType="Decimal(24,18)" CanBeNull="true" />
-      <Column Name="LongitudeEnd" Type="System.Decimal" DbType="Decimal(24,18)" CanBeNull="true" />
-      <Column Name="LatitudeStart" Type="System.Decimal" DbType="Decimal(24,18)" CanBeNull="true" />
-      <Column Name="LatitudeEnd" Type="System.Decimal" DbType="Decimal(24,18)" CanBeNull="true" />
-      <Column Name="AltitudeStart" Type="System.Decimal" DbType="Decimal(24,18)" CanBeNull="true" />
-      <Column Name="AltitudeEnd" Type="System.Decimal" DbType="Decimal(24,18)" CanBeNull="true" />
-      <Column Name="TStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="TEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Speed" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Longitude" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Altitude" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Speed" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
       <Column Name="Penalty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="t_Flugzeug_t_Daten" Member="t_Flugzeug" ThisKey="ID_Flugzeug" OtherKey="ID" Type="t_Flugzeug" IsForeignKey="true" />
+      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.t_Tracker" Member="t_Trackers">
     <Type Name="t_Tracker">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Flugzeug" Member="t_Flugzeugs">
-    <Type Name="t_Flugzeug">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Flugzeug" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
-      <Column Name="Pilot" Type="System.String" DbType="NChar(100)" CanBeNull="true" />
-      <Column Name="ID_GPS_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="t_Flugzeug_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Flugzeug" Type="t_Daten" />
     </Type>
   </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
@@ -62,9 +47,18 @@
       <Column Name="Text" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
+  <Table Name="dbo.t_Pilot" Member="t_Pilots">
+    <Type Name="t_Pilot">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SureName" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_Polygon" Member="t_Polygons">
     <Type Name="t_Polygon">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
     </Type>
   </Table>
   <Table Name="dbo.t_PolygonPoints" Member="t_PolygonPoints">
@@ -74,6 +68,28 @@
       <Column Name="latitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
       <Column Name="altitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Race" Member="t_Races">
+    <Type Name="t_Race">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ID_Pilot_0" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Pilot_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Pilot_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Pilot_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TimeEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ID_StartGate_0" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_StartGate_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_StartGate_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_StartGate_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_EndGate_0" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_EndGate_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_EndGate_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_EndGate_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_GoalLine" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

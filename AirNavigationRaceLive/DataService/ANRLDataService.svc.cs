@@ -32,29 +32,32 @@ namespace DataService
         /// <returns>List of t_Daten</returns>
         public List<t_Daten> GetPathData(DateTime timestamp)
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", timestamp.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
 
-            DateTime end = timestamp.AddSeconds(-6);
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", timestamp.ToString() + " " + timestamp.CompareTo(dataContext.t_Datens.Max(p => p.Timestamp)));
+       //     if ()
+            {
+
+            }
+
+            DateTime end = timestamp.AddSeconds(1);
 
             List<t_Daten> tmp = new List<t_Daten>();
 
             t_Daten tmp_t_Daten = new t_Daten();
-            foreach (t_Daten t in dataContext.t_Datens.Where(d => d.TStart <= timestamp && d.TEnd > end))
+            foreach (t_Daten t in dataContext.t_Datens.Where(d => d.Timestamp >= timestamp && d.Timestamp < end))
             {
                 tmp_t_Daten.ID = t.ID;
                 tmp_t_Daten.Timestamp = t.Timestamp;
-                tmp_t_Daten.TStart = t.TStart;
-                tmp_t_Daten.TEnd = t.TEnd;
-                tmp_t_Daten.LatitudeStart = t.LatitudeStart;
-                tmp_t_Daten.LatitudeEnd = t.LatitudeEnd;
-                tmp_t_Daten.LongitudeStart = t.LongitudeStart;
-                tmp_t_Daten.LongitudeEnd = t.LongitudeEnd;
-                tmp_t_Daten.AltitudeStart = t.AltitudeStart;
-                tmp_t_Daten.AltitudeEnd = t.AltitudeEnd;
+                tmp_t_Daten.Latitude = t.Latitude;
+                tmp_t_Daten.Longitude= t.Longitude;
+                tmp_t_Daten.Altitude= t.Altitude;
+                tmp_t_Daten.Speed = t.Speed;
+                tmp_t_Daten.Penalty = t.Penalty;
+                tmp_t_Daten.ID_Polygon = t.ID_Polygon;
+                tmp_t_Daten.ID_Tracker = t.ID_Tracker;
                 tmp.Add(tmp_t_Daten);
             }
-
             return tmp;
         }
 
@@ -69,7 +72,7 @@ namespace DataService
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             foreach (t_Daten row in dataContext.t_Datens)
             {
-                timestamplist.Add((DateTime)row.TStart);
+                timestamplist.Add((DateTime)row.Timestamp);
             }
             return timestamplist;
         }
@@ -116,12 +119,12 @@ namespace DataService
                 tle[1] = t.IMEI.Trim();
                 #region Check airplanes attached ?
                 //Remove GPS-Trackers if added to may Airplanes
-                if (dataContext.t_Flugzeugs.Count(p => p.ID_GPS_Tracker == t.ID) == 1)
+                if (dataContext.t_Pilots.Count(p => p.ID_Tracker == t.ID) == 1)
                 {
-                    t_Flugzeug f = dataContext.t_Flugzeugs.Single(p => p.ID_GPS_Tracker == t.ID);
+                    t_Pilot f = dataContext.t_Pilots.Single(p => p.ID_Tracker == t.ID);
                     tle[2] = f.ID.ToString().Trim();
-                    tle[3] = f.Pilot.Trim();
-                    tle[4] = f.Flugzeug.Trim();
+                    tle[3] = f.LastName.Trim();
+                    tle[4] = f.SureName.Trim();
                 }
                 #endregion
                 lstTrackers.Add(tle);
@@ -138,9 +141,9 @@ namespace DataService
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             List<String[]> tmp = new List<string[]>();
-            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == 0 || p.ID_GPS_Tracker == null))
+            foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == 0))
             {
-                tmp.Add(new String[] {f.ID.ToString().Trim(),f.Flugzeug.Trim(),f.Pilot.Trim()});
+                tmp.Add(new String[] {f.ID.ToString().Trim(),f.LastName.Trim(),f.SureName.Trim()});
             }
             return tmp;
         }
@@ -152,9 +155,9 @@ namespace DataService
         {
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:CleanTracker", TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == TrackerID))
+            foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
             {
-                f.ID_GPS_Tracker = 0;
+                f.ID_Tracker = 0;
             }
             dataContext.SubmitChanges();
         }
@@ -164,15 +167,15 @@ namespace DataService
         /// <param name="Flugzeug">Airplane Type/Name</param>
         /// <param name="Pilot">Pilot Name</param>
         /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
-        public void AddNewAirplane(String Flugzeug, String Pilot, int TrackerID)
+        public void AddNewAirplane(String LastName, String SureName, int TrackerID)
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", Flugzeug + Pilot + TrackerID.ToString());
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", LastName + SureName + TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            t_Flugzeug f = new t_Flugzeug();
-            f.ID_GPS_Tracker = TrackerID;
-            f.Pilot = Pilot;
-            f.Flugzeug = Flugzeug;
-            dataContext.t_Flugzeugs.InsertOnSubmit(f);
+            t_Pilot f = new t_Pilot();
+            f.ID_Tracker = TrackerID;
+            f.LastName = LastName;
+            f.SureName = SureName;
+            dataContext.t_Pilots.InsertOnSubmit(f);
             dataContext.SubmitChanges();
         }
         /// <summary>
@@ -185,12 +188,12 @@ namespace DataService
 
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddAirplane", FlugzeugID.ToString() + " " + TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            foreach (t_Flugzeug f in dataContext.t_Flugzeugs.Where(p => p.ID_GPS_Tracker == TrackerID))
+            foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
             {
-                f.ID_GPS_Tracker = 0;
+                f.ID_Tracker = 0;
             }
-            t_Flugzeug fl = dataContext.t_Flugzeugs.Single(p => p.ID == FlugzeugID);
-            fl.ID_GPS_Tracker = TrackerID;
+            t_Pilot fl = dataContext.t_Pilots.Single(p => p.ID == FlugzeugID);
+            fl.ID_Tracker = TrackerID;
             dataContext.SubmitChanges();
            
         }

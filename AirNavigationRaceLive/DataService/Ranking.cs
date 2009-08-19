@@ -22,7 +22,7 @@ namespace DataService
         List<RankingEntry> Result = new List<RankingEntry>();
         List<Polygon> Penaltyzones = new List<Polygon>();
         List<PolygonPoint> points = new List<PolygonPoint>();
-
+        /*
         /// <summary>
         /// Constructor for ranking
         /// </summary>
@@ -35,7 +35,7 @@ namespace DataService
 
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             //initialize ranking
-            foreach (t_Flugzeug flug in dataContext.t_Flugzeugs)
+            foreach (t_Pilot flug in dataContext.t_Flugzeugs)
             {
                 RankingEntry rank = new RankingEntry();
                 rank.Flugzeug = flug.Flugzeug;
@@ -106,7 +106,7 @@ namespace DataService
             LogManager.AddLog(DB_PATH, 4, "Ranking.cs:getRanking", "Ended");
             return Result;
         }
-
+        */
         /// <summary>
         /// Ranking Entry class
         /// </summary>

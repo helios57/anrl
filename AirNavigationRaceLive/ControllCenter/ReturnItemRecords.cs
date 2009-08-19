@@ -20,15 +20,15 @@ namespace DataService
         /// <summary>
         /// ID of the Airplane (if any attaches, else 0 or null)
         /// </summary>
-        public int ID_Flugzeug;
+        public int ID_Pilot;
         /// <summary>
         /// Name/Type of the Airplane
         /// </summary>
-        public String Flugzeug;
+        public String LastName;
         /// <summary>
         /// Name of the Pilot
         /// </summary>
-        public String Pilot;
+        public String SureName;
 
         /// <summary>
         /// Create a new TrackerListEntry for adding to a ListView
@@ -48,11 +48,11 @@ namespace DataService
             this.SubItems.Clear();
             this.Text = ID_Tracker.ToString();
             this.SubItems.Add(IMEI.Trim());
-            if (Flugzeug != null && Pilot != null && ID_Flugzeug != 0)
+            if (LastName != null && SureName != null && ID_Pilot != 0)
             {
-                this.SubItems.Add(Flugzeug.Trim());
-                this.SubItems.Add(Pilot.Trim());
-                this.SubItems.Add(ID_Flugzeug.ToString());
+                this.SubItems.Add(LastName.Trim());
+                this.SubItems.Add(SureName.Trim());
+                this.SubItems.Add(ID_Pilot.ToString());
             }
         }
     }
@@ -66,11 +66,11 @@ namespace DataService
         /// Create a new AirplaneListEntry
         /// </summary>
         /// <param name="f">The Airplane to be displayed</param>
-        public AirplaneListEntry(t_Flugzeug f)
+        public AirplaneListEntry(t_Pilot f)
         {
             ID = f.ID;
-            Flugzeug = f.Flugzeug;
-            Pilot = f.Pilot;
+            LastName = f.LastName;
+            SureName = f.SureName;
         }
         /// <summary>
         /// The ID of the Airplane
@@ -79,18 +79,18 @@ namespace DataService
         /// <summary>
         /// The Name/Type of the Airplane
         /// </summary>
-        public string Flugzeug;
+        public string LastName;
         /// <summary>
         /// The Name of the Pilot
         /// </summary>
-        public string Pilot;
+        public string SureName;
         /// <summary>
         /// Generating a String showing all important properties of an Airplane
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            return ID.ToString() + " " + Flugzeug.Trim() + " " + Pilot.Trim();
+            return ID.ToString() + " " + LastName.Trim() + " " + SureName.Trim();
         }
     }
 }

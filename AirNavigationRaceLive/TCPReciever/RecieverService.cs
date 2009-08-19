@@ -54,7 +54,7 @@ namespace TCPReciever
             LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:OnStart:Start", "");
             GPS = new Server(DB_PATH);
             GPS.OnTrackerAddded += new EventHandler(GPS_OnTrackerAddded);
-            CalculateTabels = new Timer(5000);
+            CalculateTabels = new Timer(1000);
             CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);
             CalculateTabels.Start();
             LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:OnStart:Ende", "");
@@ -111,55 +111,36 @@ namespace TCPReciever
 
         /// <summary>
         /// Calculate the Tables of t_Data and Insert all needed Entries
-        /// Will be trigered form a 5 sec-Timer
+        /// Will be trigered form a 1 sec-Timer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
         {
-            LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:CalculateTabels_Elapsed:start", "");
             try
             {
                 DataService.DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
                 List<t_GPS_IN> Positions = dataContext.t_GPS_INs.Where(a => !a.Processed).OrderBy(t => t.Timestamp).ToList();
                 List<t_Tracker> Trackers = dataContext.t_Trackers.ToList();
-                List<t_Flugzeug> Flugzeuge = dataContext.t_Flugzeugs.ToList();
 
-
-                LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:CalculateTabels_Elapsed:Lists",
-                    "Positions.Count=" + Positions.Count +
-                    " Trackers.count=" + Trackers.Count +
-                    " Flugzeuge.count=" + Flugzeuge.Count);
+                if (Positions.Count > 0)LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:CalculateTabels_Elapsed:Lists","Positions.Count=" + Positions.Count + " Trackers.count=" + Trackers.Count);
 
                 foreach (t_Tracker tr in Trackers)
                 {
                     List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.Timestamp).ToList();
-                    if (Positions_Tracker.Count > 0)
+                    foreach (t_GPS_IN GPS_IN in Positions_Tracker)
                     {
                         t_Daten InsertData = new t_Daten();
-                        InsertData.Timestamp = DateTime.Now;
-                        InsertData.t_Flugzeug = Flugzeuge.Where(a => a.ID_GPS_Tracker == tr.ID).OrderByDescending(a => a.ID).ToArray()[0];
-                        //InsertData.ID_Flugzeug = InsertData.t_Flugzeug.ID;
-                        InsertData.TStart = Positions_Tracker.First().Timestamp;
-                        InsertData.TEnd = Positions_Tracker.Last().Timestamp;
-
-                        InsertData.LatitudeStart = decimal.Round(ConvertCoordinates(Positions_Tracker.First().latitude), 16);
-                        InsertData.LatitudeEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().latitude), 16);
-                        InsertData.LongitudeStart = decimal.Round(ConvertCoordinates(Positions_Tracker.First().longitude), 16);
-                        InsertData.LongitudeEnd = decimal.Round(ConvertCoordinates(Positions_Tracker.Last().longitude), 16);
-                        InsertData.AltitudeStart = decimal.Round(decimal.Parse(Positions_Tracker.First().altitude), 16);
-                        InsertData.AltitudeEnd = decimal.Round(decimal.Parse(Positions_Tracker.Last().altitude), 16);
-
+                        InsertData.ID_Tracker = tr.ID;
+                        InsertData.Timestamp = GPS_IN.Timestamp;
+                        InsertData.Latitude = decimal.Round(ConvertCoordinates(GPS_IN.latitude), 16);
+                        InsertData.Longitude = decimal.Round(ConvertCoordinates(GPS_IN.longitude), 16);
+                        InsertData.Altitude = decimal.Round(ConvertCoordinates(GPS_IN.altitude), 16);
                         dataContext.t_Datens.InsertOnSubmit(InsertData);
-                        Positions_Tracker.First().Processed = true;
-                        Positions_Tracker.Last().Processed = true;
+                        GPS_IN.Processed = true;
                     }
-
                 }
-
                 dataContext.SubmitChanges();
-
-                LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:CalculateTabels_Elapsed:Submittet Changes", "");
             }
             catch (Exception ex)
             {
