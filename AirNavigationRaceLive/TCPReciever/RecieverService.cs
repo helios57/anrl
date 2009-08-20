@@ -135,7 +135,7 @@ namespace TCPReciever
                         InsertData.Timestamp = GPS_IN.Timestamp;
                         InsertData.Latitude = decimal.Round(ConvertCoordinates(GPS_IN.latitude), 16);
                         InsertData.Longitude = decimal.Round(ConvertCoordinates(GPS_IN.longitude), 16);
-                        InsertData.Altitude = decimal.Round(ConvertCoordinates(GPS_IN.altitude), 16);
+                        InsertData.Altitude = decimal.Parse(GPS_IN.altitude);
                         dataContext.t_Datens.InsertOnSubmit(InsertData);
                         GPS_IN.Processed = true;
                     }
