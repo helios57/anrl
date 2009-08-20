@@ -127,22 +127,21 @@ namespace GELive
             int Trackercount = 0;
             foreach (t_Daten d in DatenListe)
             {
-                if (TrackList.Count(p => p.id == d.ID_Flugzeug) == 0)
+                if (TrackList.Count(p => p.id == d.ID_Tracker) == 0)
                 {
-                    TrackList.Add(new Tracker(d.ID_Flugzeug));
+                    TrackList.Add(new Tracker(d.ID_Tracker));
                     Trackercount++;
-                    if (Trackercount >= 4) break;
                 }
             }
 
             foreach (t_Daten d in DatenListe)
             {
-                Points pStart = new Points((decimal)d.LongitudeStart, (decimal)d.LatitudeStart, (decimal)d.AltitudeStart);
-                Points pEnd = new Points((decimal)d.LongitudeEnd, (decimal)d.LatitudeEnd, (decimal)d.AltitudeEnd);
-                Tracker t = TrackList.Find(p => p.id == d.ID_Flugzeug);
-                t.Pointlist.Add(pStart);
-                t.Pointlist.Add(pEnd);
+                //@todo überdenken
+                Points Point = new Points((decimal)d.Longitude, (decimal)d.Latitude, (decimal)d.Altitude);
+                Tracker t = TrackList.Find(p => p.id == d.ID_Tracker);
+                t.Pointlist.Add(Point);
             }
+
             ListLocked = false;
 
             int ColorId = 1;

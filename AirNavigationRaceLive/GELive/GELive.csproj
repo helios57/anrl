@@ -174,8 +174,8 @@
     <None Include="Resources\KMLTemplates\headerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Service References\ANRLDataService\Arrays.xsd" />
-    <None Include="Service References\ANRLDataService\DataService.xsd" />
+    <None Include="Service References\ANRLDataService\Arrays1.xsd" />
+    <None Include="Service References\ANRLDataService\DataService1.xsd" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -199,9 +199,9 @@
     </None>
     <None Include="app.config" />
     <None Include="Resources\track.txt" />
-    <None Include="Service References\ANRLDataService\service.wsdl" />
-    <None Include="Service References\ANRLDataService\service.xsd" />
-    <None Include="Service References\ANRLDataService\service1.xsd" />
+    <None Include="Service References\ANRLDataService\service1.wsdl" />
+    <None Include="Service References\ANRLDataService\service2.xsd" />
+    <None Include="Service References\ANRLDataService\service21.xsd" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
