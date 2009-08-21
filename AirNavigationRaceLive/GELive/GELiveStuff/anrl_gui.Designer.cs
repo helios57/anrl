@@ -30,10 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(anrl_gui));
             this.geWebBrowser1 = new GELive.GEWebBrowser();
-            this.geToolStrip1 = new GELive.GEToolStrip();
-            this.ToolStrip1 = new System.Windows.Forms.ToolStripButton();
-            this.ShowRanking = new System.Windows.Forms.ToolStripButton();
-            this.geToolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // geWebBrowser1
@@ -48,37 +44,7 @@
             this.geWebBrowser1.Size = new System.Drawing.Size(633, 499);
             this.geWebBrowser1.TabIndex = 2;
             this.geWebBrowser1.WebBrowserShortcutsEnabled = false;
-            // 
-            // geToolStrip1
-            // 
-            this.geToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolStrip1,
-            this.ShowRanking});
-            this.geToolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.geToolStrip1.Name = "geToolStrip1";
-            this.geToolStrip1.Size = new System.Drawing.Size(633, 25);
-            this.geToolStrip1.TabIndex = 1;
-            this.geToolStrip1.Text = "geToolStrip1";
-            // 
-            // ToolStrip1
-            // 
-            this.ToolStrip1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ToolStrip1.Image = ((System.Drawing.Image)(resources.GetObject("ToolStrip1.Image")));
-            this.ToolStrip1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ToolStrip1.Name = "ToolStrip1";
-            this.ToolStrip1.Size = new System.Drawing.Size(72, 22);
-            this.ToolStrip1.Text = "Load Kml File";
-            this.ToolStrip1.Click += new System.EventHandler(this.LoadKml_Click);
-            // 
-            // ShowRanking
-            // 
-            this.ShowRanking.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.ShowRanking.Image = ((System.Drawing.Image)(resources.GetObject("ShowRanking.Image")));
-            this.ShowRanking.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ShowRanking.Name = "ShowRanking";
-            this.ShowRanking.Size = new System.Drawing.Size(78, 22);
-            this.ShowRanking.Text = "Show Ranking";
-            this.ShowRanking.Click += new System.EventHandler(this.ShowRanking_Click);
+
             // 
             // anrl_gui
             // 
@@ -86,11 +52,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(633, 524);
             this.Controls.Add(this.geWebBrowser1);
-            this.Controls.Add(this.geToolStrip1);
             this.Name = "anrl_gui";
             this.Text = "Air Navigation Race LIVE";
-            this.geToolStrip1.ResumeLayout(false);
-            this.geToolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,9 +61,6 @@
 
         #endregion
 
-        private GEToolStrip geToolStrip1;
-        private System.Windows.Forms.ToolStripButton ToolStrip1;
-        private System.Windows.Forms.ToolStripButton ShowRanking;
         private GEWebBrowser geWebBrowser1;
 
 

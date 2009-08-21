@@ -78,61 +78,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="anrl_gui.cs">
+    <Compile Include="AnrlClient.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="anrl_gui.Designer.cs">
+    <Compile Include="AnrlClient.Designer.cs">
+      <DependentUpon>AnrlClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GELiveStuff\anrl_gui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GELiveStuff\anrl_gui.Designer.cs">
       <DependentUpon>anrl_gui.cs</DependentUpon>
     </Compile>
-    <Compile Include="Delay-Select.cs">
+    <Compile Include="GELiveStuff\Delay-Select.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Delay-Select.Designer.cs">
+    <Compile Include="GELiveStuff\Delay-Select.Designer.cs">
       <DependentUpon>Delay-Select.cs</DependentUpon>
     </Compile>
-    <Compile Include="External.cs" />
-    <Compile Include="GEEventArgs.cs" />
-    <Compile Include="GEHelpers.cs" />
-    <Compile Include="GEToolStrip.cs">
+    <Compile Include="GELiveStuff\External.cs" />
+    <Compile Include="GELiveStuff\GEEventArgs.cs" />
+    <Compile Include="GELiveStuff\GEHelpers.cs" />
+    <Compile Include="GELiveStuff\GEWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GEToolStrip.Designer.cs">
-      <DependentUpon>GEToolStrip.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GEWebBrowser.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GEWebBrowser.designer.cs">
+    <Compile Include="GELiveStuff\GEWebBrowser.designer.cs">
       <DependentUpon>GEWebBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="IGEControls.cs" />
-    <Compile Include="IHTMLScriptElement.cs" />
-    <Compile Include="KmlTreeView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="KmlTreeView.designer.cs">
-      <DependentUpon>KmlTreeView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Maths.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="GELiveStuff\IGEControls.cs" />
+    <Compile Include="GELiveStuff\IHTMLScriptElement.cs" />
+    <Compile Include="GELiveStuff\Maths.cs" />
+    <Compile Include="GELiveStuff\Program.cs" />
+    <Compile Include="InformationPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="anrl_gui.resx">
+    <EmbeddedResource Include="AnrlClient.resx">
+      <DependentUpon>AnrlClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GELiveStuff\anrl_gui.resx">
       <DependentUpon>anrl_gui.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Delay-Select.resx">
+    <EmbeddedResource Include="GELiveStuff\Delay-Select.resx">
       <DependentUpon>Delay-Select.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KmlTreeView.resx">
-      <DependentUpon>KmlTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="RankingForm.resx">
+    <EmbeddedResource Include="GELiveStuff\RankingForm.resx">
       <DependentUpon>RankingForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -140,10 +135,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="RankingForm.cs">
+    <Compile Include="GELiveStuff\RankingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RankingForm.Designer.cs">
+    <Compile Include="GELiveStuff\RankingForm.Designer.cs">
       <DependentUpon>RankingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Service References\ANRLDataService\Reference.cs">
@@ -151,8 +146,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="SetClientCredentials.cs" />
-    <Compile Include="WSManager.cs" />
+    <Compile Include="GELiveStuff\SetClientCredentials.cs" />
+    <Compile Include="GELiveStuff\WSManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="GEPlugin">
@@ -165,9 +160,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="anrlNetworkLink.txt" />
     <Content Include="Resources\Plugin.html" />
-    <None Include="GELive_TemporaryKey.pfx" />
+    <None Include="GELiveStuff\GELive_TemporaryKey.pfx" />
     <None Include="Resources\KMLTemplates\footerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -197,7 +191,7 @@
     <None Include="Resources\KMLTemplates\KML_Samples.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="app.config" />
+    <None Include="GELiveStuff\app.config" />
     <None Include="Resources\track.txt" />
     <None Include="Service References\ANRLDataService\service1.wsdl" />
     <None Include="Service References\ANRLDataService\service2.xsd" />

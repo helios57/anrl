@@ -20,6 +20,8 @@ namespace GELive
         List<t_PolygonPoint> PolygonPoints;
         System.Timers.Timer UpdateData = new System.Timers.Timer(5000);
         ANRLDataServiceClient Client;
+        String Remote = "http://127.0.0.1:5555/";
+        String ConnectionConfig = "WSHttpBinding_IANRLDataService";
         anrl_gui gui;
         bool ListLocked = false;
         /// <summary>
@@ -49,7 +51,8 @@ namespace GELive
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
 
-            Client = new ANRLDataServiceClient();
+            Client = new GELive.ANRLDataService.ANRLDataServiceClient(ConnectionConfig, Remote);
+
             SetClientCredentials.SetCredentials(Client);
             PolygonPoints = Client.GetPolygons();
             PolygonPoints.OrderBy(p => p.ID_Polygon);

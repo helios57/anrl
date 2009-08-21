@@ -48,12 +48,6 @@ namespace GELive
             // Here we can cast the sender to the IGEPlugin interface
             // Once this is done once can work with the plugin almost seemlessly
             ge = sender as IGEPlugin;
-
-            if (ge != null)
-            {
-                // Tell various the controls the browser instance to work with
-                geToolStrip1.SetBrowserInstance(geWebBrowser1);
-            }
         }
 
         /// <summary>
@@ -92,8 +86,18 @@ namespace GELive
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void ShowRanking_Click(object sender, EventArgs e)
         {
-            rankingForm = new RankingForm();
-            rankingForm.Show();
+
+            ANRLDataService.ANRLDataServiceClient a = new GELive.ANRLDataService.ANRLDataServiceClient(
+                "WSHttpBinding_IANRLDataService", "http://127.0.0.1:5555/");
+            List<DateTime> d = a.GetTimestamps();
+
+            foreach (DateTime bla in d)
+            {
+                System.Console.Out.WriteLine(bla.ToString());
+            }
+
+          //  rankingForm = new RankingForm();
+          //  rankingForm.Show();
         }
     }
 }
