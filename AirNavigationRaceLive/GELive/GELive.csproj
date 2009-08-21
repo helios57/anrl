@@ -109,7 +109,8 @@
     <Compile Include="GELiveStuff\IHTMLScriptElement.cs" />
     <Compile Include="GELiveStuff\Maths.cs" />
     <Compile Include="GELiveStuff\Program.cs" />
-    <Compile Include="InformationPool.cs" />
+    <Compile Include="InformationPool.cs">
+    </Compile>
     <Compile Include="Pilot.cs">
       <SubType>Form</SubType>
     </Compile>

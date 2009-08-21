@@ -48,6 +48,7 @@
             this.lstExistingPilots.Name = "lstExistingPilots";
             this.lstExistingPilots.Size = new System.Drawing.Size(207, 121);
             this.lstExistingPilots.TabIndex = 0;
+            this.lstExistingPilots.SelectedIndexChanged += new System.EventHandler(this.lstExistingPilots_SelectedIndexChanged);
             // 
             // lblId
             // 
@@ -74,6 +75,7 @@
             this.btnNew.TabIndex = 3;
             this.btnNew.Text = "New Pilot";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // fldLastName
             // 
@@ -123,6 +125,7 @@
             this.btnColor.Size = new System.Drawing.Size(100, 20);
             this.btnColor.TabIndex = 9;
             this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
             // 
             // btnAddPilot
             // 
@@ -132,6 +135,7 @@
             this.btnAddPilot.TabIndex = 10;
             this.btnAddPilot.Text = "Add this Pilot";
             this.btnAddPilot.UseVisualStyleBackColor = true;
+            this.btnAddPilot.Click += new System.EventHandler(this.btnAddPilot_Click);
             // 
             // Pilot
             // 

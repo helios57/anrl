@@ -27,4 +27,17 @@ namespace GELive
         static public int PlaySpeed=1;
 
     }
+
+    public class PilotEntry
+    {
+        public String ID;
+        public String LastName;
+        public String SureName;
+        public String PilotColor;
+
+        public override string ToString()
+        {
+            return ID + " " + LastName + " " + SureName + " " + PilotColor;
+        }
+    }
 }
