@@ -110,6 +110,12 @@
     <Compile Include="GELiveStuff\Maths.cs" />
     <Compile Include="GELiveStuff\Program.cs" />
     <Compile Include="InformationPool.cs" />
+    <Compile Include="Pilot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pilot.Designer.cs">
+      <DependentUpon>Pilot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AnrlClient.resx">
       <DependentUpon>AnrlClient.cs</DependentUpon>
@@ -121,6 +127,9 @@
     <EmbeddedResource Include="GELiveStuff\Delay-Select.resx">
       <DependentUpon>Delay-Select.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot.resx">
+      <DependentUpon>Pilot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
