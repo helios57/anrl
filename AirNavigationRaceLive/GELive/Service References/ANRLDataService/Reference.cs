@@ -311,17 +311,23 @@ namespace GELive.ANRLDataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTrackers", ReplyAction="http://tempuri.org/IANRLDataService/GetTrackersResponse")]
         System.Collections.Generic.List<System.Collections.Generic.List<string>> GetTrackers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetAirplanes", ReplyAction="http://tempuri.org/IANRLDataService/GetAirplanesResponse")]
-        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetAirplanes();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPilots", ReplyAction="http://tempuri.org/IANRLDataService/GetPilotsResponse")]
+        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetPilots();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetRaces", ReplyAction="http://tempuri.org/IANRLDataService/GetRacesResponse")]
+        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetRaces();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/RemoveRace", ReplyAction="http://tempuri.org/IANRLDataService/RemoveRaceResponse")]
+        void RemoveRace(int Race_ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/CleanTracker", ReplyAction="http://tempuri.org/IANRLDataService/CleanTrackerResponse")]
         void CleanTracker(int TrackerID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddNewAirplane", ReplyAction="http://tempuri.org/IANRLDataService/AddNewAirplaneResponse")]
-        void AddNewAirplane(string Flugzeug, string Pilot, int TrackerID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddNewPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddNewPilotResponse")]
+        void AddNewPilot(int TrackerID, string LastName, string SureName, string Color);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddAirplane", ReplyAction="http://tempuri.org/IANRLDataService/AddAirplaneResponse")]
-        void AddAirplane(int FlugzeugID, int TrackerID);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddPilotResponse")]
+        void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPolygons", ReplyAction="http://tempuri.org/IANRLDataService/AddPolygonsResponse")]
         void AddPolygons(System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<double>>> PolygonList);
@@ -370,20 +376,28 @@ namespace GELive.ANRLDataService {
             return base.Channel.GetTrackers();
         }
         
-        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetAirplanes() {
-            return base.Channel.GetAirplanes();
+        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetPilots() {
+            return base.Channel.GetPilots();
+        }
+        
+        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetRaces() {
+            return base.Channel.GetRaces();
+        }
+        
+        public void RemoveRace(int Race_ID) {
+            base.Channel.RemoveRace(Race_ID);
         }
         
         public void CleanTracker(int TrackerID) {
             base.Channel.CleanTracker(TrackerID);
         }
         
-        public void AddNewAirplane(string Flugzeug, string Pilot, int TrackerID) {
-            base.Channel.AddNewAirplane(Flugzeug, Pilot, TrackerID);
+        public void AddNewPilot(int TrackerID, string LastName, string SureName, string Color) {
+            base.Channel.AddNewPilot(TrackerID, LastName, SureName, Color);
         }
         
-        public void AddAirplane(int FlugzeugID, int TrackerID) {
-            base.Channel.AddAirplane(FlugzeugID, TrackerID);
+        public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color) {
+            base.Channel.AddPilot(PilotID, TrackerID, LastName, SureName, Color);
         }
         
         public void AddPolygons(System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<double>>> PolygonList) {

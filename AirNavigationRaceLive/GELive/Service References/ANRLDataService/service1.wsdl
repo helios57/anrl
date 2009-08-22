@@ -258,7 +258,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetAirplanes_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPilots_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -277,7 +277,83 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetAirplanes_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPilots_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetRaces_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetRaces_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_RemoveRace_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_RemoveRace_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -334,7 +410,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddNewAirplane_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddNewPilot_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -353,7 +429,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddNewAirplane_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddNewPilot_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -372,7 +448,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddAirplane_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddPilot_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -391,7 +467,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddAirplane_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddPilot_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -480,11 +556,23 @@
   <wsdl:message name="IANRLDataService_GetTrackers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetTrackersResponse" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_GetAirplanes_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAirplanes" />
+  <wsdl:message name="IANRLDataService_GetPilots_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPilots" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_GetAirplanes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAirplanesResponse" />
+  <wsdl:message name="IANRLDataService_GetPilots_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPilotsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetRaces_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRaces" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetRaces_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRacesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_RemoveRace_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveRace" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_RemoveRace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveRaceResponse" />
   </wsdl:message>
   <wsdl:message name="IANRLDataService_CleanTracker_InputMessage">
     <wsdl:part name="parameters" element="tns:CleanTracker" />
@@ -492,17 +580,17 @@
   <wsdl:message name="IANRLDataService_CleanTracker_OutputMessage">
     <wsdl:part name="parameters" element="tns:CleanTrackerResponse" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_AddNewAirplane_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddNewAirplane" />
+  <wsdl:message name="IANRLDataService_AddNewPilot_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewPilot" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_AddNewAirplane_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddNewAirplaneResponse" />
+  <wsdl:message name="IANRLDataService_AddNewPilot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddNewPilotResponse" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_AddAirplane_InputMessage">
-    <wsdl:part name="parameters" element="tns:AddAirplane" />
+  <wsdl:message name="IANRLDataService_AddPilot_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPilot" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_AddAirplane_OutputMessage">
-    <wsdl:part name="parameters" element="tns:AddAirplaneResponse" />
+  <wsdl:message name="IANRLDataService_AddPilot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPilotResponse" />
   </wsdl:message>
   <wsdl:message name="IANRLDataService_AddPolygons_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPolygons" />
@@ -527,21 +615,29 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetTrackers" message="tns:IANRLDataService_GetTrackers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetTrackersResponse" message="tns:IANRLDataService_GetTrackers_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAirplanes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetAirplanes" message="tns:IANRLDataService_GetAirplanes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetAirplanesResponse" message="tns:IANRLDataService_GetAirplanes_OutputMessage" />
+    <wsdl:operation name="GetPilots">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetPilots" message="tns:IANRLDataService_GetPilots_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetPilotsResponse" message="tns:IANRLDataService_GetPilots_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRaces">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetRaces" message="tns:IANRLDataService_GetRaces_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetRacesResponse" message="tns:IANRLDataService_GetRaces_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRace">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/RemoveRace" message="tns:IANRLDataService_RemoveRace_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/RemoveRaceResponse" message="tns:IANRLDataService_RemoveRace_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CleanTracker">
       <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/CleanTracker" message="tns:IANRLDataService_CleanTracker_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/CleanTrackerResponse" message="tns:IANRLDataService_CleanTracker_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AddNewAirplane">
-      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/AddNewAirplane" message="tns:IANRLDataService_AddNewAirplane_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/AddNewAirplaneResponse" message="tns:IANRLDataService_AddNewAirplane_OutputMessage" />
+    <wsdl:operation name="AddNewPilot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/AddNewPilot" message="tns:IANRLDataService_AddNewPilot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/AddNewPilotResponse" message="tns:IANRLDataService_AddNewPilot_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="AddAirplane">
-      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/AddAirplane" message="tns:IANRLDataService_AddAirplane_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/AddAirplaneResponse" message="tns:IANRLDataService_AddAirplane_OutputMessage" />
+    <wsdl:operation name="AddPilot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/AddPilot" message="tns:IANRLDataService_AddPilot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/AddPilotResponse" message="tns:IANRLDataService_AddPilot_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddPolygons">
       <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/AddPolygons" message="tns:IANRLDataService_AddPolygons_InputMessage" />
@@ -595,14 +691,36 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAirplanes">
-      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetAirplanes" style="document" />
+    <wsdl:operation name="GetPilots">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetPilots" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetAirplanes_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPilots_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetAirplanes_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPilots_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRaces">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetRaces" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetRaces_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetRaces_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveRace">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/RemoveRace" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_RemoveRace_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_RemoveRace_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -617,25 +735,25 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddNewAirplane">
-      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/AddNewAirplane" style="document" />
+    <wsdl:operation name="AddNewPilot">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/AddNewPilot" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddNewAirplane_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddNewPilot_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddNewAirplane_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddNewPilot_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="AddAirplane">
-      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/AddAirplane" style="document" />
+    <wsdl:operation name="AddPilot">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/AddPilot" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddAirplane_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddPilot_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddAirplane_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddPilot_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

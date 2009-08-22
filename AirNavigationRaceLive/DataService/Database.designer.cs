@@ -33,9 +33,6 @@ namespace DataService
     partial void Insertt_Daten(t_Daten instance);
     partial void Updatet_Daten(t_Daten instance);
     partial void Deletet_Daten(t_Daten instance);
-    partial void Insertt_Tracker(t_Tracker instance);
-    partial void Updatet_Tracker(t_Tracker instance);
-    partial void Deletet_Tracker(t_Tracker instance);
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
@@ -54,6 +51,9 @@ namespace DataService
     partial void Insertt_Race(t_Race instance);
     partial void Updatet_Race(t_Race instance);
     partial void Deletet_Race(t_Race instance);
+    partial void Insertt_Tracker(t_Tracker instance);
+    partial void Updatet_Tracker(t_Tracker instance);
+    partial void Deletet_Tracker(t_Tracker instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -91,14 +91,6 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_Daten>();
-			}
-		}
-		
-		public System.Data.Linq.Table<t_Tracker> t_Trackers
-		{
-			get
-			{
-				return this.GetTable<t_Tracker>();
 			}
 		}
 		
@@ -147,6 +139,14 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_Race>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Tracker> t_Trackers
+		{
+			get
+			{
+				return this.GetTable<t_Tracker>();
 			}
 		}
 	}
@@ -380,92 +380,6 @@ namespace DataService
 					this._ID_Polygon = value;
 					this.SendPropertyChanged("ID_Polygon");
 					this.OnID_PolygonChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.t_Tracker")]
-	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _IMEI;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnIMEIChanging(string value);
-    partial void OnIMEIChanged();
-    #endregion
-		
-		public t_Tracker()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		public string IMEI
-		{
-			get
-			{
-				return this._IMEI;
-			}
-			set
-			{
-				if ((this._IMEI != value))
-				{
-					this.OnIMEIChanging(value);
-					this.SendPropertyChanging();
-					this._IMEI = value;
-					this.SendPropertyChanged("IMEI");
-					this.OnIMEIChanged();
 				}
 			}
 		}
@@ -1037,6 +951,8 @@ namespace DataService
 		
 		private int _ID_Tracker;
 		
+		private string _Color;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1049,6 +965,8 @@ namespace DataService
     partial void OnSureNameChanged();
     partial void OnID_TrackerChanging(int value);
     partial void OnID_TrackerChanged();
+    partial void OnColorChanging(string value);
+    partial void OnColorChanged();
     #endregion
 		
 		public t_Pilot()
@@ -1132,6 +1050,26 @@ namespace DataService
 					this._ID_Tracker = value;
 					this.SendPropertyChanged("ID_Tracker");
 					this.OnID_TrackerChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Color", DbType="NChar(10)")]
+		public string Color
+		{
+			get
+			{
+				return this._Color;
+			}
+			set
+			{
+				if ((this._Color != value))
+				{
+					this.OnColorChanging(value);
+					this.SendPropertyChanging();
+					this._Color = value;
+					this.SendPropertyChanged("Color");
+					this.OnColorChanged();
 				}
 			}
 		}
@@ -1846,6 +1784,92 @@ namespace DataService
 					this._ID_GoalLine = value;
 					this.SendPropertyChanged("ID_GoalLine");
 					this.OnID_GoalLineChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.t_Tracker")]
+	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _IMEI;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnIMEIChanging(string value);
+    partial void OnIMEIChanged();
+    #endregion
+		
+		public t_Tracker()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string IMEI
+		{
+			get
+			{
+				return this._IMEI;
+			}
+			set
+			{
+				if ((this._IMEI != value))
+				{
+					this.OnIMEIChanging(value);
+					this.SendPropertyChanging();
+					this._IMEI = value;
+					this.SendPropertyChanged("IMEI");
+					this.OnIMEIChanged();
 				}
 			}
 		}

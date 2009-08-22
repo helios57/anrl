@@ -11,7 +11,7 @@ namespace GELive
 {
     public partial class Pilot : Form
     {
-        public EventHandler OnPilotOk;
+        public event EventHandler OnPilotOk;
         public Pilot()
         {
             InitializeComponent();

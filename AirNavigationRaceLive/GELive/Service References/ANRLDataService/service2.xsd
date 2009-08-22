@@ -52,16 +52,40 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAirplanes">
+  <xs:element name="GetPilots">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAirplanesResponse">
+  <xs:element name="GetPilotsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetAirplanesResult" nillable="true" type="q5:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPilotsResult" nillable="true" type="q5:ArrayOfArrayOfstring" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRaces">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRacesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetRacesResult" nillable="true" type="q6:ArrayOfArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveRace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Race_ID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveRaceResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="CleanTracker">
@@ -76,29 +100,33 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddNewAirplane">
+  <xs:element name="AddNewPilot">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="Flugzeug" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Pilot" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="TrackerID" type="xs:int" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SureName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddNewAirplaneResponse">
+  <xs:element name="AddNewPilotResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddAirplane">
+  <xs:element name="AddPilot">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="FlugzeugID" type="xs:int" />
+        <xs:element minOccurs="0" name="PilotID" type="xs:int" />
         <xs:element minOccurs="0" name="TrackerID" type="xs:int" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SureName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="AddAirplaneResponse">
+  <xs:element name="AddPilotResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -106,7 +134,7 @@
   <xs:element name="AddPolygons">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PolygonList" nillable="true" type="q6:ArrayOfArrayOfArrayOfdouble" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PolygonList" nillable="true" type="q7:ArrayOfArrayOfArrayOfdouble" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

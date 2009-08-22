@@ -135,7 +135,7 @@ namespace DataService
         /// Return a list of all Airplanes
         /// </summary>
         /// <returns>List of Airplanes</returns>
-        public List<String[]> GetAirplanes()
+        public List<String[]> GetPilots()
         {
 
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
@@ -143,10 +143,56 @@ namespace DataService
             List<String[]> tmp = new List<string[]>();
             foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == 0))
             {
-                tmp.Add(new String[] {f.ID.ToString().Trim(),f.LastName.Trim(),f.SureName.Trim()});
+                tmp.Add(new String[] { f.ID.ToString().Trim(), f.LastName.Trim(), f.SureName.Trim(), f.Color.Trim() });
             }
             return tmp;
         }
+
+        /// <summary>
+        /// Return a list of all Racecs
+        /// </summary>
+        /// <returns>List of Racecs</returns>
+        public List<String[]> GetRaces()
+        {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetRaces", "");
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<String[]> tmp = new List<string[]>();
+            foreach (t_Race r in dataContext.t_Races)
+            {
+                tmp.Add(new String[] {
+                    r.ID.ToString().Trim(),
+                    r.Name.Trim(),
+                    r.ID_Pilot_0.ToString().Trim(),
+                    r.ID_Pilot_1.ToString().Trim(),
+                    r.ID_Pilot_2.ToString().Trim(),
+                    r.ID_Pilot_3.ToString().Trim(),
+                    r.ID_Polygon.ToString().Trim(),
+                    r.TimeEnd.ToString(),
+                    r.TimeStart.ToString()});
+            }
+            return tmp;
+        }
+
+        /// <summary>
+        /// Remove the Race
+        /// </summary>
+        /// <param name="Race_ID">Remove Race</param>
+        /// <returns></returns>
+        public void RemoveRace(int Race_ID)
+        {
+            try
+            {
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:RemoveRace", Race_ID.ToString());
+                DatabaseDataContext context = new DatabaseDataContext(DB_PATH);
+                context.t_Races.DeleteOnSubmit(context.t_Races.Single(p => p.ID == Race_ID));
+                context.SubmitChanges();
+            }
+            catch
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:RemoveRace", Race_ID.ToString());
+            }
+        }
+
         /// <summary>
         /// Remove this Tracker from any Airplane
         /// </summary>
@@ -161,13 +207,15 @@ namespace DataService
             }
             dataContext.SubmitChanges();
         }
+
         /// <summary>
-        /// Add a new Airplane to a tracker
+        /// Add New Pilot
         /// </summary>
-        /// <param name="Flugzeug">Airplane Type/Name</param>
-        /// <param name="Pilot">Pilot Name</param>
-        /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
-        public void AddNewAirplane(String LastName, String SureName, int TrackerID)
+        /// <param name="TrackerID"></param>
+        /// <param name="LastName"></param>
+        /// <param name="SureName"></param>
+        /// <param name="Color"></param>
+        public void AddNewPilot(int TrackerID, String LastName, String SureName, String Color)
         {
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", LastName + SureName + TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
@@ -175,24 +223,32 @@ namespace DataService
             f.ID_Tracker = TrackerID;
             f.LastName = LastName;
             f.SureName = SureName;
+            f.Color = Color;
             dataContext.t_Pilots.InsertOnSubmit(f);
             dataContext.SubmitChanges();
         }
+
         /// <summary>
-        /// Add an existing Airplane to a Tracker
+        /// Add Existim Pilot, may be modified
         /// </summary>
-        /// <param name="FlugzeugID">Id of the Airplane</param>
-        /// <param name="TrackerID">ID of the Tracker</param>
-        public void AddAirplane(int FlugzeugID, int TrackerID)
+        /// <param name="PilotID"></param>
+        /// <param name="TrackerID"></param>
+        /// <param name="LastName"></param>
+        /// <param name="SureName"></param>
+        /// <param name="Color"></param>
+        public void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color)
         {
 
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddAirplane", FlugzeugID.ToString() + " " + TrackerID.ToString());
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddAirplane", PilotID.ToString() + " " + TrackerID.ToString());
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
             {
                 f.ID_Tracker = 0;
             }
-            t_Pilot fl = dataContext.t_Pilots.Single(p => p.ID == FlugzeugID);
+            t_Pilot fl = dataContext.t_Pilots.Single(p => p.ID == PilotID);
+            fl.LastName = LastName;
+            fl.SureName = SureName;
+            fl.Color = Color;
             fl.ID_Tracker = TrackerID;
             dataContext.SubmitChanges();
            

@@ -44,11 +44,25 @@ namespace DataService
         List<String[]> GetTrackers();
 
         /// <summary>
-        /// Return a list of all Airplanes
+        /// Return a list of all Pilotes
         /// </summary>
-        /// <returns>List of Airplanes</returns>
+        /// <returns>List of Pilotes</returns>
         [OperationContract]
-        List<String[]> GetAirplanes();
+        List<String[]> GetPilots();
+
+        /// <summary>
+        /// Return a list of all Pilotes
+        /// </summary>
+        /// <returns>List of Pilotes</returns>
+        [OperationContract]
+        List<String[]> GetRaces();
+
+        /// <summary>
+        /// Return a list of all Pilotes
+        /// </summary>
+        /// <returns>List of Pilotes</returns>
+        [OperationContract]
+        void RemoveRace(int Race_ID);
 
         /// <summary>
         /// Remove this Tracker from any Airplane
@@ -64,7 +78,7 @@ namespace DataService
         /// <param name="Pilot">Pilot Name</param>
         /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
         [OperationContract]
-        void AddNewAirplane(String Flugzeug, String Pilot, int TrackerID);
+        void AddNewPilot(int TrackerID, String LastName, String SureName, String Color);
 
         /// <summary>
         /// Add an existing Airplane to a Tracker
@@ -72,7 +86,7 @@ namespace DataService
         /// <param name="FlugzeugID">Id of the Airplane</param>
         /// <param name="TrackerID">ID of the Tracker</param>
         [OperationContract]
-        void AddAirplane(int FlugzeugID, int TrackerID);
+        void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color);
 
         /// <summary>
         /// Add the forbidden Zones to the DB

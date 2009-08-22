@@ -15,7 +15,7 @@ namespace GELive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new anrl_gui());
+            Application.Run(new AnrlClient());
         }
     }
 }

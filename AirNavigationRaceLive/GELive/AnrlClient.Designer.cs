@@ -47,6 +47,11 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.panelRace = new System.Windows.Forms.Panel();
+            this.btnLoadXML = new System.Windows.Forms.Button();
+            this.btnRacePilotD = new System.Windows.Forms.Button();
+            this.btnRacePilotC = new System.Windows.Forms.Button();
+            this.btnRacePilotB = new System.Windows.Forms.Button();
+            this.btnRacePilotA = new System.Windows.Forms.Button();
             this.fldRacePilotD = new System.Windows.Forms.TextBox();
             this.fldRacePilotC = new System.Windows.Forms.TextBox();
             this.fldRacePilotB = new System.Windows.Forms.TextBox();
@@ -55,14 +60,14 @@
             this.lblPilotC = new System.Windows.Forms.Label();
             this.lblPilotD = new System.Windows.Forms.Label();
             this.lblPilotA = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.fldRaceDuration = new System.Windows.Forms.NumericUpDown();
             this.lblRaceDuration = new System.Windows.Forms.Label();
             this.lblStartTime = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.fldRaceTime = new System.Windows.Forms.DateTimePicker();
             this.btnLoadDxf = new System.Windows.Forms.Button();
             this.btnSaveRace = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.fldRaceDate = new System.Windows.Forms.DateTimePicker();
             this.lblRace = new System.Windows.Forms.Label();
             this.fldRaceName = new System.Windows.Forms.TextBox();
             this.btnRemvRace = new System.Windows.Forms.Button();
@@ -70,15 +75,11 @@
             this.lstRace = new System.Windows.Forms.ListView();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.btnRacePilotA = new System.Windows.Forms.Button();
-            this.btnRacePilotB = new System.Windows.Forms.Button();
-            this.btnRacePilotC = new System.Windows.Forms.Button();
-            this.btnRacePilotD = new System.Windows.Forms.Button();
-            this.btnLoadXML = new System.Windows.Forms.Button();
+            this.btnRacesRefresh = new System.Windows.Forms.Button();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).BeginInit();
             this.SuspendLayout();
             // 
             // fldServer
@@ -109,6 +110,7 @@
             this.btnConnect.TabIndex = 2;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // fldUsername
             // 
@@ -116,6 +118,7 @@
             this.fldUsername.Name = "fldUsername";
             this.fldUsername.Size = new System.Drawing.Size(121, 20);
             this.fldUsername.TabIndex = 3;
+            this.fldUsername.Text = "anrl";
             // 
             // fldPassword
             // 
@@ -124,6 +127,7 @@
             this.fldPassword.PasswordChar = '*';
             this.fldPassword.Size = new System.Drawing.Size(121, 20);
             this.fldPassword.TabIndex = 4;
+            this.fldPassword.Text = "anrl";
             this.fldPassword.UseSystemPasswordChar = true;
             // 
             // lblUsername
@@ -177,6 +181,7 @@
             this.btnAddPilotToTracker.TabIndex = 26;
             this.btnAddPilotToTracker.Text = "Add Pilot";
             this.btnAddPilotToTracker.UseVisualStyleBackColor = true;
+            this.btnAddPilotToTracker.Click += new System.EventHandler(this.btnAddPilotToTracker_Click);
             // 
             // btnRemvPilotFromTracker
             // 
@@ -186,6 +191,7 @@
             this.btnRemvPilotFromTracker.TabIndex = 25;
             this.btnRemvPilotFromTracker.Text = "Remove Pilot";
             this.btnRemvPilotFromTracker.UseVisualStyleBackColor = true;
+            this.btnRemvPilotFromTracker.Click += new System.EventHandler(this.btnRemvPilotFromTracker_Click);
             // 
             // btnRefreshTrackerList
             // 
@@ -195,6 +201,7 @@
             this.btnRefreshTrackerList.TabIndex = 24;
             this.btnRefreshTrackerList.Text = "Refresh";
             this.btnRefreshTrackerList.UseVisualStyleBackColor = true;
+            this.btnRefreshTrackerList.Click += new System.EventHandler(this.btnRefreshTrackerList_Click);
             // 
             // lstTrackers
             // 
@@ -214,6 +221,7 @@
             this.lstTrackers.TabIndex = 23;
             this.lstTrackers.UseCompatibleStateImageBehavior = false;
             this.lstTrackers.View = System.Windows.Forms.View.Details;
+            this.lstTrackers.SelectedIndexChanged += new System.EventHandler(this.lstTrackers_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -227,21 +235,22 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "LastName";
+            this.columnHeader3.Text = "Pilot ID";
             this.columnHeader3.Width = 118;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "SureName";
+            this.columnHeader4.Text = "Lastname";
             this.columnHeader4.Width = 120;
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Pilot ID";
+            this.columnHeader5.Text = "Surename";
             this.columnHeader5.Width = 80;
             // 
             // panelRace
             // 
+            this.panelRace.Controls.Add(this.btnRacesRefresh);
             this.panelRace.Controls.Add(this.btnLoadXML);
             this.panelRace.Controls.Add(this.btnRacePilotD);
             this.panelRace.Controls.Add(this.btnRacePilotC);
@@ -255,14 +264,14 @@
             this.panelRace.Controls.Add(this.lblPilotC);
             this.panelRace.Controls.Add(this.lblPilotD);
             this.panelRace.Controls.Add(this.lblPilotA);
-            this.panelRace.Controls.Add(this.numericUpDown1);
+            this.panelRace.Controls.Add(this.fldRaceDuration);
             this.panelRace.Controls.Add(this.lblRaceDuration);
             this.panelRace.Controls.Add(this.lblStartTime);
-            this.panelRace.Controls.Add(this.dateTimePicker2);
+            this.panelRace.Controls.Add(this.fldRaceTime);
             this.panelRace.Controls.Add(this.btnLoadDxf);
             this.panelRace.Controls.Add(this.btnSaveRace);
             this.panelRace.Controls.Add(this.lblDate);
-            this.panelRace.Controls.Add(this.dateTimePicker1);
+            this.panelRace.Controls.Add(this.fldRaceDate);
             this.panelRace.Controls.Add(this.lblRace);
             this.panelRace.Controls.Add(this.fldRaceName);
             this.panelRace.Controls.Add(this.btnRemvRace);
@@ -272,6 +281,57 @@
             this.panelRace.Name = "panelRace";
             this.panelRace.Size = new System.Drawing.Size(657, 138);
             this.panelRace.TabIndex = 9;
+            // 
+            // btnLoadXML
+            // 
+            this.btnLoadXML.Enabled = false;
+            this.btnLoadXML.Location = new System.Drawing.Point(346, 108);
+            this.btnLoadXML.Name = "btnLoadXML";
+            this.btnLoadXML.Size = new System.Drawing.Size(83, 26);
+            this.btnLoadXML.TabIndex = 52;
+            this.btnLoadXML.Text = "Load XML";
+            this.btnLoadXML.UseVisualStyleBackColor = true;
+            this.btnLoadXML.Click += new System.EventHandler(this.btnLoadXML_Click);
+            // 
+            // btnRacePilotD
+            // 
+            this.btnRacePilotD.Location = new System.Drawing.Point(561, 70);
+            this.btnRacePilotD.Name = "btnRacePilotD";
+            this.btnRacePilotD.Size = new System.Drawing.Size(83, 20);
+            this.btnRacePilotD.TabIndex = 51;
+            this.btnRacePilotD.Text = "Add Pilot";
+            this.btnRacePilotD.UseVisualStyleBackColor = true;
+            this.btnRacePilotD.Click += new System.EventHandler(this.btnRacePilotD_Click);
+            // 
+            // btnRacePilotC
+            // 
+            this.btnRacePilotC.Location = new System.Drawing.Point(561, 47);
+            this.btnRacePilotC.Name = "btnRacePilotC";
+            this.btnRacePilotC.Size = new System.Drawing.Size(83, 20);
+            this.btnRacePilotC.TabIndex = 50;
+            this.btnRacePilotC.Text = "Add Pilot";
+            this.btnRacePilotC.UseVisualStyleBackColor = true;
+            this.btnRacePilotC.Click += new System.EventHandler(this.btnRacePilotC_Click);
+            // 
+            // btnRacePilotB
+            // 
+            this.btnRacePilotB.Location = new System.Drawing.Point(561, 26);
+            this.btnRacePilotB.Name = "btnRacePilotB";
+            this.btnRacePilotB.Size = new System.Drawing.Size(83, 20);
+            this.btnRacePilotB.TabIndex = 49;
+            this.btnRacePilotB.Text = "Add Pilot";
+            this.btnRacePilotB.UseVisualStyleBackColor = true;
+            this.btnRacePilotB.Click += new System.EventHandler(this.btnRacePilotB_Click);
+            // 
+            // btnRacePilotA
+            // 
+            this.btnRacePilotA.Location = new System.Drawing.Point(561, 3);
+            this.btnRacePilotA.Name = "btnRacePilotA";
+            this.btnRacePilotA.Size = new System.Drawing.Size(83, 20);
+            this.btnRacePilotA.TabIndex = 48;
+            this.btnRacePilotA.Text = "Add Pilot";
+            this.btnRacePilotA.UseVisualStyleBackColor = true;
+            this.btnRacePilotA.Click += new System.EventHandler(this.btnRacePilotA_Click);
             // 
             // fldRacePilotD
             // 
@@ -341,13 +401,13 @@
             this.lblPilotA.TabIndex = 40;
             this.lblPilotA.Text = "Pilot A";
             // 
-            // numericUpDown1
+            // fldRaceDuration
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(232, 81);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 39;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.fldRaceDuration.Location = new System.Drawing.Point(232, 81);
+            this.fldRaceDuration.Name = "fldRaceDuration";
+            this.fldRaceDuration.Size = new System.Drawing.Size(120, 20);
+            this.fldRaceDuration.TabIndex = 39;
+            this.fldRaceDuration.Value = new decimal(new int[] {
             12,
             0,
             0,
@@ -371,23 +431,24 @@
             this.lblStartTime.TabIndex = 36;
             this.lblStartTime.Text = "Start Time";
             // 
-            // dateTimePicker2
+            // fldRaceTime
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePicker2.Location = new System.Drawing.Point(232, 55);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(121, 20);
-            this.dateTimePicker2.TabIndex = 35;
-            this.dateTimePicker2.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
+            this.fldRaceTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.fldRaceTime.Location = new System.Drawing.Point(232, 55);
+            this.fldRaceTime.Name = "fldRaceTime";
+            this.fldRaceTime.Size = new System.Drawing.Size(121, 20);
+            this.fldRaceTime.TabIndex = 35;
+            this.fldRaceTime.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
             // 
             // btnLoadDxf
             // 
-            this.btnLoadDxf.Location = new System.Drawing.Point(180, 106);
+            this.btnLoadDxf.Location = new System.Drawing.Point(257, 107);
             this.btnLoadDxf.Name = "btnLoadDxf";
             this.btnLoadDxf.Size = new System.Drawing.Size(83, 26);
             this.btnLoadDxf.TabIndex = 34;
             this.btnLoadDxf.Text = "Load DXF";
             this.btnLoadDxf.UseVisualStyleBackColor = true;
+            this.btnLoadDxf.Click += new System.EventHandler(this.btnLoadDxf_Click);
             // 
             // btnSaveRace
             // 
@@ -397,6 +458,7 @@
             this.btnSaveRace.TabIndex = 33;
             this.btnSaveRace.Text = "Save Race";
             this.btnSaveRace.UseVisualStyleBackColor = true;
+            this.btnSaveRace.Click += new System.EventHandler(this.btnSaveRace_Click);
             // 
             // lblDate
             // 
@@ -407,13 +469,13 @@
             this.lblDate.TabIndex = 32;
             this.lblDate.Text = "Date";
             // 
-            // dateTimePicker1
+            // fldRaceDate
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(232, 29);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(121, 20);
-            this.dateTimePicker1.TabIndex = 31;
+            this.fldRaceDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.fldRaceDate.Location = new System.Drawing.Point(232, 29);
+            this.fldRaceDate.Name = "fldRaceDate";
+            this.fldRaceDate.Size = new System.Drawing.Size(121, 20);
+            this.fldRaceDate.TabIndex = 31;
             // 
             // lblRace
             // 
@@ -430,6 +492,7 @@
             this.fldRaceName.Name = "fldRaceName";
             this.fldRaceName.Size = new System.Drawing.Size(121, 20);
             this.fldRaceName.TabIndex = 29;
+            this.fldRaceName.TextChanged += new System.EventHandler(this.fldRaceName_TextChanged);
             // 
             // btnRemvRace
             // 
@@ -439,15 +502,17 @@
             this.btnRemvRace.TabIndex = 28;
             this.btnRemvRace.Text = "Remove";
             this.btnRemvRace.UseVisualStyleBackColor = true;
+            this.btnRemvRace.Click += new System.EventHandler(this.btnRemvRace_Click);
             // 
             // btnNewRace
             // 
-            this.btnNewRace.Location = new System.Drawing.Point(6, 106);
+            this.btnNewRace.Location = new System.Drawing.Point(176, 106);
             this.btnNewRace.Name = "btnNewRace";
             this.btnNewRace.Size = new System.Drawing.Size(75, 26);
             this.btnNewRace.TabIndex = 27;
             this.btnNewRace.Text = "New";
             this.btnNewRace.UseVisualStyleBackColor = true;
+            this.btnNewRace.Click += new System.EventHandler(this.btnNewRace_Click);
             // 
             // lstRace
             // 
@@ -460,6 +525,7 @@
             this.lstRace.TabIndex = 0;
             this.lstRace.UseCompatibleStateImageBehavior = false;
             this.lstRace.View = System.Windows.Forms.View.Details;
+            this.lstRace.SelectedIndexChanged += new System.EventHandler(this.lstRace_SelectedIndexChanged);
             // 
             // columnHeader6
             // 
@@ -470,51 +536,15 @@
             this.columnHeader7.Text = "Race";
             this.columnHeader7.Width = 100;
             // 
-            // btnRacePilotA
+            // btnRacesRefresh
             // 
-            this.btnRacePilotA.Location = new System.Drawing.Point(561, 3);
-            this.btnRacePilotA.Name = "btnRacePilotA";
-            this.btnRacePilotA.Size = new System.Drawing.Size(83, 20);
-            this.btnRacePilotA.TabIndex = 48;
-            this.btnRacePilotA.Text = "Add Pilot";
-            this.btnRacePilotA.UseVisualStyleBackColor = true;
-            // 
-            // btnRacePilotB
-            // 
-            this.btnRacePilotB.Location = new System.Drawing.Point(561, 26);
-            this.btnRacePilotB.Name = "btnRacePilotB";
-            this.btnRacePilotB.Size = new System.Drawing.Size(83, 20);
-            this.btnRacePilotB.TabIndex = 49;
-            this.btnRacePilotB.Text = "Add Pilot";
-            this.btnRacePilotB.UseVisualStyleBackColor = true;
-            // 
-            // btnRacePilotC
-            // 
-            this.btnRacePilotC.Location = new System.Drawing.Point(561, 47);
-            this.btnRacePilotC.Name = "btnRacePilotC";
-            this.btnRacePilotC.Size = new System.Drawing.Size(83, 20);
-            this.btnRacePilotC.TabIndex = 50;
-            this.btnRacePilotC.Text = "Add Pilot";
-            this.btnRacePilotC.UseVisualStyleBackColor = true;
-            // 
-            // btnRacePilotD
-            // 
-            this.btnRacePilotD.Location = new System.Drawing.Point(561, 70);
-            this.btnRacePilotD.Name = "btnRacePilotD";
-            this.btnRacePilotD.Size = new System.Drawing.Size(83, 20);
-            this.btnRacePilotD.TabIndex = 51;
-            this.btnRacePilotD.Text = "Add Pilot";
-            this.btnRacePilotD.UseVisualStyleBackColor = true;
-            // 
-            // btnLoadXML
-            // 
-            this.btnLoadXML.Enabled = false;
-            this.btnLoadXML.Location = new System.Drawing.Point(270, 106);
-            this.btnLoadXML.Name = "btnLoadXML";
-            this.btnLoadXML.Size = new System.Drawing.Size(83, 26);
-            this.btnLoadXML.TabIndex = 52;
-            this.btnLoadXML.Text = "Load XML";
-            this.btnLoadXML.UseVisualStyleBackColor = true;
+            this.btnRacesRefresh.Location = new System.Drawing.Point(6, 107);
+            this.btnRacesRefresh.Name = "btnRacesRefresh";
+            this.btnRacesRefresh.Size = new System.Drawing.Size(75, 26);
+            this.btnRacesRefresh.TabIndex = 53;
+            this.btnRacesRefresh.Text = "Refresh";
+            this.btnRacesRefresh.UseVisualStyleBackColor = true;
+            this.btnRacesRefresh.Click += new System.EventHandler(this.btnRacesRefresh_Click);
             // 
             // AnrlClient
             // 
@@ -531,7 +561,7 @@
             this.panelTrackerPilot.ResumeLayout(false);
             this.panelRace.ResumeLayout(false);
             this.panelRace.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -565,13 +595,13 @@
         private System.Windows.Forms.Label lblRace;
         protected System.Windows.Forms.TextBox fldRaceName;
         private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker fldRaceDate;
         private System.Windows.Forms.Label lblStartTime;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker fldRaceTime;
         private System.Windows.Forms.Button btnLoadDxf;
         private System.Windows.Forms.Button btnSaveRace;
         private System.Windows.Forms.Label lblRaceDuration;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown fldRaceDuration;
         private System.Windows.Forms.TextBox fldRacePilotD;
         private System.Windows.Forms.TextBox fldRacePilotC;
         private System.Windows.Forms.TextBox fldRacePilotB;
@@ -585,5 +615,6 @@
         private System.Windows.Forms.Button btnRacePilotB;
         private System.Windows.Forms.Button btnRacePilotA;
         private System.Windows.Forms.Button btnLoadXML;
+        private System.Windows.Forms.Button btnRacesRefresh;
     }
 }

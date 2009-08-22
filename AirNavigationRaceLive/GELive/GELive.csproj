@@ -108,7 +108,7 @@
     <Compile Include="GELiveStuff\IGEControls.cs" />
     <Compile Include="GELiveStuff\IHTMLScriptElement.cs" />
     <Compile Include="GELiveStuff\Maths.cs" />
-    <Compile Include="GELiveStuff\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="InformationPool.cs">
     </Compile>
     <Compile Include="Pilot.cs">
@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Plugin.html" />
+    <None Include="app.config" />
     <None Include="GELiveStuff\GELive_TemporaryKey.pfx" />
     <None Include="Resources\KMLTemplates\footerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
