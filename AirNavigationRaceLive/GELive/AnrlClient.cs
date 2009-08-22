@@ -154,6 +154,7 @@ namespace GELive
                 fldRaceDate.Value = CurrentRace.StartTime;
             else
                 fldRaceDate.Value = DateTime.Now;
+            fldRacePolygonsLoaded.Text = CurrentRace.Polygons.Polygons.Count.ToString();
             CheckEnabled();
         }
         #region Event Handlers
@@ -242,6 +243,7 @@ namespace GELive
         {
             OpenFileDialog of = (OpenFileDialog)sender;
             CurrentRace.Polygons = InformationPool.importFromDxf(of.FileName);
+            SyncRace();
         }
 
         private void btnRacePilotA_Click(object sender, EventArgs e)
