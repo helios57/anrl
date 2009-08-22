@@ -76,6 +76,8 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.btnRacesRefresh = new System.Windows.Forms.Button();
+            this.lblPolygons = new System.Windows.Forms.Label();
+            this.fldRacePolygonsLoaded = new System.Windows.Forms.TextBox();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -250,6 +252,8 @@
             // 
             // panelRace
             // 
+            this.panelRace.Controls.Add(this.fldRacePolygonsLoaded);
+            this.panelRace.Controls.Add(this.lblPolygons);
             this.panelRace.Controls.Add(this.btnRacesRefresh);
             this.panelRace.Controls.Add(this.btnLoadXML);
             this.panelRace.Controls.Add(this.btnRacePilotD);
@@ -279,13 +283,13 @@
             this.panelRace.Controls.Add(this.lstRace);
             this.panelRace.Location = new System.Drawing.Point(12, 208);
             this.panelRace.Name = "panelRace";
-            this.panelRace.Size = new System.Drawing.Size(657, 138);
+            this.panelRace.Size = new System.Drawing.Size(657, 160);
             this.panelRace.TabIndex = 9;
             // 
             // btnLoadXML
             // 
             this.btnLoadXML.Enabled = false;
-            this.btnLoadXML.Location = new System.Drawing.Point(346, 108);
+            this.btnLoadXML.Location = new System.Drawing.Point(346, 131);
             this.btnLoadXML.Name = "btnLoadXML";
             this.btnLoadXML.Size = new System.Drawing.Size(83, 26);
             this.btnLoadXML.TabIndex = 52;
@@ -412,6 +416,7 @@
             0,
             0,
             0});
+            this.fldRaceDuration.ValueChanged += new System.EventHandler(this.fldRaceDuration_ValueChanged);
             // 
             // lblRaceDuration
             // 
@@ -439,10 +444,11 @@
             this.fldRaceTime.Size = new System.Drawing.Size(121, 20);
             this.fldRaceTime.TabIndex = 35;
             this.fldRaceTime.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
+            this.fldRaceTime.ValueChanged += new System.EventHandler(this.fldRaceTime_ValueChanged);
             // 
             // btnLoadDxf
             // 
-            this.btnLoadDxf.Location = new System.Drawing.Point(257, 107);
+            this.btnLoadDxf.Location = new System.Drawing.Point(257, 132);
             this.btnLoadDxf.Name = "btnLoadDxf";
             this.btnLoadDxf.Size = new System.Drawing.Size(83, 26);
             this.btnLoadDxf.TabIndex = 34;
@@ -452,7 +458,7 @@
             // 
             // btnSaveRace
             // 
-            this.btnSaveRace.Location = new System.Drawing.Point(561, 106);
+            this.btnSaveRace.Location = new System.Drawing.Point(561, 131);
             this.btnSaveRace.Name = "btnSaveRace";
             this.btnSaveRace.Size = new System.Drawing.Size(83, 26);
             this.btnSaveRace.TabIndex = 33;
@@ -476,6 +482,7 @@
             this.fldRaceDate.Name = "fldRaceDate";
             this.fldRaceDate.Size = new System.Drawing.Size(121, 20);
             this.fldRaceDate.TabIndex = 31;
+            this.fldRaceDate.ValueChanged += new System.EventHandler(this.fldRaceDate_ValueChanged);
             // 
             // lblRace
             // 
@@ -496,7 +503,7 @@
             // 
             // btnRemvRace
             // 
-            this.btnRemvRace.Location = new System.Drawing.Point(87, 106);
+            this.btnRemvRace.Location = new System.Drawing.Point(87, 131);
             this.btnRemvRace.Name = "btnRemvRace";
             this.btnRemvRace.Size = new System.Drawing.Size(83, 26);
             this.btnRemvRace.TabIndex = 28;
@@ -506,7 +513,7 @@
             // 
             // btnNewRace
             // 
-            this.btnNewRace.Location = new System.Drawing.Point(176, 106);
+            this.btnNewRace.Location = new System.Drawing.Point(176, 131);
             this.btnNewRace.Name = "btnNewRace";
             this.btnNewRace.Size = new System.Drawing.Size(75, 26);
             this.btnNewRace.TabIndex = 27;
@@ -521,7 +528,7 @@
             this.columnHeader7});
             this.lstRace.Location = new System.Drawing.Point(6, 3);
             this.lstRace.Name = "lstRace";
-            this.lstRace.Size = new System.Drawing.Size(164, 97);
+            this.lstRace.Size = new System.Drawing.Size(164, 122);
             this.lstRace.TabIndex = 0;
             this.lstRace.UseCompatibleStateImageBehavior = false;
             this.lstRace.View = System.Windows.Forms.View.Details;
@@ -538,7 +545,7 @@
             // 
             // btnRacesRefresh
             // 
-            this.btnRacesRefresh.Location = new System.Drawing.Point(6, 107);
+            this.btnRacesRefresh.Location = new System.Drawing.Point(6, 132);
             this.btnRacesRefresh.Name = "btnRacesRefresh";
             this.btnRacesRefresh.Size = new System.Drawing.Size(75, 26);
             this.btnRacesRefresh.TabIndex = 53;
@@ -546,11 +553,28 @@
             this.btnRacesRefresh.UseVisualStyleBackColor = true;
             this.btnRacesRefresh.Click += new System.EventHandler(this.btnRacesRefresh_Click);
             // 
+            // lblPolygons
+            // 
+            this.lblPolygons.AutoSize = true;
+            this.lblPolygons.Location = new System.Drawing.Point(177, 112);
+            this.lblPolygons.Name = "lblPolygons";
+            this.lblPolygons.Size = new System.Drawing.Size(89, 13);
+            this.lblPolygons.TabIndex = 54;
+            this.lblPolygons.Text = "Polygons Loaded";
+            // 
+            // fldRacePolygonsLoaded
+            // 
+            this.fldRacePolygonsLoaded.Enabled = false;
+            this.fldRacePolygonsLoaded.Location = new System.Drawing.Point(272, 105);
+            this.fldRacePolygonsLoaded.Name = "fldRacePolygonsLoaded";
+            this.fldRacePolygonsLoaded.Size = new System.Drawing.Size(80, 20);
+            this.fldRacePolygonsLoaded.TabIndex = 55;
+            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 354);
+            this.ClientSize = new System.Drawing.Size(686, 396);
             this.Controls.Add(this.panelRace);
             this.Controls.Add(this.panelTrackerPilot);
             this.Controls.Add(this.panelConnection);
@@ -616,5 +640,7 @@
         private System.Windows.Forms.Button btnRacePilotA;
         private System.Windows.Forms.Button btnLoadXML;
         private System.Windows.Forms.Button btnRacesRefresh;
+        private System.Windows.Forms.TextBox fldRacePolygonsLoaded;
+        private System.Windows.Forms.Label lblPolygons;
     }
 }

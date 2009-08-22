@@ -36,13 +36,8 @@ namespace GELive
             Client.ClientCredentials.Windows.ClientCredential.Password = Password;
             return Client.State == System.ServiceModel.CommunicationState.Created;
         }
-
-
-
-
-
         
-            /// <summary> 
+        /// <summary> 
         /// Imports a DxfFile that is in the specified Format. Any changes on the import schema may cause Errors!
         /// </summary>
         /// <param name="filepath"></param>
@@ -182,13 +177,13 @@ namespace GELive
             Polygons.Polygons.First().ID = int.Parse(Values[6]);
             this.StartTime = DateTime.Parse(Values[8]);
             DateTime EndTime = DateTime.Parse(Values[7]);
-            this.Duration = (int) (EndTime - StartTime).TotalMilliseconds;
+            this.Duration = (decimal)(EndTime - StartTime).TotalMilliseconds;
         }
         public int ID;
         public String Name;
         public PolygonGroup Polygons;
         public DateTime StartTime;
-        public int Duration;
+        public decimal Duration;
         public PilotEntry PilotA;
         public PilotEntry PilotB;
         public PilotEntry PilotC;

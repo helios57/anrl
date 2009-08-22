@@ -329,6 +329,10 @@ namespace GELive
             CurrentRace.Name = fldRaceName.Text;
             SyncRace();
         }
+        private void fldRaceDuration_ValueChanged(object sender, EventArgs e)
+        {
+            CurrentRace.Duration = fldRaceDuration.Value;
+        }
 
 
 
@@ -343,5 +347,16 @@ namespace GELive
         {
             //@todo when used
         }
+
+        private void fldRaceTime_ValueChanged(object sender, EventArgs e)
+        {
+            //@todo
+        }
+
+        private void fldRaceDate_ValueChanged(object sender, EventArgs e)
+        {
+            //@todo
+        }
+
     }
 }
