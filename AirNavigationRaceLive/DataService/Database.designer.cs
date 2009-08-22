@@ -33,6 +33,9 @@ namespace DataService
     partial void Insertt_Daten(t_Daten instance);
     partial void Updatet_Daten(t_Daten instance);
     partial void Deletet_Daten(t_Daten instance);
+    partial void Insertt_Tracker(t_Tracker instance);
+    partial void Updatet_Tracker(t_Tracker instance);
+    partial void Deletet_Tracker(t_Tracker instance);
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
@@ -45,15 +48,15 @@ namespace DataService
     partial void Insertt_Polygon(t_Polygon instance);
     partial void Updatet_Polygon(t_Polygon instance);
     partial void Deletet_Polygon(t_Polygon instance);
+    partial void Insertt_PolygonGroup(t_PolygonGroup instance);
+    partial void Updatet_PolygonGroup(t_PolygonGroup instance);
+    partial void Deletet_PolygonGroup(t_PolygonGroup instance);
     partial void Insertt_PolygonPoint(t_PolygonPoint instance);
     partial void Updatet_PolygonPoint(t_PolygonPoint instance);
     partial void Deletet_PolygonPoint(t_PolygonPoint instance);
     partial void Insertt_Race(t_Race instance);
     partial void Updatet_Race(t_Race instance);
     partial void Deletet_Race(t_Race instance);
-    partial void Insertt_Tracker(t_Tracker instance);
-    partial void Updatet_Tracker(t_Tracker instance);
-    partial void Deletet_Tracker(t_Tracker instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -94,6 +97,14 @@ namespace DataService
 			}
 		}
 		
+		public System.Data.Linq.Table<t_Tracker> t_Trackers
+		{
+			get
+			{
+				return this.GetTable<t_Tracker>();
+			}
+		}
+		
 		public System.Data.Linq.Table<t_GPS_IN> t_GPS_INs
 		{
 			get
@@ -126,6 +137,14 @@ namespace DataService
 			}
 		}
 		
+		public System.Data.Linq.Table<t_PolygonGroup> t_PolygonGroups
+		{
+			get
+			{
+				return this.GetTable<t_PolygonGroup>();
+			}
+		}
+		
 		public System.Data.Linq.Table<t_PolygonPoint> t_PolygonPoints
 		{
 			get
@@ -139,14 +158,6 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_Race>();
-			}
-		}
-		
-		public System.Data.Linq.Table<t_Tracker> t_Trackers
-		{
-			get
-			{
-				return this.GetTable<t_Tracker>();
 			}
 		}
 	}
@@ -175,6 +186,8 @@ namespace DataService
 		
 		private int _ID_Polygon;
 		
+		private EntityRef<t_Tracker> _t_Tracker;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -201,6 +214,7 @@ namespace DataService
 		
 		public t_Daten()
 		{
+			this._t_Tracker = default(EntityRef<t_Tracker>);
 			OnCreated();
 		}
 		
@@ -235,6 +249,10 @@ namespace DataService
 			{
 				if ((this._ID_Tracker != value))
 				{
+					if (this._t_Tracker.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_TrackerChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Tracker = value;
@@ -384,6 +402,40 @@ namespace DataService
 			}
 		}
 		
+		[Association(Name="t_Tracker_t_Daten", Storage="_t_Tracker", ThisKey="ID_Tracker", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public t_Tracker t_Tracker
+		{
+			get
+			{
+				return this._t_Tracker.Entity;
+			}
+			set
+			{
+				t_Tracker previousValue = this._t_Tracker.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Tracker.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Tracker.Entity = null;
+						previousValue.t_Datens.Remove(this);
+					}
+					this._t_Tracker.Entity = value;
+					if ((value != null))
+					{
+						value.t_Datens.Add(this);
+						this._ID_Tracker = value.ID;
+					}
+					else
+					{
+						this._ID_Tracker = default(int);
+					}
+					this.SendPropertyChanged("t_Tracker");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -402,6 +454,120 @@ namespace DataService
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[Table(Name="dbo.t_Tracker")]
+	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _IMEI;
+		
+		private EntitySet<t_Daten> _t_Datens;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnIMEIChanging(string value);
+    partial void OnIMEIChanged();
+    #endregion
+		
+		public t_Tracker()
+		{
+			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string IMEI
+		{
+			get
+			{
+				return this._IMEI;
+			}
+			set
+			{
+				if ((this._IMEI != value))
+				{
+					this.OnIMEIChanging(value);
+					this.SendPropertyChanging();
+					this._IMEI = value;
+					this.SendPropertyChanged("IMEI");
+					this.OnIMEIChanged();
+				}
+			}
+		}
+		
+		[Association(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Daten> t_Datens
+		{
+			get
+			{
+				return this._t_Datens;
+			}
+			set
+			{
+				this._t_Datens.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
 		}
 	}
 	
@@ -953,6 +1119,14 @@ namespace DataService
 		
 		private string _Color;
 		
+		private EntitySet<t_Race> _t_Races;
+		
+		private EntitySet<t_Race> _t_Races1;
+		
+		private EntitySet<t_Race> _t_Races2;
+		
+		private EntitySet<t_Race> _t_Races3;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -971,6 +1145,10 @@ namespace DataService
 		
 		public t_Pilot()
 		{
+			this._t_Races = new EntitySet<t_Race>(new Action<t_Race>(this.attach_t_Races), new Action<t_Race>(this.detach_t_Races));
+			this._t_Races1 = new EntitySet<t_Race>(new Action<t_Race>(this.attach_t_Races1), new Action<t_Race>(this.detach_t_Races1));
+			this._t_Races2 = new EntitySet<t_Race>(new Action<t_Race>(this.attach_t_Races2), new Action<t_Race>(this.detach_t_Races2));
+			this._t_Races3 = new EntitySet<t_Race>(new Action<t_Race>(this.attach_t_Races3), new Action<t_Race>(this.detach_t_Races3));
 			OnCreated();
 		}
 		
@@ -1074,6 +1252,58 @@ namespace DataService
 			}
 		}
 		
+		[Association(Name="t_Pilot_t_Race", Storage="_t_Races", ThisKey="ID", OtherKey="ID_Pilot_0")]
+		public EntitySet<t_Race> t_Races
+		{
+			get
+			{
+				return this._t_Races;
+			}
+			set
+			{
+				this._t_Races.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_Pilot_t_Race1", Storage="_t_Races1", ThisKey="ID", OtherKey="ID_Pilot_1")]
+		public EntitySet<t_Race> t_Races1
+		{
+			get
+			{
+				return this._t_Races1;
+			}
+			set
+			{
+				this._t_Races1.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_Pilot_t_Race2", Storage="_t_Races2", ThisKey="ID", OtherKey="ID_Pilot_2")]
+		public EntitySet<t_Race> t_Races2
+		{
+			get
+			{
+				return this._t_Races2;
+			}
+			set
+			{
+				this._t_Races2.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_Pilot_t_Race3", Storage="_t_Races3", ThisKey="ID", OtherKey="ID_Pilot_3")]
+		public EntitySet<t_Race> t_Races3
+		{
+			get
+			{
+				return this._t_Races3;
+			}
+			set
+			{
+				this._t_Races3.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1093,6 +1323,54 @@ namespace DataService
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_t_Races(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot = this;
+		}
+		
+		private void detach_t_Races(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot = null;
+		}
+		
+		private void attach_t_Races1(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot1 = this;
+		}
+		
+		private void detach_t_Races1(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot1 = null;
+		}
+		
+		private void attach_t_Races2(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot2 = this;
+		}
+		
+		private void detach_t_Races2(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot2 = null;
+		}
+		
+		private void attach_t_Races3(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot3 = this;
+		}
+		
+		private void detach_t_Races3(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Pilot3 = null;
+		}
 	}
 	
 	[Table(Name="dbo.t_Polygon")]
@@ -1103,7 +1381,13 @@ namespace DataService
 		
 		private int _ID;
 		
-		private string _Name;
+		private int _ID_PolygonGroup;
+		
+		private int _Type;
+		
+		private EntitySet<t_PolygonPoint> _t_PolygonPoints;
+		
+		private EntityRef<t_PolygonGroup> _t_PolygonGroup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1111,12 +1395,16 @@ namespace DataService
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
+    partial void OnID_PolygonGroupChanging(int value);
+    partial void OnID_PolygonGroupChanged();
+    partial void OnTypeChanging(int value);
+    partial void OnTypeChanged();
     #endregion
 		
 		public t_Polygon()
 		{
+			this._t_PolygonPoints = new EntitySet<t_PolygonPoint>(new Action<t_PolygonPoint>(this.attach_t_PolygonPoints), new Action<t_PolygonPoint>(this.detach_t_PolygonPoints));
+			this._t_PolygonGroup = default(EntityRef<t_PolygonGroup>);
 			OnCreated();
 		}
 		
@@ -1140,22 +1428,93 @@ namespace DataService
 			}
 		}
 		
-		[Column(Storage="_Name", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Name
+		[Column(Storage="_ID_PolygonGroup", DbType="Int NOT NULL")]
+		public int ID_PolygonGroup
 		{
 			get
 			{
-				return this._Name;
+				return this._ID_PolygonGroup;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._ID_PolygonGroup != value))
 				{
-					this.OnNameChanging(value);
+					if (this._t_PolygonGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_PolygonGroupChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._ID_PolygonGroup = value;
+					this.SendPropertyChanged("ID_PolygonGroup");
+					this.OnID_PolygonGroupChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Type", DbType="Int NOT NULL")]
+		public int Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[Association(Name="t_Polygon_t_PolygonPoint", Storage="_t_PolygonPoints", ThisKey="ID", OtherKey="ID_Polygon")]
+		public EntitySet<t_PolygonPoint> t_PolygonPoints
+		{
+			get
+			{
+				return this._t_PolygonPoints;
+			}
+			set
+			{
+				this._t_PolygonPoints.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_PolygonGroup_t_Polygon", Storage="_t_PolygonGroup", ThisKey="ID_PolygonGroup", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public t_PolygonGroup t_PolygonGroup
+		{
+			get
+			{
+				return this._t_PolygonGroup.Entity;
+			}
+			set
+			{
+				t_PolygonGroup previousValue = this._t_PolygonGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._t_PolygonGroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_PolygonGroup.Entity = null;
+						previousValue.t_Polygons.Remove(this);
+					}
+					this._t_PolygonGroup.Entity = value;
+					if ((value != null))
+					{
+						value.t_Polygons.Add(this);
+						this._ID_PolygonGroup = value.ID;
+					}
+					else
+					{
+						this._ID_PolygonGroup = default(int);
+					}
+					this.SendPropertyChanged("t_PolygonGroup");
 				}
 			}
 		}
@@ -1179,6 +1538,160 @@ namespace DataService
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_t_PolygonPoints(t_PolygonPoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Polygon = this;
+		}
+		
+		private void detach_t_PolygonPoints(t_PolygonPoint entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Polygon = null;
+		}
+	}
+	
+	[Table(Name="dbo.t_PolygonGroup")]
+	public partial class t_PolygonGroup : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private EntitySet<t_Polygon> _t_Polygons;
+		
+		private EntitySet<t_Race> _t_Races;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public t_PolygonGroup()
+		{
+			this._t_Polygons = new EntitySet<t_Polygon>(new Action<t_Polygon>(this.attach_t_Polygons), new Action<t_Polygon>(this.detach_t_Polygons));
+			this._t_Races = new EntitySet<t_Race>(new Action<t_Race>(this.attach_t_Races), new Action<t_Race>(this.detach_t_Races));
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Association(Name="t_PolygonGroup_t_Polygon", Storage="_t_Polygons", ThisKey="ID", OtherKey="ID_PolygonGroup")]
+		public EntitySet<t_Polygon> t_Polygons
+		{
+			get
+			{
+				return this._t_Polygons;
+			}
+			set
+			{
+				this._t_Polygons.Assign(value);
+			}
+		}
+		
+		[Association(Name="t_PolygonGroup_t_Race", Storage="_t_Races", ThisKey="ID", OtherKey="ID_PolygonGroup")]
+		public EntitySet<t_Race> t_Races
+		{
+			get
+			{
+				return this._t_Races;
+			}
+			set
+			{
+				this._t_Races.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Polygons(t_Polygon entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_PolygonGroup = this;
+		}
+		
+		private void detach_t_Polygons(t_Polygon entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_PolygonGroup = null;
+		}
+		
+		private void attach_t_Races(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_PolygonGroup = this;
+		}
+		
+		private void detach_t_Races(t_Race entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_PolygonGroup = null;
+		}
 	}
 	
 	[Table(Name="dbo.t_PolygonPoints")]
@@ -1196,6 +1709,8 @@ namespace DataService
 		private decimal _altitude;
 		
 		private int _ID_Polygon;
+		
+		private EntityRef<t_Polygon> _t_Polygon;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1215,6 +1730,7 @@ namespace DataService
 		
 		public t_PolygonPoint()
 		{
+			this._t_Polygon = default(EntityRef<t_Polygon>);
 			OnCreated();
 		}
 		
@@ -1309,11 +1825,49 @@ namespace DataService
 			{
 				if ((this._ID_Polygon != value))
 				{
+					if (this._t_Polygon.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_PolygonChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Polygon = value;
 					this.SendPropertyChanged("ID_Polygon");
 					this.OnID_PolygonChanged();
+				}
+			}
+		}
+		
+		[Association(Name="t_Polygon_t_PolygonPoint", Storage="_t_Polygon", ThisKey="ID_Polygon", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public t_Polygon t_Polygon
+		{
+			get
+			{
+				return this._t_Polygon.Entity;
+			}
+			set
+			{
+				t_Polygon previousValue = this._t_Polygon.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Polygon.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Polygon.Entity = null;
+						previousValue.t_PolygonPoints.Remove(this);
+					}
+					this._t_Polygon.Entity = value;
+					if ((value != null))
+					{
+						value.t_PolygonPoints.Add(this);
+						this._ID_Polygon = value.ID;
+					}
+					else
+					{
+						this._ID_Polygon = default(int);
+					}
+					this.SendPropertyChanged("t_Polygon");
 				}
 			}
 		}
@@ -1357,29 +1911,21 @@ namespace DataService
 		
 		private System.Nullable<int> _ID_Pilot_3;
 		
-		private System.Nullable<int> _ID_Polygon;
+		private System.Nullable<int> _ID_PolygonGroup;
 		
 		private System.Nullable<System.DateTime> _TimeStart;
 		
 		private System.Nullable<System.DateTime> _TimeEnd;
 		
-		private System.Nullable<int> _ID_StartGate_0;
+		private EntityRef<t_Pilot> _t_Pilot;
 		
-		private System.Nullable<int> _ID_StartGate_1;
+		private EntityRef<t_Pilot> _t_Pilot1;
 		
-		private System.Nullable<int> _ID_StartGate_2;
+		private EntityRef<t_Pilot> _t_Pilot2;
 		
-		private System.Nullable<int> _ID_StartGate_3;
+		private EntityRef<t_Pilot> _t_Pilot3;
 		
-		private System.Nullable<int> _ID_EndGate_0;
-		
-		private System.Nullable<int> _ID_EndGate_1;
-		
-		private System.Nullable<int> _ID_EndGate_2;
-		
-		private System.Nullable<int> _ID_EndGate_3;
-		
-		private System.Nullable<int> _ID_GoalLine;
+		private EntityRef<t_PolygonGroup> _t_PolygonGroup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1397,34 +1943,21 @@ namespace DataService
     partial void OnID_Pilot_2Changed();
     partial void OnID_Pilot_3Changing(System.Nullable<int> value);
     partial void OnID_Pilot_3Changed();
-    partial void OnID_PolygonChanging(System.Nullable<int> value);
-    partial void OnID_PolygonChanged();
+    partial void OnID_PolygonGroupChanging(System.Nullable<int> value);
+    partial void OnID_PolygonGroupChanged();
     partial void OnTimeStartChanging(System.Nullable<System.DateTime> value);
     partial void OnTimeStartChanged();
     partial void OnTimeEndChanging(System.Nullable<System.DateTime> value);
     partial void OnTimeEndChanged();
-    partial void OnID_StartGate_0Changing(System.Nullable<int> value);
-    partial void OnID_StartGate_0Changed();
-    partial void OnID_StartGate_1Changing(System.Nullable<int> value);
-    partial void OnID_StartGate_1Changed();
-    partial void OnID_StartGate_2Changing(System.Nullable<int> value);
-    partial void OnID_StartGate_2Changed();
-    partial void OnID_StartGate_3Changing(System.Nullable<int> value);
-    partial void OnID_StartGate_3Changed();
-    partial void OnID_EndGate_0Changing(System.Nullable<int> value);
-    partial void OnID_EndGate_0Changed();
-    partial void OnID_EndGate_1Changing(System.Nullable<int> value);
-    partial void OnID_EndGate_1Changed();
-    partial void OnID_EndGate_2Changing(System.Nullable<int> value);
-    partial void OnID_EndGate_2Changed();
-    partial void OnID_EndGate_3Changing(System.Nullable<int> value);
-    partial void OnID_EndGate_3Changed();
-    partial void OnID_GoalLineChanging(System.Nullable<int> value);
-    partial void OnID_GoalLineChanged();
     #endregion
 		
 		public t_Race()
 		{
+			this._t_Pilot = default(EntityRef<t_Pilot>);
+			this._t_Pilot1 = default(EntityRef<t_Pilot>);
+			this._t_Pilot2 = default(EntityRef<t_Pilot>);
+			this._t_Pilot3 = default(EntityRef<t_Pilot>);
+			this._t_PolygonGroup = default(EntityRef<t_PolygonGroup>);
 			OnCreated();
 		}
 		
@@ -1479,6 +2012,10 @@ namespace DataService
 			{
 				if ((this._ID_Pilot_0 != value))
 				{
+					if (this._t_Pilot.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_Pilot_0Changing(value);
 					this.SendPropertyChanging();
 					this._ID_Pilot_0 = value;
@@ -1499,6 +2036,10 @@ namespace DataService
 			{
 				if ((this._ID_Pilot_1 != value))
 				{
+					if (this._t_Pilot1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_Pilot_1Changing(value);
 					this.SendPropertyChanging();
 					this._ID_Pilot_1 = value;
@@ -1519,6 +2060,10 @@ namespace DataService
 			{
 				if ((this._ID_Pilot_2 != value))
 				{
+					if (this._t_Pilot2.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_Pilot_2Changing(value);
 					this.SendPropertyChanging();
 					this._ID_Pilot_2 = value;
@@ -1539,6 +2084,10 @@ namespace DataService
 			{
 				if ((this._ID_Pilot_3 != value))
 				{
+					if (this._t_Pilot3.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_Pilot_3Changing(value);
 					this.SendPropertyChanging();
 					this._ID_Pilot_3 = value;
@@ -1548,22 +2097,26 @@ namespace DataService
 			}
 		}
 		
-		[Column(Storage="_ID_Polygon", DbType="Int")]
-		public System.Nullable<int> ID_Polygon
+		[Column(Storage="_ID_PolygonGroup", DbType="Int")]
+		public System.Nullable<int> ID_PolygonGroup
 		{
 			get
 			{
-				return this._ID_Polygon;
+				return this._ID_PolygonGroup;
 			}
 			set
 			{
-				if ((this._ID_Polygon != value))
+				if ((this._ID_PolygonGroup != value))
 				{
-					this.OnID_PolygonChanging(value);
+					if (this._t_PolygonGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_PolygonGroupChanging(value);
 					this.SendPropertyChanging();
-					this._ID_Polygon = value;
-					this.SendPropertyChanged("ID_Polygon");
-					this.OnID_PolygonChanged();
+					this._ID_PolygonGroup = value;
+					this.SendPropertyChanged("ID_PolygonGroup");
+					this.OnID_PolygonGroupChanged();
 				}
 			}
 		}
@@ -1608,268 +2161,172 @@ namespace DataService
 			}
 		}
 		
-		[Column(Storage="_ID_StartGate_0", DbType="Int")]
-		public System.Nullable<int> ID_StartGate_0
+		[Association(Name="t_Pilot_t_Race", Storage="_t_Pilot", ThisKey="ID_Pilot_0", OtherKey="ID", IsForeignKey=true)]
+		public t_Pilot t_Pilot
 		{
 			get
 			{
-				return this._ID_StartGate_0;
+				return this._t_Pilot.Entity;
 			}
 			set
 			{
-				if ((this._ID_StartGate_0 != value))
+				t_Pilot previousValue = this._t_Pilot.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Pilot.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnID_StartGate_0Changing(value);
 					this.SendPropertyChanging();
-					this._ID_StartGate_0 = value;
-					this.SendPropertyChanged("ID_StartGate_0");
-					this.OnID_StartGate_0Changed();
+					if ((previousValue != null))
+					{
+						this._t_Pilot.Entity = null;
+						previousValue.t_Races.Remove(this);
+					}
+					this._t_Pilot.Entity = value;
+					if ((value != null))
+					{
+						value.t_Races.Add(this);
+						this._ID_Pilot_0 = value.ID;
+					}
+					else
+					{
+						this._ID_Pilot_0 = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_Pilot");
 				}
 			}
 		}
 		
-		[Column(Storage="_ID_StartGate_1", DbType="Int")]
-		public System.Nullable<int> ID_StartGate_1
+		[Association(Name="t_Pilot_t_Race1", Storage="_t_Pilot1", ThisKey="ID_Pilot_1", OtherKey="ID", IsForeignKey=true)]
+		public t_Pilot t_Pilot1
 		{
 			get
 			{
-				return this._ID_StartGate_1;
+				return this._t_Pilot1.Entity;
 			}
 			set
 			{
-				if ((this._ID_StartGate_1 != value))
+				t_Pilot previousValue = this._t_Pilot1.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Pilot1.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnID_StartGate_1Changing(value);
 					this.SendPropertyChanging();
-					this._ID_StartGate_1 = value;
-					this.SendPropertyChanged("ID_StartGate_1");
-					this.OnID_StartGate_1Changed();
+					if ((previousValue != null))
+					{
+						this._t_Pilot1.Entity = null;
+						previousValue.t_Races1.Remove(this);
+					}
+					this._t_Pilot1.Entity = value;
+					if ((value != null))
+					{
+						value.t_Races1.Add(this);
+						this._ID_Pilot_1 = value.ID;
+					}
+					else
+					{
+						this._ID_Pilot_1 = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_Pilot1");
 				}
 			}
 		}
 		
-		[Column(Storage="_ID_StartGate_2", DbType="Int")]
-		public System.Nullable<int> ID_StartGate_2
+		[Association(Name="t_Pilot_t_Race2", Storage="_t_Pilot2", ThisKey="ID_Pilot_2", OtherKey="ID", IsForeignKey=true)]
+		public t_Pilot t_Pilot2
 		{
 			get
 			{
-				return this._ID_StartGate_2;
+				return this._t_Pilot2.Entity;
 			}
 			set
 			{
-				if ((this._ID_StartGate_2 != value))
+				t_Pilot previousValue = this._t_Pilot2.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Pilot2.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnID_StartGate_2Changing(value);
 					this.SendPropertyChanging();
-					this._ID_StartGate_2 = value;
-					this.SendPropertyChanged("ID_StartGate_2");
-					this.OnID_StartGate_2Changed();
+					if ((previousValue != null))
+					{
+						this._t_Pilot2.Entity = null;
+						previousValue.t_Races2.Remove(this);
+					}
+					this._t_Pilot2.Entity = value;
+					if ((value != null))
+					{
+						value.t_Races2.Add(this);
+						this._ID_Pilot_2 = value.ID;
+					}
+					else
+					{
+						this._ID_Pilot_2 = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_Pilot2");
 				}
 			}
 		}
 		
-		[Column(Storage="_ID_StartGate_3", DbType="Int")]
-		public System.Nullable<int> ID_StartGate_3
+		[Association(Name="t_Pilot_t_Race3", Storage="_t_Pilot3", ThisKey="ID_Pilot_3", OtherKey="ID", IsForeignKey=true)]
+		public t_Pilot t_Pilot3
 		{
 			get
 			{
-				return this._ID_StartGate_3;
+				return this._t_Pilot3.Entity;
 			}
 			set
 			{
-				if ((this._ID_StartGate_3 != value))
+				t_Pilot previousValue = this._t_Pilot3.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Pilot3.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnID_StartGate_3Changing(value);
 					this.SendPropertyChanging();
-					this._ID_StartGate_3 = value;
-					this.SendPropertyChanged("ID_StartGate_3");
-					this.OnID_StartGate_3Changed();
+					if ((previousValue != null))
+					{
+						this._t_Pilot3.Entity = null;
+						previousValue.t_Races3.Remove(this);
+					}
+					this._t_Pilot3.Entity = value;
+					if ((value != null))
+					{
+						value.t_Races3.Add(this);
+						this._ID_Pilot_3 = value.ID;
+					}
+					else
+					{
+						this._ID_Pilot_3 = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_Pilot3");
 				}
 			}
 		}
 		
-		[Column(Storage="_ID_EndGate_0", DbType="Int")]
-		public System.Nullable<int> ID_EndGate_0
+		[Association(Name="t_PolygonGroup_t_Race", Storage="_t_PolygonGroup", ThisKey="ID_PolygonGroup", OtherKey="ID", IsForeignKey=true, DeleteRule="CASCADE")]
+		public t_PolygonGroup t_PolygonGroup
 		{
 			get
 			{
-				return this._ID_EndGate_0;
+				return this._t_PolygonGroup.Entity;
 			}
 			set
 			{
-				if ((this._ID_EndGate_0 != value))
+				t_PolygonGroup previousValue = this._t_PolygonGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._t_PolygonGroup.HasLoadedOrAssignedValue == false)))
 				{
-					this.OnID_EndGate_0Changing(value);
 					this.SendPropertyChanging();
-					this._ID_EndGate_0 = value;
-					this.SendPropertyChanged("ID_EndGate_0");
-					this.OnID_EndGate_0Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_ID_EndGate_1", DbType="Int")]
-		public System.Nullable<int> ID_EndGate_1
-		{
-			get
-			{
-				return this._ID_EndGate_1;
-			}
-			set
-			{
-				if ((this._ID_EndGate_1 != value))
-				{
-					this.OnID_EndGate_1Changing(value);
-					this.SendPropertyChanging();
-					this._ID_EndGate_1 = value;
-					this.SendPropertyChanged("ID_EndGate_1");
-					this.OnID_EndGate_1Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_ID_EndGate_2", DbType="Int")]
-		public System.Nullable<int> ID_EndGate_2
-		{
-			get
-			{
-				return this._ID_EndGate_2;
-			}
-			set
-			{
-				if ((this._ID_EndGate_2 != value))
-				{
-					this.OnID_EndGate_2Changing(value);
-					this.SendPropertyChanging();
-					this._ID_EndGate_2 = value;
-					this.SendPropertyChanged("ID_EndGate_2");
-					this.OnID_EndGate_2Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_ID_EndGate_3", DbType="Int")]
-		public System.Nullable<int> ID_EndGate_3
-		{
-			get
-			{
-				return this._ID_EndGate_3;
-			}
-			set
-			{
-				if ((this._ID_EndGate_3 != value))
-				{
-					this.OnID_EndGate_3Changing(value);
-					this.SendPropertyChanging();
-					this._ID_EndGate_3 = value;
-					this.SendPropertyChanged("ID_EndGate_3");
-					this.OnID_EndGate_3Changed();
-				}
-			}
-		}
-		
-		[Column(Storage="_ID_GoalLine", DbType="Int")]
-		public System.Nullable<int> ID_GoalLine
-		{
-			get
-			{
-				return this._ID_GoalLine;
-			}
-			set
-			{
-				if ((this._ID_GoalLine != value))
-				{
-					this.OnID_GoalLineChanging(value);
-					this.SendPropertyChanging();
-					this._ID_GoalLine = value;
-					this.SendPropertyChanged("ID_GoalLine");
-					this.OnID_GoalLineChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.t_Tracker")]
-	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _IMEI;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnIMEIChanging(string value);
-    partial void OnIMEIChanged();
-    #endregion
-		
-		public t_Tracker()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		public string IMEI
-		{
-			get
-			{
-				return this._IMEI;
-			}
-			set
-			{
-				if ((this._IMEI != value))
-				{
-					this.OnIMEIChanging(value);
-					this.SendPropertyChanging();
-					this._IMEI = value;
-					this.SendPropertyChanged("IMEI");
-					this.OnIMEIChanged();
+					if ((previousValue != null))
+					{
+						this._t_PolygonGroup.Entity = null;
+						previousValue.t_Races.Remove(this);
+					}
+					this._t_PolygonGroup.Entity = value;
+					if ((value != null))
+					{
+						value.t_Races.Add(this);
+						this._ID_PolygonGroup = value.ID;
+					}
+					else
+					{
+						this._ID_PolygonGroup = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("t_PolygonGroup");
 				}
 			}
 		}

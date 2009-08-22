@@ -12,6 +12,14 @@
       <Column Name="Speed" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
       <Column Name="Penalty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Tracker" Member="t_Trackers">
+    <Type Name="t_Tracker">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
     </Type>
   </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
@@ -48,12 +56,27 @@
       <Column Name="SureName" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Color" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="t_Pilot_t_Race" Member="t_Races" ThisKey="ID" OtherKey="ID_Pilot_0" Type="t_Race" />
+      <Association Name="t_Pilot_t_Race1" Member="t_Races1" ThisKey="ID" OtherKey="ID_Pilot_1" Type="t_Race" />
+      <Association Name="t_Pilot_t_Race2" Member="t_Races2" ThisKey="ID" OtherKey="ID_Pilot_2" Type="t_Race" />
+      <Association Name="t_Pilot_t_Race3" Member="t_Races3" ThisKey="ID" OtherKey="ID_Pilot_3" Type="t_Race" />
     </Type>
   </Table>
   <Table Name="dbo.t_Polygon" Member="t_Polygons">
     <Type Name="t_Polygon">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ID_PolygonGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Polygon_t_PolygonPoint" Member="t_PolygonPoints" ThisKey="ID" OtherKey="ID_Polygon" Type="t_PolygonPoint" />
+      <Association Name="t_PolygonGroup_t_Polygon" Member="t_PolygonGroup" ThisKey="ID_PolygonGroup" OtherKey="ID" Type="t_PolygonGroup" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PolygonGroup" Member="t_PolygonGroups">
+    <Type Name="t_PolygonGroup">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="t_PolygonGroup_t_Polygon" Member="t_Polygons" ThisKey="ID" OtherKey="ID_PolygonGroup" Type="t_Polygon" />
+      <Association Name="t_PolygonGroup_t_Race" Member="t_Races" ThisKey="ID" OtherKey="ID_PolygonGroup" Type="t_Race" />
     </Type>
   </Table>
   <Table Name="dbo.t_PolygonPoints" Member="t_PolygonPoints">
@@ -63,6 +86,7 @@
       <Column Name="latitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
       <Column Name="altitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Polygon_t_PolygonPoint" Member="t_Polygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_Polygon" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Race" Member="t_Races">
@@ -73,24 +97,14 @@
       <Column Name="ID_Pilot_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Pilot_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ID_Pilot_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_PolygonGroup" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TimeStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="TimeEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ID_StartGate_0" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_StartGate_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_StartGate_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_StartGate_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_EndGate_0" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_EndGate_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_EndGate_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_EndGate_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_GoalLine" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Tracker" Member="t_Trackers">
-    <Type Name="t_Tracker">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="t_Pilot_t_Race" Member="t_Pilot" ThisKey="ID_Pilot_0" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
+      <Association Name="t_Pilot_t_Race1" Member="t_Pilot1" ThisKey="ID_Pilot_1" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
+      <Association Name="t_Pilot_t_Race2" Member="t_Pilot2" ThisKey="ID_Pilot_2" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
+      <Association Name="t_Pilot_t_Race3" Member="t_Pilot3" ThisKey="ID_Pilot_3" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
+      <Association Name="t_PolygonGroup_t_Race" Member="t_PolygonGroup" ThisKey="ID_PolygonGroup" OtherKey="ID" Type="t_PolygonGroup" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

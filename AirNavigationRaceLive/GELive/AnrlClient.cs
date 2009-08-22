@@ -145,15 +145,8 @@ namespace GELive
                 fldRacePilotB.Text = "";
             #endregion 
             fldRaceDuration.Value = CurrentRace.Duration;
-
-            if (CurrentRace.StartTime != null)
-                fldRaceTime.Value = CurrentRace.StartTime;
-            else
-                fldRaceTime.Value = DateTime.Now;
-            if (CurrentRace.StartTime != null)
-                fldRaceDate.Value = CurrentRace.StartTime;
-            else
-                fldRaceDate.Value = DateTime.Now;
+            fldRaceDate.Value = CurrentRace.StartTime;
+            fldRaceTime.Value = CurrentRace.StartTime;
             fldRacePolygonsLoaded.Text = CurrentRace.Polygons.Polygons.Count.ToString();
             CheckEnabled();
         }
@@ -334,6 +327,29 @@ namespace GELive
         private void fldRaceDuration_ValueChanged(object sender, EventArgs e)
         {
             CurrentRace.Duration = fldRaceDuration.Value;
+            SyncRace();
+        }
+        private void fldRaceTime_ValueChanged(object sender, EventArgs e)
+        {
+            CurrentRace.StartTime = new DateTime(
+                CurrentRace.StartTime.Year,
+                CurrentRace.StartTime.Month,
+                CurrentRace.StartTime.Day,
+                fldRaceTime.Value.Hour,
+                fldRaceTime.Value.Minute,
+                fldRaceTime.Value.Second);
+            SyncRace();
+        }
+        private void fldRaceDate_ValueChanged(object sender, EventArgs e)
+        {
+            CurrentRace.StartTime = new DateTime(
+                fldRaceTime.Value.Year,
+                fldRaceTime.Value.Month,
+                fldRaceTime.Value.Day,
+                CurrentRace.StartTime.Hour,
+                CurrentRace.StartTime.Minute,
+                CurrentRace.StartTime.Second);
+            SyncRace();
         }
 
 
@@ -350,15 +366,6 @@ namespace GELive
             //@todo when used
         }
 
-        private void fldRaceTime_ValueChanged(object sender, EventArgs e)
-        {
-            //@todo
-        }
-
-        private void fldRaceDate_ValueChanged(object sender, EventArgs e)
-        {
-            //@todo
-        }
 
     }
 }

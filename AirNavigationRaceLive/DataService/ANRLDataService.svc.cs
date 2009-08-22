@@ -166,7 +166,7 @@ namespace DataService
                     r.ID_Pilot_1.ToString().Trim(),
                     r.ID_Pilot_2.ToString().Trim(),
                     r.ID_Pilot_3.ToString().Trim(),
-                    r.ID_Polygon.ToString().Trim(),
+                    r.ID_PolygonGroup.ToString().Trim(),
                     r.TimeEnd.ToString(),
                     r.TimeStart.ToString()});
             }
