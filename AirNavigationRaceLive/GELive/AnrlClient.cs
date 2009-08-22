@@ -65,7 +65,8 @@ namespace GELive
             else btnRacePilotC.Text = "Remove";
             if (fldRacePilotD.Text == "") btnRacePilotD.Text = "Add Pilot";
             else btnRacePilotD.Text = "Remove";
-            btnSaveRace.Enabled = Connected && RaceHasName; 
+            btnSaveRace.Enabled = Connected && RaceHasName;
+            btnSelectParcour.Enabled = Connected && RaceHasName;
         }
         private void Connect()
         {
@@ -364,6 +365,11 @@ namespace GELive
         private void btnLoadXML_Click(object sender, EventArgs e)
         {
             //@todo when used
+        }
+
+        private void btnSelectParcour_Click(object sender, EventArgs e)
+        {
+
         }
 
 

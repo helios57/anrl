@@ -18,8 +18,15 @@ namespace GELive
             if (InformationPool.Client != null && InformationPool.Client.State == System.ServiceModel.CommunicationState.Opened)
             {
                 lstExistingPilots.Items.Clear();
-                //foreach (
-                //Fill Pilots-List
+                foreach (List<String> S in InformationPool.Client.GetPilots())
+                {
+                    PilotEntry P = new PilotEntry();
+                    P.ID = S[0];
+                    P.LastName = S[1];
+                    P.SureName = S[2];
+                    P.PilotColor = S[3];
+                    lstExistingPilots.Items.Add(P);
+                }
             }
         }
         private void lstExistingPilots_SelectedIndexChanged(object sender, EventArgs e)

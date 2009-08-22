@@ -47,6 +47,9 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.panelRace = new System.Windows.Forms.Panel();
+            this.fldRacePolygonsLoaded = new System.Windows.Forms.TextBox();
+            this.lblPolygons = new System.Windows.Forms.Label();
+            this.btnRacesRefresh = new System.Windows.Forms.Button();
             this.btnLoadXML = new System.Windows.Forms.Button();
             this.btnRacePilotD = new System.Windows.Forms.Button();
             this.btnRacePilotC = new System.Windows.Forms.Button();
@@ -75,9 +78,9 @@
             this.lstRace = new System.Windows.Forms.ListView();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.btnRacesRefresh = new System.Windows.Forms.Button();
-            this.lblPolygons = new System.Windows.Forms.Label();
-            this.fldRacePolygonsLoaded = new System.Windows.Forms.TextBox();
+            this.btnSelectParcour = new System.Windows.Forms.Button();
+            this.fldRaceParcour = new System.Windows.Forms.TextBox();
+            this.lblParcour = new System.Windows.Forms.Label();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -252,6 +255,9 @@
             // 
             // panelRace
             // 
+            this.panelRace.Controls.Add(this.fldRaceParcour);
+            this.panelRace.Controls.Add(this.lblParcour);
+            this.panelRace.Controls.Add(this.btnSelectParcour);
             this.panelRace.Controls.Add(this.fldRacePolygonsLoaded);
             this.panelRace.Controls.Add(this.lblPolygons);
             this.panelRace.Controls.Add(this.btnRacesRefresh);
@@ -285,6 +291,33 @@
             this.panelRace.Name = "panelRace";
             this.panelRace.Size = new System.Drawing.Size(657, 160);
             this.panelRace.TabIndex = 9;
+            // 
+            // fldRacePolygonsLoaded
+            // 
+            this.fldRacePolygonsLoaded.Enabled = false;
+            this.fldRacePolygonsLoaded.Location = new System.Drawing.Point(272, 105);
+            this.fldRacePolygonsLoaded.Name = "fldRacePolygonsLoaded";
+            this.fldRacePolygonsLoaded.Size = new System.Drawing.Size(80, 20);
+            this.fldRacePolygonsLoaded.TabIndex = 55;
+            // 
+            // lblPolygons
+            // 
+            this.lblPolygons.AutoSize = true;
+            this.lblPolygons.Location = new System.Drawing.Point(177, 112);
+            this.lblPolygons.Name = "lblPolygons";
+            this.lblPolygons.Size = new System.Drawing.Size(89, 13);
+            this.lblPolygons.TabIndex = 54;
+            this.lblPolygons.Text = "Polygons Loaded";
+            // 
+            // btnRacesRefresh
+            // 
+            this.btnRacesRefresh.Location = new System.Drawing.Point(6, 132);
+            this.btnRacesRefresh.Name = "btnRacesRefresh";
+            this.btnRacesRefresh.Size = new System.Drawing.Size(75, 26);
+            this.btnRacesRefresh.TabIndex = 53;
+            this.btnRacesRefresh.Text = "Refresh";
+            this.btnRacesRefresh.UseVisualStyleBackColor = true;
+            this.btnRacesRefresh.Click += new System.EventHandler(this.btnRacesRefresh_Click);
             // 
             // btnLoadXML
             // 
@@ -543,38 +576,39 @@
             this.columnHeader7.Text = "Race";
             this.columnHeader7.Width = 100;
             // 
-            // btnRacesRefresh
+            // btnSelectParcour
             // 
-            this.btnRacesRefresh.Location = new System.Drawing.Point(6, 132);
-            this.btnRacesRefresh.Name = "btnRacesRefresh";
-            this.btnRacesRefresh.Size = new System.Drawing.Size(75, 26);
-            this.btnRacesRefresh.TabIndex = 53;
-            this.btnRacesRefresh.Text = "Refresh";
-            this.btnRacesRefresh.UseVisualStyleBackColor = true;
-            this.btnRacesRefresh.Click += new System.EventHandler(this.btnRacesRefresh_Click);
+            this.btnSelectParcour.Enabled = false;
+            this.btnSelectParcour.Location = new System.Drawing.Point(561, 101);
+            this.btnSelectParcour.Name = "btnSelectParcour";
+            this.btnSelectParcour.Size = new System.Drawing.Size(83, 21);
+            this.btnSelectParcour.TabIndex = 56;
+            this.btnSelectParcour.Text = "Select";
+            this.btnSelectParcour.UseVisualStyleBackColor = true;
+            this.btnSelectParcour.Click += new System.EventHandler(this.btnSelectParcour_Click);
             // 
-            // lblPolygons
+            // fldRaceParcour
             // 
-            this.lblPolygons.AutoSize = true;
-            this.lblPolygons.Location = new System.Drawing.Point(177, 112);
-            this.lblPolygons.Name = "lblPolygons";
-            this.lblPolygons.Size = new System.Drawing.Size(89, 13);
-            this.lblPolygons.TabIndex = 54;
-            this.lblPolygons.Text = "Polygons Loaded";
+            this.fldRaceParcour.Enabled = false;
+            this.fldRaceParcour.Location = new System.Drawing.Point(424, 102);
+            this.fldRaceParcour.Name = "fldRaceParcour";
+            this.fldRaceParcour.Size = new System.Drawing.Size(131, 20);
+            this.fldRaceParcour.TabIndex = 58;
             // 
-            // fldRacePolygonsLoaded
+            // lblParcour
             // 
-            this.fldRacePolygonsLoaded.Enabled = false;
-            this.fldRacePolygonsLoaded.Location = new System.Drawing.Point(272, 105);
-            this.fldRacePolygonsLoaded.Name = "fldRacePolygonsLoaded";
-            this.fldRacePolygonsLoaded.Size = new System.Drawing.Size(80, 20);
-            this.fldRacePolygonsLoaded.TabIndex = 55;
+            this.lblParcour.AutoSize = true;
+            this.lblParcour.Location = new System.Drawing.Point(381, 105);
+            this.lblParcour.Name = "lblParcour";
+            this.lblParcour.Size = new System.Drawing.Size(44, 13);
+            this.lblParcour.TabIndex = 57;
+            this.lblParcour.Text = "Parcour";
             // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 396);
+            this.ClientSize = new System.Drawing.Size(686, 372);
             this.Controls.Add(this.panelRace);
             this.Controls.Add(this.panelTrackerPilot);
             this.Controls.Add(this.panelConnection);
@@ -642,5 +676,8 @@
         private System.Windows.Forms.Button btnRacesRefresh;
         private System.Windows.Forms.TextBox fldRacePolygonsLoaded;
         private System.Windows.Forms.Label lblPolygons;
+        private System.Windows.Forms.Button btnSelectParcour;
+        private System.Windows.Forms.TextBox fldRaceParcour;
+        private System.Windows.Forms.Label lblParcour;
     }
 }
