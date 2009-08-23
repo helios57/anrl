@@ -174,6 +174,25 @@ namespace DataService
         }
 
         /// <summary>
+        /// Return a list of all Racecs
+        /// </summary>
+        /// <returns>List of Racecs</returns>
+        public List<String[]> GetParcours()
+        {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetParcours", "");
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<String[]> tmp = new List<string[]>();
+            foreach (t_PolygonGroup pg in dataContext.t_PolygonGroups)
+            {
+                tmp.Add(new String[] {
+                    pg.ID.ToString().Trim(),
+                    pg.Name.Trim()
+                });
+            }
+            return tmp;
+        }
+
+        /// <summary>
         /// Remove the Race
         /// </summary>
         /// <param name="Race_ID">Remove Race</param>

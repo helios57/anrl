@@ -17,9 +17,18 @@
       <xs:element minOccurs="0" name="Penalty" type="xs:int" />
       <xs:element minOccurs="0" name="Speed" type="xs:decimal" />
       <xs:element minOccurs="0" name="Timestamp" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="t_Tracker" nillable="true" type="tns:t_Tracker" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="t_Daten" nillable="true" type="tns:t_Daten" />
+  <xs:complexType name="t_Tracker">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="IMEI" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="t_Datens" nillable="true" type="tns:ArrayOft_Daten" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_Tracker" nillable="true" type="tns:t_Tracker" />
   <xs:complexType name="ArrayOft_PolygonPoint">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="t_PolygonPoint" nillable="true" type="tns:t_PolygonPoint" />
@@ -33,7 +42,72 @@
       <xs:element minOccurs="0" name="altitude" type="xs:decimal" />
       <xs:element minOccurs="0" name="latitude" type="xs:decimal" />
       <xs:element minOccurs="0" name="longitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="t_Polygon" nillable="true" type="tns:t_Polygon" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="t_PolygonPoint" nillable="true" type="tns:t_PolygonPoint" />
+  <xs:complexType name="t_Polygon">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_PolygonGroup" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+      <xs:element minOccurs="0" name="t_PolygonGroup" nillable="true" type="tns:t_PolygonGroup" />
+      <xs:element minOccurs="0" name="t_PolygonPoints" nillable="true" type="tns:ArrayOft_PolygonPoint" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_Polygon" nillable="true" type="tns:t_Polygon" />
+  <xs:complexType name="t_PolygonGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="t_Polygons" nillable="true" type="tns:ArrayOft_Polygon" />
+      <xs:element minOccurs="0" name="t_Races" nillable="true" type="tns:ArrayOft_Race" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_PolygonGroup" nillable="true" type="tns:t_PolygonGroup" />
+  <xs:complexType name="ArrayOft_Polygon">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Polygon" nillable="true" type="tns:t_Polygon" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_Polygon" nillable="true" type="tns:ArrayOft_Polygon" />
+  <xs:complexType name="ArrayOft_Race">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Race" nillable="true" type="tns:t_Race" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_Race" nillable="true" type="tns:ArrayOft_Race" />
+  <xs:complexType name="t_Race">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Pilot_0" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Pilot_1" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Pilot_2" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Pilot_3" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_PolygonGroup" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeEnd" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TimeStart" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="t_Pilot" nillable="true" type="tns:t_Pilot" />
+      <xs:element minOccurs="0" name="t_Pilot1" nillable="true" type="tns:t_Pilot" />
+      <xs:element minOccurs="0" name="t_Pilot2" nillable="true" type="tns:t_Pilot" />
+      <xs:element minOccurs="0" name="t_Pilot3" nillable="true" type="tns:t_Pilot" />
+      <xs:element minOccurs="0" name="t_PolygonGroup" nillable="true" type="tns:t_PolygonGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_Race" nillable="true" type="tns:t_Race" />
+  <xs:complexType name="t_Pilot">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Tracker" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SureName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="t_Races" nillable="true" type="tns:ArrayOft_Race" />
+      <xs:element minOccurs="0" name="t_Races1" nillable="true" type="tns:ArrayOft_Race" />
+      <xs:element minOccurs="0" name="t_Races2" nillable="true" type="tns:ArrayOft_Race" />
+      <xs:element minOccurs="0" name="t_Races3" nillable="true" type="tns:ArrayOft_Race" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_Pilot" nillable="true" type="tns:t_Pilot" />
 </xs:schema>

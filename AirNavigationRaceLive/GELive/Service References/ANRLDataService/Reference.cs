@@ -49,6 +49,9 @@ namespace GELive.ANRLDataService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime TimestampField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Tracker t_TrackerField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -176,6 +179,96 @@ namespace GELive.ANRLDataService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Tracker t_Tracker {
+            get {
+                return this.t_TrackerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_TrackerField, value) != true)) {
+                    this.t_TrackerField = value;
+                    this.RaisePropertyChanged("t_Tracker");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Tracker", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_Tracker : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IMEIField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_DatensField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IMEI {
+            get {
+                return this.IMEIField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IMEIField, value) != true)) {
+                    this.IMEIField = value;
+                    this.RaisePropertyChanged("IMEI");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> t_Datens {
+            get {
+                return this.t_DatensField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_DatensField, value) != true)) {
+                    this.t_DatensField = value;
+                    this.RaisePropertyChanged("t_Datens");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -209,6 +302,9 @@ namespace GELive.ANRLDataService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal longitudeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Polygon t_PolygonField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -285,6 +381,647 @@ namespace GELive.ANRLDataService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Polygon t_Polygon {
+            get {
+                return this.t_PolygonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonField, value) != true)) {
+                    this.t_PolygonField = value;
+                    this.RaisePropertyChanged("t_Polygon");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Polygon", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_Polygon : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ID_PolygonGroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int TypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_PolygonGroup t_PolygonGroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> t_PolygonPointsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID_PolygonGroup {
+            get {
+                return this.ID_PolygonGroupField;
+            }
+            set {
+                if ((this.ID_PolygonGroupField.Equals(value) != true)) {
+                    this.ID_PolygonGroupField = value;
+                    this.RaisePropertyChanged("ID_PolygonGroup");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((this.TypeField.Equals(value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_PolygonGroup t_PolygonGroup {
+            get {
+                return this.t_PolygonGroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonGroupField, value) != true)) {
+                    this.t_PolygonGroupField = value;
+                    this.RaisePropertyChanged("t_PolygonGroup");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> t_PolygonPoints {
+            get {
+                return this.t_PolygonPointsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonPointsField, value) != true)) {
+                    this.t_PolygonPointsField = value;
+                    this.RaisePropertyChanged("t_PolygonPoints");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_PolygonGroup", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_PolygonGroup : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Polygon> t_PolygonsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_RacesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Polygon> t_Polygons {
+            get {
+                return this.t_PolygonsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonsField, value) != true)) {
+                    this.t_PolygonsField = value;
+                    this.RaisePropertyChanged("t_Polygons");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races {
+            get {
+                return this.t_RacesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_RacesField, value) != true)) {
+                    this.t_RacesField = value;
+                    this.RaisePropertyChanged("t_Races");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Race", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_Race : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ID_Pilot_0Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ID_Pilot_1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ID_Pilot_2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ID_Pilot_3Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ID_PolygonGroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> TimeEndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> TimeStartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Pilot t_PilotField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Pilot t_Pilot1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Pilot t_Pilot2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_Pilot t_Pilot3Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.t_PolygonGroup t_PolygonGroupField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ID_Pilot_0 {
+            get {
+                return this.ID_Pilot_0Field;
+            }
+            set {
+                if ((this.ID_Pilot_0Field.Equals(value) != true)) {
+                    this.ID_Pilot_0Field = value;
+                    this.RaisePropertyChanged("ID_Pilot_0");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ID_Pilot_1 {
+            get {
+                return this.ID_Pilot_1Field;
+            }
+            set {
+                if ((this.ID_Pilot_1Field.Equals(value) != true)) {
+                    this.ID_Pilot_1Field = value;
+                    this.RaisePropertyChanged("ID_Pilot_1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ID_Pilot_2 {
+            get {
+                return this.ID_Pilot_2Field;
+            }
+            set {
+                if ((this.ID_Pilot_2Field.Equals(value) != true)) {
+                    this.ID_Pilot_2Field = value;
+                    this.RaisePropertyChanged("ID_Pilot_2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ID_Pilot_3 {
+            get {
+                return this.ID_Pilot_3Field;
+            }
+            set {
+                if ((this.ID_Pilot_3Field.Equals(value) != true)) {
+                    this.ID_Pilot_3Field = value;
+                    this.RaisePropertyChanged("ID_Pilot_3");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ID_PolygonGroup {
+            get {
+                return this.ID_PolygonGroupField;
+            }
+            set {
+                if ((this.ID_PolygonGroupField.Equals(value) != true)) {
+                    this.ID_PolygonGroupField = value;
+                    this.RaisePropertyChanged("ID_PolygonGroup");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> TimeEnd {
+            get {
+                return this.TimeEndField;
+            }
+            set {
+                if ((this.TimeEndField.Equals(value) != true)) {
+                    this.TimeEndField = value;
+                    this.RaisePropertyChanged("TimeEnd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> TimeStart {
+            get {
+                return this.TimeStartField;
+            }
+            set {
+                if ((this.TimeStartField.Equals(value) != true)) {
+                    this.TimeStartField = value;
+                    this.RaisePropertyChanged("TimeStart");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Pilot t_Pilot {
+            get {
+                return this.t_PilotField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PilotField, value) != true)) {
+                    this.t_PilotField = value;
+                    this.RaisePropertyChanged("t_Pilot");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Pilot t_Pilot1 {
+            get {
+                return this.t_Pilot1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_Pilot1Field, value) != true)) {
+                    this.t_Pilot1Field = value;
+                    this.RaisePropertyChanged("t_Pilot1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Pilot t_Pilot2 {
+            get {
+                return this.t_Pilot2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_Pilot2Field, value) != true)) {
+                    this.t_Pilot2Field = value;
+                    this.RaisePropertyChanged("t_Pilot2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_Pilot t_Pilot3 {
+            get {
+                return this.t_Pilot3Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_Pilot3Field, value) != true)) {
+                    this.t_Pilot3Field = value;
+                    this.RaisePropertyChanged("t_Pilot3");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.t_PolygonGroup t_PolygonGroup {
+            get {
+                return this.t_PolygonGroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_PolygonGroupField, value) != true)) {
+                    this.t_PolygonGroupField = value;
+                    this.RaisePropertyChanged("t_PolygonGroup");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Pilot", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_Pilot : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ColorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ID_TrackerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SureNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_RacesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races1Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races3Field;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Color {
+            get {
+                return this.ColorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ColorField, value) != true)) {
+                    this.ColorField = value;
+                    this.RaisePropertyChanged("Color");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID_Tracker {
+            get {
+                return this.ID_TrackerField;
+            }
+            set {
+                if ((this.ID_TrackerField.Equals(value) != true)) {
+                    this.ID_TrackerField = value;
+                    this.RaisePropertyChanged("ID_Tracker");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SureName {
+            get {
+                return this.SureNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SureNameField, value) != true)) {
+                    this.SureNameField = value;
+                    this.RaisePropertyChanged("SureName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races {
+            get {
+                return this.t_RacesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_RacesField, value) != true)) {
+                    this.t_RacesField = value;
+                    this.RaisePropertyChanged("t_Races");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races1 {
+            get {
+                return this.t_Races1Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_Races1Field, value) != true)) {
+                    this.t_Races1Field = value;
+                    this.RaisePropertyChanged("t_Races1");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races2 {
+            get {
+                return this.t_Races2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_Races2Field, value) != true)) {
+                    this.t_Races2Field = value;
+                    this.RaisePropertyChanged("t_Races2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Race> t_Races3 {
+            get {
+                return this.t_Races3Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.t_Races3Field, value) != true)) {
+                    this.t_Races3Field = value;
+                    this.RaisePropertyChanged("t_Races3");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -316,6 +1053,9 @@ namespace GELive.ANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetRaces", ReplyAction="http://tempuri.org/IANRLDataService/GetRacesResponse")]
         System.Collections.Generic.List<System.Collections.Generic.List<string>> GetRaces();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetParcours", ReplyAction="http://tempuri.org/IANRLDataService/GetParcoursResponse")]
+        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetParcours();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/RemoveRace", ReplyAction="http://tempuri.org/IANRLDataService/RemoveRaceResponse")]
         void RemoveRace(int Race_ID);
@@ -382,6 +1122,10 @@ namespace GELive.ANRLDataService {
         
         public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetRaces() {
             return base.Channel.GetRaces();
+        }
+        
+        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetParcours() {
+            return base.Channel.GetParcours();
         }
         
         public void RemoveRace(int Race_ID) {

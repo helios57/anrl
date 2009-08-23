@@ -62,6 +62,13 @@ namespace DataService
         /// </summary>
         /// <returns>List of Pilotes</returns>
         [OperationContract]
+        List<String[]> GetParcours();
+
+        /// <summary>
+        /// Return a list of all Pilotes
+        /// </summary>
+        /// <returns>List of Pilotes</returns>
+        [OperationContract]
         void RemoveRace(int Race_ID);
 
         /// <summary>
