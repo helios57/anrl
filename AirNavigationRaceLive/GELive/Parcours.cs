@@ -32,6 +32,7 @@ namespace GELive
             if (lstParcours.SelectedItem != null)
             {
                 OnParcourOk.Invoke(lstParcours.SelectedItem, e);
+                Close();
             }
         }
     }

@@ -149,6 +149,7 @@ namespace GELive
             fldRaceDate.Value = CurrentRace.StartTime;
             fldRaceTime.Value = CurrentRace.StartTime;
             fldRacePolygonsLoaded.Text = CurrentRace.Polygons.Polygons.Count.ToString();
+            fldRaceParcour.Text = CurrentRace.Polygons.Name;
             CheckEnabled();
         }
         #region Event Handlers
@@ -369,7 +370,16 @@ namespace GELive
 
         private void btnSelectParcour_Click(object sender, EventArgs e)
         {
+            Parcours P = new Parcours();
+            P.OnParcourOk += new EventHandler(P_OnParcourOk);
+            P.Show();
+        }
 
+        void P_OnParcourOk(object sender, EventArgs e)
+        {
+            PolygonGroup G = (PolygonGroup)sender;
+            CurrentRace.Polygons = G;
+            SyncRace();
         }
 
 
