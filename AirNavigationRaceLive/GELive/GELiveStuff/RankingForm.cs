@@ -34,8 +34,8 @@ namespace GELive
             for (int i = 1; i < 5; i++)
             {
                 RankingEntry rankingEntry = new RankingEntry();
-                rankingEntry.Flugzeug = "Flugzeug" + i;
-                rankingEntry.Pilot = "Pilot" + i;
+                rankingEntry.LastName = "Flugzeug" + i;
+                rankingEntry.SureName = "Pilot" + i;
                 rankingEntry.Punkte = i;
 
                 rankingEntries.Add(rankingEntry);
@@ -43,12 +43,5 @@ namespace GELive
 
             SetData(rankingEntries);
         }
-    }
-
-    public class RankingEntry
-    {
-        public String Flugzeug;
-        public String Pilot;
-        public int Punkte;
     }
 }

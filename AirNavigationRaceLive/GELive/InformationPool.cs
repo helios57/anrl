@@ -237,5 +237,11 @@ namespace GELive
         EndLine = 9
     }
 
+    public class RankingEntry
+    {
+        public String LastName;
+        public String SureName;
+        public int Punkte;
+    }
 
 }
