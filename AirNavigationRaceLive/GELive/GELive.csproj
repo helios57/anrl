@@ -193,7 +193,22 @@
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Pilot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Polygon.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_PolygonGroup.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_PolygonPoint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Race.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Tracker.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ANRLDataService\Reference.svcmap">

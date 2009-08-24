@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GELive.ANRLDataService;
 
 namespace GELive
 {
@@ -18,13 +19,9 @@ namespace GELive
             if (InformationPool.Client != null && InformationPool.Client.State == System.ServiceModel.CommunicationState.Opened)
             {
                 lstExistingPilots.Items.Clear();
-                foreach (List<String> S in InformationPool.Client.GetPilots())
+                foreach (t_Pilot p in InformationPool.Client.GetPilots())
                 {
-                    PilotEntry P = new PilotEntry();
-                    P.ID = S[0];
-                    P.LastName = S[1];
-                    P.SureName = S[2];
-                    P.PilotColor = S[3];
+                    PilotEntry P = new PilotEntry(p);
                     lstExistingPilots.Items.Add(P);
                 }
             }

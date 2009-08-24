@@ -26,32 +26,31 @@ namespace DataService
         #region IANRLDataService Members
 
         /// <summary>
-        /// Returns the flight path data as a list of t_Daten at a Given Timestamp
+        /// 
         /// </summary>
-        /// <param name="timestamp">The Timestamp for which the Data is requested</param>
-        /// <returns>List of t_Daten</returns>
-        public List<t_Daten> GetPathData(DateTime timestamp)
+        /// <param name="IntervallStart"></param>
+        /// <param name="IntervallEnd"></param>
+        /// <returns></returns>
+        public List<t_Daten> GetPathData(DateTime IntervallStart, DateTime IntervallEnd)
         {
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
 
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", timestamp.ToString() + " " + timestamp.CompareTo(dataContext.t_Datens.Max(p => p.Timestamp)));
-       //     if ()
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", IntervallStart.ToString() + " " + IntervallEnd.CompareTo(dataContext.t_Datens.Max(p => p.Timestamp)));
+            //     if ()
             {
 
             }
 
-            DateTime end = timestamp.AddSeconds(1);
-
             List<t_Daten> tmp = new List<t_Daten>();
 
             t_Daten tmp_t_Daten = new t_Daten();
-            foreach (t_Daten t in dataContext.t_Datens.Where(d => d.Timestamp >= timestamp && d.Timestamp < end))
+            foreach (t_Daten t in dataContext.t_Datens.Where(d => d.Timestamp >= IntervallStart && d.Timestamp < IntervallEnd))
             {
                 tmp_t_Daten.ID = t.ID;
                 tmp_t_Daten.Timestamp = t.Timestamp;
                 tmp_t_Daten.Latitude = t.Latitude;
-                tmp_t_Daten.Longitude= t.Longitude;
-                tmp_t_Daten.Altitude= t.Altitude;
+                tmp_t_Daten.Longitude = t.Longitude;
+                tmp_t_Daten.Altitude = t.Altitude;
                 tmp_t_Daten.Speed = t.Speed;
                 tmp_t_Daten.Penalty = t.Penalty;
                 tmp_t_Daten.ID_Polygon = t.ID_Polygon;
@@ -107,26 +106,16 @@ namespace DataService
         /// Return a list of all Trackers
         /// </summary>
         /// <returns>List of Trackers</returns>
-        public List<String[]> GetTrackers()
+        public List<t_Tracker> GetTrackers()
         {
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTrackers", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<String[]> lstTrackers = new List<String[]>();
+            List<t_Tracker> lstTrackers = new List<t_Tracker>();
             foreach (t_Tracker t in dataContext.t_Trackers)
             {
-                String[] tle = new String[5];
-                tle[0] = t.ID.ToString();
-                tle[1] = t.IMEI.Trim();
-                #region Check airplanes attached ?
-                //Remove GPS-Trackers if added to may Airplanes
-                if (dataContext.t_Pilots.Count(p => p.ID_Tracker == t.ID) == 1)
-                {
-                    t_Pilot f = dataContext.t_Pilots.Single(p => p.ID_Tracker == t.ID);
-                    tle[2] = f.ID.ToString().Trim();
-                    tle[3] = f.LastName.Trim();
-                    tle[4] = f.SureName.Trim();
-                }
-                #endregion
+                t_Tracker tle = new t_Tracker();
+                tle.ID = t.ID;
+                tle.IMEI = t.IMEI.Trim();
                 lstTrackers.Add(tle);
             }
             return lstTrackers;
@@ -135,15 +124,21 @@ namespace DataService
         /// Return a list of all Airplanes
         /// </summary>
         /// <returns>List of Airplanes</returns>
-        public List<String[]> GetPilots()
+        public List<t_Pilot> GetPilots()
         {
 
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<String[]> tmp = new List<string[]>();
+            List<t_Pilot> tmp = new List<t_Pilot>();
             foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == 0))
             {
-                tmp.Add(new String[] { f.ID.ToString().Trim(), f.LastName.Trim(), f.SureName.Trim(), f.Color.Trim() });
+                t_Pilot pilo = new t_Pilot();
+                pilo.ID = f.ID;
+                pilo.ID_Tracker = f.ID_Tracker;
+                pilo.LastName = f.LastName;
+                pilo.SureName = f.SureName;
+                pilo.Color = f.Color;
+                tmp.Add(pilo);
             }
             return tmp;
         }
@@ -152,23 +147,27 @@ namespace DataService
         /// Return a list of all Racecs
         /// </summary>
         /// <returns>List of Racecs</returns>
-        public List<String[]> GetRaces()
+        public List<t_Race> GetRaces()
         {
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetRaces", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<String[]> tmp = new List<string[]>();
+            List<t_Race> tmp = new List<t_Race>();
             foreach (t_Race r in dataContext.t_Races)
             {
-                tmp.Add(new String[] {
-                    r.ID.ToString().Trim(),
-                    r.Name.Trim(),
-                    r.ID_Pilot_0.ToString().Trim(),
-                    r.ID_Pilot_1.ToString().Trim(),
-                    r.ID_Pilot_2.ToString().Trim(),
-                    r.ID_Pilot_3.ToString().Trim(),
-                    r.ID_PolygonGroup.ToString().Trim(),
-                    r.TimeEnd.ToString(),
-                    r.TimeStart.ToString()});
+                t_Race race = new t_Race();
+                race.ID = r.ID;
+                race.ID_Pilot_0 = r.ID_Pilot_0;
+                race.ID_Pilot_1 = r.ID_Pilot_1;
+                race.ID_Pilot_2 = r.ID_Pilot_2;
+                race.ID_Pilot_3 = r.ID_Pilot_3;
+                race.ID_PolygonGroup = r.ID_PolygonGroup;
+                race.Name = r.Name;
+                race.TimeEnd = r.TimeEnd;
+                race.TimeStart = r.TimeStart;
+                race.t_PolygonGroup = new t_PolygonGroup();
+                race.t_PolygonGroup.ID = r.t_PolygonGroup.ID;
+                race.t_PolygonGroup.Name = r.t_PolygonGroup.Name;
+                tmp.Add(race);
             }
             return tmp;
         }
@@ -177,19 +176,61 @@ namespace DataService
         /// Return a list of all Racecs
         /// </summary>
         /// <returns>List of Racecs</returns>
-        public List<String[]> GetParcours()
+        public List<t_PolygonGroup> GetPolygonGroup()
         {
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetParcours", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<String[]> tmp = new List<string[]>();
+            List<t_PolygonGroup> tmp = new List<t_PolygonGroup>();
             foreach (t_PolygonGroup pg in dataContext.t_PolygonGroups)
             {
-                tmp.Add(new String[] {
-                    pg.ID.ToString().Trim(),
-                    pg.Name.Trim()
-                });
+                t_PolygonGroup tmppg = new t_PolygonGroup();
+                tmppg.ID = pg.ID;
+                tmppg.Name = pg.Name;
+                tmp.Add(tmppg);
             }
             return tmp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID_PolygonGroup"></param>
+        /// <returns></returns>
+        public List<t_Polygon> GetPolygonsByGroup(int ID_PolygonGroup)
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<t_Polygon> Result = new List<t_Polygon>();
+            foreach (t_Polygon p in dataContext.t_Polygons.Where(p => p.ID_PolygonGroup == ID_PolygonGroup))
+            {
+                t_Polygon tmp = new t_Polygon();
+                tmp.ID = p.ID;
+                tmp.ID_PolygonGroup = p.ID_PolygonGroup;
+                tmp.Type = p.Type;
+                Result.Add(tmp);
+            }
+            return Result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID_Polygon"></param>
+        /// <returns></returns>
+        public List<t_PolygonPoint> GetPolygonPoints(int ID_Polygon)
+        {
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<t_PolygonPoint> Result = new List<t_PolygonPoint>();
+            foreach (t_PolygonPoint p in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon == ID_Polygon))
+            {
+                t_PolygonPoint tmp = new t_PolygonPoint();
+                tmp.ID = p.ID;
+                tmp.ID_Polygon = p.ID_Polygon;
+                tmp.latitude = p.latitude;
+                tmp.longitude = p.longitude;
+                tmp.altitude = p.altitude;
+                Result.Add(tmp);
+            }
+            return Result;
         }
 
         /// <summary>
@@ -210,6 +251,70 @@ namespace DataService
             {
                 LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:RemoveRace", Race_ID.ToString());
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Race"></param>
+        public void AddRace(t_Race Race)
+        {
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "");
+            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+            List<t_PolygonPoint> Points = new List<t_PolygonPoint>();
+            List<t_Polygon> Polygons = new List<t_Polygon>();
+            t_PolygonGroup PolygonGroup = new t_PolygonGroup();
+            try
+            {
+                #region Polygongroup & Polygons & PolygonPoints
+                if (Race.t_PolygonGroup != null)
+                {
+                    PolygonGroup.Name = Race.t_PolygonGroup.Name;
+                    dataContext.t_PolygonGroups.InsertOnSubmit(PolygonGroup);
+                    dataContext.SubmitChanges();
+                    PolygonGroup = dataContext.t_PolygonGroups.Where(p=>p.Name == PolygonGroup.Name).Last();
+                    
+                    if (Race.t_PolygonGroup.t_Polygons.Count > 0)
+                    {
+                        foreach (t_Polygon poly in Race.t_PolygonGroup.t_Polygons)
+                        {
+                            t_Polygon tmp_poly = new t_Polygon();
+                            tmp_poly.Type = poly.Type;
+                            tmp_poly.ID_PolygonGroup = PolygonGroup.ID;
+                            dataContext.t_Polygons.InsertOnSubmit(tmp_poly);
+                            dataContext.SubmitChanges();
+                            Polygons.Add(dataContext.t_Polygons.Last());
+                            foreach (t_PolygonPoint pp in poly.t_PolygonPoints)
+                            {
+                                t_PolygonPoint tmpPoint = new t_PolygonPoint();
+                                tmpPoint.ID_Polygon = Polygons.Last().ID;
+                                tmpPoint.longitude = pp.longitude;
+                                tmpPoint.latitude = pp.latitude;
+                                tmpPoint.altitude = pp.altitude;
+                                dataContext.t_PolygonPoints.InsertOnSubmit(tmpPoint);
+                            }
+                        }
+                    }
+                    dataContext.SubmitChanges();
+                }
+                #endregion
+                t_Race r = new t_Race();
+                r.ID_Pilot_0 = Race.ID_Pilot_0;
+                r.ID_Pilot_1 = Race.ID_Pilot_1;
+                r.ID_Pilot_2 = Race.ID_Pilot_2;
+                r.ID_Pilot_3 = Race.ID_Pilot_3;
+                r.ID_PolygonGroup = PolygonGroup.ID;
+                r.Name = Race.Name;
+                r.TimeEnd = Race.TimeEnd;
+                r.TimeStart = Race.TimeStart;
+                dataContext.t_Races.InsertOnSubmit(r);
+                dataContext.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:AddRace", ex.ToString());
+            }
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "Sucessfull Added");
         }
 
         /// <summary>

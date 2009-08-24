@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GELive.ANRLDataService;
 
 namespace GELive
 {
@@ -87,10 +88,22 @@ namespace GELive
         private void LoadTrackerList()
         {
             lstTrackers.Items.Clear();
-            List<List<String>> Trackerlist = InformationPool.Client.GetTrackers();
-            foreach (List<String> ls in Trackerlist)
+            List<t_Tracker> Trackerlist = InformationPool.Client.GetTrackers();
+            List<t_Pilot> PilotList = InformationPool.Client.GetPilots();
+
+            foreach (t_Tracker t in Trackerlist)
             {
-                lstTrackers.Items.Add(new ListViewItem(ls.ToArray()));
+                ListViewItem lvi = new ListViewItem(new String[] { t.ID.ToString(), t.IMEI });
+                lvi.Tag = t;
+                if (PilotList.Count(p => p.ID_Tracker == t.ID) == 1)
+                {
+                    t_Pilot Pilot = PilotList.Single(p => p.ID_Tracker == t.ID);
+                    lvi.SubItems.Add(Pilot.ID.ToString());
+                    lvi.SubItems.Add(Pilot.LastName);
+                    lvi.SubItems.Add(Pilot.SureName);
+                    lvi.BackColor = Color.FromArgb(int.Parse(Pilot.Color));
+                }
+                lstTrackers.Items.Add(lvi);
             }
             CheckEnabled();
         }
@@ -103,10 +116,10 @@ namespace GELive
         private void LoadRaces()
         {
             lstRace.Items.Clear();
-            foreach (List<String> StringArray in InformationPool.Client.GetRaces())
+            foreach (t_Race Race in InformationPool.Client.GetRaces())
             {
-                ListViewItem lvi = new ListViewItem(new String[] {StringArray[0],StringArray[1]});
-                lvi.Tag = new RaceEntry(StringArray.ToArray());
+                ListViewItem lvi = new ListViewItem(new String[] {Race.ID.ToString(),Race.Name});
+                lvi.Tag = new RaceEntry(Race);
                 lstRace.Items.Add(lvi); 
             }
         }

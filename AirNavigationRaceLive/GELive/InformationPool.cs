@@ -123,6 +123,14 @@ namespace GELive
 
     public class PilotEntry
     {
+        public PilotEntry() { }
+        public PilotEntry(t_Pilot Pilot)
+        {
+            this.ID = Pilot.ID.ToString();
+            this.LastName = Pilot.LastName;
+            this.SureName = Pilot.SureName;
+            this.PilotColor = Pilot.Color.ToString();
+        }
         public String ID;
         public String LastName;
         public String SureName;
@@ -135,6 +143,12 @@ namespace GELive
     }
     public class PolygonGroup
     {
+        public PolygonGroup() { }
+        public PolygonGroup(t_PolygonGroup pg)
+        {
+            this.ID = pg.ID;
+            this.Name = pg.Name;
+        }
         public int ID;
         public String Name;
         public List<Polygon> Polygons = new List<Polygon>();
@@ -177,6 +191,26 @@ namespace GELive
             Polygons.Polygons.First().ID = int.Parse(Values[6]);
             this.StartTime = DateTime.Parse(Values[8]);
             DateTime EndTime = DateTime.Parse(Values[7]);
+            this.Duration = (decimal)(EndTime - StartTime).TotalMilliseconds;
+        }
+        public RaceEntry(t_Race Race)
+        {
+            this.ID = Race.ID;
+            this.Name = Race.Name;
+            this.PilotA = new PilotEntry();
+            this.PilotA.ID = Race.ID_Pilot_0.ToString();
+            this.PilotB = new PilotEntry();
+            this.PilotB.ID = Race.ID_Pilot_1.ToString();
+            this.PilotC = new PilotEntry();
+            this.PilotC.ID = Race.ID_Pilot_2.ToString();
+            this.PilotD = new PilotEntry();
+            this.PilotD.ID = Race.ID_Pilot_3.ToString();
+            this.Polygons = new PolygonGroup();
+            Polygons.Polygons.Add(new Polygon());
+            Polygons.ID = (int)Race.ID_PolygonGroup;
+            Polygons.Name = Race.t_PolygonGroup.Name;
+            this.StartTime = (DateTime)Race.TimeStart;
+            DateTime EndTime = (DateTime)Race.TimeEnd;
             this.Duration = (decimal)(EndTime - StartTime).TotalMilliseconds;
         }
         public int ID;

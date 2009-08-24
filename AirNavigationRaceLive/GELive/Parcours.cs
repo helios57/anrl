@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GELive.ANRLDataService;
 
 namespace GELive
 {
@@ -17,11 +18,9 @@ namespace GELive
         {
             InitializeComponent();
             lstParcours.Items.Clear();
-            foreach (List<String> S in InformationPool.Client.GetParcours())
+            foreach (t_PolygonGroup pg in InformationPool.Client.GetPolygonGroup())
             {
-                PolygonGroup PG = new PolygonGroup();
-                PG.ID = int.Parse(S[0]);
-                PG.Name = S[1];
+                PolygonGroup PG = new PolygonGroup(pg);
                 lstParcours.Items.Add(PG);
             }
             //InformationPool.Client

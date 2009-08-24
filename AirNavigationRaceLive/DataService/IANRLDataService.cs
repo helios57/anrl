@@ -17,10 +17,11 @@ namespace DataService
         /// <summary>
         /// Returns the flight path data as a list of t_Daten at a Given Timestamp
         /// </summary>
-        /// <param name="timestamp">The Timestamp for which the Data is requested</param>
-        /// <returns>List of t_Daten</returns>
+        /// <param name="IntervallStart"></param>
+        /// <param name="IntervallEnd"></param>
+        /// <returns></returns>
         [OperationContract]
-        List<t_Daten> GetPathData(DateTime timestamp);
+        List<t_Daten> GetPathData(DateTime IntervallStart, DateTime IntervallEnd);
 
         /// <summary>
         /// List of timestamps with Data available for Delay
@@ -41,57 +42,80 @@ namespace DataService
         /// </summary>
         /// <returns>List of Trackers</returns>
         [OperationContract]
-        List<String[]> GetTrackers();
+        List<t_Tracker> GetTrackers();
 
         /// <summary>
         /// Return a list of all Pilotes
         /// </summary>
         /// <returns>List of Pilotes</returns>
         [OperationContract]
-        List<String[]> GetPilots();
+        List<t_Pilot> GetPilots();
 
         /// <summary>
         /// Return a list of all Pilotes
         /// </summary>
         /// <returns>List of Pilotes</returns>
         [OperationContract]
-        List<String[]> GetRaces();
+        List<t_Race> GetRaces();
+
+        /// <summary>
+        /// Adds or modifies a Race
+        /// </summary>
+        /// <param name="Race"></param>
+        [OperationContract]
+        void AddRace(t_Race Race);
 
         /// <summary>
         /// Return a list of all Pilotes
         /// </summary>
         /// <returns>List of Pilotes</returns>
         [OperationContract]
-        List<String[]> GetParcours();
+        List<t_PolygonGroup> GetPolygonGroup();
 
         /// <summary>
-        /// Return a list of all Pilotes
+        /// 
         /// </summary>
-        /// <returns>List of Pilotes</returns>
+        /// <param name="ID_PolygonGroup"></param>
+        /// <returns></returns>
+        [OperationContract]
+        List<t_Polygon> GetPolygonsByGroup(int ID_PolygonGroup);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID_Polygon"></param>
+        /// <returns></returns>
+        [OperationContract]
+        List<t_PolygonPoint> GetPolygonPoints(int ID_Polygon);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Race_ID"></param>
         [OperationContract]
         void RemoveRace(int Race_ID);
-
         /// <summary>
-        /// Remove this Tracker from any Airplane
+        /// 
         /// </summary>
-        /// <param name="TrackerID"> ID of the Tracker</param>
+        /// <param name="TrackerID"></param>
         [OperationContract]
         void CleanTracker(int TrackerID);
-
         /// <summary>
-        /// Add a new Airplane to a tracker
+        /// 
         /// </summary>
-        /// <param name="Flugzeug">Airplane Type/Name</param>
-        /// <param name="Pilot">Pilot Name</param>
-        /// <param name="TrackerID">ID of the Tracker to bee added to this Airplane</param>
+        /// <param name="TrackerID"></param>
+        /// <param name="LastName"></param>
+        /// <param name="SureName"></param>
+        /// <param name="Color"></param>
         [OperationContract]
         void AddNewPilot(int TrackerID, String LastName, String SureName, String Color);
-
         /// <summary>
-        /// Add an existing Airplane to a Tracker
+        /// 
         /// </summary>
-        /// <param name="FlugzeugID">Id of the Airplane</param>
-        /// <param name="TrackerID">ID of the Tracker</param>
+        /// <param name="PilotID"></param>
+        /// <param name="TrackerID"></param>
+        /// <param name="LastName"></param>
+        /// <param name="SureName"></param>
+        /// <param name="Color"></param>
         [OperationContract]
         void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color);
 

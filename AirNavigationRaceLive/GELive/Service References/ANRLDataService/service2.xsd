@@ -5,7 +5,8 @@
   <xs:element name="GetPathData">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="timestamp" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="IntervallStart" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="IntervallEnd" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -48,7 +49,7 @@
   <xs:element name="GetTrackersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetTrackersResult" nillable="true" type="q4:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetTrackersResult" nillable="true" type="q4:ArrayOft_Tracker" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -60,7 +61,7 @@
   <xs:element name="GetPilotsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetPilotsResult" nillable="true" type="q5:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetPilotsResult" nillable="true" type="q5:ArrayOft_Pilot" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -72,19 +73,59 @@
   <xs:element name="GetRacesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetRacesResult" nillable="true" type="q6:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetRacesResult" nillable="true" type="q6:ArrayOft_Race" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetParcours">
+  <xs:element name="AddRace">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="Race" nillable="true" type="q7:t_Race" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddRaceResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetParcoursResponse">
+  <xs:element name="GetPolygonGroup">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPolygonGroupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetParcoursResult" nillable="true" type="q7:ArrayOfArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetPolygonGroupResult" nillable="true" type="q8:ArrayOft_PolygonGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPolygonsByGroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ID_PolygonGroup" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPolygonsByGroupResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetPolygonsByGroupResult" nillable="true" type="q9:ArrayOft_Polygon" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPolygonPoints">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ID_Polygon" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPolygonPointsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DataService" minOccurs="0" name="GetPolygonPointsResult" nillable="true" type="q10:ArrayOft_PolygonPoint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -146,7 +187,7 @@
   <xs:element name="AddPolygons">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PolygonList" nillable="true" type="q8:ArrayOfArrayOfArrayOfdouble" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PolygonList" nillable="true" type="q11:ArrayOfArrayOfArrayOfdouble" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

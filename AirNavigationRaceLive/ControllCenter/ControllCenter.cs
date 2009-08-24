@@ -103,10 +103,10 @@ namespace ControllCenter
                 btnStartWebservice.Enabled = false;
                 LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:btnStartWebservice_Click", "Successfull");
             }
-            catch
+            catch (Exception ex)
             {
-                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:btnStartWebservice_Click", "Fehler beim Starten des Webservices");
-                MessageBox.Show("Fehler beim Starten des Webservices");
+                LogManager.AddLog(DB_Path, 0, "ControllCenter.cs:btnStartWebservice_Click", "Fehler beim Starten des Webservices " + ex.ToString());
+                MessageBox.Show("Fehler beim Starten des Webservices "+ ex.ToString());
             }
             ef.Close();            
         }

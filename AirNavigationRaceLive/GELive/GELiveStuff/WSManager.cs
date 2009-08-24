@@ -77,7 +77,7 @@ namespace GELive
                 DisplayTime = DisplayTime.Add(-Delay);
             }
 
-            List<t_Daten> Data = Client.GetPathData(DisplayTime);
+            List<t_Daten> Data = Client.GetPathData(DisplayTime,DisplayTime.Add(new TimeSpan(0,0,5)));
             DatenListe.AddRange(Data);
             ListLocked = false;
             UpdateGWebBrowser();

@@ -334,7 +334,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetParcours_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddRace_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -353,7 +353,121 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetParcours_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_AddRace_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPolygonGroup_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPolygonGroup_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPolygonsByGroup_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPolygonsByGroup_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPolygonPoints_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IANRLDataService_GetPolygonPoints_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -606,11 +720,29 @@
   <wsdl:message name="IANRLDataService_GetRaces_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetRacesResponse" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_GetParcours_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetParcours" />
+  <wsdl:message name="IANRLDataService_AddRace_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRace" />
   </wsdl:message>
-  <wsdl:message name="IANRLDataService_GetParcours_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetParcoursResponse" />
+  <wsdl:message name="IANRLDataService_AddRace_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRaceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetPolygonGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolygonGroup" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetPolygonGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolygonGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetPolygonsByGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolygonsByGroup" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetPolygonsByGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolygonsByGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetPolygonPoints_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolygonPoints" />
+  </wsdl:message>
+  <wsdl:message name="IANRLDataService_GetPolygonPoints_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPolygonPointsResponse" />
   </wsdl:message>
   <wsdl:message name="IANRLDataService_RemoveRace_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveRace" />
@@ -667,9 +799,21 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetRaces" message="tns:IANRLDataService_GetRaces_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetRacesResponse" message="tns:IANRLDataService_GetRaces_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetParcours">
-      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetParcours" message="tns:IANRLDataService_GetParcours_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetParcoursResponse" message="tns:IANRLDataService_GetParcours_OutputMessage" />
+    <wsdl:operation name="AddRace">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/AddRace" message="tns:IANRLDataService_AddRace_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/AddRaceResponse" message="tns:IANRLDataService_AddRace_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetPolygonGroup" message="tns:IANRLDataService_GetPolygonGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetPolygonGroupResponse" message="tns:IANRLDataService_GetPolygonGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonsByGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetPolygonsByGroup" message="tns:IANRLDataService_GetPolygonsByGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetPolygonsByGroupResponse" message="tns:IANRLDataService_GetPolygonsByGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonPoints">
+      <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/GetPolygonPoints" message="tns:IANRLDataService_GetPolygonPoints_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IANRLDataService/GetPolygonPointsResponse" message="tns:IANRLDataService_GetPolygonPoints_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RemoveRace">
       <wsdl:input wsaw:Action="http://tempuri.org/IANRLDataService/RemoveRace" message="tns:IANRLDataService_RemoveRace_InputMessage" />
@@ -761,14 +905,47 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetParcours">
-      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetParcours" style="document" />
+    <wsdl:operation name="AddRace">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/AddRace" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetParcours_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddRace_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetParcours_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_AddRace_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonGroup">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetPolygonGroup" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPolygonGroup_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPolygonGroup_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonsByGroup">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetPolygonsByGroup" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPolygonsByGroup_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPolygonsByGroup_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPolygonPoints">
+      <soap12:operation soapAction="http://tempuri.org/IANRLDataService/GetPolygonPoints" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPolygonPoints_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IANRLDataService_GetPolygonPoints_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

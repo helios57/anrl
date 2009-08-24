@@ -110,4 +110,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="t_Pilot" nillable="true" type="tns:t_Pilot" />
+  <xs:complexType name="ArrayOft_Tracker">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Tracker" nillable="true" type="tns:t_Tracker" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_Tracker" nillable="true" type="tns:ArrayOft_Tracker" />
+  <xs:complexType name="ArrayOft_Pilot">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Pilot" nillable="true" type="tns:t_Pilot" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_Pilot" nillable="true" type="tns:ArrayOft_Pilot" />
+  <xs:complexType name="ArrayOft_PolygonGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_PolygonGroup" nillable="true" type="tns:t_PolygonGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_PolygonGroup" nillable="true" type="tns:ArrayOft_PolygonGroup" />
 </xs:schema>

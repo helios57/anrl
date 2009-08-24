@@ -1037,7 +1037,7 @@ namespace GELive.ANRLDataService {
     public interface IANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPathData", ReplyAction="http://tempuri.org/IANRLDataService/GetPathDataResponse")]
-        System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp);
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime IntervallStart, System.DateTime IntervallEnd);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTimestamps", ReplyAction="http://tempuri.org/IANRLDataService/GetTimestampsResponse")]
         System.Collections.Generic.List<System.DateTime> GetTimestamps();
@@ -1046,16 +1046,25 @@ namespace GELive.ANRLDataService {
         System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygons();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetTrackers", ReplyAction="http://tempuri.org/IANRLDataService/GetTrackersResponse")]
-        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetTrackers();
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Tracker> GetTrackers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPilots", ReplyAction="http://tempuri.org/IANRLDataService/GetPilotsResponse")]
-        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetPilots();
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Pilot> GetPilots();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetRaces", ReplyAction="http://tempuri.org/IANRLDataService/GetRacesResponse")]
-        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetRaces();
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Race> GetRaces();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetParcours", ReplyAction="http://tempuri.org/IANRLDataService/GetParcoursResponse")]
-        System.Collections.Generic.List<System.Collections.Generic.List<string>> GetParcours();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddRace", ReplyAction="http://tempuri.org/IANRLDataService/AddRaceResponse")]
+        void AddRace(GELive.ANRLDataService.t_Race Race);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPolygonGroup", ReplyAction="http://tempuri.org/IANRLDataService/GetPolygonGroupResponse")]
+        System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonGroup> GetPolygonGroup();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPolygonsByGroup", ReplyAction="http://tempuri.org/IANRLDataService/GetPolygonsByGroupResponse")]
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Polygon> GetPolygonsByGroup(int ID_PolygonGroup);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetPolygonPoints", ReplyAction="http://tempuri.org/IANRLDataService/GetPolygonPointsResponse")]
+        System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygonPoints(int ID_Polygon);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/RemoveRace", ReplyAction="http://tempuri.org/IANRLDataService/RemoveRaceResponse")]
         void RemoveRace(int Race_ID);
@@ -1100,8 +1109,8 @@ namespace GELive.ANRLDataService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime timestamp) {
-            return base.Channel.GetPathData(timestamp);
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Daten> GetPathData(System.DateTime IntervallStart, System.DateTime IntervallEnd) {
+            return base.Channel.GetPathData(IntervallStart, IntervallEnd);
         }
         
         public System.Collections.Generic.List<System.DateTime> GetTimestamps() {
@@ -1112,20 +1121,32 @@ namespace GELive.ANRLDataService {
             return base.Channel.GetPolygons();
         }
         
-        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetTrackers() {
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Tracker> GetTrackers() {
             return base.Channel.GetTrackers();
         }
         
-        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetPilots() {
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Pilot> GetPilots() {
             return base.Channel.GetPilots();
         }
         
-        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetRaces() {
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Race> GetRaces() {
             return base.Channel.GetRaces();
         }
         
-        public System.Collections.Generic.List<System.Collections.Generic.List<string>> GetParcours() {
-            return base.Channel.GetParcours();
+        public void AddRace(GELive.ANRLDataService.t_Race Race) {
+            base.Channel.AddRace(Race);
+        }
+        
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonGroup> GetPolygonGroup() {
+            return base.Channel.GetPolygonGroup();
+        }
+        
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Polygon> GetPolygonsByGroup(int ID_PolygonGroup) {
+            return base.Channel.GetPolygonsByGroup(ID_PolygonGroup);
+        }
+        
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_PolygonPoint> GetPolygonPoints(int ID_Polygon) {
+            return base.Channel.GetPolygonPoints(ID_Polygon);
         }
         
         public void RemoveRace(int Race_ID) {
