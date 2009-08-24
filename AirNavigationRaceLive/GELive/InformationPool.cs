@@ -26,6 +26,7 @@ namespace GELive
 
         static public TimeSpan Delay = new TimeSpan();
         static public List<t_Daten> DatenListe = new List<t_Daten>();
+        static public PolygonGroup PolygonGroupToDraw = new PolygonGroup();
         static public DateTime Oldest = new DateTime();
         static public DateTime Newest = new DateTime();
         static public DateTime Next = new DateTime();

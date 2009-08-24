@@ -29,7 +29,7 @@ namespace GELive
         {
             Container = InformationPool.ge.getFeatures();
             Container.appendChild(InformationPool.ge.parseKml(GetKml()));
-            Container.appendChild(InformationPool.ge.parseKml(GetPolygonKml()));
+          //  Container.appendChild(InformationPool.ge.parseKml(GetPolygonKml()));
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
         }
@@ -55,7 +55,7 @@ namespace GELive
         {
             String kml = GetKml();
             Container.replaceChild(InformationPool.ge.parseKml(GetKml()), Container.getFirstChild());
-            Container.replaceChild(InformationPool.ge.parseKml(GetPolygonKml()), Container.getLastChild());
+         //   Container.replaceChild(InformationPool.ge.parseKml(GetPolygonKml()), Container.getLastChild());
             InformationPool.gweb.Invalidate();
             InformationPool.gweb.Invoke(new MethodInvoker(InformationPool.gweb.Update));
         }
@@ -115,12 +115,15 @@ namespace GELive
             }
             return result;
         }
-
+        /*
         private string GetPolygonKml()
-        {
+        {/*
             String result = "";
             result += GetKMLTemplateContent("headerPolygon");
-            List<int> PolygonIdList = new List<int>();
+            foreach (Polygon p in InformationPool.PolygonGroupToDraw)
+            {
+
+            }
             foreach (t_PolygonPoint poly in PolygonPoints)
             {
                 if (!PolygonIdList.Contains(poly.ID_Polygon))
@@ -133,14 +136,14 @@ namespace GELive
                 result += @"<Placemark><name>Polygon" + i + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 foreach (t_PolygonPoint tp in PolygonPoints.Where(p => p.ID_Polygon == i))
                 {
-                    result += tp.longitude + "," + tp.latitude + "," +/*tp.altitude+"*/ "300 ";
+                    result += tp.longitude + "," + tp.latitude + "," +/*tp.altitude+"*/ /*"300 ";
                 }
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
 
             result += GetKMLTemplateContent("footerPolygon");
             return result;
-        }
+        }*/
 
         /// <summary>
         /// Reads the filecontent of a template for generating the KML-File

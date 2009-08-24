@@ -48,14 +48,5 @@ namespace GELive
 
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (listBox1.Items.Count > 0)
-            {
-                wsm.delaytimestamp = (DateTime)listBox1.SelectedItem;
-                wsm.Delay = DateTime.Now - wsm.delaytimestamp;
-            }
-        }
     }
 }

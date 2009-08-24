@@ -50,16 +50,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "List with recorded Entries";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(15, 269);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(235, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Apply Delay to selected Timestamp";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Delay_Select
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
