@@ -236,7 +236,6 @@ namespace GELive
         GateEndD = 8,
         EndLine = 9
     }
-
     public class RankingEntry
     {
         public String LastName;
