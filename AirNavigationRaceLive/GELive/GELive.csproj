@@ -84,10 +84,10 @@
     <Compile Include="AnrlClient.Designer.cs">
       <DependentUpon>AnrlClient.cs</DependentUpon>
     </Compile>
-    <Compile Include="GELiveStuff\anrl_gui.cs">
+    <Compile Include="anrl_gui.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GELiveStuff\anrl_gui.Designer.cs">
+    <Compile Include="anrl_gui.Designer.cs">
       <DependentUpon>anrl_gui.cs</DependentUpon>
     </Compile>
     <Compile Include="GELiveStuff\Delay-Select.cs">
@@ -127,7 +127,7 @@
     <EmbeddedResource Include="AnrlClient.resx">
       <DependentUpon>AnrlClient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GELiveStuff\anrl_gui.resx">
+    <EmbeddedResource Include="anrl_gui.resx">
       <DependentUpon>anrl_gui.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

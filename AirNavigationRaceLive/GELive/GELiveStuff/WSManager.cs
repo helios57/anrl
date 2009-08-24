@@ -8,6 +8,7 @@ using System.Timers;
 using System.IO;
 using GEPlugin;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace GELive
 {
@@ -16,47 +17,21 @@ namespace GELive
     /// </summary>
     public class WSManager
     {
-        List<t_Daten> DatenListe = new List<t_Daten>();
-        List<t_PolygonPoint> PolygonPoints;
-        System.Timers.Timer UpdateData = new System.Timers.Timer(5000);
-        ANRLDataServiceClient Client;
-        String Remote = "http://127.0.0.1:5555/";
-        String ConnectionConfig = "WSHttpBinding_IANRLDataService";
-        anrl_gui gui;
-        bool ListLocked = false;
-        /// <summary>
-        /// The Timestamp of the Selected Entrie used as reference for delaying
-        /// </summary>
-        public DateTime delaytimestamp;
-        /// <summary>
-        /// The Delay to be used when whowing Data
-        /// </summary>
-        public TimeSpan Delay;
-        private GEWebBrowser gweb;
+        System.Timers.Timer UpdateData = new System.Timers.Timer(2000);   
         private GEFeatureContainerCoClass Container;
-        private IGEPlugin ge;
+        public event EventHandler DataUpdated;
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
         /// Respondable for Updateing, getting the local Data-Cache and generating the KML-File with the lines
         /// </summary>
-        public WSManager(GEWebBrowser gweb, anrl_gui gui)
+        public WSManager()
         {
-            this.gweb = gweb;
-            this.gui = gui;
-            ge = gweb.GetPlugin();
-            Container = ge.getFeatures();
-            Container.appendChild(ge.parseKml(GetKml()));
-
+            Container = InformationPool.ge.getFeatures();
+            Container.appendChild(InformationPool.ge.parseKml(GetKml()));
+            Container.appendChild(InformationPool.ge.parseKml(GetPolygonKml()));
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
-
-            Client = new GELive.ANRLDataService.ANRLDataServiceClient(ConnectionConfig, Remote);
-
-            SetClientCredentials.SetCredentials(Client);
-            PolygonPoints = Client.GetPolygons();
-            PolygonPoints.OrderBy(p => p.ID_Polygon);
-            Container.appendChild(ge.parseKml(GetPolygonKml()));
         }
 
         /// <summary>
@@ -66,96 +41,78 @@ namespace GELive
         /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
-            while (ListLocked)
-            {
-                System.Threading.Thread.Sleep(20);
-            }
-            ListLocked = true;
-            DateTime DisplayTime = DateTime.Now.AddMinutes(0); //Set to 1 for Delayed Display
-            if (Delay != null)
-            {
-                DisplayTime = DisplayTime.Add(-Delay);
-            }
+            InformationPool.Next = new DateTime().ToUniversalTime();
 
-            List<t_Daten> Data = Client.GetPathData(DisplayTime,DisplayTime.Add(new TimeSpan(0,0,5)));
-            DatenListe.AddRange(Data);
-            ListLocked = false;
+            InformationPool.DatenListe.AddRange(
+                InformationPool.Client.GetPathData(
+                    InformationPool.Newest, 
+                    InformationPool.Next));
             UpdateGWebBrowser();
-            if (gui.rankingForm != null && gui.rankingForm.Visible)
-            {
-                AddRankingData();
-            }
-        }
-
-        private void AddRankingData()
-        {
-            if (gui.rankingForm != null && gui.rankingForm.Visible)
-            {
-                List<RankingEntry> RList = new List<RankingEntry>();
-
-                gui.rankingForm.SetData(RList);
-            }
+            DataUpdated.Invoke(sender, e);
         }
 
         private void UpdateGWebBrowser()
         {
             String kml = GetKml();
-            Container.replaceChild(ge.parseKml(GetKml()), Container.getFirstChild());
-            gweb.Invalidate();
-
-            gweb.Invoke(new MethodInvoker(gweb.Update));
-            //gweb.Update();
+            Container.replaceChild(InformationPool.ge.parseKml(GetKml()), Container.getFirstChild());
+            Container.replaceChild(InformationPool.ge.parseKml(GetPolygonKml()), Container.getLastChild());
+            InformationPool.gweb.Invalidate();
+            InformationPool.gweb.Invoke(new MethodInvoker(InformationPool.gweb.Update));
         }
 
         /// <summary>
         /// Generates a KML-File with alle needed Points and Lines to be displayed on the Gui
         /// </summary>
         /// <returns>KML as String</returns>
-        public string GetKml()
+        private string GetKml()
         {
-            //kml file loaded by resource file instead of webservice
-            //change this when webservice is implemented
-            //return GELive.Properties.Resources.track;
             string result = "";
-            result += GetKMLTemplateContent("header");
             List<Tracker> TrackList = new List<Tracker>();
-
-            while (ListLocked)
+            foreach (PilotEntry Pilot in InformationPool.PilotsToBeDrawn.Where(p=>p.ID_Tracker > 0))
             {
-                System.Threading.Thread.Sleep(20);
+                Tracker t = new Tracker(Pilot.ID_Tracker);
+                t.Color = Color.FromArgb(int.Parse(Pilot.PilotColor));
+                TrackList.Add(t);
             }
-            ListLocked = true;
-
-            //Get all Trackers in the Datacache
-            int Trackercount = 0;
-            foreach (t_Daten d in DatenListe)
+            result += GenerateKMLHeader(TrackList);
+            List<t_Daten> DataToDraw = InformationPool.GetCurrentData();
+            foreach (Tracker t in TrackList)
             {
-                if (TrackList.Count(p => p.id == d.ID_Tracker) == 0)
+                foreach (t_Daten d in DataToDraw.Where(p => p.ID_Tracker == t.id))
                 {
-                    TrackList.Add(new Tracker(d.ID_Tracker));
-                    Trackercount++;
+                    t.Pointlist.Add(new Points((decimal)d.Longitude, (decimal)d.Latitude, (decimal)d.Altitude));
                 }
             }
 
-            foreach (t_Daten d in DatenListe)
-            {
-                //@todo überdenken
-                Points Point = new Points((decimal)d.Longitude, (decimal)d.Latitude, (decimal)d.Altitude);
-                Tracker t = TrackList.Find(p => p.id == d.ID_Tracker);
-                t.Pointlist.Add(Point);
-            }
-
-            ListLocked = false;
-
-            int ColorId = 1;
-            TrackList.OrderBy(p => p.id);
             foreach (Tracker t in TrackList)
             {
-                result += AddLine(t.Pointlist, (Colors)ColorId++);
+                result += AddLine(t);
             }
 
             result += GetKMLTemplateContent("footer");
 
+            return result;
+        }
+
+        private string GenerateKMLHeader(List<Tracker> TrackList)
+        {
+            string result = @"<?xml version=""1.0"" encoding=""UTF-8""?><kml xmlns=""http://www.opengis.net/kml/2.2""><Document><name>ANRL KML Generated</name><Folder>";
+            int i = 0;
+            foreach (Tracker t in TrackList)
+            {
+                t.ColorTag_1 = "sh_" + i;
+                t.ColorTag_2 = "sn_" + i;
+                t.ColorTag_3 = "msn_" + i;
+                result += @"<Style id=" + t.ColorTag_1+ @"><IconStyle><scale>1.2</scale></IconStyle><LineStyle>";
+                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>10</width></LineStyle><PolyStyle>";
+                result += @"<color>7f"+ t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color></PolyStyle></Style>";
+                result += @"<Style id=" + t.ColorTag_2 +@"><LineStyle>";
+                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>10</width></LineStyle><PolyStyle>";
+                result += @"<color>7f" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color></PolyStyle></Style>";
+                result += @"<StyleMap id=" + t.ColorTag_3+ @"><Pair><key>normal</key>";
+                result += @"<styleUrl>#"+ t.ColorTag_2 +@"</styleUrl></Pair><Pair><key>highlight</key>";
+                result += @"<styleUrl>#" + t.ColorTag_1 + @"</styleUrl></Pair></StyleMap>";
+            }
             return result;
         }
 
@@ -186,15 +143,6 @@ namespace GELive
         }
 
         /// <summary>
-        /// Returns the KML of an Airplane
-        /// </summary>
-        /// <param name="index">Index needed for color</param>
-        /// <returns>KML-String</returns>
-        public string getAriplane(int index)
-        {
-            return GetKMLTemplateContent("blue");
-        }
-        /// <summary>
         /// Reads the filecontent of a template for generating the KML-File
         /// </summary>
         /// <param name="Filename">Name of the Template in the Folder Resources\KMLTemplates</param>
@@ -208,38 +156,22 @@ namespace GELive
             file.Close();
             return result;
         }
-
         /// <summary>
         /// Add a line with the given Points to the KML-File
         /// </summary>
         /// <param name="Points">List of Points</param>
         /// <param name="Color">Color</param>
         /// <returns></returns>
-        private string AddLine(List<Points> Points, Colors Color)
+        private string AddLine(Tracker t)
         {
             string result = "<Placemark>";
-            switch (Color)
-            {
-                case Colors.Red:
-                    result += "<styleUrl>#msn_red</styleUrl>";
-                    break;
-                case Colors.Blue:
-                    result += "<styleUrl>#msn_blue</styleUrl>";
-                    break;
-                case Colors.Green:
-                    result += "<styleUrl>#msn_green</styleUrl>";
-                    break;
-                case Colors.Yellow:
-                    result += "<styleUrl>#msn_yellow</styleUrl>";
-                    break;
-
-            }
+            result += "<styleUrl>#"+t.ColorTag_3+"</styleUrl>";
             result += "<LineString><extrude>1</extrude><tessellate>0</tessellate>";
             result += "<altitudeMode>absolute</altitudeMode>";
             result += "<coordinates>";
-            foreach (Points p in Points)
+            foreach (Points p in t.Pointlist)
             {
-                result += p.X + "," + p.Y + "," + p.Z + " ";
+                result += p.longitude + "," + p.latitude + "," + p.altitude + " ";
             }
             result += "</coordinates>";
             result += "</LineString></Placemark>";
@@ -251,26 +183,17 @@ namespace GELive
         /// </summary>
         class Points
         {
-            public Points(decimal X, decimal Y, decimal Z)
+            public Points(decimal longitude, decimal latitude, decimal altitude)
             {
-                this.X = X;
-                this.Y = Y;
-                this.Z = Z;
+                this.longitude = longitude;
+                this.latitude = latitude;
+                this.altitude = altitude;
             }
-            public decimal X;
-            public decimal Y;
-            public decimal Z;
+            public decimal longitude;
+            public decimal latitude;
+            public decimal altitude;
         }
-        /// <summary>
-        /// Enum of Colors which are supported by AddLine-Function
-        /// </summary>
-        enum Colors : int
-        {
-            Red = 1,
-            Blue = 2,
-            Green = 3,
-            Yellow = 4
-        }
+
         /// <summary>
         /// Tracker vor displaying
         /// </summary>
@@ -278,6 +201,10 @@ namespace GELive
         {
             public List<Points> Pointlist = new List<Points>();
             public int id;
+            public Color Color;
+            public String ColorTag_1;
+            public String ColorTag_2;
+            public String ColorTag_3;
             public Tracker(int id)
             {
                 this.id = id;

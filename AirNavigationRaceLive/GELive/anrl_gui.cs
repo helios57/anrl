@@ -11,13 +11,7 @@ namespace GELive
     /// </summary>
     public partial class anrl_gui : Form
     {
-
-        /// <summary>
-        /// The plugin instance
-        /// </summary>
-        private IGEPlugin ge = null;
-        public RankingForm rankingForm = null;
-
+        public event EventHandler PluginReady;
         /// <summary>
         /// Initializes a new instance of the <see cref="anrl_gui"/> class.
         /// Loads the html directly from the library.
@@ -35,7 +29,7 @@ namespace GELive
             // This event is raised if there is a javascript error (it can also be raised manually)
             geWebBrowser1.ScriptError += new GEWebBorwserEventHandeler(geWebBrowser1_ScriptError);
 
-        
+            InformationPool.gweb = geWebBrowser1;        
         }
 
         /// <summary>
@@ -47,7 +41,8 @@ namespace GELive
         {
             // Here we can cast the sender to the IGEPlugin interface
             // Once this is done once can work with the plugin almost seemlessly
-            ge = sender as IGEPlugin;
+            InformationPool.ge = sender as IGEPlugin;
+            PluginReady.Invoke(sender, e);
         }
 
         /// <summary>
@@ -62,42 +57,6 @@ namespace GELive
                 + Environment.NewLine
                 + e.Message,
                 "Error " + e.Data);
-        }
-
-        /// <summary>
-        /// Invokes geToolStrip1.InvokeLoadKml(); to load the kml.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void LoadKml_Click(object sender, EventArgs e)
-        {
-            if (ge != null)
-            {
-                WSManager ws = new WSManager(geWebBrowser1,this);
-                Delay_Select d = new Delay_Select(ws);
-                d.Show();
-            }
-        }
-
-        /// <summary>
-        /// Opens a new form to show the ranking.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void ShowRanking_Click(object sender, EventArgs e)
-        {
-
-            ANRLDataService.ANRLDataServiceClient a = new GELive.ANRLDataService.ANRLDataServiceClient(
-                "WSHttpBinding_IANRLDataService", "http://127.0.0.1:5555/");
-            List<DateTime> d = a.GetTimestamps();
-
-            foreach (DateTime bla in d)
-            {
-                System.Console.Out.WriteLine(bla.ToString());
-            }
-
-          //  rankingForm = new RankingForm();
-          //  rankingForm.Show();
         }
     }
 }

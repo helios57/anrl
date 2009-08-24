@@ -25,6 +25,18 @@ namespace GELive
         static public IGEPlugin ge = null;
 
         static public TimeSpan Delay = new TimeSpan();
+        static public List<t_Daten> DatenListe = new List<t_Daten>();
+        static public DateTime Oldest = new DateTime();
+        static public DateTime Newest = new DateTime();
+        static public DateTime Next = new DateTime();
+        static public List<PilotEntry> PilotsToBeDrawn = new List<PilotEntry>();
+        static public DateTime CurrentStart = new DateTime();
+        static public DateTime CurrentEnd = new DateTime();
+
+        static public List<t_Daten> GetCurrentData()
+        {
+            return DatenListe.Where(p => p.Timestamp > CurrentStart && p.Timestamp < CurrentEnd).ToList();
+        }
         static public int PlaySpeed=1;
 
         static public bool Connect()
@@ -40,6 +52,13 @@ namespace GELive
         static public void StartVisualisation()
         {
             gui = new anrl_gui();
+            gui.PluginReady += new EventHandler(gui_PluginReady);
+            gui.Show();
+        }
+
+        static void gui_PluginReady(object sender, EventArgs e)
+        {
+            manager = new WSManager();
         }
 
         static public void ShowDelay()
@@ -51,6 +70,42 @@ namespace GELive
 
         }
         
+        /*        /// <summary>
+        /// Invokes geToolStrip1.InvokeLoadKml(); to load the kml.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void LoadKml_Click(object sender, EventArgs e)
+        {
+            if (ge != null)
+            {
+                WSManager ws = new WSManager(geWebBrowser1,this);
+                Delay_Select d = new Delay_Select(ws);
+                d.Show();
+            }
+        }
+
+        /// <summary>
+        /// Opens a new form to show the ranking.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void ShowRanking_Click(object sender, EventArgs e)
+        {
+
+            ANRLDataService.ANRLDataServiceClient a = new GELive.ANRLDataService.ANRLDataServiceClient(
+                "WSHttpBinding_IANRLDataService", "http://127.0.0.1:5555/");
+            List<DateTime> d = a.GetTimestamps();
+
+            foreach (DateTime bla in d)
+            {
+                System.Console.Out.WriteLine(bla.ToString());
+            }
+
+          //  rankingForm = new RankingForm();
+          //  rankingForm.Show();
+        }*/
+
         /// <summary> 
         /// Imports a DxfFile that is in the specified Format. Any changes on the import schema may cause Errors!
         /// </summary>
@@ -147,6 +202,7 @@ namespace GELive
             this.PilotColor = Pilot.Color.ToString();
         }
         public String ID;
+        public int ID_Tracker;
         public String LastName;
         public String SureName;
         public String PilotColor;
