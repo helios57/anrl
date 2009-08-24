@@ -119,18 +119,26 @@ namespace ControllCenter
                 ef.label1.Text = "Beenden, Bitte Warten";
                 ef.Show();
                 ef.Refresh();
-                if (GPS_Service_running)
+                try
                 {
-                    ef.label1.Text = "Bitte Warten, Reciever-Service wird beendet";
-                    ef.Refresh();
-                    Service_test.Stop();
+                    if (GPS_Service_running)
+                    {
+                        ef.label1.Text = "Bitte Warten, Reciever-Service wird beendet";
+                        ef.Refresh();
+                        Service_test.Stop();
+                    }
                 }
-                if (Service_Host_running)
+                catch { }
+                try
                 {
-                    ef.label1.Text = "Bitte Warten, Web-Service wird beendet";
-                    ef.Refresh();
-                    host.Close();
+                    if (Service_Host_running)
+                    {
+                        ef.label1.Text = "Bitte Warten, Web-Service wird beendet";
+                        ef.Refresh();
+                        host.Close();
+                    }
                 }
+                catch { }
 
                 LogManager.AddLog(DB_Path, 4, "ControllCenter.cs:ControllCenter_FormClosing", "Successfull");
             }

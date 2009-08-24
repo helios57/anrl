@@ -162,7 +162,7 @@ namespace DataService
                 LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
                 DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
                 List<t_Pilot> tmp = new List<t_Pilot>();
-                foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == 0))
+                foreach (t_Pilot f in dataContext.t_Pilots)
                 {
                     t_Pilot pilo = new t_Pilot();
                     pilo.ID = f.ID;

@@ -34,7 +34,7 @@ namespace GELive
             {
                 TrackerSelected = true;
             }
-            if (lstTrackers.SelectedItems.Count == 1 && lstTrackers.SelectedItems[0].SubItems[4].Text != "")
+            if (lstTrackers.SelectedItems.Count == 1 && lstTrackers.SelectedItems[0].SubItems.Count > 4 && lstTrackers.SelectedItems[0].SubItems[4].Text != "")
             {
                 TrackerHasPilot = true;
             }
@@ -129,36 +129,60 @@ namespace GELive
             fldRaceName.Text = CurrentRace.Name;
             #region Pilotes
             if (CurrentRace.PilotA != null)
+            {
                 fldRacePilotA.Text =
                     CurrentRace.PilotA.ID + " " +
                     CurrentRace.PilotA.LastName + " " +
                     CurrentRace.PilotA.SureName;
+                fldRacePilotA.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotA.PilotColor));
+            }
             else
+            {
                 fldRacePilotA.Text = "";
+                fldRacePilotA.BackColor = Color.Gray;
+            }
 
             if (CurrentRace.PilotB != null)
+            {
                 fldRacePilotB.Text =
                     CurrentRace.PilotB.ID + " " +
                     CurrentRace.PilotB.LastName + " " +
                     CurrentRace.PilotB.SureName;
+                fldRacePilotB.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotB.PilotColor));
+            }
             else
+            {
                 fldRacePilotB.Text = "";
+                fldRacePilotB.BackColor = Color.Gray;
+            }
 
             if (CurrentRace.PilotC != null)
+            {
                 fldRacePilotC.Text =
                     CurrentRace.PilotC.ID + " " +
                     CurrentRace.PilotC.LastName + " " +
                     CurrentRace.PilotC.SureName;
+                fldRacePilotC.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotC.PilotColor));
+            }
             else
+            {
                 fldRacePilotC.Text = "";
+                fldRacePilotC.BackColor = Color.Gray;
+            }
 
             if (CurrentRace.PilotD != null)
+            {
                 fldRacePilotD.Text =
                     CurrentRace.PilotD.ID + " " +
                     CurrentRace.PilotD.LastName + " " +
                     CurrentRace.PilotD.SureName;
+                fldRacePilotD.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotD.PilotColor));
+            }
             else
+            {
                 fldRacePilotD.Text = "";
+                fldRacePilotD.BackColor = Color.Gray;
+            }
 
             #endregion 
             fldRaceDuration.Value = CurrentRace.Duration;
@@ -199,6 +223,7 @@ namespace GELive
                 PilotEntry PE = (PilotEntry)sender;
                 InformationPool.Client.AddPilot(int.Parse(PE.ID),TrackerId, PE.LastName, PE.SureName, PE.PilotColor);
             }
+            LoadTrackerList();
         }
         private void lstRace_SelectedIndexChanged(object sender, EventArgs e)
         {

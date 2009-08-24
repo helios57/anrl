@@ -562,7 +562,9 @@
             this.lstRace.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader6,
             this.columnHeader7});
+            this.lstRace.FullRowSelect = true;
             this.lstRace.Location = new System.Drawing.Point(6, 3);
+            this.lstRace.MultiSelect = false;
             this.lstRace.Name = "lstRace";
             this.lstRace.Size = new System.Drawing.Size(164, 122);
             this.lstRace.TabIndex = 0;

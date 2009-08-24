@@ -169,6 +169,7 @@
             this.drpAirplane.Name = "drpAirplane";
             this.drpAirplane.Size = new System.Drawing.Size(121, 21);
             this.drpAirplane.TabIndex = 12;
+            this.drpAirplane.Visible = false;
             this.drpAirplane.SelectedIndexChanged += new System.EventHandler(this.drpAirplane_SelectedIndexChanged);
             // 
             // label6
@@ -179,6 +180,7 @@
             this.label6.Size = new System.Drawing.Size(132, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "Flugzeug/Pilot auswählen ";
+            this.label6.Visible = false;
             // 
             // label7
             // 
@@ -188,6 +190,7 @@
             this.label7.Size = new System.Drawing.Size(106, 13);
             this.label7.TabIndex = 14;
             this.label7.Text = "oder neu Hinzufügen";
+            this.label7.Visible = false;
             // 
             // txtAirplane
             // 
@@ -196,6 +199,7 @@
             this.txtAirplane.Name = "txtAirplane";
             this.txtAirplane.Size = new System.Drawing.Size(129, 20);
             this.txtAirplane.TabIndex = 15;
+            this.txtAirplane.Visible = false;
             // 
             // label8
             // 
@@ -222,6 +226,7 @@
             this.txtPilot.Name = "txtPilot";
             this.txtPilot.Size = new System.Drawing.Size(129, 20);
             this.txtPilot.TabIndex = 17;
+            this.txtPilot.Visible = false;
             // 
             // btnAddAirplaneToTracker
             // 
@@ -232,6 +237,7 @@
             this.btnAddAirplaneToTracker.TabIndex = 19;
             this.btnAddAirplaneToTracker.Text = "Dem ausgewählten Tracker zuweisen";
             this.btnAddAirplaneToTracker.UseVisualStyleBackColor = true;
+            this.btnAddAirplaneToTracker.Visible = false;
             this.btnAddAirplaneToTracker.Click += new System.EventHandler(this.btnAddAirplaneToTracker_Click);
             // 
             // btnAddNewAirplaneToTracker
@@ -243,6 +249,7 @@
             this.btnAddNewAirplaneToTracker.TabIndex = 20;
             this.btnAddNewAirplaneToTracker.Text = "Hinzufügen und dem Ausgewählten Tracker zuweisen";
             this.btnAddNewAirplaneToTracker.UseVisualStyleBackColor = true;
+            this.btnAddNewAirplaneToTracker.Visible = false;
             this.btnAddNewAirplaneToTracker.Click += new System.EventHandler(this.btnAddNewAirplaneToTracker_Click);
             // 
             // btnRefresh
@@ -320,6 +327,7 @@
             this.btnImportPenalty.TabIndex = 24;
             this.btnImportPenalty.Text = "Import Penalty-Zonen von dxf";
             this.btnImportPenalty.UseVisualStyleBackColor = true;
+            this.btnImportPenalty.Visible = false;
             this.btnImportPenalty.Click += new System.EventHandler(this.btnImportPenalty_Click);
             // 
             // lblPenaltyZonenLoaded
@@ -330,6 +338,7 @@
             this.lblPenaltyZonenLoaded.Size = new System.Drawing.Size(120, 13);
             this.lblPenaltyZonenLoaded.TabIndex = 25;
             this.lblPenaltyZonenLoaded.Text = "0 Penalty Zonen loaded";
+            this.lblPenaltyZonenLoaded.Visible = false;
             // 
             // btnShowDebug
             // 

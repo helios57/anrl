@@ -62,7 +62,6 @@ namespace TCPReciever
         /// <param name="message">The Message recieved from TCP</param>
         public void Message_Received_Processor(string message)
         {
-            LogManager.AddLog(DB_PATH, 4, "Reciever.cs:Message_Received_Processor", message);
             MyDelegate = new RecievedGPS(ProcessRecievedGPSData);
             MyDelegate.Invoke(message);
         }
@@ -79,7 +78,15 @@ namespace TCPReciever
             {
                 String trimedGPSData = GPSData.Trim(new char[] { '!', '$' });
                 String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
-
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                if (dataContext.t_Trackers.Count(p => p.IMEI == GPScoords[0]) == 0)
+                {
+                    t_Tracker t = new t_Tracker();
+                    t.IMEI = GPScoords[0];
+                    dataContext.t_Trackers.InsertOnSubmit(t);
+                    dataContext.SubmitChanges();
+                    OnTrackerAddded.Invoke(null, null);
+                }
                 string yy = GPScoords[3].Substring(4, 2);
                 string mm = GPScoords[3].Substring(2, 2);
                 string dd = GPScoords[3].Substring(0, 2);
@@ -106,14 +113,6 @@ namespace TCPReciever
                     new_position.Timestamp = DateTime.Now;
                     new_position.Processed = false;
 
-                    DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-                    if (dataContext.t_Trackers.Count(p => p.IMEI == new_position.IMEI) == 0)
-                    {
-                        t_Tracker t = new t_Tracker();
-                        t.IMEI = new_position.IMEI;
-                        dataContext.t_Trackers.InsertOnSubmit(t);
-                        OnTrackerAddded.Invoke(null, null);
-                    }
                     dataContext.t_GPS_INs.InsertOnSubmit(new_position);
                     dataContext.SubmitChanges();
                 }
@@ -122,7 +121,6 @@ namespace TCPReciever
             {
                 LogManager.AddLog(DB_PATH, 0, "Reciever.cs:ProcessRecievedGPSData:Error", GPSData);
             }
-            LogManager.AddLog(DB_PATH, 4, "Reciever.cs:ProcessRecievedGPSData:Ende", "");
         }
 
         /// <summary>
@@ -221,7 +219,11 @@ namespace TCPReciever
                 listenThread.Abort();
                 foreach (Thread t in ThreadList)
                 {
-                    t.Abort();
+                    try
+                    {
+                        t.Abort();
+                    }
+                    catch { }
                 }
             }
             catch 
