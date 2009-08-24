@@ -90,10 +90,10 @@
     <Compile Include="anrl_gui.Designer.cs">
       <DependentUpon>anrl_gui.cs</DependentUpon>
     </Compile>
-    <Compile Include="GELiveStuff\Delay-Select.cs">
+    <Compile Include="Delay-Select.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GELiveStuff\Delay-Select.Designer.cs">
+    <Compile Include="Delay-Select.Designer.cs">
       <DependentUpon>Delay-Select.cs</DependentUpon>
     </Compile>
     <Compile Include="GELiveStuff\External.cs" />
@@ -131,7 +131,7 @@
       <DependentUpon>anrl_gui.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="GELiveStuff\Delay-Select.resx">
+    <EmbeddedResource Include="Delay-Select.resx">
       <DependentUpon>Delay-Select.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -146,7 +146,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="GELiveStuff\RankingForm.resx">
+    <EmbeddedResource Include="RankingForm.resx">
       <DependentUpon>RankingForm.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -154,10 +154,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="GELiveStuff\RankingForm.cs">
+    <Compile Include="RankingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GELiveStuff\RankingForm.Designer.cs">
+    <Compile Include="RankingForm.Designer.cs">
       <DependentUpon>RankingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Service References\ANRLDataService\Reference.cs">
@@ -165,8 +165,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="GELiveStuff\SetClientCredentials.cs" />
-    <Compile Include="GELiveStuff\WSManager.cs" />
+    <Compile Include="WSManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="GEPlugin">

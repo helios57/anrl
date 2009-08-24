@@ -27,12 +27,12 @@ namespace GELive
         static public TimeSpan Delay = new TimeSpan();
         static public List<t_Daten> DatenListe = new List<t_Daten>();
         static public PolygonGroup PolygonGroupToDraw = new PolygonGroup();
-        static public DateTime Oldest = new DateTime();
-        static public DateTime Newest = new DateTime();
-        static public DateTime Next = new DateTime();
+        static public DateTime Oldest = new DateTime().ToUniversalTime();
+        static public DateTime Newest = new DateTime().ToUniversalTime();
+        static public DateTime Next = new DateTime().ToUniversalTime();
         static public List<PilotEntry> PilotsToBeDrawn = new List<PilotEntry>();
-        static public DateTime CurrentStart = new DateTime();
-        static public DateTime CurrentEnd = new DateTime();
+        static public DateTime CurrentStart = new DateTime().ToUniversalTime();
+        static public DateTime CurrentEnd = new DateTime().ToUniversalTime();
 
         static public List<t_Daten> GetCurrentData()
         {

@@ -17,7 +17,7 @@ namespace GELive
     /// </summary>
     public class WSManager
     {
-        System.Timers.Timer UpdateData = new System.Timers.Timer(2000);   
+        System.Timers.Timer UpdateData = new System.Timers.Timer(1000);   
         private GEFeatureContainerCoClass Container;
         public event EventHandler DataUpdated;
 
