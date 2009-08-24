@@ -33,31 +33,38 @@ namespace DataService
         /// <returns></returns>
         public List<t_Daten> GetPathData(DateTime IntervallStart, DateTime IntervallEnd)
         {
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", IntervallStart.ToString() + " " + IntervallEnd.CompareTo(dataContext.t_Datens.Max(p => p.Timestamp)));
-            //     if ()
+            try
             {
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", IntervallStart.ToString() + " " + IntervallEnd.CompareTo(dataContext.t_Datens.Max(p => p.Timestamp)));
+                //     if ()
+                {
 
+                }
+
+                List<t_Daten> tmp = new List<t_Daten>();
+
+                t_Daten tmp_t_Daten = new t_Daten();
+                foreach (t_Daten t in dataContext.t_Datens.Where(d => d.Timestamp >= IntervallStart && d.Timestamp < IntervallEnd))
+                {
+                    tmp_t_Daten.ID = t.ID;
+                    tmp_t_Daten.Timestamp = t.Timestamp;
+                    tmp_t_Daten.Latitude = t.Latitude;
+                    tmp_t_Daten.Longitude = t.Longitude;
+                    tmp_t_Daten.Altitude = t.Altitude;
+                    tmp_t_Daten.Speed = t.Speed;
+                    tmp_t_Daten.Penalty = t.Penalty;
+                    tmp_t_Daten.ID_Polygon = t.ID_Polygon;
+                    tmp_t_Daten.ID_Tracker = t.ID_Tracker;
+                    tmp.Add(tmp_t_Daten);
+                }
+                return tmp;
             }
-
-            List<t_Daten> tmp = new List<t_Daten>();
-
-            t_Daten tmp_t_Daten = new t_Daten();
-            foreach (t_Daten t in dataContext.t_Datens.Where(d => d.Timestamp >= IntervallStart && d.Timestamp < IntervallEnd))
+            catch (Exception ex)
             {
-                tmp_t_Daten.ID = t.ID;
-                tmp_t_Daten.Timestamp = t.Timestamp;
-                tmp_t_Daten.Latitude = t.Latitude;
-                tmp_t_Daten.Longitude = t.Longitude;
-                tmp_t_Daten.Altitude = t.Altitude;
-                tmp_t_Daten.Speed = t.Speed;
-                tmp_t_Daten.Penalty = t.Penalty;
-                tmp_t_Daten.ID_Polygon = t.ID_Polygon;
-                tmp_t_Daten.ID_Tracker = t.ID_Tracker;
-                tmp.Add(tmp_t_Daten);
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetPathData", ex.ToString());
             }
-            return tmp;
+            return null;
         }
 
         /// <summary>
@@ -66,14 +73,22 @@ namespace DataService
         /// <returns>List of Datetime Timestamps</returns>
         public List<DateTime> GetTimestamps()
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTimestamps", "");
-            List<DateTime> timestamplist = new List<DateTime>();
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            foreach (t_Daten row in dataContext.t_Datens)
+            try
             {
-                timestamplist.Add((DateTime)row.Timestamp);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTimestamps", "");
+                List<DateTime> timestamplist = new List<DateTime>();
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                foreach (t_Daten row in dataContext.t_Datens)
+                {
+                    timestamplist.Add((DateTime)row.Timestamp);
+                }
+                return timestamplist;
             }
-            return timestamplist;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetTimestamps", ex.ToString());
+            }
+            return null;
         }
 
 
@@ -83,24 +98,32 @@ namespace DataService
         /// <returns>List of PolygonPoints</returns>
         public List<t_PolygonPoint> GetPolygons()
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPolygons", "");
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-
-            List<t_PolygonPoint> tmp = new List<t_PolygonPoint>();
-
-            t_PolygonPoint tmp_t_PolygonPoint;
-
-            foreach (t_PolygonPoint t in dataContext.t_PolygonPoints)
+            try
             {
-                tmp_t_PolygonPoint = new t_PolygonPoint();
-                tmp_t_PolygonPoint.ID = t.ID;
-                tmp_t_PolygonPoint.latitude = t.latitude;
-                tmp_t_PolygonPoint.altitude = t.altitude;
-                tmp_t_PolygonPoint.longitude = t.longitude;
-                tmp_t_PolygonPoint.ID_Polygon = t.ID_Polygon;
-                tmp.Add(tmp_t_PolygonPoint);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPolygons", "");
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+
+                List<t_PolygonPoint> tmp = new List<t_PolygonPoint>();
+
+                t_PolygonPoint tmp_t_PolygonPoint;
+
+                foreach (t_PolygonPoint t in dataContext.t_PolygonPoints)
+                {
+                    tmp_t_PolygonPoint = new t_PolygonPoint();
+                    tmp_t_PolygonPoint.ID = t.ID;
+                    tmp_t_PolygonPoint.latitude = t.latitude;
+                    tmp_t_PolygonPoint.altitude = t.altitude;
+                    tmp_t_PolygonPoint.longitude = t.longitude;
+                    tmp_t_PolygonPoint.ID_Polygon = t.ID_Polygon;
+                    tmp.Add(tmp_t_PolygonPoint);
+                }
+                return tmp;
             }
-            return tmp;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetPolygons", ex.ToString());
+            }
+            return null;
         }
         /// <summary>
         /// Return a list of all Trackers
@@ -108,17 +131,25 @@ namespace DataService
         /// <returns>List of Trackers</returns>
         public List<t_Tracker> GetTrackers()
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTrackers", "");
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_Tracker> lstTrackers = new List<t_Tracker>();
-            foreach (t_Tracker t in dataContext.t_Trackers)
+            try
             {
-                t_Tracker tle = new t_Tracker();
-                tle.ID = t.ID;
-                tle.IMEI = t.IMEI.Trim();
-                lstTrackers.Add(tle);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetTrackers", "");
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_Tracker> lstTrackers = new List<t_Tracker>();
+                foreach (t_Tracker t in dataContext.t_Trackers)
+                {
+                    t_Tracker tle = new t_Tracker();
+                    tle.ID = t.ID;
+                    tle.IMEI = t.IMEI.Trim();
+                    lstTrackers.Add(tle);
+                }
+                return lstTrackers;
             }
-            return lstTrackers;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetTrackers", ex.ToString());
+            }
+            return null;
         }
         /// <summary>
         /// Return a list of all Airplanes
@@ -126,21 +157,28 @@ namespace DataService
         /// <returns>List of Airplanes</returns>
         public List<t_Pilot> GetPilots()
         {
-
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_Pilot> tmp = new List<t_Pilot>();
-            foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == 0))
+            try
             {
-                t_Pilot pilo = new t_Pilot();
-                pilo.ID = f.ID;
-                pilo.ID_Tracker = f.ID_Tracker;
-                pilo.LastName = f.LastName;
-                pilo.SureName = f.SureName;
-                pilo.Color = f.Color;
-                tmp.Add(pilo);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetAirplanes", "");
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_Pilot> tmp = new List<t_Pilot>();
+                foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == 0))
+                {
+                    t_Pilot pilo = new t_Pilot();
+                    pilo.ID = f.ID;
+                    pilo.ID_Tracker = f.ID_Tracker;
+                    pilo.LastName = f.LastName;
+                    pilo.SureName = f.SureName;
+                    pilo.Color = f.Color;
+                    tmp.Add(pilo);
+                }
+                return tmp;
             }
-            return tmp;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetPilots", ex.ToString());
+            }
+            return null;
         }
 
         /// <summary>
@@ -149,24 +187,32 @@ namespace DataService
         /// <returns>List of Racecs</returns>
         public List<t_Race> GetRaces()
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetRaces", "");
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_Race> tmp = new List<t_Race>();
-            foreach (t_Race r in dataContext.t_Races)
+            try
             {
-                t_Race race = new t_Race();
-                race.ID = r.ID;
-                race.ID_Pilot_0 = r.ID_Pilot_0;
-                race.ID_Pilot_1 = r.ID_Pilot_1;
-                race.ID_Pilot_2 = r.ID_Pilot_2;
-                race.ID_Pilot_3 = r.ID_Pilot_3;
-                race.ID_PolygonGroup = r.ID_PolygonGroup;
-                race.Name = r.Name;
-                race.TimeEnd = r.TimeEnd;
-                race.TimeStart = r.TimeStart;
-                tmp.Add(race);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetRaces", "");
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_Race> tmp = new List<t_Race>();
+                foreach (t_Race r in dataContext.t_Races)
+                {
+                    t_Race race = new t_Race();
+                    race.ID = r.ID;
+                    race.ID_Pilot_0 = r.ID_Pilot_0;
+                    race.ID_Pilot_1 = r.ID_Pilot_1;
+                    race.ID_Pilot_2 = r.ID_Pilot_2;
+                    race.ID_Pilot_3 = r.ID_Pilot_3;
+                    race.ID_PolygonGroup = r.ID_PolygonGroup;
+                    race.Name = r.Name;
+                    race.TimeEnd = r.TimeEnd;
+                    race.TimeStart = r.TimeStart;
+                    tmp.Add(race);
+                }
+                return tmp;
             }
-            return tmp;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetRaces", ex.ToString());
+            }
+            return null;
         }
 
         /// <summary>
@@ -175,17 +221,25 @@ namespace DataService
         /// <returns>List of Racecs</returns>
         public List<t_PolygonGroup> GetPolygonGroup()
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetParcours", "");
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_PolygonGroup> tmp = new List<t_PolygonGroup>();
-            foreach (t_PolygonGroup pg in dataContext.t_PolygonGroups)
+            try
             {
-                t_PolygonGroup tmppg = new t_PolygonGroup();
-                tmppg.ID = pg.ID;
-                tmppg.Name = pg.Name;
-                tmp.Add(tmppg);
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetParcours", "");
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_PolygonGroup> tmp = new List<t_PolygonGroup>();
+                foreach (t_PolygonGroup pg in dataContext.t_PolygonGroups)
+                {
+                    t_PolygonGroup tmppg = new t_PolygonGroup();
+                    tmppg.ID = pg.ID;
+                    tmppg.Name = pg.Name;
+                    tmp.Add(tmppg);
+                }
+                return tmp;
             }
-            return tmp;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetPolygonGroup", ex.ToString());
+            }
+            return null;
         }
 
         /// <summary>
@@ -195,17 +249,25 @@ namespace DataService
         /// <returns></returns>
         public List<t_Polygon> GetPolygonsByGroup(int ID_PolygonGroup)
         {
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_Polygon> Result = new List<t_Polygon>();
-            foreach (t_Polygon p in dataContext.t_Polygons.Where(p => p.ID_PolygonGroup == ID_PolygonGroup))
+            try
             {
-                t_Polygon tmp = new t_Polygon();
-                tmp.ID = p.ID;
-                tmp.ID_PolygonGroup = p.ID_PolygonGroup;
-                tmp.Type = p.Type;
-                Result.Add(tmp);
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_Polygon> Result = new List<t_Polygon>();
+                foreach (t_Polygon p in dataContext.t_Polygons.Where(p => p.ID_PolygonGroup == ID_PolygonGroup))
+                {
+                    t_Polygon tmp = new t_Polygon();
+                    tmp.ID = p.ID;
+                    tmp.ID_PolygonGroup = p.ID_PolygonGroup;
+                    tmp.Type = p.Type;
+                    Result.Add(tmp);
+                }
+                return Result;
             }
-            return Result;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetPolygonsByGroup", ex.ToString());
+            }
+            return null;
         }
 
         /// <summary>
@@ -215,19 +277,27 @@ namespace DataService
         /// <returns></returns>
         public List<t_PolygonPoint> GetPolygonPoints(int ID_Polygon)
         {
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_PolygonPoint> Result = new List<t_PolygonPoint>();
-            foreach (t_PolygonPoint p in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon == ID_Polygon))
+            try
             {
-                t_PolygonPoint tmp = new t_PolygonPoint();
-                tmp.ID = p.ID;
-                tmp.ID_Polygon = p.ID_Polygon;
-                tmp.latitude = p.latitude;
-                tmp.longitude = p.longitude;
-                tmp.altitude = p.altitude;
-                Result.Add(tmp);
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_PolygonPoint> Result = new List<t_PolygonPoint>();
+                foreach (t_PolygonPoint p in dataContext.t_PolygonPoints.Where(p => p.ID_Polygon == ID_Polygon))
+                {
+                    t_PolygonPoint tmp = new t_PolygonPoint();
+                    tmp.ID = p.ID;
+                    tmp.ID_Polygon = p.ID_Polygon;
+                    tmp.latitude = p.latitude;
+                    tmp.longitude = p.longitude;
+                    tmp.altitude = p.altitude;
+                    Result.Add(tmp);
+                }
+                return Result;
             }
-            return Result;
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetPolygonPoints", ex.ToString());
+            }
+            return null;
         }
 
         /// <summary>
@@ -244,9 +314,9 @@ namespace DataService
                 context.t_Races.DeleteOnSubmit(context.t_Races.Single(p => p.ID == Race_ID));
                 context.SubmitChanges();
             }
-            catch
+            catch (Exception ex)
             {
-                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:RemoveRace", Race_ID.ToString());
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:RemoveRace", ex.ToString());
             }
         }
 
@@ -256,11 +326,12 @@ namespace DataService
         /// <param name="Race"></param>
         public void AddRace(t_Race Race)
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "");
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            t_PolygonGroup PolygonGroup = new t_PolygonGroup();
             try
             {
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "");
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                t_PolygonGroup PolygonGroup = new t_PolygonGroup();
+
                 #region Polygongroup & Polygons & PolygonPoints
                 if (Race.t_PolygonGroup != null)
                 {
@@ -269,7 +340,7 @@ namespace DataService
                         PolygonGroup.Name = Race.t_PolygonGroup.Name;
                         dataContext.t_PolygonGroups.InsertOnSubmit(PolygonGroup);
                         dataContext.SubmitChanges();
- 
+
                         if (Race.t_PolygonGroup.t_Polygons.Count > 0)
                         {
                             foreach (t_Polygon poly in Race.t_PolygonGroup.t_Polygons)
@@ -316,12 +387,12 @@ namespace DataService
                 r.TimeStart = Race.TimeStart;
                 dataContext.t_Races.InsertOnSubmit(r);
                 dataContext.SubmitChanges();
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "Sucessfull Added");
             }
             catch (Exception ex)
             {
                 LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:AddRace", ex.ToString());
             }
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "Sucessfull Added");
         }
 
         /// <summary>
@@ -330,13 +401,20 @@ namespace DataService
         /// <param name="TrackerID"> ID of the Tracker</param>
         public void CleanTracker(int TrackerID)
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:CleanTracker", TrackerID.ToString());
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
+            try
             {
-                f.ID_Tracker = 0;
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:CleanTracker", TrackerID.ToString());
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
+                {
+                    f.ID_Tracker = 0;
+                }
+                dataContext.SubmitChanges();
             }
-            dataContext.SubmitChanges();
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:CleanTracker", ex.ToString());
+            }
         }
 
         /// <summary>
@@ -348,15 +426,23 @@ namespace DataService
         /// <param name="Color"></param>
         public int AddNewPilot(String LastName, String SureName, String Color)
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", LastName + SureName);
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            t_Pilot f = new t_Pilot();
-            f.LastName = LastName;
-            f.SureName = SureName;
-            f.Color = Color;
-            dataContext.t_Pilots.InsertOnSubmit(f);
-            dataContext.SubmitChanges();
-            return f.ID;
+            try
+            {
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", LastName + SureName);
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                t_Pilot f = new t_Pilot();
+                f.LastName = LastName;
+                f.SureName = SureName;
+                f.Color = Color;
+                dataContext.t_Pilots.InsertOnSubmit(f);
+                dataContext.SubmitChanges();
+                return f.ID;
+            }
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:AddNewPilot", ex.ToString());
+            }
+            return -1;
         }
 
         /// <summary>
@@ -369,49 +455,25 @@ namespace DataService
         /// <param name="Color"></param>
         public void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color)
         {
-
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddAirplane", PilotID.ToString() + " " + TrackerID.ToString());
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
+            try
             {
-                f.ID_Tracker = 0;
-            }
-            t_Pilot fl = dataContext.t_Pilots.Single(p => p.ID == PilotID);
-            fl.LastName = LastName;
-            fl.SureName = SureName;
-            fl.Color = Color;
-            fl.ID_Tracker = TrackerID;
-            dataContext.SubmitChanges();
-           
-        }
-
-        /// <summary>
-        /// Add the forbidden Zones to the DB
-        /// </summary>
-        /// <param name="PolygonList">A List of Polygons saved as a List of Polygon-Points saved in an Array {longitude, latitude}</param>
-        public void AddPolygons(List<List<List<double>>> PolygonList)
-        {
-            DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            dataContext.t_PolygonPoints.DeleteAllOnSubmit(dataContext.t_PolygonPoints);
-            dataContext.t_Polygons.DeleteAllOnSubmit(dataContext.t_Polygons);
-            dataContext.SubmitChanges();
-            int i = 1;
-            foreach (List<List<double>> Polygonlist in PolygonList)
-            {
-                t_Polygon p = new t_Polygon();
-                p.ID = i++;
-    
-                foreach (List<double> Point in Polygonlist)
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddAirplane", PilotID.ToString() + " " + TrackerID.ToString());
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                foreach (t_Pilot f in dataContext.t_Pilots.Where(p => p.ID_Tracker == TrackerID))
                 {
-                    t_PolygonPoint point = new t_PolygonPoint();
-                    point.longitude =(decimal) Point[0];
-                    point.latitude =(decimal) Point[1];
-                    point.ID_Polygon = p.ID;
-                    dataContext.t_PolygonPoints.InsertOnSubmit(point);
+                    f.ID_Tracker = 0;
                 }
-                dataContext.t_Polygons.InsertOnSubmit(p);
+                t_Pilot fl = dataContext.t_Pilots.Single(p => p.ID == PilotID);
+                fl.LastName = LastName;
+                fl.SureName = SureName;
+                fl.Color = Color;
+                fl.ID_Tracker = TrackerID;
+                dataContext.SubmitChanges();
             }
-            dataContext.SubmitChanges();
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:AddPilot", ex.ToString());
+            }
         }
         #endregion
     }

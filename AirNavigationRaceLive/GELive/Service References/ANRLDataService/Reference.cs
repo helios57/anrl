@@ -1077,9 +1077,6 @@ namespace GELive.ANRLDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddPilotResponse")]
         void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPolygons", ReplyAction="http://tempuri.org/IANRLDataService/AddPolygonsResponse")]
-        void AddPolygons(System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<double>>> PolygonList);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -1163,10 +1160,6 @@ namespace GELive.ANRLDataService {
         
         public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color) {
             base.Channel.AddPilot(PilotID, TrackerID, LastName, SureName, Color);
-        }
-        
-        public void AddPolygons(System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<double>>> PolygonList) {
-            base.Channel.AddPolygons(PolygonList);
         }
     }
 }

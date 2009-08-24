@@ -6,22 +6,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfdateTime" nillable="true" type="tns:ArrayOfdateTime" />
-  <xs:complexType name="ArrayOfArrayOfArrayOfdouble">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfArrayOfdouble" nillable="true" type="tns:ArrayOfArrayOfdouble" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfArrayOfArrayOfdouble" nillable="true" type="tns:ArrayOfArrayOfArrayOfdouble" />
-  <xs:complexType name="ArrayOfArrayOfdouble">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfdouble" nillable="true" type="tns:ArrayOfdouble" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfArrayOfdouble" nillable="true" type="tns:ArrayOfArrayOfdouble" />
-  <xs:complexType name="ArrayOfdouble">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="double" type="xs:double" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfdouble" nillable="true" type="tns:ArrayOfdouble" />
 </xs:schema>
