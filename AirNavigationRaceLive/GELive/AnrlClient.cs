@@ -148,14 +148,16 @@ namespace GELive
                     CurrentRace.PilotC.LastName + " " +
                     CurrentRace.PilotC.SureName;
             else
-                fldRacePilotD.Text = "";
+                fldRacePilotC.Text = "";
+
             if (CurrentRace.PilotD != null)
                 fldRacePilotD.Text =
                     CurrentRace.PilotD.ID + " " +
                     CurrentRace.PilotD.LastName + " " +
                     CurrentRace.PilotD.SureName;
             else
-                fldRacePilotB.Text = "";
+                fldRacePilotD.Text = "";
+
             #endregion 
             fldRaceDuration.Value = CurrentRace.Duration;
             fldRaceDate.Value = CurrentRace.StartTime;
@@ -193,14 +195,7 @@ namespace GELive
             {
                 int TrackerId = int.Parse(lstTrackers.SelectedItems[0].Text);
                 PilotEntry PE = (PilotEntry)sender;
-                if (PE.ID == "")
-                {
-                    InformationPool.Client.AddNewPilot(TrackerId, PE.LastName, PE.SureName, PE.PilotColor);
-                } 
-                if (PE.ID != "")
-                {
-                    InformationPool.Client.AddPilot(int.Parse(PE.ID),TrackerId, PE.LastName, PE.SureName, PE.PilotColor);
-                }
+                InformationPool.Client.AddPilot(int.Parse(PE.ID),TrackerId, PE.LastName, PE.SureName, PE.PilotColor);
             }
         }
         private void lstRace_SelectedIndexChanged(object sender, EventArgs e)
@@ -360,12 +355,13 @@ namespace GELive
         {
             t_Race r = new t_Race();
             r.Name = CurrentRace.Name;
-            r.ID_Pilot_0 = int.Parse(CurrentRace.PilotA.ID);
-            r.ID_Pilot_1 = int.Parse(CurrentRace.PilotB.ID);
-            r.ID_Pilot_2 = int.Parse(CurrentRace.PilotC.ID);
-            r.ID_Pilot_3 = int.Parse(CurrentRace.PilotD.ID);
+            if (CurrentRace.PilotA != null)r.ID_Pilot_0 = int.Parse(CurrentRace.PilotA.ID);
+            if (CurrentRace.PilotB != null) r.ID_Pilot_1 = int.Parse(CurrentRace.PilotB.ID);
+            if (CurrentRace.PilotC != null) r.ID_Pilot_2 = int.Parse(CurrentRace.PilotC.ID);
+            if (CurrentRace.PilotD != null) r.ID_Pilot_3 = int.Parse(CurrentRace.PilotD.ID);
             r.ID_PolygonGroup = CurrentRace.Polygons.ID;
             r.t_PolygonGroup = new t_PolygonGroup();
+            r.t_PolygonGroup.Name = CurrentRace.Polygons.Name;
             r.t_PolygonGroup.t_Polygons = new List<t_Polygon>();
             foreach (Polygon p in CurrentRace.Polygons.Polygons)
             {

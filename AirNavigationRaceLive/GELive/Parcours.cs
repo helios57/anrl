@@ -51,6 +51,7 @@ namespace GELive
             OpenFileDialog of = (OpenFileDialog)sender;
             PolygonGroup pg = InformationPool.importFromDxf(of.FileName);
             pg.ID = 0;
+            pg.Name = fldNewParcourName.Text;
             lstParcours.Items.Add(pg);
             Refresh();
         }

@@ -69,6 +69,7 @@ namespace GELive
                                 point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000);
                                 point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000);
                                 point.ID = p.ID;
+                                p.Points.Add(point);
                             }
                             g.Polygons.Add(p);
                         }
@@ -153,11 +154,15 @@ namespace GELive
         public String Name;
         public List<Polygon> Polygons = new List<Polygon>();
         public int PolygonIdGen=1;
+        public override string ToString()
+        {
+            return ID.ToString() + " " + Name + " " + Polygons.Count;
+        }
     }
     public class Polygon
     {
         public int ID;
-        public List<PolygonPoint> Points;
+        public List<PolygonPoint> Points = new List<PolygonPoint>();
         public PolygonType Type;
     }
     public class PolygonPoint

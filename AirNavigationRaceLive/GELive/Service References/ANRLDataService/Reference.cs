@@ -1073,7 +1073,7 @@ namespace GELive.ANRLDataService {
         void CleanTracker(int TrackerID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddNewPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddNewPilotResponse")]
-        void AddNewPilot(int TrackerID, string LastName, string SureName, string Color);
+        int AddNewPilot(string LastName, string SureName, string Color);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddPilotResponse")]
         void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color);
@@ -1157,8 +1157,8 @@ namespace GELive.ANRLDataService {
             base.Channel.CleanTracker(TrackerID);
         }
         
-        public void AddNewPilot(int TrackerID, string LastName, string SureName, string Color) {
-            base.Channel.AddNewPilot(TrackerID, LastName, SureName, Color);
+        public int AddNewPilot(string LastName, string SureName, string Color) {
+            return base.Channel.AddNewPilot(LastName, SureName, Color);
         }
         
         public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color) {

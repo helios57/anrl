@@ -42,12 +42,14 @@ namespace GELive
                 {}
             }
         }
-        private void btnNew_Click(object sender, EventArgs e)
+        private void btnUse_Click(object sender, EventArgs e)
         {
-            fldId.Text = "";
-            fldLastName.Text = "";
-            fldSureName.Text = "";
-            btnColor.BackColor = Color.White;
+            if (lstExistingPilots.SelectedItem != null)
+            {
+                OnPilotOk.Invoke(lstExistingPilots.SelectedItem, e);
+                Close();
+            }
+
         }
         private void btnColor_Click(object sender, EventArgs e)
         {
@@ -57,14 +59,16 @@ namespace GELive
         }
         private void btnAddPilot_Click(object sender, EventArgs e)
         {
-            PilotEntry PlEntry = new PilotEntry();
-            PlEntry.ID = fldId.Text;
-            PlEntry.LastName = fldLastName.Text;
-            PlEntry.SureName = fldSureName.Text;
-            PlEntry.PilotColor = btnColor.BackColor.ToArgb().ToString();
-
-            OnPilotOk.Invoke(PlEntry, e);
-            Close();
+            PilotEntry pe = new PilotEntry();
+            pe.LastName = fldLastName.Text;
+            pe.SureName = fldSureName.Text;
+            pe.PilotColor = btnColor.BackColor.ToArgb().ToString();
+            pe.ID = InformationPool.Client.AddNewPilot(pe.LastName, pe.SureName, pe.PilotColor).ToString();
+            lstExistingPilots.Items.Add(pe);
+            fldId.Text = "";
+            fldLastName.Text = "";
+            fldSureName.Text = "";
+            btnColor.BackColor = Color.White;
         }
     }
 }

@@ -64,7 +64,7 @@
   </Table>
   <Table Name="dbo.t_Polygon" Member="t_Polygons">
     <Type Name="t_Polygon">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ID_PolygonGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Polygon_t_PolygonPoint" Member="t_PolygonPoints" ThisKey="ID" OtherKey="ID_Polygon" Type="t_PolygonPoint" />

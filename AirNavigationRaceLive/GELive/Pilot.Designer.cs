@@ -31,7 +31,7 @@
             this.lstExistingPilots = new System.Windows.Forms.ListBox();
             this.lblId = new System.Windows.Forms.Label();
             this.fldId = new System.Windows.Forms.TextBox();
-            this.btnNew = new System.Windows.Forms.Button();
+            this.btnUsePilot = new System.Windows.Forms.Button();
             this.fldLastName = new System.Windows.Forms.TextBox();
             this.lblLastName = new System.Windows.Forms.Label();
             this.fldSureName = new System.Windows.Forms.TextBox();
@@ -53,7 +53,7 @@
             // lblId
             // 
             this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(12, 173);
+            this.lblId.Location = new System.Drawing.Point(12, 217);
             this.lblId.Name = "lblId";
             this.lblId.Size = new System.Drawing.Size(18, 13);
             this.lblId.TabIndex = 1;
@@ -62,24 +62,24 @@
             // fldId
             // 
             this.fldId.Enabled = false;
-            this.fldId.Location = new System.Drawing.Point(71, 170);
+            this.fldId.Location = new System.Drawing.Point(71, 214);
             this.fldId.Name = "fldId";
             this.fldId.Size = new System.Drawing.Size(100, 20);
             this.fldId.TabIndex = 2;
             // 
-            // btnNew
+            // btnUsePilot
             // 
-            this.btnNew.Location = new System.Drawing.Point(12, 141);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(207, 23);
-            this.btnNew.TabIndex = 3;
-            this.btnNew.Text = "New Pilot";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.btnUsePilot.Location = new System.Drawing.Point(12, 141);
+            this.btnUsePilot.Name = "btnUsePilot";
+            this.btnUsePilot.Size = new System.Drawing.Size(207, 23);
+            this.btnUsePilot.TabIndex = 3;
+            this.btnUsePilot.Text = "Use Selected Pilot";
+            this.btnUsePilot.UseVisualStyleBackColor = true;
+            this.btnUsePilot.Click += new System.EventHandler(this.btnUse_Click);
             // 
             // fldLastName
             // 
-            this.fldLastName.Location = new System.Drawing.Point(71, 196);
+            this.fldLastName.Location = new System.Drawing.Point(71, 240);
             this.fldLastName.Name = "fldLastName";
             this.fldLastName.Size = new System.Drawing.Size(100, 20);
             this.fldLastName.TabIndex = 5;
@@ -87,7 +87,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(12, 199);
+            this.lblLastName.Location = new System.Drawing.Point(12, 243);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(53, 13);
             this.lblLastName.TabIndex = 4;
@@ -95,7 +95,7 @@
             // 
             // fldSureName
             // 
-            this.fldSureName.Location = new System.Drawing.Point(71, 222);
+            this.fldSureName.Location = new System.Drawing.Point(71, 266);
             this.fldSureName.Name = "fldSureName";
             this.fldSureName.Size = new System.Drawing.Size(100, 20);
             this.fldSureName.TabIndex = 7;
@@ -103,7 +103,7 @@
             // lblSureName
             // 
             this.lblSureName.AutoSize = true;
-            this.lblSureName.Location = new System.Drawing.Point(12, 225);
+            this.lblSureName.Location = new System.Drawing.Point(12, 269);
             this.lblSureName.Name = "lblSureName";
             this.lblSureName.Size = new System.Drawing.Size(55, 13);
             this.lblSureName.TabIndex = 6;
@@ -112,7 +112,7 @@
             // lblColor
             // 
             this.lblColor.AutoSize = true;
-            this.lblColor.Location = new System.Drawing.Point(12, 250);
+            this.lblColor.Location = new System.Drawing.Point(12, 294);
             this.lblColor.Name = "lblColor";
             this.lblColor.Size = new System.Drawing.Size(31, 13);
             this.lblColor.TabIndex = 8;
@@ -120,7 +120,7 @@
             // 
             // btnColor
             // 
-            this.btnColor.Location = new System.Drawing.Point(71, 248);
+            this.btnColor.Location = new System.Drawing.Point(71, 292);
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(100, 20);
             this.btnColor.TabIndex = 9;
@@ -129,11 +129,11 @@
             // 
             // btnAddPilot
             // 
-            this.btnAddPilot.Location = new System.Drawing.Point(15, 274);
+            this.btnAddPilot.Location = new System.Drawing.Point(15, 318);
             this.btnAddPilot.Name = "btnAddPilot";
             this.btnAddPilot.Size = new System.Drawing.Size(204, 23);
             this.btnAddPilot.TabIndex = 10;
-            this.btnAddPilot.Text = "Add this Pilot";
+            this.btnAddPilot.Text = "Add new Pilot";
             this.btnAddPilot.UseVisualStyleBackColor = true;
             this.btnAddPilot.Click += new System.EventHandler(this.btnAddPilot_Click);
             // 
@@ -141,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 302);
+            this.ClientSize = new System.Drawing.Size(231, 353);
             this.Controls.Add(this.btnAddPilot);
             this.Controls.Add(this.btnColor);
             this.Controls.Add(this.lblColor);
@@ -149,7 +149,7 @@
             this.Controls.Add(this.lblSureName);
             this.Controls.Add(this.fldLastName);
             this.Controls.Add(this.lblLastName);
-            this.Controls.Add(this.btnNew);
+            this.Controls.Add(this.btnUsePilot);
             this.Controls.Add(this.fldId);
             this.Controls.Add(this.lblId);
             this.Controls.Add(this.lstExistingPilots);
@@ -165,7 +165,7 @@
         private System.Windows.Forms.ListBox lstExistingPilots;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.TextBox fldId;
-        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnUsePilot;
         private System.Windows.Forms.TextBox fldLastName;
         private System.Windows.Forms.Label lblLastName;
         private System.Windows.Forms.TextBox fldSureName;

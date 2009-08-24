@@ -107,7 +107,7 @@ namespace DataService
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
         [OperationContract]
-        void AddNewPilot(int TrackerID, String LastName, String SureName, String Color);
+        int AddNewPilot(String LastName, String SureName, String Color);
         /// <summary>
         /// 
         /// </summary>

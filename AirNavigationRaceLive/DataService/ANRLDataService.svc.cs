@@ -261,8 +261,6 @@ namespace DataService
         {
             LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "");
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-            List<t_PolygonPoint> Points = new List<t_PolygonPoint>();
-            List<t_Polygon> Polygons = new List<t_Polygon>();
             t_PolygonGroup PolygonGroup = new t_PolygonGroup();
             try
             {
@@ -274,8 +272,7 @@ namespace DataService
                         PolygonGroup.Name = Race.t_PolygonGroup.Name;
                         dataContext.t_PolygonGroups.InsertOnSubmit(PolygonGroup);
                         dataContext.SubmitChanges();
-                        PolygonGroup = dataContext.t_PolygonGroups.Where(p => p.Name == PolygonGroup.Name).Last();
-
+ 
                         if (Race.t_PolygonGroup.t_Polygons.Count > 0)
                         {
                             foreach (t_Polygon poly in Race.t_PolygonGroup.t_Polygons)
@@ -285,11 +282,10 @@ namespace DataService
                                 tmp_poly.ID_PolygonGroup = PolygonGroup.ID;
                                 dataContext.t_Polygons.InsertOnSubmit(tmp_poly);
                                 dataContext.SubmitChanges();
-                                Polygons.Add(dataContext.t_Polygons.Last());
                                 foreach (t_PolygonPoint pp in poly.t_PolygonPoints)
                                 {
                                     t_PolygonPoint tmpPoint = new t_PolygonPoint();
-                                    tmpPoint.ID_Polygon = Polygons.Last().ID;
+                                    tmpPoint.ID_Polygon = tmp_poly.ID;
                                     tmpPoint.longitude = pp.longitude;
                                     tmpPoint.latitude = pp.latitude;
                                     tmpPoint.altitude = pp.altitude;
@@ -353,17 +349,17 @@ namespace DataService
         /// <param name="LastName"></param>
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
-        public void AddNewPilot(int TrackerID, String LastName, String SureName, String Color)
+        public int AddNewPilot(String LastName, String SureName, String Color)
         {
-            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", LastName + SureName + TrackerID.ToString());
+            LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddNewAirplane", LastName + SureName);
             DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
             t_Pilot f = new t_Pilot();
-            f.ID_Tracker = TrackerID;
             f.LastName = LastName;
             f.SureName = SureName;
             f.Color = Color;
             dataContext.t_Pilots.InsertOnSubmit(f);
             dataContext.SubmitChanges();
+            return f.ID;
         }
 
         /// <summary>

@@ -156,7 +156,6 @@
   <xs:element name="AddNewPilot">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="TrackerID" type="xs:int" />
         <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="SureName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
@@ -165,7 +164,9 @@
   </xs:element>
   <xs:element name="AddNewPilotResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddNewPilotResult" type="xs:int" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddPilot">
