@@ -53,7 +53,6 @@ namespace GELive
             btnAddPilotToTracker.Enabled = Connected && TrackerSelected && !TrackerHasPilot;
             btnRemvPilotFromTracker.Enabled = Connected && TrackerSelected && TrackerHasPilot;
             btnRemvRace.Enabled = Connected && RaceSelected;
-            btnLoadDxf.Enabled = Connected && RaceHasName;
             btnRacePilotA.Enabled = Connected && RaceHasName;
             btnRacePilotB.Enabled = Connected && RaceHasName;
             btnRacePilotC.Enabled = Connected && RaceHasName;
@@ -240,19 +239,7 @@ namespace GELive
                 MessageBox.Show("Error Rmoving Race " + ex.ToString());  
             }
         }
-        private void btnLoadDxf_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog fp = new OpenFileDialog();
-            fp.Filter = "Penalty-Zonen |*.dxf";
-            fp.FileOk += new CancelEventHandler(fp_FileOk);
-            fp.ShowDialog();
-        }
-        void fp_FileOk(object sender, CancelEventArgs e)
-        {
-            OpenFileDialog of = (OpenFileDialog)sender;
-            CurrentRace.Polygons = InformationPool.importFromDxf(of.FileName);
-            SyncRace();
-        }
+
 
         private void btnRacePilotA_Click(object sender, EventArgs e)
         {
@@ -373,13 +360,7 @@ namespace GELive
         {
 
         }
-        #endregion
 
-
-        private void btnLoadXML_Click(object sender, EventArgs e)
-        {
-            //@todo when used
-        }
 
         private void btnSelectParcour_Click(object sender, EventArgs e)
         {
@@ -387,14 +368,12 @@ namespace GELive
             P.OnParcourOk += new EventHandler(P_OnParcourOk);
             P.Show();
         }
-
         void P_OnParcourOk(object sender, EventArgs e)
         {
             PolygonGroup G = (PolygonGroup)sender;
             CurrentRace.Polygons = G;
             SyncRace();
         }
-
-
+        #endregion
     }
 }

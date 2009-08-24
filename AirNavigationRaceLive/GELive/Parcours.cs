@@ -23,7 +23,6 @@ namespace GELive
                 PolygonGroup PG = new PolygonGroup(pg);
                 lstParcours.Items.Add(PG);
             }
-            //InformationPool.Client
         }
 
         private void btnAddParcour_Click(object sender, EventArgs e)
@@ -33,6 +32,27 @@ namespace GELive
                 OnParcourOk.Invoke(lstParcours.SelectedItem, e);
                 Close();
             }
+        }
+
+        private void btnLoadXML_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLoadDxf_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fp = new OpenFileDialog();
+            fp.Filter = "Penalty-Zonen |*.dxf";
+            fp.FileOk += new CancelEventHandler(fp_FileOk);
+            fp.ShowDialog();
+        }
+        void fp_FileOk(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog of = (OpenFileDialog)sender;
+            PolygonGroup pg = InformationPool.importFromDxf(of.FileName);
+            pg.ID = 0;
+            lstParcours.Items.Add(pg);
+            Refresh();
         }
     }
 }

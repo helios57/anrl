@@ -47,10 +47,12 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.panelRace = new System.Windows.Forms.Panel();
+            this.fldRaceParcour = new System.Windows.Forms.TextBox();
+            this.lblParcour = new System.Windows.Forms.Label();
+            this.btnSelectParcour = new System.Windows.Forms.Button();
             this.fldRacePolygonsLoaded = new System.Windows.Forms.TextBox();
             this.lblPolygons = new System.Windows.Forms.Label();
             this.btnRacesRefresh = new System.Windows.Forms.Button();
-            this.btnLoadXML = new System.Windows.Forms.Button();
             this.btnRacePilotD = new System.Windows.Forms.Button();
             this.btnRacePilotC = new System.Windows.Forms.Button();
             this.btnRacePilotB = new System.Windows.Forms.Button();
@@ -67,7 +69,6 @@
             this.lblRaceDuration = new System.Windows.Forms.Label();
             this.lblStartTime = new System.Windows.Forms.Label();
             this.fldRaceTime = new System.Windows.Forms.DateTimePicker();
-            this.btnLoadDxf = new System.Windows.Forms.Button();
             this.btnSaveRace = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
             this.fldRaceDate = new System.Windows.Forms.DateTimePicker();
@@ -78,9 +79,6 @@
             this.lstRace = new System.Windows.Forms.ListView();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.btnSelectParcour = new System.Windows.Forms.Button();
-            this.fldRaceParcour = new System.Windows.Forms.TextBox();
-            this.lblParcour = new System.Windows.Forms.Label();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -261,7 +259,6 @@
             this.panelRace.Controls.Add(this.fldRacePolygonsLoaded);
             this.panelRace.Controls.Add(this.lblPolygons);
             this.panelRace.Controls.Add(this.btnRacesRefresh);
-            this.panelRace.Controls.Add(this.btnLoadXML);
             this.panelRace.Controls.Add(this.btnRacePilotD);
             this.panelRace.Controls.Add(this.btnRacePilotC);
             this.panelRace.Controls.Add(this.btnRacePilotB);
@@ -278,7 +275,6 @@
             this.panelRace.Controls.Add(this.lblRaceDuration);
             this.panelRace.Controls.Add(this.lblStartTime);
             this.panelRace.Controls.Add(this.fldRaceTime);
-            this.panelRace.Controls.Add(this.btnLoadDxf);
             this.panelRace.Controls.Add(this.btnSaveRace);
             this.panelRace.Controls.Add(this.lblDate);
             this.panelRace.Controls.Add(this.fldRaceDate);
@@ -291,6 +287,34 @@
             this.panelRace.Name = "panelRace";
             this.panelRace.Size = new System.Drawing.Size(657, 160);
             this.panelRace.TabIndex = 9;
+            // 
+            // fldRaceParcour
+            // 
+            this.fldRaceParcour.Enabled = false;
+            this.fldRaceParcour.Location = new System.Drawing.Point(424, 102);
+            this.fldRaceParcour.Name = "fldRaceParcour";
+            this.fldRaceParcour.Size = new System.Drawing.Size(131, 20);
+            this.fldRaceParcour.TabIndex = 58;
+            // 
+            // lblParcour
+            // 
+            this.lblParcour.AutoSize = true;
+            this.lblParcour.Location = new System.Drawing.Point(381, 105);
+            this.lblParcour.Name = "lblParcour";
+            this.lblParcour.Size = new System.Drawing.Size(44, 13);
+            this.lblParcour.TabIndex = 57;
+            this.lblParcour.Text = "Parcour";
+            // 
+            // btnSelectParcour
+            // 
+            this.btnSelectParcour.Enabled = false;
+            this.btnSelectParcour.Location = new System.Drawing.Point(561, 101);
+            this.btnSelectParcour.Name = "btnSelectParcour";
+            this.btnSelectParcour.Size = new System.Drawing.Size(83, 21);
+            this.btnSelectParcour.TabIndex = 56;
+            this.btnSelectParcour.Text = "Select";
+            this.btnSelectParcour.UseVisualStyleBackColor = true;
+            this.btnSelectParcour.Click += new System.EventHandler(this.btnSelectParcour_Click);
             // 
             // fldRacePolygonsLoaded
             // 
@@ -318,17 +342,6 @@
             this.btnRacesRefresh.Text = "Refresh";
             this.btnRacesRefresh.UseVisualStyleBackColor = true;
             this.btnRacesRefresh.Click += new System.EventHandler(this.btnRacesRefresh_Click);
-            // 
-            // btnLoadXML
-            // 
-            this.btnLoadXML.Enabled = false;
-            this.btnLoadXML.Location = new System.Drawing.Point(346, 131);
-            this.btnLoadXML.Name = "btnLoadXML";
-            this.btnLoadXML.Size = new System.Drawing.Size(83, 26);
-            this.btnLoadXML.TabIndex = 52;
-            this.btnLoadXML.Text = "Load XML";
-            this.btnLoadXML.UseVisualStyleBackColor = true;
-            this.btnLoadXML.Click += new System.EventHandler(this.btnLoadXML_Click);
             // 
             // btnRacePilotD
             // 
@@ -479,16 +492,6 @@
             this.fldRaceTime.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
             this.fldRaceTime.ValueChanged += new System.EventHandler(this.fldRaceTime_ValueChanged);
             // 
-            // btnLoadDxf
-            // 
-            this.btnLoadDxf.Location = new System.Drawing.Point(257, 132);
-            this.btnLoadDxf.Name = "btnLoadDxf";
-            this.btnLoadDxf.Size = new System.Drawing.Size(83, 26);
-            this.btnLoadDxf.TabIndex = 34;
-            this.btnLoadDxf.Text = "Load DXF";
-            this.btnLoadDxf.UseVisualStyleBackColor = true;
-            this.btnLoadDxf.Click += new System.EventHandler(this.btnLoadDxf_Click);
-            // 
             // btnSaveRace
             // 
             this.btnSaveRace.Location = new System.Drawing.Point(561, 131);
@@ -576,34 +579,6 @@
             this.columnHeader7.Text = "Race";
             this.columnHeader7.Width = 100;
             // 
-            // btnSelectParcour
-            // 
-            this.btnSelectParcour.Enabled = false;
-            this.btnSelectParcour.Location = new System.Drawing.Point(561, 101);
-            this.btnSelectParcour.Name = "btnSelectParcour";
-            this.btnSelectParcour.Size = new System.Drawing.Size(83, 21);
-            this.btnSelectParcour.TabIndex = 56;
-            this.btnSelectParcour.Text = "Select";
-            this.btnSelectParcour.UseVisualStyleBackColor = true;
-            this.btnSelectParcour.Click += new System.EventHandler(this.btnSelectParcour_Click);
-            // 
-            // fldRaceParcour
-            // 
-            this.fldRaceParcour.Enabled = false;
-            this.fldRaceParcour.Location = new System.Drawing.Point(424, 102);
-            this.fldRaceParcour.Name = "fldRaceParcour";
-            this.fldRaceParcour.Size = new System.Drawing.Size(131, 20);
-            this.fldRaceParcour.TabIndex = 58;
-            // 
-            // lblParcour
-            // 
-            this.lblParcour.AutoSize = true;
-            this.lblParcour.Location = new System.Drawing.Point(381, 105);
-            this.lblParcour.Name = "lblParcour";
-            this.lblParcour.Size = new System.Drawing.Size(44, 13);
-            this.lblParcour.TabIndex = 57;
-            this.lblParcour.Text = "Parcour";
-            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -656,7 +631,6 @@
         private System.Windows.Forms.DateTimePicker fldRaceDate;
         private System.Windows.Forms.Label lblStartTime;
         private System.Windows.Forms.DateTimePicker fldRaceTime;
-        private System.Windows.Forms.Button btnLoadDxf;
         private System.Windows.Forms.Button btnSaveRace;
         private System.Windows.Forms.Label lblRaceDuration;
         private System.Windows.Forms.NumericUpDown fldRaceDuration;
@@ -672,7 +646,6 @@
         private System.Windows.Forms.Button btnRacePilotC;
         private System.Windows.Forms.Button btnRacePilotB;
         private System.Windows.Forms.Button btnRacePilotA;
-        private System.Windows.Forms.Button btnLoadXML;
         private System.Windows.Forms.Button btnRacesRefresh;
         private System.Windows.Forms.TextBox fldRacePolygonsLoaded;
         private System.Windows.Forms.Label lblPolygons;

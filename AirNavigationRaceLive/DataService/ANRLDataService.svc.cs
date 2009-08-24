@@ -269,31 +269,38 @@ namespace DataService
                 #region Polygongroup & Polygons & PolygonPoints
                 if (Race.t_PolygonGroup != null)
                 {
-                    PolygonGroup.Name = Race.t_PolygonGroup.Name;
-                    dataContext.t_PolygonGroups.InsertOnSubmit(PolygonGroup);
-                    dataContext.SubmitChanges();
-                    PolygonGroup = dataContext.t_PolygonGroups.Where(p=>p.Name == PolygonGroup.Name).Last();
-                    
-                    if (Race.t_PolygonGroup.t_Polygons.Count > 0)
+                    if (Race.t_PolygonGroup.ID == 0)
                     {
-                        foreach (t_Polygon poly in Race.t_PolygonGroup.t_Polygons)
+                        PolygonGroup.Name = Race.t_PolygonGroup.Name;
+                        dataContext.t_PolygonGroups.InsertOnSubmit(PolygonGroup);
+                        dataContext.SubmitChanges();
+                        PolygonGroup = dataContext.t_PolygonGroups.Where(p => p.Name == PolygonGroup.Name).Last();
+
+                        if (Race.t_PolygonGroup.t_Polygons.Count > 0)
                         {
-                            t_Polygon tmp_poly = new t_Polygon();
-                            tmp_poly.Type = poly.Type;
-                            tmp_poly.ID_PolygonGroup = PolygonGroup.ID;
-                            dataContext.t_Polygons.InsertOnSubmit(tmp_poly);
-                            dataContext.SubmitChanges();
-                            Polygons.Add(dataContext.t_Polygons.Last());
-                            foreach (t_PolygonPoint pp in poly.t_PolygonPoints)
+                            foreach (t_Polygon poly in Race.t_PolygonGroup.t_Polygons)
                             {
-                                t_PolygonPoint tmpPoint = new t_PolygonPoint();
-                                tmpPoint.ID_Polygon = Polygons.Last().ID;
-                                tmpPoint.longitude = pp.longitude;
-                                tmpPoint.latitude = pp.latitude;
-                                tmpPoint.altitude = pp.altitude;
-                                dataContext.t_PolygonPoints.InsertOnSubmit(tmpPoint);
+                                t_Polygon tmp_poly = new t_Polygon();
+                                tmp_poly.Type = poly.Type;
+                                tmp_poly.ID_PolygonGroup = PolygonGroup.ID;
+                                dataContext.t_Polygons.InsertOnSubmit(tmp_poly);
+                                dataContext.SubmitChanges();
+                                Polygons.Add(dataContext.t_Polygons.Last());
+                                foreach (t_PolygonPoint pp in poly.t_PolygonPoints)
+                                {
+                                    t_PolygonPoint tmpPoint = new t_PolygonPoint();
+                                    tmpPoint.ID_Polygon = Polygons.Last().ID;
+                                    tmpPoint.longitude = pp.longitude;
+                                    tmpPoint.latitude = pp.latitude;
+                                    tmpPoint.altitude = pp.altitude;
+                                    dataContext.t_PolygonPoints.InsertOnSubmit(tmpPoint);
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        PolygonGroup.ID = (int)Race.ID_PolygonGroup;
                     }
                     dataContext.SubmitChanges();
                 }
