@@ -36,6 +36,20 @@ namespace GELive
             Client.ClientCredentials.Windows.ClientCredential.Password = Password;
             return Client.State == System.ServiceModel.CommunicationState.Created;
         }
+
+        static public void StartVisualisation()
+        {
+            gui = new anrl_gui();
+        }
+
+        static public void ShowDelay()
+        {
+
+        }
+        static public void ShowRanking(RaceEntry Race)
+        {
+
+        }
         
         /// <summary> 
         /// Imports a DxfFile that is in the specified Format. Any changes on the import schema may cause Errors!

@@ -79,10 +79,15 @@
             this.lstRace = new System.Windows.Forms.ListView();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.panelStarterPanel = new System.Windows.Forms.Panel();
+            this.btnStartClient = new System.Windows.Forms.Button();
+            this.btnShowRanking = new System.Windows.Forms.Button();
+            this.btnShowDelay = new System.Windows.Forms.Button();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).BeginInit();
+            this.panelStarterPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // fldServer
@@ -254,6 +259,7 @@
             // panelRace
             // 
             this.panelRace.Controls.Add(this.fldRaceParcour);
+            this.panelRace.Controls.Add(this.btnShowRanking);
             this.panelRace.Controls.Add(this.lblParcour);
             this.panelRace.Controls.Add(this.btnSelectParcour);
             this.panelRace.Controls.Add(this.fldRacePolygonsLoaded);
@@ -581,11 +587,51 @@
             this.columnHeader7.Text = "Race";
             this.columnHeader7.Width = 100;
             // 
+            // panelStarterPanel
+            // 
+            this.panelStarterPanel.Controls.Add(this.btnShowDelay);
+            this.panelStarterPanel.Controls.Add(this.btnStartClient);
+            this.panelStarterPanel.Location = new System.Drawing.Point(285, 12);
+            this.panelStarterPanel.Name = "panelStarterPanel";
+            this.panelStarterPanel.Size = new System.Drawing.Size(384, 86);
+            this.panelStarterPanel.TabIndex = 10;
+            // 
+            // btnStartClient
+            // 
+            this.btnStartClient.Location = new System.Drawing.Point(243, 0);
+            this.btnStartClient.Name = "btnStartClient";
+            this.btnStartClient.Size = new System.Drawing.Size(141, 23);
+            this.btnStartClient.TabIndex = 0;
+            this.btnStartClient.Text = "Start Visualisation";
+            this.btnStartClient.UseVisualStyleBackColor = true;
+            this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
+            // 
+            // btnShowRanking
+            // 
+            this.btnShowRanking.Location = new System.Drawing.Point(257, 131);
+            this.btnShowRanking.Name = "btnShowRanking";
+            this.btnShowRanking.Size = new System.Drawing.Size(96, 26);
+            this.btnShowRanking.TabIndex = 1;
+            this.btnShowRanking.Text = "Show Ranking";
+            this.btnShowRanking.UseVisualStyleBackColor = true;
+            this.btnShowRanking.Click += new System.EventHandler(this.btnShowRanking_Click);
+            // 
+            // btnShowDelay
+            // 
+            this.btnShowDelay.Location = new System.Drawing.Point(243, 27);
+            this.btnShowDelay.Name = "btnShowDelay";
+            this.btnShowDelay.Size = new System.Drawing.Size(141, 23);
+            this.btnShowDelay.TabIndex = 2;
+            this.btnShowDelay.Text = "Show Delay Select";
+            this.btnShowDelay.UseVisualStyleBackColor = true;
+            this.btnShowDelay.Click += new System.EventHandler(this.btnShowDelay_Click);
+            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(686, 372);
+            this.Controls.Add(this.panelStarterPanel);
             this.Controls.Add(this.panelRace);
             this.Controls.Add(this.panelTrackerPilot);
             this.Controls.Add(this.panelConnection);
@@ -597,6 +643,7 @@
             this.panelRace.ResumeLayout(false);
             this.panelRace.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).EndInit();
+            this.panelStarterPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -654,5 +701,9 @@
         private System.Windows.Forms.Button btnSelectParcour;
         private System.Windows.Forms.TextBox fldRaceParcour;
         private System.Windows.Forms.Label lblParcour;
+        private System.Windows.Forms.Panel panelStarterPanel;
+        private System.Windows.Forms.Button btnStartClient;
+        private System.Windows.Forms.Button btnShowRanking;
+        private System.Windows.Forms.Button btnShowDelay;
     }
 }

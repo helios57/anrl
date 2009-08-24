@@ -443,5 +443,21 @@ namespace GELive
             SyncRace();
         }
         #endregion
+
+        private void btnStartClient_Click(object sender, EventArgs e)
+        {
+            InformationPool.StartVisualisation();
+        }
+        private void btnShowDelay_Click(object sender, EventArgs e)
+        {
+            InformationPool.ShowDelay();
+        }
+        private void btnShowRanking_Click(object sender, EventArgs e)
+        {
+            if (lstRace.SelectedItems.Count == 1)
+            {
+                InformationPool.ShowRanking(CurrentRace);
+            }
+        }
     }
 }
