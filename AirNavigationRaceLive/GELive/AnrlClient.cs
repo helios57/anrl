@@ -358,7 +358,33 @@ namespace GELive
 
         private void btnSaveRace_Click(object sender, EventArgs e)
         {
-
+            t_Race r = new t_Race();
+            r.Name = CurrentRace.Name;
+            r.ID_Pilot_0 = int.Parse(CurrentRace.PilotA.ID);
+            r.ID_Pilot_1 = int.Parse(CurrentRace.PilotB.ID);
+            r.ID_Pilot_2 = int.Parse(CurrentRace.PilotC.ID);
+            r.ID_Pilot_3 = int.Parse(CurrentRace.PilotD.ID);
+            r.ID_PolygonGroup = CurrentRace.Polygons.ID;
+            r.t_PolygonGroup = new t_PolygonGroup();
+            r.t_PolygonGroup.t_Polygons = new List<t_Polygon>();
+            foreach (Polygon p in CurrentRace.Polygons.Polygons)
+            {
+                t_Polygon poly = new t_Polygon();
+                poly.t_PolygonPoints = new List<t_PolygonPoint>();
+                foreach (PolygonPoint pp in p.Points)
+                {
+                    t_PolygonPoint temp_poly_point = new t_PolygonPoint();
+                    temp_poly_point.altitude = pp.Altitude;
+                    temp_poly_point.latitude = pp.Latitude;
+                    temp_poly_point.longitude = pp.Longitude;
+                    poly.t_PolygonPoints.Add(temp_poly_point);
+                }
+                r.t_PolygonGroup.t_Polygons.Add(poly);
+            }
+            r.t_PolygonGroup.ID = 0;
+            r.TimeStart = CurrentRace.StartTime;
+            r.TimeEnd = CurrentRace.StartTime.Add(new TimeSpan(0,(int)CurrentRace.Duration,0));
+            InformationPool.Client.AddRace(r);
         }
 
 

@@ -269,7 +269,7 @@ namespace DataService
                 #region Polygongroup & Polygons & PolygonPoints
                 if (Race.t_PolygonGroup != null)
                 {
-                    if (Race.t_PolygonGroup.ID == 0)
+                    if (Race.ID_PolygonGroup == 0)
                     {
                         PolygonGroup.Name = Race.t_PolygonGroup.Name;
                         dataContext.t_PolygonGroups.InsertOnSubmit(PolygonGroup);
@@ -310,7 +310,14 @@ namespace DataService
                 r.ID_Pilot_1 = Race.ID_Pilot_1;
                 r.ID_Pilot_2 = Race.ID_Pilot_2;
                 r.ID_Pilot_3 = Race.ID_Pilot_3;
-                r.ID_PolygonGroup = PolygonGroup.ID;
+                if (Race.ID_PolygonGroup != 0)
+                {
+                    r.ID_PolygonGroup = Race.ID_PolygonGroup;
+                }
+                else
+                {
+                    r.ID_PolygonGroup = PolygonGroup.ID;
+                }
                 r.Name = Race.Name;
                 r.TimeEnd = Race.TimeEnd;
                 r.TimeStart = Race.TimeStart;
