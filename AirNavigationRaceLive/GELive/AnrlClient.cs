@@ -78,6 +78,7 @@ namespace GELive
             try
             {
                 LoadTrackerList();
+                LoadRaces();
             }
             catch
             {
@@ -115,7 +116,8 @@ namespace GELive
         private void LoadRaces()
         {
             lstRace.Items.Clear();
-            foreach (t_Race Race in InformationPool.Client.GetRaces())
+            List<t_Race> RaceList = InformationPool.Client.GetRaces();
+            foreach (t_Race Race in RaceList)
             {
                 ListViewItem lvi = new ListViewItem(new String[] {Race.ID.ToString(),Race.Name});
                 lvi.Tag = new RaceEntry(Race);
@@ -355,10 +357,26 @@ namespace GELive
         {
             t_Race r = new t_Race();
             r.Name = CurrentRace.Name;
-            if (CurrentRace.PilotA != null)r.ID_Pilot_0 = int.Parse(CurrentRace.PilotA.ID);
-            if (CurrentRace.PilotB != null) r.ID_Pilot_1 = int.Parse(CurrentRace.PilotB.ID);
-            if (CurrentRace.PilotC != null) r.ID_Pilot_2 = int.Parse(CurrentRace.PilotC.ID);
-            if (CurrentRace.PilotD != null) r.ID_Pilot_3 = int.Parse(CurrentRace.PilotD.ID);
+            if (CurrentRace.PilotA != null)
+            {
+                r.t_Pilot = new t_Pilot();
+                r.t_Pilot.ID = int.Parse(CurrentRace.PilotA.ID);
+            }
+            if (CurrentRace.PilotB != null)
+            {
+                r.t_Pilot1 = new t_Pilot();
+                r.t_Pilot1.ID = int.Parse(CurrentRace.PilotB.ID);
+            }
+            if (CurrentRace.PilotC != null)
+            {
+                r.t_Pilot2 = new t_Pilot();
+                r.t_Pilot2.ID = int.Parse(CurrentRace.PilotC.ID);
+            }
+            if (CurrentRace.PilotD != null)
+            {
+                r.t_Pilot3 = new t_Pilot();
+                r.t_Pilot3.ID = int.Parse(CurrentRace.PilotA.ID);
+            }
             r.ID_PolygonGroup = CurrentRace.Polygons.ID;
             r.t_PolygonGroup = new t_PolygonGroup();
             r.t_PolygonGroup.Name = CurrentRace.Polygons.Name;
@@ -377,10 +395,13 @@ namespace GELive
                 }
                 r.t_PolygonGroup.t_Polygons.Add(poly);
             }
-            r.t_PolygonGroup.ID = 0;
+            r.t_PolygonGroup.ID = CurrentRace.Polygons.ID;
             r.TimeStart = CurrentRace.StartTime;
             r.TimeEnd = CurrentRace.StartTime.Add(new TimeSpan(0,(int)CurrentRace.Duration,0));
             InformationPool.Client.AddRace(r);
+            LoadRaces();
+            CurrentRace = new RaceEntry();
+            SyncRace();
         }
 
 

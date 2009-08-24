@@ -164,9 +164,6 @@ namespace DataService
                 race.Name = r.Name;
                 race.TimeEnd = r.TimeEnd;
                 race.TimeStart = r.TimeStart;
-                race.t_PolygonGroup = new t_PolygonGroup();
-                race.t_PolygonGroup.ID = r.t_PolygonGroup.ID;
-                race.t_PolygonGroup.Name = r.t_PolygonGroup.Name;
                 tmp.Add(race);
             }
             return tmp;

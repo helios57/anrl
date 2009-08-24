@@ -200,23 +200,20 @@ namespace GELive
         }
         public RaceEntry(t_Race Race)
         {
+            List<t_Pilot> pilots = InformationPool.Client.GetPilots();
             this.ID = Race.ID;
             this.Name = Race.Name;
-            this.PilotA = new PilotEntry();
-            this.PilotA.ID = Race.ID_Pilot_0.ToString();
-            this.PilotB = new PilotEntry();
-            this.PilotB.ID = Race.ID_Pilot_1.ToString();
-            this.PilotC = new PilotEntry();
-            this.PilotC.ID = Race.ID_Pilot_2.ToString();
-            this.PilotD = new PilotEntry();
-            this.PilotD.ID = Race.ID_Pilot_3.ToString();
+            if (Race.ID_Pilot_0 > 0) this.PilotA = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_0));
+            if (Race.ID_Pilot_1 > 0) this.PilotB = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_1));
+            if (Race.ID_Pilot_2 > 0) this.PilotC = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_2));
+            if (Race.ID_Pilot_3 > 0) this.PilotD = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_3));
+
             this.Polygons = new PolygonGroup();
-            Polygons.Polygons.Add(new Polygon());
             Polygons.ID = (int)Race.ID_PolygonGroup;
-            Polygons.Name = Race.t_PolygonGroup.Name;
+            Polygons.Name = Race.ID_PolygonGroup.ToString();
             this.StartTime = (DateTime)Race.TimeStart;
             DateTime EndTime = (DateTime)Race.TimeEnd;
-            this.Duration = (decimal)(EndTime - StartTime).TotalMilliseconds;
+            this.Duration = (decimal)(EndTime - StartTime).TotalMinutes;
         }
         public int ID;
         public String Name;
