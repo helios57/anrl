@@ -29,7 +29,7 @@ namespace GELive
             //Add Delay-Selector
 
             ANRLDataServiceClient Client = new ANRLDataServiceClient();
-            SetClientCredentials.SetCredentials(Client);
+            //SetClientCredentials.SetCredentials(Client);
 
             try
             {
