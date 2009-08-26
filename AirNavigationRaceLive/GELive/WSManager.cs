@@ -41,12 +41,14 @@ namespace GELive
         /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
-            InformationPool.Next = new DateTime().ToUniversalTime();
+            InformationPool.Next = DateTime.Now.ToUniversalTime();
 
-            InformationPool.DatenListe.AddRange(
-                InformationPool.Client.GetPathData(
+            List<t_Daten> tempList = InformationPool.Client.GetPathData(
                     InformationPool.Newest, 
-                    InformationPool.Next));
+                    InformationPool.Next);
+
+            InformationPool.DatenListe.AddRange(tempList);
+
             UpdateGWebBrowser();
             DataUpdated.Invoke(sender, e);
         }
