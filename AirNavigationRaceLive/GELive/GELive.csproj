@@ -90,12 +90,6 @@
     <Compile Include="anrl_gui.Designer.cs">
       <DependentUpon>anrl_gui.cs</DependentUpon>
     </Compile>
-    <Compile Include="Delay-Select.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Delay-Select.Designer.cs">
-      <DependentUpon>Delay-Select.cs</DependentUpon>
-    </Compile>
     <Compile Include="GELiveStuff\External.cs" />
     <Compile Include="GELiveStuff\GEEventArgs.cs" />
     <Compile Include="GELiveStuff\GEHelpers.cs" />
@@ -129,10 +123,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="anrl_gui.resx">
       <DependentUpon>anrl_gui.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Delay-Select.resx">
-      <DependentUpon>Delay-Select.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Parcours.resx">
