@@ -15,8 +15,7 @@ namespace GELive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new AnrlClient());
-            Application.Run(new RankForm());
+            Application.Run(new AnrlClient());
         }
     }
 }

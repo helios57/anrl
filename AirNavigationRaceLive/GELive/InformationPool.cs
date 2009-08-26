@@ -316,5 +316,30 @@ namespace GELive
         public String SureName;
         public int Punkte;
     }
+    public class PilotLst :t_Pilot
+    {
+        public t_Pilot p;
+        public PilotLst(t_Pilot p)
+        {
+            this.p = p;
+        }
+        public override string ToString()
+        {
+            return p.ID + " " + p.LastName + " " + p.SureName;
+        }
+    }
+    public class RaceLst : t_Race
+    {
+        public t_Race r;
+        public RaceEntry re;
+        public RaceLst(t_Race r)
+        {
+            this.r = r;
+        }
+        public override string ToString()
+        {
+            return r.ID + " " + r.Name + " " + r.TimeStart.ToString();
+        }
+    }
 
 }

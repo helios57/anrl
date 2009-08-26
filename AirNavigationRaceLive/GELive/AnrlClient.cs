@@ -73,7 +73,10 @@ namespace GELive
             btnSaveRace.Enabled = Connected && RaceHasName;
             btnSelectParcour.Enabled = Connected && RaceHasName;
             btnShowRanking.Enabled = Connected && RaceSelected;
+            RefreshTimeline();
+
         }
+
         private void Connect()
         {
             InformationPool.RemoteAddress = fldServer.Text;
@@ -114,7 +117,7 @@ namespace GELive
             lstVisualPilotsToShow.Items.Clear();
             foreach (t_Pilot p in PilotList.Where(p=>p.ID_Tracker > 0))
             {
-                lstVisualPilotsToShow.Items.Add(p);
+                lstVisualPilotsToShow.Items.Add(new PilotLst(p));
             }
             CheckEnabled();
             CheckPilotListChecked();
@@ -135,7 +138,9 @@ namespace GELive
                 ListViewItem lvi = new ListViewItem(new String[] {Race.ID.ToString(),Race.Name});
                 lvi.Tag = new RaceEntry(Race);
                 lstRace.Items.Add(lvi);
-                lstVisualRacesToShow.Items.Add(Race);
+                RaceLst rl = new RaceLst(Race);
+                rl.re = (RaceEntry)lvi.Tag;
+                lstVisualRacesToShow.Items.Add(rl);
             }
             CheckRacecListChecked();
         }
@@ -276,8 +281,6 @@ namespace GELive
                 MessageBox.Show("Error Rmoving Race " + ex.ToString());  
             }
         }
-
-
         private void btnRacePilotA_Click(object sender, EventArgs e)
         {
             if (CurrentRace.PilotA == null)
@@ -390,9 +393,6 @@ namespace GELive
                 CurrentRace.StartTime.Second);
             SyncRace();
         }
-
-
-
         private void btnSaveRace_Click(object sender, EventArgs e)
         {
             t_Race r = new t_Race();
@@ -443,8 +443,6 @@ namespace GELive
             CurrentRace = new RaceEntry();
             SyncRace();
         }
-
-
         private void btnSelectParcour_Click(object sender, EventArgs e)
         {
             Parcours P = new Parcours();
@@ -471,23 +469,94 @@ namespace GELive
             }
         }
 
+        public void RefreshTimeline()
+        {
+            VisualScrollBar.Maximum = InformationPool.DatenListe.Count;
+            if (VisualChkBoxAlwaysNewest.Checked)
+            {
+                VisualScrollBar.Value = VisualScrollBar.Maximum;
+            }
+            if (InformationPool.DatenListe.Count > 1)
+            {
+                try
+                {
+                    InformationPool.CurrentEnd = InformationPool.DatenListe[VisualScrollBar.Value-1].Timestamp;
+                    InformationPool.CurrentStart = InformationPool.DatenListe[0].Timestamp;
+                }
+                catch{}
+            }
+        }
+
         private void CheckPilotListChecked()
         {
-            
+            InformationPool.PilotsToBeDrawn.Clear();
+            foreach (Object o in lstVisualPilotsToShow.CheckedItems)
+            {
+                PilotLst pl = (PilotLst)o;
+                PilotEntry p = new PilotEntry();
+                p.ID_Tracker = pl.p.ID_Tracker;
+                p.ID = pl.p.ID.ToString();
+                InformationPool.PilotsToBeDrawn.Add(p);
+            }
         }
         private void CheckRacecListChecked()
         {
-            
+            foreach (Object o in lstVisualRacesToShow.CheckedItems)
+            {
+                RaceLst rl = (RaceLst)o;
+                if (InformationPool.PolygonGroupToDraw.ID == 0)
+                {
+                    InformationPool.PolygonGroupToDraw = rl.re.Polygons;
+                }
+                else if (InformationPool.PolygonGroupToDraw.ID == rl.re.Polygons.ID)
+                {
+                    InformationPool.PolygonGroupToDraw = rl.re.Polygons;
+                }
+                else
+                {
+                    InformationPool.PolygonGroupToDraw = new PolygonGroup();
+                    LoadRaces();
+                    break;
+                }
+            }
+            panelStarterPanel.Enabled = false;
+            panelTrackerPilot.Enabled = false;
+            panelRace.Enabled = false;
+            if (InformationPool.PolygonGroupToDraw.ID > 0)
+            {
+                List<t_Polygon> pg = InformationPool.Client.GetPolygonsByGroup(InformationPool.PolygonGroupToDraw.ID);
+                foreach (t_Polygon p in pg)
+                {
+                    List<t_PolygonPoint> ppl = InformationPool.Client.GetPolygonPoints(p.ID);
+                    Polygon TmpPolygon = new Polygon();
+                    TmpPolygon.ID = p.ID;
+                    TmpPolygon.Type = (PolygonType)p.Type;
+                    #region Polygon Points
+                    TmpPolygon.Points = new List<PolygonPoint>();
+                    foreach (t_PolygonPoint pgp in ppl)
+                    {
+                        PolygonPoint pgpp = new PolygonPoint();
+                        pgpp.Altitude = pgp.altitude;
+                        pgpp.Longitude = pgp.longitude;
+                        pgpp.Latitude = pgp.latitude;
+                        pgpp.ID = pgp.ID;
+                        TmpPolygon.Points.Add(pgpp);
+                    }
+                    #endregion
+                    InformationPool.PolygonGroupToDraw.Polygons.Add(TmpPolygon);
+                }
+            }
+            CheckEnabled();
         }
 
         private void lstVisualRacesToShow_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CheckRacecListChecked();
         }
 
         private void lstVisualPilotsToShow_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            CheckPilotListChecked();
         }
 
         private void btnVisualLoadOlder_Click(object sender, EventArgs e)
