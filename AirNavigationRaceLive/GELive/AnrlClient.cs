@@ -48,8 +48,13 @@ namespace GELive
             }
             #endregion
             panelConnection.Enabled = !Connected;
+            panelConnection.Visible = !Connected;
             panelTrackerPilot.Enabled = Connected;
+            panelTrackerPilot.Visible = Connected;
             panelRace.Enabled = Connected;
+            panelRace.Visible = Connected;
+            panelStarterPanel.Enabled = Connected;
+            panelStarterPanel.Visible = Connected;
             btnAddPilotToTracker.Enabled = Connected && TrackerSelected && !TrackerHasPilot;
             btnRemvPilotFromTracker.Enabled = Connected && TrackerSelected && TrackerHasPilot;
             btnRemvRace.Enabled = Connected && RaceSelected;
@@ -67,6 +72,7 @@ namespace GELive
             else btnRacePilotD.Text = "Remove";
             btnSaveRace.Enabled = Connected && RaceHasName;
             btnSelectParcour.Enabled = Connected && RaceHasName;
+            btnShowRanking.Enabled = Connected && RaceSelected;
         }
         private void Connect()
         {
@@ -105,7 +111,13 @@ namespace GELive
                 }
                 lstTrackers.Items.Add(lvi);
             }
+            lstVisualPilotsToShow.Items.Clear();
+            foreach (t_Pilot p in PilotList.Where(p=>p.ID_Tracker > 0))
+            {
+                lstVisualPilotsToShow.Items.Add(p);
+            }
             CheckEnabled();
+            CheckPilotListChecked();
         }
         private void RemovePilotFromTracker()
         {
@@ -116,13 +128,16 @@ namespace GELive
         private void LoadRaces()
         {
             lstRace.Items.Clear();
+            lstVisualRacesToShow.Items.Clear();
             List<t_Race> RaceList = InformationPool.Client.GetRaces();
             foreach (t_Race Race in RaceList)
             {
                 ListViewItem lvi = new ListViewItem(new String[] {Race.ID.ToString(),Race.Name});
                 lvi.Tag = new RaceEntry(Race);
-                lstRace.Items.Add(lvi); 
+                lstRace.Items.Add(lvi);
+                lstVisualRacesToShow.Items.Add(Race);
             }
+            CheckRacecListChecked();
         }
         private void SyncRace()
         {
@@ -367,9 +382,9 @@ namespace GELive
         private void fldRaceDate_ValueChanged(object sender, EventArgs e)
         {
             CurrentRace.StartTime = new DateTime(
-                fldRaceTime.Value.Year,
-                fldRaceTime.Value.Month,
-                fldRaceTime.Value.Day,
+                fldRaceDate.Value.Year,
+                fldRaceDate.Value.Month,
+                fldRaceDate.Value.Day,
                 CurrentRace.StartTime.Hour,
                 CurrentRace.StartTime.Minute,
                 CurrentRace.StartTime.Second);
@@ -448,16 +463,56 @@ namespace GELive
         {
             InformationPool.StartVisualisation();
         }
-        private void btnShowDelay_Click(object sender, EventArgs e)
-        {
-            InformationPool.ShowDelay();
-        }
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
             if (lstRace.SelectedItems.Count == 1)
             {
                 InformationPool.ShowRanking(CurrentRace);
             }
+        }
+
+        private void CheckPilotListChecked()
+        {
+            
+        }
+        private void CheckRacecListChecked()
+        {
+            
+        }
+
+        private void lstVisualRacesToShow_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstVisualPilotsToShow_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVisualLoadOlder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VisualScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void VisualChkBoxAlwaysNewest_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fldVisualPlaySpeed_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
