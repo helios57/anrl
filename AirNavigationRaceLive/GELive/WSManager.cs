@@ -28,6 +28,7 @@ namespace GELive
         public WSManager()
         {
             Container = InformationPool.ge.getFeatures();
+            String KML = GetKml();
             Container.appendChild(InformationPool.ge.parseKml(GetKml()));
             Container.appendChild(InformationPool.ge.parseKml(GetPolygonKml()));
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
@@ -50,16 +51,27 @@ namespace GELive
             InformationPool.DatenListe.AddRange(tempList);
 
             UpdateGWebBrowser();
-            DataUpdated.Invoke(sender, e);
+            if (DataUpdated != null) DataUpdated.Invoke(sender, e);
         }
 
         private void UpdateGWebBrowser()
         {
             String kml = GetKml();
-            Container.replaceChild(InformationPool.ge.parseKml(GetKml()), Container.getFirstChild());
-            Container.replaceChild(InformationPool.ge.parseKml(GetPolygonKml()), Container.getLastChild());
-            InformationPool.gweb.Invalidate();
-            InformationPool.gweb.Invoke(new MethodInvoker(InformationPool.gweb.Update));
+            String PolyKML = GetPolygonKml();
+            try
+            {
+                Container.replaceChild(InformationPool.ge.parseKml(kml), Container.getFirstChild());
+                InformationPool.gweb.Invalidate();
+                InformationPool.gweb.Invoke(new MethodInvoker(InformationPool.gweb.Update));
+
+                Container.replaceChild(InformationPool.ge.parseKml(PolyKML), Container.getLastChild());
+                InformationPool.gweb.Invalidate();
+                InformationPool.gweb.Invoke(new MethodInvoker(InformationPool.gweb.Update));
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>
@@ -205,6 +217,11 @@ namespace GELive
             {
                 this.id = id;
             }
+        }
+
+        internal void close()
+        {
+            UpdateData.Stop();
         }
     }
 }

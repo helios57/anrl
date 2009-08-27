@@ -56,17 +56,17 @@ namespace GELive
             gui = new anrl_gui();
             gui.PluginReady += new EventHandler(gui_PluginReady);
             gui.Show();
+            gui.FormClosing += new System.Windows.Forms.FormClosingEventHandler(gui_FormClosing);
         }
-
+        static void gui_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            manager.close();
+        }
         static void gui_PluginReady(object sender, EventArgs e)
         {
             manager = new WSManager();
         }
 
-        static public void ShowDelay()
-        {
-
-        }
         static public void ShowRanking(RaceEntry Race)
         {
 
@@ -137,8 +137,8 @@ namespace GELive
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
                                 PolygonPoint point = new PolygonPoint();
-                                point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000);
-                                point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000);
+                                point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16]) * 1000, double.Parse(lines[i + (j * 4) + 18]) * 1000);
+                                point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16]) * 1000, double.Parse(lines[i + (j * 4) + 18]) * 1000);
                                 point.ID = p.ID;
                                 p.Points.Add(point);
                             }

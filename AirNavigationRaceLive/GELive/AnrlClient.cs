@@ -515,6 +515,7 @@ namespace GELive
                 else
                 {
                     InformationPool.PolygonGroupToDraw = new PolygonGroup();
+                    InformationPool.PolygonGroupToDraw.ID = 0;
                     LoadRaces();
                     break;
                 }
@@ -548,12 +549,14 @@ namespace GELive
             }
             CheckEnabled();
         }
-
+        private void fldVisualPlaySpeed_ValueChanged(object sender, EventArgs e)
+        {
+            InformationPool.PlaySpeed = (int)fldVisualPlaySpeed.Value;
+        }
         private void lstVisualRacesToShow_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckRacecListChecked();
         }
-
         private void lstVisualPilotsToShow_SelectedIndexChanged(object sender, EventArgs e)
         {
             CheckPilotListChecked();
@@ -561,7 +564,9 @@ namespace GELive
 
         private void btnVisualLoadOlder_Click(object sender, EventArgs e)
         {
-
+            InformationPool.Oldest.AddMinutes(-30);
+            InformationPool.DatenListe.AddRange(InformationPool.Client.GetPathData(InformationPool.Oldest, InformationPool.Oldest.AddMinutes(30)));
+            RefreshTimeline();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -575,11 +580,6 @@ namespace GELive
         }
 
         private void VisualChkBoxAlwaysNewest_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fldVisualPlaySpeed_ValueChanged(object sender, EventArgs e)
         {
 
         }

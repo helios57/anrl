@@ -36,8 +36,8 @@ namespace DataService
             try
             {
                 DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", IntervallStart.ToString() + " " + IntervallEnd.CompareTo(dataContext.t_Datens.Max(p => p.Timestamp)));
-                //     if ()
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:GetPathData", IntervallStart.ToString() + " " + IntervallEnd.ToString());
+                //@todo ... add delay for anti-cheating-reasons     if ()
                 {
 
                 }

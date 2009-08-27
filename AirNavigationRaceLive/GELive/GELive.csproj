@@ -168,7 +168,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Plugin.html" />
+    <Content Include="Resources\Plugin.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config" />
     <None Include="GELiveStuff\GELive_TemporaryKey.pfx" />
     <None Include="Resources\KMLTemplates\footerPolygon.kml">
