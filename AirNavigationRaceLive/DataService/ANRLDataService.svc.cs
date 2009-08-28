@@ -47,6 +47,7 @@ namespace DataService
                 t_Daten tmp_t_Daten = new t_Daten();
                 foreach (t_Daten t in dataContext.t_Datens.Where(d => d.Timestamp >= IntervallStart && d.Timestamp < IntervallEnd))
                 {
+                    tmp_t_Daten = new t_Daten();
                     tmp_t_Daten.ID = t.ID;
                     tmp_t_Daten.Timestamp = t.Timestamp;
                     tmp_t_Daten.Latitude = t.Latitude;

@@ -17,6 +17,8 @@ namespace GELive
 
         static public ANRLDataServiceClient Client = null;
 
+        static public event EventHandler GuiLoaded;
+
         static public anrl_gui gui = null;
         static public WSManager manager = null;
 
@@ -37,7 +39,7 @@ namespace GELive
 
         static public List<t_Daten> GetCurrentData()
         {
-            return DatenListe.Where(p => p.Timestamp > CurrentStart && p.Timestamp < CurrentEnd).ToList();
+            return DatenListe.Where(p => p.Timestamp >= CurrentStart && p.Timestamp <= CurrentEnd).ToList();
         }
         static public int PlaySpeed=1;
 
@@ -65,6 +67,7 @@ namespace GELive
         static void gui_PluginReady(object sender, EventArgs e)
         {
             manager = new WSManager();
+            GuiLoaded.Invoke(null, null);
         }
 
         static public void ShowRanking(RaceEntry Race)

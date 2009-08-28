@@ -81,6 +81,7 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.panelStarterPanel = new System.Windows.Forms.Panel();
+            this.fldVisualOldest = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lstVisualPilotsToShow = new System.Windows.Forms.CheckedListBox();
             this.lstVisualRacesToShow = new System.Windows.Forms.CheckedListBox();
@@ -92,6 +93,10 @@
             this.VisualChkBoxAlwaysNewest = new System.Windows.Forms.CheckBox();
             this.VisualScrollBar = new System.Windows.Forms.HScrollBar();
             this.btnStartClient = new System.Windows.Forms.Button();
+            this.fldVisualDelay = new System.Windows.Forms.ComboBox();
+            this.lblDelay = new System.Windows.Forms.Label();
+            this.btnVisualApplyDelay = new System.Windows.Forms.Button();
+            this.btnVisualGetDelay = new System.Windows.Forms.Button();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -609,6 +614,11 @@
             // 
             // panelStarterPanel
             // 
+            this.panelStarterPanel.Controls.Add(this.btnVisualGetDelay);
+            this.panelStarterPanel.Controls.Add(this.btnVisualApplyDelay);
+            this.panelStarterPanel.Controls.Add(this.lblDelay);
+            this.panelStarterPanel.Controls.Add(this.fldVisualDelay);
+            this.panelStarterPanel.Controls.Add(this.fldVisualOldest);
             this.panelStarterPanel.Controls.Add(this.checkBox1);
             this.panelStarterPanel.Controls.Add(this.lstVisualPilotsToShow);
             this.panelStarterPanel.Controls.Add(this.lstVisualRacesToShow);
@@ -622,8 +632,16 @@
             this.panelStarterPanel.Controls.Add(this.btnStartClient);
             this.panelStarterPanel.Location = new System.Drawing.Point(12, 282);
             this.panelStarterPanel.Name = "panelStarterPanel";
-            this.panelStarterPanel.Size = new System.Drawing.Size(657, 169);
+            this.panelStarterPanel.Size = new System.Drawing.Size(657, 188);
             this.panelStarterPanel.TabIndex = 10;
+            // 
+            // fldVisualOldest
+            // 
+            this.fldVisualOldest.Enabled = false;
+            this.fldVisualOldest.Location = new System.Drawing.Point(6, 165);
+            this.fldVisualOldest.Name = "fldVisualOldest";
+            this.fldVisualOldest.Size = new System.Drawing.Size(160, 20);
+            this.fldVisualOldest.TabIndex = 65;
             // 
             // checkBox1
             // 
@@ -695,7 +713,7 @@
             // 
             this.fldVisualPlaySpeed.Location = new System.Drawing.Point(503, 50);
             this.fldVisualPlaySpeed.Maximum = new decimal(new int[] {
-            10,
+            4,
             0,
             0,
             0});
@@ -743,11 +761,48 @@
             this.btnStartClient.UseVisualStyleBackColor = true;
             this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
             // 
+            // fldVisualDelay
+            // 
+            this.fldVisualDelay.FormattingEnabled = true;
+            this.fldVisualDelay.Location = new System.Drawing.Point(503, 76);
+            this.fldVisualDelay.Name = "fldVisualDelay";
+            this.fldVisualDelay.Size = new System.Drawing.Size(121, 21);
+            this.fldVisualDelay.TabIndex = 66;
+            // 
+            // lblDelay
+            // 
+            this.lblDelay.AutoSize = true;
+            this.lblDelay.Location = new System.Drawing.Point(463, 79);
+            this.lblDelay.Name = "lblDelay";
+            this.lblDelay.Size = new System.Drawing.Size(34, 13);
+            this.lblDelay.TabIndex = 67;
+            this.lblDelay.Text = "Delay";
+            // 
+            // btnVisualApplyDelay
+            // 
+            this.btnVisualApplyDelay.Location = new System.Drawing.Point(503, 103);
+            this.btnVisualApplyDelay.Name = "btnVisualApplyDelay";
+            this.btnVisualApplyDelay.Size = new System.Drawing.Size(121, 23);
+            this.btnVisualApplyDelay.TabIndex = 68;
+            this.btnVisualApplyDelay.Text = "Apply Delay";
+            this.btnVisualApplyDelay.UseVisualStyleBackColor = true;
+            this.btnVisualApplyDelay.Click += new System.EventHandler(this.btnVisualApplyDelay_Click);
+            // 
+            // btnVisualGetDelay
+            // 
+            this.btnVisualGetDelay.Location = new System.Drawing.Point(414, 103);
+            this.btnVisualGetDelay.Name = "btnVisualGetDelay";
+            this.btnVisualGetDelay.Size = new System.Drawing.Size(83, 23);
+            this.btnVisualGetDelay.TabIndex = 69;
+            this.btnVisualGetDelay.Text = "Get Delay";
+            this.btnVisualGetDelay.UseVisualStyleBackColor = true;
+            this.btnVisualGetDelay.Click += new System.EventHandler(this.btnVisualGetDelay_Click);
+            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 456);
+            this.ClientSize = new System.Drawing.Size(703, 482);
             this.Controls.Add(this.panelStarterPanel);
             this.Controls.Add(this.panelRace);
             this.Controls.Add(this.panelTrackerPilot);
@@ -833,5 +888,10 @@
         private System.Windows.Forms.CheckedListBox lstVisualPilotsToShow;
         private System.Windows.Forms.CheckedListBox lstVisualRacesToShow;
         private System.Windows.Forms.CheckBox VisualChkBoxAlwaysNewest;
+        private System.Windows.Forms.TextBox fldVisualOldest;
+        private System.Windows.Forms.Button btnVisualApplyDelay;
+        private System.Windows.Forms.Label lblDelay;
+        private System.Windows.Forms.ComboBox fldVisualDelay;
+        private System.Windows.Forms.Button btnVisualGetDelay;
     }
 }

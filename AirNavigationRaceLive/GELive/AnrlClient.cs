@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GELive.ANRLDataService;
+using System.Threading;
 
 namespace GELive
 {
@@ -460,6 +461,17 @@ namespace GELive
         private void btnStartClient_Click(object sender, EventArgs e)
         {
             InformationPool.StartVisualisation();
+            InformationPool.GuiLoaded += new EventHandler(InformationPool_GuiLoaded);
+        }
+
+        void InformationPool_GuiLoaded(object sender, EventArgs e)
+        {
+            InformationPool.manager.DataUpdated += new EventHandler(manager_DataUpdated);
+        }
+
+        void manager_DataUpdated(object sender, EventArgs e)
+        {
+            RefreshTimeline();
         }
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
@@ -471,19 +483,28 @@ namespace GELive
 
         public void RefreshTimeline()
         {
+            try
+            {
+                VisualScrollBar.Invoke(new MethodInvoker(UpdateScrollbar));
+                if (InformationPool.DatenListe.Count > 1)
+                {
+                    try
+                    {
+                        InformationPool.CurrentEnd = InformationPool.DatenListe[VisualScrollBar.Value - 1].Timestamp;
+                        InformationPool.CurrentStart = InformationPool.DatenListe[0].Timestamp;
+                    }
+                    catch { }
+                }
+            }
+            catch { }
+        }
+
+        private void UpdateScrollbar()
+        {
             VisualScrollBar.Maximum = InformationPool.DatenListe.Count;
             if (VisualChkBoxAlwaysNewest.Checked)
             {
                 VisualScrollBar.Value = VisualScrollBar.Maximum;
-            }
-            if (InformationPool.DatenListe.Count > 1)
-            {
-                try
-                {
-                    InformationPool.CurrentEnd = InformationPool.DatenListe[VisualScrollBar.Value-1].Timestamp;
-                    InformationPool.CurrentStart = InformationPool.DatenListe[0].Timestamp;
-                }
-                catch{}
             }
         }
 
@@ -496,6 +517,7 @@ namespace GELive
                 PilotEntry p = new PilotEntry();
                 p.ID_Tracker = pl.p.ID_Tracker;
                 p.ID = pl.p.ID.ToString();
+                p.PilotColor = pl.p.Color;
                 InformationPool.PilotsToBeDrawn.Add(p);
             }
         }
@@ -562,26 +584,36 @@ namespace GELive
             CheckPilotListChecked();
         }
 
-        private void btnVisualLoadOlder_Click(object sender, EventArgs e)
-        {
-            InformationPool.Oldest.AddMinutes(-30);
-            InformationPool.DatenListe.AddRange(InformationPool.Client.GetPathData(InformationPool.Oldest, InformationPool.Oldest.AddMinutes(30)));
-            RefreshTimeline();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void VisualScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-
+            VisualChkBoxAlwaysNewest.Checked = false;
         }
 
         private void VisualChkBoxAlwaysNewest_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnVisualGetDelay_Click(object sender, EventArgs e)
+        {
+            fldVisualDelay.Items.Clear();
+            List<DateTime> tmp = InformationPool.Client.GetTimestamps();
+            foreach (DateTime t in tmp)
+            {
+                fldVisualDelay.Items.Add(t);
+            }
+        }
+
+        private void btnVisualApplyDelay_Click(object sender, EventArgs e)
+        {
+            if (fldVisualDelay.SelectedItem != null)
+            {
+                DateTime tmp = (DateTime)fldVisualDelay.SelectedItem;
+                InformationPool.Newest = tmp;
+                InformationPool.Next = tmp;
+                InformationPool.Oldest = tmp;
+                
+            }
         }
     }
 }

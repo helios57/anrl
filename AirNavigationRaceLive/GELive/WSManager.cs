@@ -42,7 +42,8 @@ namespace GELive
         /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
-            InformationPool.Next = DateTime.Now.ToUniversalTime();
+            InformationPool.Newest = InformationPool.Next; 
+            InformationPool.Next = InformationPool.Next.AddSeconds((UpdateData.Interval / 1000) * InformationPool.PlaySpeed);
 
             List<t_Daten> tempList = InformationPool.Client.GetPathData(
                     InformationPool.Newest, 
@@ -90,6 +91,7 @@ namespace GELive
             }
             result += GenerateKMLHeader(TrackList);
             List<t_Daten> DataToDraw = InformationPool.GetCurrentData();
+            DataToDraw.Sort(new CompareData());
             foreach (Tracker t in TrackList)
             {
                 foreach (t_Daten d in DataToDraw.Where(p => p.ID_Tracker == t.id))
@@ -114,18 +116,19 @@ namespace GELive
             int i = 0;
             foreach (Tracker t in TrackList)
             {
-                t.ColorTag_1 = "sh_" + i;
+                t.ColorTag_1 = "sh_" + i ;
                 t.ColorTag_2 = "sn_" + i;
                 t.ColorTag_3 = "msn_" + i;
-                result += @"<Style id=" + t.ColorTag_1+ @"><IconStyle><scale>1.2</scale></IconStyle><LineStyle>";
-                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>10</width></LineStyle><PolyStyle>";
+                result += "<Style id=\"" + t.ColorTag_1+ "\"><IconStyle><scale>1.2</scale></IconStyle><LineStyle>";
+                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>2</width></LineStyle><PolyStyle>";
                 result += @"<color>7f"+ t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color></PolyStyle></Style>";
-                result += @"<Style id=" + t.ColorTag_2 +@"><LineStyle>";
-                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>10</width></LineStyle><PolyStyle>";
+                result += "<Style id=\"" + t.ColorTag_2 + "\"><LineStyle>";
+                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>2</width></LineStyle><PolyStyle>";
                 result += @"<color>7f" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color></PolyStyle></Style>";
-                result += @"<StyleMap id=" + t.ColorTag_3+ @"><Pair><key>normal</key>";
+                result += "<StyleMap id=\"" + t.ColorTag_3 + "\"><Pair><key>normal</key>";
                 result += @"<styleUrl>#"+ t.ColorTag_2 +@"</styleUrl></Pair><Pair><key>highlight</key>";
                 result += @"<styleUrl>#" + t.ColorTag_1 + @"</styleUrl></Pair></StyleMap>";
+                i++;
             }
             return result;
         }
@@ -179,7 +182,7 @@ namespace GELive
             result += "<coordinates>";
             foreach (Points p in t.Pointlist)
             {
-                result += p.longitude + "," + p.latitude + "," + p.altitude + " ";
+                result += p.longitude + "," + p.latitude + "," + (p.altitude +100) + " ";
             }
             result += "</coordinates>";
             result += "</LineString></Placemark>";
@@ -223,5 +226,18 @@ namespace GELive
         {
             UpdateData.Stop();
         }
+    }
+    public class CompareData : IComparer<t_Daten>
+    {
+        #region IComparer<t_Daten> Members
+
+        public int Compare(t_Daten x, t_Daten y)
+        {
+            if (x.Timestamp > y.Timestamp) return 1;
+            if (x.Timestamp < y.Timestamp) return -1;
+            else return 0;
+        }
+
+        #endregion
     }
 }
