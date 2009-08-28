@@ -120,10 +120,10 @@ namespace GELive
                 t.ColorTag_2 = "sn_" + i;
                 t.ColorTag_3 = "msn_" + i;
                 result += "<Style id=\"" + t.ColorTag_1+ "\"><IconStyle><scale>1.2</scale></IconStyle><LineStyle>";
-                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>2</width></LineStyle><PolyStyle>";
+                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>"+InformationPool.LineWidth+"</width></LineStyle><PolyStyle>";
                 result += @"<color>7f"+ t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color></PolyStyle></Style>";
                 result += "<Style id=\"" + t.ColorTag_2 + "\"><LineStyle>";
-                result += @"<color>cc" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color><width>2</width></LineStyle><PolyStyle>";
+                result += @"<color>cc" + t.Color.B.ToString("X2") + t.Color.G.ToString("X2") + t.Color.R.ToString("X2") + @"</color><width>" + InformationPool.LineWidth + "</width></LineStyle><PolyStyle>";
                 result += @"<color>7f" + t.Color.B.ToString("X2")+ t.Color.G.ToString("X2")+ t.Color.R.ToString("X2")+ @"</color></PolyStyle></Style>";
                 result += "<StyleMap id=\"" + t.ColorTag_3 + "\"><Pair><key>normal</key>";
                 result += @"<styleUrl>#"+ t.ColorTag_2 +@"</styleUrl></Pair><Pair><key>highlight</key>";

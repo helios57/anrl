@@ -41,7 +41,8 @@ namespace GELive
         {
             return DatenListe.Where(p => p.Timestamp >= CurrentStart && p.Timestamp <= CurrentEnd).ToList();
         }
-        static public int PlaySpeed=1;
+        static public int PlaySpeed = 1;
+        static public int LineWidth = 1;
 
         static public bool Connect()
         {

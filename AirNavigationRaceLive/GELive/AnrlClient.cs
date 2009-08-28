@@ -626,5 +626,10 @@ namespace GELive
                 
             }
         }
+
+        private void fldVisualLineWidth_ValueChanged(object sender, EventArgs e)
+        {
+            InformationPool.LineWidth = (int)fldVisualLineWidth.Value;
+        }
     }
 }
