@@ -416,7 +416,7 @@ namespace GELive
             if (CurrentRace.PilotD != null)
             {
                 r.t_Pilot3 = new t_Pilot();
-                r.t_Pilot3.ID = int.Parse(CurrentRace.PilotA.ID);
+                r.t_Pilot3.ID = int.Parse(CurrentRace.PilotD.ID);
             }
             r.ID_PolygonGroup = CurrentRace.Polygons.ID;
             r.t_PolygonGroup = new t_PolygonGroup();

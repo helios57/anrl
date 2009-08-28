@@ -137,6 +137,7 @@ namespace GELive
                             int numberOfVertexes = int.Parse(lines[i + 10]);
                             Polygon p = new Polygon();
                             p.ID = g.PolygonIdGen++;
+                            p.Type = PolygonType.PenaltyZone;
 
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
@@ -146,6 +147,74 @@ namespace GELive
                                 point.ID = p.ID;
                                 p.Points.Add(point);
                             }
+                            g.Polygons.Add(p);
+                        }
+                    }
+                    else if (lines[i + 5] == "  8" && lines[i + 6].Contains("STARTPOINT-"))
+                    {
+                        Polygon p = new Polygon();
+                        p.ID = g.PolygonIdGen++;
+                        p.Type = PolygonType.GateStartA;
+
+                        PolygonPoint point = new PolygonPoint();
+                        PolygonPoint point2 = new PolygonPoint();
+                      
+                        point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                        point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                        point.ID = p.ID;
+                        p.Points.Add(point);
+
+                        point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        point2.ID = p.ID;
+                        p.Points.Add(point2);
+
+                        string gatename = lines[i + 6].Substring(11, 1);
+                        g.Polygons.Add(p);
+                    }
+                    else if (lines[i + 5] == "  8" && lines[i + 6].Contains("ENDPOINT-"))
+                    {
+                        Polygon p = new Polygon();
+                        p.ID = g.PolygonIdGen++;
+                        p.Type = PolygonType.GateEndA;
+
+                        PolygonPoint point = new PolygonPoint();
+                        PolygonPoint point2 = new PolygonPoint();
+
+                        point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                        point.Latitude =  (decimal)CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                        point.ID = p.ID;
+                        p.Points.Add(point);
+
+                        point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        point2.Latitude =  (decimal)CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        point2.ID = p.ID;
+                        p.Points.Add(point2);
+
+                        string gatename = lines[i + 6].Substring(9, 1);
+                        g.Polygons.Add(p);
+                    }
+                    else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
+                    {
+                        if (lines[i + 9] == " 90" && double.Parse(lines[10]) == 2)
+                        {
+                            Polygon p = new Polygon();
+                            p.ID = g.PolygonIdGen++;
+                            p.Type = PolygonType.EndLine;
+
+                            PolygonPoint point = new PolygonPoint();
+                            PolygonPoint point2 = new PolygonPoint();
+
+                            point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                            point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                            point.ID = p.ID;
+                            p.Points.Add(point);
+
+                            point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                            point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                            point2.ID = p.ID;
+                            p.Points.Add(point2);
+
                             g.Polygons.Add(p);
                         }
                     }
