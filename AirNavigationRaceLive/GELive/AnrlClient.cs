@@ -523,6 +523,9 @@ namespace GELive
         }
         private void CheckRacecListChecked()
         {
+            InformationPool.PolygonGroupToDraw = new PolygonGroup();
+            InformationPool.PolygonGroupToDraw.ID = 0;
+
             foreach (Object o in lstVisualRacesToShow.CheckedItems)
             {
                 RaceLst rl = (RaceLst)o;
@@ -547,30 +550,37 @@ namespace GELive
             panelRace.Enabled = false;
             if (InformationPool.PolygonGroupToDraw.ID > 0)
             {
-                List<t_Polygon> pg = InformationPool.Client.GetPolygonsByGroup(InformationPool.PolygonGroupToDraw.ID);
-                foreach (t_Polygon p in pg)
-                {
-                    List<t_PolygonPoint> ppl = InformationPool.Client.GetPolygonPoints(p.ID);
-                    Polygon TmpPolygon = new Polygon();
-                    TmpPolygon.ID = p.ID;
-                    TmpPolygon.Type = (PolygonType)p.Type;
-                    #region Polygon Points
-                    TmpPolygon.Points = new List<PolygonPoint>();
-                    foreach (t_PolygonPoint pgp in ppl)
-                    {
-                        PolygonPoint pgpp = new PolygonPoint();
-                        pgpp.Altitude = pgp.altitude;
-                        pgpp.Longitude = pgp.longitude;
-                        pgpp.Latitude = pgp.latitude;
-                        pgpp.ID = pgp.ID;
-                        TmpPolygon.Points.Add(pgpp);
-                    }
-                    #endregion
-                    InformationPool.PolygonGroupToDraw.Polygons.Add(TmpPolygon);
-                }
+                Thread t = new Thread(new ThreadStart(GetPolygonsFromServer));
+                t.Start();
             }
             CheckEnabled();
         }
+
+        private static void GetPolygonsFromServer()
+        {
+            List<t_Polygon> pg = InformationPool.Client.GetPolygonsByGroup(InformationPool.PolygonGroupToDraw.ID);
+            foreach (t_Polygon p in pg)
+            {
+                List<t_PolygonPoint> ppl = InformationPool.Client.GetPolygonPoints(p.ID);
+                Polygon TmpPolygon = new Polygon();
+                TmpPolygon.ID = p.ID;
+                TmpPolygon.Type = (PolygonType)p.Type;
+                #region Polygon Points
+                TmpPolygon.Points = new List<PolygonPoint>();
+                foreach (t_PolygonPoint pgp in ppl)
+                {
+                    PolygonPoint pgpp = new PolygonPoint();
+                    pgpp.Altitude = pgp.altitude;
+                    pgpp.Longitude = pgp.longitude;
+                    pgpp.Latitude = pgp.latitude;
+                    pgpp.ID = pgp.ID;
+                    TmpPolygon.Points.Add(pgpp);
+                }
+                #endregion
+                InformationPool.PolygonGroupToDraw.Polygons.Add(TmpPolygon);
+            }
+        }
+
         private void fldVisualPlaySpeed_ValueChanged(object sender, EventArgs e)
         {
             InformationPool.PlaySpeed = (int)fldVisualPlaySpeed.Value;
@@ -606,6 +616,7 @@ namespace GELive
 
         private void btnVisualApplyDelay_Click(object sender, EventArgs e)
         {
+            InformationPool.DatenListe.Clear();
             if (fldVisualDelay.SelectedItem != null)
             {
                 DateTime tmp = (DateTime)fldVisualDelay.SelectedItem;

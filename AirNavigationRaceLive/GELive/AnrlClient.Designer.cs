@@ -81,22 +81,21 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.panelStarterPanel = new System.Windows.Forms.Panel();
-            this.fldVisualOldest = new System.Windows.Forms.TextBox();
+            this.btnVisualGetDelay = new System.Windows.Forms.Button();
+            this.btnVisualApplyDelay = new System.Windows.Forms.Button();
+            this.lblDelay = new System.Windows.Forms.Label();
+            this.fldVisualDelay = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lstVisualPilotsToShow = new System.Windows.Forms.CheckedListBox();
             this.lstVisualRacesToShow = new System.Windows.Forms.CheckedListBox();
             this.lblPilotsToShow = new System.Windows.Forms.Label();
             this.lblVisualRacesToShow = new System.Windows.Forms.Label();
-            this.btnVisualLoadOlder = new System.Windows.Forms.Button();
             this.lblVisualPlaySpeed = new System.Windows.Forms.Label();
             this.fldVisualPlaySpeed = new System.Windows.Forms.NumericUpDown();
             this.VisualChkBoxAlwaysNewest = new System.Windows.Forms.CheckBox();
             this.VisualScrollBar = new System.Windows.Forms.HScrollBar();
             this.btnStartClient = new System.Windows.Forms.Button();
-            this.fldVisualDelay = new System.Windows.Forms.ComboBox();
-            this.lblDelay = new System.Windows.Forms.Label();
-            this.btnVisualApplyDelay = new System.Windows.Forms.Button();
-            this.btnVisualGetDelay = new System.Windows.Forms.Button();
+            this.btnCredits = new System.Windows.Forms.Button();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -180,20 +179,21 @@
             this.panelConnection.Controls.Add(this.btnConnect);
             this.panelConnection.Controls.Add(this.fldPassword);
             this.panelConnection.Controls.Add(this.fldUsername);
-            this.panelConnection.Location = new System.Drawing.Point(12, 12);
+            this.panelConnection.Location = new System.Drawing.Point(3, 30);
             this.panelConnection.Name = "panelConnection";
             this.panelConnection.Size = new System.Drawing.Size(267, 86);
             this.panelConnection.TabIndex = 7;
             // 
             // panelTrackerPilot
             // 
+            this.panelTrackerPilot.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelTrackerPilot.Controls.Add(this.btnAddPilotToTracker);
             this.panelTrackerPilot.Controls.Add(this.btnRemvPilotFromTracker);
             this.panelTrackerPilot.Controls.Add(this.btnRefreshTrackerList);
             this.panelTrackerPilot.Controls.Add(this.lstTrackers);
-            this.panelTrackerPilot.Location = new System.Drawing.Point(12, 12);
+            this.panelTrackerPilot.Location = new System.Drawing.Point(3, 30);
             this.panelTrackerPilot.Name = "panelTrackerPilot";
-            this.panelTrackerPilot.Size = new System.Drawing.Size(657, 99);
+            this.panelTrackerPilot.Size = new System.Drawing.Size(668, 99);
             this.panelTrackerPilot.TabIndex = 8;
             // 
             // btnAddPilotToTracker
@@ -273,6 +273,7 @@
             // 
             // panelRace
             // 
+            this.panelRace.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelRace.Controls.Add(this.fldRaceParcour);
             this.panelRace.Controls.Add(this.btnShowRanking);
             this.panelRace.Controls.Add(this.lblParcour);
@@ -304,15 +305,15 @@
             this.panelRace.Controls.Add(this.btnRemvRace);
             this.panelRace.Controls.Add(this.btnNewRace);
             this.panelRace.Controls.Add(this.lstRace);
-            this.panelRace.Location = new System.Drawing.Point(12, 116);
+            this.panelRace.Location = new System.Drawing.Point(3, 146);
             this.panelRace.Name = "panelRace";
-            this.panelRace.Size = new System.Drawing.Size(657, 160);
+            this.panelRace.Size = new System.Drawing.Size(668, 167);
             this.panelRace.TabIndex = 9;
             // 
             // fldRaceParcour
             // 
             this.fldRaceParcour.Enabled = false;
-            this.fldRaceParcour.Location = new System.Drawing.Point(424, 102);
+            this.fldRaceParcour.Location = new System.Drawing.Point(437, 102);
             this.fldRaceParcour.Name = "fldRaceParcour";
             this.fldRaceParcour.Size = new System.Drawing.Size(131, 20);
             this.fldRaceParcour.TabIndex = 58;
@@ -330,7 +331,7 @@
             // lblParcour
             // 
             this.lblParcour.AutoSize = true;
-            this.lblParcour.Location = new System.Drawing.Point(381, 105);
+            this.lblParcour.Location = new System.Drawing.Point(394, 105);
             this.lblParcour.Name = "lblParcour";
             this.lblParcour.Size = new System.Drawing.Size(44, 13);
             this.lblParcour.TabIndex = 57;
@@ -339,7 +340,7 @@
             // btnSelectParcour
             // 
             this.btnSelectParcour.Enabled = false;
-            this.btnSelectParcour.Location = new System.Drawing.Point(561, 101);
+            this.btnSelectParcour.Location = new System.Drawing.Point(574, 101);
             this.btnSelectParcour.Name = "btnSelectParcour";
             this.btnSelectParcour.Size = new System.Drawing.Size(83, 21);
             this.btnSelectParcour.TabIndex = 56;
@@ -376,7 +377,7 @@
             // 
             // btnRacePilotD
             // 
-            this.btnRacePilotD.Location = new System.Drawing.Point(561, 70);
+            this.btnRacePilotD.Location = new System.Drawing.Point(574, 70);
             this.btnRacePilotD.Name = "btnRacePilotD";
             this.btnRacePilotD.Size = new System.Drawing.Size(83, 20);
             this.btnRacePilotD.TabIndex = 51;
@@ -386,7 +387,7 @@
             // 
             // btnRacePilotC
             // 
-            this.btnRacePilotC.Location = new System.Drawing.Point(561, 47);
+            this.btnRacePilotC.Location = new System.Drawing.Point(574, 47);
             this.btnRacePilotC.Name = "btnRacePilotC";
             this.btnRacePilotC.Size = new System.Drawing.Size(83, 20);
             this.btnRacePilotC.TabIndex = 50;
@@ -396,7 +397,7 @@
             // 
             // btnRacePilotB
             // 
-            this.btnRacePilotB.Location = new System.Drawing.Point(561, 26);
+            this.btnRacePilotB.Location = new System.Drawing.Point(574, 26);
             this.btnRacePilotB.Name = "btnRacePilotB";
             this.btnRacePilotB.Size = new System.Drawing.Size(83, 20);
             this.btnRacePilotB.TabIndex = 49;
@@ -406,7 +407,7 @@
             // 
             // btnRacePilotA
             // 
-            this.btnRacePilotA.Location = new System.Drawing.Point(561, 3);
+            this.btnRacePilotA.Location = new System.Drawing.Point(574, 3);
             this.btnRacePilotA.Name = "btnRacePilotA";
             this.btnRacePilotA.Size = new System.Drawing.Size(83, 20);
             this.btnRacePilotA.TabIndex = 48;
@@ -417,7 +418,7 @@
             // fldRacePilotD
             // 
             this.fldRacePilotD.Enabled = false;
-            this.fldRacePilotD.Location = new System.Drawing.Point(424, 71);
+            this.fldRacePilotD.Location = new System.Drawing.Point(437, 71);
             this.fldRacePilotD.Name = "fldRacePilotD";
             this.fldRacePilotD.Size = new System.Drawing.Size(131, 20);
             this.fldRacePilotD.TabIndex = 47;
@@ -425,7 +426,7 @@
             // fldRacePilotC
             // 
             this.fldRacePilotC.Enabled = false;
-            this.fldRacePilotC.Location = new System.Drawing.Point(424, 48);
+            this.fldRacePilotC.Location = new System.Drawing.Point(437, 48);
             this.fldRacePilotC.Name = "fldRacePilotC";
             this.fldRacePilotC.Size = new System.Drawing.Size(131, 20);
             this.fldRacePilotC.TabIndex = 46;
@@ -433,7 +434,7 @@
             // fldRacePilotB
             // 
             this.fldRacePilotB.Enabled = false;
-            this.fldRacePilotB.Location = new System.Drawing.Point(424, 26);
+            this.fldRacePilotB.Location = new System.Drawing.Point(437, 26);
             this.fldRacePilotB.Name = "fldRacePilotB";
             this.fldRacePilotB.Size = new System.Drawing.Size(131, 20);
             this.fldRacePilotB.TabIndex = 45;
@@ -441,7 +442,7 @@
             // fldRacePilotA
             // 
             this.fldRacePilotA.Enabled = false;
-            this.fldRacePilotA.Location = new System.Drawing.Point(424, 3);
+            this.fldRacePilotA.Location = new System.Drawing.Point(437, 3);
             this.fldRacePilotA.Name = "fldRacePilotA";
             this.fldRacePilotA.Size = new System.Drawing.Size(131, 20);
             this.fldRacePilotA.TabIndex = 44;
@@ -449,7 +450,7 @@
             // lblPilotB
             // 
             this.lblPilotB.AutoSize = true;
-            this.lblPilotB.Location = new System.Drawing.Point(381, 29);
+            this.lblPilotB.Location = new System.Drawing.Point(394, 29);
             this.lblPilotB.Name = "lblPilotB";
             this.lblPilotB.Size = new System.Drawing.Size(37, 13);
             this.lblPilotB.TabIndex = 43;
@@ -458,7 +459,7 @@
             // lblPilotC
             // 
             this.lblPilotC.AutoSize = true;
-            this.lblPilotC.Location = new System.Drawing.Point(381, 51);
+            this.lblPilotC.Location = new System.Drawing.Point(394, 51);
             this.lblPilotC.Name = "lblPilotC";
             this.lblPilotC.Size = new System.Drawing.Size(37, 13);
             this.lblPilotC.TabIndex = 42;
@@ -467,7 +468,7 @@
             // lblPilotD
             // 
             this.lblPilotD.AutoSize = true;
-            this.lblPilotD.Location = new System.Drawing.Point(381, 74);
+            this.lblPilotD.Location = new System.Drawing.Point(394, 74);
             this.lblPilotD.Name = "lblPilotD";
             this.lblPilotD.Size = new System.Drawing.Size(38, 13);
             this.lblPilotD.TabIndex = 41;
@@ -476,7 +477,7 @@
             // lblPilotA
             // 
             this.lblPilotA.AutoSize = true;
-            this.lblPilotA.Location = new System.Drawing.Point(381, 6);
+            this.lblPilotA.Location = new System.Drawing.Point(394, 6);
             this.lblPilotA.Name = "lblPilotA";
             this.lblPilotA.Size = new System.Drawing.Size(37, 13);
             this.lblPilotA.TabIndex = 40;
@@ -525,7 +526,7 @@
             // 
             // btnSaveRace
             // 
-            this.btnSaveRace.Location = new System.Drawing.Point(561, 131);
+            this.btnSaveRace.Location = new System.Drawing.Point(574, 131);
             this.btnSaveRace.Name = "btnSaveRace";
             this.btnSaveRace.Size = new System.Drawing.Size(83, 26);
             this.btnSaveRace.TabIndex = 33;
@@ -614,34 +615,62 @@
             // 
             // panelStarterPanel
             // 
+            this.panelStarterPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelStarterPanel.Controls.Add(this.btnVisualGetDelay);
             this.panelStarterPanel.Controls.Add(this.btnVisualApplyDelay);
             this.panelStarterPanel.Controls.Add(this.lblDelay);
             this.panelStarterPanel.Controls.Add(this.fldVisualDelay);
-            this.panelStarterPanel.Controls.Add(this.fldVisualOldest);
             this.panelStarterPanel.Controls.Add(this.checkBox1);
             this.panelStarterPanel.Controls.Add(this.lstVisualPilotsToShow);
             this.panelStarterPanel.Controls.Add(this.lstVisualRacesToShow);
             this.panelStarterPanel.Controls.Add(this.lblPilotsToShow);
             this.panelStarterPanel.Controls.Add(this.lblVisualRacesToShow);
-            this.panelStarterPanel.Controls.Add(this.btnVisualLoadOlder);
             this.panelStarterPanel.Controls.Add(this.lblVisualPlaySpeed);
             this.panelStarterPanel.Controls.Add(this.fldVisualPlaySpeed);
             this.panelStarterPanel.Controls.Add(this.VisualChkBoxAlwaysNewest);
             this.panelStarterPanel.Controls.Add(this.VisualScrollBar);
             this.panelStarterPanel.Controls.Add(this.btnStartClient);
-            this.panelStarterPanel.Location = new System.Drawing.Point(12, 282);
+            this.panelStarterPanel.Location = new System.Drawing.Point(3, 319);
             this.panelStarterPanel.Name = "panelStarterPanel";
-            this.panelStarterPanel.Size = new System.Drawing.Size(657, 188);
+            this.panelStarterPanel.Size = new System.Drawing.Size(668, 171);
             this.panelStarterPanel.TabIndex = 10;
             // 
-            // fldVisualOldest
+            // btnVisualGetDelay
             // 
-            this.fldVisualOldest.Enabled = false;
-            this.fldVisualOldest.Location = new System.Drawing.Point(6, 165);
-            this.fldVisualOldest.Name = "fldVisualOldest";
-            this.fldVisualOldest.Size = new System.Drawing.Size(160, 20);
-            this.fldVisualOldest.TabIndex = 65;
+            this.btnVisualGetDelay.Location = new System.Drawing.Point(447, 108);
+            this.btnVisualGetDelay.Name = "btnVisualGetDelay";
+            this.btnVisualGetDelay.Size = new System.Drawing.Size(83, 23);
+            this.btnVisualGetDelay.TabIndex = 69;
+            this.btnVisualGetDelay.Text = "Get Delay";
+            this.btnVisualGetDelay.UseVisualStyleBackColor = true;
+            this.btnVisualGetDelay.Click += new System.EventHandler(this.btnVisualGetDelay_Click);
+            // 
+            // btnVisualApplyDelay
+            // 
+            this.btnVisualApplyDelay.Location = new System.Drawing.Point(536, 108);
+            this.btnVisualApplyDelay.Name = "btnVisualApplyDelay";
+            this.btnVisualApplyDelay.Size = new System.Drawing.Size(121, 23);
+            this.btnVisualApplyDelay.TabIndex = 68;
+            this.btnVisualApplyDelay.Text = "Apply Delay";
+            this.btnVisualApplyDelay.UseVisualStyleBackColor = true;
+            this.btnVisualApplyDelay.Click += new System.EventHandler(this.btnVisualApplyDelay_Click);
+            // 
+            // lblDelay
+            // 
+            this.lblDelay.AutoSize = true;
+            this.lblDelay.Location = new System.Drawing.Point(496, 84);
+            this.lblDelay.Name = "lblDelay";
+            this.lblDelay.Size = new System.Drawing.Size(34, 13);
+            this.lblDelay.TabIndex = 67;
+            this.lblDelay.Text = "Delay";
+            // 
+            // fldVisualDelay
+            // 
+            this.fldVisualDelay.FormattingEnabled = true;
+            this.fldVisualDelay.Location = new System.Drawing.Point(536, 81);
+            this.fldVisualDelay.Name = "fldVisualDelay";
+            this.fldVisualDelay.Size = new System.Drawing.Size(121, 21);
+            this.fldVisualDelay.TabIndex = 66;
             // 
             // checkBox1
             // 
@@ -652,7 +681,6 @@
             this.checkBox1.TabIndex = 64;
             this.checkBox1.Text = "Show Ranking for this Races";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // lstVisualPilotsToShow
             // 
@@ -690,20 +718,10 @@
             this.lblVisualRacesToShow.TabIndex = 60;
             this.lblVisualRacesToShow.Text = "Races to Show";
             // 
-            // btnVisualLoadOlder
-            // 
-            this.btnVisualLoadOlder.Location = new System.Drawing.Point(0, 136);
-            this.btnVisualLoadOlder.Name = "btnVisualLoadOlder";
-            this.btnVisualLoadOlder.Size = new System.Drawing.Size(73, 28);
-            this.btnVisualLoadOlder.TabIndex = 57;
-            this.btnVisualLoadOlder.Text = "Load Older";
-            this.btnVisualLoadOlder.UseVisualStyleBackColor = true;
-            this.btnVisualLoadOlder.Click += new System.EventHandler(this.btnVisualLoadOlder_Click);
-            // 
             // lblVisualPlaySpeed
             // 
             this.lblVisualPlaySpeed.AutoSize = true;
-            this.lblVisualPlaySpeed.Location = new System.Drawing.Point(555, 57);
+            this.lblVisualPlaySpeed.Location = new System.Drawing.Point(588, 62);
             this.lblVisualPlaySpeed.Name = "lblVisualPlaySpeed";
             this.lblVisualPlaySpeed.Size = new System.Drawing.Size(58, 13);
             this.lblVisualPlaySpeed.TabIndex = 55;
@@ -711,7 +729,7 @@
             // 
             // fldVisualPlaySpeed
             // 
-            this.fldVisualPlaySpeed.Location = new System.Drawing.Point(503, 50);
+            this.fldVisualPlaySpeed.Location = new System.Drawing.Point(536, 55);
             this.fldVisualPlaySpeed.Maximum = new decimal(new int[] {
             4,
             0,
@@ -733,7 +751,7 @@
             this.VisualChkBoxAlwaysNewest.AutoSize = true;
             this.VisualChkBoxAlwaysNewest.Checked = true;
             this.VisualChkBoxAlwaysNewest.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.VisualChkBoxAlwaysNewest.Location = new System.Drawing.Point(503, 32);
+            this.VisualChkBoxAlwaysNewest.Location = new System.Drawing.Point(516, 32);
             this.VisualChkBoxAlwaysNewest.Name = "VisualChkBoxAlwaysNewest";
             this.VisualChkBoxAlwaysNewest.Size = new System.Drawing.Size(141, 17);
             this.VisualChkBoxAlwaysNewest.TabIndex = 2;
@@ -743,17 +761,17 @@
             // 
             // VisualScrollBar
             // 
-            this.VisualScrollBar.Location = new System.Drawing.Point(73, 151);
+            this.VisualScrollBar.Location = new System.Drawing.Point(3, 151);
             this.VisualScrollBar.Maximum = 1000;
             this.VisualScrollBar.Name = "VisualScrollBar";
-            this.VisualScrollBar.Size = new System.Drawing.Size(584, 13);
+            this.VisualScrollBar.Size = new System.Drawing.Size(654, 13);
             this.VisualScrollBar.TabIndex = 1;
             this.VisualScrollBar.Value = 1;
             this.VisualScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.VisualScrollBar_Scroll);
             // 
             // btnStartClient
             // 
-            this.btnStartClient.Location = new System.Drawing.Point(503, 3);
+            this.btnStartClient.Location = new System.Drawing.Point(516, 3);
             this.btnStartClient.Name = "btnStartClient";
             this.btnStartClient.Size = new System.Drawing.Size(141, 23);
             this.btnStartClient.TabIndex = 0;
@@ -761,48 +779,24 @@
             this.btnStartClient.UseVisualStyleBackColor = true;
             this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
             // 
-            // fldVisualDelay
+            // btnCredits
             // 
-            this.fldVisualDelay.FormattingEnabled = true;
-            this.fldVisualDelay.Location = new System.Drawing.Point(503, 76);
-            this.fldVisualDelay.Name = "fldVisualDelay";
-            this.fldVisualDelay.Size = new System.Drawing.Size(121, 21);
-            this.fldVisualDelay.TabIndex = 66;
-            // 
-            // lblDelay
-            // 
-            this.lblDelay.AutoSize = true;
-            this.lblDelay.Location = new System.Drawing.Point(463, 79);
-            this.lblDelay.Name = "lblDelay";
-            this.lblDelay.Size = new System.Drawing.Size(34, 13);
-            this.lblDelay.TabIndex = 67;
-            this.lblDelay.Text = "Delay";
-            // 
-            // btnVisualApplyDelay
-            // 
-            this.btnVisualApplyDelay.Location = new System.Drawing.Point(503, 103);
-            this.btnVisualApplyDelay.Name = "btnVisualApplyDelay";
-            this.btnVisualApplyDelay.Size = new System.Drawing.Size(121, 23);
-            this.btnVisualApplyDelay.TabIndex = 68;
-            this.btnVisualApplyDelay.Text = "Apply Delay";
-            this.btnVisualApplyDelay.UseVisualStyleBackColor = true;
-            this.btnVisualApplyDelay.Click += new System.EventHandler(this.btnVisualApplyDelay_Click);
-            // 
-            // btnVisualGetDelay
-            // 
-            this.btnVisualGetDelay.Location = new System.Drawing.Point(414, 103);
-            this.btnVisualGetDelay.Name = "btnVisualGetDelay";
-            this.btnVisualGetDelay.Size = new System.Drawing.Size(83, 23);
-            this.btnVisualGetDelay.TabIndex = 69;
-            this.btnVisualGetDelay.Text = "Get Delay";
-            this.btnVisualGetDelay.UseVisualStyleBackColor = true;
-            this.btnVisualGetDelay.Click += new System.EventHandler(this.btnVisualGetDelay_Click);
+            this.btnCredits.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Cyan;
+            this.btnCredits.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnCredits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCredits.Location = new System.Drawing.Point(3, 1);
+            this.btnCredits.Name = "btnCredits";
+            this.btnCredits.Size = new System.Drawing.Size(668, 26);
+            this.btnCredits.TabIndex = 25;
+            this.btnCredits.Text = "Credits / About";
+            this.btnCredits.UseVisualStyleBackColor = true;
             // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 482);
+            this.ClientSize = new System.Drawing.Size(678, 490);
+            this.Controls.Add(this.btnCredits);
             this.Controls.Add(this.panelStarterPanel);
             this.Controls.Add(this.panelRace);
             this.Controls.Add(this.panelTrackerPilot);
@@ -881,17 +875,16 @@
         private System.Windows.Forms.HScrollBar VisualScrollBar;
         private System.Windows.Forms.Label lblVisualPlaySpeed;
         private System.Windows.Forms.NumericUpDown fldVisualPlaySpeed;
-        private System.Windows.Forms.Button btnVisualLoadOlder;
         private System.Windows.Forms.Label lblVisualRacesToShow;
         private System.Windows.Forms.Label lblPilotsToShow;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckedListBox lstVisualPilotsToShow;
         private System.Windows.Forms.CheckedListBox lstVisualRacesToShow;
         private System.Windows.Forms.CheckBox VisualChkBoxAlwaysNewest;
-        private System.Windows.Forms.TextBox fldVisualOldest;
         private System.Windows.Forms.Button btnVisualApplyDelay;
         private System.Windows.Forms.Label lblDelay;
         private System.Windows.Forms.ComboBox fldVisualDelay;
         private System.Windows.Forms.Button btnVisualGetDelay;
+        private System.Windows.Forms.Button btnCredits;
     }
 }
