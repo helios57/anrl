@@ -182,7 +182,7 @@ namespace GELive
             result += "<coordinates>";
             foreach (Points p in t.Pointlist)
             {
-                result += p.longitude + "," + p.latitude + "," + (p.altitude +100) + " ";
+                result += p.longitude + "," + p.latitude + "," + p.altitude + " ";
             }
             result += "</coordinates>";
             result += "</LineString></Placemark>";
