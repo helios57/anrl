@@ -645,5 +645,20 @@ namespace GELive
             d.Cursor = System.Windows.Forms.Cursors.Hand;
             d.Show();
         }
+
+        private void fldPenaltyHeight_ValueChanged(object sender, EventArgs e)
+        {
+            InformationPool.HeightPenalty = (int)fldPenaltyHeight.Value;
+        }
+
+        private void panelStarterPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void fldTrackerHeight_ValueChanged(object sender, EventArgs e)
+        {
+            InformationPool.HeightTracker = (int)fldTrackerHeight.Value;
+        }
     }
 }

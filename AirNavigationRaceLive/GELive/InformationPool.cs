@@ -43,6 +43,8 @@ namespace GELive
         }
         static public int PlaySpeed = 1;
         static public int LineWidth = 1;
+        static public int HeightPenalty = 300;
+        static public int HeightTracker = 0;
 
         static public bool Connect()
         {

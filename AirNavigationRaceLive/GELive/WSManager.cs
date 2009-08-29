@@ -144,7 +144,7 @@ namespace GELive
 
                 foreach (PolygonPoint tp in p.Points)
                 {
-                    result += tp.Longitude + "," + tp.Latitude + "," +/*tp.altitude+"*/ "300 ";
+                    result += tp.Longitude + "," + tp.Latitude + "," + InformationPool.HeightPenalty + " ";
                 }
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
 
@@ -182,7 +182,7 @@ namespace GELive
             result += "<coordinates>";
             foreach (Points p in t.Pointlist)
             {
-                result += p.longitude + "," + p.latitude + "," + p.altitude + " ";
+                result += p.longitude + "," + p.latitude + "," + (p.altitude + InformationPool.HeightTracker) + " ";
             }
             result += "</coordinates>";
             result += "</LineString></Placemark>";

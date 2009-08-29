@@ -98,6 +98,10 @@
             this.VisualScrollBar = new System.Windows.Forms.HScrollBar();
             this.btnStartClient = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fldPenaltyHeight = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.fldTrackerHeight = new System.Windows.Forms.NumericUpDown();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -105,6 +109,8 @@
             this.panelStarterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // fldServer
@@ -619,6 +625,10 @@
             // panelStarterPanel
             // 
             this.panelStarterPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelStarterPanel.Controls.Add(this.label2);
+            this.panelStarterPanel.Controls.Add(this.fldTrackerHeight);
+            this.panelStarterPanel.Controls.Add(this.label1);
+            this.panelStarterPanel.Controls.Add(this.fldPenaltyHeight);
             this.panelStarterPanel.Controls.Add(this.lblVisualLineWidth);
             this.panelStarterPanel.Controls.Add(this.fldVisualLineWidth);
             this.panelStarterPanel.Controls.Add(this.btnVisualGetDelay);
@@ -639,6 +649,7 @@
             this.panelStarterPanel.Name = "panelStarterPanel";
             this.panelStarterPanel.Size = new System.Drawing.Size(668, 171);
             this.panelStarterPanel.TabIndex = 10;
+            this.panelStarterPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelStarterPanel_Paint);
             // 
             // lblVisualLineWidth
             // 
@@ -825,6 +836,57 @@
             this.btnCredits.UseVisualStyleBackColor = true;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(434, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 73;
+            this.label1.Text = "Penalty Zone h";
+            // 
+            // fldPenaltyHeight
+            // 
+            this.fldPenaltyHeight.Location = new System.Drawing.Point(382, 34);
+            this.fldPenaltyHeight.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.fldPenaltyHeight.Name = "fldPenaltyHeight";
+            this.fldPenaltyHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fldPenaltyHeight.Size = new System.Drawing.Size(46, 20);
+            this.fldPenaltyHeight.TabIndex = 72;
+            this.fldPenaltyHeight.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.fldPenaltyHeight.ValueChanged += new System.EventHandler(this.fldPenaltyHeight_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(434, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Line width";
+            // 
+            // fldTrackerHeight
+            // 
+            this.fldTrackerHeight.Location = new System.Drawing.Point(382, 60);
+            this.fldTrackerHeight.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.fldTrackerHeight.Name = "fldTrackerHeight";
+            this.fldTrackerHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fldTrackerHeight.Size = new System.Drawing.Size(46, 20);
+            this.fldTrackerHeight.TabIndex = 74;
+            this.fldTrackerHeight.ValueChanged += new System.EventHandler(this.fldTrackerHeight_ValueChanged);
+            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -847,6 +909,8 @@
             this.panelStarterPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -923,5 +987,9 @@
         private System.Windows.Forms.Button btnCredits;
         private System.Windows.Forms.Label lblVisualLineWidth;
         private System.Windows.Forms.NumericUpDown fldVisualLineWidth;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown fldTrackerHeight;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown fldPenaltyHeight;
     }
 }
