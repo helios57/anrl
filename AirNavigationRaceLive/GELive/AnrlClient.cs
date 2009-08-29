@@ -80,6 +80,8 @@ namespace GELive
 
         private void Connect()
         {
+            Developper d = new Developper();
+            d.Show();
             InformationPool.RemoteAddress = fldServer.Text;
             InformationPool.Username = fldUsername.Text;
             InformationPool.Password = fldPassword.Text;
@@ -94,6 +96,9 @@ namespace GELive
             {
                 MessageBox.Show("Wrong Username or Password");
             }
+            d.UseWaitCursor = false;
+            d.lblConnect.Visible = false;
+            d.Cursor = System.Windows.Forms.Cursors.Hand;
         }
         private void LoadTrackerList()
         {
@@ -630,6 +635,15 @@ namespace GELive
         private void fldVisualLineWidth_ValueChanged(object sender, EventArgs e)
         {
             InformationPool.LineWidth = (int)fldVisualLineWidth.Value;
+        }
+
+        private void btnCredits_Click(object sender, EventArgs e)
+        {
+            Developper d = new Developper();
+            d.UseWaitCursor = false;
+            d.lblConnect.Visible = false;
+            d.Cursor = System.Windows.Forms.Cursors.Hand;
+            d.Show();
         }
     }
 }

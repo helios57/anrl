@@ -81,6 +81,8 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.panelStarterPanel = new System.Windows.Forms.Panel();
+            this.lblVisualLineWidth = new System.Windows.Forms.Label();
+            this.fldVisualLineWidth = new System.Windows.Forms.NumericUpDown();
             this.btnVisualGetDelay = new System.Windows.Forms.Button();
             this.btnVisualApplyDelay = new System.Windows.Forms.Button();
             this.lblDelay = new System.Windows.Forms.Label();
@@ -96,15 +98,13 @@
             this.VisualScrollBar = new System.Windows.Forms.HScrollBar();
             this.btnStartClient = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
-            this.lblVisualLineWidth = new System.Windows.Forms.Label();
-            this.fldVisualLineWidth = new System.Windows.Forms.NumericUpDown();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).BeginInit();
             this.panelStarterPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // fldServer
@@ -640,6 +640,34 @@
             this.panelStarterPanel.Size = new System.Drawing.Size(668, 171);
             this.panelStarterPanel.TabIndex = 10;
             // 
+            // lblVisualLineWidth
+            // 
+            this.lblVisualLineWidth.AutoSize = true;
+            this.lblVisualLineWidth.Location = new System.Drawing.Point(434, 13);
+            this.lblVisualLineWidth.Name = "lblVisualLineWidth";
+            this.lblVisualLineWidth.Size = new System.Drawing.Size(55, 13);
+            this.lblVisualLineWidth.TabIndex = 71;
+            this.lblVisualLineWidth.Text = "Line width";
+            // 
+            // fldVisualLineWidth
+            // 
+            this.fldVisualLineWidth.Location = new System.Drawing.Point(382, 11);
+            this.fldVisualLineWidth.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.fldVisualLineWidth.Name = "fldVisualLineWidth";
+            this.fldVisualLineWidth.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fldVisualLineWidth.Size = new System.Drawing.Size(46, 20);
+            this.fldVisualLineWidth.TabIndex = 70;
+            this.fldVisualLineWidth.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.fldVisualLineWidth.ValueChanged += new System.EventHandler(this.fldVisualLineWidth_ValueChanged);
+            // 
             // btnVisualGetDelay
             // 
             this.btnVisualGetDelay.Location = new System.Drawing.Point(447, 108);
@@ -795,34 +823,7 @@
             this.btnCredits.TabIndex = 25;
             this.btnCredits.Text = "Credits / About";
             this.btnCredits.UseVisualStyleBackColor = true;
-            // 
-            // lblVisualLineWidth
-            // 
-            this.lblVisualLineWidth.AutoSize = true;
-            this.lblVisualLineWidth.Location = new System.Drawing.Point(434, 13);
-            this.lblVisualLineWidth.Name = "lblVisualLineWidth";
-            this.lblVisualLineWidth.Size = new System.Drawing.Size(55, 13);
-            this.lblVisualLineWidth.TabIndex = 71;
-            this.lblVisualLineWidth.Text = "Line width";
-            // 
-            // fldVisualLineWidth
-            // 
-            this.fldVisualLineWidth.Location = new System.Drawing.Point(382, 11);
-            this.fldVisualLineWidth.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.fldVisualLineWidth.Name = "fldVisualLineWidth";
-            this.fldVisualLineWidth.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.fldVisualLineWidth.Size = new System.Drawing.Size(46, 20);
-            this.fldVisualLineWidth.TabIndex = 70;
-            this.fldVisualLineWidth.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.fldVisualLineWidth.ValueChanged += new System.EventHandler(this.fldVisualLineWidth_ValueChanged);
+            this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
             // AnrlClient
             // 
@@ -844,8 +845,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).EndInit();
             this.panelStarterPanel.ResumeLayout(false);
             this.panelStarterPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).EndInit();
             this.ResumeLayout(false);
 
         }

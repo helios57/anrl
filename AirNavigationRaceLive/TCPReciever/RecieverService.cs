@@ -73,7 +73,6 @@ namespace TCPReciever
         /// <returns></returns>
         private decimal ConvertCoordinates(string wsg84Coords)
         {
-            LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:ConvertCoordinates:Start", wsg84Coords);
             try
             {
                 decimal result = 0;
@@ -120,19 +119,19 @@ namespace TCPReciever
             try
             {
                 DataService.DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
-                List<t_GPS_IN> Positions = dataContext.t_GPS_INs.Where(a => !a.Processed).OrderBy(t => t.Timestamp).ToList();
+                List<t_GPS_IN> Positions = dataContext.t_GPS_INs.Where(a => !a.Processed).OrderBy(t => t.TimestampTracker).ToList();
                 List<t_Tracker> Trackers = dataContext.t_Trackers.ToList();
 
                 if (Positions.Count > 0)LogManager.AddLog(DB_PATH, 4, "RecieverService.cs:CalculateTabels_Elapsed:Lists","Positions.Count=" + Positions.Count + " Trackers.count=" + Trackers.Count);
 
                 foreach (t_Tracker tr in Trackers)
                 {
-                    List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.Timestamp).ToList();
+                    List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.TimestampTracker).ToList();
                     foreach (t_GPS_IN GPS_IN in Positions_Tracker)
                     {
                         t_Daten InsertData = new t_Daten();
                         InsertData.ID_Tracker = tr.ID;
-                        InsertData.Timestamp = GPS_IN.Timestamp;
+                        InsertData.Timestamp = GPS_IN.TimestampTracker;
                         InsertData.Latitude = decimal.Round(ConvertCoordinates(GPS_IN.latitude), 16);
                         InsertData.Longitude = decimal.Round(ConvertCoordinates(GPS_IN.longitude), 16);
                         InsertData.Altitude = decimal.Parse(GPS_IN.altitude);
