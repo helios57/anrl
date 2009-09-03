@@ -102,6 +102,8 @@
             this.fldPenaltyHeight = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.fldTrackerHeight = new System.Windows.Forms.NumericUpDown();
+            this.fldApplyDelay = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -625,6 +627,8 @@
             // panelStarterPanel
             // 
             this.panelStarterPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelStarterPanel.Controls.Add(this.button1);
+            this.panelStarterPanel.Controls.Add(this.fldApplyDelay);
             this.panelStarterPanel.Controls.Add(this.label2);
             this.panelStarterPanel.Controls.Add(this.fldTrackerHeight);
             this.panelStarterPanel.Controls.Add(this.label1);
@@ -887,6 +891,25 @@
             this.fldTrackerHeight.TabIndex = 74;
             this.fldTrackerHeight.ValueChanged += new System.EventHandler(this.fldTrackerHeight_ValueChanged);
             // 
+            // fldApplyDelay
+            // 
+            this.fldApplyDelay.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.fldApplyDelay.Location = new System.Drawing.Point(369, 84);
+            this.fldApplyDelay.Name = "fldApplyDelay";
+            this.fldApplyDelay.Size = new System.Drawing.Size(121, 20);
+            this.fldApplyDelay.TabIndex = 76;
+            this.fldApplyDelay.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(361, 110);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 23);
+            this.button1.TabIndex = 77;
+            this.button1.Text = "Apply Delay";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -991,5 +1014,7 @@
         private System.Windows.Forms.NumericUpDown fldTrackerHeight;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown fldPenaltyHeight;
+        private System.Windows.Forms.DateTimePicker fldApplyDelay;
+        private System.Windows.Forms.Button button1;
     }
 }

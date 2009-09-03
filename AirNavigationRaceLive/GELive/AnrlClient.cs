@@ -660,5 +660,15 @@ namespace GELive
         {
             InformationPool.HeightTracker = (int)fldTrackerHeight.Value;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            InformationPool.DatenListe.Clear();
+            DateTime tmp = (DateTime)fldApplyDelay.Value;
+            InformationPool.Newest = tmp;
+            InformationPool.Next = tmp;
+            InformationPool.Oldest = tmp;
+        }
     }
 }
