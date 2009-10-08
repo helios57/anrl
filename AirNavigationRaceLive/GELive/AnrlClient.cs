@@ -481,7 +481,7 @@ namespace GELive
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
 
-            InformationPool.manager.showRanking();
+            InformationPool.showRanking();
         }
 
         public void RefreshTimeline()
@@ -524,7 +524,10 @@ namespace GELive
                 p.LastName = pl.p.LastName;
                 p.SureName = pl.p.SureName;
                 InformationPool.PilotsToBeDrawn.Add(p);
-                
+                if (InformationPool.rankform != null)
+                {
+                    InformationPool.rankform.InitializeRankingEntries();
+                }
             }
         }
         private void CheckRacecListChecked()

@@ -36,6 +36,7 @@ namespace GELive
         static public DateTime Next = DateTime.Now.ToUniversalTime();
         static public DateTime CurrentStart = DateTime.Now.ToUniversalTime();
         static public DateTime CurrentEnd = DateTime.Now.ToUniversalTime();
+        static public RankForm rankform;
         
 
         static public List<t_Daten> GetCurrentData()
@@ -77,7 +78,12 @@ namespace GELive
             manager = new WSManager();
             GuiLoaded.Invoke(null, null);
         }
-        
+
+        public static void showRanking()
+        {
+            rankform = new RankForm();
+            rankform.Show();
+        }
         /*        /// <summary>
         /// Invokes geToolStrip1.InvokeLoadKml(); to load the kml.
         /// </summary>
