@@ -20,6 +20,7 @@ namespace GELive
         System.Timers.Timer UpdateData = new System.Timers.Timer(1000);   
         private GEFeatureContainerCoClass Container;
         public event EventHandler DataUpdated;
+        public RankForm rankform;
 
         /// <summary>
         /// Creates a new Instance of the Webservice-Client Object
@@ -33,6 +34,12 @@ namespace GELive
             Container.appendChild(InformationPool.ge.parseKml(GetPolygonKml()));
             UpdateData.Elapsed += new ElapsedEventHandler(UpdateData_Elapsed);
             UpdateData.Start();
+        }
+
+        public void showRanking()
+        {
+           rankform =  new RankForm();
+           rankform.Show();
         }
 
         /// <summary>
@@ -83,6 +90,10 @@ namespace GELive
         {
             string result = "";
             List<Tracker> TrackList = new List<Tracker>();
+            if (rankform != null)
+            {
+                rankform.InitializeRankingEntries();
+            }
             foreach (PilotEntry Pilot in InformationPool.PilotsToBeDrawn.Where(p=>p.ID_Tracker > 0))
             {
                 Tracker t = new Tracker(Pilot.ID_Tracker);
@@ -92,11 +103,21 @@ namespace GELive
             result += GenerateKMLHeader(TrackList);
             List<t_Daten> DataToDraw = InformationPool.GetCurrentData();
             DataToDraw.Sort(new CompareData());
+            List<t_Daten> DataNewToDraw = InformationPool.GetCurrentDataOnly();
             foreach (Tracker t in TrackList)
             {
                 foreach (t_Daten d in DataToDraw.Where(p => p.ID_Tracker == t.id))
                 {
                     t.Pointlist.Add(new Points((decimal)d.Longitude, (decimal)d.Latitude, (decimal)d.Altitude));
+                    
+
+                }
+                foreach (t_Daten d in DataNewToDraw.Where(p => p.ID_Tracker == t.id))
+                {
+                    if (rankform != null)
+                    {
+                        rankform.doranking(d.Longitude, d.Latitude, d.ID_Tracker);
+                    }
                 }
             }
 

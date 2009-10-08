@@ -480,10 +480,8 @@ namespace GELive
         }
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
-            if (lstRace.SelectedItems.Count == 1)
-            {
-                InformationPool.ShowRanking(CurrentRace);
-            }
+
+            InformationPool.manager.showRanking();
         }
 
         public void RefreshTimeline()
@@ -526,6 +524,7 @@ namespace GELive
                 p.LastName = pl.p.LastName;
                 p.SureName = pl.p.SureName;
                 InformationPool.PilotsToBeDrawn.Add(p);
+                
             }
         }
         private void CheckRacecListChecked()

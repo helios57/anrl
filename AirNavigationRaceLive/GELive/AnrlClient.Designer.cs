@@ -81,6 +81,12 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.panelStarterPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.fldApplyDelay = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.fldTrackerHeight = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fldPenaltyHeight = new System.Windows.Forms.NumericUpDown();
             this.lblVisualLineWidth = new System.Windows.Forms.Label();
             this.fldVisualLineWidth = new System.Windows.Forms.NumericUpDown();
             this.btnVisualGetDelay = new System.Windows.Forms.Button();
@@ -98,21 +104,15 @@
             this.VisualScrollBar = new System.Windows.Forms.HScrollBar();
             this.btnStartClient = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.fldPenaltyHeight = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.fldTrackerHeight = new System.Windows.Forms.NumericUpDown();
-            this.fldApplyDelay = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).BeginInit();
             this.panelStarterPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).BeginInit();
             this.SuspendLayout();
             // 
             // fldServer
@@ -655,6 +655,76 @@
             this.panelStarterPanel.TabIndex = 10;
             this.panelStarterPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelStarterPanel_Paint);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(361, 110);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 23);
+            this.button1.TabIndex = 77;
+            this.button1.Text = "Apply Delay";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // fldApplyDelay
+            // 
+            this.fldApplyDelay.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.fldApplyDelay.Location = new System.Drawing.Point(369, 84);
+            this.fldApplyDelay.Name = "fldApplyDelay";
+            this.fldApplyDelay.Size = new System.Drawing.Size(121, 20);
+            this.fldApplyDelay.TabIndex = 76;
+            this.fldApplyDelay.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(434, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 75;
+            this.label2.Text = "Line width";
+            // 
+            // fldTrackerHeight
+            // 
+            this.fldTrackerHeight.Location = new System.Drawing.Point(382, 60);
+            this.fldTrackerHeight.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.fldTrackerHeight.Name = "fldTrackerHeight";
+            this.fldTrackerHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fldTrackerHeight.Size = new System.Drawing.Size(46, 20);
+            this.fldTrackerHeight.TabIndex = 74;
+            this.fldTrackerHeight.ValueChanged += new System.EventHandler(this.fldTrackerHeight_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(434, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 73;
+            this.label1.Text = "Penalty Zone h";
+            // 
+            // fldPenaltyHeight
+            // 
+            this.fldPenaltyHeight.Location = new System.Drawing.Point(382, 34);
+            this.fldPenaltyHeight.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.fldPenaltyHeight.Name = "fldPenaltyHeight";
+            this.fldPenaltyHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.fldPenaltyHeight.Size = new System.Drawing.Size(46, 20);
+            this.fldPenaltyHeight.TabIndex = 72;
+            this.fldPenaltyHeight.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.fldPenaltyHeight.ValueChanged += new System.EventHandler(this.fldPenaltyHeight_ValueChanged);
+            // 
             // lblVisualLineWidth
             // 
             this.lblVisualLineWidth.AutoSize = true;
@@ -729,6 +799,7 @@
             this.checkBox1.TabIndex = 64;
             this.checkBox1.Text = "Show Ranking for this Races";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.btnShowRanking_Click);
             // 
             // lstVisualPilotsToShow
             // 
@@ -840,76 +911,6 @@
             this.btnCredits.UseVisualStyleBackColor = true;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(434, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 73;
-            this.label1.Text = "Penalty Zone h";
-            // 
-            // fldPenaltyHeight
-            // 
-            this.fldPenaltyHeight.Location = new System.Drawing.Point(382, 34);
-            this.fldPenaltyHeight.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.fldPenaltyHeight.Name = "fldPenaltyHeight";
-            this.fldPenaltyHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.fldPenaltyHeight.Size = new System.Drawing.Size(46, 20);
-            this.fldPenaltyHeight.TabIndex = 72;
-            this.fldPenaltyHeight.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.fldPenaltyHeight.ValueChanged += new System.EventHandler(this.fldPenaltyHeight_ValueChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(434, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 75;
-            this.label2.Text = "Line width";
-            // 
-            // fldTrackerHeight
-            // 
-            this.fldTrackerHeight.Location = new System.Drawing.Point(382, 60);
-            this.fldTrackerHeight.Maximum = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
-            this.fldTrackerHeight.Name = "fldTrackerHeight";
-            this.fldTrackerHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.fldTrackerHeight.Size = new System.Drawing.Size(46, 20);
-            this.fldTrackerHeight.TabIndex = 74;
-            this.fldTrackerHeight.ValueChanged += new System.EventHandler(this.fldTrackerHeight_ValueChanged);
-            // 
-            // fldApplyDelay
-            // 
-            this.fldApplyDelay.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.fldApplyDelay.Location = new System.Drawing.Point(369, 84);
-            this.fldApplyDelay.Name = "fldApplyDelay";
-            this.fldApplyDelay.Size = new System.Drawing.Size(121, 20);
-            this.fldApplyDelay.TabIndex = 76;
-            this.fldApplyDelay.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(361, 110);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 23);
-            this.button1.TabIndex = 77;
-            this.button1.Text = "Apply Delay";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -930,10 +931,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.fldRaceDuration)).EndInit();
             this.panelStarterPanel.ResumeLayout(false);
             this.panelStarterPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -36,10 +36,15 @@ namespace GELive
         static public DateTime Next = DateTime.Now.ToUniversalTime();
         static public DateTime CurrentStart = DateTime.Now.ToUniversalTime();
         static public DateTime CurrentEnd = DateTime.Now.ToUniversalTime();
+        
 
         static public List<t_Daten> GetCurrentData()
         {
             return DatenListe.Where(p => p.Timestamp >= CurrentStart && p.Timestamp <= CurrentEnd).ToList();
+        }
+        static public List<t_Daten> GetCurrentDataOnly()
+        {
+            return DatenListe.Where(p => p.Timestamp >= Newest && p.Timestamp <= Next).ToList();
         }
         static public int PlaySpeed = 1;
         static public int LineWidth = 1;
@@ -71,11 +76,6 @@ namespace GELive
         {
             manager = new WSManager();
             GuiLoaded.Invoke(null, null);
-        }
-
-        static public void ShowRanking(RaceEntry Race)
-        {
-
         }
         
         /*        /// <summary>
@@ -222,6 +222,7 @@ namespace GELive
                     }
                 }
             }
+            PolygonGroupToDraw = g;
             return g;
         }
         // Convert CH y/x to WGS lat
@@ -311,6 +312,55 @@ namespace GELive
         public int ID;
         public List<PolygonPoint> Points = new List<PolygonPoint>();
         public PolygonType Type;
+        public bool contains(decimal x, decimal y)
+        {
+            bool inside = false;
+
+            //int x1 = xpoints[npoints - 1];
+            decimal x1 = Points[Points.Count - 1].Longitude;
+            //int y1 = ypoints[npoints - 1];
+            decimal y1 = Points[Points.Count - 1].Latitude;
+            //int x2 = xpoints[0];
+            decimal x2 = Points[0].Longitude;
+            //int y2 = ypoints[0];
+            decimal y2 = Points[0].Latitude;
+
+
+
+            //Der Algorithmus ist mir zu kompliziert, den müsstest du mir mal erklären ^^
+            bool startUeber = y1 >= y ? true : false;
+            for (int i = 1; i < Points.Count; i++)
+            {
+                bool endUeber = y2 >= y ? true : false;
+                if (startUeber != endUeber)
+                {
+                    if ((y2 - y) * (x2 - x1) <= (y2 - y1) * (x2 - x))
+                    {
+                        if (endUeber)
+                        {
+                            inside = !inside;
+                        }
+                    }
+                    else
+                    {
+                        if (!endUeber)
+                        {
+                            inside = !inside;
+                        }
+                    }
+                }
+
+                startUeber = endUeber;
+                y1 = y2;
+                x1 = x2;
+                //x2 = xpoints[i];
+                x2 = Points[i].Longitude;
+                //y2 = ypoints[i];
+                y2 = Points[i].Latitude;
+            }
+            return inside;
+        }
+
     }
     public class PolygonPoint
     {
@@ -390,6 +440,7 @@ namespace GELive
         public String LastName;
         public String SureName;
         public int Punkte;
+        public int TrackerID;
     }
     public class PilotLst :t_Pilot
     {
