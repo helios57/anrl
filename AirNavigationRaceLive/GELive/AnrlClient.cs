@@ -523,8 +523,8 @@ namespace GELive
                 p.ID_Tracker = pl.p.ID_Tracker;
                 p.ID = pl.p.ID.ToString();
                 p.PilotColor = pl.p.Color;
-                p.LastName = pl.LastName;
-                p.SureName = pl.SureName;
+                p.LastName = pl.p.LastName;
+                p.SureName = pl.p.SureName;
                 InformationPool.PilotsToBeDrawn.Add(p);
             }
         }
