@@ -48,17 +48,29 @@ namespace GELive
         {
             Comparison<RankingEntry> compRankEntr = new Comparison<RankingEntry>(CompareRankingEntries);
             rankinEntries.Sort(compRankEntr);
-            //rng1Name.Text = rankinEntries[3].LastName;
-            //rng1Punkte.Text = rankinEntries[3].Punkte.ToString();
+            if (rankinEntries.Count > 0)
+            {
+                rng1Name.Text = rankinEntries[0].LastName;
+                rng1Punkte.Text = rankinEntries[0].Punkte.ToString();
+            }
             //rng1Punkte.Invoke(new MethodInvoker(addrankingEntry1));
-            rng2Name.Text = rankinEntries[2].LastName;
-            rng2Punkte.Text = rankinEntries[2].Punkte.ToString();
+            if (rankinEntries.Count > 1)
+            {
+                rng2Name.Text = rankinEntries[1].LastName;
+                rng2Punkte.Text = rankinEntries[1].Punkte.ToString();
+            }
             //rng2Punkte.Invoke(new MethodInvoker(addrankingEntry2));
-            rng3Name.Text = rankinEntries[1].LastName;
-            rng3Punkte.Text = rankinEntries[1].Punkte.ToString();
+            if (rankinEntries.Count > 2)
+            {
+                rng3Name.Text = rankinEntries[2].LastName;
+                rng3Punkte.Text = rankinEntries[2].Punkte.ToString();
+            }
             //rng3Punkte.Invoke(new MethodInvoker(addrankingEntry3));
-            rng4Name.Text = rankinEntries[0].LastName;
-            rng4Punkte.Text = rankinEntries[0].Punkte.ToString();
+            if (rankinEntries.Count > 3)
+            {
+                rng4Name.Text = rankinEntries[3].LastName;
+                rng4Punkte.Text = rankinEntries[3].Punkte.ToString();
+            }
             //rng4Punkte.Invoke(new MethodInvoker(addrankingEntry4));
         }
 
@@ -115,7 +127,12 @@ namespace GELive
                 }
             }
             //PopulateData();
-            this.Invoke(new MethodInvoker(PopulateData));
+            try
+            {
+                this.Invoke(new MethodInvoker(PopulateData));
+            }
+            catch (Exception ex)
+            { }     
         }
         public void initranking()
         {
