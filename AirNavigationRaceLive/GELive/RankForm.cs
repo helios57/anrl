@@ -106,7 +106,7 @@ namespace GELive
             {
                 if (p.Type == (int)PolygonType.PenaltyZone)
                 {
-                    if(p.contains(longitude,latitude)){
+                    if(p.contains2(longitude,latitude)){
                         foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
                         {
                             r.Punkte += 6;

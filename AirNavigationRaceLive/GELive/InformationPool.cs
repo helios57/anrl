@@ -318,6 +318,43 @@ namespace GELive
         public int ID;
         public List<PolygonPoint> Points = new List<PolygonPoint>();
         public PolygonType Type;
+        public bool contains2(decimal x, decimal y)
+        {
+            bool isOffTrack = false;
+
+                int polySides = Points.Count - 1;
+                decimal[] polyY = new decimal[Points.Count];
+                decimal[] polyX = new decimal[Points.Count];
+
+                int k = 0;
+                foreach (PolygonPoint gpsPoint in Points)
+                {
+                    polyY[k] = gpsPoint.Latitude;
+                    polyX[k] = gpsPoint.Longitude;
+                    k++;
+                }
+
+                int i, j = polySides - 1;
+                bool oddNodes = false;
+
+                for (i = 0; i < polySides; i++)
+                {
+                    if (polyY[i] < y && polyY[j] >= y || polyY[j] < y && polyY[i] >= y)
+                    {
+                        if (polyX[i] + (y - polyY[i]) / (polyY[j] - polyY[i]) * (polyX[j] - polyX[i]) < x)
+                        {
+                            oddNodes = !oddNodes;
+                        }
+                    }
+                    j = i;
+                }
+                isOffTrack = oddNodes;
+                if (isOffTrack)
+                {
+                    return isOffTrack;
+                }         
+            return isOffTrack;
+        }
         public bool contains(decimal x, decimal y)
         {
             bool inside = false;
