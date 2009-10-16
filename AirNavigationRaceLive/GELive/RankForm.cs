@@ -53,54 +53,24 @@ namespace GELive
                 rng1Name.Text = rankinEntries[0].LastName;
                 rng1Punkte.Text = rankinEntries[0].Punkte.ToString();
             }
-            //rng1Punkte.Invoke(new MethodInvoker(addrankingEntry1));
             if (rankinEntries.Count > 1)
             {
                 rng2Name.Text = rankinEntries[1].LastName;
                 rng2Punkte.Text = rankinEntries[1].Punkte.ToString();
             }
-            //rng2Punkte.Invoke(new MethodInvoker(addrankingEntry2));
             if (rankinEntries.Count > 2)
             {
                 rng3Name.Text = rankinEntries[2].LastName;
                 rng3Punkte.Text = rankinEntries[2].Punkte.ToString();
             }
-            //rng3Punkte.Invoke(new MethodInvoker(addrankingEntry3));
             if (rankinEntries.Count > 3)
             {
                 rng4Name.Text = rankinEntries[3].LastName;
                 rng4Punkte.Text = rankinEntries[3].Punkte.ToString();
             }
-            //rng4Punkte.Invoke(new MethodInvoker(addrankingEntry4));
         }
 
-        private void TestRanking_Click(object sender, EventArgs e)
-        {
-            //List<RankingEntry> rankingEntries = new List<RankingEntry>();
 
-            //RankingEntry rE1 = new RankingEntry();
-            //rE1.LastName = "Bart";
-            //rE1.Punkte = 15;
-            //rankingEntries.Add(rE1);
-
-            //RankingEntry rE2 = new RankingEntry();
-            //rE2.LastName = "Lisa";
-            //rE2.Punkte = 12;
-            //rankingEntries.Add(rE2);
-
-            //RankingEntry rE3 = new RankingEntry();
-            //rE3.LastName = "Homer";
-            //rE3.Punkte = 1045;
-            //rankingEntries.Add(rE3);
-
-            //RankingEntry rE4 = new RankingEntry();
-            //rE4.LastName = "Marge";
-            //rE4.Punkte = 985;
-            //rankingEntries.Add(rE4);
-
-            //PopulateData(rankingEntries);
-            initranking();
-        }
 
         /// <summary>
         /// Compares the ranking entries.
@@ -126,7 +96,6 @@ namespace GELive
                     }
                 }
             }
-            //PopulateData();
             try
             {
                 this.Invoke(new MethodInvoker(PopulateData));
@@ -134,9 +103,23 @@ namespace GELive
             catch (Exception ex)
             { }     
         }
-        public void initranking()
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            rankinEntries = new List<RankingEntry>();
+            if (checkBox1.Checked)
+            {
+                this.TransparencyKey = Color.AntiqueWhite;
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+                this.TopMost = false;
+                Refresh();
+            }
+            else
+            {
+                this.TransparencyKey = Color.AliceBlue;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.TopMost = true;
+                Refresh();
+            }
         }
     }
 }
