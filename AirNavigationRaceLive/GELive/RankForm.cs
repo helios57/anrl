@@ -100,7 +100,7 @@ namespace GELive
             {
                 this.Invoke(new MethodInvoker(PopulateData));
             }
-            catch (Exception ex)
+            catch
             { }     
         }
 
