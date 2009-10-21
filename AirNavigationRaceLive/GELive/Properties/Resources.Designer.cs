@@ -60,10 +60,17 @@ namespace GELive.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Logo_05 {
+            get {
+                object obj = ResourceManager.GetObject("Logo_05", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
-        ///   Looks up a localized string similar to &lt;!DOCTYPE html 
-        ///	PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
-        ///	&quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
+        ///   Looks up a localized string similar to ﻿&lt;!DOCTYPE html 
+        ///  PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot;
+        ///  &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;
         ///&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
         ///&lt;!--
         ///Copyright (c) 2008 Fraser Chapman
@@ -71,29 +78,14 @@ namespace GELive.Properties {
         ///Email: fraser.chapman@gmail.com
         ///Date: 2009-01-25
         ///Summary:
-        ///This program is part of FC.GEPluginCtrls
+        ///Plugin.html is part of FC.GEPluginCtrls
         ///FC.GEPluginCtrls is free software: you can redistribute it and/or modify
         ///it under the terms of the GNU General Public License as published by
-        ///the Free Software Foundation, either ve [rest of string was truncated]&quot;;.
+        ///the Free Software Foundation, either  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Plugin {
             get {
                 return ResourceManager.GetString("Plugin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;NetworkLink xmlns=&quot;http://earth.google.com/kml/2.1&quot;&gt;
-        ///&lt;name&gt;webcams.travel&lt;/name&gt;
-        ///&lt;Snippet&gt;Webcams Worldwide&lt;/Snippet&gt;
-        ///&lt;Link&gt;
-        ///&lt;href&gt;http://export.webcams.travel/kml/webcams.kml&lt;/href&gt;
-        ///&lt;/Link&gt;
-        ///&lt;/NetworkLink&gt;.
-        /// </summary>
-        internal static string track {
-            get {
-                return ResourceManager.GetString("track", resourceCulture);
             }
         }
     }

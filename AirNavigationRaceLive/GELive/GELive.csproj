@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1A2526F5-9A18-40D7-A4C1-479A131F1698}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -12,14 +12,21 @@
     <AssemblyName>GELive</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>5A005D595B9882215DEC5FA158B3EA55307266DB</ManifestCertificateThumbprint>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>179679EB820FB6DFB0F4FAAD491ACFAF2A8F7B27</ManifestCertificateThumbprint>
     <ManifestKeyFile>GELive_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
-    <PublishUrl>H:\gelive\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <SignManifests>false</SignManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>GELive_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <StartupObject>GELive.Program</StartupObject>
+    <PublishUrl>C:\Daten\Code\ANRL\AirNavigationRaceLive\Deployed\</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -27,7 +34,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <InstallUrl>http://anrl.googlecode.com/svn/trunk/AirNavigationRaceLive/Deployed/</InstallUrl>
+    <SupportUrl>http://code.google.com/p/anrl/</SupportUrl>
+    <ErrorReportUrl>http://code.google.com/p/anrl/</ErrorReportUrl>
+    <ProductName>ANRL Client</ProductName>
+    <PublisherName>SharpSoft</PublisherName>
+    <SuiteName>ANRL</SuiteName>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -36,7 +50,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -53,6 +67,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\GELive.XML</DocumentationFile>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -177,17 +192,19 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Logo_051.png" />
     <Content Include="Resources\Plugin.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
     <None Include="GELiveStuff\GELive_TemporaryKey.pfx" />
-    <None Include="Resources\KMLTemplates\footerPolygon.kml">
+    <None Include="GELive_TemporaryKey.pfx" />
+    <Content Include="Resources\KMLTemplates\footerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\KMLTemplates\headerPolygon.kml">
+    </Content>
+    <Content Include="Resources\KMLTemplates\headerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Service References\ANRLDataService\Arrays1.xsd" />
     <None Include="Service References\ANRLDataService\DataService1.xsd" />
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
@@ -217,15 +234,15 @@
     </None>
     <None Include="Service References\ANRLDataService\configuration.svcinfo" />
     <None Include="Service References\ANRLDataService\configuration91.svcinfo" />
-    <None Include="Resources\KMLTemplates\footer.kml">
+    <Content Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\KMLTemplates\header.kml">
+    </Content>
+    <Content Include="Resources\KMLTemplates\header.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\KMLTemplates\KML_Samples.kml">
+    </Content>
+    <Content Include="Resources\KMLTemplates\KML_Samples.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="GELiveStuff\app.config" />
     <None Include="Resources\track.txt" />
     <None Include="Service References\ANRLDataService\service1.wsdl" />

@@ -5,6 +5,7 @@ using System.Text;
 using GEPlugin;
 using GELive.ANRLDataService;
 using System.IO;
+using System.Threading;
 
 namespace GELive
 {
@@ -81,8 +82,21 @@ namespace GELive
 
         public static void showRanking()
         {
-            rankform = new RankForm();
-            rankform.Show();
+            if (rankform == null || !rankform.Visible)
+            {
+                rankform = new RankForm();
+                rankform.Show();
+            }
+            else
+            {
+                try
+                {
+                    rankform.Hide();
+                    rankform.Dispose();
+                    rankform = null;
+                }
+                catch { }
+            }
         }
         /*        /// <summary>
         /// Invokes geToolStrip1.InvokeLoadKml(); to load the kml.
@@ -484,6 +498,7 @@ namespace GELive
         public String SureName;
         public int Punkte;
         public int TrackerID;
+        public int Color;
     }
     public class PilotLst :t_Pilot
     {

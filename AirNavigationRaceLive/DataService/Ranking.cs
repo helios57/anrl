@@ -18,7 +18,7 @@ namespace DataService
     /// </summary>
     public class Ranking
     {
-        string DB_PATH;
+        //string DB_PATH;
         List<RankingEntry> Result = new List<RankingEntry>();
         List<Polygon> Penaltyzones = new List<Polygon>();
         List<PolygonPoint> points = new List<PolygonPoint>();

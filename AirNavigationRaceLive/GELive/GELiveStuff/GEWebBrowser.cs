@@ -4,6 +4,7 @@
     using System.IO;
     using System.Windows.Forms;
     using GEPlugin;
+    using System.Threading;
 
     /// <summary>
     /// Main delegate event handler
@@ -15,6 +16,7 @@
     /// <summary>
     /// This control simplifies working with the Google Earth Plugin
     /// </summary>
+    [System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
     public partial class GEWebBrowser : WebBrowser
     {
         #region Private fields
@@ -24,7 +26,7 @@
         /// to be called from javascript. An instance of this is set
         /// to the base object's ObjectForScripting property in the constuctor.
         /// </summary>
-        private External external = null;
+        private External external = new External();
 
         /// <summary>
         /// Use the IGEPlugin COM interface. 
@@ -41,7 +43,6 @@
             : base()
         {
             // External - COM visible class
-            this.external = new External();
             this.external.KmlLoaded += new ExternalEventHandeler(this.External_KmlLoaded);
             this.external.PluginReady += new ExternalEventHandeler(this.External_PluginReady);
             this.external.ScriptError += new ExternalEventHandeler(this.External_ScriptError);
@@ -52,8 +53,7 @@
             this.ScrollBarsEnabled = false;
             this.WebBrowserShortcutsEnabled = false;
             this.ObjectForScripting = this.external;
-            this.DocumentCompleted +=
-                new WebBrowserDocumentCompletedEventHandler(this.GEWebBrowser_DocumentCompleted);
+            this.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(this.GEWebBrowser_DocumentCompleted);
         }
 
         #region Public events

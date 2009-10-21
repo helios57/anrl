@@ -80,8 +80,6 @@ namespace GELive
 
         private void Connect()
         {
-            Developper d = new Developper();
-            d.Show();
             InformationPool.RemoteAddress = fldServer.Text;
             InformationPool.Username = fldUsername.Text;
             InformationPool.Password = fldPassword.Text;
@@ -91,14 +89,12 @@ namespace GELive
             {
                 LoadTrackerList();
                 LoadRaces();
+                tabControl.SelectedIndex=2;
             }
             catch
             {
                 MessageBox.Show("Wrong Username or Password");
             }
-            d.UseWaitCursor = false;
-            d.lblConnect.Visible = false;
-            d.Cursor = System.Windows.Forms.Cursors.Hand;
         }
         private void LoadTrackerList()
         {
@@ -673,6 +669,16 @@ namespace GELive
             InformationPool.Newest = tmp;
             InformationPool.Next = tmp;
             InformationPool.Oldest = tmp;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"http://SharpSoft.ch");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6861542");
         }
     }
 }

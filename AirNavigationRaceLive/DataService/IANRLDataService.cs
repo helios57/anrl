@@ -102,10 +102,10 @@ namespace DataService
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="TrackerID"></param>
         /// <param name="LastName"></param>
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
+        /// <returns></returns>
         [OperationContract]
         int AddNewPilot(String LastName, String SureName, String Color);
         /// <summary>

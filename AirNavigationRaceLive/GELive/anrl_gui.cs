@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using GEPlugin;
 using GELive.ANRLDataService;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace GELive
 {
@@ -20,8 +21,6 @@ namespace GELive
         {
             InitializeComponent();
 
-            // Load the html directly from the library
-            geWebBrowser1.LoadEmbededPlugin();
 
             // This event is raised by the initCallBack javascript function in the holding page
             geWebBrowser1.PluginReady += new GEWebBorwserEventHandeler(geWebBrowser1_PluginReady);
@@ -29,10 +28,24 @@ namespace GELive
             // This event is raised if there is a javascript error (it can also be raised manually)
             geWebBrowser1.ScriptError += new GEWebBorwserEventHandeler(geWebBrowser1_ScriptError);
 
-            InformationPool.gweb = geWebBrowser1;        
+            InformationPool.gweb = geWebBrowser1;
+
+            geWebBrowser1.Show();
+            this.Refresh();
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            t.Interval = 1000;
+            t.Tick += new EventHandler(t_Tick);
+            t.Start();
         }
 
-        /// <summary>
+        void t_Tick(object sender, EventArgs e)
+        {
+            // Load the html directly from the library
+            geWebBrowser1.LoadEmbededPlugin();
+            (sender as System.Windows.Forms.Timer).Stop();
+        }
+
+        /// <summar>y
         /// Handles the plugin ready event
         /// </summary>
         /// <param name="sender">The plugin object</param>

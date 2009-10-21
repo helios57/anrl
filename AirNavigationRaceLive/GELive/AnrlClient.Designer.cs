@@ -41,11 +41,11 @@
             this.btnRemvPilotFromTracker = new System.Windows.Forms.Button();
             this.btnRefreshTrackerList = new System.Windows.Forms.Button();
             this.lstTrackers = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelRace = new System.Windows.Forms.Panel();
             this.fldRaceParcour = new System.Windows.Forms.TextBox();
             this.btnShowRanking = new System.Windows.Forms.Button();
@@ -78,22 +78,26 @@
             this.btnRemvRace = new System.Windows.Forms.Button();
             this.btnNewRace = new System.Windows.Forms.Button();
             this.lstRace = new System.Windows.Forms.ListView();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelStarterPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblDelay2 = new System.Windows.Forms.Label();
+            this.btnShowRanking_ = new System.Windows.Forms.Button();
+            this.lblDelay5 = new System.Windows.Forms.Label();
+            this.lblDelay4 = new System.Windows.Forms.Label();
+            this.lblDelay3 = new System.Windows.Forms.Label();
+            this.lblDelay1 = new System.Windows.Forms.Label();
+            this.btnApplyDelayTyped = new System.Windows.Forms.Button();
             this.fldApplyDelay = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblAdjustTrackerHeight = new System.Windows.Forms.Label();
             this.fldTrackerHeight = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPenaltyZoneHeight = new System.Windows.Forms.Label();
             this.fldPenaltyHeight = new System.Windows.Forms.NumericUpDown();
             this.lblVisualLineWidth = new System.Windows.Forms.Label();
             this.fldVisualLineWidth = new System.Windows.Forms.NumericUpDown();
             this.btnVisualGetDelay = new System.Windows.Forms.Button();
             this.btnVisualApplyDelay = new System.Windows.Forms.Button();
-            this.lblDelay = new System.Windows.Forms.Label();
             this.fldVisualDelay = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.lstVisualPilotsToShow = new System.Windows.Forms.CheckedListBox();
             this.lstVisualRacesToShow = new System.Windows.Forms.CheckedListBox();
             this.lblPilotsToShow = new System.Windows.Forms.Label();
@@ -104,6 +108,26 @@
             this.VisualScrollBar = new System.Windows.Forms.HScrollBar();
             this.btnStartClient = new System.Windows.Forms.Button();
             this.btnCredits = new System.Windows.Forms.Button();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblLucaTested = new System.Windows.Forms.Label();
+            this.lblLucaMail = new System.Windows.Forms.Label();
+            this.lblLucMail = new System.Windows.Forms.Label();
+            this.lblLuca1 = new System.Windows.Forms.Label();
+            this.lblLuc4 = new System.Windows.Forms.Label();
+            this.lblLuc3 = new System.Windows.Forms.Label();
+            this.lblLuc2 = new System.Windows.Forms.Label();
+            this.lblLuc1 = new System.Windows.Forms.Label();
+            this.lblLuca = new System.Windows.Forms.Label();
+            this.lblLuc = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.lblSharpsoft = new System.Windows.Forms.Label();
+            this.btnDonations = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -113,6 +137,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // fldServer
@@ -121,15 +152,15 @@
             this.fldServer.Items.AddRange(new object[] {
             "http://127.0.0.1:5555/",
             "http://92.51.137.17:5555/"});
-            this.fldServer.Location = new System.Drawing.Point(79, 7);
+            this.fldServer.Location = new System.Drawing.Point(81, 41);
             this.fldServer.Name = "fldServer";
-            this.fldServer.Size = new System.Drawing.Size(121, 21);
+            this.fldServer.Size = new System.Drawing.Size(210, 21);
             this.fldServer.TabIndex = 0;
             // 
             // lblAnrlServer
             // 
             this.lblAnrlServer.AutoSize = true;
-            this.lblAnrlServer.Location = new System.Drawing.Point(3, 10);
+            this.lblAnrlServer.Location = new System.Drawing.Point(5, 44);
             this.lblAnrlServer.Name = "lblAnrlServer";
             this.lblAnrlServer.Size = new System.Drawing.Size(70, 13);
             this.lblAnrlServer.TabIndex = 1;
@@ -137,7 +168,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(206, 5);
+            this.btnConnect.Location = new System.Drawing.Point(297, 39);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(57, 75);
             this.btnConnect.TabIndex = 2;
@@ -147,18 +178,18 @@
             // 
             // fldUsername
             // 
-            this.fldUsername.Location = new System.Drawing.Point(79, 34);
+            this.fldUsername.Location = new System.Drawing.Point(81, 68);
             this.fldUsername.Name = "fldUsername";
-            this.fldUsername.Size = new System.Drawing.Size(121, 20);
+            this.fldUsername.Size = new System.Drawing.Size(210, 20);
             this.fldUsername.TabIndex = 3;
             this.fldUsername.Text = "anrl";
             // 
             // fldPassword
             // 
-            this.fldPassword.Location = new System.Drawing.Point(79, 60);
+            this.fldPassword.Location = new System.Drawing.Point(81, 94);
             this.fldPassword.Name = "fldPassword";
             this.fldPassword.PasswordChar = '*';
-            this.fldPassword.Size = new System.Drawing.Size(121, 20);
+            this.fldPassword.Size = new System.Drawing.Size(210, 20);
             this.fldPassword.TabIndex = 4;
             this.fldPassword.Text = "anrl";
             this.fldPassword.UseSystemPasswordChar = true;
@@ -166,7 +197,7 @@
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(3, 37);
+            this.lblUsername.Location = new System.Drawing.Point(5, 71);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(55, 13);
             this.lblUsername.TabIndex = 5;
@@ -175,7 +206,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(3, 63);
+            this.lblPassword.Location = new System.Drawing.Point(5, 97);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(53, 13);
             this.lblPassword.TabIndex = 6;
@@ -183,6 +214,7 @@
             // 
             // panelConnection
             // 
+            this.panelConnection.Controls.Add(this.label8);
             this.panelConnection.Controls.Add(this.lblAnrlServer);
             this.panelConnection.Controls.Add(this.lblPassword);
             this.panelConnection.Controls.Add(this.fldServer);
@@ -190,9 +222,10 @@
             this.panelConnection.Controls.Add(this.btnConnect);
             this.panelConnection.Controls.Add(this.fldPassword);
             this.panelConnection.Controls.Add(this.fldUsername);
-            this.panelConnection.Location = new System.Drawing.Point(3, 30);
+            this.panelConnection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelConnection.Location = new System.Drawing.Point(3, 3);
             this.panelConnection.Name = "panelConnection";
-            this.panelConnection.Size = new System.Drawing.Size(267, 86);
+            this.panelConnection.Size = new System.Drawing.Size(668, 442);
             this.panelConnection.TabIndex = 7;
             // 
             // panelTrackerPilot
@@ -202,13 +235,15 @@
             this.panelTrackerPilot.Controls.Add(this.btnRemvPilotFromTracker);
             this.panelTrackerPilot.Controls.Add(this.btnRefreshTrackerList);
             this.panelTrackerPilot.Controls.Add(this.lstTrackers);
-            this.panelTrackerPilot.Location = new System.Drawing.Point(3, 30);
+            this.panelTrackerPilot.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTrackerPilot.Location = new System.Drawing.Point(3, 3);
             this.panelTrackerPilot.Name = "panelTrackerPilot";
-            this.panelTrackerPilot.Size = new System.Drawing.Size(668, 99);
+            this.panelTrackerPilot.Size = new System.Drawing.Size(668, 442);
             this.panelTrackerPilot.TabIndex = 8;
             // 
             // btnAddPilotToTracker
             // 
+            this.btnAddPilotToTracker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddPilotToTracker.Location = new System.Drawing.Point(537, 67);
             this.btnAddPilotToTracker.Name = "btnAddPilotToTracker";
             this.btnAddPilotToTracker.Size = new System.Drawing.Size(120, 26);
@@ -219,6 +254,7 @@
             // 
             // btnRemvPilotFromTracker
             // 
+            this.btnRemvPilotFromTracker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemvPilotFromTracker.Location = new System.Drawing.Point(537, 35);
             this.btnRemvPilotFromTracker.Name = "btnRemvPilotFromTracker";
             this.btnRemvPilotFromTracker.Size = new System.Drawing.Size(120, 26);
@@ -229,6 +265,7 @@
             // 
             // btnRefreshTrackerList
             // 
+            this.btnRefreshTrackerList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefreshTrackerList.Location = new System.Drawing.Point(537, 3);
             this.btnRefreshTrackerList.Name = "btnRefreshTrackerList";
             this.btnRefreshTrackerList.Size = new System.Drawing.Size(120, 26);
@@ -240,6 +277,9 @@
             // lstTrackers
             // 
             this.lstTrackers.AllowColumnReorder = true;
+            this.lstTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstTrackers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -251,7 +291,7 @@
             this.lstTrackers.Location = new System.Drawing.Point(3, 3);
             this.lstTrackers.MultiSelect = false;
             this.lstTrackers.Name = "lstTrackers";
-            this.lstTrackers.Size = new System.Drawing.Size(528, 95);
+            this.lstTrackers.Size = new System.Drawing.Size(528, 432);
             this.lstTrackers.TabIndex = 23;
             this.lstTrackers.UseCompatibleStateImageBehavior = false;
             this.lstTrackers.View = System.Windows.Forms.View.Details;
@@ -316,9 +356,10 @@
             this.panelRace.Controls.Add(this.btnRemvRace);
             this.panelRace.Controls.Add(this.btnNewRace);
             this.panelRace.Controls.Add(this.lstRace);
-            this.panelRace.Location = new System.Drawing.Point(3, 146);
+            this.panelRace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRace.Location = new System.Drawing.Point(3, 3);
             this.panelRace.Name = "panelRace";
-            this.panelRace.Size = new System.Drawing.Size(668, 167);
+            this.panelRace.Size = new System.Drawing.Size(668, 442);
             this.panelRace.TabIndex = 9;
             // 
             // fldRaceParcour
@@ -627,19 +668,23 @@
             // panelStarterPanel
             // 
             this.panelStarterPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelStarterPanel.Controls.Add(this.button1);
+            this.panelStarterPanel.Controls.Add(this.lblDelay2);
+            this.panelStarterPanel.Controls.Add(this.btnShowRanking_);
+            this.panelStarterPanel.Controls.Add(this.lblDelay5);
+            this.panelStarterPanel.Controls.Add(this.lblDelay4);
+            this.panelStarterPanel.Controls.Add(this.lblDelay3);
+            this.panelStarterPanel.Controls.Add(this.lblDelay1);
+            this.panelStarterPanel.Controls.Add(this.btnApplyDelayTyped);
             this.panelStarterPanel.Controls.Add(this.fldApplyDelay);
-            this.panelStarterPanel.Controls.Add(this.label2);
+            this.panelStarterPanel.Controls.Add(this.lblAdjustTrackerHeight);
             this.panelStarterPanel.Controls.Add(this.fldTrackerHeight);
-            this.panelStarterPanel.Controls.Add(this.label1);
+            this.panelStarterPanel.Controls.Add(this.lblPenaltyZoneHeight);
             this.panelStarterPanel.Controls.Add(this.fldPenaltyHeight);
             this.panelStarterPanel.Controls.Add(this.lblVisualLineWidth);
             this.panelStarterPanel.Controls.Add(this.fldVisualLineWidth);
             this.panelStarterPanel.Controls.Add(this.btnVisualGetDelay);
             this.panelStarterPanel.Controls.Add(this.btnVisualApplyDelay);
-            this.panelStarterPanel.Controls.Add(this.lblDelay);
             this.panelStarterPanel.Controls.Add(this.fldVisualDelay);
-            this.panelStarterPanel.Controls.Add(this.checkBox1);
             this.panelStarterPanel.Controls.Add(this.lstVisualPilotsToShow);
             this.panelStarterPanel.Controls.Add(this.lstVisualRacesToShow);
             this.panelStarterPanel.Controls.Add(this.lblPilotsToShow);
@@ -649,43 +694,109 @@
             this.panelStarterPanel.Controls.Add(this.VisualChkBoxAlwaysNewest);
             this.panelStarterPanel.Controls.Add(this.VisualScrollBar);
             this.panelStarterPanel.Controls.Add(this.btnStartClient);
-            this.panelStarterPanel.Location = new System.Drawing.Point(3, 319);
+            this.panelStarterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelStarterPanel.Location = new System.Drawing.Point(3, 3);
             this.panelStarterPanel.Name = "panelStarterPanel";
-            this.panelStarterPanel.Size = new System.Drawing.Size(668, 171);
+            this.panelStarterPanel.Size = new System.Drawing.Size(668, 442);
             this.panelStarterPanel.TabIndex = 10;
             this.panelStarterPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panelStarterPanel_Paint);
             // 
-            // button1
+            // lblDelay2
             // 
-            this.button1.Location = new System.Drawing.Point(361, 110);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 23);
-            this.button1.TabIndex = 77;
-            this.button1.Text = "Apply Delay";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.lblDelay2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDelay2.AutoSize = true;
+            this.lblDelay2.Location = new System.Drawing.Point(385, 124);
+            this.lblDelay2.Name = "lblDelay2";
+            this.lblDelay2.Size = new System.Drawing.Size(154, 13);
+            this.lblDelay2.TabIndex = 83;
+            this.lblDelay2.Text = "and start from the selected time";
+            // 
+            // btnShowRanking_
+            // 
+            this.btnShowRanking_.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowRanking_.Location = new System.Drawing.Point(392, 40);
+            this.btnShowRanking_.Name = "btnShowRanking_";
+            this.btnShowRanking_.Size = new System.Drawing.Size(269, 23);
+            this.btnShowRanking_.TabIndex = 82;
+            this.btnShowRanking_.Text = "Show Ranking";
+            this.btnShowRanking_.UseVisualStyleBackColor = true;
+            this.btnShowRanking_.Click += new System.EventHandler(this.btnShowRanking_Click);
+            // 
+            // lblDelay5
+            // 
+            this.lblDelay5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDelay5.AutoSize = true;
+            this.lblDelay5.Location = new System.Drawing.Point(383, 404);
+            this.lblDelay5.Name = "lblDelay5";
+            this.lblDelay5.Size = new System.Drawing.Size(154, 13);
+            this.lblDelay5.TabIndex = 81;
+            this.lblDelay5.Text = "and start from the selected time";
+            // 
+            // lblDelay4
+            // 
+            this.lblDelay4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDelay4.AutoSize = true;
+            this.lblDelay4.Location = new System.Drawing.Point(445, 375);
+            this.lblDelay4.Name = "lblDelay4";
+            this.lblDelay4.Size = new System.Drawing.Size(94, 13);
+            this.lblDelay4.TabIndex = 80;
+            this.lblDelay4.Text = "select one of them";
+            // 
+            // lblDelay3
+            // 
+            this.lblDelay3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDelay3.AutoSize = true;
+            this.lblDelay3.Location = new System.Drawing.Point(427, 348);
+            this.lblDelay3.Name = "lblDelay3";
+            this.lblDelay3.Size = new System.Drawing.Size(112, 13);
+            this.lblDelay3.TabIndex = 79;
+            this.lblDelay3.Text = "or, get dates of entries";
+            // 
+            // lblDelay1
+            // 
+            this.lblDelay1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDelay1.AutoSize = true;
+            this.lblDelay1.Location = new System.Drawing.Point(454, 78);
+            this.lblDelay1.Name = "lblDelay1";
+            this.lblDelay1.Size = new System.Drawing.Size(209, 13);
+            this.lblDelay1.TabIndex = 78;
+            this.lblDelay1.Text = "Set the delay to the selected date and time";
+            // 
+            // btnApplyDelayTyped
+            // 
+            this.btnApplyDelayTyped.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnApplyDelayTyped.Location = new System.Drawing.Point(540, 121);
+            this.btnApplyDelayTyped.Name = "btnApplyDelayTyped";
+            this.btnApplyDelayTyped.Size = new System.Drawing.Size(121, 23);
+            this.btnApplyDelayTyped.TabIndex = 77;
+            this.btnApplyDelayTyped.Text = "Apply Delay";
+            this.btnApplyDelayTyped.UseVisualStyleBackColor = true;
+            this.btnApplyDelayTyped.Click += new System.EventHandler(this.button1_Click);
             // 
             // fldApplyDelay
             // 
+            this.fldApplyDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fldApplyDelay.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.fldApplyDelay.Location = new System.Drawing.Point(369, 84);
+            this.fldApplyDelay.Location = new System.Drawing.Point(540, 94);
             this.fldApplyDelay.Name = "fldApplyDelay";
             this.fldApplyDelay.Size = new System.Drawing.Size(121, 20);
             this.fldApplyDelay.TabIndex = 76;
             this.fldApplyDelay.Value = new System.DateTime(2009, 8, 21, 19, 46, 0, 0);
             // 
-            // label2
+            // lblAdjustTrackerHeight
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(434, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 75;
-            this.label2.Text = "Line width";
+            this.lblAdjustTrackerHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblAdjustTrackerHeight.AutoSize = true;
+            this.lblAdjustTrackerHeight.Location = new System.Drawing.Point(54, 350);
+            this.lblAdjustTrackerHeight.Name = "lblAdjustTrackerHeight";
+            this.lblAdjustTrackerHeight.Size = new System.Drawing.Size(110, 13);
+            this.lblAdjustTrackerHeight.TabIndex = 75;
+            this.lblAdjustTrackerHeight.Text = "Adjust Tracker Height";
             // 
             // fldTrackerHeight
             // 
-            this.fldTrackerHeight.Location = new System.Drawing.Point(382, 60);
+            this.fldTrackerHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldTrackerHeight.Location = new System.Drawing.Point(4, 343);
             this.fldTrackerHeight.Maximum = new decimal(new int[] {
             500,
             0,
@@ -697,18 +808,20 @@
             this.fldTrackerHeight.TabIndex = 74;
             this.fldTrackerHeight.ValueChanged += new System.EventHandler(this.fldTrackerHeight_ValueChanged);
             // 
-            // label1
+            // lblPenaltyZoneHeight
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(434, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 73;
-            this.label1.Text = "Penalty Zone h";
+            this.lblPenaltyZoneHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPenaltyZoneHeight.AutoSize = true;
+            this.lblPenaltyZoneHeight.Location = new System.Drawing.Point(54, 324);
+            this.lblPenaltyZoneHeight.Name = "lblPenaltyZoneHeight";
+            this.lblPenaltyZoneHeight.Size = new System.Drawing.Size(79, 13);
+            this.lblPenaltyZoneHeight.TabIndex = 73;
+            this.lblPenaltyZoneHeight.Text = "Penalty Zone h";
             // 
             // fldPenaltyHeight
             // 
-            this.fldPenaltyHeight.Location = new System.Drawing.Point(382, 34);
+            this.fldPenaltyHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldPenaltyHeight.Location = new System.Drawing.Point(4, 317);
             this.fldPenaltyHeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -727,8 +840,9 @@
             // 
             // lblVisualLineWidth
             // 
+            this.lblVisualLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblVisualLineWidth.AutoSize = true;
-            this.lblVisualLineWidth.Location = new System.Drawing.Point(434, 13);
+            this.lblVisualLineWidth.Location = new System.Drawing.Point(54, 301);
             this.lblVisualLineWidth.Name = "lblVisualLineWidth";
             this.lblVisualLineWidth.Size = new System.Drawing.Size(55, 13);
             this.lblVisualLineWidth.TabIndex = 71;
@@ -736,9 +850,10 @@
             // 
             // fldVisualLineWidth
             // 
-            this.fldVisualLineWidth.Location = new System.Drawing.Point(382, 11);
+            this.fldVisualLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldVisualLineWidth.Location = new System.Drawing.Point(4, 294);
             this.fldVisualLineWidth.Maximum = new decimal(new int[] {
-            4,
+            5,
             0,
             0,
             0});
@@ -747,7 +862,7 @@
             this.fldVisualLineWidth.Size = new System.Drawing.Size(46, 20);
             this.fldVisualLineWidth.TabIndex = 70;
             this.fldVisualLineWidth.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -755,9 +870,10 @@
             // 
             // btnVisualGetDelay
             // 
-            this.btnVisualGetDelay.Location = new System.Drawing.Point(447, 108);
+            this.btnVisualGetDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualGetDelay.Location = new System.Drawing.Point(545, 343);
             this.btnVisualGetDelay.Name = "btnVisualGetDelay";
-            this.btnVisualGetDelay.Size = new System.Drawing.Size(83, 23);
+            this.btnVisualGetDelay.Size = new System.Drawing.Size(119, 23);
             this.btnVisualGetDelay.TabIndex = 69;
             this.btnVisualGetDelay.Text = "Get Delay";
             this.btnVisualGetDelay.UseVisualStyleBackColor = true;
@@ -765,7 +881,8 @@
             // 
             // btnVisualApplyDelay
             // 
-            this.btnVisualApplyDelay.Location = new System.Drawing.Point(536, 108);
+            this.btnVisualApplyDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnVisualApplyDelay.Location = new System.Drawing.Point(543, 399);
             this.btnVisualApplyDelay.Name = "btnVisualApplyDelay";
             this.btnVisualApplyDelay.Size = new System.Drawing.Size(121, 23);
             this.btnVisualApplyDelay.TabIndex = 68;
@@ -773,49 +890,36 @@
             this.btnVisualApplyDelay.UseVisualStyleBackColor = true;
             this.btnVisualApplyDelay.Click += new System.EventHandler(this.btnVisualApplyDelay_Click);
             // 
-            // lblDelay
-            // 
-            this.lblDelay.AutoSize = true;
-            this.lblDelay.Location = new System.Drawing.Point(496, 84);
-            this.lblDelay.Name = "lblDelay";
-            this.lblDelay.Size = new System.Drawing.Size(34, 13);
-            this.lblDelay.TabIndex = 67;
-            this.lblDelay.Text = "Delay";
-            // 
             // fldVisualDelay
             // 
+            this.fldVisualDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.fldVisualDelay.FormattingEnabled = true;
-            this.fldVisualDelay.Location = new System.Drawing.Point(536, 81);
+            this.fldVisualDelay.Location = new System.Drawing.Point(545, 372);
             this.fldVisualDelay.Name = "fldVisualDelay";
             this.fldVisualDelay.Size = new System.Drawing.Size(121, 21);
             this.fldVisualDelay.TabIndex = 66;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(2, 118);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(164, 17);
-            this.checkBox1.TabIndex = 64;
-            this.checkBox1.Text = "Show Ranking for this Races";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Click += new System.EventHandler(this.btnShowRanking_Click);
-            // 
             // lstVisualPilotsToShow
             // 
+            this.lstVisualPilotsToShow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstVisualPilotsToShow.CheckOnClick = true;
             this.lstVisualPilotsToShow.FormattingEnabled = true;
             this.lstVisualPilotsToShow.Location = new System.Drawing.Point(179, 22);
             this.lstVisualPilotsToShow.Name = "lstVisualPilotsToShow";
-            this.lstVisualPilotsToShow.Size = new System.Drawing.Size(167, 109);
+            this.lstVisualPilotsToShow.Size = new System.Drawing.Size(167, 259);
             this.lstVisualPilotsToShow.TabIndex = 63;
             this.lstVisualPilotsToShow.SelectedIndexChanged += new System.EventHandler(this.lstVisualPilotsToShow_SelectedIndexChanged);
             // 
             // lstVisualRacesToShow
             // 
+            this.lstVisualRacesToShow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.lstVisualRacesToShow.CheckOnClick = true;
             this.lstVisualRacesToShow.FormattingEnabled = true;
             this.lstVisualRacesToShow.Location = new System.Drawing.Point(3, 22);
             this.lstVisualRacesToShow.Name = "lstVisualRacesToShow";
-            this.lstVisualRacesToShow.Size = new System.Drawing.Size(167, 94);
+            this.lstVisualRacesToShow.Size = new System.Drawing.Size(167, 259);
             this.lstVisualRacesToShow.TabIndex = 62;
             this.lstVisualRacesToShow.SelectedIndexChanged += new System.EventHandler(this.lstVisualRacesToShow_SelectedIndexChanged);
             // 
@@ -839,8 +943,9 @@
             // 
             // lblVisualPlaySpeed
             // 
+            this.lblVisualPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblVisualPlaySpeed.AutoSize = true;
-            this.lblVisualPlaySpeed.Location = new System.Drawing.Point(588, 62);
+            this.lblVisualPlaySpeed.Location = new System.Drawing.Point(54, 376);
             this.lblVisualPlaySpeed.Name = "lblVisualPlaySpeed";
             this.lblVisualPlaySpeed.Size = new System.Drawing.Size(58, 13);
             this.lblVisualPlaySpeed.TabIndex = 55;
@@ -848,9 +953,10 @@
             // 
             // fldVisualPlaySpeed
             // 
-            this.fldVisualPlaySpeed.Location = new System.Drawing.Point(536, 55);
+            this.fldVisualPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldVisualPlaySpeed.Location = new System.Drawing.Point(4, 369);
             this.fldVisualPlaySpeed.Maximum = new decimal(new int[] {
-            4,
+            10,
             0,
             0,
             0});
@@ -867,32 +973,35 @@
             // 
             // VisualChkBoxAlwaysNewest
             // 
+            this.VisualChkBoxAlwaysNewest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.VisualChkBoxAlwaysNewest.AutoSize = true;
             this.VisualChkBoxAlwaysNewest.Checked = true;
             this.VisualChkBoxAlwaysNewest.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.VisualChkBoxAlwaysNewest.Location = new System.Drawing.Point(516, 32);
+            this.VisualChkBoxAlwaysNewest.Location = new System.Drawing.Point(3, 400);
             this.VisualChkBoxAlwaysNewest.Name = "VisualChkBoxAlwaysNewest";
-            this.VisualChkBoxAlwaysNewest.Size = new System.Drawing.Size(141, 17);
+            this.VisualChkBoxAlwaysNewest.Size = new System.Drawing.Size(169, 17);
             this.VisualChkBoxAlwaysNewest.TabIndex = 2;
-            this.VisualChkBoxAlwaysNewest.Text = "Always the newest Entry";
+            this.VisualChkBoxAlwaysNewest.Text = "Always show the newest Entry";
             this.VisualChkBoxAlwaysNewest.UseVisualStyleBackColor = true;
             this.VisualChkBoxAlwaysNewest.CheckedChanged += new System.EventHandler(this.VisualChkBoxAlwaysNewest_CheckedChanged);
             // 
             // VisualScrollBar
             // 
-            this.VisualScrollBar.Location = new System.Drawing.Point(3, 151);
+            this.VisualScrollBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.VisualScrollBar.Location = new System.Drawing.Point(0, 425);
             this.VisualScrollBar.Maximum = 1000;
             this.VisualScrollBar.Name = "VisualScrollBar";
-            this.VisualScrollBar.Size = new System.Drawing.Size(654, 13);
+            this.VisualScrollBar.Size = new System.Drawing.Size(664, 13);
             this.VisualScrollBar.TabIndex = 1;
             this.VisualScrollBar.Value = 1;
             this.VisualScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.VisualScrollBar_Scroll);
             // 
             // btnStartClient
             // 
-            this.btnStartClient.Location = new System.Drawing.Point(516, 3);
+            this.btnStartClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartClient.Location = new System.Drawing.Point(392, 6);
             this.btnStartClient.Name = "btnStartClient";
-            this.btnStartClient.Size = new System.Drawing.Size(141, 23);
+            this.btnStartClient.Size = new System.Drawing.Size(269, 28);
             this.btnStartClient.TabIndex = 0;
             this.btnStartClient.Text = "Start Visualisation";
             this.btnStartClient.UseVisualStyleBackColor = true;
@@ -903,7 +1012,7 @@
             this.btnCredits.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Cyan;
             this.btnCredits.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnCredits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCredits.Location = new System.Drawing.Point(3, 1);
+            this.btnCredits.Location = new System.Drawing.Point(176, 502);
             this.btnCredits.Name = "btnCredits";
             this.btnCredits.Size = new System.Drawing.Size(668, 26);
             this.btnCredits.TabIndex = 25;
@@ -911,18 +1020,296 @@
             this.btnCredits.UseVisualStyleBackColor = true;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
+            this.tabControl.Controls.Add(this.tabPage5);
+            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(682, 474);
+            this.tabControl.TabIndex = 26;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.btnDonations);
+            this.tabPage1.Controls.Add(this.lblSharpsoft);
+            this.tabPage1.Controls.Add(this.pictureBox1);
+            this.tabPage1.Controls.Add(this.lblLucaTested);
+            this.tabPage1.Controls.Add(this.lblLucaMail);
+            this.tabPage1.Controls.Add(this.lblLucMail);
+            this.tabPage1.Controls.Add(this.lblLuca1);
+            this.tabPage1.Controls.Add(this.lblLuc4);
+            this.tabPage1.Controls.Add(this.lblLuc3);
+            this.tabPage1.Controls.Add(this.lblLuc2);
+            this.tabPage1.Controls.Add(this.lblLuc1);
+            this.tabPage1.Controls.Add(this.lblLuca);
+            this.tabPage1.Controls.Add(this.lblLuc);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(674, 448);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Credits & Developper";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::GELive.Properties.Resources.Logo_05;
+            this.pictureBox1.Location = new System.Drawing.Point(164, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(320, 130);
+            this.pictureBox1.TabIndex = 34;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // lblLucaTested
+            // 
+            this.lblLucaTested.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLucaTested.AutoSize = true;
+            this.lblLucaTested.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLucaTested.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLucaTested.Location = new System.Drawing.Point(438, 312);
+            this.lblLucaTested.Name = "lblLucaTested";
+            this.lblLucaTested.Size = new System.Drawing.Size(79, 25);
+            this.lblLucaTested.TabIndex = 33;
+            this.lblLucaTested.Text = "Tester";
+            this.lblLucaTested.UseWaitCursor = true;
+            // 
+            // lblLucaMail
+            // 
+            this.lblLucaMail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLucaMail.AutoSize = true;
+            this.lblLucaMail.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLucaMail.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLucaMail.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblLucaMail.Location = new System.Drawing.Point(387, 254);
+            this.lblLucaMail.Name = "lblLucaMail";
+            this.lblLucaMail.Size = new System.Drawing.Size(213, 23);
+            this.lblLucaMail.TabIndex = 32;
+            this.lblLucaMail.Text = "Peac3maker@gmx.ch";
+            this.lblLucaMail.UseWaitCursor = true;
+            // 
+            // lblLucMail
+            // 
+            this.lblLucMail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLucMail.AutoSize = true;
+            this.lblLucMail.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLucMail.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLucMail.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblLucMail.Location = new System.Drawing.Point(50, 254);
+            this.lblLucMail.Name = "lblLucMail";
+            this.lblLucMail.Size = new System.Drawing.Size(224, 23);
+            this.lblLucMail.TabIndex = 31;
+            this.lblLucMail.Text = "Helios157@gmail.com";
+            this.lblLucMail.UseWaitCursor = true;
+            // 
+            // lblLuca1
+            // 
+            this.lblLuca1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuca1.AutoSize = true;
+            this.lblLuca1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuca1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuca1.Location = new System.Drawing.Point(438, 287);
+            this.lblLuca1.Name = "lblLuca1";
+            this.lblLuca1.Size = new System.Drawing.Size(133, 25);
+            this.lblLuca1.TabIndex = 30;
+            this.lblLuca1.Text = "Developper";
+            this.lblLuca1.UseWaitCursor = true;
+            // 
+            // lblLuc4
+            // 
+            this.lblLuc4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuc4.AutoSize = true;
+            this.lblLuc4.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuc4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuc4.Location = new System.Drawing.Point(116, 362);
+            this.lblLuc4.Name = "lblLuc4";
+            this.lblLuc4.Size = new System.Drawing.Size(190, 25);
+            this.lblLuc4.TabIndex = 29;
+            this.lblLuc4.Text = "Main Developper";
+            this.lblLuc4.UseWaitCursor = true;
+            // 
+            // lblLuc3
+            // 
+            this.lblLuc3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuc3.AutoSize = true;
+            this.lblLuc3.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuc3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuc3.Location = new System.Drawing.Point(116, 337);
+            this.lblLuc3.Name = "lblLuc3";
+            this.lblLuc3.Size = new System.Drawing.Size(213, 25);
+            this.lblLuc3.TabIndex = 28;
+            this.lblLuc3.Text = "Software Architect ";
+            this.lblLuc3.UseWaitCursor = true;
+            // 
+            // lblLuc2
+            // 
+            this.lblLuc2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuc2.AutoSize = true;
+            this.lblLuc2.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuc2.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuc2.Location = new System.Drawing.Point(116, 312);
+            this.lblLuc2.Name = "lblLuc2";
+            this.lblLuc2.Size = new System.Drawing.Size(151, 25);
+            this.lblLuc2.TabIndex = 27;
+            this.lblLuc2.Text = "Team Leader";
+            this.lblLuc2.UseWaitCursor = true;
+            // 
+            // lblLuc1
+            // 
+            this.lblLuc1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuc1.AutoSize = true;
+            this.lblLuc1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuc1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuc1.Location = new System.Drawing.Point(116, 287);
+            this.lblLuc1.Name = "lblLuc1";
+            this.lblLuc1.Size = new System.Drawing.Size(185, 25);
+            this.lblLuc1.TabIndex = 26;
+            this.lblLuc1.Text = "Project Manager";
+            this.lblLuc1.UseWaitCursor = true;
+            // 
+            // lblLuca
+            // 
+            this.lblLuca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuca.AutoSize = true;
+            this.lblLuca.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuca.Font = new System.Drawing.Font("Verdana", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuca.Location = new System.Drawing.Point(385, 217);
+            this.lblLuca.Name = "lblLuca";
+            this.lblLuca.Size = new System.Drawing.Size(209, 34);
+            this.lblLuca.TabIndex = 25;
+            this.lblLuca.Text = "Luca Selinger";
+            this.lblLuca.UseWaitCursor = true;
+            // 
+            // lblLuc
+            // 
+            this.lblLuc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLuc.AutoSize = true;
+            this.lblLuc.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblLuc.Font = new System.Drawing.Font("Verdana", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLuc.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblLuc.Location = new System.Drawing.Point(48, 217);
+            this.lblLuc.Name = "lblLuc";
+            this.lblLuc.Size = new System.Drawing.Size(208, 34);
+            this.lblLuc.TabIndex = 24;
+            this.lblLuc.Text = "Luc Baumann";
+            this.lblLuc.UseWaitCursor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.panelConnection);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(674, 448);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Connect to Server";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.panelTrackerPilot);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(674, 448);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Configure Trackers";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.panelRace);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(674, 448);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Configure Races & Pilots";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.panelStarterPanel);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(674, 448);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Visualisation Controll";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // lblSharpsoft
+            // 
+            this.lblSharpsoft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSharpsoft.AutoSize = true;
+            this.lblSharpsoft.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblSharpsoft.Font = new System.Drawing.Font("Verdana", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSharpsoft.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblSharpsoft.Location = new System.Drawing.Point(182, 139);
+            this.lblSharpsoft.Name = "lblSharpsoft";
+            this.lblSharpsoft.Size = new System.Drawing.Size(267, 32);
+            this.lblSharpsoft.TabIndex = 35;
+            this.lblSharpsoft.Text = "www.SharpSoft.ch";
+            this.lblSharpsoft.UseWaitCursor = true;
+            // 
+            // btnDonations
+            // 
+            this.btnDonations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDonations.Location = new System.Drawing.Point(562, 422);
+            this.btnDonations.Name = "btnDonations";
+            this.btnDonations.Size = new System.Drawing.Size(109, 23);
+            this.btnDonations.TabIndex = 37;
+            this.btnDonations.Text = "Donations";
+            this.btnDonations.UseVisualStyleBackColor = true;
+            this.btnDonations.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(5, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(534, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Please choose a Server to connect (127.0.0.1 is the Local, if you are running the" +
+                " Service on your own Machine)";
+            // 
             // AnrlClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(678, 490);
+            this.ClientSize = new System.Drawing.Size(682, 474);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.btnCredits);
-            this.Controls.Add(this.panelStarterPanel);
-            this.Controls.Add(this.panelRace);
-            this.Controls.Add(this.panelTrackerPilot);
-            this.Controls.Add(this.panelConnection);
             this.Name = "AnrlClient";
-            this.Text = "AnrlClient";
+            this.Text = "Air Navigation Race Live -- Client";
             this.panelConnection.ResumeLayout(false);
             this.panelConnection.PerformLayout();
             this.panelTrackerPilot.ResumeLayout(false);
@@ -935,6 +1322,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualPlaySpeed)).EndInit();
+            this.tabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1000,22 +1395,46 @@
         private System.Windows.Forms.NumericUpDown fldVisualPlaySpeed;
         private System.Windows.Forms.Label lblVisualRacesToShow;
         private System.Windows.Forms.Label lblPilotsToShow;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckedListBox lstVisualPilotsToShow;
         private System.Windows.Forms.CheckedListBox lstVisualRacesToShow;
         private System.Windows.Forms.CheckBox VisualChkBoxAlwaysNewest;
         private System.Windows.Forms.Button btnVisualApplyDelay;
-        private System.Windows.Forms.Label lblDelay;
         private System.Windows.Forms.ComboBox fldVisualDelay;
         private System.Windows.Forms.Button btnVisualGetDelay;
         private System.Windows.Forms.Button btnCredits;
         private System.Windows.Forms.Label lblVisualLineWidth;
         private System.Windows.Forms.NumericUpDown fldVisualLineWidth;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblAdjustTrackerHeight;
         private System.Windows.Forms.NumericUpDown fldTrackerHeight;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPenaltyZoneHeight;
         private System.Windows.Forms.NumericUpDown fldPenaltyHeight;
         private System.Windows.Forms.DateTimePicker fldApplyDelay;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnApplyDelayTyped;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label lblDelay5;
+        private System.Windows.Forms.Label lblDelay4;
+        private System.Windows.Forms.Label lblDelay3;
+        private System.Windows.Forms.Label lblDelay1;
+        private System.Windows.Forms.Button btnShowRanking_;
+        private System.Windows.Forms.Label lblDelay2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lblLucaTested;
+        private System.Windows.Forms.Label lblLucaMail;
+        private System.Windows.Forms.Label lblLucMail;
+        private System.Windows.Forms.Label lblLuca1;
+        private System.Windows.Forms.Label lblLuc4;
+        private System.Windows.Forms.Label lblLuc3;
+        private System.Windows.Forms.Label lblLuc2;
+        private System.Windows.Forms.Label lblLuc1;
+        private System.Windows.Forms.Label lblLuca;
+        private System.Windows.Forms.Label lblLuc;
+        private System.Windows.Forms.Label lblSharpsoft;
+        private System.Windows.Forms.Button btnDonations;
+        private System.Windows.Forms.Label label8;
     }
 }

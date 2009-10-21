@@ -29,6 +29,7 @@ namespace GELive
                 r.SureName = p.SureName;
                 r.TrackerID = p.ID_Tracker;
                 r.Punkte =0;
+                r.Color = Int32.Parse(p.PilotColor);
                 bool check = false;
                 foreach (RankingEntry re in rankinEntries)
                 {
@@ -46,27 +47,36 @@ namespace GELive
         
         public void PopulateData()
         {
+            Boolean PunkteVisible = false;
             Comparison<RankingEntry> compRankEntr = new Comparison<RankingEntry>(CompareRankingEntries);
             rankinEntries.Sort(compRankEntr);
             if (rankinEntries.Count > 0)
             {
                 rng1Name.Text = rankinEntries[0].LastName;
                 rng1Punkte.Text = rankinEntries[0].Punkte.ToString();
+                rng1Name.ForeColor = Color.FromArgb(rankinEntries[0].Color);
+                rng1Punkte.Visible = PunkteVisible;
             }
             if (rankinEntries.Count > 1)
             {
                 rng2Name.Text = rankinEntries[1].LastName;
                 rng2Punkte.Text = rankinEntries[1].Punkte.ToString();
+                rng2Name.ForeColor = Color.FromArgb(rankinEntries[1].Color);
+                rng2Punkte.Visible = PunkteVisible;
             }
             if (rankinEntries.Count > 2)
             {
                 rng3Name.Text = rankinEntries[2].LastName;
                 rng3Punkte.Text = rankinEntries[2].Punkte.ToString();
+                rng3Name.ForeColor = Color.FromArgb(rankinEntries[2].Color);
+                rng3Punkte.Visible = PunkteVisible;
             }
             if (rankinEntries.Count > 3)
             {
                 rng4Name.Text = rankinEntries[3].LastName;
                 rng4Punkte.Text = rankinEntries[3].Punkte.ToString();
+                rng4Name.ForeColor = Color.FromArgb(rankinEntries[3].Color);
+                rng4Punkte.Visible = PunkteVisible;
             }
         }
 

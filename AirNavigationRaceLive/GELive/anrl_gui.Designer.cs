@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(anrl_gui));
             this.geWebBrowser1 = new GELive.GEWebBrowser();
             this.SuspendLayout();
             // 
@@ -37,14 +36,13 @@
             this.geWebBrowser1.AllowNavigation = false;
             this.geWebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.geWebBrowser1.IsWebBrowserContextMenuEnabled = false;
-            this.geWebBrowser1.Location = new System.Drawing.Point(0, 25);
+            this.geWebBrowser1.Location = new System.Drawing.Point(0, 0);
             this.geWebBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.geWebBrowser1.Name = "geWebBrowser1";
             this.geWebBrowser1.ScrollBarsEnabled = false;
-            this.geWebBrowser1.Size = new System.Drawing.Size(633, 499);
+            this.geWebBrowser1.Size = new System.Drawing.Size(633, 524);
             this.geWebBrowser1.TabIndex = 2;
             this.geWebBrowser1.WebBrowserShortcutsEnabled = false;
-
             // 
             // anrl_gui
             // 
@@ -55,7 +53,6 @@
             this.Name = "anrl_gui";
             this.Text = "Air Navigation Race LIVE";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
