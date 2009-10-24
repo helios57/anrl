@@ -50,33 +50,33 @@ namespace GELive
             Boolean PunkteVisible = false;
             Comparison<RankingEntry> compRankEntr = new Comparison<RankingEntry>(CompareRankingEntries);
             rankinEntries.Sort(compRankEntr);
-            if (rankinEntries.Count > 0)
+            if (rankinEntries.Count > 3)
             {
-                rng1Name.Text = rankinEntries[0].LastName;
-                rng1Punkte.Text = rankinEntries[0].Punkte.ToString();
-                rng1Name.ForeColor = Color.FromArgb(rankinEntries[0].Color);
-                rng1Punkte.Visible = PunkteVisible;
-            }
-            if (rankinEntries.Count > 1)
-            {
-                rng2Name.Text = rankinEntries[1].LastName;
-                rng2Punkte.Text = rankinEntries[1].Punkte.ToString();
-                rng2Name.ForeColor = Color.FromArgb(rankinEntries[1].Color);
-                rng2Punkte.Visible = PunkteVisible;
+                rng4Name.Text = rankinEntries[0].LastName;
+                rng4Punkte.Text = rankinEntries[0].Punkte.ToString();
+                rng4Name.ForeColor = Color.FromArgb(rankinEntries[0].Color);
+                rng4Punkte.Visible = PunkteVisible;
             }
             if (rankinEntries.Count > 2)
             {
-                rng3Name.Text = rankinEntries[2].LastName;
-                rng3Punkte.Text = rankinEntries[2].Punkte.ToString();
-                rng3Name.ForeColor = Color.FromArgb(rankinEntries[2].Color);
+                rng3Name.Text = rankinEntries[1].LastName;
+                rng3Punkte.Text = rankinEntries[1].Punkte.ToString();
+                rng3Name.ForeColor = Color.FromArgb(rankinEntries[1].Color);
                 rng3Punkte.Visible = PunkteVisible;
             }
-            if (rankinEntries.Count > 3)
+            if (rankinEntries.Count > 1)
             {
-                rng4Name.Text = rankinEntries[3].LastName;
-                rng4Punkte.Text = rankinEntries[3].Punkte.ToString();
-                rng4Name.ForeColor = Color.FromArgb(rankinEntries[3].Color);
-                rng4Punkte.Visible = PunkteVisible;
+                rng2Name.Text = rankinEntries[2].LastName;
+                rng2Punkte.Text = rankinEntries[2].Punkte.ToString();
+                rng2Name.ForeColor = Color.FromArgb(rankinEntries[2].Color);
+                rng2Punkte.Visible = PunkteVisible;
+            }
+            if (rankinEntries.Count > 0)
+            {
+                rng1Name.Text = rankinEntries[3].LastName;
+                rng1Punkte.Text = rankinEntries[3].Punkte.ToString();
+                rng1Name.ForeColor = Color.FromArgb(rankinEntries[3].Color);
+                rng1Punkte.Visible = PunkteVisible;
             }
         }
 
@@ -92,7 +92,7 @@ namespace GELive
         {
             return rE1.Punkte.CompareTo(rE2.Punkte);
         }
-        public void doranking(decimal longitude, decimal latitude, int trackerid)
+        public void doranking(decimal longitude, decimal latitude, int trackerid, DateTime pointtime)
         {
             foreach (Polygon p in InformationPool.PolygonGroupToDraw.Polygons)
             {
@@ -105,13 +105,50 @@ namespace GELive
                         }
                     }
                 }
+                else if (p.Type == PolygonType.GateStartA || p.Type == PolygonType.GateStartB || p.Type == PolygonType.GateStartC || p.Type == PolygonType.GateStartD)
+                {
+                    foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
+                    {
+                        if (!r.passedstartinggate)
+                        {
+                            r.Punkte += getGatePenaltyPoints("StartGate", InformationPool.ExpectedStartGateTime, pointtime);
+                            r.passedstartinggate = true;
+                        }
+                        if (!r.passedfinishgate)
+                        {
+                            r.Punkte += getGatePenaltyPoints("FinishGate", InformationPool.ExpectedEndGateTime, pointtime);
+                            r.passedfinishgate = true;
+                        }
+                    }
+                }
             }
+                this.Invoke(new MethodInvoker(PopulateDat
             try
-            {
-                this.Invoke(new MethodInvoker(PopulateData));
+            {a));
             }
             catch
             { }     
+        }
+
+        private int getGatePenaltyPoints(string gatename, DateTime expected, DateTime effective)
+        {
+            //double seconds = Math.Abs(expected.TimeOfDay.Subtract(effective.TimeOfDay).TotalSeconds);
+            //int points = 0;
+            //string message = "Passed " + gatename + " right on time";
+            //if (seconds > 1 && seconds * 3 < 200)
+            //{
+            //    message = "Failed to pass " + gatename + " by " + seconds + " seconds. (Plan: " +
+            //        expected.ToString("HH:mm:ss") + ", effective: " + effective.ToString("HH:mm:ss") + ").";
+            //    points = Convert.ToInt32((seconds - 1) * 3);
+            //}
+            //else if (seconds * 3 >= 200)
+            //{
+            //    message = "Failed to pass " + gatename + " within time slot. (Maximum Penalty, Plan: " +
+            //        expected.ToString("HH:mm:ss") + ", effective: " + effective.ToString("HH:mm:ss") + ")."; ;
+            //    points = 200;
+            //}
+            //return points;
+            return 0;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

@@ -106,7 +106,7 @@ namespace GELive
                 {
                     if (InformationPool.rankform != null)
                     {
-                        InformationPool.rankform.doranking(d.Longitude, d.Latitude, d.ID_Tracker);
+                        InformationPool.rankform.doranking(d.Longitude, d.Latitude, d.ID_Tracker,d.Timestamp);
                     }
                 }
             }

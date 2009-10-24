@@ -32,6 +32,8 @@ namespace GELive
         static public PolygonGroup PolygonGroupToDraw = new PolygonGroup();
         static public List<PilotEntry> PilotsToBeDrawn = new List<PilotEntry>();
 
+        static public DateTime ExpectedStartGateTime;
+        static public DateTime ExpectedEndGateTime;
         static public DateTime Oldest = DateTime.Now.ToUniversalTime();
         static public DateTime Newest = DateTime.Now.ToUniversalTime();
         static public DateTime Next = DateTime.Now.ToUniversalTime();
@@ -499,6 +501,8 @@ namespace GELive
         public int Punkte;
         public int TrackerID;
         public int Color;
+        public bool passedstartinggate = false;
+        public bool passedfinishgate = false;
     }
     public class PilotLst :t_Pilot
     {
