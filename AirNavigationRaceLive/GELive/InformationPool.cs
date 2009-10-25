@@ -33,8 +33,6 @@ namespace GELive
         static public List<PilotEntry> PilotsToBeDrawn = new List<PilotEntry>();
         static public List<t_Pilot> PilotList = new List<t_Pilot>();
 
-        static public DateTime ExpectedStartGateTime;
-        static public DateTime ExpectedEndGateTime;
         static public DateTime Oldest = DateTime.Now.ToUniversalTime();
         static public DateTime Newest = DateTime.Now.ToUniversalTime();
         static public DateTime Next = DateTime.Now.ToUniversalTime();
