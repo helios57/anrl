@@ -13,8 +13,10 @@ namespace GELive
     public partial class RankForm : Form
     {
         List<RankingEntry> rankinEntries;
-        public RankForm()
+        RaceEntry Race;
+        public RankForm(RaceEntry Race)
         {
+            this.Race = Race;
             InitializeComponent();
             rankinEntries = new List<RankingEntry>();
             InitializeRankingEntries();
@@ -111,12 +113,12 @@ namespace GELive
                     {
                         if (!r.passedstartinggate)
                         {
-                            r.Punkte += getGatePenaltyPoints("StartGate", InformationPool.ExpectedStartGateTime, pointtime);
+                            r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
                             r.passedstartinggate = true;
                         }
                         if (!r.passedfinishgate)
                         {
-                            r.Punkte += getGatePenaltyPoints("FinishGate", InformationPool.ExpectedEndGateTime, pointtime);
+                            r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
                             r.passedfinishgate = true;
                         }
                     }

@@ -88,11 +88,11 @@ namespace GELive
             GuiLoaded.Invoke(null, null);
         }
 
-        public static void showRanking()
+        public static void showRanking(List<RaceEntry> Races)
         {
             if (rankform == null || !rankform.Visible)
             {
-                rankform = new RankForm();
+                rankform = new RankForm(Races.First());
                 rankform.Show();
             }
             else

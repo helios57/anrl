@@ -495,8 +495,13 @@ namespace GELive
         }
         private void btnShowRanking_Click(object sender, EventArgs e)
         {
-
-            InformationPool.showRanking();
+            List<RaceEntry> Races = new List<RaceEntry>();
+            foreach (Object o in lstVisualRacesToShow.CheckedItems)
+            {
+                RaceLst rl = (RaceLst)o;
+                Races.Add(rl.re);
+            }
+            InformationPool.showRanking(Races);
         }
 
         public void RefreshTimeline()
