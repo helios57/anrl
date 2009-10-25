@@ -22,12 +22,13 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>GELive_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <StartupObject>GELive.Program</StartupObject>
-    <PublishUrl>C:\Daten\Code\ANRL\AirNavigationRaceLive\Deployed\</PublishUrl>
+    <PublishUrl>E:\Projects\Code\ANRL\AirNavigationRaceLive\Deployed\</PublishUrl>
     <Install>false</Install>
     <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -40,8 +41,10 @@
     <ProductName>ANRL Client</ProductName>
     <PublisherName>SharpSoft</PublisherName>
     <SuiteName>ANRL</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -199,7 +202,6 @@
     </Content>
     <None Include="app.config" />
     <None Include="GELiveStuff\GELive_TemporaryKey.pfx" />
-    <None Include="GELive_TemporaryKey.pfx" />
     <Content Include="Resources\KMLTemplates\footerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

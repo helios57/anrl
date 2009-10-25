@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using GELive.ANRLDataService;
+using System.IO;
 
 namespace GELive
 {
@@ -49,36 +50,65 @@ namespace GELive
         
         public void PopulateData()
         {
-            Boolean PunkteVisible = false;
             Comparison<RankingEntry> compRankEntr = new Comparison<RankingEntry>(CompareRankingEntries);
             rankinEntries.Sort(compRankEntr);
+            t_Pilot pilot;
+
             if (rankinEntries.Count > 3)
             {
-                rng4Name.Text = rankinEntries[0].LastName;
-                rng4Punkte.Text = rankinEntries[0].Punkte.ToString();
-                rng4Name.ForeColor = Color.FromArgb(rankinEntries[0].Color);
-                rng4Punkte.Visible = PunkteVisible;
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[0].TrackerID);
+                lblName4.Text = pilot.LastName;
+                lblPunkte4.Text = rankinEntries[0].Punkte.ToString();
+                lblName4.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
+                picFlag4.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                picPilot4.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                label4.Visible = true;
+            }
+            else
+            {
+                label4.Visible = false;
             }
             if (rankinEntries.Count > 2)
             {
-                rng3Name.Text = rankinEntries[1].LastName;
-                rng3Punkte.Text = rankinEntries[1].Punkte.ToString();
-                rng3Name.ForeColor = Color.FromArgb(rankinEntries[1].Color);
-                rng3Punkte.Visible = PunkteVisible;
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[1].TrackerID);
+                lblName3.Text = pilot.LastName;
+                lblPunkte3.Text = rankinEntries[1].Punkte.ToString();
+                lblName3.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
+                picFlag3.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                picPilot3.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                label3.Visible = true;
+            }
+            else
+            {
+                label3.Visible = false;
             }
             if (rankinEntries.Count > 1)
             {
-                rng2Name.Text = rankinEntries[2].LastName;
-                rng2Punkte.Text = rankinEntries[2].Punkte.ToString();
-                rng2Name.ForeColor = Color.FromArgb(rankinEntries[2].Color);
-                rng2Punkte.Visible = PunkteVisible;
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[2].TrackerID);
+                lblName2.Text = pilot.LastName;
+                lblPunkte2.Text = rankinEntries[2].Punkte.ToString();
+                lblName2.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
+                picFlag2.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                picPilot2.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                label2.Visible = true;
+            }
+            else
+            {
+                label2.Visible = false;
             }
             if (rankinEntries.Count > 0)
             {
-                rng1Name.Text = rankinEntries[3].LastName;
-                rng1Punkte.Text = rankinEntries[3].Punkte.ToString();
-                rng1Name.ForeColor = Color.FromArgb(rankinEntries[3].Color);
-                rng1Punkte.Visible = PunkteVisible;
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[3].TrackerID);
+                lblName1.Text = pilot.LastName;
+                lblPunkte1.Text = rankinEntries[3].Punkte.ToString();
+                lblName1.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
+                picFlag1.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                picPilot1.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                label1.Visible = true;
+            }
+            else
+            {
+                label1.Visible = false;
             }
         }
 
@@ -170,5 +200,6 @@ namespace GELive
                 Refresh();
             }
         }
+
     }
 }
