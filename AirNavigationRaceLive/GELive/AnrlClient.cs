@@ -418,22 +418,22 @@ namespace GELive
         {
             t_Race r = new t_Race();
             r.Name = CurrentRace.Name;
-            if (CurrentRace.PilotA != null)
+            if (CurrentRace.PilotA != 0)
             {
                 r.t_Pilot = new t_Pilot();
                 r.t_Pilot.ID = CurrentRace.PilotA;
             }
-            if (CurrentRace.PilotB != null)
+            if (CurrentRace.PilotB != 0)
             {
                 r.t_Pilot1 = new t_Pilot();
                 r.t_Pilot1.ID = CurrentRace.PilotB;
             }
-            if (CurrentRace.PilotC != null)
+            if (CurrentRace.PilotC != 0)
             {
                 r.t_Pilot2 = new t_Pilot();
                 r.t_Pilot2.ID = CurrentRace.PilotC;
             }
-            if (CurrentRace.PilotD != null)
+            if (CurrentRace.PilotD != 0)
             {
                 r.t_Pilot3 = new t_Pilot();
                 r.t_Pilot3.ID = CurrentRace.PilotD;
