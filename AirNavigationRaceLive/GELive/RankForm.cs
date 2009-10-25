@@ -124,12 +124,12 @@ namespace GELive
                     }
                 }
             }
-               /* this.Invoke(new MethodInvoker(PopulateDat
+                this.Invoke(new MethodInvoker(PopulateData));
             try
-            {a));
+            {
             }
             catch
-            { }     */
+            { }     
         }
 
         private int getGatePenaltyPoints(string gatename, DateTime expected, DateTime effective)
