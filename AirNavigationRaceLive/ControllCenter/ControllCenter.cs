@@ -10,6 +10,7 @@ using TCPReciever;
 using DataService;
 using System.ServiceModel;
 using System.Data.Linq;
+using System.IO;
 
 namespace ControllCenter
 {
@@ -312,6 +313,50 @@ namespace ControllCenter
         {
             d = new DebugWindow(this);
             d.Show();
+        }
+
+        private void btnAddFlags_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.Filter = "PNG | *.png";
+            of.FileOk += new CancelEventHandler(of_FileOk);
+            of.Multiselect = true;
+            of.ShowDialog();
+        }
+
+        void of_FileOk(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog of = sender as OpenFileDialog;
+            if (of != null)
+            {
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_Path);
+                dataContext.t_Pictures.DeleteAllOnSubmit(dataContext.t_Pictures.Where(p => p.isFlag));
+                dataContext.SubmitChanges();
+                foreach (String s in of.FileNames)
+                {
+                    FileStream fs = File.OpenRead(s);
+                    List<Byte> lb = new List<Byte>();
+                    lb.Clear();
+                    int b;
+                    while ((b = fs.ReadByte()) >= 0)
+                    {
+                        lb.Add((Byte)b);
+                    }
+                    t_Picture p = new t_Picture();
+                    p.isFlag = true;
+                    String[] Name = s.Split(new char[]{'\\'});
+                    p.Name = Name[Name.Length - 1].Split(new char[] {'.'})[0];
+                    if (p.Name.Contains("flag_"))
+                    {
+                        p.Name = p.Name.Substring(5);
+                    }
+                    p.Data = new Binary(lb.ToArray());
+                    fs.Close();
+                    dataContext.t_Pictures.InsertOnSubmit(p);
+                    dataContext.SubmitChanges();
+                }
+                dataContext.SubmitChanges();
+            }
         }
     }
 }

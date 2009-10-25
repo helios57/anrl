@@ -66,7 +66,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\GELive.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
@@ -210,6 +211,9 @@
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Daten.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Picture.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ANRLDataService\GELive.ANRLDataService.t_Pilot.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -248,6 +252,9 @@
     <None Include="Service References\ANRLDataService\service1.wsdl" />
     <None Include="Service References\ANRLDataService\service2.xsd" />
     <None Include="Service References\ANRLDataService\service21.xsd" />
+    <None Include="Service References\ANRLDataService\System.Data.Linq.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -36,6 +36,7 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.panelConnection = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.panelTrackerPilot = new System.Windows.Forms.Panel();
             this.btnAddPilotToTracker = new System.Windows.Forms.Button();
             this.btnRemvPilotFromTracker = new System.Windows.Forms.Button();
@@ -110,6 +111,8 @@
             this.btnCredits = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnDonations = new System.Windows.Forms.Button();
+            this.lblSharpsoft = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblLucaTested = new System.Windows.Forms.Label();
             this.lblLucaMail = new System.Windows.Forms.Label();
@@ -125,9 +128,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.lblSharpsoft = new System.Windows.Forms.Label();
-            this.btnDonations = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.txtConnectStatus = new System.Windows.Forms.TextBox();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -214,6 +216,8 @@
             // 
             // panelConnection
             // 
+            this.panelConnection.Controls.Add(this.txtConnectStatus);
+            this.panelConnection.Controls.Add(this.lblStatus);
             this.panelConnection.Controls.Add(this.label8);
             this.panelConnection.Controls.Add(this.lblAnrlServer);
             this.panelConnection.Controls.Add(this.lblPassword);
@@ -227,6 +231,16 @@
             this.panelConnection.Name = "panelConnection";
             this.panelConnection.Size = new System.Drawing.Size(668, 442);
             this.panelConnection.TabIndex = 7;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(5, 14);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(534, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Please choose a Server to connect (127.0.0.1 is the Local, if you are running the" +
+                " Service on your own Machine)";
             // 
             // panelTrackerPilot
             // 
@@ -1057,6 +1071,33 @@
             this.tabPage1.Text = "Credits & Developper";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnDonations
+            // 
+            this.btnDonations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDonations.Location = new System.Drawing.Point(562, 422);
+            this.btnDonations.Name = "btnDonations";
+            this.btnDonations.Size = new System.Drawing.Size(109, 23);
+            this.btnDonations.TabIndex = 37;
+            this.btnDonations.Text = "Donations";
+            this.btnDonations.UseVisualStyleBackColor = true;
+            this.btnDonations.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // lblSharpsoft
+            // 
+            this.lblSharpsoft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSharpsoft.AutoSize = true;
+            this.lblSharpsoft.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            this.lblSharpsoft.Font = new System.Drawing.Font("Verdana", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSharpsoft.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.lblSharpsoft.Location = new System.Drawing.Point(182, 139);
+            this.lblSharpsoft.Name = "lblSharpsoft";
+            this.lblSharpsoft.Size = new System.Drawing.Size(267, 32);
+            this.lblSharpsoft.TabIndex = 35;
+            this.lblSharpsoft.Text = "www.SharpSoft.ch";
+            this.lblSharpsoft.UseWaitCursor = true;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::GELive.Properties.Resources.Logo_05;
@@ -1264,42 +1305,25 @@
             this.tabPage5.Text = "Visualisation Controll";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // lblSharpsoft
+            // lblStatus
             // 
-            this.lblSharpsoft.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(5, 153);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.TabIndex = 8;
+            this.lblStatus.Text = "Status";
+            // 
+            // txtConnectStatus
+            // 
+            this.txtConnectStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSharpsoft.AutoSize = true;
-            this.lblSharpsoft.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.lblSharpsoft.Font = new System.Drawing.Font("Verdana", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSharpsoft.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.lblSharpsoft.Location = new System.Drawing.Point(182, 139);
-            this.lblSharpsoft.Name = "lblSharpsoft";
-            this.lblSharpsoft.Size = new System.Drawing.Size(267, 32);
-            this.lblSharpsoft.TabIndex = 35;
-            this.lblSharpsoft.Text = "www.SharpSoft.ch";
-            this.lblSharpsoft.UseWaitCursor = true;
-            // 
-            // btnDonations
-            // 
-            this.btnDonations.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDonations.Location = new System.Drawing.Point(562, 422);
-            this.btnDonations.Name = "btnDonations";
-            this.btnDonations.Size = new System.Drawing.Size(109, 23);
-            this.btnDonations.TabIndex = 37;
-            this.btnDonations.Text = "Donations";
-            this.btnDonations.UseVisualStyleBackColor = true;
-            this.btnDonations.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(5, 14);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(534, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Please choose a Server to connect (127.0.0.1 is the Local, if you are running the" +
-                " Service on your own Machine)";
+            this.txtConnectStatus.Location = new System.Drawing.Point(81, 146);
+            this.txtConnectStatus.Name = "txtConnectStatus";
+            this.txtConnectStatus.Size = new System.Drawing.Size(458, 20);
+            this.txtConnectStatus.TabIndex = 9;
+            this.txtConnectStatus.Text = "Choose or type a Server adress";
+            this.txtConnectStatus.TextChanged += new System.EventHandler(this.txtConnectStatus_TextChanged);
             // 
             // AnrlClient
             // 
@@ -1436,5 +1460,7 @@
         private System.Windows.Forms.Label lblSharpsoft;
         private System.Windows.Forms.Button btnDonations;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblStatus;
+        protected System.Windows.Forms.TextBox txtConnectStatus;
     }
 }

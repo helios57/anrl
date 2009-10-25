@@ -875,10 +875,16 @@ namespace GELive.ANRLDataService {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> ID_FlagField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ID_TrackerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.Binary PictureField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SureNameField;
@@ -932,6 +938,19 @@ namespace GELive.ANRLDataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> ID_Flag {
+            get {
+                return this.ID_FlagField;
+            }
+            set {
+                if ((this.ID_FlagField.Equals(value) != true)) {
+                    this.ID_FlagField = value;
+                    this.RaisePropertyChanged("ID_Flag");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int ID_Tracker {
             get {
                 return this.ID_TrackerField;
@@ -953,6 +972,19 @@ namespace GELive.ANRLDataService {
                 if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
                     this.LastNameField = value;
                     this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.Binary Picture {
+            get {
+                return this.PictureField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PictureField, value) != true)) {
+                    this.PictureField = value;
+                    this.RaisePropertyChanged("Picture");
                 }
             }
         }
@@ -1032,6 +1064,144 @@ namespace GELive.ANRLDataService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Binary", Namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq")]
+    [System.SerializableAttribute()]
+    public partial class Binary : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] BytesField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Bytes {
+            get {
+                return this.BytesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BytesField, value) != true)) {
+                    this.BytesField = value;
+                    this.RaisePropertyChanged("Bytes");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="t_Picture", Namespace="http://schemas.datacontract.org/2004/07/DataService")]
+    [System.SerializableAttribute()]
+    public partial class t_Picture : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private GELive.ANRLDataService.Binary DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool isFlagField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public GELive.ANRLDataService.Binary Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool isFlag {
+            get {
+                return this.isFlagField;
+            }
+            set {
+                if ((this.isFlagField.Equals(value) != true)) {
+                    this.isFlagField = value;
+                    this.RaisePropertyChanged("isFlag");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ANRLDataService.IANRLDataService")]
     public interface IANRLDataService {
@@ -1073,10 +1243,13 @@ namespace GELive.ANRLDataService {
         void CleanTracker(int TrackerID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddNewPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddNewPilotResponse")]
-        int AddNewPilot(string LastName, string SureName, string Color);
+        int AddNewPilot(string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddPilotResponse")]
-        void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color);
+        void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetAllFlags", ReplyAction="http://tempuri.org/IANRLDataService/GetAllFlagsResponse")]
+        System.Collections.Generic.List<GELive.ANRLDataService.t_Picture> GetAllFlags();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1154,12 +1327,16 @@ namespace GELive.ANRLDataService {
             base.Channel.CleanTracker(TrackerID);
         }
         
-        public int AddNewPilot(string LastName, string SureName, string Color) {
-            return base.Channel.AddNewPilot(LastName, SureName, Color);
+        public int AddNewPilot(string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag) {
+            return base.Channel.AddNewPilot(LastName, SureName, Color, Picture, Id_Flag);
         }
         
-        public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color) {
-            base.Channel.AddPilot(PilotID, TrackerID, LastName, SureName, Color);
+        public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag) {
+            base.Channel.AddPilot(PilotID, TrackerID, LastName, SureName, Color, Picture, Id_Flag);
+        }
+        
+        public System.Collections.Generic.List<GELive.ANRLDataService.t_Picture> GetAllFlags() {
+            return base.Channel.GetAllFlags();
         }
     }
 }

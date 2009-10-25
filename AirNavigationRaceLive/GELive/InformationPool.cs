@@ -31,6 +31,7 @@ namespace GELive
         static public List<t_Daten> DatenListe = new List<t_Daten>();
         static public PolygonGroup PolygonGroupToDraw = new PolygonGroup();
         static public List<PilotEntry> PilotsToBeDrawn = new List<PilotEntry>();
+        static public List<t_Pilot> PilotList = new List<t_Pilot>();
 
         static public DateTime ExpectedStartGateTime;
         static public DateTime ExpectedEndGateTime;
@@ -40,7 +41,15 @@ namespace GELive
         static public DateTime CurrentStart = DateTime.Now.ToUniversalTime();
         static public DateTime CurrentEnd = DateTime.Now.ToUniversalTime();
         static public RankForm rankform;
-        
+
+        static public List<t_Picture> Flags = new List<t_Picture>();
+
+
+        static public int PlaySpeed = 1;
+        static public int LineWidth = 1;
+        static public int HeightPenalty = 300;
+        static public int HeightTracker = 0;
+
 
         static public List<t_Daten> GetCurrentData()
         {
@@ -50,18 +59,17 @@ namespace GELive
         {
             return DatenListe.Where(p => p.Timestamp >= Newest && p.Timestamp <= Next).ToList();
         }
-        static public int PlaySpeed = 1;
-        static public int LineWidth = 1;
-        static public int HeightPenalty = 300;
-        static public int HeightTracker = 0;
 
         static public bool Connect()
         {
             Client = new GELive.ANRLDataService.ANRLDataServiceClient(ConnectionConfig, RemoteAddress);
-            Client.ClientCredentials.UserName.UserName = Username;
-            Client.ClientCredentials.UserName.Password = Password;
-            Client.ClientCredentials.Windows.ClientCredential.UserName = Username;
-            Client.ClientCredentials.Windows.ClientCredential.Password = Password;
+            if (!RemoteAddress.Contains("127.0.0.1"))
+            {
+                Client.ClientCredentials.UserName.UserName = Username;
+                Client.ClientCredentials.UserName.Password = Password;
+                Client.ClientCredentials.Windows.ClientCredential.UserName = Username;
+                Client.ClientCredentials.Windows.ClientCredential.Password = Password;
+            }
             return Client.State == System.ServiceModel.CommunicationState.Created;
         }
 
@@ -100,41 +108,7 @@ namespace GELive
                 catch { }
             }
         }
-        /*        /// <summary>
-        /// Invokes geToolStrip1.InvokeLoadKml(); to load the kml.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void LoadKml_Click(object sender, EventArgs e)
-        {
-            if (ge != null)
-            {
-                WSManager ws = new WSManager(geWebBrowser1,this);
-                Delay_Select d = new Delay_Select(ws);
-                d.Show();
-            }
-        }
-
-        /// <summary>
-        /// Opens a new form to show the ranking.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void ShowRanking_Click(object sender, EventArgs e)
-        {
-
-            ANRLDataService.ANRLDataServiceClient a = new GELive.ANRLDataService.ANRLDataServiceClient(
-                "WSHttpBinding_IANRLDataService", "http://127.0.0.1:5555/");
-            List<DateTime> d = a.GetTimestamps();
-
-            foreach (DateTime bla in d)
-            {
-                System.Console.Out.WriteLine(bla.ToString());
-            }
-
-          //  rankingForm = new RankingForm();
-          //  rankingForm.Show();
-        }*/
+       
 
         /// <summary> 
         /// Imports a DxfFile that is in the specified Format. Any changes on the import schema may cause Errors!
@@ -300,12 +274,18 @@ namespace GELive
             this.LastName = Pilot.LastName;
             this.SureName = Pilot.SureName;
             this.PilotColor = Pilot.Color.ToString();
+            this.Picture =Pilot.Picture;
+            this.Flag = null;
+            this.FlagId = (int)Pilot.ID_Flag;
         }
         public String ID;
         public int ID_Tracker;
         public String LastName;
         public String SureName;
         public String PilotColor;
+        public Binary Picture;
+        public Binary Flag;
+        public int FlagId;
 
         public override string ToString()
         {
@@ -430,6 +410,16 @@ namespace GELive
     }
     public class RaceEntry
     {
+        public int ID;
+        public String Name;
+        public PolygonGroup Polygons;
+        public DateTime StartTime;
+        public decimal Duration = 12;
+        public int PilotA;
+        public int PilotB;
+        public int PilotC;
+        public int PilotD;
+
         public RaceEntry()
         {
             StartTime = DateTime.Now;
@@ -439,14 +429,10 @@ namespace GELive
         {
             this.ID = int.Parse(Values[0]);
             this.Name = Values[1];
-            this.PilotA = new PilotEntry();
-            this.PilotA.ID = Values[2];
-            this.PilotB = new PilotEntry();
-            this.PilotB.ID = Values[3];
-            this.PilotC = new PilotEntry();
-            this.PilotC.ID = Values[4];
-            this.PilotD = new PilotEntry();
-            this.PilotD.ID = Values[5];
+            this.PilotA = int.Parse(Values[2]);
+            this.PilotB = int.Parse(Values[3]);
+            this.PilotC = int.Parse(Values[4]);
+            this.PilotD = int.Parse(Values[5]);
             this.Polygons = new PolygonGroup();
             Polygons.Polygons.Add(new Polygon());
             Polygons.Polygons.First().ID = int.Parse(Values[6]);
@@ -456,13 +442,18 @@ namespace GELive
         }
         public RaceEntry(t_Race Race)
         {
-            List<t_Pilot> pilots = InformationPool.Client.GetPilots();
+            
+            InformationPool.PilotList.Clear();
+            foreach (t_Pilot p in InformationPool.Client.GetPilots())
+            {
+                InformationPool.PilotList.Add(p);
+            }
             this.ID = Race.ID;
             this.Name = Race.Name;
-            if (Race.ID_Pilot_0 > 0) this.PilotA = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_0));
-            if (Race.ID_Pilot_1 > 0) this.PilotB = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_1));
-            if (Race.ID_Pilot_2 > 0) this.PilotC = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_2));
-            if (Race.ID_Pilot_3 > 0) this.PilotD = new PilotEntry(pilots.Single(p => p.ID == Race.ID_Pilot_3));
+            if (Race.ID_Pilot_0 > 0) this.PilotA = (int)Race.ID_Pilot_0;
+            if (Race.ID_Pilot_1 > 0) this.PilotB = (int)Race.ID_Pilot_1;
+            if (Race.ID_Pilot_2 > 0) this.PilotC = (int)Race.ID_Pilot_2;
+            if (Race.ID_Pilot_3 > 0) this.PilotD = (int)Race.ID_Pilot_3;
 
             this.Polygons = new PolygonGroup();
             Polygons.ID = (int)Race.ID_PolygonGroup;
@@ -471,15 +462,6 @@ namespace GELive
             DateTime EndTime = (DateTime)Race.TimeEnd;
             this.Duration = (decimal)(EndTime - StartTime).TotalMinutes;
         }
-        public int ID;
-        public String Name;
-        public PolygonGroup Polygons;
-        public DateTime StartTime;
-        public decimal Duration;
-        public PilotEntry PilotA;
-        public PilotEntry PilotB;
-        public PilotEntry PilotC;
-        public PilotEntry PilotD;
     }
     public enum PolygonType : int
     {

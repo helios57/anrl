@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DataService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DataService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
   <xs:complexType name="ArrayOft_Daten">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Daten" nillable="true" type="tns:t_Daten" />
@@ -100,8 +101,10 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Color" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Flag" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="ID_Tracker" type="xs:int" />
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Linq" minOccurs="0" name="Picture" nillable="true" type="q1:Binary" />
       <xs:element minOccurs="0" name="SureName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="t_Races" nillable="true" type="tns:ArrayOft_Race" />
       <xs:element minOccurs="0" name="t_Races1" nillable="true" type="tns:ArrayOft_Race" />
@@ -128,4 +131,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOft_PolygonGroup" nillable="true" type="tns:ArrayOft_PolygonGroup" />
+  <xs:complexType name="ArrayOft_Picture">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="t_Picture" nillable="true" type="tns:t_Picture" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOft_Picture" nillable="true" type="tns:ArrayOft_Picture" />
+  <xs:complexType name="t_Picture">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Data.Linq" minOccurs="0" name="Data" nillable="true" type="q2:Binary" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="isFlag" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="t_Picture" nillable="true" type="tns:t_Picture" />
 </xs:schema>

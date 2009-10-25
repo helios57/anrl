@@ -42,6 +42,9 @@ namespace DataService
     partial void Insertt_Log(t_Log instance);
     partial void Updatet_Log(t_Log instance);
     partial void Deletet_Log(t_Log instance);
+    partial void Insertt_Picture(t_Picture instance);
+    partial void Updatet_Picture(t_Picture instance);
+    partial void Deletet_Picture(t_Picture instance);
     partial void Insertt_Pilot(t_Pilot instance);
     partial void Updatet_Pilot(t_Pilot instance);
     partial void Deletet_Pilot(t_Pilot instance);
@@ -118,6 +121,14 @@ namespace DataService
 			get
 			{
 				return this.GetTable<t_Log>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Picture> t_Pictures
+		{
+			get
+			{
+				return this.GetTable<t_Picture>();
 			}
 		}
 		
@@ -1103,6 +1114,140 @@ namespace DataService
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Picture")]
+	public partial class t_Picture : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Data.Linq.Binary _Data;
+		
+		private string _Name;
+		
+		private bool _isFlag;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnDataChanging(System.Data.Linq.Binary value);
+    partial void OnDataChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnisFlagChanging(bool value);
+    partial void OnisFlagChanged();
+    #endregion
+		
+		public t_Picture()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Data", DbType="Image NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Data
+		{
+			get
+			{
+				return this._Data;
+			}
+			set
+			{
+				if ((this._Data != value))
+				{
+					this.OnDataChanging(value);
+					this.SendPropertyChanging();
+					this._Data = value;
+					this.SendPropertyChanged("Data");
+					this.OnDataChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isFlag", DbType="Bit NOT NULL")]
+		public bool isFlag
+		{
+			get
+			{
+				return this._isFlag;
+			}
+			set
+			{
+				if ((this._isFlag != value))
+				{
+					this.OnisFlagChanging(value);
+					this.SendPropertyChanging();
+					this._isFlag = value;
+					this.SendPropertyChanged("isFlag");
+					this.OnisFlagChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Pilot")]
 	public partial class t_Pilot : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1118,6 +1263,10 @@ namespace DataService
 		private int _ID_Tracker;
 		
 		private string _Color;
+		
+		private System.Data.Linq.Binary _Picture;
+		
+		private System.Nullable<int> _ID_Flag;
 		
 		private EntitySet<t_Race> _t_Races;
 		
@@ -1141,6 +1290,10 @@ namespace DataService
     partial void OnID_TrackerChanged();
     partial void OnColorChanging(string value);
     partial void OnColorChanged();
+    partial void OnPictureChanging(System.Data.Linq.Binary value);
+    partial void OnPictureChanged();
+    partial void OnID_FlagChanging(System.Nullable<int> value);
+    partial void OnID_FlagChanged();
     #endregion
 		
 		public t_Pilot()
@@ -1248,6 +1401,46 @@ namespace DataService
 					this._Color = value;
 					this.SendPropertyChanged("Color");
 					this.OnColorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Picture", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary Picture
+		{
+			get
+			{
+				return this._Picture;
+			}
+			set
+			{
+				if ((this._Picture != value))
+				{
+					this.OnPictureChanging(value);
+					this.SendPropertyChanging();
+					this._Picture = value;
+					this.SendPropertyChanged("Picture");
+					this.OnPictureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Flag", DbType="Int")]
+		public System.Nullable<int> ID_Flag
+		{
+			get
+			{
+				return this._ID_Flag;
+			}
+			set
+			{
+				if ((this._ID_Flag != value))
+				{
+					this.OnID_FlagChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Flag = value;
+					this.SendPropertyChanged("ID_Flag");
+					this.OnID_FlagChanged();
 				}
 			}
 		}

@@ -171,6 +171,8 @@ namespace DataService
                     pilo.LastName = f.LastName;
                     pilo.SureName = f.SureName;
                     pilo.Color = f.Color;
+                    pilo.Picture = f.Picture;
+                    pilo.ID_Flag = f.ID_Flag;
                     tmp.Add(pilo);
                 }
                 return tmp;
@@ -371,10 +373,10 @@ namespace DataService
                 }
                 #endregion
                 t_Race r = new t_Race();
-                r.ID_Pilot_0 = Race.ID_Pilot_0;
-                r.ID_Pilot_1 = Race.ID_Pilot_1;
-                r.ID_Pilot_2 = Race.ID_Pilot_2;
-                r.ID_Pilot_3 = Race.ID_Pilot_3;
+                if (Race.ID_Pilot_0 != 0) r.ID_Pilot_0 = Race.ID_Pilot_0;
+                if (Race.ID_Pilot_1 != 0) r.ID_Pilot_1 = Race.ID_Pilot_1;
+                if (Race.ID_Pilot_2 != 0) r.ID_Pilot_2 = Race.ID_Pilot_2;
+                if (Race.ID_Pilot_3 != 0) r.ID_Pilot_3 = Race.ID_Pilot_3;
                 if (Race.ID_PolygonGroup != 0)
                 {
                     r.ID_PolygonGroup = Race.ID_PolygonGroup;
@@ -388,7 +390,7 @@ namespace DataService
                 r.TimeStart = Race.TimeStart;
                 dataContext.t_Races.InsertOnSubmit(r);
                 dataContext.SubmitChanges();
-                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "Sucessfull Added");
+                LogManager.AddLog(DB_PATH, 4, "ANRLDataService.svc.cs:AddRace", "Sucessfull Added " + r.ID);
             }
             catch (Exception ex)
             {
@@ -425,7 +427,7 @@ namespace DataService
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
         /// <returns></returns>
-        public int AddNewPilot(String LastName, String SureName, String Color)
+        public int AddNewPilot(String LastName, String SureName, String Color,System.Data.Linq.Binary Picture,int Id_Flag)
         {
             try
             {
@@ -435,6 +437,8 @@ namespace DataService
                 f.LastName = LastName;
                 f.SureName = SureName;
                 f.Color = Color;
+                f.Picture = Picture;
+                f.ID_Flag = Id_Flag;
                 dataContext.t_Pilots.InsertOnSubmit(f);
                 dataContext.SubmitChanges();
                 return f.ID;
@@ -454,7 +458,7 @@ namespace DataService
         /// <param name="LastName"></param>
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
-        public void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color)
+        public void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color, System.Data.Linq.Binary Picture,int Id_Flag)
         {
             try
             {
@@ -469,6 +473,8 @@ namespace DataService
                 fl.SureName = SureName;
                 fl.Color = Color;
                 fl.ID_Tracker = TrackerID;
+                fl.Picture = Picture;
+                fl.ID_Flag = Id_Flag;
                 dataContext.SubmitChanges();
             }
             catch (Exception ex)
@@ -476,6 +482,36 @@ namespace DataService
                 LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:AddPilot", ex.ToString());
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ID_Polygon"></param>
+        /// <returns></returns>
+        public List<t_Picture> GetAllFlags()
+        {
+            try
+            {
+                DatabaseDataContext dataContext = new DatabaseDataContext(DB_PATH);
+                List<t_Picture> Result = new List<t_Picture>();
+                foreach (t_Picture p in dataContext.t_Pictures.Where(p => p.isFlag))
+                {
+                    t_Picture tmp = new t_Picture();
+                    tmp.id = p.id;
+                    tmp.isFlag = p.isFlag;
+                    tmp.Name = p.Name;
+                    tmp.Data = new System.Data.Linq.Binary(p.Data.ToArray());
+                    Result.Add(tmp);
+                }
+                return Result;
+            }
+            catch (Exception ex)
+            {
+                LogManager.AddLog(DB_PATH, 0, "ANRLDataService.svc.cs:GetAllFlags", ex.ToString());
+            }
+            return null;
+        }
+
         #endregion
     }
 }

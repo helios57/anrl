@@ -50,15 +50,16 @@
             this.btnAddNewAirplaneToTracker = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.lstTrackers = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRemvAirplaneFromTracker = new System.Windows.Forms.Button();
             this.btnImportPenalty = new System.Windows.Forms.Button();
             this.lblPenaltyZonenLoaded = new System.Windows.Forms.Label();
             this.btnShowDebug = new System.Windows.Forms.Button();
+            this.btnAddFlags = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtPfad
@@ -209,6 +210,7 @@
             this.label8.Size = new System.Drawing.Size(50, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "Flugzeug";
+            this.label8.Visible = false;
             // 
             // label9
             // 
@@ -218,6 +220,7 @@
             this.label9.Size = new System.Drawing.Size(27, 13);
             this.label9.TabIndex = 18;
             this.label9.Text = "Pilot";
+            this.label9.Visible = false;
             // 
             // txtPilot
             // 
@@ -350,11 +353,22 @@
             this.btnShowDebug.UseVisualStyleBackColor = true;
             this.btnShowDebug.Click += new System.EventHandler(this.btnShowDebug_Click);
             // 
+            // btnAddFlags
+            // 
+            this.btnAddFlags.Location = new System.Drawing.Point(552, 329);
+            this.btnAddFlags.Name = "btnAddFlags";
+            this.btnAddFlags.Size = new System.Drawing.Size(156, 23);
+            this.btnAddFlags.TabIndex = 27;
+            this.btnAddFlags.Text = "Add Flags";
+            this.btnAddFlags.UseVisualStyleBackColor = true;
+            this.btnAddFlags.Click += new System.EventHandler(this.btnAddFlags_Click);
+            // 
             // ControllCenter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(710, 380);
+            this.Controls.Add(this.btnAddFlags);
             this.Controls.Add(this.btnShowDebug);
             this.Controls.Add(this.lblPenaltyZonenLoaded);
             this.Controls.Add(this.btnImportPenalty);
@@ -422,6 +436,7 @@
         private System.Windows.Forms.Button btnImportPenalty;
         private System.Windows.Forms.Label lblPenaltyZonenLoaded;
         private System.Windows.Forms.Button btnShowDebug;
+        private System.Windows.Forms.Button btnAddFlags;
     }
 }
 

@@ -33,7 +33,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\DataService.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,6 +107,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Database.dbml.diagram">
+      <DependentUpon>Database.dbml</DependentUpon>
+    </None>
     <None Include="Database.dbml.layout">
       <DependentUpon>Database.dbml</DependentUpon>
     </None>
@@ -130,6 +134,9 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

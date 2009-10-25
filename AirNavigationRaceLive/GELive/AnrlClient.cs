@@ -83,18 +83,36 @@ namespace GELive
             InformationPool.RemoteAddress = fldServer.Text;
             InformationPool.Username = fldUsername.Text;
             InformationPool.Password = fldPassword.Text;
+            txtConnectStatus.Text = "Connecting to Server";
+            this.Refresh();
             InformationPool.Connect();
             CheckEnabled();
             try
             {
+                txtConnectStatus.Text = "Loading Tracker list";
+                this.Refresh();
                 LoadTrackerList();
+                txtConnectStatus.Text = "Loading Races";
+                this.Refresh();
                 LoadRaces();
+                txtConnectStatus.Text = "Loading Flags";
+                this.Refresh();
+                LoadFlags();
+                txtConnectStatus.Text = "Connected";
+                this.Refresh();
                 tabControl.SelectedIndex=2;
             }
             catch
             {
+                txtConnectStatus.Text = "Error during connetion Proccess";
+                this.Refresh();
                 MessageBox.Show("Wrong Username or Password");
             }
+        }
+        private void LoadFlags()
+        {
+            InformationPool.Flags.Clear();
+            InformationPool.Flags.AddRange(InformationPool.Client.GetAllFlags());
         }
         private void LoadTrackerList()
         {
@@ -150,13 +168,15 @@ namespace GELive
         {
             fldRaceName.Text = CurrentRace.Name;
             #region Pilotes
-            if (CurrentRace.PilotA != null)
+            t_Pilot p;
+            if (CurrentRace.PilotA != 0)
             {
+                p = InformationPool.PilotList.Single(pp => pp.ID == CurrentRace.PilotA);
                 fldRacePilotA.Text =
-                    CurrentRace.PilotA.ID + " " +
-                    CurrentRace.PilotA.LastName + " " +
-                    CurrentRace.PilotA.SureName;
-                fldRacePilotA.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotA.PilotColor));
+                    p.ID + " " +
+                    p.LastName + " " +
+                    p.SureName;
+                fldRacePilotA.BackColor = Color.FromArgb(int.Parse(p.Color));
             }
             else
             {
@@ -164,13 +184,14 @@ namespace GELive
                 fldRacePilotA.BackColor = Color.Gray;
             }
 
-            if (CurrentRace.PilotB != null)
+            if (CurrentRace.PilotB != 0)
             {
+                p = InformationPool.PilotList.Single(pp => pp.ID == CurrentRace.PilotB);
                 fldRacePilotB.Text =
-                    CurrentRace.PilotB.ID + " " +
-                    CurrentRace.PilotB.LastName + " " +
-                    CurrentRace.PilotB.SureName;
-                fldRacePilotB.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotB.PilotColor));
+                    p.ID + " " +
+                    p.LastName + " " +
+                    p.SureName;
+                fldRacePilotB.BackColor = Color.FromArgb(int.Parse(p.Color));
             }
             else
             {
@@ -178,13 +199,14 @@ namespace GELive
                 fldRacePilotB.BackColor = Color.Gray;
             }
 
-            if (CurrentRace.PilotC != null)
+            if (CurrentRace.PilotC != 0)
             {
+                p = InformationPool.PilotList.Single(pp => pp.ID == CurrentRace.PilotC);
                 fldRacePilotC.Text =
-                    CurrentRace.PilotC.ID + " " +
-                    CurrentRace.PilotC.LastName + " " +
-                    CurrentRace.PilotC.SureName;
-                fldRacePilotC.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotC.PilotColor));
+                    p.ID + " " +
+                    p.LastName + " " +
+                    p.SureName;
+                fldRacePilotC.BackColor = Color.FromArgb(int.Parse(p.Color));
             }
             else
             {
@@ -192,13 +214,14 @@ namespace GELive
                 fldRacePilotC.BackColor = Color.Gray;
             }
 
-            if (CurrentRace.PilotD != null)
+            if (CurrentRace.PilotD != 0)
             {
+                p = InformationPool.PilotList.Single(pp => pp.ID == CurrentRace.PilotD);
                 fldRacePilotD.Text =
-                    CurrentRace.PilotD.ID + " " +
-                    CurrentRace.PilotD.LastName + " " +
-                    CurrentRace.PilotD.SureName;
-                fldRacePilotD.BackColor = Color.FromArgb(int.Parse(CurrentRace.PilotD.PilotColor));
+                    p.ID + " " +
+                    p.LastName + " " +
+                    p.SureName;
+                fldRacePilotD.BackColor = Color.FromArgb(int.Parse(p.Color));
             }
             else
             {
@@ -243,7 +266,7 @@ namespace GELive
             {
                 int TrackerId = int.Parse(lstTrackers.SelectedItems[0].Text);
                 PilotEntry PE = (PilotEntry)sender;
-                InformationPool.Client.AddPilot(int.Parse(PE.ID),TrackerId, PE.LastName, PE.SureName, PE.PilotColor);
+                InformationPool.Client.AddPilot(int.Parse(PE.ID),TrackerId, PE.LastName, PE.SureName, PE.PilotColor, PE.Picture,PE.FlagId);
             }
             LoadTrackerList();
         }
@@ -285,7 +308,7 @@ namespace GELive
         }
         private void btnRacePilotA_Click(object sender, EventArgs e)
         {
-            if (CurrentRace.PilotA == null)
+            if (CurrentRace.PilotA == 0)
             {
                 Pilot PilotA = new Pilot();
                 PilotA.OnPilotOk += new EventHandler(PilotA_OnPilotOk);
@@ -293,19 +316,18 @@ namespace GELive
             }
             else
             {
-                CurrentRace.PilotA = null;
+                CurrentRace.PilotA = 0;
                 SyncRace();
             }
         }
         void PilotA_OnPilotOk(object sender, EventArgs e)
         {
-            PilotEntry PilotA = (PilotEntry)sender;
-            CurrentRace.PilotA = PilotA;
+            CurrentRace.PilotA = (int)sender;
             SyncRace();
         }
         private void btnRacePilotB_Click(object sender, EventArgs e)
         {
-            if (CurrentRace.PilotB == null)
+            if (CurrentRace.PilotB == 0)
             {
                 Pilot PilotB = new Pilot();
                 PilotB.OnPilotOk += new EventHandler(PilotB_OnPilotOk);
@@ -313,19 +335,18 @@ namespace GELive
             }
             else
             {
-                CurrentRace.PilotB = null;
+                CurrentRace.PilotB = 0;
                 SyncRace();
             }
         }
         void PilotB_OnPilotOk(object sender, EventArgs e)
         {
-            PilotEntry PilotB = (PilotEntry)sender;
-            CurrentRace.PilotB = PilotB;
+            CurrentRace.PilotB = (int)sender;
             SyncRace();
         }
         private void btnRacePilotC_Click(object sender, EventArgs e)
         {
-            if (CurrentRace.PilotC == null)
+            if (CurrentRace.PilotC == 0)
             {
                 Pilot PilotC = new Pilot();
                 PilotC.OnPilotOk += new EventHandler(PilotC_OnPilotOk);
@@ -333,19 +354,18 @@ namespace GELive
             }
             else
             {
-                CurrentRace.PilotC = null;
+                CurrentRace.PilotC = 0;
                 SyncRace();
             }
         }
         void PilotC_OnPilotOk(object sender, EventArgs e)
         {
-            PilotEntry PilotC = (PilotEntry)sender;
-            CurrentRace.PilotC = PilotC;
+            CurrentRace.PilotC = (int)sender;
             SyncRace();
         }
         private void btnRacePilotD_Click(object sender, EventArgs e)
         {
-            if (CurrentRace.PilotD == null)
+            if (CurrentRace.PilotD == 0)
             {
                 Pilot PilotD = new Pilot();
                 PilotD.OnPilotOk += new EventHandler(PilotD_OnPilotOk);
@@ -353,14 +373,13 @@ namespace GELive
             }
             else
             {
-                CurrentRace.PilotD = null;
+                CurrentRace.PilotD = 0;
                 SyncRace();
             }
         }
         void PilotD_OnPilotOk(object sender, EventArgs e)
         {
-            PilotEntry PilotD = (PilotEntry)sender;
-            CurrentRace.PilotD = PilotD;
+            CurrentRace.PilotD = (int)sender;
             SyncRace();
         }
         private void fldRaceName_TextChanged(object sender, EventArgs e)
@@ -402,22 +421,22 @@ namespace GELive
             if (CurrentRace.PilotA != null)
             {
                 r.t_Pilot = new t_Pilot();
-                r.t_Pilot.ID = int.Parse(CurrentRace.PilotA.ID);
+                r.t_Pilot.ID = CurrentRace.PilotA;
             }
             if (CurrentRace.PilotB != null)
             {
                 r.t_Pilot1 = new t_Pilot();
-                r.t_Pilot1.ID = int.Parse(CurrentRace.PilotB.ID);
+                r.t_Pilot1.ID = CurrentRace.PilotB;
             }
             if (CurrentRace.PilotC != null)
             {
                 r.t_Pilot2 = new t_Pilot();
-                r.t_Pilot2.ID = int.Parse(CurrentRace.PilotC.ID);
+                r.t_Pilot2.ID = CurrentRace.PilotC;
             }
             if (CurrentRace.PilotD != null)
             {
                 r.t_Pilot3 = new t_Pilot();
-                r.t_Pilot3.ID = int.Parse(CurrentRace.PilotD.ID);
+                r.t_Pilot3.ID = CurrentRace.PilotD;
             }
             r.ID_PolygonGroup = CurrentRace.Polygons.ID;
             r.t_PolygonGroup = new t_PolygonGroup();
@@ -679,6 +698,11 @@ namespace GELive
         private void button3_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6861542");
+        }
+
+        private void txtConnectStatus_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

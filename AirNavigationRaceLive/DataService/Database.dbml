@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Database Name="Database" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_Daten" Member="t_Datens">
     <Type Name="t_Daten">
@@ -49,6 +48,14 @@
       <Column Name="Text" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
+  <Table Name="dbo.t_Picture" Member="t_Pictures">
+    <Type Name="t_Picture">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Data" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="isFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_Pilot" Member="t_Pilots">
     <Type Name="t_Pilot">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -56,6 +63,8 @@
       <Column Name="SureName" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Color" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Picture" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ID_Flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="t_Pilot_t_Race" Member="t_Races" ThisKey="ID" OtherKey="ID_Pilot_0" Type="t_Race" />
       <Association Name="t_Pilot_t_Race1" Member="t_Races1" ThisKey="ID" OtherKey="ID_Pilot_1" Type="t_Race" />
       <Association Name="t_Pilot_t_Race2" Member="t_Races2" ThisKey="ID" OtherKey="ID_Pilot_2" Type="t_Race" />
