@@ -61,6 +61,7 @@ namespace GELive
                 lblPunkte4.Text = rankinEntries[0].Punkte.ToString();
                 lblName4.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag4.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                if (pilot.Picture != null)
                 picPilot4.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 label4.Visible = true;
             }
@@ -75,7 +76,7 @@ namespace GELive
                 lblPunkte3.Text = rankinEntries[1].Punkte.ToString();
                 lblName3.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag3.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                picPilot3.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                if (pilot.Picture != null)  picPilot3.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 label3.Visible = true;
             }
             else
@@ -89,7 +90,7 @@ namespace GELive
                 lblPunkte2.Text = rankinEntries[2].Punkte.ToString();
                 lblName2.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag2.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                picPilot2.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                if (pilot.Picture != null)  picPilot2.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 label2.Visible = true;
             }
             else
@@ -103,7 +104,7 @@ namespace GELive
                 lblPunkte1.Text = rankinEntries[3].Punkte.ToString();
                 lblName1.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag1.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                picPilot1.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                if (pilot.Picture != null) picPilot1.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 label1.Visible = true;
             }
             else

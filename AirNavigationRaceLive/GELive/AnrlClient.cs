@@ -265,7 +265,7 @@ namespace GELive
             if (lstTrackers.SelectedItems.Count ==1)
             {
                 int TrackerId = int.Parse(lstTrackers.SelectedItems[0].Text);
-                PilotEntry PE = (PilotEntry)sender;
+                PilotEntry PE = new PilotEntry(InformationPool.PilotList.Single(panelConnection => panelConnection.ID == (Int32)sender));
                 InformationPool.Client.AddPilot(int.Parse(PE.ID),TrackerId, PE.LastName, PE.SureName, PE.PilotColor, PE.Picture,PE.FlagId);
             }
             LoadTrackerList();

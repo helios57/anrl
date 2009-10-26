@@ -49,14 +49,6 @@
             this.lblPunkte3 = new System.Windows.Forms.Label();
             this.lblPunkte2 = new System.Windows.Forms.Label();
             this.lblPunkte1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot1)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -334,14 +326,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "RankingForm";
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFlag4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picPilot1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

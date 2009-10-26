@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GELive.ANRLDataService;
 using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace GELive
 {
@@ -70,9 +71,12 @@ namespace GELive
 
                 im = new DataGridViewImageCell();
                 Row1.Height = 50;
-                ms = new MemoryStream(p.Picture.Bytes);
-                im.Value = System.Drawing.Image.FromStream(ms);
-                ms.Close();
+                if (p.Picture != null)
+                {
+                    ms = new MemoryStream(p.Picture.Bytes);
+                    im.Value = System.Drawing.Image.FromStream(ms);
+                    ms.Close();
+                }
                 Row1.Cells.Add(im);
 
                 im = new DataGridViewImageCell();
@@ -111,6 +115,7 @@ namespace GELive
             pe.PilotColor = btnColor.BackColor.ToArgb().ToString();
 
             MemoryStream stream = new MemoryStream();
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.Image.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
             pe.Picture = new Binary();
             pe.Picture.Bytes = stream.ToArray();
@@ -128,7 +133,20 @@ namespace GELive
             LoadPilotes(); 
             tabControl1.SelectedIndex = 0;
         }
-
+        public Image ResizeImage(Image img)
+        {
+            //create a new Bitmap the size of the new image
+            Bitmap bmp = new Bitmap(100, 100);
+            //create a new graphic from the Bitmap
+            Graphics graphic = Graphics.FromImage((Image)bmp);
+            graphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            //draw the newly resized image
+            graphic.DrawImage(img, 0, 0, 100, 100);
+            //dispose and free up the resources
+            graphic.Dispose();
+            //return the image
+            return (Image)bmp;
+        } 
         private void btnAddPicture_Click(object sender, EventArgs e)
         {
             OpenFileDialog of = new OpenFileDialog();
@@ -153,7 +171,7 @@ namespace GELive
                 Picture = new Binary();
                 Picture.Bytes = lb.ToArray();
                 MemoryStream ms = new MemoryStream(lb.ToArray());
-                pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+                pictureBox1.Image = ResizeImage(System.Drawing.Image.FromStream(ms));
                 ms.Close();
                 fs.Close();
             //MemoryStream stream = new MemoryStream(MyData);
@@ -197,14 +215,16 @@ namespace GELive
 
         private void btnAddNewPilot_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedIndex = 1;
             idSelectedPilot = 0;
+            LoadPilotDetail();
+            tabControl1.SelectedIndex = 1;
             btnModiyPilot.Enabled = false;
             btnUsePilot.Enabled = false;
         }
 
         private void btnModiyPilot_Click(object sender, EventArgs e)
         {
+            LoadPilotDetail();
             tabControl1.SelectedIndex = 1;
             btnModiyPilot.Enabled = false;
             btnUsePilot.Enabled = false;
@@ -231,10 +251,12 @@ namespace GELive
                         fldLastName.Text = p.LastName;
                         fldSureName.Text = p.SureName;
                         btnColor.BackColor = Color.FromArgb(Int32.Parse(p.Color));
-
-                        MemoryStream ms = new MemoryStream(p.Picture.Bytes);
-                        pictureBox1.Image = System.Drawing.Image.FromStream(ms);
-                        ms.Close();
+                        if (p.Picture != null)
+                        {
+                            MemoryStream ms = new MemoryStream(p.Picture.Bytes);
+                            pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+                            ms.Close();
+                        }
                         fldFlagId.Text = p.ID_Flag.ToString();
                     }catch{}
                 }

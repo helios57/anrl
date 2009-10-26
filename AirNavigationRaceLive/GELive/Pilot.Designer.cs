@@ -57,11 +57,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.fldFlagId = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdVPilotToUse)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,6 +81,8 @@
             // 
             // btnUsePilot
             // 
+            this.btnUsePilot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUsePilot.Location = new System.Drawing.Point(8, 270);
             this.btnUsePilot.Name = "btnUsePilot";
             this.btnUsePilot.Size = new System.Drawing.Size(159, 23);
@@ -233,6 +232,8 @@
             // 
             // btnModiyPilot
             // 
+            this.btnModiyPilot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnModiyPilot.Location = new System.Drawing.Point(334, 270);
             this.btnModiyPilot.Name = "btnModiyPilot";
             this.btnModiyPilot.Size = new System.Drawing.Size(155, 23);
@@ -243,6 +244,8 @@
             // 
             // btnAddNewPilot
             // 
+            this.btnAddNewPilot.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNewPilot.Location = new System.Drawing.Point(173, 270);
             this.btnAddNewPilot.Name = "btnAddNewPilot";
             this.btnAddNewPilot.Size = new System.Drawing.Size(155, 23);
@@ -353,11 +356,8 @@
             this.Controls.Add(this.tabControl1);
             this.Name = "Pilot";
             this.Text = "Pilot";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdVPilotToUse)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
