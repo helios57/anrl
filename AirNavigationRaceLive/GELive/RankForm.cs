@@ -15,6 +15,8 @@ namespace GELive
     {
         List<RankingEntry> rankinEntries;
         RaceEntry Race;
+        decimal lastlongitude;
+        decimal lastlatitude;
         public RankForm(RaceEntry Race)
         {
             this.Race = Race;
@@ -147,10 +149,20 @@ namespace GELive
                             r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
                             r.passedstartinggate = true;
                         }
+                    }
+                }
+                else if (p.Type == PolygonType.GateEndA || p.Type == PolygonType.GateEndB || p.Type == PolygonType.GateEndC || p.Type == PolygonType.GateEndD)
+                {
+                    foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
+                    {
                         if (!r.passedfinishgate)
                         {
-                            r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
-                            r.passedfinishgate = true;
+                            ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
+                            ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
+                            if(intersect(trackline,gateline)){
+                                r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
+                                r.passedfinishgate = true;
+                            }
                         }
                     }
                 }
@@ -165,24 +177,53 @@ namespace GELive
 
         private int getGatePenaltyPoints(string gatename, DateTime expected, DateTime effective)
         {
-            //double seconds = Math.Abs(expected.TimeOfDay.Subtract(effective.TimeOfDay).TotalSeconds);
-            //int points = 0;
-            //string message = "Passed " + gatename + " right on time";
-            //if (seconds > 1 && seconds * 3 < 200)
-            //{
-            //    message = "Failed to pass " + gatename + " by " + seconds + " seconds. (Plan: " +
-            //        expected.ToString("HH:mm:ss") + ", effective: " + effective.ToString("HH:mm:ss") + ").";
-            //    points = Convert.ToInt32((seconds - 1) * 3);
-            //}
-            //else if (seconds * 3 >= 200)
-            //{
-            //    message = "Failed to pass " + gatename + " within time slot. (Maximum Penalty, Plan: " +
-            //        expected.ToString("HH:mm:ss") + ", effective: " + effective.ToString("HH:mm:ss") + ")."; ;
-            //    points = 200;
-            //}
-            //return points;
-            return 0;
+            double seconds = Math.Abs(expected.TimeOfDay.Subtract(effective.TimeOfDay).TotalSeconds);
+            int points = 0;
+            string message = "Passed " + gatename + " right on time";
+            if (seconds > 1 && seconds * 3 < 200)
+            {
+                message = "Failed to pass " + gatename + " by " + seconds + " seconds. (Plan: " +
+                    expected.ToString("HH:mm:ss") + ", effective: " + effective.ToString("HH:mm:ss") + ").";
+                points = Convert.ToInt32((seconds - 1) * 3);
+            }
+            else if (seconds * 3 >= 200)
+            {
+                message = "Failed to pass " + gatename + " within time slot. (Maximum Penalty, Plan: " +
+                    expected.ToString("HH:mm:ss") + ", effective: " + effective.ToString("HH:mm:ss") + ")."; ;
+                points = 200;
+            }
+            return points;
         }
+
+            public static APoint distance(APoint p1, APoint p2)
+            {
+                return new APoint(p2.x - p1.x, p2.y - p1.y);
+            }
+
+            public static decimal cross(APoint p1, APoint p2)
+            {
+                return p1.x * p2.y - p2.x * p1.y;
+            }
+
+            public static decimal direction(APoint pi, APoint pj, APoint pk)
+            {
+                return cross(distance(pi, pk), distance(pi, pj));
+            }
+
+            public static bool intersect(ALine l1, ALine l2)
+            {
+                decimal d1 = direction(l2.p1, l2.p2, l1.p1);
+                decimal d2 = direction(l2.p1, l2.p2, l1.p2);
+                decimal d3 = direction(l1.p1, l1.p2, l2.p1);
+                decimal d4 = direction(l1.p1, l1.p2, l2.p2);
+                if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0) || (d3 > 0 && d4 < 0)
+                        || (d3 < 0 && d4 > 0))
+                    return true;
+                else
+                    return false;
+            }
+        
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -202,5 +243,25 @@ namespace GELive
             }
         }
 
+    }
+    public class APoint
+    {
+        public decimal x;
+        public decimal y;
+        public APoint(decimal x, decimal y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public class ALine
+    {
+        public APoint p1;
+        public APoint p2;
+        public ALine(APoint p1, APoint p2)
+        {
+            this.p1 = p1;
+            this.p2 = p2;
+        }
     }
 }
