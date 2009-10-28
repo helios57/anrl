@@ -63,8 +63,11 @@ namespace GELive
                 lblPunkte4.Text = rankinEntries[0].Punkte.ToString();
                 lblName4.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag4.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null)
-                picPilot4.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                if (pilot.Picture != null) picPilot4.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                else
+                {
+                    picPilot4.Image = null;
+                }
                 label4.Visible = true;
             }
             else
@@ -78,7 +81,11 @@ namespace GELive
                 lblPunkte3.Text = rankinEntries[1].Punkte.ToString();
                 lblName3.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag3.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null)  picPilot3.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                if (pilot.Picture != null) picPilot3.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                else
+                {
+                    picPilot3.Image = null;
+                }
                 label3.Visible = true;
             }
             else
@@ -92,7 +99,11 @@ namespace GELive
                 lblPunkte2.Text = rankinEntries[2].Punkte.ToString();
                 lblName2.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag2.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null)  picPilot2.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                if (pilot.Picture != null) picPilot2.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                else
+                {
+                    picPilot2.Image = null;
+                }
                 label2.Visible = true;
             }
             else
@@ -107,6 +118,10 @@ namespace GELive
                 lblName1.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
                 picFlag1.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
                 if (pilot.Picture != null) picPilot1.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                else
+                {
+                    picPilot1.Image = null;
+                }
                 label1.Visible = true;
             }
             else
