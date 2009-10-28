@@ -15,8 +15,8 @@ namespace GELive
     {
         List<RankingEntry> rankinEntries;
         RaceEntry Race;
-        decimal lastlongitude;
-        decimal lastlatitude;
+        decimal lastlongitude=-1;
+        decimal lastlatitude=-1;
         public RankForm(RaceEntry Race)
         {
             this.Race = Race;
@@ -146,8 +146,13 @@ namespace GELive
                     {
                         if (!r.passedstartinggate)
                         {
-                            r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
-                            r.passedstartinggate = true;
+                            ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
+                            ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
+                            if (intersect(trackline, gateline))
+                            {
+                                r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
+                                r.passedstartinggate = true;
+                            }
                         }
                     }
                 }
@@ -155,7 +160,7 @@ namespace GELive
                 {
                     foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
                     {
-                        if (!r.passedfinishgate)
+                        if (!r.passedfinishgate && lastlatitude !=-1 && lastlongitude!=-1)
                         {
                             ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
                             ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
