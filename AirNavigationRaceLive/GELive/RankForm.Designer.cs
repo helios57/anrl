@@ -130,6 +130,7 @@
             this.picFlag1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picFlag1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picFlag1.Location = new System.Drawing.Point(49, 12);
             this.picFlag1.Name = "picFlag1";
             this.picFlag1.Size = new System.Drawing.Size(35, 35);
@@ -141,6 +142,7 @@
             this.picFlag2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picFlag2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picFlag2.Location = new System.Drawing.Point(49, 64);
             this.picFlag2.Name = "picFlag2";
             this.picFlag2.Size = new System.Drawing.Size(35, 35);
@@ -152,6 +154,7 @@
             this.picFlag3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picFlag3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picFlag3.Location = new System.Drawing.Point(49, 119);
             this.picFlag3.Name = "picFlag3";
             this.picFlag3.Size = new System.Drawing.Size(35, 35);
@@ -163,6 +166,7 @@
             this.picFlag4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picFlag4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picFlag4.Location = new System.Drawing.Point(49, 172);
             this.picFlag4.Name = "picFlag4";
             this.picFlag4.Size = new System.Drawing.Size(35, 35);
