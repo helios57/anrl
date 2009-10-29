@@ -427,7 +427,7 @@ namespace DataService
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
         /// <returns></returns>
-        public int AddNewPilot(String LastName, String SureName, String Color,System.Data.Linq.Binary Picture,int Id_Flag)
+        public int AddNewPilot(String LastName, String SureName, String Color, byte[] Picture, int Id_Flag)
         {
             try
             {
@@ -437,7 +437,7 @@ namespace DataService
                 f.LastName = LastName;
                 f.SureName = SureName;
                 f.Color = Color;
-                f.Picture = Picture;
+                f.Picture = new System.Data.Linq.Binary(Picture);
                 f.ID_Flag = Id_Flag;
                 dataContext.t_Pilots.InsertOnSubmit(f);
                 dataContext.SubmitChanges();
@@ -458,7 +458,7 @@ namespace DataService
         /// <param name="LastName"></param>
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
-        public void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color, System.Data.Linq.Binary Picture,int Id_Flag)
+        public void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color, byte[] Picture, int Id_Flag)
         {
             try
             {
@@ -473,7 +473,7 @@ namespace DataService
                 fl.SureName = SureName;
                 fl.Color = Color;
                 fl.ID_Tracker = TrackerID;
-                fl.Picture = Picture;
+                fl.Picture = new System.Data.Linq.Binary(Picture);
                 fl.ID_Flag = Id_Flag;
                 dataContext.SubmitChanges();
             }

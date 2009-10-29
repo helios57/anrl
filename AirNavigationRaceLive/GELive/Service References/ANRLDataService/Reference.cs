@@ -1243,10 +1243,10 @@ namespace GELive.ANRLDataService {
         void CleanTracker(int TrackerID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddNewPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddNewPilotResponse")]
-        int AddNewPilot(string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag);
+        int AddNewPilot(string LastName, string SureName, string Color, byte[] Picture, int Id_Flag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/AddPilot", ReplyAction="http://tempuri.org/IANRLDataService/AddPilotResponse")]
-        void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag);
+        void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color, byte[] Picture, int Id_Flag);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IANRLDataService/GetAllFlags", ReplyAction="http://tempuri.org/IANRLDataService/GetAllFlagsResponse")]
         System.Collections.Generic.List<GELive.ANRLDataService.t_Picture> GetAllFlags();
@@ -1327,11 +1327,11 @@ namespace GELive.ANRLDataService {
             base.Channel.CleanTracker(TrackerID);
         }
         
-        public int AddNewPilot(string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag) {
+        public int AddNewPilot(string LastName, string SureName, string Color, byte[] Picture, int Id_Flag) {
             return base.Channel.AddNewPilot(LastName, SureName, Color, Picture, Id_Flag);
         }
         
-        public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color, GELive.ANRLDataService.Binary Picture, int Id_Flag) {
+        public void AddPilot(int PilotID, int TrackerID, string LastName, string SureName, string Color, byte[] Picture, int Id_Flag) {
             base.Channel.AddPilot(PilotID, TrackerID, LastName, SureName, Color, Picture, Id_Flag);
         }
         

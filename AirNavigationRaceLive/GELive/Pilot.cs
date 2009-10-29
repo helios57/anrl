@@ -123,12 +123,13 @@ namespace GELive
             pe.FlagId = Int32.Parse(fldFlagId.Text);
             if (fldId.Text == "")
             {
-                pe.ID = InformationPool.Client.AddNewPilot(pe.LastName, pe.SureName, pe.PilotColor, pe.Picture, pe.FlagId).ToString();
+                pe.ID = InformationPool.Client.AddNewPilot(pe.LastName, pe.SureName, pe.PilotColor, pe.Picture.Bytes, pe.FlagId).ToString();
             }
             else
             {
                 int TID = InformationPool.PilotList.Where(p => p.ID == idSelectedPilot).First().ID_Tracker;
-                InformationPool.Client.AddPilot(idSelectedPilot,TID, pe.LastName, pe.SureName, pe.PilotColor, pe.Picture, pe.FlagId);
+                
+                InformationPool.Client.AddPilot(idSelectedPilot,TID, pe.LastName, pe.SureName, pe.PilotColor, pe.Picture.Bytes, pe.FlagId);
             }
             LoadPilotes(); 
             tabControl1.SelectedIndex = 0;

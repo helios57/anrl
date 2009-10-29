@@ -107,7 +107,7 @@ namespace DataService
         /// <param name="Color"></param>
         /// <returns></returns>
         [OperationContract]
-        int AddNewPilot(String LastName, String SureName, String Color, System.Data.Linq.Binary Picture, int Id_Flag);
+        int AddNewPilot(String LastName, String SureName, String Color, byte[] Picture, int Id_Flag);
         /// <summary>
         /// 
         /// </summary>
@@ -117,7 +117,7 @@ namespace DataService
         /// <param name="SureName"></param>
         /// <param name="Color"></param>
         [OperationContract]
-        void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color,System.Data.Linq.Binary Picture,int Id_Flag);
+        void AddPilot(int PilotID, int TrackerID, String LastName, String SureName, String Color,byte[] Picture, int Id_Flag);
 
 
         /// <summary>
