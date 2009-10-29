@@ -54,6 +54,7 @@ namespace GELive
         {
             Comparison<RankingEntry> compRankEntr = new Comparison<RankingEntry>(CompareRankingEntries);
             rankinEntries.Sort(compRankEntr);
+            rankinEntries.Reverse();
             t_Pilot pilot;
 
             if (rankinEntries.Count > 3)

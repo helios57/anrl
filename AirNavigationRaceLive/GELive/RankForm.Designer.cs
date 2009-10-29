@@ -49,6 +49,14 @@
             this.lblPunkte3 = new System.Windows.Forms.Label();
             this.lblPunkte2 = new System.Windows.Forms.Label();
             this.lblPunkte1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot1)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -210,6 +218,7 @@
             this.picPilot4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPilot4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picPilot4.Location = new System.Drawing.Point(454, 172);
             this.picPilot4.Name = "picPilot4";
             this.picPilot4.Size = new System.Drawing.Size(60, 60);
@@ -221,6 +230,7 @@
             this.picPilot3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPilot3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picPilot3.Location = new System.Drawing.Point(367, 119);
             this.picPilot3.Name = "picPilot3";
             this.picPilot3.Size = new System.Drawing.Size(60, 60);
@@ -232,6 +242,7 @@
             this.picPilot2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPilot2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picPilot2.Location = new System.Drawing.Point(454, 64);
             this.picPilot2.Name = "picPilot2";
             this.picPilot2.Size = new System.Drawing.Size(60, 60);
@@ -243,6 +254,7 @@
             this.picPilot1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.picPilot1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picPilot1.Location = new System.Drawing.Point(367, 12);
             this.picPilot1.Name = "picPilot1";
             this.picPilot1.Size = new System.Drawing.Size(60, 60);
@@ -326,6 +338,14 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "RankingForm";
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlag4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPilot1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
