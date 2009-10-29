@@ -52,22 +52,20 @@ namespace GELive
         
         public void PopulateData()
         {
-            Comparison<RankingEntry> compRankEntr = new Comparison<RankingEntry>(CompareRankingEntries);
-            rankinEntries.Sort(compRankEntr);
-            rankinEntries.Reverse();
+            rankinEntries.Sort(new RankingEntryComparer());
             t_Pilot pilot;
 
             if (rankinEntries.Count > 3)
             {
-                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[0].TrackerID);
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[3].TrackerID);
                 lblName4.Text = pilot.LastName;
-                lblPunkte4.Text = rankinEntries[0].Punkte.ToString();
+                lblPunkte4.Text = rankinEntries[3].Punkte.ToString();
                 lblName4.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
-                picFlag4.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null) picPilot4.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                picFlag4.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                if (pilot.Picture != null) picPilot4.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 else
                 {
-                    picPilot4.Image = null;
+                    picPilot4.BackgroundImage = null;
                 }
                 label4.Visible = true;
             }
@@ -77,15 +75,15 @@ namespace GELive
             }
             if (rankinEntries.Count > 2)
             {
-                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[1].TrackerID);
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[2].TrackerID);
                 lblName3.Text = pilot.LastName;
-                lblPunkte3.Text = rankinEntries[1].Punkte.ToString();
+                lblPunkte3.Text = rankinEntries[2].Punkte.ToString();
                 lblName3.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
-                picFlag3.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null) picPilot3.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                picFlag3.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                if (pilot.Picture != null) picPilot3.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 else
                 {
-                    picPilot3.Image = null;
+                    picPilot3.BackgroundImage = null;
                 }
                 label3.Visible = true;
             }
@@ -95,15 +93,15 @@ namespace GELive
             }
             if (rankinEntries.Count > 1)
             {
-                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[2].TrackerID);
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[1].TrackerID);
                 lblName2.Text = pilot.LastName;
-                lblPunkte2.Text = rankinEntries[2].Punkte.ToString();
+                lblPunkte2.Text = rankinEntries[1].Punkte.ToString();
                 lblName2.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
-                picFlag2.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null) picPilot2.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                picFlag2.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                if (pilot.Picture != null) picPilot2.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 else
                 {
-                    picPilot2.Image = null;
+                    picPilot2.BackgroundImage = null;
                 }
                 label2.Visible = true;
             }
@@ -113,15 +111,15 @@ namespace GELive
             }
             if (rankinEntries.Count > 0)
             {
-                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[3].TrackerID);
+                pilot = InformationPool.PilotList.Single(p => p.ID_Tracker == rankinEntries[0].TrackerID);
                 lblName1.Text = pilot.LastName;
-                lblPunkte1.Text = rankinEntries[3].Punkte.ToString();
+                lblPunkte1.Text = rankinEntries[0].Punkte.ToString();
                 lblName1.ForeColor = Color.FromArgb(Int32.Parse(pilot.Color));
-                picFlag1.Image = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
-                if (pilot.Picture != null) picPilot1.Image = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
+                picFlag1.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(InformationPool.Flags.Single(p => p.id == pilot.ID_Flag).Data.Bytes));
+                if (pilot.Picture != null) picPilot1.BackgroundImage = System.Drawing.Image.FromStream(new MemoryStream(pilot.Picture.Bytes));
                 else
                 {
-                    picPilot1.Image = null;
+                    picPilot1.BackgroundImage = null;
                 }
                 label1.Visible = true;
             }
@@ -131,18 +129,6 @@ namespace GELive
             }
         }
 
-
-
-        /// <summary>
-        /// Compares the ranking entries.
-        /// </summary>
-        /// <param name="rE1">The r e1.</param>
-        /// <param name="rE2">The r e2.</param>
-        /// <returns></returns>
-        private static int CompareRankingEntries(RankingEntry rE1, RankingEntry rE2)
-        {
-            return rE1.Punkte.CompareTo(rE2.Punkte);
-        }
         public void doranking(decimal longitude, decimal latitude, int trackerid, DateTime pointtime)
         {
             foreach (Polygon p in InformationPool.PolygonGroupToDraw.Polygons)
@@ -218,35 +204,33 @@ namespace GELive
             return points;
         }
 
-            public static APoint distance(APoint p1, APoint p2)
-            {
-                return new APoint(p2.x - p1.x, p2.y - p1.y);
-            }
+        public static APoint distance(APoint p1, APoint p2)
+        {
+            return new APoint(p2.x - p1.x, p2.y - p1.y);
+        }
 
-            public static decimal cross(APoint p1, APoint p2)
-            {
-                return p1.x * p2.y - p2.x * p1.y;
-            }
+        public static decimal cross(APoint p1, APoint p2)
+        {
+            return p1.x * p2.y - p2.x * p1.y;
+        }
 
-            public static decimal direction(APoint pi, APoint pj, APoint pk)
-            {
-                return cross(distance(pi, pk), distance(pi, pj));
-            }
+        public static decimal direction(APoint pi, APoint pj, APoint pk)
+        {
+            return cross(distance(pi, pk), distance(pi, pj));
+        }
 
-            public static bool intersect(ALine l1, ALine l2)
-            {
-                decimal d1 = direction(l2.p1, l2.p2, l1.p1);
-                decimal d2 = direction(l2.p1, l2.p2, l1.p2);
-                decimal d3 = direction(l1.p1, l1.p2, l2.p1);
-                decimal d4 = direction(l1.p1, l1.p2, l2.p2);
-                if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0) || (d3 > 0 && d4 < 0)
-                        || (d3 < 0 && d4 > 0))
-                    return true;
-                else
-                    return false;
-            }
-        
-
+        public static bool intersect(ALine l1, ALine l2)
+        {
+            decimal d1 = direction(l2.p1, l2.p2, l1.p1);
+            decimal d2 = direction(l2.p1, l2.p2, l1.p2);
+            decimal d3 = direction(l1.p1, l1.p2, l2.p1);
+            decimal d4 = direction(l1.p1, l1.p2, l2.p2);
+            if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0) || (d3 > 0 && d4 < 0)
+                    || (d3 < 0 && d4 > 0))
+                return true;
+            else
+                return false;
+        }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -285,6 +269,15 @@ namespace GELive
         {
             this.p1 = p1;
             this.p2 = p2;
+        }
+    }
+    public class RankingEntryComparer:  Comparer<RankingEntry>
+    {
+        public override int Compare(RankingEntry x, RankingEntry y)
+        {
+            if (x.Punkte > y.Punkte) return 1;
+            if (x.Punkte < y.Punkte) return -1;
+            return 0;
         }
     }
 }

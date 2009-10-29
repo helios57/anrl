@@ -218,7 +218,7 @@
             this.picPilot4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picPilot4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPilot4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPilot4.Location = new System.Drawing.Point(454, 172);
             this.picPilot4.Name = "picPilot4";
             this.picPilot4.Size = new System.Drawing.Size(60, 60);
@@ -230,7 +230,7 @@
             this.picPilot3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picPilot3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPilot3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPilot3.Location = new System.Drawing.Point(367, 119);
             this.picPilot3.Name = "picPilot3";
             this.picPilot3.Size = new System.Drawing.Size(60, 60);
@@ -242,7 +242,7 @@
             this.picPilot2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picPilot2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPilot2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPilot2.Location = new System.Drawing.Point(454, 64);
             this.picPilot2.Name = "picPilot2";
             this.picPilot2.Size = new System.Drawing.Size(60, 60);
@@ -254,7 +254,7 @@
             this.picPilot1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picPilot1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picPilot1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPilot1.Location = new System.Drawing.Point(367, 12);
             this.picPilot1.Name = "picPilot1";
             this.picPilot1.Size = new System.Drawing.Size(60, 60);
@@ -269,7 +269,7 @@
             this.lblPunkte4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPunkte4.Location = new System.Drawing.Point(536, 172);
             this.lblPunkte4.Name = "lblPunkte4";
-            this.lblPunkte4.Size = new System.Drawing.Size(57, 32);
+            this.lblPunkte4.Size = new System.Drawing.Size(99, 32);
             this.lblPunkte4.TabIndex = 28;
             // 
             // lblPunkte3
@@ -280,7 +280,7 @@
             this.lblPunkte3.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPunkte3.Location = new System.Drawing.Point(536, 121);
             this.lblPunkte3.Name = "lblPunkte3";
-            this.lblPunkte3.Size = new System.Drawing.Size(57, 33);
+            this.lblPunkte3.Size = new System.Drawing.Size(99, 33);
             this.lblPunkte3.TabIndex = 27;
             // 
             // lblPunkte2
@@ -291,7 +291,7 @@
             this.lblPunkte2.Font = new System.Drawing.Font("Microsoft Sans Serif", 23.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPunkte2.Location = new System.Drawing.Point(536, 64);
             this.lblPunkte2.Name = "lblPunkte2";
-            this.lblPunkte2.Size = new System.Drawing.Size(57, 35);
+            this.lblPunkte2.Size = new System.Drawing.Size(99, 35);
             this.lblPunkte2.TabIndex = 26;
             // 
             // lblPunkte1
@@ -302,7 +302,7 @@
             this.lblPunkte1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPunkte1.Location = new System.Drawing.Point(535, 9);
             this.lblPunkte1.Name = "lblPunkte1";
-            this.lblPunkte1.Size = new System.Drawing.Size(58, 37);
+            this.lblPunkte1.Size = new System.Drawing.Size(100, 37);
             this.lblPunkte1.TabIndex = 25;
             // 
             // RankForm
