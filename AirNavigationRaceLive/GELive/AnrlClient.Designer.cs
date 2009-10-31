@@ -36,6 +36,8 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.panelConnection = new System.Windows.Forms.Panel();
+            this.txtConnectStatus = new System.Windows.Forms.TextBox();
+            this.lblStatus = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panelTrackerPilot = new System.Windows.Forms.Panel();
             this.btnAddPilotToTracker = new System.Windows.Forms.Button();
@@ -128,8 +130,6 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.lblStatus = new System.Windows.Forms.Label();
-            this.txtConnectStatus = new System.Windows.Forms.TextBox();
             this.panelConnection.SuspendLayout();
             this.panelTrackerPilot.SuspendLayout();
             this.panelRace.SuspendLayout();
@@ -153,7 +153,7 @@
             this.fldServer.FormattingEnabled = true;
             this.fldServer.Items.AddRange(new object[] {
             "http://127.0.0.1:5555/",
-            "http://92.51.137.17:5555/"});
+            "http://83.169.11.154:5555/"});
             this.fldServer.Location = new System.Drawing.Point(81, 41);
             this.fldServer.Name = "fldServer";
             this.fldServer.Size = new System.Drawing.Size(210, 21);
@@ -231,6 +231,26 @@
             this.panelConnection.Name = "panelConnection";
             this.panelConnection.Size = new System.Drawing.Size(668, 442);
             this.panelConnection.TabIndex = 7;
+            // 
+            // txtConnectStatus
+            // 
+            this.txtConnectStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtConnectStatus.Location = new System.Drawing.Point(81, 146);
+            this.txtConnectStatus.Name = "txtConnectStatus";
+            this.txtConnectStatus.Size = new System.Drawing.Size(458, 20);
+            this.txtConnectStatus.TabIndex = 9;
+            this.txtConnectStatus.Text = "Choose or type a Server adress";
+            this.txtConnectStatus.TextChanged += new System.EventHandler(this.txtConnectStatus_TextChanged);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(5, 153);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
+            this.lblStatus.TabIndex = 8;
+            this.lblStatus.Text = "Status";
             // 
             // label8
             // 
@@ -1304,26 +1324,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Visualisation Controll";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(5, 153);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(37, 13);
-            this.lblStatus.TabIndex = 8;
-            this.lblStatus.Text = "Status";
-            // 
-            // txtConnectStatus
-            // 
-            this.txtConnectStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtConnectStatus.Location = new System.Drawing.Point(81, 146);
-            this.txtConnectStatus.Name = "txtConnectStatus";
-            this.txtConnectStatus.Size = new System.Drawing.Size(458, 20);
-            this.txtConnectStatus.TabIndex = 9;
-            this.txtConnectStatus.Text = "Choose or type a Server adress";
-            this.txtConnectStatus.TextChanged += new System.EventHandler(this.txtConnectStatus_TextChanged);
             // 
             // AnrlClient
             // 
