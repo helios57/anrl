@@ -236,16 +236,29 @@ namespace GELive
         {
             if (checkBox1.Checked)
             {
-                this.TransparencyKey = Color.AntiqueWhite;
+                this.TransparencyKey = Color.Bisque;
                 this.FormBorderStyle = FormBorderStyle.Sizable;
-                this.TopMost = false;
                 Refresh();
             }
             else
             {
-                this.TransparencyKey = Color.AliceBlue;
+                this.TransparencyKey = Color.White;
                 this.FormBorderStyle = FormBorderStyle.None;
+                Refresh();
+            }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (checkBox2.Checked)
+            {
                 this.TopMost = true;
+                Refresh();
+            }
+            else
+            {
+                this.TopMost = false;
                 Refresh();
             }
         }
