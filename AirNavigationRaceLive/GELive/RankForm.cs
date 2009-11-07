@@ -176,9 +176,10 @@ namespace GELive
             }
             lastlongitude = longitude;
             lastlatitude = latitude;
-                this.Invoke(new MethodInvoker(PopulateData));
+                
             try
             {
+                this.Invoke(new MethodInvoker(PopulateData));
             }
             catch
             { }     
