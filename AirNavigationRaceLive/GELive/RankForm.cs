@@ -148,9 +148,13 @@ namespace GELive
                     {
                         if (!r.passedstartinggate)
                         {
-                            ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
-                            ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
-                            if (intersect(trackline, gateline))
+                            //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
+                            //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
+                            APoint gp1 = new APoint((double)p.Points[0].Longitude, (double)p.Points[0].Latitude);
+                            APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
+                            APoint p1 = new APoint((double)lastlongitude, (double)lastlatitude);
+                            APoint p2 = new APoint((double)longitude, (double)latitude);
+                            if (gatePassed(p1,p2,gp1,gp2))
                             {
                                 r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
                                 r.passedstartinggate = true;
@@ -164,9 +168,16 @@ namespace GELive
                     {
                         if (!r.passedfinishgate && lastlatitude !=-1 && lastlongitude!=-1)
                         {
-                            ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
-                            ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
-                            if(intersect(trackline,gateline)){
+                            //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
+                            //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
+                            
+                            APoint gp1 = new APoint((double)p.Points[0].Longitude,(double)p.Points[0].Latitude);
+                            APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
+                            APoint p1 = new APoint((double)lastlongitude, (double)lastlatitude);
+                            APoint p2 = new APoint((double)longitude, (double)latitude);
+                            
+
+                            if(gatePassed(p1, p2, gp1, gp2)){
                                 r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
                                 r.passedfinishgate = true;
                             }
@@ -210,28 +221,28 @@ namespace GELive
             return new APoint(p2.x - p1.x, p2.y - p1.y);
         }
 
-        public static decimal cross(APoint p1, APoint p2)
-        {
-            return p1.x * p2.y - p2.x * p1.y;
-        }
+        //public static decimal cross(APoint p1, APoint p2)
+        //{
+        //    return p1.x * p2.y - p2.x * p1.y;
+        //}
 
-        public static decimal direction(APoint pi, APoint pj, APoint pk)
-        {
-            return cross(distance(pi, pk), distance(pi, pj));
-        }
+        //public static decimal direction(APoint pi, APoint pj, APoint pk)
+        //{
+        //    return cross(distance(pi, pk), distance(pi, pj));
+        //}
 
-        public static bool intersect(ALine l1, ALine l2)
-        {
-            decimal d1 = direction(l2.p1, l2.p2, l1.p1);
-            decimal d2 = direction(l2.p1, l2.p2, l1.p2);
-            decimal d3 = direction(l1.p1, l1.p2, l2.p1);
-            decimal d4 = direction(l1.p1, l1.p2, l2.p2);
-            if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0) || (d3 > 0 && d4 < 0)
-                    || (d3 < 0 && d4 > 0))
-                return true;
-            else
-                return false;
-        }
+        //public static bool intersect(ALine l1, ALine l2)
+        //{
+        //    decimal d1 = direction(l2.p1, l2.p2, l1.p1);
+        //    decimal d2 = direction(l2.p1, l2.p2, l1.p2);
+        //    decimal d3 = direction(l1.p1, l1.p2, l2.p1);
+        //    decimal d4 = direction(l1.p1, l1.p2, l2.p2);
+        //    if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0) || (d3 > 0 && d4 < 0)
+        //            || (d3 < 0 && d4 > 0))
+        //        return true;
+        //    else
+        //        return false;
+        //}
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -264,12 +275,73 @@ namespace GELive
             }
         }
 
+        public bool gatePassed(APoint p1, APoint p2, APoint gp1, APoint gp2)
+        {
+            double Ax = gp1.x;
+            double Ay = gp2.y;
+            double Bx = gp2.x;
+            double By = gp2.y;
+            double Cx = p1.x;
+            double Cy = p1.y;
+            double Dx = p2.x;
+            double Dy = p2.y;
+            //double* X, double* Y
+
+            double distAB, theCos, theSin, newX, ABpos;
+
+            //  Fail if either line segment is zero-length.
+            if (Ax == Bx && Ay == By || Cx == Dx && Cy == Dy) return false;
+
+            //  Fail if the segments share an end-point.
+            if (Ax == Cx && Ay == Cy || Bx == Cx && By == Cy
+                || Ax == Dx && Ay == Dy || Bx == Dx && By == Dy)
+            {
+                return false;
+            }
+
+            //  (1) Translate the system so that point A is on the origin.
+            Bx -= Ax;
+            By -= Ay;
+            Cx -= Ax;
+            Cy -= Ay;
+            Dx -= Ax;
+            Dy -= Ay;
+
+            //  Discover the length of segment A-B.
+            distAB = Math.Sqrt(Bx * Bx + By * By);
+
+            //  (2) Rotate the system so that point B is on the positive X axis.
+            theCos = Bx / distAB;
+            theSin = By / distAB;
+            newX = Cx * theCos + Cy * theSin;
+            Cy = Cy * theCos - Cx * theSin;
+            Cx = newX;
+            newX = Dx * theCos + Dy * theSin;
+            Dy = Dy * theCos - Dx * theSin;
+            Dx = newX;
+
+            //  Fail if segment C-D doesn't cross line A-B.
+            if (Cy < 0.0 && Dy < 0.0 || Cy >= 0.0 && Dy >= 0.0)
+                return false;
+
+            //  (3) Discover the position of the intersection point along line A-B.
+            ABpos = Dx + (Cx - Dx) * Dy / (Dy - Cy);
+
+            //  Fail if segment C-D crosses line A-B outside of segment A-B.
+            if (ABpos < 0.0 || ABpos > distAB)
+                return false;
+            else
+            {
+                return true;
+            }
+        }
+
     }
     public class APoint
     {
-        public decimal x;
-        public decimal y;
-        public APoint(decimal x, decimal y)
+        public double x;
+        public double y;
+        public APoint(double x, double y)
         {
             this.x = x;
             this.y = y;

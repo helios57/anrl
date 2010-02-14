@@ -105,7 +105,7 @@ namespace GELive
                 foreach (t_Daten d in DataNewToDraw.Where(p => p.ID_Tracker == t.id))
                 {
                     if (InformationPool.rankform != null)
-                    {
+                    {                        
                         InformationPool.rankform.doranking(d.Longitude, d.Latitude, d.ID_Tracker,d.Timestamp);
                     }
                 }
