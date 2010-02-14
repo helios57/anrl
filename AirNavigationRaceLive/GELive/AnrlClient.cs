@@ -446,6 +446,7 @@ namespace GELive
             {
                 t_Polygon poly = new t_Polygon();
                 poly.t_PolygonPoints = new List<t_PolygonPoint>();
+                poly.Type = (int)p.Type;
                 foreach (PolygonPoint pp in p.Points)
                 {
                     t_PolygonPoint temp_poly_point = new t_PolygonPoint();
