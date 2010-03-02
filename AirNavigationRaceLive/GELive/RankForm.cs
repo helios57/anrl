@@ -17,6 +17,10 @@ namespace GELive
         RaceEntry Race;
         decimal lastlongitude=-1;
         decimal lastlatitude=-1;
+        /// <summary>
+        /// Timespan in which you can still pass starting and ending gate without penalty
+        /// (hours,minutes,seconds)
+        /// </summary>
         private TimeSpan spanStartEnd = new TimeSpan(0, 1, 0);
         public RankForm(RaceEntry Race)
         {
