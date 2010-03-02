@@ -136,61 +136,57 @@ namespace GELive
 
         public void doranking(decimal longitude, decimal latitude, int trackerid, DateTime pointtime)
         {
-            foreach (Polygon p in InformationPool.PolygonGroupToDraw.Polygons)
+            foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
             {
-                if (p.Type == (int)PolygonType.PenaltyZone)
+                foreach (Polygon p in InformationPool.PolygonGroupToDraw.Polygons)
                 {
-                    if(p.contains2(longitude,latitude)){
-                        foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
+                    if (p.Type == (int)PolygonType.PenaltyZone)
+                    {
+                        if (p.contains2(longitude, latitude))
                         {
                             r.Punkte += 6;
                         }
                     }
-                }
-                else if (p.Type == PolygonType.GateStartA || p.Type == PolygonType.GateStartB || p.Type == PolygonType.GateStartC || p.Type == PolygonType.GateStartD)
-                {
-                    foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
+                    else if (p.Type == PolygonType.GateStartA || p.Type == PolygonType.GateStartB || p.Type == PolygonType.GateStartC || p.Type == PolygonType.GateStartD)
                     {
+
                         // Es wird nur innerhalb der möglichen Zeitspanne überprüft
-                        if (!r.passedstartinggate && Race.StartTime+spanStartEnd >= pointtime )
+                        if (!r.passedstartinggate && Race.StartTime + spanStartEnd >= pointtime && r.lastlatitude != -1 && r.lastlongitude != -1)
                         {
                             //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
                             //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
                             APoint gp1 = new APoint((double)p.Points[0].Longitude, (double)p.Points[0].Latitude);
                             APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
-                            APoint p1 = new APoint((double)lastlongitude, (double)lastlatitude);
+                            APoint p1 = new APoint((double)r.lastlongitude, (double)r.lastlatitude);
                             APoint p2 = new APoint((double)longitude, (double)latitude);
-                            if (gatePassed(p1,p2,gp1,gp2))
+                            if (gatePassed(p1, p2, gp1, gp2))
                             {
                                 r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
                                 r.passedstartinggate = true;
                             }
                         }
                         //Wird das Gate bis zur letzten Möglichkeit nicht überflogen gibt es auch strafpunkte
-                        else if (!r.passedstartinggate && pointtime > Race.StartTime + spanStartEnd )
+                        else if (!r.passedstartinggate && pointtime > Race.StartTime + spanStartEnd)
                         {
                             r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
                             r.passedstartinggate = true;
                         }
-                        
                     }
-                }
-                else if (p.Type == PolygonType.GateEndA || p.Type == PolygonType.GateEndB || p.Type == PolygonType.GateEndC || p.Type == PolygonType.GateEndD)
-                {
-                    foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
+                    else if (p.Type == PolygonType.GateEndA || p.Type == PolygonType.GateEndB || p.Type == PolygonType.GateEndC || p.Type == PolygonType.GateEndD)
                     {
-                        if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd >= pointtime && lastlatitude != -1 && lastlongitude != -1)
+                        if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd >= pointtime && r.lastlatitude != -1 && r.lastlongitude != -1)
                         {
                             //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
                             //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
-                            
-                            APoint gp1 = new APoint((double)p.Points[0].Longitude,(double)p.Points[0].Latitude);
-                            APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
-                            APoint p1 = new APoint((double)lastlongitude, (double)lastlatitude);
-                            APoint p2 = new APoint((double)longitude, (double)latitude);
-                            
 
-                            if(gatePassed(p1, p2, gp1, gp2)){
+                            APoint gp1 = new APoint((double)p.Points[0].Longitude, (double)p.Points[0].Latitude);
+                            APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
+                            APoint p1 = new APoint((double)r.lastlongitude, (double)r.lastlatitude);
+                            APoint p2 = new APoint((double)longitude, (double)latitude);
+
+
+                            if (gatePassed(p1, p2, gp1, gp2))
+                            {
                                 r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
                                 r.passedfinishgate = true;
                             }
@@ -201,10 +197,11 @@ namespace GELive
                             r.passedfinishgate = true;
                         }
                     }
+
                 }
+                r.lastlatitude = latitude;
+                r.lastlongitude = longitude;
             }
-            lastlongitude = longitude;
-            lastlatitude = latitude;
                 
             try
             {

@@ -483,6 +483,8 @@ namespace GELive
         public int Color;
         public bool passedstartinggate = false;
         public bool passedfinishgate = false;
+        public decimal lastlongitude = -1;
+        public decimal lastlatitude = -1;
     }
     public class PilotLst :t_Pilot
     {
