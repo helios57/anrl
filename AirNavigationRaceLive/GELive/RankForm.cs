@@ -17,6 +17,7 @@ namespace GELive
         RaceEntry Race;
         decimal lastlongitude=-1;
         decimal lastlatitude=-1;
+        private TimeSpan spanStartEnd = new TimeSpan(0, 1, 0);
         public RankForm(RaceEntry Race)
         {
             this.Race = Race;
@@ -146,7 +147,8 @@ namespace GELive
                 {
                     foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
                     {
-                        if (!r.passedstartinggate)
+                        // Es wird nur innerhalb der möglichen Zeitspanne überprüft
+                        if (!r.passedstartinggate && Race.StartTime+spanStartEnd >= pointtime )
                         {
                             //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
                             //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
@@ -160,13 +162,20 @@ namespace GELive
                                 r.passedstartinggate = true;
                             }
                         }
+                        //Wird das Gate bis zur letzten Möglichkeit nicht überflogen gibt es auch strafpunkte
+                        else if (!r.passedstartinggate && pointtime > Race.StartTime + spanStartEnd )
+                        {
+                            r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
+                            r.passedstartinggate = true;
+                        }
+                        
                     }
                 }
                 else if (p.Type == PolygonType.GateEndA || p.Type == PolygonType.GateEndB || p.Type == PolygonType.GateEndC || p.Type == PolygonType.GateEndD)
                 {
                     foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
                     {
-                        if (!r.passedfinishgate && lastlatitude !=-1 && lastlongitude!=-1)
+                        if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd >= pointtime && lastlatitude != -1 && lastlongitude != -1)
                         {
                             //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
                             //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
@@ -181,6 +190,11 @@ namespace GELive
                                 r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
                                 r.passedfinishgate = true;
                             }
+                        }
+                        else if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd < pointtime)
+                        {
+                            r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
+                            r.passedfinishgate = true;
                         }
                     }
                 }
@@ -221,28 +235,6 @@ namespace GELive
             return new APoint(p2.x - p1.x, p2.y - p1.y);
         }
 
-        //public static decimal cross(APoint p1, APoint p2)
-        //{
-        //    return p1.x * p2.y - p2.x * p1.y;
-        //}
-
-        //public static decimal direction(APoint pi, APoint pj, APoint pk)
-        //{
-        //    return cross(distance(pi, pk), distance(pi, pj));
-        //}
-
-        //public static bool intersect(ALine l1, ALine l2)
-        //{
-        //    decimal d1 = direction(l2.p1, l2.p2, l1.p1);
-        //    decimal d2 = direction(l2.p1, l2.p2, l1.p2);
-        //    decimal d3 = direction(l1.p1, l1.p2, l2.p1);
-        //    decimal d4 = direction(l1.p1, l1.p2, l2.p2);
-        //    if ((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0) || (d3 > 0 && d4 < 0)
-        //            || (d3 < 0 && d4 > 0))
-        //        return true;
-        //    else
-        //        return false;
-        //}
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -278,7 +270,7 @@ namespace GELive
         public bool gatePassed(APoint p1, APoint p2, APoint gp1, APoint gp2)
         {
             double Ax = gp1.x;
-            double Ay = gp2.y;
+            double Ay = gp1.y;
             double Bx = gp2.x;
             double By = gp2.y;
             double Cx = p1.x;
