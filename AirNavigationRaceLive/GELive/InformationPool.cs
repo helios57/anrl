@@ -90,7 +90,7 @@ namespace GELive
 
         public static void showRanking(List<RaceEntry> Races)
         {
-            if (rankform == null || !rankform.Visible)
+            if ((rankform == null || !rankform.Visible) && Races.First()!=null)
             {
                 rankform = new RankForm(Races.First());
                 rankform.Show();

@@ -134,6 +134,13 @@ namespace GELive
             }
         }
 
+        /// <summary>
+        /// Handles all the Penalties and Invokes Populate Data
+        /// </summary>
+        /// <param name="longitude"></param>
+        /// <param name="latitude"></param>
+        /// <param name="trackerid"></param>
+        /// <param name="pointtime"></param>
         public void doranking(decimal longitude, decimal latitude, int trackerid, DateTime pointtime)
         {
             foreach (RankingEntry r in rankinEntries.Where(q => q.TrackerID == trackerid))
@@ -150,51 +157,43 @@ namespace GELive
                     else if (p.Type == PolygonType.GateStartA || p.Type == PolygonType.GateStartB || p.Type == PolygonType.GateStartC || p.Type == PolygonType.GateStartD)
                     {
 
-                        // Es wird nur innerhalb der möglichen Zeitspanne überprüft
-                        if (!r.passedstartinggate && Race.StartTime + spanStartEnd >= pointtime && r.lastlatitude != -1 && r.lastlongitude != -1)
-                        {
-                            //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
-                            //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
+                        // Checks wether gate is crossed in the specified time.
+                        //if (!r.passedstartinggate && Race.StartTime + spanStartEnd >= pointtime && r.lastlatitude != -1 && r.lastlongitude != -1)
+                        if (!r.passedstartinggate && r.lastlatitude != -1 && r.lastlongitude != -1)
+                        {                           
                             APoint gp1 = new APoint((double)p.Points[0].Longitude, (double)p.Points[0].Latitude);
                             APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
                             APoint p1 = new APoint((double)r.lastlongitude, (double)r.lastlatitude);
                             APoint p2 = new APoint((double)longitude, (double)latitude);
-                            if (gatePassed(p1, p2, gp1, gp2))
+                            if (gatePassed(p1, p2, gp1, gp2) || pointtime > Race.StartTime + spanStartEnd)
                             {
                                 r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
                                 r.passedstartinggate = true;
                             }
                         }
-                        //Wird das Gate bis zur letzten Möglichkeit nicht überflogen gibt es auch strafpunkte
-                        else if (!r.passedstartinggate && pointtime > Race.StartTime + spanStartEnd)
-                        {
-                            r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
-                            r.passedstartinggate = true;
-                        }
+                        //If the gate isn't passed until the last possible moment, penalty is added.
+                        //else if (!r.passedstartinggate && pointtime > Race.StartTime + spanStartEnd)
+                        //{
+                        //    r.Punkte += getGatePenaltyPoints("StartGate", Race.StartTime, pointtime);
+                        //    r.passedstartinggate = true;
+                        //}
                     }
                     else if (p.Type == PolygonType.GateEndA || p.Type == PolygonType.GateEndB || p.Type == PolygonType.GateEndC || p.Type == PolygonType.GateEndD)
                     {
-                        if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd >= pointtime && r.lastlatitude != -1 && r.lastlongitude != -1)
-                        {
-                            //ALine trackline = new ALine(new APoint(lastlongitude,lastlatitude),new APoint(longitude,latitude));
-                            //ALine gateline = new ALine(new APoint(p.Points[0].Longitude,p.Points[0].Latitude),new APoint(p.Points[1].Longitude,p.Points[1].Latitude));
-
+                        //if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd >= pointtime && r.lastlatitude != -1 && r.lastlongitude != -1)
+                        if (!r.passedfinishgate && r.lastlatitude != -1 && r.lastlongitude != -1)
+                        {                           
                             APoint gp1 = new APoint((double)p.Points[0].Longitude, (double)p.Points[0].Latitude);
                             APoint gp2 = new APoint((double)p.Points[1].Longitude, (double)p.Points[1].Latitude);
                             APoint p1 = new APoint((double)r.lastlongitude, (double)r.lastlatitude);
                             APoint p2 = new APoint((double)longitude, (double)latitude);
 
 
-                            if (gatePassed(p1, p2, gp1, gp2))
+                            if (gatePassed(p1, p2, gp1, gp2) || (Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd) < pointtime)
                             {
                                 r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
                                 r.passedfinishgate = true;
                             }
-                        }
-                        else if (!r.passedfinishgate && Race.StartTime.AddMinutes((double)Race.Duration) + spanStartEnd < pointtime)
-                        {
-                            r.Punkte += getGatePenaltyPoints("FinishGate", Race.StartTime.AddMinutes((double)Race.Duration), pointtime);
-                            r.passedfinishgate = true;
                         }
                     }
 
@@ -210,7 +209,13 @@ namespace GELive
             catch
             { }     
         }
-
+        /// <summary>
+        /// Calculates GatePenalties
+        /// </summary>
+        /// <param name="gatename"></param>
+        /// <param name="expected"></param>
+        /// <param name="effective"></param>
+        /// <returns></returns>
         private int getGatePenaltyPoints(string gatename, DateTime expected, DateTime effective)
         {
             double seconds = Math.Abs(expected.TimeOfDay.Subtract(effective.TimeOfDay).TotalSeconds);
@@ -268,6 +273,14 @@ namespace GELive
             }
         }
 
+        /// <summary>
+        /// Checks wether a gate is passed.
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        /// <param name="gp1"></param>
+        /// <param name="gp2"></param>
+        /// <returns></returns>
         public bool gatePassed(APoint p1, APoint p2, APoint gp1, APoint gp2)
         {
             double Ax = gp1.x;
