@@ -1,12 +1,6 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 10
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GELive", "GELive\GELive.csproj", "{1A2526F5-9A18-40D7-A4C1-479A131F1698}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2D2F75FD-F155-451B-A49F-EAECB277F282} = {2D2F75FD-F155-451B-A49F-EAECB277F282}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataService", "DataService\DataService.csproj", "{2D2F75FD-F155-451B-A49F-EAECB277F282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPReciever", "TCPReciever\TCPReciever.csproj", "{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}"
 EndProject
@@ -44,21 +38,6 @@ Global
 		{1A2526F5-9A18-40D7-A4C1-479A131F1698}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1A2526F5-9A18-40D7-A4C1-479A131F1698}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1A2526F5-9A18-40D7-A4C1-479A131F1698}.Release|x86.ActiveCfg = Release|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Default|x86.ActiveCfg = Debug|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{2D2F75FD-F155-451B-A49F-EAECB277F282}.Release|x86.ActiveCfg = Release|Any CPU
 		{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
