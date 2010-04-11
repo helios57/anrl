@@ -13,10 +13,10 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>179679EB820FB6DFB0F4FAAD491ACFAF2A8F7B27</ManifestCertificateThumbprint>
-    <ManifestKeyFile>GELive_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>3733C9F07B77960B8F8548A9C2027B61541F5127</ManifestCertificateThumbprint>
+    <ManifestKeyFile>ANRL_Client_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -45,7 +45,7 @@
     <PublisherName>SharpSoft</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -196,6 +196,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ANRL_Client_TemporaryKey.pfx" />
     <None Include="Resources\Logo_051.png" />
     <Content Include="Resources\Plugin.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -272,11 +273,6 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
