@@ -1,4 +1,4 @@
-﻿namespace GELive
+﻿namespace ANRLClient
 {
     using System;
     using System.IO;
@@ -94,7 +94,7 @@
             try
             {
                 // Get the html string from the embebed reasource
-                string html = GELive.Properties.Resources.Plugin;
+                string html = ANRL.Properties.Resources.Plugin;
 
                 // Create a temp file and get the full path
                 string path = Path.GetTempFileName();

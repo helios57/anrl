@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GELive", "GELive\GELive.csproj", "{1A2526F5-9A18-40D7-A4C1-479A131F1698}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANRL_Client", "GELive\ANRL_Client.csproj", "{1A2526F5-9A18-40D7-A4C1-479A131F1698}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPReciever", "TCPReciever\TCPReciever.csproj", "{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}"
 EndProject

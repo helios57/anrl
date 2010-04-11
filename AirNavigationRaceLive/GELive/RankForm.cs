@@ -6,17 +6,17 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GELive.ANRLDataService;
+using ANRL.ANRLDataService;
 using System.IO;
 
-namespace GELive
+namespace ANRLClient
 {
     public partial class RankForm : Form
     {
         List<RankingEntry> rankinEntries;
         RaceEntry Race;
-        decimal lastlongitude=-1;
-        decimal lastlatitude=-1;
+        //decimal lastlongitude=-1;
+        //decimal lastlatitude=-1;
         /// <summary>
         /// Timespan in which you can still pass starting and ending gate without penalty
         /// (hours,minutes,seconds)

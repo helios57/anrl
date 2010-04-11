@@ -1,4 +1,4 @@
-﻿namespace GELive
+﻿namespace ANRLClient
 {
     partial class anrl_gui
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.geWebBrowser1 = new GELive.GEWebBrowser();
+            this.geWebBrowser1 = new ANRLClient.GEWebBrowser();
             this.SuspendLayout();
             // 
             // geWebBrowser1

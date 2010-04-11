@@ -1,4 +1,4 @@
-﻿namespace GELive
+﻿namespace ANRLClient
 {
     partial class AnrlClient
     {
@@ -1120,7 +1120,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::GELive.Properties.Resources.Logo_05;
+            this.pictureBox1.Image = global::ANRL.Properties.Resources.Logo_05;
             this.pictureBox1.Location = new System.Drawing.Point(164, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(320, 130);

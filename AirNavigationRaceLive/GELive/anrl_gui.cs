@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 using GEPlugin;
-using GELive.ANRLDataService;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace GELive
+namespace ANRLClient
 {
     /// <summary>
     /// The Client Gui

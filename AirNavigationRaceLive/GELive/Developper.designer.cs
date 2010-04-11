@@ -1,5 +1,5 @@
 ﻿
-namespace GELive
+namespace ANRLClient
 {
     partial class Developper
     {

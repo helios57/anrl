@@ -1,4 +1,4 @@
-﻿namespace GELive
+﻿namespace ANRLClient
 {
     partial class Parcours
     {

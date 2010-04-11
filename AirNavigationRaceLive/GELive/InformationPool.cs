@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GEPlugin;
-using GELive.ANRLDataService;
 using System.IO;
 using System.Threading;
+using ANRL.ANRLDataService;
 
-namespace GELive
+namespace ANRLClient
 {
     static class InformationPool
     {
@@ -60,7 +60,7 @@ namespace GELive
 
         static public bool Connect()
         {
-            Client = new GELive.ANRLDataService.ANRLDataServiceClient(ConnectionConfig, RemoteAddress);
+            Client = new ANRL.ANRLDataService.ANRLDataServiceClient(ConnectionConfig, RemoteAddress);
             if (!RemoteAddress.Contains("127.0.0.1"))
             {
                 Client.ClientCredentials.UserName.UserName = Username;

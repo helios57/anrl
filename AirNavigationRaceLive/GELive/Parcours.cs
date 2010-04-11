@@ -6,9 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GELive.ANRLDataService;
+using ANRL.ANRLDataService;
 
-namespace GELive
+namespace ANRLClient
 {
     public partial class Parcours : Form
     {

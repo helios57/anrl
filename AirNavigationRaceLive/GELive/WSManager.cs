@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using GELive.ANRLDataService;
+using ANRL.ANRLDataService;
 using System.Timers;
 using System.IO;
 using GEPlugin;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace GELive
+namespace ANRLClient
 {
     /// <summary>
     /// Webservice-Client Manager
