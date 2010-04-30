@@ -17,7 +17,7 @@ namespace ANRLClient
     /// </summary>
     public class WSManager
     {
-        System.Timers.Timer UpdateData = new System.Timers.Timer(1000);   
+        System.Timers.Timer UpdateData = new System.Timers.Timer(2000);   
         private GEFeatureContainerCoClass Container;
         public event EventHandler DataUpdated;
 
@@ -42,14 +42,25 @@ namespace ANRLClient
         /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
-            InformationPool.Newest = InformationPool.Next; 
             InformationPool.Next = InformationPool.Next.AddSeconds((UpdateData.Interval / 1000) * InformationPool.PlaySpeed);
 
+            if (InformationPool.Next.Ticks > DateTime.Now.ToUniversalTime().Ticks)
+            {
+                InformationPool.Next = DateTime.Now.ToUniversalTime();
+            }
+
             List<t_Daten> tempList = InformationPool.Client.GetPathData(
-                    InformationPool.Newest, 
+                    InformationPool.Newest,
                     InformationPool.Next);
+            Console.Out.WriteLine("GetPathData" + InformationPool.Newest + " Next =" + InformationPool.Next+" count = "+tempList.Count);
+
+            if (tempList.Count > 0)
+            {
+                InformationPool.Newest = tempList.Max(p => p.Timestamp).AddMilliseconds(1); //InformationPool.Next;
+            }
 
             InformationPool.DatenListe.AddRange(tempList);
+            Console.Out.WriteLine("Date loaded" + InformationPool.Newest);
 
             UpdateGWebBrowser();
             if (DataUpdated != null) DataUpdated.Invoke(sender, e);
