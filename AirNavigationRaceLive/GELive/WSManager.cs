@@ -42,28 +42,40 @@ namespace ANRLClient
         /// <param name="e"></param>
         void UpdateData_Elapsed(object sender, ElapsedEventArgs e)
         {
-            InformationPool.Next = InformationPool.Next.AddSeconds((UpdateData.Interval / 1000) * InformationPool.PlaySpeed);
-
-            if (InformationPool.Next.Ticks > DateTime.Now.ToUniversalTime().Ticks)
+            try
             {
-                InformationPool.Next = DateTime.Now.ToUniversalTime();
+                InformationPool.Next = InformationPool.Next.AddSeconds((UpdateData.Interval / 1000) * InformationPool.PlaySpeed);
+
+                if (InformationPool.Next.Ticks > DateTime.Now.ToUniversalTime().Ticks)
+                {
+                    InformationPool.Next = DateTime.Now.ToUniversalTime();
+                }
+
+                List<t_Daten> tempList = InformationPool.Client.GetPathData(
+                        InformationPool.Newest,
+                        InformationPool.Next);
+                Console.Out.WriteLine("GetPathData" + InformationPool.Newest + " Next =" + InformationPool.Next + " count = " + tempList.Count);
+
+                if (tempList.Count > 0)
+                {
+                    InformationPool.Newest = tempList.Max(p => p.Timestamp); //InformationPool.Next;
+                }
+                foreach (t_Daten d in tempList)
+                {
+                    if (InformationPool.DatenListe.Count(p => p.ID == d.ID) == 0)
+                    {
+                        InformationPool.DatenListe.Add(d);
+                        Console.Out.WriteLine("Added Point with Timestamp = " + d.Timestamp + " ID=" + d.ID);
+                    }
+                }
+                //InformationPool.DatenListe.AddRange(tempList);
+                Console.Out.WriteLine("Date loaded" + InformationPool.Newest);
+
+                UpdateGWebBrowser();
+                if (DataUpdated != null) DataUpdated.Invoke(sender, e);
+
             }
-
-            List<t_Daten> tempList = InformationPool.Client.GetPathData(
-                    InformationPool.Newest,
-                    InformationPool.Next);
-            Console.Out.WriteLine("GetPathData" + InformationPool.Newest + " Next =" + InformationPool.Next+" count = "+tempList.Count);
-
-            if (tempList.Count > 0)
-            {
-                InformationPool.Newest = tempList.Max(p => p.Timestamp).AddMilliseconds(1); //InformationPool.Next;
-            }
-
-            InformationPool.DatenListe.AddRange(tempList);
-            Console.Out.WriteLine("Date loaded" + InformationPool.Newest);
-
-            UpdateGWebBrowser();
-            if (DataUpdated != null) DataUpdated.Invoke(sender, e);
+            catch { }
         }
 
         private void UpdateGWebBrowser()
