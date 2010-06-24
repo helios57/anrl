@@ -217,7 +217,7 @@
             this.lblPunkte4.Name = "lblPunkte4";
             this.lblPunkte4.Size = new System.Drawing.Size(98, 32);
             this.lblPunkte4.TabIndex = 28;
-            this.lblPunkte4.Visible = false;
+            //this.lblPunkte4.Visible = false;
             // 
             // lblPunkte3
             // 
@@ -226,7 +226,7 @@
             this.lblPunkte3.Name = "lblPunkte3";
             this.lblPunkte3.Size = new System.Drawing.Size(98, 33);
             this.lblPunkte3.TabIndex = 27;
-            this.lblPunkte3.Visible = false;
+            //this.lblPunkte3.Visible = false;
             // 
             // lblPunkte2
             // 
@@ -235,7 +235,7 @@
             this.lblPunkte2.Name = "lblPunkte2";
             this.lblPunkte2.Size = new System.Drawing.Size(98, 35);
             this.lblPunkte2.TabIndex = 26;
-            this.lblPunkte2.Visible = false;
+            //this.lblPunkte2.Visible = false;
             // 
             // lblPunkte1
             // 
@@ -244,7 +244,7 @@
             this.lblPunkte1.Name = "lblPunkte1";
             this.lblPunkte1.Size = new System.Drawing.Size(99, 37);
             this.lblPunkte1.TabIndex = 25;
-            this.lblPunkte1.Visible = false;
+            //this.lblPunkte1.Visible = false;
             // 
             // checkBox2
             // 
