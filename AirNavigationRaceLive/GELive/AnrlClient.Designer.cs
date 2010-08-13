@@ -1121,7 +1121,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ANRL.Properties.Resources.Logo_05;
-            this.pictureBox1.Location = new System.Drawing.Point(164, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(160, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(320, 130);
             this.pictureBox1.TabIndex = 34;
@@ -1136,7 +1136,7 @@
             this.lblLucaTested.AutoSize = true;
             this.lblLucaTested.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.lblLucaTested.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLucaTested.Location = new System.Drawing.Point(438, 312);
+            this.lblLucaTested.Location = new System.Drawing.Point(401, 312);
             this.lblLucaTested.Name = "lblLucaTested";
             this.lblLucaTested.Size = new System.Drawing.Size(79, 25);
             this.lblLucaTested.TabIndex = 33;
@@ -1170,9 +1170,9 @@
             this.lblLucMail.ForeColor = System.Drawing.SystemColors.WindowText;
             this.lblLucMail.Location = new System.Drawing.Point(50, 254);
             this.lblLucMail.Name = "lblLucMail";
-            this.lblLucMail.Size = new System.Drawing.Size(224, 23);
+            this.lblLucMail.Size = new System.Drawing.Size(186, 23);
             this.lblLucMail.TabIndex = 31;
-            this.lblLucMail.Text = "Helios157@gmail.com";
+            this.lblLucMail.Text = "Luc@SharpSoft.ch";
             this.lblLucMail.UseWaitCursor = true;
             // 
             // lblLuca1
@@ -1183,7 +1183,7 @@
             this.lblLuca1.AutoSize = true;
             this.lblLuca1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.lblLuca1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLuca1.Location = new System.Drawing.Point(438, 287);
+            this.lblLuca1.Location = new System.Drawing.Point(401, 287);
             this.lblLuca1.Name = "lblLuca1";
             this.lblLuca1.Size = new System.Drawing.Size(133, 25);
             this.lblLuca1.TabIndex = 30;
@@ -1198,7 +1198,7 @@
             this.lblLuc4.AutoSize = true;
             this.lblLuc4.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.lblLuc4.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLuc4.Location = new System.Drawing.Point(116, 362);
+            this.lblLuc4.Location = new System.Drawing.Point(71, 362);
             this.lblLuc4.Name = "lblLuc4";
             this.lblLuc4.Size = new System.Drawing.Size(190, 25);
             this.lblLuc4.TabIndex = 29;
@@ -1213,7 +1213,7 @@
             this.lblLuc3.AutoSize = true;
             this.lblLuc3.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.lblLuc3.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLuc3.Location = new System.Drawing.Point(116, 337);
+            this.lblLuc3.Location = new System.Drawing.Point(71, 337);
             this.lblLuc3.Name = "lblLuc3";
             this.lblLuc3.Size = new System.Drawing.Size(213, 25);
             this.lblLuc3.TabIndex = 28;
@@ -1228,7 +1228,7 @@
             this.lblLuc2.AutoSize = true;
             this.lblLuc2.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.lblLuc2.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLuc2.Location = new System.Drawing.Point(116, 312);
+            this.lblLuc2.Location = new System.Drawing.Point(71, 312);
             this.lblLuc2.Name = "lblLuc2";
             this.lblLuc2.Size = new System.Drawing.Size(151, 25);
             this.lblLuc2.TabIndex = 27;
@@ -1243,7 +1243,7 @@
             this.lblLuc1.AutoSize = true;
             this.lblLuc1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.lblLuc1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLuc1.Location = new System.Drawing.Point(116, 287);
+            this.lblLuc1.Location = new System.Drawing.Point(71, 287);
             this.lblLuc1.Name = "lblLuc1";
             this.lblLuc1.Size = new System.Drawing.Size(185, 25);
             this.lblLuc1.TabIndex = 26;

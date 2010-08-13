@@ -134,6 +134,10 @@
     <Compile Include="ReturnItemRecords.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataService\DataService.csproj">
+      <Project>{2D2F75FD-F155-451B-A49F-EAECB277F282}</Project>
+      <Name>DataService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TCPReciever\TCPReciever.csproj">
       <Project>{A7C66D55-685E-47B2-A97D-31FD4E50ADD7}</Project>
       <Name>TCPReciever</Name>
