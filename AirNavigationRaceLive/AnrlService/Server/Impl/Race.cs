@@ -9,11 +9,12 @@ namespace AnrlService.Server.Impl
 {
     class Race:IDImpl,IRace
     {
-        List<ITeam> _Teams;
-        DateTime _TakeOff;
-        DateTime _Start;
-        DateTime _End;
-        IPenaltyZone _PenaltyZone;
+        private List<ITeam> _Teams;
+        private String _Name;
+        private DateTime _TakeOff;
+        private DateTime _Start;
+        private DateTime _End;
+        private IPenaltyZone _PenaltyZone;
 
         internal Race(t_Race race)
             : base(race.ID)
@@ -27,6 +28,7 @@ namespace AnrlService.Server.Impl
             _Start = race.TimeStart;
             _End = race.TimeEnd;
             _PenaltyZone = new PenaltyZone(race.t_PenaltyZone);
+            _Name = race.Name;
         }
         #region IRace Members
 
@@ -53,6 +55,11 @@ namespace AnrlService.Server.Impl
         public IPenaltyZone PenaltyZone
         {
             get { return _PenaltyZone; }
+        }
+
+        public string Name
+        {
+            get { return _Name; }
         }
 
         #endregion

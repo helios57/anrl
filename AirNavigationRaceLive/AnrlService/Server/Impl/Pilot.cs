@@ -11,11 +11,13 @@ namespace AnrlService.Server.Impl
     {
         private String _Name;
         private String _Surename;
+        private IPicture _Picture;
 
         internal Pilot(t_Pilot pilot):base(pilot.ID)
         {
             _Name = pilot.LastName;
             _Surename =pilot.SureName;
+            _Picture = new Picture(pilot.t_Picture);
         }
         #region IPilot Members
 
@@ -28,6 +30,12 @@ namespace AnrlService.Server.Impl
         {
             get { return _Surename; }
         }
+
+        public IPicture Picture
+        {
+            get { return _Picture; }
+        }
+
         #endregion
     }
 }

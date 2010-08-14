@@ -9,5 +9,6 @@ namespace AnrlInterfaces
     {
         String Name { get; }
         String Surename { get; }
+        IPicture Picture { get; }
     }
 }

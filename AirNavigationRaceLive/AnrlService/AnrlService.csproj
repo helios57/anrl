@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\AnrlClient.cs" />
     <Compile Include="Server\AnrlServerControl.cs" />
+    <Compile Include="Server\Impl\Data.cs" />
     <Compile Include="Server\Impl\GPSPoint.cs" />
     <Compile Include="Server\Impl\IDImpl.cs" />
     <Compile Include="Server\Impl\PenaltyPoint.cs" />

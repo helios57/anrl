@@ -37,7 +37,7 @@ namespace AnrlService.Server.Impl
             get {return _Navigator; }
         }
 
-        public IPicture Picture
+        public IPicture FlagPicture
         {
             get { return _Picture; }
         }
