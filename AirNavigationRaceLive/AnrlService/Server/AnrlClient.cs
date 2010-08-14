@@ -30,7 +30,6 @@ namespace AnrlService.Server
             foreach (t_Tracker tracker in db.t_Tracker)
             {
                 result.Add(new Tracker(tracker));
-                Update.Invoke(null, null);
             }
             return result;
         }

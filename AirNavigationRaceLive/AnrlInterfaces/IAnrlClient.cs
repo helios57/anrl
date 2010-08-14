@@ -17,7 +17,7 @@ namespace AnrlInterfaces
         long addTeam(ITeam team);
         long addRace(IRace race);
         long addPenaltyZone(IPenaltyZone penaltyzone);
-        long addPicture(IPicture picture);
+        long addPicture(IPicture picture, Boolean isFlag);
         Boolean removePilot(long id);
         Boolean removeTeam(long id);
         Boolean removeRace(long id);
