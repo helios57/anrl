@@ -168,9 +168,6 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK_t_Race_t_PenaltyZone.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK_t_Pilot_t_Picture.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\FK_t_Polygon_t_PolygonGroup.fkey.sql">
       <SubType>Code</SubType>
     </Build>
