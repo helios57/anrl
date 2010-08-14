@@ -7,27 +7,29 @@ using AnrlDBAccessors;
 
 namespace AnrlService.Server.Impl
 {
-    class Pilot:IDImpl,IPilot
+    class Tracker:IDImpl,ITracker
     {
         private String _Name;
-        private String _Surename;
+        private String _IMEI;
 
-        internal Pilot(t_Pilot pilot):base(pilot.ID)
+        internal Tracker(t_Tracker tracker):base(tracker.ID)
         {
-            _Name = pilot.LastName;
-            _Surename =pilot.SureName;
+            _Name = tracker.Name;
+            _IMEI = tracker.IMEI;
         }
-        #region IPilot Members
+
+        #region ITracker Members
 
         public string Name
         {
             get { return _Name; }
         }
 
-        public string Surename
+        public string IMEI
         {
-            get { return _Surename; }
+            get { return _IMEI; }
         }
+
         #endregion
     }
 }

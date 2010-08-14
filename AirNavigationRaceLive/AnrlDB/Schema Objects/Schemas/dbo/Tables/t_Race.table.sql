@@ -1,10 +1,10 @@
 ﻿CREATE TABLE [dbo].[t_Race](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [text] NOT NULL,
-	[ID_PenaltyZone] [int] NULL,
-	[TimeStart] [datetime] NULL,
-	[TimeEnd] [datetime] NULL,
-	[TakeOff] [datetime] NULL,
+	[ID_PenaltyZone] [int] NOT NULL,
+	[TimeStart] [datetime] NOT NULL,
+	[TimeEnd] [datetime] NOT NULL,
+	[TakeOff] [datetime] NOT NULL,
  CONSTRAINT [PK_t_Race] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC

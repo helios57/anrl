@@ -3,37 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
+using AnrlDBAccessors;
+using AnrlService.Server.Impl;
 
 namespace AnrlService.Server
 {
     class AnrlClient:IAnrlClient
     {
+        private string ConnectionString;
+        AnrlDBAccessors.AnrlDBEntities db;
+
+        public AnrlClient(string ConnectionString)
+        {
+            this.ConnectionString = ConnectionString;
+            db = new AnrlDBAccessors.AnrlDBEntities(ConnectionString);
+        }
+
         #region IAnrlClient Members
 
         public List<ITracker> getTrackers()
         {
-            AnrlDBAccessors.AnrlDBEntities db = new AnrlDBAccessors.AnrlDBEntities();
-            throw new NotImplementedException();
+            List<ITracker> result = new List<ITracker>();
+            foreach (t_Tracker tracker in db.t_Tracker)
+            {
+                result.Add(new Tracker(tracker));
+            }
+            return result;
         }
 
         public List<IPilot> getPilots()
         {
-            throw new NotImplementedException();
+            List<IPilot> result = new List<IPilot>();
+            foreach (t_Pilot pilot in db.t_Pilot)
+            {
+                result.Add(new Pilot(pilot));
+            }
+            return result;
         }
 
         public List<ITeam> getTeams()
         {
-            throw new NotImplementedException();
+            List<ITeam> result = new List<ITeam>();
+            foreach (t_Team team in db.t_Team)
+            {
+                result.Add(new Team(team));
+            }
+            return result;
         }
 
         public List<IRace> getRaces()
         {
-            throw new NotImplementedException();
+            List<IRace> result = new List<IRace>();
+            foreach (t_Race race in db.t_Race)
+            {
+                result.Add(new Race(race));
+            }
+            return result;
         }
 
         public List<IPenaltyZone> getPenaltyzones()
         {
-            throw new NotImplementedException();
+            List<IPenaltyZone> result = new List<IPenaltyZone>();
+            foreach (t_PenaltyZone penaltyZone in db.t_PenaltyZone)
+            {
+                result.Add(new PenaltyZone(penaltyZone));
+            }
+            return result;
         }
 
         public List<IData> getData(List<ITracker> trackers, DateTime from, DateTime to)

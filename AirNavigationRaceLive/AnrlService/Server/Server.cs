@@ -10,6 +10,8 @@ namespace AnrlService.Server
     {
         AnrlServerControl ServerControl = null;
         AnrlClient Client = null;
+        //original String ConnectionString = "metadata=res://*/AnrlDBModel.csdl|res://*/AnrlDBModel.ssdl|res://*/AnrlDBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=HELIOS6X-PC;Initial Catalog=AnrlDB;Integrated Security=True;MultipleActiveResultSets=True&quot;\" providerName=\"System.Data.EntityClient";
+        String ConnectionString = "metadata=res://*/AnrlDBModel.csdl|res://*/AnrlDBModel.ssdl|res://*/AnrlDBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=localhost;Initial Catalog=AnrlDB;Integrated Security=True;MultipleActiveResultSets=True&quot;\" providerName=\"System.Data.EntityClient";
 
         public AnrlInterfaces.IAnrlClient getAnrlClient(string username, string password)
         {
@@ -18,7 +20,7 @@ namespace AnrlService.Server
             {
                 if (Client == null)
                 {
-                    Client = new AnrlClient();
+                    Client = new AnrlClient(ConnectionString);
                 }
                 Result = Client;
             }

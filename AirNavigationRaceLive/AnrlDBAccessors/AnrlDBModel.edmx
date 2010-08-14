@@ -22,6 +22,10 @@
             <End Role="t_Tracker" EntitySet="t_Tracker" />
             <End Role="t_Daten" EntitySet="t_Daten" />
           </AssociationSet>
+          <AssociationSet Name="FK_t_Pilot_t_Picture" Association="AnrlDBModel.Store.FK_t_Pilot_t_Picture">
+            <End Role="t_Picture" EntitySet="t_Picture" />
+            <End Role="t_Pilot" EntitySet="t_Pilot" />
+          </AssociationSet>
           <AssociationSet Name="FK_t_Polygon_t_PolygonGroup" Association="AnrlDBModel.Store.FK_t_Polygon_t_PolygonGroup">
             <End Role="t_PenaltyZone" EntitySet="t_PenaltyZone" />
             <End Role="t_PenaltyZonePolygon" EntitySet="t_PenaltyZonePolygon" />
@@ -151,10 +155,10 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="text" Nullable="false" />
-          <Property Name="ID_PenaltyZone" Type="int" />
-          <Property Name="TimeStart" Type="datetime" />
-          <Property Name="TimeEnd" Type="datetime" />
-          <Property Name="TakeOff" Type="datetime" />
+          <Property Name="ID_PenaltyZone" Type="int" Nullable="false" />
+          <Property Name="TimeStart" Type="datetime" Nullable="false" />
+          <Property Name="TimeEnd" Type="datetime" Nullable="false" />
+          <Property Name="TakeOff" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="t_Race_Team">
           <Key>
@@ -197,6 +201,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_t_Pilot_t_Picture">
+          <End Role="t_Picture" Type="AnrlDBModel.Store.t_Picture" Multiplicity="0..1" />
+          <End Role="t_Pilot" Type="AnrlDBModel.Store.t_Pilot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="t_Picture">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="t_Pilot">
+              <PropertyRef Name="ID_Picture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_t_Polygon_t_PolygonGroup">
           <End Role="t_PenaltyZone" Type="AnrlDBModel.Store.t_PenaltyZone" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -226,7 +242,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_t_Race_t_PenaltyZone">
-          <End Role="t_PenaltyZone" Type="AnrlDBModel.Store.t_PenaltyZone" Multiplicity="0..1" />
+          <End Role="t_PenaltyZone" Type="AnrlDBModel.Store.t_PenaltyZone" Multiplicity="1" />
           <End Role="t_Race" Type="AnrlDBModel.Store.t_Race" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="t_PenaltyZone">
@@ -322,7 +338,6 @@
           <EntitySet Name="t_PenaltyZonePolygon" EntityType="AnrlDBModel.t_PenaltyZonePolygon" />
           <EntitySet Name="t_Picture" EntityType="AnrlDBModel.t_Picture" />
           <EntitySet Name="t_Pilot" EntityType="AnrlDBModel.t_Pilot" />
-          <EntitySet Name="t_Race" EntityType="AnrlDBModel.t_Race" />
           <EntitySet Name="t_Race_Team" EntityType="AnrlDBModel.t_Race_Team" />
           <EntitySet Name="t_Team" EntityType="AnrlDBModel.t_Team" />
           <EntitySet Name="t_Tracker" EntityType="AnrlDBModel.t_Tracker" />
@@ -333,10 +348,6 @@
           <AssociationSet Name="FK_t_Polygon_t_PolygonGroup" Association="AnrlDBModel.FK_t_Polygon_t_PolygonGroup">
             <End Role="t_PenaltyZone" EntitySet="t_PenaltyZone" />
             <End Role="t_PenaltyZonePolygon" EntitySet="t_PenaltyZonePolygon" />
-          </AssociationSet>
-          <AssociationSet Name="FK_t_Race_t_PenaltyZone" Association="AnrlDBModel.FK_t_Race_t_PenaltyZone">
-            <End Role="t_PenaltyZone" EntitySet="t_PenaltyZone" />
-            <End Role="t_Race" EntitySet="t_Race" />
           </AssociationSet>
           <AssociationSet Name="FK_t_PolygonPoints_t_Polygon" Association="AnrlDBModel.FK_t_PolygonPoints_t_Polygon">
             <End Role="t_PenaltyZonePolygon" EntitySet="t_PenaltyZonePolygon" />
@@ -354,10 +365,6 @@
             <End Role="t_Pilot" EntitySet="t_Pilot" />
             <End Role="t_Team" EntitySet="t_Team" />
           </AssociationSet>
-          <AssociationSet Name="FK_t_Race_Team_t_Race" Association="AnrlDBModel.FK_t_Race_Team_t_Race">
-            <End Role="t_Race" EntitySet="t_Race" />
-            <End Role="t_Race_Team" EntitySet="t_Race_Team" />
-          </AssociationSet>
           <AssociationSet Name="FK_t_Race_Team_t_Team" Association="AnrlDBModel.FK_t_Race_Team_t_Team">
             <End Role="t_Team" EntitySet="t_Team" />
             <End Role="t_Race_Team" EntitySet="t_Race_Team" />
@@ -365,6 +372,19 @@
           <AssociationSet Name="FK_t_Team_t_Tracker" Association="AnrlDBModel.FK_t_Team_t_Tracker">
             <End Role="t_Tracker" EntitySet="t_Tracker" />
             <End Role="t_Team" EntitySet="t_Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_Pilot_t_Picture" Association="AnrlDBModel.FK_t_Pilot_t_Picture">
+            <End Role="t_Picture" EntitySet="t_Picture" />
+            <End Role="t_Pilot" EntitySet="t_Pilot" />
+          </AssociationSet>
+          <EntitySet Name="t_Race" EntityType="AnrlDBModel.t_Race" />
+          <AssociationSet Name="FK_t_Race_t_PenaltyZone" Association="AnrlDBModel.FK_t_Race_t_PenaltyZone">
+            <End Role="t_PenaltyZone" EntitySet="t_PenaltyZone" />
+            <End Role="t_Race" EntitySet="t_Race" />
+          </AssociationSet>
+          <AssociationSet Name="FK_t_Race_Team_t_Race" Association="AnrlDBModel.FK_t_Race_Team_t_Race">
+            <End Role="t_Race" EntitySet="t_Race" />
+            <End Role="t_Race_Team" EntitySet="t_Race_Team" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="t_Daten">
@@ -454,26 +474,15 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="SureName" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="t_Race">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="TimeStart" Type="DateTime" />
-          <Property Name="TimeEnd" Type="DateTime" />
-          <Property Name="TakeOff" Type="DateTime" />
-          <NavigationProperty Name="t_PenaltyZone" Relationship="AnrlDBModel.FK_t_Race_t_PenaltyZone" FromRole="t_Race" ToRole="t_PenaltyZone" />
-          <NavigationProperty Name="t_Race_Team" Relationship="AnrlDBModel.FK_t_Race_Team_t_Race" FromRole="t_Race" ToRole="t_Race_Team" />
+          <NavigationProperty Name="t_Picture" Relationship="AnrlDBModel.FK_t_Pilot_t_Picture" FromRole="t_Pilot" ToRole="t_Picture" />
         </EntityType>
         <EntityType Name="t_Race_Team">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="t_Race" Relationship="AnrlDBModel.FK_t_Race_Team_t_Race" FromRole="t_Race_Team" ToRole="t_Race" />
           <NavigationProperty Name="t_Team" Relationship="AnrlDBModel.FK_t_Race_Team_t_Team" FromRole="t_Race_Team" ToRole="t_Team" />
+          <NavigationProperty Name="t_Race" Relationship="AnrlDBModel.FK_t_Race_Team_t_Race" FromRole="t_Race_Team" ToRole="t_Race" />
         </EntityType>
         <EntityType Name="t_Team">
           <Key>
@@ -509,10 +518,6 @@
           </End>
           <End Role="t_PenaltyZonePolygon" Type="AnrlDBModel.t_PenaltyZonePolygon" Multiplicity="*" />
         </Association>
-        <Association Name="FK_t_Race_t_PenaltyZone">
-          <End Role="t_PenaltyZone" Type="AnrlDBModel.t_PenaltyZone" Multiplicity="0..1" />
-          <End Role="t_Race" Type="AnrlDBModel.t_Race" Multiplicity="*" />
-        </Association>
         <Association Name="FK_t_PolygonPoints_t_Polygon">
           <End Role="t_PenaltyZonePolygon" Type="AnrlDBModel.t_PenaltyZonePolygon" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -531,10 +536,6 @@
           <End Role="t_Pilot" Type="AnrlDBModel.t_Pilot" Multiplicity="0..1" />
           <End Role="t_Team" Type="AnrlDBModel.t_Team" Multiplicity="*" />
         </Association>
-        <Association Name="FK_t_Race_Team_t_Race">
-          <End Role="t_Race" Type="AnrlDBModel.t_Race" Multiplicity="1" />
-          <End Role="t_Race_Team" Type="AnrlDBModel.t_Race_Team" Multiplicity="*" />
-        </Association>
         <Association Name="FK_t_Race_Team_t_Team">
           <End Role="t_Team" Type="AnrlDBModel.t_Team" Multiplicity="1" />
           <End Role="t_Race_Team" Type="AnrlDBModel.t_Race_Team" Multiplicity="*" />
@@ -542,6 +543,30 @@
         <Association Name="FK_t_Team_t_Tracker">
           <End Role="t_Tracker" Type="AnrlDBModel.t_Tracker" Multiplicity="0..1" />
           <End Role="t_Team" Type="AnrlDBModel.t_Team" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_t_Pilot_t_Picture">
+          <End Type="AnrlDBModel.t_Picture" Role="t_Picture" Multiplicity="0..1" />
+          <End Type="AnrlDBModel.t_Pilot" Role="t_Pilot" Multiplicity="*" />
+        </Association>
+        <EntityType Name="t_Race">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="TimeStart" Nullable="false" />
+          <Property Type="DateTime" Name="TimeEnd" Nullable="false" />
+          <Property Type="DateTime" Name="TakeOff" Nullable="false" />
+          <NavigationProperty Name="t_PenaltyZone" Relationship="AnrlDBModel.FK_t_Race_t_PenaltyZone" FromRole="t_Race" ToRole="t_PenaltyZone" />
+          <NavigationProperty Name="t_Race_Team" Relationship="AnrlDBModel.FK_t_Race_Team_t_Race" FromRole="t_Race" ToRole="t_Race_Team" />
+        </EntityType>
+        <Association Name="FK_t_Race_t_PenaltyZone">
+          <End Type="AnrlDBModel.t_PenaltyZone" Role="t_PenaltyZone" Multiplicity="1" />
+          <End Type="AnrlDBModel.t_Race" Role="t_Race" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_t_Race_Team_t_Race">
+          <End Type="AnrlDBModel.t_Race" Role="t_Race" Multiplicity="1" />
+          <End Type="AnrlDBModel.t_Race_Team" Role="t_Race_Team" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -607,13 +632,6 @@
             <ScalarProperty Name="LastName" ColumnName="LastName" />
             <ScalarProperty Name="SureName" ColumnName="SureName" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="t_Race"><EntityTypeMapping TypeName="AnrlDBModel.t_Race"><MappingFragment StoreEntitySet="t_Race">
-            <ScalarProperty Name="ID" ColumnName="ID" />
-            <ScalarProperty Name="Name" ColumnName="Name" />
-            <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
-            <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
-            <ScalarProperty Name="TakeOff" ColumnName="TakeOff" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="t_Race_Team"><EntityTypeMapping TypeName="AnrlDBModel.t_Race_Team"><MappingFragment StoreEntitySet="t_Race_Team">
             <ScalarProperty Name="ID" ColumnName="ID" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
@@ -641,15 +659,6 @@
             <EndProperty Name="t_PenaltyZonePolygon">
               <ScalarProperty Name="ID" ColumnName="ID" />
             </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_t_Race_t_PenaltyZone" TypeName="AnrlDBModel.FK_t_Race_t_PenaltyZone" StoreEntitySet="t_Race">
-            <EndProperty Name="t_PenaltyZone">
-              <ScalarProperty Name="ID" ColumnName="ID_PenaltyZone" />
-            </EndProperty>
-            <EndProperty Name="t_Race">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-            <Condition ColumnName="ID_PenaltyZone" IsNull="false" />
           </AssociationSetMapping>
           <AssociationSetMapping Name="FK_t_PolygonPoints_t_Polygon" TypeName="AnrlDBModel.FK_t_PolygonPoints_t_Polygon" StoreEntitySet="t_PenaltyZonePoint">
             <EndProperty Name="t_PenaltyZonePolygon">
@@ -685,14 +694,6 @@
             </EndProperty>
             <Condition ColumnName="ID_Navigator" IsNull="false" />
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_t_Race_Team_t_Race" TypeName="AnrlDBModel.FK_t_Race_Team_t_Race" StoreEntitySet="t_Race_Team">
-            <EndProperty Name="t_Race">
-              <ScalarProperty Name="ID" ColumnName="ID_Race" />
-            </EndProperty>
-            <EndProperty Name="t_Race_Team">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_t_Race_Team_t_Team" TypeName="AnrlDBModel.FK_t_Race_Team_t_Team" StoreEntitySet="t_Race_Team">
             <EndProperty Name="t_Team">
               <ScalarProperty Name="ID" ColumnName="ID_Team" />
@@ -709,6 +710,42 @@
               <ScalarProperty Name="ID" ColumnName="ID" />
             </EndProperty>
             <Condition ColumnName="ID_Tracker" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_t_Pilot_t_Picture" TypeName="AnrlDBModel.FK_t_Pilot_t_Picture" StoreEntitySet="t_Pilot">
+            <EndProperty Name="t_Pilot">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="t_Picture">
+              <ScalarProperty Name="ID" ColumnName="ID_Picture" />
+            </EndProperty>
+            <Condition ColumnName="ID_Picture" IsNull="false" />
+          </AssociationSetMapping>
+          <EntitySetMapping Name="t_Race">
+            <EntityTypeMapping TypeName="AnrlDBModel.t_Race">
+              <MappingFragment StoreEntitySet="t_Race">
+                <ScalarProperty Name="TakeOff" ColumnName="TakeOff" />
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_t_Race_t_PenaltyZone" TypeName="AnrlDBModel.FK_t_Race_t_PenaltyZone" StoreEntitySet="t_Race">
+            <EndProperty Name="t_Race">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="t_PenaltyZone">
+              <ScalarProperty Name="ID" ColumnName="ID_PenaltyZone" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_t_Race_Team_t_Race" TypeName="AnrlDBModel.FK_t_Race_Team_t_Race" StoreEntitySet="t_Race_Team">
+            <EndProperty Name="t_Race_Team">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="t_Race">
+              <ScalarProperty Name="ID" ColumnName="ID_Race" />
+            </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
@@ -739,7 +776,6 @@
         <EntityTypeShape EntityType="AnrlDBModel.t_PenaltyZonePolygon" Width="1.875" PointX="9.875" PointY="6.5" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="AnrlDBModel.t_Picture" Width="1.5" PointX="9.125" PointY="3.625" Height="1.7879850260416665" IsExpanded="true" />
         <EntityTypeShape EntityType="AnrlDBModel.t_Pilot" Width="1.5" PointX="6.5" PointY="3.625" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="AnrlDBModel.t_Race" Width="1.5" PointX="6.375" PointY="6.5" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="AnrlDBModel.t_Race_Team" Width="1.5" PointX="4.375" PointY="6.5" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="AnrlDBModel.t_Team" Width="1.5" PointX="4.25" PointY="3.5" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="AnrlDBModel.t_Tracker" Width="1.5" PointX="4.25" PointY="0.75" Height="1.9802864583333388" IsExpanded="true" />
@@ -748,40 +784,48 @@
           <ConnectorPoint PointX="3.875" PointY="1.7401432291666694" />
         </AssociationConnector>
         <AssociationConnector Association="AnrlDBModel.FK_t_Polygon_t_PolygonGroup" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.625" PointY="7.3939925130208337" />
-          <ConnectorPoint PointX="9.875" PointY="7.3939925130208337" />
-        </AssociationConnector>
-        <AssociationConnector Association="AnrlDBModel.FK_t_Race_t_PenaltyZone" ManuallyRouted="false">
-          <ConnectorPoint PointX="8.125" PointY="7.3939925130208337" />
-          <ConnectorPoint PointX="7.875" PointY="7.3939925130208337" />
+          <ConnectorPoint PointX="9.625" PointY="7.3939925130208328" />
+          <ConnectorPoint PointX="9.875" PointY="7.3939925130208328" />
         </AssociationConnector>
         <AssociationConnector Association="AnrlDBModel.FK_t_PolygonPoints_t_Polygon" ManuallyRouted="false">
           <ConnectorPoint PointX="11.75" PointY="7.3939925130208337" />
           <ConnectorPoint PointX="12.125" PointY="7.3939925130208337" />
         </AssociationConnector>
-        <AssociationConnector ManuallyRouted="false" Association="AnrlDBModel.FK_t_Team_t_Picture">
-          <ConnectorPoint PointX="9.125" PointY="5.3480843098958335" />
-          <ConnectorPoint PointX="5.75" PointY="5.3480843098958335" />
+        <AssociationConnector ManuallyRouted="true" Association="AnrlDBModel.FK_t_Team_t_Picture">
+          <ConnectorPoint PointX="9.1249999999999982" PointY="3.625" />
+          <ConnectorPoint PointX="8.75" PointY="3.2500000000000009" />
+          <ConnectorPoint PointX="8.75" PointY="3.125" />
+          <ConnectorPoint PointX="6.125" PointY="3.125" />
+          <ConnectorPoint PointX="5.75" PointY="3.5" />
         </AssociationConnector>
         <AssociationConnector Association="AnrlDBModel.FK_t_Team_t_Pilot" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.5" PointY="4.7326905488967892" />
-          <ConnectorPoint PointX="5.75" PointY="4.7326905488967892" />
+          <ConnectorPoint PointX="6.5" PointY="4.8271651502450315" />
+          <ConnectorPoint PointX="5.75" PointY="4.8271651502450315" />
         </AssociationConnector>
         <AssociationConnector Association="AnrlDBModel.FK_t_Team_t_Pilot1" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.5" PointY="4.1163452744483946" />
-          <ConnectorPoint PointX="5.75" PointY="4.1163452744483946" />
-        </AssociationConnector>
-        <AssociationConnector Association="AnrlDBModel.FK_t_Race_Team_t_Race" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.375" PointY="7.297841796875" />
-          <ConnectorPoint PointX="5.875" PointY="7.297841796875" />
+          <ConnectorPoint PointX="6.5" PointY="4.1635825751225157" />
+          <ConnectorPoint PointX="5.75" PointY="4.1635825751225157" />
         </AssociationConnector>
         <AssociationConnector Association="AnrlDBModel.FK_t_Race_Team_t_Team" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.0625" PointY="5.8648893229166656" />
+          <ConnectorPoint PointX="5.0625" PointY="5.8648893229166674" />
           <ConnectorPoint PointX="5.0625" PointY="6.5" />
         </AssociationConnector>
         <AssociationConnector Association="AnrlDBModel.FK_t_Team_t_Tracker" ManuallyRouted="false">
           <ConnectorPoint PointX="5" PointY="2.7302864583333335" />
           <ConnectorPoint PointX="5" PointY="3.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="AnrlDBModel.FK_t_Pilot_t_Picture" >
+          <ConnectorPoint PointX="9.125" PointY="4.5502450130208345" />
+          <ConnectorPoint PointX="8" PointY="4.5502450130208345" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="AnrlDBModel.t_Race" Width="1.5" PointX="6.25" PointY="6.5" Height="2.3648893229166674" />
+        <AssociationConnector Association="AnrlDBModel.FK_t_Race_t_PenaltyZone" >
+          <ConnectorPoint PointX="8.125" PointY="7.3939925130208328" />
+          <ConnectorPoint PointX="7.75" PointY="7.3939925130208328" />
+        </AssociationConnector>
+        <AssociationConnector Association="AnrlDBModel.FK_t_Race_Team_t_Race" >
+          <ConnectorPoint PointX="6.25" PointY="7.297841796875" />
+          <ConnectorPoint PointX="5.875" PointY="7.297841796875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

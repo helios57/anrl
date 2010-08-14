@@ -9,5 +9,8 @@ namespace AnrlInterfaces
     {
         IPilot Pilot { get; }
         IPilot Navigator { get; }
+        IPicture Picture { get; }
+        ITracker Tracker { get; }
+        String Color { get; }
     }
 }

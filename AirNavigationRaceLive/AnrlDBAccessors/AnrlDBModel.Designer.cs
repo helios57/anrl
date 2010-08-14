@@ -11,17 +11,18 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmSchemaAttribute()]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Daten_t_Tracker", "t_Tracker", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_Tracker), "t_Daten", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Daten))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Polygon_t_PolygonGroup", "t_PenaltyZone", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_PenaltyZone), "t_PenaltyZonePolygon", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_PenaltyZonePolygon))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Race_t_PenaltyZone", "t_PenaltyZone", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AnrlDBAccessors.t_PenaltyZone), "t_Race", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Race))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_PolygonPoints_t_Polygon", "t_PenaltyZonePolygon", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_PenaltyZonePolygon), "t_PenaltyZonePoint", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_PenaltyZonePoint))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Team_t_Picture", "t_Picture", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AnrlDBAccessors.t_Picture), "t_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Team))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Team_t_Pilot", "t_Pilot", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_Pilot), "t_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Team))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Team_t_Pilot1", "t_Pilot", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AnrlDBAccessors.t_Pilot), "t_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Team))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Race_Team_t_Race", "t_Race", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_Race), "t_Race_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Race_Team))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Race_Team_t_Team", "t_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_Team), "t_Race_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Race_Team))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Team_t_Tracker", "t_Tracker", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AnrlDBAccessors.t_Tracker), "t_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Team))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Pilot_t_Picture", "t_Picture", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(AnrlDBAccessors.t_Picture), "t_Pilot", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Pilot))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Race_t_PenaltyZone", "t_PenaltyZone", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_PenaltyZone), "t_Race", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Race))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("AnrlDBModel", "FK_t_Race_Team_t_Race", "t_Race", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(AnrlDBAccessors.t_Race), "t_Race_Team", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(AnrlDBAccessors.t_Race_Team))]
 
 // Original file name:
-// Generation date: 14.08.2010 09:55:55
+// Generation date: 14.08.2010 12:02:36
 namespace AnrlDBAccessors
 {
     
@@ -192,23 +193,6 @@ namespace AnrlDBAccessors
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<t_Pilot> _t_Pilot;
         /// <summary>
-        /// There are no comments for t_Race in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<t_Race> t_Race
-        {
-            get
-            {
-                if ((this._t_Race == null))
-                {
-                    this._t_Race = base.CreateQuery<t_Race>("[t_Race]");
-                }
-                return this._t_Race;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<t_Race> _t_Race;
-        /// <summary>
         /// There are no comments for t_Race_Team in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
@@ -259,6 +243,23 @@ namespace AnrlDBAccessors
         }
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<t_Tracker> _t_Tracker;
+        /// <summary>
+        /// There are no comments for t_Race in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<t_Race> t_Race
+        {
+            get
+            {
+                if ((this._t_Race == null))
+                {
+                    this._t_Race = base.CreateQuery<t_Race>("[t_Race]");
+                }
+                return this._t_Race;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<t_Race> _t_Race;
         /// <summary>
         /// There are no comments for t_Daten in the schema.
         /// </summary>
@@ -324,14 +325,6 @@ namespace AnrlDBAccessors
             base.AddObject("t_Pilot", t_Pilot);
         }
         /// <summary>
-        /// There are no comments for t_Race in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddTot_Race(t_Race t_Race)
-        {
-            base.AddObject("t_Race", t_Race);
-        }
-        /// <summary>
         /// There are no comments for t_Race_Team in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
@@ -354,6 +347,14 @@ namespace AnrlDBAccessors
         public void AddTot_Tracker(t_Tracker t_Tracker)
         {
             base.AddObject("t_Tracker", t_Tracker);
+        }
+        /// <summary>
+        /// There are no comments for t_Race in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddTot_Race(t_Race t_Race)
+        {
+            base.AddObject("t_Race", t_Race);
         }
     }
     /// <summary>
@@ -1916,224 +1917,42 @@ namespace AnrlDBAccessors
         partial void OnSureNameChanging(string value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnSureNameChanged();
-    }
-    /// <summary>
-    /// There are no comments for AnrlDBModel.t_Race in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// ID
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="AnrlDBModel", Name="t_Race")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class t_Race : global::System.Data.Objects.DataClasses.EntityObject
-    {
         /// <summary>
-        /// Create a new t_Race object.
+        /// There are no comments for t_Picture in the schema.
         /// </summary>
-        /// <param name="id">Initial value of ID.</param>
-        /// <param name="name">Initial value of Name.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static t_Race Createt_Race(int id, string name)
-        {
-            t_Race t_Race = new t_Race();
-            t_Race.ID = id;
-            t_Race.Name = name;
-            return t_Race;
-        }
-        /// <summary>
-        /// There are no comments for property ID in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int ID
-        {
-            get
-            {
-                return this._ID;
-            }
-            set
-            {
-                this.OnIDChanging(value);
-                this.ReportPropertyChanging("ID");
-                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("ID");
-                this.OnIDChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _ID;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIDChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIDChanged();
-        /// <summary>
-        /// There are no comments for property Name in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Name
-        {
-            get
-            {
-                return this._Name;
-            }
-            set
-            {
-                this.OnNameChanging(value);
-                this.ReportPropertyChanging("Name");
-                this._Name = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Name");
-                this.OnNameChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Name;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNameChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNameChanged();
-        /// <summary>
-        /// There are no comments for property TimeStart in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Nullable<global::System.DateTime> TimeStart
-        {
-            get
-            {
-                return this._TimeStart;
-            }
-            set
-            {
-                this.OnTimeStartChanging(value);
-                this.ReportPropertyChanging("TimeStart");
-                this._TimeStart = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("TimeStart");
-                this.OnTimeStartChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Nullable<global::System.DateTime> _TimeStart;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTimeStartChanging(global::System.Nullable<global::System.DateTime> value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTimeStartChanged();
-        /// <summary>
-        /// There are no comments for property TimeEnd in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Nullable<global::System.DateTime> TimeEnd
-        {
-            get
-            {
-                return this._TimeEnd;
-            }
-            set
-            {
-                this.OnTimeEndChanging(value);
-                this.ReportPropertyChanging("TimeEnd");
-                this._TimeEnd = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("TimeEnd");
-                this.OnTimeEndChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Nullable<global::System.DateTime> _TimeEnd;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTimeEndChanging(global::System.Nullable<global::System.DateTime> value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTimeEndChanged();
-        /// <summary>
-        /// There are no comments for property TakeOff in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Nullable<global::System.DateTime> TakeOff
-        {
-            get
-            {
-                return this._TakeOff;
-            }
-            set
-            {
-                this.OnTakeOffChanging(value);
-                this.ReportPropertyChanging("TakeOff");
-                this._TakeOff = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("TakeOff");
-                this.OnTakeOffChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Nullable<global::System.DateTime> _TakeOff;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTakeOffChanging(global::System.Nullable<global::System.DateTime> value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTakeOffChanged();
-        /// <summary>
-        /// There are no comments for t_PenaltyZone in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_t_PenaltyZone", "t_PenaltyZone")]
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Pilot_t_Picture", "t_Picture")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public t_PenaltyZone t_PenaltyZone
+        public t_Picture t_Picture
         {
             get
             {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone").Value;
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Picture>("AnrlDBModel.FK_t_Pilot_t_Picture", "t_Picture").Value;
             }
             set
             {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone").Value = value;
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Picture>("AnrlDBModel.FK_t_Pilot_t_Picture", "t_Picture").Value = value;
             }
         }
         /// <summary>
-        /// There are no comments for t_PenaltyZone in the schema.
+        /// There are no comments for t_Picture in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<t_PenaltyZone> t_PenaltyZoneReference
+        public global::System.Data.Objects.DataClasses.EntityReference<t_Picture> t_PictureReference
         {
             get
             {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone");
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Picture>("AnrlDBModel.FK_t_Pilot_t_Picture", "t_Picture");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for t_Race_Team in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_Team_t_Race", "t_Race_Team")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<t_Race_Team> t_Race_Team
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<t_Race_Team>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race_Team");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<t_Race_Team>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race_Team", value);
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<t_Picture>("AnrlDBModel.FK_t_Pilot_t_Picture", "t_Picture", value);
                 }
             }
         }
@@ -2188,45 +2007,6 @@ namespace AnrlDBAccessors
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnIDChanged();
         /// <summary>
-        /// There are no comments for t_Race in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_Team_t_Race", "t_Race")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public t_Race t_Race
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for t_Race in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<t_Race> t_RaceReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race", value);
-                }
-            }
-        }
-        /// <summary>
         /// There are no comments for t_Team in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_Team_t_Team", "t_Team")]
@@ -2262,6 +2042,45 @@ namespace AnrlDBAccessors
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<t_Team>("AnrlDBModel.FK_t_Race_Team_t_Team", "t_Team", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for t_Race in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_Team_t_Race", "t_Race")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public t_Race t_Race
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for t_Race in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<t_Race> t_RaceReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<t_Race>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race", value);
                 }
             }
         }
@@ -2667,6 +2486,233 @@ namespace AnrlDBAccessors
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<t_Team>("AnrlDBModel.FK_t_Team_t_Tracker", "t_Team", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// There are no comments for AnrlDBModel.t_Race in the schema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="AnrlDBModel", Name="t_Race")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class t_Race : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Create a new t_Race object.
+        /// </summary>
+        /// <param name="id">Initial value of ID.</param>
+        /// <param name="name">Initial value of Name.</param>
+        /// <param name="timeStart">Initial value of TimeStart.</param>
+        /// <param name="timeEnd">Initial value of TimeEnd.</param>
+        /// <param name="takeOff">Initial value of TakeOff.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static t_Race Createt_Race(int id, string name, global::System.DateTime timeStart, global::System.DateTime timeEnd, global::System.DateTime takeOff)
+        {
+            t_Race t_Race = new t_Race();
+            t_Race.ID = id;
+            t_Race.Name = name;
+            t_Race.TimeStart = timeStart;
+            t_Race.TimeEnd = timeEnd;
+            t_Race.TakeOff = takeOff;
+            return t_Race;
+        }
+        /// <summary>
+        /// There are no comments for property ID in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// There are no comments for property Name in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+            set
+            {
+                this.OnNameChanging(value);
+                this.ReportPropertyChanging("Name");
+                this._Name = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Name");
+                this.OnNameChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _Name;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNameChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNameChanged();
+        /// <summary>
+        /// There are no comments for property TimeStart in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime TimeStart
+        {
+            get
+            {
+                return this._TimeStart;
+            }
+            set
+            {
+                this.OnTimeStartChanging(value);
+                this.ReportPropertyChanging("TimeStart");
+                this._TimeStart = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("TimeStart");
+                this.OnTimeStartChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _TimeStart;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTimeStartChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTimeStartChanged();
+        /// <summary>
+        /// There are no comments for property TimeEnd in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime TimeEnd
+        {
+            get
+            {
+                return this._TimeEnd;
+            }
+            set
+            {
+                this.OnTimeEndChanging(value);
+                this.ReportPropertyChanging("TimeEnd");
+                this._TimeEnd = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("TimeEnd");
+                this.OnTimeEndChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _TimeEnd;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTimeEndChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTimeEndChanged();
+        /// <summary>
+        /// There are no comments for property TakeOff in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime TakeOff
+        {
+            get
+            {
+                return this._TakeOff;
+            }
+            set
+            {
+                this.OnTakeOffChanging(value);
+                this.ReportPropertyChanging("TakeOff");
+                this._TakeOff = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("TakeOff");
+                this.OnTakeOffChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _TakeOff;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTakeOffChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTakeOffChanged();
+        /// <summary>
+        /// There are no comments for t_PenaltyZone in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_t_PenaltyZone", "t_PenaltyZone")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public t_PenaltyZone t_PenaltyZone
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone").Value = value;
+            }
+        }
+        /// <summary>
+        /// There are no comments for t_PenaltyZone in the schema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<t_PenaltyZone> t_PenaltyZoneReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<t_PenaltyZone>("AnrlDBModel.FK_t_Race_t_PenaltyZone", "t_PenaltyZone", value);
+                }
+            }
+        }
+        /// <summary>
+        /// There are no comments for t_Race_Team in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("AnrlDBModel", "FK_t_Race_Team_t_Race", "t_Race_Team")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<t_Race_Team> t_Race_Team
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<t_Race_Team>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race_Team");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<t_Race_Team>("AnrlDBModel.FK_t_Race_Team_t_Race", "t_Race_Team", value);
                 }
             }
         }
