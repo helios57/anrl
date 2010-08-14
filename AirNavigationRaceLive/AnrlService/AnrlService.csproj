@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
@@ -75,6 +76,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AnrlDBAccessors\AnrlDBAccessors.csproj">
+      <Project>{4DE042F0-C774-4F1A-BABB-97EEFFB1412E}</Project>
+      <Name>AnrlDBAccessors</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AnrlInterfaces\AnrlInterfaces.csproj">
       <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
       <Name>AnrlInterfaces</Name>

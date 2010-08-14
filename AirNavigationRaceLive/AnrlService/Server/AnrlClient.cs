@@ -12,6 +12,7 @@ namespace AnrlService.Server
 
         public List<ITracker> getTrackers()
         {
+            AnrlDBAccessors.AnrlDBEntities db = new AnrlDBAccessors.AnrlDBEntities();
             throw new NotImplementedException();
         }
 
