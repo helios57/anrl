@@ -16,6 +16,7 @@ namespace AnrlService
         {
             s = new Server.Server(); 
             InitializeComponent();
+            OnStart(null);
         }
 
         protected override void OnStart(string[] args)

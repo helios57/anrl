@@ -6,7 +6,7 @@ using AnrlInterfaces;
 
 namespace AnrlService.Server
 {
-    class AnrlServerControl:IAnrlServerControl
+    class AnrlServerControl : MarshalByRefObject, IAnrlServerControl
     {
         public bool StartTCPListener()
         {

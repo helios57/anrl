@@ -6,7 +6,7 @@ using AnrlInterfaces;
 
 namespace AnrlService.Server.Impl
 {
-    class IDImpl:IID
+    class IDImpl : MarshalByRefObject, IID
     {
         private long _ID;
         internal IDImpl(long ID)

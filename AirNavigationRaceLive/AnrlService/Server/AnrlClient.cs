@@ -6,10 +6,12 @@ using AnrlInterfaces;
 using AnrlDBAccessors;
 using AnrlService.Server.Impl;
 using System.IO;
+using System.Data.EntityClient;
+using System.Data.SqlClient;
 
 namespace AnrlService.Server
 {
-    class AnrlClient : IAnrlClient
+    class AnrlClient : MarshalByRefObject, IAnrlClient
     {
         private string ConnectionString;
         AnrlDBAccessors.AnrlDBEntities db;
@@ -28,6 +30,7 @@ namespace AnrlService.Server
             foreach (t_Tracker tracker in db.t_Tracker)
             {
                 result.Add(new Tracker(tracker));
+                Update.Invoke(null, null);
             }
             return result;
         }
@@ -294,7 +297,7 @@ namespace AnrlService.Server
             return result;
         }
 
-        public long addPicture(IPicture picture)
+        public long addPicture(IPicture picture, Boolean isFlag)
         {      
             long result = -1;
             try
@@ -307,7 +310,7 @@ namespace AnrlService.Server
                     picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     t_Picture dbPicture = new t_Picture();
                     dbPicture.Data = ms.ToArray();
-                    dbPicture.isFlag = false;
+                    dbPicture.isFlag = isFlag;
                     ms.Close();
                     db.AddTot_Picture(dbPicture);
                     db.SaveChanges();

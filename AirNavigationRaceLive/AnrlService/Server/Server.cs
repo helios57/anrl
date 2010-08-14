@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
+using System.Data.EntityClient;
+using System.Data.SqlClient;
 
 namespace AnrlService.Server
 {
@@ -10,8 +12,11 @@ namespace AnrlService.Server
     {
         AnrlServerControl ServerControl = null;
         AnrlClient Client = null;
-        //original String ConnectionString = "metadata=res://*/AnrlDBModel.csdl|res://*/AnrlDBModel.ssdl|res://*/AnrlDBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=HELIOS6X-PC;Initial Catalog=AnrlDB;Integrated Security=True;MultipleActiveResultSets=True&quot;\" providerName=\"System.Data.EntityClient";
-        String ConnectionString = "metadata=res://*/AnrlDBModel.csdl|res://*/AnrlDBModel.ssdl|res://*/AnrlDBModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=localhost;Initial Catalog=AnrlDB;Integrated Security=True;MultipleActiveResultSets=True&quot;\" providerName=\"System.Data.EntityClient";
+        String ConnectionString;
+        public Server()
+        {
+            ConnectionString = generateConnectionString();
+        }
 
         public AnrlInterfaces.IAnrlClient getAnrlClient(string username, string password)
         {
@@ -40,10 +45,48 @@ namespace AnrlService.Server
             }
             return Result;
         }
-
         private Boolean authenticate(String username, String password)
         {
             return true;
+        }
+        private String generateConnectionString()
+        {
+            // Specify the provider name, server and database.
+            string providerName = "System.Data.SqlClient";
+            string serverName = ".";
+            string databaseName = "AnrlDB";
+
+            // Initialize the connection string builder for the
+            // underlying provider.
+            SqlConnectionStringBuilder sqlBuilder =
+                new SqlConnectionStringBuilder();
+
+            // Set the properties for the data source.
+            sqlBuilder.DataSource = serverName;
+            sqlBuilder.InitialCatalog = databaseName;
+            sqlBuilder.IntegratedSecurity = true;
+
+            // Build the SqlConnection connection string.
+            string providerString = sqlBuilder.ToString();
+
+            // Initialize the EntityConnectionStringBuilder.
+            EntityConnectionStringBuilder entityBuilder =
+                new EntityConnectionStringBuilder();
+
+            //Set the provider name.
+            entityBuilder.Provider = providerName;
+
+            // Set the provider-specific connection string.
+            entityBuilder.ProviderConnectionString = providerString;
+
+            // Set the Metadata location.
+            entityBuilder.Metadata = @"res://*/AnrlDBModel.csdl|res://*/AnrlDBModel.ssdl|res://*/AnrlDBModel.msl";
+
+            return entityBuilder.ToString();
+        }
+        public override object InitializeLifetimeService()
+        {
+            return null;
         }
     }
 }

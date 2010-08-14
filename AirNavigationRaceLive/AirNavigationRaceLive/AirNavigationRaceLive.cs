@@ -30,7 +30,9 @@ namespace AirNavigationRaceLive
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(new Components.Connect());
+            StatusStripLabel.Text = "Ready to Connect to Server";
         }
     }
 }

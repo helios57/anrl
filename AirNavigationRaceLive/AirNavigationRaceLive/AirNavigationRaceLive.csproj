@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AirNavigationRaceLive</RootNamespace>
     <AssemblyName>AirNavigationRaceLive</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -100,7 +100,14 @@
     <None Include="Resources\Logo_051.png" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <ProjectReference Include="..\AnrlInterfaces\AnrlInterfaces.csproj">
+      <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
+      <Name>AnrlInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteHelper\RemoteHelper.csproj">
+      <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>
+      <Name>RemoteHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
