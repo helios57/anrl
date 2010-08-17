@@ -12,6 +12,7 @@ namespace AnrlService
     public partial class AnrlService : ServiceBase
     {
         Server.Server s;
+        TCPReciever.Server Reciever;
         public AnrlService()
         {
             s = new Server.Server(); 
@@ -21,6 +22,7 @@ namespace AnrlService
 
         protected override void OnStart(string[] args)
         {
+
             try
             {
                 RemoteHelper.RemotingHelper.PublishObjectOverTCP(s, "AnrlServer", 4321, false, false);
@@ -29,10 +31,26 @@ namespace AnrlService
             {
                 System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
             }
+            try
+            {
+                Reciever = new TCPReciever.Server(s.getConnectionString());
+                s.SetReciever(Reciever);
+            }
+            catch
+            {
+            }
         }
 
         protected override void OnStop()
         {
+            if (Reciever != null)
+            {
+                try
+                {
+                    Reciever.Stop();
+                }
+                catch { }
+            }
         }
     }
 }

@@ -10,9 +10,11 @@ namespace AnrlService.Server
 {
     class Server : MarshalByRefObject ,IServer
     {
-        AnrlServerControl ServerControl = null;
-        AnrlClient Client = null;
-        String ConnectionString;
+        private AnrlServerControl ServerControl = null;
+        private AnrlClient Client = null;
+        private String ConnectionString;
+        private TCPReciever.Server Reciever;
+
         public Server()
         {
             ConnectionString = generateConnectionString();
@@ -84,9 +86,19 @@ namespace AnrlService.Server
 
             return entityBuilder.ToString();
         }
+       
         public override object InitializeLifetimeService()
         {
             return null;
+        }
+
+        internal String getConnectionString()
+        {
+            return ConnectionString;
+        }
+        internal void SetReciever(TCPReciever.Server Reciever)
+        {
+            this.Reciever = Reciever;
         }
     }
 }

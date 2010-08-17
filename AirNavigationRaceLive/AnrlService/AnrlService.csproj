@@ -66,6 +66,7 @@
       <DependentUpon>AnrlService.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reciever\Reciever.cs" />
     <Compile Include="Server\AnrlClient.cs" />
     <Compile Include="Server\AnrlServerControl.cs" />
     <Compile Include="Server\Impl\Data.cs" />
