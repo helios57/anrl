@@ -40,7 +40,7 @@ namespace AirNavigationRaceLive
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Client != null)
+            if (Client == null)
             {
                 MainPanel.Controls.Clear();
                 if (Connect == null)
@@ -63,12 +63,15 @@ namespace AirNavigationRaceLive
             if (c != null)
             {
                 Client = c;
+                StatusStripLabel.Text = "Connected to Server";
+                MainPanel.Controls.Clear();
             }
         }
 
         private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Client = null;
+            StatusStripLabel.Text = "Disconnected from Server";
         }
     }
 }

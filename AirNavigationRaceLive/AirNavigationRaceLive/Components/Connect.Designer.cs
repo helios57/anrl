@@ -65,6 +65,7 @@
             this.fldServer.Name = "fldServer";
             this.fldServer.Size = new System.Drawing.Size(210, 21);
             this.fldServer.TabIndex = 7;
+            this.fldServer.Text = "127.0.0.1";
             // 
             // lblUsername
             // 
