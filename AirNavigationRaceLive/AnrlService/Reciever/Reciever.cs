@@ -263,7 +263,7 @@ namespace TCPReciever
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
+        private void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {

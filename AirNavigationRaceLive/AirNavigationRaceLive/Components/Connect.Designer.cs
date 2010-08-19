@@ -59,8 +59,8 @@
             // 
             this.fldServer.FormattingEnabled = true;
             this.fldServer.Items.AddRange(new object[] {
-            "http://127.0.0.1:5555/",
-            "http://83.169.11.154:5555/"});
+            "127.0.0.1",
+            "83.169.11.154"});
             this.fldServer.Location = new System.Drawing.Point(181, 132);
             this.fldServer.Name = "fldServer";
             this.fldServer.Size = new System.Drawing.Size(210, 21);

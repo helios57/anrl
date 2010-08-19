@@ -13,34 +13,27 @@ namespace AirNavigationRaceLive.Components
 {
     public partial class Connect : UserControl
     {
+        public event EventHandler Connected;
+
         public Connect()
         {
             InitializeComponent();
         }
-
+        
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            IServer server = RemoteHelper.RemotingHelper.GetRemoteObjectOverTCP(typeof(IServer), "AnrlServer", "localhost", 4321, false, false) as IServer;
+            IServer server = RemoteHelper.RemotingHelper.GetRemoteObjectOverTCP(typeof(IServer), "AnrlServer", fldServer.Text, 4321, false, false) as IServer;
             if (server != null)
             {
-                IAnrlClient client = server.getAnrlClient("test", "test");
-                client.getTrackers();
+                IAnrlClient client = server.getAnrlClient(fldUsername.Text, fldPassword.Text);
+                if (client != null)
+                {
+                    if (Connected != null)
+                    {
+                        Connected.Invoke(client, e);
+                    }
+                }
             }
-            /*
-            Client = new ANRL.ANRLDataService.ANRLDataServiceClient(ConnectionConfig, RemoteAddress);
-            if (!RemoteAddress.Contains("127.0.0.1"))
-            {
-                Client.ClientCredentials.UserName.UserName = Username;
-                Client.ClientCredentials.UserName.Password = Password;
-                Client.ClientCredentials.Windows.ClientCredential.UserName = Username;
-                Client.ClientCredentials.Windows.ClientCredential.Password = Password;
-            }
-            return Client.State == System.ServiceModel.CommunicationState.Created;*/
-        }
-
-        void client_Update(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 }

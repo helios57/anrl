@@ -13,6 +13,7 @@ namespace AnrlInterfaces
         List<IRace> getRaces();
         List<IPenaltyZone> getPenaltyzones();
         List<IData> getData(List<ITracker> trackers,DateTime from, DateTime to);
+        Boolean addName(ITracker tracker);
         long addPilot(IPilot pilot);
         long addTeam(ITeam team);
         long addRace(IRace race);

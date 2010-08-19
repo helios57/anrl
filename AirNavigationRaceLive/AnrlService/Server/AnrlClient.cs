@@ -404,6 +404,24 @@ namespace AnrlService.Server
             return result;
         }
 
+        public bool addName(ITracker tracker)
+        {
+            bool result = false;
+            try
+            {
+                t_Tracker t = db.t_Tracker.Single(p => p.ID == tracker.ID);
+                if (t != null)
+                {
+                    t.Name = tracker.Name;
+                    db.SaveChanges();
+                    result = true;
+                }
+            }
+            catch { }
+
+            return result;
+        }
+
         #endregion
     }
 }
