@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AnrlDB" Class="AnrlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HELIOS6X-PC;Initial Catalog=AnrlDB;Integrated Security=True" SettingsObjectName="AnrlDB.Properties.Settings" SettingsPropertyName="AnrlDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_Daten" Member="t_Datens">
+    <Type Name="t_Daten">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Longitude" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Latitude" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Altitude" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Speed" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="Penalty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Tracker" Member="t_Trackers">
+    <Type Name="t_Tracker">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
+      <Association Name="t_Tracker_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
+    <Type Name="t_GPS_IN">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GPS_fix" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimestampTracker" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="longitude" Type="System.String" DbType="NChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.String" DbType="NChar(12) NOT NULL" CanBeNull="false" />
+      <Column Name="altitude" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="speed" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="heading" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="nr_used_sat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HDOP" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Processed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Log" Member="t_Logs">
+    <Type Name="t_Log">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="[level]" Member="level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="project" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Text" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PenaltyZone" Member="t_PenaltyZones">
+    <Type Name="t_PenaltyZone">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="t_PenaltyZone_t_PenaltyZonePolygon" Member="t_PenaltyZonePolygons" ThisKey="ID" OtherKey="ID_PolygonGroup" Type="t_PenaltyZonePolygon" />
+      <Association Name="t_PenaltyZone_t_Race" Member="t_Races" ThisKey="ID" OtherKey="ID_PenaltyZone" Type="t_Race" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PenaltyZonePoint" Member="t_PenaltyZonePoints">
+    <Type Name="t_PenaltyZonePoint">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="longitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
+      <Column Name="altitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_PenaltyZonePolygon_t_PenaltyZonePoint" Member="t_PenaltyZonePolygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_PenaltyZonePolygon" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_PenaltyZonePolygon" Member="t_PenaltyZonePolygons">
+    <Type Name="t_PenaltyZonePolygon">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_PolygonGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_PenaltyZonePolygon_t_PenaltyZonePoint" Member="t_PenaltyZonePoints" ThisKey="ID" OtherKey="ID_Polygon" Type="t_PenaltyZonePoint" />
+      <Association Name="t_PenaltyZone_t_PenaltyZonePolygon" Member="t_PenaltyZone" ThisKey="ID_PolygonGroup" OtherKey="ID" Type="t_PenaltyZone" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Picture" Member="t_Pictures">
+    <Type Name="t_Picture">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Data" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="isFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="t_Picture_t_Pilot" Member="t_Pilots" ThisKey="ID" OtherKey="ID_Picture" Type="t_Pilot" />
+      <Association Name="t_Picture_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Flag" Type="t_Team" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Pilot" Member="t_Pilots">
+    <Type Name="t_Pilot">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SureName" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ID_Picture" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="t_Pilot_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Pilot" Type="t_Team" />
+      <Association Name="t_Pilot_t_Team1" Member="t_Teams1" ThisKey="ID" OtherKey="ID_Navigator" Type="t_Team" />
+      <Association Name="t_Picture_t_Pilot" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Race" Member="t_Races">
+    <Type Name="t_Race">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ID_PenaltyZone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TimeEnd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="TakeOff" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="t_Race_t_Race_Team" Member="t_Race_Teams" ThisKey="ID" OtherKey="ID_Race" Type="t_Race_Team" />
+      <Association Name="t_PenaltyZone_t_Race" Member="t_PenaltyZone" ThisKey="ID_PenaltyZone" OtherKey="ID" Type="t_PenaltyZone" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Race_Team" Member="t_Race_Teams">
+    <Type Name="t_Race_Team">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Race" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Race_t_Race_Team" Member="t_Race" ThisKey="ID_Race" OtherKey="ID" Type="t_Race" IsForeignKey="true" />
+      <Association Name="t_Team_t_Race_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Team" Member="t_Teams">
+    <Type Name="t_Team">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Pilot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Navigator" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Color" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="ID_Flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="t_Team_t_Race_Team" Member="t_Race_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Race_Team" />
+      <Association Name="t_Picture_t_Team" Member="t_Picture" ThisKey="ID_Flag" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
+      <Association Name="t_Pilot_t_Team" Member="t_Pilot" ThisKey="ID_Pilot" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
+      <Association Name="t_Pilot_t_Team1" Member="t_Pilot1" ThisKey="ID_Navigator" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
+      <Association Name="t_Tracker_t_Team" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

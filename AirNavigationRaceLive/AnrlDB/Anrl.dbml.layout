@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 14.875" name="Anrl">
+  <DataContextMoniker Name="/AnrlDataContext" />
+  <nestedChildShapes>
+    <classShape Id="2b02ab9b-ef78-4906-a72a-a6803e03685a" absoluteBounds="3.5, 6.125, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/AnrlDataContext/t_Daten" />
+      <nestedChildShapes>
+        <elementListCompartment Id="56410885-4da7-47b9-b7e5-95768bd82365" absoluteBounds="3.515, 6.585, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="adae4397-4ec3-4b54-91ee-7619e8dfec0c" absoluteBounds="0.75, 4, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/AnrlDataContext/t_Tracker" />
+      <nestedChildShapes>
+        <elementListCompartment Id="981b847f-cf3d-4ef0-9604-04ae9eecfad9" absoluteBounds="0.765, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f4c33cb2-110c-42ad-9f95-6774876e4b5b" absoluteBounds="6.75, 5.75, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/AnrlDataContext/t_GPS_IN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b774443a-9e40-4f27-8da8-672c80fe74e4" absoluteBounds="6.765, 6.21, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="51fc97d4-6c08-4c08-ac44-17acbcffbae9" absoluteBounds="8.75, 1.75, 2, 1.7708968098958329">
+      <DataClassMoniker Name="/AnrlDataContext/t_Log" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d671e61c-0a6d-4383-80e1-bcaa209ac5ef" absoluteBounds="8.765, 2.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="892d896d-528c-46cb-9909-4dce7ac2325b" absoluteBounds="0.75, 10.125, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/AnrlDataContext/t_PenaltyZone" />
+      <nestedChildShapes>
+        <elementListCompartment Id="095517a1-6c35-4e7d-955d-9699603e29f4" absoluteBounds="0.765, 10.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b633d9ed-fa4e-4cdd-8358-ed463e5a08b4" absoluteBounds="6.25, 12.875, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/AnrlDataContext/t_PenaltyZonePoint" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8596fd07-902b-45ce-8069-5a3ca4231aa0" absoluteBounds="6.265, 13.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fca5b25d-a7b0-47aa-acbd-4e4b2d2bcdc8" absoluteBounds="3.5, 13, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/AnrlDataContext/t_PenaltyZonePolygon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="31be281c-4b48-4119-a913-ee5679a93411" absoluteBounds="3.515, 13.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3511ddd9-4264-4a48-ac2e-70b37cdb1b33" absoluteBounds="0.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AnrlDataContext/t_Picture" />
+      <nestedChildShapes>
+        <elementListCompartment Id="226e06cc-643b-4c32-9679-a5ddbb3b9ade" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8e2f14c4-b109-4daf-97c7-7e771cb664e9" absoluteBounds="0.75, 7.125, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/AnrlDataContext/t_Pilot" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a3ddb2f8-6c58-43df-b145-84262d67cd67" absoluteBounds="0.765, 7.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="57f5c6e9-c073-4450-bd52-d43f75da0314" absoluteBounds="3.5, 9.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/AnrlDataContext/t_Race" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f58481c-38b9-45a4-87b9-ef31fad27800" absoluteBounds="3.515, 10.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fe734d23-40e4-41fd-8055-52cccd10b104" absoluteBounds="6.25, 3, 2, 1.3862939453124992">
+      <DataClassMoniker Name="/AnrlDataContext/t_Race_Team" />
+      <nestedChildShapes>
+        <elementListCompartment Id="22127370-4bf1-4186-a536-5d6db9314ba4" absoluteBounds="6.265, 3.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="415aaa92-6496-4990-bcd4-692438ebc2d7" absoluteBounds="3.5, 2.75, 2, 1.9631982421874996">
+      <DataClassMoniker Name="/AnrlDataContext/t_Team" />
+      <nestedChildShapes>
+        <elementListCompartment Id="594b8444-aa22-4546-882c-632addd917ef" absoluteBounds="3.515, 3.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 5.3862939453125); (3.125 : 5.7612939453125); (3.125 : 7.39505126953125); (3.5 : 7.39505126953125)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Tracker/t_Tracker_t_Daten" />
+      <nodes>
+        <classShapeMoniker Id="adae4397-4ec3-4b54-91ee-7619e8dfec0c" />
+        <classShapeMoniker Id="2b02ab9b-ef78-4906-a72a-a6803e03685a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 13.6931469726562); (6.25 : 13.6931469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_PenaltyZonePolygon/t_PenaltyZonePolygon_t_PenaltyZonePoint" />
+      <nodes>
+        <classShapeMoniker Id="fca5b25d-a7b0-47aa-acbd-4e4b2d2bcdc8" />
+        <classShapeMoniker Id="b633d9ed-fa4e-4cdd-8358-ed463e5a08b4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 11.3189925130208); (1.75 : 13.6931469726562); (3.5 : 13.6931469726562)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_PenaltyZone/t_PenaltyZone_t_PenaltyZonePolygon" />
+      <nodes>
+        <classShapeMoniker Id="892d896d-528c-46cb-9909-4dce7ac2325b" />
+        <classShapeMoniker Id="fca5b25d-a7b0-47aa-acbd-4e4b2d2bcdc8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.26666486663662); (3.3125 : 2.82916486663662); (3.3125 : 6.5236422676282); (3.18392556509888 : 6.65221670252933 : JumpStart); (3.06607443490112 : 6.77006783272708 : JumpEnd); (2.71114226762821 : 7.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AnrlDataContext/t_Picture/t_Picture_t_Pilot" />
+      <nodes>
+        <classShapeMoniker Id="3511ddd9-4264-4a48-ac2e-70b37cdb1b33" />
+        <classShapeMoniker Id="8e2f14c4-b109-4daf-97c7-7e771cb664e9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.7219962565104); (3.5 : 10.7219962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_PenaltyZone/t_PenaltyZone_t_Race" />
+      <nodes>
+        <classShapeMoniker Id="892d896d-528c-46cb-9909-4dce7ac2325b" />
+        <classShapeMoniker Id="57f5c6e9-c073-4450-bd52-d43f75da0314" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 10.7315991210937); (6.46875 : 10.7315991210937); (6.46875 : 4.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Race/t_Race_t_Race_Team" />
+      <nodes>
+        <classShapeMoniker Id="57f5c6e9-c073-4450-bd52-d43f75da0314" />
+        <classShapeMoniker Id="fe734d23-40e4-41fd-8055-52cccd10b104" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 3.69314697265625); (6.25 : 3.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Team/t_Team_t_Race_Team" />
+      <nodes>
+        <classShapeMoniker Id="415aaa92-6496-4990-bcd4-692438ebc2d7" />
+        <classShapeMoniker Id="fe734d23-40e4-41fd-8055-52cccd10b104" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.47707993331831); (4.5 : 1.47707993331831); (4.5 : 2.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Picture/t_Picture_t_Team" />
+      <nodes>
+        <classShapeMoniker Id="3511ddd9-4264-4a48-ac2e-70b37cdb1b33" />
+        <classShapeMoniker Id="415aaa92-6496-4990-bcd4-692438ebc2d7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.16507103650841); (3.06607443490112 : 6.84899660160729 : JumpStart); (3.18392556509888 : 6.73114547140953 : JumpEnd); (3.40625 : 6.50882103650841); (3.40625 : 3.73159912109375); (3.5 : 3.73159912109375)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Pilot/t_Pilot_t_Team" />
+      <nodes>
+        <classShapeMoniker Id="8e2f14c4-b109-4daf-97c7-7e771cb664e9" />
+        <classShapeMoniker Id="415aaa92-6496-4990-bcd4-692438ebc2d7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.15657090755208); (3.06607443490112 : 6.84049647265096 : JumpStart); (3.18392556509888 : 6.7226453424532 : JumpEnd); (3.21875 : 6.68782090755208); (3.21875 : 3.73159912109375); (3.22916666666667 : 3.73159912109375 : JumpStart); (3.39583333333333 : 3.73159912109375 : JumpEnd); (3.5 : 3.73159912109375)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Pilot/t_Pilot_t_Team1" />
+      <nodes>
+        <classShapeMoniker Id="8e2f14c4-b109-4daf-97c7-7e771cb664e9" />
+        <classShapeMoniker Id="415aaa92-6496-4990-bcd4-692438ebc2d7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.35659912109375); (3.13541666666667 : 4.35659912109375 : JumpStart); (3.48958333333333 : 4.35659912109375 : JumpEnd); (3.5 : 4.35659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Tracker/t_Tracker_t_Team" />
+      <nodes>
+        <classShapeMoniker Id="adae4397-4ec3-4b54-91ee-7619e8dfec0c" />
+        <classShapeMoniker Id="415aaa92-6496-4990-bcd4-692438ebc2d7" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
