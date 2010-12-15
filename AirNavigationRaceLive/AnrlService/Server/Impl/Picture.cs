@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
-using AnrlDBAccessors;
 using System.IO;
+using AnrlDB;
 
 namespace AnrlService.Server.Impl
 {
@@ -13,7 +13,7 @@ namespace AnrlService.Server.Impl
         private System.Drawing.Image _Picture;
         internal Picture(t_Picture picture):base(picture.ID)
         {
-            MemoryStream ms = new MemoryStream(picture.Data);
+            MemoryStream ms = new MemoryStream(picture.Data.ToArray());
             _Picture = System.Drawing.Image.FromStream(ms);
             ms.Close();
         }

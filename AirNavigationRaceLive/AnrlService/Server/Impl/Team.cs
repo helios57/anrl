@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
-using AnrlDBAccessors;
+using AnrlDB;
 
 namespace AnrlService.Server.Impl
 {
@@ -19,7 +19,7 @@ namespace AnrlService.Server.Impl
             : base(team.ID)
         {
             _Pilot = new Pilot(team.t_Pilot);
-            _Navigator = new Pilot(team.t_Navigator);
+            _Navigator = new Pilot(team.t_Pilot1);
             _Picture = new Picture(team.t_Picture);
             _Tracker = new Tracker(team.t_Tracker);
             _Color = team.Color;

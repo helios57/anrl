@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
-using AnrlDBAccessors;
 using AnrlService.Server.Impl;
 using System.IO;
 using System.Data.EntityClient;
 using System.Data.SqlClient;
+using AnrlDB;
 
 namespace AnrlService.Server
 {
     class AnrlClient : MarshalByRefObject, IAnrlClient
     {
         private string ConnectionString;
-        AnrlDBAccessors.AnrlDBEntities db;
+        AnrlDB.AnrlDataContext db;
 
         public AnrlClient(string ConnectionString)
         {
             this.ConnectionString = ConnectionString;
-            db = new AnrlDBAccessors.AnrlDBEntities(ConnectionString);
+            db = new AnrlDB.AnrlDataContext(ConnectionString);
         }
 
         #region IAnrlClient Members
@@ -27,7 +27,7 @@ namespace AnrlService.Server
         public List<ITracker> getTrackers()
         {
             List<ITracker> result = new List<ITracker>();
-            foreach (t_Tracker tracker in db.t_Tracker)
+            foreach (t_Tracker tracker in db.t_Trackers)
             {
                 result.Add(new Tracker(tracker));
             }
@@ -37,7 +37,7 @@ namespace AnrlService.Server
         public List<IPilot> getPilots()
         {
             List<IPilot> result = new List<IPilot>();
-            foreach (t_Pilot pilot in db.t_Pilot)
+            foreach (t_Pilot pilot in db.t_Pilots)
             {
                 result.Add(new Pilot(pilot));
             }
@@ -47,7 +47,7 @@ namespace AnrlService.Server
         public List<ITeam> getTeams()
         {
             List<ITeam> result = new List<ITeam>();
-            foreach (t_Team team in db.t_Team)
+            foreach (t_Team team in db.t_Teams)
             {
                 result.Add(new Team(team));
             }
@@ -57,7 +57,7 @@ namespace AnrlService.Server
         public List<IRace> getRaces()
         {
             List<IRace> result = new List<IRace>();
-            foreach (t_Race race in db.t_Race)
+            foreach (t_Race race in db.t_Races)
             {
                 result.Add(new Race(race));
             }
@@ -67,7 +67,7 @@ namespace AnrlService.Server
         public List<IPenaltyZone> getPenaltyzones()
         {
             List<IPenaltyZone> result = new List<IPenaltyZone>();
-            foreach (t_PenaltyZone penaltyZone in db.t_PenaltyZone)
+            foreach (t_PenaltyZone penaltyZone in db.t_PenaltyZones)
             {
                 result.Add(new PenaltyZone(penaltyZone));
             }
@@ -77,7 +77,7 @@ namespace AnrlService.Server
         public List<IData> getData(List<ITracker> trackers, DateTime from, DateTime to)
         {
             List<IData> result = new List<IData>();
-            foreach (t_Daten data in db.t_Daten.Where(p => p.Timestamp >= from && p.Timestamp <= to))
+            foreach (t_Daten data in db.t_Datens.Where(p => p.Timestamp >= from && p.Timestamp <= to))
             {
                 result.Add(new Data(data));
             }
@@ -107,16 +107,16 @@ namespace AnrlService.Server
                         picture = new t_Picture();
                         picture.Data = ms.ToArray();
                         ms.Close();
-                        db.AddTot_Picture(picture);
-                        db.SaveChanges();
+                        db.t_Pictures.InsertOnSubmit(picture);
+                        db.SubmitChanges();
                     }
                     else
                     {
-                        picture = db.t_Picture.Single(pp => pp.ID == pilot.Picture.ID);
+                        picture = db.t_Pictures.Single(pp => pp.ID == pilot.Picture.ID);
                     }
                     p.t_Picture = picture;
-                    db.AddTot_Pilot(p);
-                    db.SaveChanges();
+                    db.t_Pilots.InsertOnSubmit(p);
+                    db.SubmitChanges();
                     result = p.ID;
                 }
             }
@@ -137,29 +137,29 @@ namespace AnrlService.Server
                     team.FlagPicture != null && 
                     team.FlagPicture.ID >0)
                 {
-                    t_Pilot pilot = db.t_Pilot.Single(p => p.ID == team.Pilot.ID);
+                    t_Pilot pilot = db.t_Pilots.Single(p => p.ID == team.Pilot.ID);
                     if (pilot != null)
                     {
                         t_Pilot navigator = null;
                         if (team.Navigator != null && team.Navigator.ID > 0)
                         {
-                            navigator = db.t_Pilot.Single(p => p.ID == team.Navigator.ID);
+                            navigator = db.t_Pilots.Single(p => p.ID == team.Navigator.ID);
                         }
-                        t_Picture flag = db.t_Picture.Single(p => p.ID == team.FlagPicture.ID && p.isFlag);
+                        t_Picture flag = db.t_Pictures.Single(p => p.ID == team.FlagPicture.ID && p.isFlag);
 
                         t_Tracker tracker = null;
                         if (team.Tracker != null && team.Tracker.ID > 0)
                         {
-                            tracker = db.t_Tracker.Single(p=>p.ID == team.Tracker.ID);
+                            tracker = db.t_Trackers.Single(p=>p.ID == team.Tracker.ID);
                         }
                         t_Team dbTeam = new t_Team();
                         dbTeam.t_Pilot = pilot;
-                        dbTeam.t_Navigator = navigator;
+                        dbTeam.t_Pilot1 = navigator;
                         dbTeam.t_Picture = flag;
                         dbTeam.t_Tracker = tracker;
                         dbTeam.Color = team.Color;
-                        db.AddTot_Team(dbTeam);
-                        db.SaveChanges();
+                        db.t_Teams.InsertOnSubmit(dbTeam);
+                        db.SubmitChanges();
                         result = dbTeam.ID;
                     }
                 }
@@ -188,7 +188,7 @@ namespace AnrlService.Server
                     {
                         if (team.ID > 0)
                         {
-                            teams.Add(db.t_Team.Single(p => p.ID == team.ID));
+                            teams.Add(db.t_Teams.Single(p => p.ID == team.ID));
                         }
                         else
                         {
@@ -198,7 +198,7 @@ namespace AnrlService.Server
                     }
                     if (teamsOk)
                     {
-                        t_PenaltyZone penaltyZone = db.t_PenaltyZone.Single(p => p.ID == race.PenaltyZone.ID);
+                        t_PenaltyZone penaltyZone = db.t_PenaltyZones.Single(p => p.ID == race.PenaltyZone.ID);
                         if (penaltyZone != null)
                         {
                             t_Race dbRace = new t_Race();
@@ -207,16 +207,16 @@ namespace AnrlService.Server
                             dbRace.TakeOff = race.TakeOff;
                             dbRace.TimeEnd = race.End;
                             dbRace.TimeStart = race.Start;
-                            db.AddTot_Race(dbRace);
-                            db.SaveChanges();
+                            db.t_Races.InsertOnSubmit(dbRace);
+                            db.SubmitChanges();
                             foreach (t_Team team in teams)
                             {
                                 t_Race_Team rt = new t_Race_Team();
                                 rt.t_Race = dbRace;
                                 rt.t_Team = team;
-                                db.AddTot_Race_Team(rt);
+                                db.t_Race_Teams.InsertOnSubmit(rt);
                             }
-                            db.SaveChanges();
+                            db.SubmitChanges();
                             result = dbRace.ID;
                         }
                     }
@@ -275,19 +275,19 @@ namespace AnrlService.Server
                     {
                         t_PenaltyZone dbZone = new t_PenaltyZone();
                         dbZone.Name = penaltyzone.Name;
-                        db.AddTot_PenaltyZone(dbZone);
-                        db.SaveChanges();
+                        db.t_PenaltyZones.InsertOnSubmit(dbZone);
+                        db.SubmitChanges();
                         foreach (t_PenaltyZonePolygon poly in polygons)
                         {
                             poly.t_PenaltyZone = dbZone;
-                            db.AddTot_PenaltyZonePolygon(poly);
+                            db.t_PenaltyZonePolygons.InsertOnSubmit(poly);
                         }
-                        db.SaveChanges();
+                        db.SubmitChanges();
                         foreach (t_PenaltyZonePoint point in points)
                         {
-                            db.AddTot_PenaltyZonePoint(point);
+                            db.t_PenaltyZonePoints.InsertOnSubmit(point);
                         }
-                        db.SaveChanges();
+                        db.SubmitChanges();
                         result = dbZone.ID;
                     }
                 }
@@ -311,8 +311,8 @@ namespace AnrlService.Server
                     dbPicture.Data = ms.ToArray();
                     dbPicture.isFlag = isFlag;
                     ms.Close();
-                    db.AddTot_Picture(dbPicture);
-                    db.SaveChanges();
+                    db.t_Pictures.InsertOnSubmit(dbPicture);
+                    db.SubmitChanges();
                     result = dbPicture.ID;
                 }
             }
@@ -325,8 +325,8 @@ namespace AnrlService.Server
             bool result = false;
             try
             {
-                db.DeleteObject(db.t_Pilot.Single(p => p.ID == id));
-                db.SaveChanges();
+                db.t_Pilots.DeleteOnSubmit(db.t_Pilots.Single(p => p.ID == id));
+                db.SubmitChanges();
                 result = true;
             }
             catch
@@ -340,8 +340,8 @@ namespace AnrlService.Server
             bool result = false;
             try
             {
-                db.DeleteObject(db.t_Team.Single(p => p.ID == id));
-                db.SaveChanges();
+                db.t_Teams.DeleteOnSubmit(db.t_Teams.Single(p => p.ID == id));
+                db.SubmitChanges();
                 result = true;
             }
             catch
@@ -355,8 +355,8 @@ namespace AnrlService.Server
             bool result = false;
             try
             {
-                db.DeleteObject(db.t_Race.Single(p => p.ID == id));
-                db.SaveChanges();
+                db.t_Races.DeleteOnSubmit(db.t_Races.Single(p => p.ID == id));
+                db.SubmitChanges();
                 result = true;
             }
             catch
@@ -370,17 +370,17 @@ namespace AnrlService.Server
             bool result = false;
             try
             {
-                t_PenaltyZone zone = db.t_PenaltyZone.Single(p => p.ID == id);
-                foreach (t_PenaltyZonePolygon poly in zone.t_PenaltyZonePolygon)
+                t_PenaltyZone zone = db.t_PenaltyZones.Single(p => p.ID == id);
+                foreach (t_PenaltyZonePolygon poly in zone.t_PenaltyZonePolygons)
                 {
-                    foreach (t_PenaltyZonePoint point in poly.t_PenaltyZonePoint)
+                    foreach (t_PenaltyZonePoint point in poly.t_PenaltyZonePoints)
                     {
-                        db.DeleteObject(point);
+                        db.t_PenaltyZonePoints.DeleteOnSubmit(point);
                     }
-                    db.DeleteObject(poly);
+                    db.t_PenaltyZonePolygons.DeleteOnSubmit(poly);
                 }
-                db.DeleteObject(zone);
-                db.SaveChanges();
+                db.t_PenaltyZones.DeleteOnSubmit(zone);
+                db.SubmitChanges();
                 result = true;
             }
             catch
@@ -394,8 +394,8 @@ namespace AnrlService.Server
             bool result = false;
             try
             {
-                db.DeleteObject(db.t_Picture.Single(p => p.ID == id));
-                db.SaveChanges();
+                db.t_Pictures.DeleteOnSubmit(db.t_Pictures.Single(p => p.ID == id));
+                db.SubmitChanges();
                 result = true;
             }
             catch
@@ -409,11 +409,11 @@ namespace AnrlService.Server
             bool result = false;
             try
             {
-                t_Tracker t = db.t_Tracker.Single(p => p.ID == tracker.ID);
+                t_Tracker t = db.t_Trackers.Single(p => p.ID == tracker.ID);
                 if (t != null)
                 {
                     t.Name = tracker.Name;
-                    db.SaveChanges();
+                    db.SubmitChanges();
                     result = true;
                 }
             }

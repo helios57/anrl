@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
-using AnrlDBAccessors;
+using AnrlDB;
 
 namespace AnrlService.Server.Impl
 {
@@ -14,7 +14,7 @@ namespace AnrlService.Server.Impl
             : base(penaltyPolygon.ID)
         {
             _Points = new List<IPenaltyPoint>();
-            foreach (t_PenaltyZonePoint point in penaltyPolygon.t_PenaltyZonePoint)
+            foreach (t_PenaltyZonePoint point in penaltyPolygon.t_PenaltyZonePoints)
             {
                 _Points.Add(new PenaltyPoint(point));
             }

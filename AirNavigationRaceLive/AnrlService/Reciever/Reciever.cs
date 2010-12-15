@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Timers;
-using AnrlDBAccessors;
+using AnrlDB;
 
 namespace TCPReciever
 {
@@ -23,7 +23,7 @@ namespace TCPReciever
         private bool running;
         private List<Thread> ThreadList = new List<Thread>();
         private System.Timers.Timer CalculateTabels;
-        private AnrlDBAccessors.AnrlDBEntities db;
+        private AnrlDB.AnrlDataContext db;
         
         #endregion
         /// <summary>
@@ -33,7 +33,7 @@ namespace TCPReciever
         {
             try
             {
-                db = new AnrlDBAccessors.AnrlDBEntities(ConnectionString);
+                db = new AnrlDB.AnrlDataContext(ConnectionString);
                 
                 CalculateTabels = new System.Timers.Timer(1000);
                 CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);
@@ -74,12 +74,12 @@ namespace TCPReciever
                     String trimedGPSData = incomingData.Trim(new char[] { '!', '$' });
                     String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
-                    if (db.t_Tracker.Count(p => p.IMEI == GPScoords[0]) == 0)
+                    if (db.t_Trackers.Count(p => p.IMEI == GPScoords[0]) == 0)
                     {
                         t_Tracker t = new t_Tracker();
                         t.IMEI = GPScoords[0];
-                        db.AddTot_Tracker(t);
-                        db.SaveChanges();
+                        db.t_Trackers.InsertOnSubmit(t);
+                        db.SubmitChanges();
                     }
                     string yy = GPScoords[3].Substring(4, 2);
                     string mm = GPScoords[3].Substring(2, 2);
@@ -107,8 +107,8 @@ namespace TCPReciever
                         new_position.Timestamp = DateTime.Now;
                         new_position.Processed = false;
 
-                        db.AddTot_GPS_IN(new_position);
-                        db.SaveChanges();
+                        db.t_GPS_INs.InsertOnSubmit(new_position);
+                        db.SubmitChanges();
                     }
                 }
                 catch
@@ -267,8 +267,8 @@ namespace TCPReciever
         {
             try
             {
-                List<t_GPS_IN> Positions = db.t_GPS_IN.Where(a => !a.Processed).OrderBy(t => t.TimestampTracker).ToList();
-                List<t_Tracker> Trackers = db.t_Tracker.ToList();
+                List<t_GPS_IN> Positions = db.t_GPS_INs.Where(a => !a.Processed).OrderBy(t => t.TimestampTracker).ToList();
+                List<t_Tracker> Trackers = db.t_Trackers.ToList();
 
                 foreach (t_Tracker tr in Trackers)
                 {
@@ -285,7 +285,7 @@ namespace TCPReciever
                                 InsertData.Latitude = decimal.Round(ConvertCoordinates(GPS_IN.latitude), 16);
                                 InsertData.Longitude = decimal.Round(ConvertCoordinates(GPS_IN.longitude), 16);
                                 InsertData.Altitude = decimal.Parse(GPS_IN.altitude);
-                                db.AddTot_Daten(InsertData);
+                                db.t_Datens.InsertOnSubmit(InsertData);
                                 GPS_IN.Processed = true;
                             }
                             catch { }
@@ -295,7 +295,7 @@ namespace TCPReciever
                     {
                     }
                 }
-                db.SaveChanges();
+                db.SubmitChanges();
             }
             catch
             {

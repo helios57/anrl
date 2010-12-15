@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
-using AnrlDBAccessors;
+using AnrlDB;
 
 namespace AnrlService.Server.Impl
 {
@@ -20,7 +20,7 @@ namespace AnrlService.Server.Impl
             : base(race.ID)
         {
             _Teams = new List<ITeam>();
-            foreach (t_Race_Team raceTeam in race.t_Race_Team)
+            foreach (t_Race_Team raceTeam in race.t_Race_Teams)
             {
                 _Teams.Add(new Team(raceTeam.t_Team));
             }
