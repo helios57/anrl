@@ -27,7 +27,8 @@ namespace AnrlService.Server
             {
                 if (Client == null)
                 {
-                    Client = new AnrlClient(ConnectionString);
+                   // Client = new AnrlClient(ConnectionString);
+                    Client = new AnrlClient();
                 }
                 Result = Client;
             }

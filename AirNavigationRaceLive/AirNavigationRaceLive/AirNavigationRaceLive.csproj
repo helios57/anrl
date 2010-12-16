@@ -63,6 +63,36 @@
     <Compile Include="Components\Credits.Designer.cs">
       <DependentUpon>Credits.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Pilot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Pilot.Designer.cs">
+      <DependentUpon>Pilot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Race.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Race.Designer.cs">
+      <DependentUpon>Race.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Team.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Team.Designer.cs">
+      <DependentUpon>Team.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Tracker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Tracker.Designer.cs">
+      <DependentUpon>Tracker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Visualisation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Visualisation.Designer.cs">
+      <DependentUpon>Visualisation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AirNavigationRaceLive.resx">
@@ -73,6 +103,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Pilot.resx">
+      <DependentUpon>Pilot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Race.resx">
+      <DependentUpon>Race.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Team.resx">
+      <DependentUpon>Team.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Tracker.resx">
+      <DependentUpon>Tracker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Visualisation.resx">
+      <DependentUpon>Visualisation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

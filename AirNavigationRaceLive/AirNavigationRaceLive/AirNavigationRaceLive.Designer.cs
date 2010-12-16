@@ -38,8 +38,10 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.racesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
@@ -67,8 +69,10 @@
             this.MenuServer,
             this.trackerToolStripMenuItem,
             this.pilotsToolStripMenuItem,
+            this.teamsToolStripMenuItem,
             this.racesToolStripMenuItem,
-            this.visualisationToolStripMenuItem});
+            this.visualisationToolStripMenuItem,
+            this.creditsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
             this.MainMenu.Size = new System.Drawing.Size(600, 24);
@@ -89,56 +93,76 @@
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.connectToolStripMenuItem.Text = "Connect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
             // disconnectToolStripMenuItem
             // 
+            this.disconnectToolStripMenuItem.Enabled = false;
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // trackerToolStripMenuItem
             // 
+            this.trackerToolStripMenuItem.Enabled = false;
             this.trackerToolStripMenuItem.Name = "trackerToolStripMenuItem";
             this.trackerToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.trackerToolStripMenuItem.Text = "Tracker";
-            this.trackerToolStripMenuItem.Visible = false;
+            this.trackerToolStripMenuItem.Click += new System.EventHandler(this.trackerToolStripMenuItem_Click);
             // 
             // pilotsToolStripMenuItem
             // 
+            this.pilotsToolStripMenuItem.Enabled = false;
             this.pilotsToolStripMenuItem.Name = "pilotsToolStripMenuItem";
             this.pilotsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.pilotsToolStripMenuItem.Text = "Pilots";
-            this.pilotsToolStripMenuItem.Visible = false;
+            this.pilotsToolStripMenuItem.Click += new System.EventHandler(this.pilotsToolStripMenuItem_Click);
+            // 
+            // teamsToolStripMenuItem
+            // 
+            this.teamsToolStripMenuItem.Enabled = false;
+            this.teamsToolStripMenuItem.Name = "teamsToolStripMenuItem";
+            this.teamsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.teamsToolStripMenuItem.Text = "Teams";
+            this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
             // 
             // racesToolStripMenuItem
             // 
+            this.racesToolStripMenuItem.Enabled = false;
             this.racesToolStripMenuItem.Name = "racesToolStripMenuItem";
             this.racesToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
             this.racesToolStripMenuItem.Text = "Races";
-            this.racesToolStripMenuItem.Visible = false;
+            this.racesToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
             // 
             // visualisationToolStripMenuItem
             // 
+            this.visualisationToolStripMenuItem.Enabled = false;
             this.visualisationToolStripMenuItem.Name = "visualisationToolStripMenuItem";
             this.visualisationToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.visualisationToolStripMenuItem.Text = "Visualisation";
-            this.visualisationToolStripMenuItem.Visible = false;
+            this.visualisationToolStripMenuItem.Click += new System.EventHandler(this.visualisationToolStripMenuItem_Click);
+            // 
+            // creditsToolStripMenuItem
+            // 
+            this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
+            this.creditsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.creditsToolStripMenuItem.Text = "Credits";
+            this.creditsToolStripMenuItem.Click += new System.EventHandler(this.creditsToolStripMenuItem_Click);
             // 
             // MainPanel
             // 
@@ -184,6 +208,8 @@
         private System.Windows.Forms.ToolStripMenuItem pilotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem racesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualisationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem teamsToolStripMenuItem;
     }
 }
 

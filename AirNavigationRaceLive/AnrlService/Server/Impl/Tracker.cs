@@ -14,8 +14,8 @@ namespace AnrlService.Server.Impl
 
         internal Tracker(t_Tracker tracker):base(tracker.ID)
         {
-            _Name = tracker.Name;
-            _IMEI = tracker.IMEI;
+            _Name = tracker.Name.Trim();
+            _IMEI = tracker.IMEI.Trim();
         }
 
         #region ITracker Members

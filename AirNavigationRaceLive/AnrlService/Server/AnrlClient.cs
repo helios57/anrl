@@ -16,6 +16,10 @@ namespace AnrlService.Server
         private string ConnectionString;
         AnrlDB.AnrlDataContext db;
 
+        public AnrlClient()
+        {
+            db = new AnrlDB.AnrlDataContext();
+        }
         public AnrlClient(string ConnectionString)
         {
             this.ConnectionString = ConnectionString;
