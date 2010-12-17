@@ -17,7 +17,14 @@ namespace AnrlService.Server.Impl
         {
             _Name = pilot.LastName;
             _Surename =pilot.SureName;
-            _Picture = new Picture(pilot.t_Picture);
+            if (pilot.t_Picture != null)
+            {
+                _Picture = new Picture(pilot.t_Picture);
+            }
+            else
+            {
+                _Picture = null;
+            }
         }
         #region IPilot Members
 

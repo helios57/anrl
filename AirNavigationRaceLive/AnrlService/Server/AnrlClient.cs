@@ -94,34 +94,59 @@ namespace AnrlService.Server
             try
             {
                 if (pilot != null && 
-                    pilot.ID < 0 && 
                     pilot.Name.Length > 2 && 
                     pilot.Surename.Length > 2 && 
                     pilot.Picture != null && 
                     pilot.Picture.Image != null)
                 {
-                    t_Pilot p = new t_Pilot();
-                    p.LastName = pilot.Name;
-                    p.SureName = pilot.Surename;
-                    t_Picture picture;
-                    if (pilot.Picture.ID < 0)
+                    if (pilot.ID <= 0)
                     {
-                        MemoryStream ms = new MemoryStream();
-                        pilot.Picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                        picture = new t_Picture();
-                        picture.Data = ms.ToArray();
-                        ms.Close();
-                        db.t_Pictures.InsertOnSubmit(picture);
+                        t_Pilot p = new t_Pilot();
+                        p.LastName = pilot.Name;
+                        p.SureName = pilot.Surename;
+                        t_Picture picture;
+                        if (pilot.Picture.ID <= 0)
+                        {
+                            MemoryStream ms = new MemoryStream();
+                            pilot.Picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            picture = new t_Picture();
+                            picture.Data = ms.ToArray();
+                            ms.Close();
+                            db.t_Pictures.InsertOnSubmit(picture);
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            picture = db.t_Pictures.Single(pp => pp.ID == pilot.Picture.ID);
+                        }
+                        p.t_Picture = picture;
+                        db.t_Pilots.InsertOnSubmit(p);
                         db.SubmitChanges();
+                        result = p.ID;
                     }
                     else
                     {
-                        picture = db.t_Pictures.Single(pp => pp.ID == pilot.Picture.ID);
+                        t_Pilot p = db.t_Pilots.Single(pp => pp.ID == pilot.ID);
+                        p.LastName = pilot.Name;
+                        p.SureName = pilot.Surename;
+                        t_Picture picture;
+                        if (pilot.Picture.ID <= 0)
+                        {
+                            MemoryStream ms = new MemoryStream();
+                            pilot.Picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            picture = new t_Picture();
+                            picture.Data = ms.ToArray();
+                            ms.Close();
+                            db.t_Pictures.InsertOnSubmit(picture);
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            picture = db.t_Pictures.Single(pp => pp.ID == pilot.Picture.ID);
+                        }
+                        p.t_Picture = picture;
+                        db.SubmitChanges();
                     }
-                    p.t_Picture = picture;
-                    db.t_Pilots.InsertOnSubmit(p);
-                    db.SubmitChanges();
-                    result = p.ID;
                 }
             }
             catch { result = -2; }
