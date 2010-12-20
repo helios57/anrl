@@ -81,7 +81,7 @@
     <Type Name="t_Picture">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Data" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="Name" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="isFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="t_Picture_t_Pilot" Member="t_Pilots" ThisKey="ID" OtherKey="ID_Picture" Type="t_Pilot" />
       <Association Name="t_Picture_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Flag" Type="t_Team" />

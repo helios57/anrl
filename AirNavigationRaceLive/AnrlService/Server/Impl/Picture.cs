@@ -10,16 +10,14 @@ namespace AnrlService.Server.Impl
 {
     class Picture:IDImpl,IPicture
     {
-        private System.Drawing.Image _Picture;
+        private byte[] _Picture;
         internal Picture(t_Picture picture):base(picture.ID)
         {
-            MemoryStream ms = new MemoryStream(picture.Data.ToArray());
-            _Picture = System.Drawing.Image.FromStream(ms);
-            ms.Close();
+            _Picture = picture.Data.ToArray();
         }
         #region IPicture Members
 
-        public System.Drawing.Image Image
+        public byte[] Image
         {
             get { return _Picture; }
         }

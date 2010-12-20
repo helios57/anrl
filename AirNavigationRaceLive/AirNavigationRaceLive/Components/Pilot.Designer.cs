@@ -45,6 +45,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAddPicture = new System.Windows.Forms.Button();
+            this.textBoxPictureId = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -204,10 +205,20 @@
             this.btnAddPicture.UseVisualStyleBackColor = true;
             this.btnAddPicture.Click += new System.EventHandler(this.btnAddPicture_Click);
             // 
+            // textBoxPictureId
+            // 
+            this.textBoxPictureId.Enabled = false;
+            this.textBoxPictureId.Location = new System.Drawing.Point(483, 340);
+            this.textBoxPictureId.Name = "textBoxPictureId";
+            this.textBoxPictureId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPictureId.TabIndex = 18;
+            this.textBoxPictureId.Visible = false;
+            // 
             // Pilot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBoxPictureId);
             this.Controls.Add(this.btnAddPicture);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnNew);
@@ -250,5 +261,6 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAddPicture;
+        private System.Windows.Forms.TextBox textBoxPictureId;
     }
 }

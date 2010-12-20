@@ -7,6 +7,6 @@ namespace AnrlInterfaces
 {
     public interface IPicture : IID
     {
-        System.Drawing.Image Image {get;}
+        byte[] Image {get;}
     }
 }

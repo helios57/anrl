@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AnrlInterfaces;
+using System.IO;
 
 namespace AirNavigationRaceLive.Components
 {
@@ -42,8 +43,8 @@ namespace AirNavigationRaceLive.Components
 
         private void UpdateEnablement()
         {
-            btnSave.Enabled = (listViewPilots.SelectedItems.Count == 1) || newPilot;
-            btnAddPicture.Enabled = btnSave.Enabled;
+            btnAddPicture.Enabled =((listViewPilots.SelectedItems.Count == 1) || newPilot);
+            btnSave.Enabled = btnAddPicture.Enabled && pictureBox.Image != null;
         }
 
         private void listViewPilots_SelectedIndexChanged(object sender, EventArgs e)
@@ -58,11 +59,14 @@ namespace AirNavigationRaceLive.Components
                 newPilot = false;
                 if (pilot.Picture != null)
                 {
-                    pictureBox.Image = pilot.Picture.Image;
+                    MemoryStream ms = new MemoryStream(pilot.Picture.Image);
+                    pictureBox.Image = System.Drawing.Image.FromStream(ms);
+                    textBoxPictureId.Text = pilot.Picture.ID.ToString(); 
                 }
                 else
                 {
                     pictureBox.Image = null;
+                    textBoxPictureId.Text ="0"; 
                 }
             }
             else
@@ -89,22 +93,24 @@ namespace AirNavigationRaceLive.Components
         private void ResetFields()
         {
                 newPilot = false;
-                textBoxID.Text = "";
+                textBoxID.Text = "0";
                 textBoxLastname.Text = "";
                 textBoxSurename.Text = "";
                 pictureBox.Image = null;
+                textBoxPictureId.Text = "0"; 
                 UpdateEnablement();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            long id=0;
-            IPicture picture = new PictureEntry(0,pictureBox.Image);
-            if (!newPilot)
-            {
-                //TODO
-            }
+            long id=Int32.Parse(textBoxID.Text);
+            long picId = Int32.Parse(textBoxPictureId.Text);
+            MemoryStream ms = new MemoryStream();
+            pictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+
+            IPicture picture = new PictureEntry(picId, ms.ToArray());
             PilotEntry pe = new PilotEntry(id, textBoxLastname.Text, textBoxSurename.Text, picture);
+            Client.addPilot(pe);
             newPilot = false;
             ResetFields();
             UpdateListe();
@@ -149,15 +155,14 @@ namespace AirNavigationRaceLive.Components
         class PictureEntry : MarshalByRefObject, IPicture
         {
             long _ID;
-            Image _Image;
+            byte[] _Image;
 
-            public PictureEntry(int iID, System.Drawing.Image iImage)
+            public PictureEntry(long iID, byte[] iImage)
             {
-                // TODO: Complete member initialization
                 _ID = iID;
                 _Image = iImage;
             }
-            public Image Image
+            public byte[] Image
             {
                 get { return _Image; }
             }
@@ -188,6 +193,7 @@ namespace AirNavigationRaceLive.Components
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
             pictureBox.Image = Image.FromFile(ofd.FileName);
+            UpdateEnablement();
         }
     }
 }

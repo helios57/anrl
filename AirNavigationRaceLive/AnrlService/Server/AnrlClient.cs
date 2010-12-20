@@ -107,11 +107,8 @@ namespace AnrlService.Server
                         t_Picture picture;
                         if (pilot.Picture.ID <= 0)
                         {
-                            MemoryStream ms = new MemoryStream();
-                            pilot.Picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                            picture = new t_Picture();
-                            picture.Data = ms.ToArray();
-                            ms.Close();
+                            picture = new t_Picture(); 
+                            picture.Data = new System.Data.Linq.Binary(pilot.Picture.Image);
                             db.t_Pictures.InsertOnSubmit(picture);
                             db.SubmitChanges();
                         }
@@ -132,11 +129,8 @@ namespace AnrlService.Server
                         t_Picture picture;
                         if (pilot.Picture.ID <= 0)
                         {
-                            MemoryStream ms = new MemoryStream();
-                            pilot.Picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                             picture = new t_Picture();
-                            picture.Data = ms.ToArray();
-                            ms.Close();
+                            picture.Data = new System.Data.Linq.Binary(pilot.Picture.Image);
                             db.t_Pictures.InsertOnSubmit(picture);
                             db.SubmitChanges();
                         }
@@ -149,7 +143,10 @@ namespace AnrlService.Server
                     }
                 }
             }
-            catch { result = -2; }
+            catch (Exception ex) { 
+                System.Console.Out.WriteLine(ex.StackTrace);
+                result = -2;
+            }
             return result;
         }
 
@@ -334,12 +331,9 @@ namespace AnrlService.Server
                     picture.ID < 0 &&
                     picture.Image != null)
                 {
-                    MemoryStream ms = new MemoryStream();
-                    picture.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     t_Picture dbPicture = new t_Picture();
-                    dbPicture.Data = ms.ToArray();
+                    dbPicture.Data = new System.Data.Linq.Binary(picture.Image);
                     dbPicture.isFlag = isFlag;
-                    ms.Close();
                     db.t_Pictures.InsertOnSubmit(dbPicture);
                     db.SubmitChanges();
                     result = dbPicture.ID;
