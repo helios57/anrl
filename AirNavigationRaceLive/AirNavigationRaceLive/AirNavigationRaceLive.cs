@@ -140,7 +140,7 @@ namespace AirNavigationRaceLive
             {
                 Team = new Team(Client);
             }
-            MainPanel.Controls.Add(Pilot);
+            MainPanel.Controls.Add(Team);
             UpdateEnablement();
         }
 
