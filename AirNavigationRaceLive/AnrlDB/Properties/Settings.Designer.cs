@@ -26,7 +26,7 @@ namespace AnrlDB.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HELIOS6X-PC;Initial Catalog=AnrlDB;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=127.0.0.1;Initial Catalog=AnrlDB;Integrated Security=True")]
         public string AnrlDBConnectionString {
             get {
                 return ((string)(this["AnrlDBConnectionString"]));
