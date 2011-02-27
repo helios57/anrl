@@ -9,6 +9,7 @@ namespace AnrlInterfaces
     {
         List<ITracker> getTrackers();
         List<IPilot> getPilots();
+        List<IPicture> getPictures(Boolean flag);
         List<ITeam> getTeams();
         List<IRace> getRaces();
         List<IPenaltyZone> getPenaltyzones();

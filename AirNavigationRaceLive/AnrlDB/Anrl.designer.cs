@@ -30,12 +30,12 @@ namespace AnrlDB
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertt_Daten(t_Daten instance);
-    partial void Updatet_Daten(t_Daten instance);
-    partial void Deletet_Daten(t_Daten instance);
     partial void Insertt_Tracker(t_Tracker instance);
     partial void Updatet_Tracker(t_Tracker instance);
     partial void Deletet_Tracker(t_Tracker instance);
+    partial void Insertt_Daten(t_Daten instance);
+    partial void Updatet_Daten(t_Daten instance);
+    partial void Deletet_Daten(t_Daten instance);
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
@@ -69,7 +69,7 @@ namespace AnrlDB
     #endregion
 		
 		public AnrlDataContext() : 
-				base(global::AnrlDB.Properties.Settings.Default.AnrlDBConnectionString, mappingSource)
+				base(global::AnrlDB.Properties.Settings.Default.AnrlDBConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -98,19 +98,19 @@ namespace AnrlDB
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<t_Daten> t_Datens
-		{
-			get
-			{
-				return this.GetTable<t_Daten>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_Tracker> t_Trackers
 		{
 			get
 			{
 				return this.GetTable<t_Tracker>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Daten> t_Datens
+		{
+			get
+			{
+				return this.GetTable<t_Daten>();
 			}
 		}
 		
@@ -192,6 +192,172 @@ namespace AnrlDB
 			{
 				return this.GetTable<t_Team>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Tracker")]
+	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _IMEI;
+		
+		private string _Name;
+		
+		private EntitySet<t_Daten> _t_Datens;
+		
+		private EntitySet<t_Team> _t_Teams;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnIMEIChanging(string value);
+    partial void OnIMEIChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public t_Tracker()
+		{
+			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
+			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string IMEI
+		{
+			get
+			{
+				return this._IMEI;
+			}
+			set
+			{
+				if ((this._IMEI != value))
+				{
+					this.OnIMEIChanging(value);
+					this.SendPropertyChanging();
+					this._IMEI = value;
+					this.SendPropertyChanged("IMEI");
+					this.OnIMEIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NChar(20)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Daten> t_Datens
+		{
+			get
+			{
+				return this._t_Datens;
+			}
+			set
+			{
+				this._t_Datens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team", Storage="_t_Teams", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Team> t_Teams
+		{
+			get
+			{
+				return this._t_Teams;
+			}
+			set
+			{
+				this._t_Teams.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
+		}
+		
+		private void attach_t_Teams(t_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Teams(t_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
 		}
 	}
 	
@@ -487,172 +653,6 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Tracker")]
-	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _IMEI;
-		
-		private string _Name;
-		
-		private EntitySet<t_Daten> _t_Datens;
-		
-		private EntitySet<t_Team> _t_Teams;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnIMEIChanging(string value);
-    partial void OnIMEIChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public t_Tracker()
-		{
-			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
-			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		public string IMEI
-		{
-			get
-			{
-				return this._IMEI;
-			}
-			set
-			{
-				if ((this._IMEI != value))
-				{
-					this.OnIMEIChanging(value);
-					this.SendPropertyChanging();
-					this._IMEI = value;
-					this.SendPropertyChanged("IMEI");
-					this.OnIMEIChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NChar(20)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Daten> t_Datens
-		{
-			get
-			{
-				return this._t_Datens;
-			}
-			set
-			{
-				this._t_Datens.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team", Storage="_t_Teams", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Team> t_Teams
-		{
-			get
-			{
-				return this._t_Teams;
-			}
-			set
-			{
-				this._t_Teams.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = this;
-		}
-		
-		private void detach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = null;
-		}
-		
-		private void attach_t_Teams(t_Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = this;
-		}
-		
-		private void detach_t_Teams(t_Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = null;
 		}
 	}
 	
@@ -2628,7 +2628,7 @@ namespace AnrlDB
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int ID
 		{
 			get

@@ -19,7 +19,14 @@ namespace AnrlService.Server.Impl
             : base(team.ID)
         {
             _Pilot = new Pilot(team.t_Pilot);
-            _Navigator = new Pilot(team.t_Pilot1);
+            if (team.t_Pilot1 != null)
+            {
+                _Navigator = new Pilot(team.t_Pilot1);
+            }
+            else
+            {
+                _Navigator = null;
+            }
             _Picture = new Picture(team.t_Picture);
             _Tracker = new Tracker(team.t_Tracker);
             _Color = team.Color;

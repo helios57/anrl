@@ -170,6 +170,16 @@ namespace AirNavigationRaceLive.Components
             {
                 get { return _ID; }
             }
+
+            #region IPicture Members
+
+
+            public string Name
+            {
+                get { return ""; }
+            }
+
+            #endregion
         }
 
         private void btnAddPicture_Click(object sender, EventArgs e)

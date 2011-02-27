@@ -48,6 +48,16 @@ namespace AnrlService.Server
             return result;
         }
 
+        public List<IPicture> getPictures(bool flag)
+        {
+            List<IPicture> result = new List<IPicture>();
+            foreach (t_Picture pic in db.t_Pictures.Where(p=>p.isFlag==flag))
+            {
+                result.Add(new Picture(pic));
+            }
+            return result;
+        }
+
         public List<ITeam> getTeams()
         {
             List<ITeam> result = new List<ITeam>();
@@ -156,7 +166,6 @@ namespace AnrlService.Server
             try
             {
                 if (team != null && 
-                    team.ID < 0 && 
                     team.Pilot != null && 
                     team.Pilot.ID > 0 &&
                     team.Color != null && 
@@ -178,19 +187,34 @@ namespace AnrlService.Server
                         {
                             tracker = db.t_Trackers.Single(p=>p.ID == team.Tracker.ID);
                         }
-                        t_Team dbTeam = new t_Team();
+
+                        t_Team dbTeam;
+                        if (team.ID < 0)
+                        {
+                            dbTeam = new t_Team();
+                        }
+                        else
+                        {
+                            dbTeam = db.t_Teams.Single(p => p.ID == team.ID);
+                        }
                         dbTeam.t_Pilot = pilot;
                         dbTeam.t_Pilot1 = navigator;
                         dbTeam.t_Picture = flag;
                         dbTeam.t_Tracker = tracker;
                         dbTeam.Color = team.Color;
-                        db.t_Teams.InsertOnSubmit(dbTeam);
+                        if (team.ID < 0)
+                        {
+                            db.t_Teams.InsertOnSubmit(dbTeam);
+                        }
                         db.SubmitChanges();
                         result = dbTeam.ID;
                     }
                 }
             }
-            catch { result = -2; }
+            catch (Exception ex) { 
+                result = -2; 
+                System.Console.Out.WriteLine(ex.ToString()); 
+            }
             return result;
         }
 
@@ -446,5 +470,6 @@ namespace AnrlService.Server
         }
 
         #endregion
+
     }
 }

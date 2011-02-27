@@ -111,7 +111,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(422, 129);
+            this.label2.Location = new System.Drawing.Point(422, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 13);
             this.label2.TabIndex = 7;
@@ -120,14 +120,14 @@
             // textBoxID
             // 
             this.textBoxID.Enabled = false;
-            this.textBoxID.Location = new System.Drawing.Point(483, 126);
+            this.textBoxID.Location = new System.Drawing.Point(483, 76);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(100, 20);
             this.textBoxID.TabIndex = 8;
             // 
             // textBoxLastname
             // 
-            this.textBoxLastname.Location = new System.Drawing.Point(483, 152);
+            this.textBoxLastname.Location = new System.Drawing.Point(483, 102);
             this.textBoxLastname.Name = "textBoxLastname";
             this.textBoxLastname.Size = new System.Drawing.Size(100, 20);
             this.textBoxLastname.TabIndex = 10;
@@ -135,7 +135,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(422, 155);
+            this.label3.Location = new System.Drawing.Point(422, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 9;
@@ -143,7 +143,7 @@
             // 
             // textBoxSurename
             // 
-            this.textBoxSurename.Location = new System.Drawing.Point(483, 178);
+            this.textBoxSurename.Location = new System.Drawing.Point(483, 128);
             this.textBoxSurename.Name = "textBoxSurename";
             this.textBoxSurename.Size = new System.Drawing.Size(100, 20);
             this.textBoxSurename.TabIndex = 12;
@@ -151,7 +151,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(422, 181);
+            this.label4.Location = new System.Drawing.Point(422, 131);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 11;
@@ -159,7 +159,7 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(483, 205);
+            this.pictureBox.Location = new System.Drawing.Point(483, 155);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(100, 100);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -169,7 +169,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(422, 205);
+            this.label5.Location = new System.Drawing.Point(422, 155);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 14;
@@ -177,7 +177,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(422, 99);
+            this.btnNew.Location = new System.Drawing.Point(427, 49);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(75, 23);
             this.btnNew.TabIndex = 15;
@@ -187,7 +187,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(508, 99);
+            this.btnSave.Location = new System.Drawing.Point(508, 49);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 16;
@@ -197,7 +197,7 @@
             // 
             // btnAddPicture
             // 
-            this.btnAddPicture.Location = new System.Drawing.Point(483, 311);
+            this.btnAddPicture.Location = new System.Drawing.Point(483, 261);
             this.btnAddPicture.Name = "btnAddPicture";
             this.btnAddPicture.Size = new System.Drawing.Size(100, 23);
             this.btnAddPicture.TabIndex = 17;
@@ -208,7 +208,7 @@
             // textBoxPictureId
             // 
             this.textBoxPictureId.Enabled = false;
-            this.textBoxPictureId.Location = new System.Drawing.Point(483, 340);
+            this.textBoxPictureId.Location = new System.Drawing.Point(483, 290);
             this.textBoxPictureId.Name = "textBoxPictureId";
             this.textBoxPictureId.Size = new System.Drawing.Size(100, 20);
             this.textBoxPictureId.TabIndex = 18;

@@ -8,5 +8,6 @@ namespace AnrlInterfaces
     public interface IPicture : IID
     {
         byte[] Image {get;}
+        string Name {get;}
     }
 }

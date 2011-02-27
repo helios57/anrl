@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AnrlInterfaces;
+using System.IO;
+using AnrlDB;
+using System.Drawing;
 
 namespace TestApplikation
 {
@@ -10,12 +12,23 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
-            Parcour p = new Parcour();
-            Line newLine = new Line();
-            newLine.Point.Add(new Point());
-            p.EndPoint.Add(newLine);
-            System.Console.Out.WriteLine(p.Serialize());
-            System.Console.Read();
+
+            string path = @"C:\Users\Helios6x\Downloads\flags_style1_medium";
+            DirectoryInfo dir = new DirectoryInfo(path);
+            AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
+            foreach (FileInfo fi in dir.GetFiles().Where(p=>p.Extension==".png"))
+            {
+                Image i = Image.FromFile(fi.FullName);
+                t_Picture pic = new t_Picture();
+                pic.Name = fi.Name.Replace(fi.Extension,"").Trim();
+                pic.isFlag = true;
+                
+                MemoryStream ms = new MemoryStream();
+                i.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                pic.Data = ms.ToArray();
+                db.t_Pictures.InsertOnSubmit(pic);
+            }
+            db.SubmitChanges();
         }
     }
 }
