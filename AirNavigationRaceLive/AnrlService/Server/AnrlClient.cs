@@ -19,11 +19,19 @@ namespace AnrlService.Server
         public AnrlClient()
         {
             db = new AnrlDB.AnrlDataContext();
+            if (!db.DatabaseExists())
+            {
+                db.CreateDatabase();
+            }
         }
         public AnrlClient(string ConnectionString)
         {
             this.ConnectionString = ConnectionString;
             db = new AnrlDB.AnrlDataContext(ConnectionString);
+            if (!db.DatabaseExists())
+            {
+                db.CreateDatabase();
+            }
         }
 
         #region IAnrlClient Members

@@ -33,7 +33,11 @@ namespace TCPReciever
         {
             try
             {
-                db = new AnrlDB.AnrlDataContext(ConnectionString);
+                db = new AnrlDB.AnrlDataContext(ConnectionString); 
+                if (!db.DatabaseExists())
+                {
+                    db.CreateDatabase();
+                }
                 
                 CalculateTabels = new System.Timers.Timer(1000);
                 CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);
