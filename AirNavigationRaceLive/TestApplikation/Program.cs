@@ -12,7 +12,11 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
+            AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
+            db.DatabaseExists();
+            db.CreateDatabase();
 
+            /*
             string path = @"C:\Users\Helios6x\Downloads\flags_style1_medium";
             DirectoryInfo dir = new DirectoryInfo(path);
             AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
@@ -28,7 +32,7 @@ namespace TestApplikation
                 pic.Data = ms.ToArray();
                 db.t_Pictures.InsertOnSubmit(pic);
             }
-            db.SubmitChanges();
+            db.SubmitChanges();*/
         }
     }
 }
