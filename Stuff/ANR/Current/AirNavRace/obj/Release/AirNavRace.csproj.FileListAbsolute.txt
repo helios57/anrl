@@ -1,0 +1,239 @@
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.GroupsForm.resources
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.groupEdit.resources
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.AirNavRace.resources
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.ImageViewer.resources
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.CompetitorForm.resources
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\bin\Release\AirNavRace.exe.config
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\bin\Release\AirNavRace.exe
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\bin\Release\AirNavRace.pdb
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\bin\Release\PdfSharp.dll
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\AirNavRace.exe
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\AirNavRace.pdb
+C:\Dokumente und Einstellungen\ch!llKroet\Desktop\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.PenaltyForm.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe.config
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\AirNavRace.exe
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\AirNavRace.pdb
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.CompetitorForm.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.GroupsForm.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.groupEdit.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.AirNavRace.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.ImageViewer.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.PenaltyForm.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\bin\Release\AirNavRace.pdb
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\bin\Release\PdfSharp.dll
+C:\Users\Administrator\Desktop\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+F:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe.config
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.exe
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.pdb
+F:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe
+F:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.pdb
+F:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+F:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PdfSharp.dll
+F:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.CompetitorForm.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.GroupsForm.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.groupEdit.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.AirNavRace.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.ImageViewer.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.PenaltyForm.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+F:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+H:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe.config
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.exe
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.pdb
+H:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe
+H:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.pdb
+H:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+H:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PdfSharp.dll
+H:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.CompetitorForm.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.GroupsForm.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.groupEdit.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.AirNavRace.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.ImageViewer.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.PenaltyForm.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+H:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+M:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe.config
+M:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.exe
+M:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\AirNavRace.pdb
+M:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+M:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PdfSharp.dll
+M:\anr_ (2)\anr_\anr_\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.CompetitorForm.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.GroupsForm.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.groupEdit.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.AirNavRace.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.ImageViewer.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.PenaltyForm.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.exe
+M:\anr_ (2)\anr_\anr_\AirNavRace\obj\Release\AirNavRace.pdb
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\bin\Release\AirNavRace.exe.config
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\AirNavRace.exe
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\AirNavRace.pdb
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\bin\Release\AirNavRace.exe
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\bin\Release\AirNavRace.pdb
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\bin\Release\PdfSharp.dll
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.CompetitorForm.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.GroupsForm.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.groupEdit.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.AirNavRace.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.ImageViewer.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.PenaltyForm.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+I:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+I:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe
+I:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.pdb
+I:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+I:\Anr2\Current\AirNavRace\bin\Release\PdfSharp.dll
+I:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+I:\Anr2\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+I:\Anr2\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+I:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+I:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+I:\Anr2\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+I:\Anr2\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+I:\Anr2\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+I:\Anr2\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+I:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+I:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.exe
+I:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.pdb
+N:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+N:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.exe
+N:\Anr2\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+N:\Anr2\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+N:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+N:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+N:\Anr2\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+N:\Anr2\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+N:\Anr2\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+N:\Anr2\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+N:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+N:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe
+N:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.pdb
+N:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+N:\Anr2\Current\AirNavRace\bin\Release\PdfSharp.dll
+N:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+N:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.pdb
+F:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+F:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe
+F:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.pdb
+F:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+F:\Anr2\Current\AirNavRace\bin\Release\PdfSharp.dll
+F:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+F:\Anr2\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+F:\Anr2\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+F:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+F:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+F:\Anr2\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+F:\Anr2\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+F:\Anr2\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+F:\Anr2\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+F:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+F:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.exe
+F:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.pdb
+L:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+L:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.exe
+L:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.pdb
+L:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe
+L:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.pdb
+L:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+L:\Anr2\Current\AirNavRace\bin\Release\PdfSharp.dll
+L:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+L:\Anr2\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+L:\Anr2\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+L:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+L:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+L:\Anr2\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+L:\Anr2\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+L:\Anr2\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+L:\Anr2\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+L:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+H:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+H:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.exe
+H:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.pdb
+H:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe
+H:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.pdb
+H:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+H:\Anr2\Current\AirNavRace\bin\Release\PdfSharp.dll
+H:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+H:\Anr2\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+H:\Anr2\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+H:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+H:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+H:\Anr2\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+H:\Anr2\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+H:\Anr2\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+H:\Anr2\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+H:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+K:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+K:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.exe
+K:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.pdb
+K:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.exe
+K:\Anr2\Current\AirNavRace\bin\Release\AirNavRace.pdb
+K:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+K:\Anr2\Current\AirNavRace\bin\Release\PdfSharp.dll
+K:\Anr2\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+K:\Anr2\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+K:\Anr2\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+K:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+K:\Anr2\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+K:\Anr2\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+K:\Anr2\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+K:\Anr2\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+K:\Anr2\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+K:\Anr2\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\AirNavRace.exe
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\AirNavRace.pdb
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\bin\Release\AirNavRace.exe
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\bin\Release\AirNavRace.pdb
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\bin\Release\PdfSharp.dll
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\AirNavRace\obj\Release\AirNavRace.csproj.GenerateResource.Cache
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\bin\Release\AirNavRace.exe.config
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\AirNavRace.exe
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\AirNavRace.pdb
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\bin\Release\AirNavRace.exe
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\bin\Release\AirNavRace.pdb
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\bin\Release\PdfSharp.dll
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\bin\Release\PFA.ANR.BusinessLayer.pdb
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ANR.CompetitorSelection.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ANR.GroupCompetitorSelection.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ANR.GroupsForm.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ANR.AirNavRace.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ANR.ImageViewer.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\Tpsc.Controls.PictureBoxEx.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ANR.Properties.Resources.resources
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ResGen.read.1.tlog
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\obj\Release\ResGen.write.1.tlog

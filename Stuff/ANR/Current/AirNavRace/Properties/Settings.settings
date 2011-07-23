@@ -1,0 +1,324 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ANR.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="formTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AirNavRace</Value>
+    </Setting>
+    <Setting Name="menuSpeichern" Type="System.String" Scope="User">
+      <Value Profile="(Default)">wettkampfSpeichernToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuLaden" Type="System.String" Scope="User">
+      <Value Profile="(Default)">wettkampfLadenToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExport" Type="System.String" Scope="User">
+      <Value Profile="(Default)">exportToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExportRangliste" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ranglisteToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExportRangCrew" Type="System.String" Scope="User">
+      <Value Profile="(Default)">groupToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExportRangStraf" Type="System.String" Scope="User">
+      <Value Profile="(Default)">strafpunkeToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="manuExportTlnr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">teilnehmerlisteToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExportTeam" Type="System.String" Scope="User">
+      <Value Profile="(Default)">teamauswertungToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExportTeamGrafisch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">grafischToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuExportTeamDruck" Type="System.String" Scope="User">
+      <Value Profile="(Default)">druckenToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuBeenden" Type="System.String" Scope="User">
+      <Value Profile="(Default)">beendenToolStripMenuItem</Value>
+    </Setting>
+    <Setting Name="menuDatei" Type="System.String" Scope="User">
+      <Value Profile="(Default)">File</Value>
+    </Setting>
+    <Setting Name="nameFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">File</Value>
+    </Setting>
+    <Setting Name="menuFileSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Save Competition</Value>
+    </Setting>
+    <Setting Name="menuFileLoad" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Load Competition</Value>
+    </Setting>
+    <Setting Name="menuFileExport" Type="System.String" Scope="User">
+      <Value Profile="(Default)">export</Value>
+    </Setting>
+    <Setting Name="menuFileExportRank" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ranklist</Value>
+    </Setting>
+    <Setting Name="menuFileExportRankCrew" Type="System.String" Scope="User">
+      <Value Profile="(Default)">group</Value>
+    </Setting>
+    <Setting Name="menuFileExportRankPenalty" Type="System.String" Scope="User">
+      <Value Profile="(Default)">penaltys</Value>
+    </Setting>
+    <Setting Name="menuFileExportComp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">competitors</Value>
+    </Setting>
+    <Setting Name="menuFileExportCrew" Type="System.String" Scope="User">
+      <Value Profile="(Default)">group</Value>
+    </Setting>
+    <Setting Name="menuFileExportCrewGraphic" Type="System.String" Scope="User">
+      <Value Profile="(Default)">graphical</Value>
+    </Setting>
+    <Setting Name="menuFileExportCrewPrint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">print</Value>
+    </Setting>
+    <Setting Name="menuFileExit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Exit</Value>
+    </Setting>
+    <Setting Name="tabComp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Competition</Value>
+    </Setting>
+    <Setting Name="tabcompetitors" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Competitors and Teams</Value>
+    </Setting>
+    <Setting Name="tabCrews" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Groups</Value>
+    </Setting>
+    <Setting Name="tabFlight" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Flights</Value>
+    </Setting>
+    <Setting Name="tabRanklist" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Results</Value>
+    </Setting>
+    <Setting Name="raceCompetitionDetails" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Competition Details</Value>
+    </Setting>
+    <Setting Name="raceParcoursLoad" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Parcours for the Selected Map</Value>
+    </Setting>
+    <Setting Name="raceParcoursLoadText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Add New</Value>
+    </Setting>
+    <Setting Name="raceMapText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Maps for this Competition</Value>
+    </Setting>
+    <Setting Name="raceDetailsCompName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Competition Name</Value>
+    </Setting>
+    <Setting Name="raceDetailsDate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Date</Value>
+    </Setting>
+    <Setting Name="raceDetailsLocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Location</Value>
+    </Setting>
+    <Setting Name="raceCompMin1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">min</Value>
+    </Setting>
+    <Setting Name="raceCompMin2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">min</Value>
+    </Setting>
+    <Setting Name="raceCompSec1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sec</Value>
+    </Setting>
+    <Setting Name="raceCompSec2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="raceCompMin3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">°</Value>
+    </Setting>
+    <Setting Name="raceCompSec3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">'</Value>
+    </Setting>
+    <Setting Name="raceDetailsStartP1Len" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Runway Startpoint</Value>
+    </Setting>
+    <Setting Name="raceDetailsStartP1Width" Type="System.String" Scope="User">
+      <Value Profile="(Default)">startgate (left point, latitude)</Value>
+    </Setting>
+    <Setting Name="raceDetailsStartP2Len" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Point 2 Coordinates</Value>
+    </Setting>
+    <Setting Name="raceDetailsStartP2Width" Type="System.String" Scope="User">
+      <Value Profile="(Default)">startgate (right point, latitude)</Value>
+    </Setting>
+    <Setting Name="raceDetailsTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Time to pass Parcours</Value>
+    </Setting>
+    <Setting Name="raceButtonSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">save</Value>
+    </Setting>
+    <Setting Name="raceButtonCancel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cancel</Value>
+    </Setting>
+    <Setting Name="compList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">competitors list</Value>
+    </Setting>
+    <Setting Name="compAddName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Competitor</Value>
+    </Setting>
+    <Setting Name="compGroupName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">competitor</Value>
+    </Setting>
+    <Setting Name="compNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">competition number</Value>
+    </Setting>
+    <Setting Name="compAcCallsign" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ac callsign</Value>
+    </Setting>
+    <Setting Name="compPilotLastname" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pilot last name</Value>
+    </Setting>
+    <Setting Name="compPilotPrename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pilot first name</Value>
+    </Setting>
+    <Setting Name="compCountry" Type="System.String" Scope="User">
+      <Value Profile="(Default)">country</Value>
+    </Setting>
+    <Setting Name="compCancel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cancel</Value>
+    </Setting>
+    <Setting Name="compSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">save</Value>
+    </Setting>
+    <Setting Name="compAdd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">add competitor...</Value>
+    </Setting>
+    <Setting Name="compEdit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit competitor...</Value>
+    </Setting>
+    <Setting Name="compEditName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit competitor</Value>
+    </Setting>
+    <Setting Name="compEditGroupName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit competitor</Value>
+    </Setting>
+    <Setting Name="compEditName2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit competitor</Value>
+    </Setting>
+    <Setting Name="compEditGroupName2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit competitor</Value>
+    </Setting>
+    <Setting Name="compEditSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit competitor</Value>
+    </Setting>
+    <Setting Name="raceCrewList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Races and Groups</Value>
+    </Setting>
+    <Setting Name="groupAdd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">add group ...</Value>
+    </Setting>
+    <Setting Name="groupEdit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit group ...</Value>
+    </Setting>
+    <Setting Name="flightEdit" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Edit Penalties</Value>
+    </Setting>
+    <Setting Name="flightImport" Type="System.String" Scope="User">
+      <Value Profile="(Default)">import flight</Value>
+    </Setting>
+    <Setting Name="flightChooseComp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Choose Group and Competitor</Value>
+    </Setting>
+    <Setting Name="flightChoose" Type="System.String" Scope="User">
+      <Value Profile="(Default)">choose or import flight</Value>
+    </Setting>
+    <Setting Name="flightMap" Type="System.String" Scope="User">
+      <Value Profile="(Default)">map of flight</Value>
+    </Setting>
+    <Setting Name="flightImport2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Import Flight for selected Competitor</Value>
+    </Setting>
+    <Setting Name="raceRankList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">List for Selection</Value>
+    </Setting>
+    <Setting Name="rankExport" Type="System.String" Scope="User">
+      <Value Profile="(Default)">export ranklist</Value>
+    </Setting>
+    <Setting Name="rankPrint" Type="System.String" Scope="User">
+      <Value Profile="(Default)">print ranklist</Value>
+    </Setting>
+    <Setting Name="groupAddText" Type="System.String" Scope="User">
+      <Value Profile="(Default)">add a group</Value>
+    </Setting>
+    <Setting Name="groupAddGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">add a new group</Value>
+    </Setting>
+    <Setting Name="groupAddComp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">competitors list</Value>
+    </Setting>
+    <Setting Name="groupAddMembers" Type="System.String" Scope="User">
+      <Value Profile="(Default)">group members</Value>
+    </Setting>
+    <Setting Name="groupAddGroupName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">group name</Value>
+    </Setting>
+    <Setting Name="groupAddGroupNr" Type="System.String" Scope="User">
+      <Value Profile="(Default)">group number</Value>
+    </Setting>
+    <Setting Name="groupAddParcours" Type="System.String" Scope="User">
+      <Value Profile="(Default)">choose parcours</Value>
+    </Setting>
+    <Setting Name="groupAddSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">add</Value>
+    </Setting>
+    <Setting Name="groupAddCancel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cancel</Value>
+    </Setting>
+    <Setting Name="groupAddTime" Type="System.String" Scope="User">
+      <Value Profile="(Default)">time for parcours</Value>
+    </Setting>
+    <Setting Name="groupAddParoucs" Type="System.String" Scope="User">
+      <Value Profile="(Default)">runway</Value>
+    </Setting>
+    <Setting Name="groupEdit2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit this group</Value>
+    </Setting>
+    <Setting Name="groupEdit3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit this group</Value>
+    </Setting>
+    <Setting Name="groupEditSave" Type="System.String" Scope="User">
+      <Value Profile="(Default)">edit this group</Value>
+    </Setting>
+    <Setting Name="manageFlightButtonPdf" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Export Pdf</Value>
+    </Setting>
+    <Setting Name="manageFlightExportImage" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Save Image of Flight</Value>
+    </Setting>
+    <Setting Name="manageFlightButtonExportGroupFlight" Type="System.String" Scope="User">
+      <Value Profile="(Default)">View Flights of current Group</Value>
+    </Setting>
+    <Setting Name="manageFlightsExportPenalities" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Save Penalties (CSV)</Value>
+    </Setting>
+    <Setting Name="raceDetailsRunway" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RWY</Value>
+    </Setting>
+    <Setting Name="raceDetailsTakeoff1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">First Competitor Takeoff -&gt; Startgate Time </Value>
+    </Setting>
+    <Setting Name="raceDetailsTakeoff2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Takeoff -&gt; Startgate Time (Alternative Runway)</Value>
+    </Setting>
+    <Setting Name="compNavigatorPrename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">navigator first name</Value>
+    </Setting>
+    <Setting Name="compNavigatorLastname" Type="System.String" Scope="User">
+      <Value Profile="(Default)">navigator last name</Value>
+    </Setting>
+    <Setting Name="penFormTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Penalty</Value>
+    </Setting>
+    <Setting Name="penGroupBoxTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">penalty</Value>
+    </Setting>
+    <Setting Name="penFormComment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">comment</Value>
+    </Setting>
+    <Setting Name="penFormPenaltyPoints" Type="System.String" Scope="User">
+      <Value Profile="(Default)">penalty points</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

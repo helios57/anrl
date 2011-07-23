@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="ANR.Core.AnrObject" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AnrObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.BO" Collapsed="true">
+    <Position X="47.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>BO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.Common" Collapsed="true">
+    <Position X="49.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ANR.Core.Common.TotalResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Common.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAAAEAAAAAAAAAQAAAAAAAAAAAQAAAGAAAAAAIAIAAI=</HashCode>
+      <FileName>Common.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.Competitor">
+    <Position X="45.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEACEAAAABAUAAAAkAAAAIBABAIAwAACAIAAAAQAAgA=</HashCode>
+      <FileName>Entities\Competitor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.CompetitorCollection" Collapsed="true">
+    <Position X="40.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAABAAAAAAAAAAAAAUIBA=</HashCode>
+      <FileName>Collections\CompetitorCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.CompetitorGroup">
+    <Position X="43" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQCAEABIAAAQCAAEMAAABSAAAAEAAAAAAAAAEAEAgQ=</HashCode>
+      <FileName>Entities\CompetitorGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.CompetitorGroupCollection" Collapsed="true">
+    <Position X="35.25" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAADAABAASAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\CompetitorGroupCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.Flight">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgBQEADiQFBQwABCEFAgAhBGIABAAAABAFAAAIAAEQA=</HashCode>
+      <FileName>Entities\Flight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.FlightCollection" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAQAAAACAABAAAAgAFAQAAAAAAAEEAQAEABAUIAA=</HashCode>
+      <FileName>Collections\FlightCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.ForbiddenZone">
+    <Position X="28.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAAAAAQAAAAAAAAAAAAAAAAAAAQggAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Entities\ForbiddenZone.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.ForbiddenZoneCollection" Collapsed="true">
+    <Position X="25.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\ForbiddenZoneCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.Gate">
+    <Position X="23.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAEAAIAFAAAABAAAAAAAgAAACAA=</HashCode>
+      <FileName>Entities\Gate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.GateCollection" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\GateCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.GpsPoint">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QORFQAAABEAggMAEAABo+CEGKAACAIAgEBCAEAEAACA=</HashCode>
+      <FileName>Entities\GpsPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.GpsPointCollection" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\GpsPointCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.Map">
+    <Position X="21.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAgAAAIAAAAAAAAAgAAAAIAAEBAACBAQAAAAAAAAAIA=</HashCode>
+      <FileName>Entities\Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.Parcours">
+    <Position X="32.5" Y="1.75" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAhGAAAIgBAAEAAAAEACAABAAhAAAAAAAKAAAAASBAA=</HashCode>
+      <FileName>Entities\Parcours.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.ParcoursCollection" Collapsed="true">
+    <Position X="30.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\ParcoursCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.Penalty">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAACEAAAAgAAAAAAAAAAAAAABAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Penalty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.PenaltyCollection" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\PenaltyCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.Race">
+    <Position X="38.25" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAIhAQACDAEAAAABQAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Race.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.Route">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAEAAAAAAAAAAAEAAAEBAAAEAQAAA=</HashCode>
+      <FileName>Entities\Route.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.RouteCollection" Collapsed="true">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAACAABAACAgAFAQAAAAAAAAAAAAAAAAUIAA=</HashCode>
+      <FileName>Collections\RouteCollection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ANR.Core.Rules" Collapsed="true">
+    <Position X="49.5" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="ANR.Core.Rules.RestrictedAreaDuration" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Rules.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Rules.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.TrackPoint">
+    <Position X="3.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\TrackPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.TrackPointCollection" Collapsed="true">
+    <Position X="3.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAABAAAAAAAAAAAAAAAAAAUAAA=</HashCode>
+      <FileName>Collections\TrackPointCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.Competition">
+    <Position X="35.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAICAAQCAAAEIAABAKgQAECIAIJAAADCAAAAQAgAAg=</HashCode>
+      <FileName>Entities\Competition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ANR.Core.CompetitorRouteAssignment" Collapsed="true">
+    <Position X="47.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQgAAAAIAAAAAAAEAAAABAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Entities\CompetitorRouteAssignment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="ANR.Core.GpsPointComponent" Collapsed="true">
+    <Position X="47.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\GpsPoint.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ANR.Core.GpsPointFormatImport" Collapsed="true">
+    <Position X="49.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Entities\GpsPoint.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ANR.Core.GpsPointFormatString" Collapsed="true">
+    <Position X="51.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEAAAAAEAAAAAAAAAAAFAAAAAAACAAAAAAAAQAA=</HashCode>
+      <FileName>Entities\GpsPoint.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PenaltyType" Collapsed="true">
+    <Position X="47.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAQAA=</HashCode>
+      <FileName>Entities\Penalty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

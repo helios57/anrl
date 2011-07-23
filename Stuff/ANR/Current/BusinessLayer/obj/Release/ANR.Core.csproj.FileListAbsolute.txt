@@ -1,0 +1,14 @@
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\bin\Release\PFA.ANR.BusinessLayer.pdb
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\bin\Release\PdfSharp.dll
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\obj\Release\ANR.Core.csproj.ResolveComReference.cache
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\obj\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Luca\Documents\Visual Studio 2008\Projects\ANR\Current\BusinessLayer\obj\Release\PFA.ANR.BusinessLayer.pdb
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\bin\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\bin\Release\PFA.ANR.BusinessLayer.pdb
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\bin\Release\PdfSharp.dll
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\obj\Release\ANR.Core.csproj.ResolveComReference.cache
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\obj\Release\PFA.ANR.BusinessLayer.dll
+C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\BusinessLayer\obj\Release\PFA.ANR.BusinessLayer.pdb

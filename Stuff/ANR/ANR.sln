@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ANR.Setup", "ANR.Setup\ANR.Setup.vdproj", "{A382B924-CD2F-49AF-A076-A60A1170DC2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirNavRace", "Current\AirNavRace\AirNavRace.csproj", "{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANR.Core", "Current\BusinessLayer\ANR.Core.csproj", "{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}"
+EndProject
+Global
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Debug|Any CPU.ActiveCfg = Debug
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Debug|Any CPU.Build.0 = Debug
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Debug|x86.ActiveCfg = Release
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Debug|x86.Build.0 = Release
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Release|Any CPU.ActiveCfg = Release
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Release|x86.ActiveCfg = Release
+		{A382B924-CD2F-49AF-A076-A60A1170DC2F}.Release|x86.Build.0 = Release
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Debug|x86.ActiveCfg = Release|x86
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Debug|x86.Build.0 = Release|x86
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Release|x86.ActiveCfg = Release|x86
+		{97B65D03-47AB-4F4F-9C7D-265549B6F1C2}.Release|x86.Build.0 = Release|x86
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Debug|x86.ActiveCfg = Release|x86
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Debug|x86.Build.0 = Release|x86
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Release|x86.ActiveCfg = Release|x86
+		{8B9BFB39-DD4B-49D5-89D3-1BEFF1425BD8}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

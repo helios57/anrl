@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ANR">
+</Property><Property Name="Solution File" Value="C:\Users\Helios6x\Downloads\ANR\ANR\ANR\ANR.sln">
+</Property><Property Name="Date" Value="Mittwoch, 25. Mai 2011">
+</Property><Property Name="Time" Value="21:41">
+</Property></Properties><Event ErrorLevel="0" Project="AirNavRace" Source="Current\AirNavRace\AirNavRace.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="AirNavRace" Source="Current\AirNavRace\AirNavRace.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ANR.Core" Source="Current\BusinessLayer\ANR.Core.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ANR.Core" Source="Current\BusinessLayer\ANR.Core.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ANR.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ANR.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="AirNavRace" Source="Current\AirNavRace\AirNavRace.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ANR.Core" Source="Current\BusinessLayer\ANR.Core.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

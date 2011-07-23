@@ -1,0 +1,13 @@
+<Exceptions>
+  <Exception>
+    <ErrorMessage>Object reference not set to an instance of an object.</ErrorMessage>
+    <Source>AirNavRace</Source>
+    <Stacktrace>   at ANR.AirNavRace.competitionUpdateBaseData() in C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\GUI.cs:line 124
+   at ANR.AirNavRace.tabControl_SelectedIndexChanged(Object sender, EventArgs e) in C:\Users\Helios6x\Downloads\ANR\ANR\ANR\Current\AirNavRace\GUI.cs:line 1623
+   at System.Windows.Forms.TabControl.OnSelectedIndexChanged(EventArgs e)
+   at System.Windows.Forms.TabControl.WmSelChange()
+   at System.Windows.Forms.TabControl.WndProc(Message&amp; m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message&amp; m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)</Stacktrace>
+  </Exception>
+</Exceptions>

@@ -1,0 +1,50 @@
+M:\anr_ (2)\anr_\anr_\ANR.WPF\bin\Debug\ANR.WPF.exe
+M:\anr_ (2)\anr_\anr_\ANR.WPF\bin\Debug\ANR.WPF.pdb
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ResolveAssemblyReference.cache
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\OpenFileControl.baml
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\OpenFileControl.g.cs
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\Base.g.cs
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\App.g.cs
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.cache
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.lref
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\Base.baml
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF.g.resources
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF.Properties.Resources.resources
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF.csproj.GenerateResource.Cache
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF.exe
+M:\anr_ (2)\anr_\anr_\ANR.WPF\obj\Debug\ANR.WPF.pdb
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\Base.g.cs
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\App.g.cs
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.cache
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.lref
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\ANR.WPF.exe
+C:\Users\AHE\Documents\Visual Studio 2008\Projects\ANR\ANR.WPF\obj\Debug\ANR.WPF.pdb
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF.exe
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF.pdb
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\bin\Debug\ANR.WPF.exe
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\bin\Debug\ANR.WPF.pdb
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ResolveAssemblyReference.cache
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\Base.g.cs
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\App.g.cs
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.cache
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.lref
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\Base.baml
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF.g.resources
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF.Properties.Resources.resources
+F:\Visual Studio 2008\Projects\ANR\Future\ANR.WPF\obj\Debug\ANR.WPF.csproj.GenerateResource.Cache
+I:\Anr2\Future\ANR.WPF\bin\Debug\ANR.WPF.exe
+I:\Anr2\Future\ANR.WPF\bin\Debug\ANR.WPF.pdb
+I:\Anr2\Future\ANR.WPF\obj\Debug\ResolveAssemblyReference.cache
+I:\Anr2\Future\ANR.WPF\obj\Debug\Base.g.cs
+I:\Anr2\Future\ANR.WPF\obj\Debug\App.g.cs
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.cache
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF_MarkupCompile.lref
+I:\Anr2\Future\ANR.WPF\obj\Debug\Base.baml
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF.g.resources
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF.Properties.Resources.resources
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF.csproj.GenerateResource.Cache
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF.exe
+I:\Anr2\Future\ANR.WPF\obj\Debug\ANR.WPF.pdb
