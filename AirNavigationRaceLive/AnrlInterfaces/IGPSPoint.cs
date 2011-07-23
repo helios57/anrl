@@ -7,8 +7,8 @@ namespace AnrlInterfaces
 {
     public interface IGPSPoint
     {
-        Decimal Longitude { get; }
-        Decimal Latitude { get; }
-        Decimal Altitude { get; }
+        Double Longitude { get; }
+        Double Latitude { get; }
+        Double Altitude { get; }
     }
 }

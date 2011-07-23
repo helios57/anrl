@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AnrlInterfaces;
 using System.IO;
+using AirNavigationRaceLive.Components.Model;
 
 namespace AirNavigationRaceLive.Components
 {
@@ -117,70 +118,7 @@ namespace AirNavigationRaceLive.Components
             UpdateEnablement();
         }
 
-        class PilotEntry :MarshalByRefObject, IPilot
-        {
-            string _Name;
-            string _Surename;
-            IPicture _Picture;
-            long _ID;
-            public PilotEntry(long iID, string iName, string iSureName, IPicture iPicture)
-            {
-                _ID = iID;
-                _Name = iName;
-                _Surename = iSureName;
-                _Picture = iPicture;
-            }
-
-            public string Name
-            {
-                get { return _Name; }
-            }
-
-            public string Surename
-            {
-                get { return _Surename; }
-            }
-
-            public IPicture Picture
-            {
-                get {return _Picture; }
-            }
-
-            public long ID
-            {
-                get { return _ID; }
-            }
-        }
-
-        class PictureEntry : MarshalByRefObject, IPicture
-        {
-            long _ID;
-            byte[] _Image;
-
-            public PictureEntry(long iID, byte[] iImage)
-            {
-                _ID = iID;
-                _Image = iImage;
-            }
-            public byte[] Image
-            {
-                get { return _Image; }
-            }
-            public long ID
-            {
-                get { return _ID; }
-            }
-
-            #region IPicture Members
-
-
-            public string Name
-            {
-                get { return ""; }
-            }
-
-            #endregion
-        }
+        
 
         private void btnAddPicture_Click(object sender, EventArgs e)
         {

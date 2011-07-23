@@ -73,6 +73,7 @@
     <Compile Include="Server\Impl\Data.cs" />
     <Compile Include="Server\Impl\GPSPoint.cs" />
     <Compile Include="Server\Impl\IDImpl.cs" />
+    <Compile Include="Server\Impl\Map.cs" />
     <Compile Include="Server\Impl\PenaltyPoint.cs" />
     <Compile Include="Server\Impl\PenaltyPolygon.cs" />
     <Compile Include="Server\Impl\PenaltyZone.cs" />

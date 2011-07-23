@@ -20,6 +20,7 @@ namespace AirNavigationRaceLive
         Pilot Pilot;
         Team Team;
         Race Race;
+        Map Map;
         Visualisation Visualisation;
 
 
@@ -33,12 +34,23 @@ namespace AirNavigationRaceLive
         {
             Boolean connected = Client != null;
             disconnectToolStripMenuItem.Enabled = connected;
+            mapToolStripMenuItem.Enabled = connected;
+            parcourToolStripMenuItem.Enabled = connected;
             trackerToolStripMenuItem.Enabled = connected;
             connectToolStripMenuItem.Enabled = !connected;
             pilotsToolStripMenuItem.Enabled = connected;
-            visualisationToolStripMenuItem.Enabled = connected;
-            racesToolStripMenuItem.Enabled = connected;
             teamsToolStripMenuItem.Enabled = connected;
+            groupsToolStripMenuItem.Enabled = connected;
+            competitionToolStripMenuItem.Enabled = connected;
+            rulesToolStripMenuItem.Enabled = connected;
+            resultsToolStripMenuItem.Enabled = connected;
+            toplistToolStripMenuItem.Enabled = connected;
+            toplistFlightToolStripMenuItem.Enabled = connected;
+            toplistLandingToolStripMenuItem.Enabled = connected;
+            individualToplistToolStripMenuItem.Enabled = connected;
+            addLandingResultsToolStripMenuItem.Enabled = connected;
+            adjustResultsToolStripMenuItem.Enabled = connected;
+            visualisationToolStripMenuItem.Enabled = connected;
         }
 
         private void AirNavigationRaceLive_Load(object sender, EventArgs e)
@@ -48,9 +60,8 @@ namespace AirNavigationRaceLive
             {
                 Credits = new Components.Credits();
             }
-            MainPanel.Controls.Add(Credits);
+            enableControl(Credits);
             StatusStripLabel.Text = "Ready";
-            UpdateEnablement();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,7 +79,7 @@ namespace AirNavigationRaceLive
                     Connect = new Components.Connect();
                     Connect.Connected += new EventHandler(Connect_Connected);
                 }
-                MainPanel.Controls.Add(Connect);
+                enableControl(Connect);
                 StatusStripLabel.Text = "Ready to Connect to Server";
             }
             else
@@ -87,84 +98,101 @@ namespace AirNavigationRaceLive
                 StatusStripLabel.Text = "Connected to Server";
                 MainPanel.Controls.Clear();
             }
-            UpdateEnablement();
+            enableControl(Credits);
         }
 
         private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Client = null;
             Connect = null;
-            Credits = null;
             Tracker = null;
             Pilot = null;
             Team = null;
             Race = null;
             Visualisation = null;
+            Map = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
+            enableControl(Credits);
         }
 
         private void creditsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainPanel.Controls.Clear();
-            MainPanel.Controls.Add(Credits);
-            UpdateEnablement();
+            enableControl(Credits);
         }
 
         private void trackerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainPanel.Controls.Clear();
             if (Tracker == null)
             {
                 Tracker = new Tracker(Client);
             }
-            MainPanel.Controls.Add(Tracker);
-            UpdateEnablement();
+            enableControl(Tracker);
         }
 
         private void pilotsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainPanel.Controls.Clear();
             if (Pilot == null)
             {
                 Pilot = new Pilot(Client);
             }
-            MainPanel.Controls.Add(Pilot);
-            UpdateEnablement();
+            enableControl(Pilot);
         }
 
         private void teamsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainPanel.Controls.Clear();
             if (Team == null)
             {
                 Team = new Team(Client);
             }
-            MainPanel.Controls.Add(Team);
-            UpdateEnablement();
+            enableControl(Team);
         }
 
         private void racesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainPanel.Controls.Clear();
             if (Race == null)
             {
                 Race = new Race(Client);
             }
-            MainPanel.Controls.Add(Race);
-            UpdateEnablement();
+            enableControl(Race);
         }
 
         private void visualisationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MainPanel.Controls.Clear();
             if (Visualisation == null)
             {
                 Visualisation = new Visualisation(Client);
             }
-            MainPanel.Controls.Add(Visualisation);
-            UpdateEnablement();
+            enableControl(Visualisation);
+        }
 
+        private void MainPanel_Resize(object sender, EventArgs e)
+        {
+            if (MainPanel.Controls.Count == 1)
+            {
+                resize();
+            }
+        }
+
+        private void enableControl(Control c)
+        {
+            MainPanel.Controls.Clear();
+            MainPanel.Controls.Add(c);
+            UpdateEnablement();
+            resize();
+        }
+        private void resize()
+        {
+            MainPanel.Controls[0].SetBounds(0, 0, MainPanel.Width, MainPanel.Height);
+        }
+
+        private void mapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Visualisation == null)
+            {
+                Map = new Map(Client);
+            }
+            enableControl(Map);
         }
     }
 }

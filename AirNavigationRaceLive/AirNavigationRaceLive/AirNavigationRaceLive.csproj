@@ -57,12 +57,27 @@
     <Compile Include="Components\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\MapLegacy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MapLegacy.Designer.cs">
+      <DependentUpon>MapLegacy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Map.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Map.Designer.cs">
+      <DependentUpon>Map.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Credits.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\Credits.Designer.cs">
       <DependentUpon>Credits.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Model\MapImpl.cs" />
+    <Compile Include="Components\Model\PictureEntry.cs" />
+    <Compile Include="Components\Model\PilotEntry.cs" />
     <Compile Include="Components\Pilot.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,6 +115,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MapLegacy.resx">
+      <DependentUpon>MapLegacy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Map.resx">
+      <DependentUpon>Map.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>

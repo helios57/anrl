@@ -5,8 +5,7 @@ using System.Text;
 
 namespace AnrlInterfaces
 {
-    public interface IPenaltyPolygon : IID
+    interface ILine : IID
     {
-        List<IPenaltyPoint> Points { get; }
     }
 }

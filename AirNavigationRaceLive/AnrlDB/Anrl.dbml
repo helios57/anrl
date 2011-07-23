@@ -1,14 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AnrlDB" Class="AnrlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=HELIOS6X-PC;Initial Catalog=AnrlDB;Integrated Security=True" SettingsObjectName="AnrlDB.Properties.Settings" SettingsPropertyName="AnrlDBConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.t_Tracker" Member="t_Trackers">
-    <Type Name="t_Tracker">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
-      <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
-      <Association Name="t_Tracker_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_Daten" Member="t_Datens">
     <Type Name="t_Daten">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -20,7 +11,16 @@
       <Column Name="Speed" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
       <Column Name="Penalty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Tracker_t_Daten" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Tracker" Member="t_Trackers">
+    <Type Name="t_Tracker">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
+      <Association Name="t_Tracker_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team" />
     </Type>
   </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
@@ -50,6 +50,20 @@
       <Column Name="Text" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
     </Type>
   </Table>
+  <Table Name="dbo.t_Map" Member="t_Maps">
+    <Type Name="t_Map">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Picture" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="XSize" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="YSize" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="XRot" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="YRot" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="XTopLeft" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="YTopLeft" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Association Name="t_Picture_t_Map" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_PenaltyZone" Member="t_PenaltyZones">
     <Type Name="t_PenaltyZone">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -65,7 +79,7 @@
       <Column Name="latitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
       <Column Name="altitude" Type="System.Decimal" DbType="Decimal(24,14) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_PenaltyZonePolygon_t_PenaltyZonePoint" Member="t_PenaltyZonePolygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_PenaltyZonePolygon" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="t_PenaltyZonePolygon_t_PenaltyZonePoint" Member="t_PenaltyZonePolygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_PenaltyZonePolygon" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_PenaltyZonePolygon" Member="t_PenaltyZonePolygons">
@@ -74,7 +88,7 @@
       <Column Name="ID_PolygonGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_PenaltyZonePolygon_t_PenaltyZonePoint" Member="t_PenaltyZonePoints" ThisKey="ID" OtherKey="ID_Polygon" Type="t_PenaltyZonePoint" />
-      <Association Name="t_PenaltyZone_t_PenaltyZonePolygon" Member="t_PenaltyZone" ThisKey="ID_PolygonGroup" OtherKey="ID" Type="t_PenaltyZone" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="t_PenaltyZone_t_PenaltyZonePolygon" Member="t_PenaltyZone" ThisKey="ID_PolygonGroup" OtherKey="ID" Type="t_PenaltyZone" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Picture" Member="t_Pictures">
@@ -83,6 +97,7 @@
       <Column Name="Data" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Name" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
       <Column Name="isFlag" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="t_Picture_t_Map" Member="t_Maps" ThisKey="ID" OtherKey="ID_Picture" Type="t_Map" />
       <Association Name="t_Picture_t_Pilot" Member="t_Pilots" ThisKey="ID" OtherKey="ID_Picture" Type="t_Pilot" />
       <Association Name="t_Picture_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Flag" Type="t_Team" />
     </Type>

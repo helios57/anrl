@@ -477,7 +477,77 @@ namespace AnrlService.Server
             return result;
         }
 
-        #endregion
+        public List<IMap> getMaps()
+        {
+            List<IMap> result = new List<IMap>();
+            foreach (t_Map map in db.t_Maps)
+            {
+                result.Add(new Map(map));
+            }
+            return result;
+        }
 
+        public long addMap(IMap map)
+        {
+            long result = -1;
+            try
+            {
+                if (map != null &&
+                    map.Name.Length > 2 &&
+                    map.Picture != null)
+                {
+                    if (map.ID <= 0)
+                    {
+                        t_Map m = new t_Map();
+                        m.Name = map.Name;
+                        m.XRot = new Decimal(map.XRot);
+                        m.YRot = new Decimal(map.YRot);
+                        m.XSize = new Decimal(map.XSize);
+                        m.YSize = new Decimal(map.YSize);
+                        m.XTopLeft= new Decimal(map.XTopLeft);
+                        m.YTopLeft = new Decimal(map.YTopLeft);
+                        t_Picture picture;
+                        if (map.Picture.ID <= 0)
+                        {
+                            picture = new t_Picture();
+                            picture.Data = new System.Data.Linq.Binary(map.Picture.Image);
+                            db.t_Pictures.InsertOnSubmit(picture);
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            picture = db.t_Pictures.Single(pp => pp.ID == map.Picture.ID);
+                        }
+                        m.t_Picture = picture;
+                        db.t_Maps.InsertOnSubmit(m);
+                        db.SubmitChanges();
+                        result = m.ID;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.Out.WriteLine(ex.StackTrace);
+                result = -2;
+            }
+            return result;
+        }
+
+        public bool removeMap(long id)
+        {
+            bool result = false;
+            try
+            {
+                db.t_Maps.DeleteOnSubmit(db.t_Maps.Single(p => p.ID == id));
+                db.SubmitChanges();
+                result = true;
+            }
+            catch
+            {
+            }
+            return result;
+        }
+
+        #endregion   
     }
 }

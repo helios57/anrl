@@ -36,10 +36,22 @@
             this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parcourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.racesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.competitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toplistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toplistFlightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toplistLandingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.individualToplistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.addLandingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adjustResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -51,9 +63,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusStripLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 424);
+            this.statusStrip.Location = new System.Drawing.Point(0, 626);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(600, 22);
+            this.statusStrip.Size = new System.Drawing.Size(928, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -67,15 +79,20 @@
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuServer,
+            this.mapToolStripMenuItem,
+            this.parcourToolStripMenuItem,
             this.trackerToolStripMenuItem,
             this.pilotsToolStripMenuItem,
             this.teamsToolStripMenuItem,
-            this.racesToolStripMenuItem,
+            this.groupsToolStripMenuItem,
+            this.competitionToolStripMenuItem,
+            this.rulesToolStripMenuItem,
+            this.resultsToolStripMenuItem,
             this.visualisationToolStripMenuItem,
             this.creditsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(600, 24);
+            this.MainMenu.Size = new System.Drawing.Size(928, 24);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "Menu";
             // 
@@ -117,6 +134,21 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // mapToolStripMenuItem
+            // 
+            this.mapToolStripMenuItem.Enabled = false;
+            this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
+            this.mapToolStripMenuItem.Text = "Map";
+            this.mapToolStripMenuItem.Click += new System.EventHandler(this.mapToolStripMenuItem_Click);
+            // 
+            // parcourToolStripMenuItem
+            // 
+            this.parcourToolStripMenuItem.Enabled = false;
+            this.parcourToolStripMenuItem.Name = "parcourToolStripMenuItem";
+            this.parcourToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.parcourToolStripMenuItem.Text = "Parcour";
+            // 
             // trackerToolStripMenuItem
             // 
             this.trackerToolStripMenuItem.Enabled = false;
@@ -141,13 +173,89 @@
             this.teamsToolStripMenuItem.Text = "Teams";
             this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
             // 
-            // racesToolStripMenuItem
+            // groupsToolStripMenuItem
             // 
-            this.racesToolStripMenuItem.Enabled = false;
-            this.racesToolStripMenuItem.Name = "racesToolStripMenuItem";
-            this.racesToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.racesToolStripMenuItem.Text = "Races";
-            this.racesToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
+            this.groupsToolStripMenuItem.Enabled = false;
+            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
+            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.groupsToolStripMenuItem.Text = "Groups";
+            // 
+            // competitionToolStripMenuItem
+            // 
+            this.competitionToolStripMenuItem.Enabled = false;
+            this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem";
+            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.competitionToolStripMenuItem.Text = "Competition";
+            this.competitionToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
+            // 
+            // rulesToolStripMenuItem
+            // 
+            this.rulesToolStripMenuItem.Enabled = false;
+            this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
+            this.rulesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.rulesToolStripMenuItem.Text = "Rules";
+            // 
+            // resultsToolStripMenuItem
+            // 
+            this.resultsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toplistToolStripMenuItem,
+            this.toplistFlightToolStripMenuItem,
+            this.toplistLandingToolStripMenuItem,
+            this.individualToplistToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.addLandingResultsToolStripMenuItem,
+            this.adjustResultsToolStripMenuItem});
+            this.resultsToolStripMenuItem.Enabled = false;
+            this.resultsToolStripMenuItem.Name = "resultsToolStripMenuItem";
+            this.resultsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.resultsToolStripMenuItem.Text = "Results";
+            // 
+            // toplistToolStripMenuItem
+            // 
+            this.toplistToolStripMenuItem.Enabled = false;
+            this.toplistToolStripMenuItem.Name = "toplistToolStripMenuItem";
+            this.toplistToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.toplistToolStripMenuItem.Text = "Toplist";
+            // 
+            // toplistFlightToolStripMenuItem
+            // 
+            this.toplistFlightToolStripMenuItem.Enabled = false;
+            this.toplistFlightToolStripMenuItem.Name = "toplistFlightToolStripMenuItem";
+            this.toplistFlightToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.toplistFlightToolStripMenuItem.Text = "Toplist Flight";
+            // 
+            // toplistLandingToolStripMenuItem
+            // 
+            this.toplistLandingToolStripMenuItem.Enabled = false;
+            this.toplistLandingToolStripMenuItem.Name = "toplistLandingToolStripMenuItem";
+            this.toplistLandingToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.toplistLandingToolStripMenuItem.Text = "Toplist Landing";
+            // 
+            // individualToplistToolStripMenuItem
+            // 
+            this.individualToplistToolStripMenuItem.Enabled = false;
+            this.individualToplistToolStripMenuItem.Name = "individualToplistToolStripMenuItem";
+            this.individualToplistToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.individualToplistToolStripMenuItem.Text = "Individual Toplist";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            // 
+            // addLandingResultsToolStripMenuItem
+            // 
+            this.addLandingResultsToolStripMenuItem.Enabled = false;
+            this.addLandingResultsToolStripMenuItem.Name = "addLandingResultsToolStripMenuItem";
+            this.addLandingResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.addLandingResultsToolStripMenuItem.Text = "Add Landing Results";
+            // 
+            // adjustResultsToolStripMenuItem
+            // 
+            this.adjustResultsToolStripMenuItem.Enabled = false;
+            this.adjustResultsToolStripMenuItem.Name = "adjustResultsToolStripMenuItem";
+            this.adjustResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.adjustResultsToolStripMenuItem.Text = "Adjust Results";
             // 
             // visualisationToolStripMenuItem
             // 
@@ -169,14 +277,15 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(600, 400);
+            this.MainPanel.Size = new System.Drawing.Size(928, 602);
             this.MainPanel.TabIndex = 2;
+            this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
             // AirNavigationRaceLive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 446);
+            this.ClientSize = new System.Drawing.Size(928, 648);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.MainMenu);
@@ -206,10 +315,22 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.ToolStripMenuItem trackerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pilotsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem racesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem competitionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualisationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mapToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem parcourToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rulesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resultsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toplistToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toplistFlightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toplistLandingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem individualToplistToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem addLandingResultsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adjustResultsToolStripMenuItem;
     }
 }
 
