@@ -5,7 +5,27 @@ using System.Text;
 
 namespace AnrlInterfaces
 {
-    interface ILine : IID
+    public interface ILine : IID
     {
+        IGPSPoint PointA { get; }
+        IGPSPoint PointB { get; }
+        IGPSPoint PointOrientation { get; }
+        LineType LineType { get; }
+    }
+
+    public enum LineType:int
+    {
+        START = 1,
+        END = 2,
+        START_A = 3,
+        START_B = 4,
+        START_C = 5,
+        START_D = 6,
+        END_A = 7,
+        END_B = 8,
+        END_C = 9,
+        END_D = 10,
+        LINEOFNORETURN = 11,
+        PENALTYZONE = 12        
     }
 }

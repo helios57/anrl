@@ -101,6 +101,8 @@ namespace AirNavigationRaceLive.Components
                 fldY.Text = li.getMap().YTopLeft.ToString();
                 MemoryStream ms = new MemoryStream(li.getMap().Picture.Image);
                 pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+
+                btnDelete.Enabled = true;
             }
         }
 

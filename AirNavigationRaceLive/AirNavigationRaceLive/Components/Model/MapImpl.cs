@@ -6,7 +6,7 @@ using AnrlInterfaces;
 
 namespace AirNavigationRaceLive.Components.Model
 {
-     class MapImpl  : MarshalByRefObject,IMap
+    class MapImpl : MarshalByRefObject, IMap
     {
         internal String _Name;
         internal IPicture _Picture;
@@ -61,4 +61,5 @@ namespace AirNavigationRaceLive.Components.Model
         {
             get { return _YTopLeft; }
         }
+    }
 }

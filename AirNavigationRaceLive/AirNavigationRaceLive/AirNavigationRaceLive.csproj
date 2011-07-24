@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -56,6 +57,24 @@
     </Compile>
     <Compile Include="Components\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Helper\Converter.cs" />
+    <Compile Include="Components\Helper\ParcourGenerator.cs" />
+    <Compile Include="Components\Helper\ParcourPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Helper\Vector.cs" />
+    <Compile Include="Components\Helper\VectorUtil.cs" />
+    <Compile Include="Components\Helper\wgs84_ch1903.cs" />
+    <Compile Include="Components\Model\GPSPoint.cs" />
+    <Compile Include="Components\Model\Line.cs" />
+    <Compile Include="Components\Model\Parcour.cs" />
+    <Compile Include="Components\Model\Polygon.cs" />
+    <Compile Include="Components\ParcourGen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\ParcourGen.Designer.cs">
+      <DependentUpon>ParcourGen.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\MapLegacy.cs">
       <SubType>UserControl</SubType>
@@ -116,6 +135,9 @@
     <EmbeddedResource Include="Components\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\ParcourGen.resx">
+      <DependentUpon>ParcourGen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\MapLegacy.resx">
       <DependentUpon>MapLegacy.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +195,11 @@
       <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>
       <Name>RemoteHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\GPSCursor.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

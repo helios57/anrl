@@ -76,26 +76,7 @@ namespace AnrlService.Server
             return result;
         }
 
-        public List<IRace> getRaces()
-        {
-            List<IRace> result = new List<IRace>();
-            foreach (t_Race race in db.t_Races)
-            {
-                result.Add(new Race(race));
-            }
-            return result;
-        }
-
-        public List<IPenaltyZone> getPenaltyzones()
-        {
-            List<IPenaltyZone> result = new List<IPenaltyZone>();
-            foreach (t_PenaltyZone penaltyZone in db.t_PenaltyZones)
-            {
-                result.Add(new PenaltyZone(penaltyZone));
-            }
-            return result;
-        }
-
+      
         public List<IData> getData(List<ITracker> trackers, DateTime from, DateTime to)
         {
             List<IData> result = new List<IData>();
@@ -226,134 +207,6 @@ namespace AnrlService.Server
             return result;
         }
 
-        public long addRace(IRace race)
-        {
-            long result = -1;
-            try
-            {
-                if( race != null && 
-                    race.ID < 0 && 
-                    race.Teams != null && 
-                    race.Start != null &&
-                    race.End != null && 
-                    race.TakeOff != null &&
-                    race.PenaltyZone != null &&
-                    race.PenaltyZone.ID > 0)
-                {
-                    List<t_Team> teams = new List<t_Team>();
-                    bool teamsOk = true;
-                    foreach (ITeam team in race.Teams)
-                    {
-                        if (team.ID > 0)
-                        {
-                            teams.Add(db.t_Teams.Single(p => p.ID == team.ID));
-                        }
-                        else
-                        {
-                            teamsOk = false;
-                            break;
-                        }
-                    }
-                    if (teamsOk)
-                    {
-                        t_PenaltyZone penaltyZone = db.t_PenaltyZones.Single(p => p.ID == race.PenaltyZone.ID);
-                        if (penaltyZone != null)
-                        {
-                            t_Race dbRace = new t_Race();
-                            dbRace.Name = race.Name;
-                            dbRace.t_PenaltyZone = penaltyZone;
-                            dbRace.TakeOff = race.TakeOff;
-                            dbRace.TimeEnd = race.End;
-                            dbRace.TimeStart = race.Start;
-                            db.t_Races.InsertOnSubmit(dbRace);
-                            db.SubmitChanges();
-                            foreach (t_Team team in teams)
-                            {
-                                t_Race_Team rt = new t_Race_Team();
-                                rt.t_Race = dbRace;
-                                rt.t_Team = team;
-                                db.t_Race_Teams.InsertOnSubmit(rt);
-                            }
-                            db.SubmitChanges();
-                            result = dbRace.ID;
-                        }
-                    }
-                }
-            }
-            catch { result = -2; }
-            return result;
-        }
-
-        public long addPenaltyZone(IPenaltyZone penaltyzone)
-        {
-            long result = -1;
-            try
-            {
-                if (penaltyzone != null &&
-                    penaltyzone.ID < 0 &&
-                    penaltyzone.Name.Length > 2 &&
-                    penaltyzone.Polygons != null &&
-                    penaltyzone.Polygons.Count > 0)
-                {
-                    List<t_PenaltyZonePolygon> polygons = new List<t_PenaltyZonePolygon>();
-                    List<t_PenaltyZonePoint> points = new List<t_PenaltyZonePoint>();
-
-                    bool allOk = true;
-                    foreach (IPenaltyPolygon polygon in penaltyzone.Polygons)
-                    {
-                        if (polygon.ID < 0 && polygon.Points != null)
-                        {
-                            t_PenaltyZonePolygon dbPoly = new t_PenaltyZonePolygon();
-                            foreach (IPenaltyPoint point in polygon.Points)
-                            {
-                                if (point.ID < 0)
-                                {
-                                    t_PenaltyZonePoint dbPoint = new t_PenaltyZonePoint();
-                                    dbPoint.longitude = point.Longitude;
-                                    dbPoint.latitude = point.Latitude;
-                                    dbPoint.altitude = point.Altitude;
-                                    dbPoint.t_PenaltyZonePolygon = dbPoly;
-                                    points.Add(dbPoint);
-                                }
-                                else
-                                {
-                                    allOk = false;
-                                    break;
-                                }
-                            }
-                            polygons.Add(dbPoly);
-                        }
-                        else
-                        {
-                            allOk = false;
-                            break;
-                        }
-                    }
-                    if (allOk)
-                    {
-                        t_PenaltyZone dbZone = new t_PenaltyZone();
-                        dbZone.Name = penaltyzone.Name;
-                        db.t_PenaltyZones.InsertOnSubmit(dbZone);
-                        db.SubmitChanges();
-                        foreach (t_PenaltyZonePolygon poly in polygons)
-                        {
-                            poly.t_PenaltyZone = dbZone;
-                            db.t_PenaltyZonePolygons.InsertOnSubmit(poly);
-                        }
-                        db.SubmitChanges();
-                        foreach (t_PenaltyZonePoint point in points)
-                        {
-                            db.t_PenaltyZonePoints.InsertOnSubmit(point);
-                        }
-                        db.SubmitChanges();
-                        result = dbZone.ID;
-                    }
-                }
-            }
-            catch { result = -2; }
-            return result;
-        }
-
         public long addPicture(IPicture picture, Boolean isFlag)
         {      
             long result = -1;
@@ -396,45 +249,6 @@ namespace AnrlService.Server
             try
             {
                 db.t_Teams.DeleteOnSubmit(db.t_Teams.Single(p => p.ID == id));
-                db.SubmitChanges();
-                result = true;
-            }
-            catch
-            {
-            }
-            return result;
-        }
-
-        public bool removeRace(long id)
-        {
-            bool result = false;
-            try
-            {
-                db.t_Races.DeleteOnSubmit(db.t_Races.Single(p => p.ID == id));
-                db.SubmitChanges();
-                result = true;
-            }
-            catch
-            {
-            }
-            return result;
-        }
-
-        public bool removePenaltyZone(long id)
-        {
-            bool result = false;
-            try
-            {
-                t_PenaltyZone zone = db.t_PenaltyZones.Single(p => p.ID == id);
-                foreach (t_PenaltyZonePolygon poly in zone.t_PenaltyZonePolygons)
-                {
-                    foreach (t_PenaltyZonePoint point in poly.t_PenaltyZonePoints)
-                    {
-                        db.t_PenaltyZonePoints.DeleteOnSubmit(point);
-                    }
-                    db.t_PenaltyZonePolygons.DeleteOnSubmit(poly);
-                }
-                db.t_PenaltyZones.DeleteOnSubmit(zone);
                 db.SubmitChanges();
                 result = true;
             }

@@ -225,33 +225,33 @@ namespace TCPReciever
         /// </summary>
         /// <param name="wsg84Coords"></param>
         /// <returns></returns>
-        private decimal ConvertCoordinates(string wsg84Coords)
+        private double ConvertCoordinates(string wsg84Coords)
         {
             try
             {
-                decimal result = 0;
+                double result = 0;
                 string SingChar = wsg84Coords.Substring(0, 1);
                 if (SingChar == "E" || SingChar == "W")
                 {
                     double sign = SingChar == "E" ? 1.0 : -1.0;
-                    decimal degree = decimal.Parse(wsg84Coords.Substring(1, 3));
-                    degree += decimal.Parse(wsg84Coords.Substring(4, 6)) / 60;
-                    degree *= (decimal)sign;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 3));
+                    degree += double.Parse(wsg84Coords.Substring(4, 6)) / 60;
+                    degree *= (double)sign;
                     result = degree;
                 }
                 else if (SingChar == "N" || SingChar == "S")
                 {
                     double sign = SingChar == "N" ? 1.0 : -1.0;
-                    decimal degree = decimal.Parse(wsg84Coords.Substring(1, 2));
-                    degree += decimal.Parse(wsg84Coords.Substring(3, 6)) / 60;
-                    degree *= (decimal)sign;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 2));
+                    degree += double.Parse(wsg84Coords.Substring(3, 6)) / 60;
+                    degree *= (double)sign;
                     result = degree;
                 }
                 else
                 {
                     throw new Exception("Wrong Coordinate format");
                 }
-                return decimal.Round(result, 18);
+                return result;
             }
             catch
             {
@@ -286,9 +286,9 @@ namespace TCPReciever
                                 t_Daten InsertData = new t_Daten();
                                 InsertData.t_Tracker = tr;
                                 InsertData.Timestamp = GPS_IN.TimestampTracker;
-                                InsertData.Latitude = decimal.Round(ConvertCoordinates(GPS_IN.latitude), 16);
-                                InsertData.Longitude = decimal.Round(ConvertCoordinates(GPS_IN.longitude), 16);
-                                InsertData.Altitude = decimal.Parse(GPS_IN.altitude);
+                                InsertData.Latitude = ConvertCoordinates(GPS_IN.latitude);
+                                InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
+                                InsertData.Altitude = double.Parse(GPS_IN.altitude);
                                 db.t_Datens.InsertOnSubmit(InsertData);
                                 GPS_IN.Processed = true;
                             }

@@ -22,6 +22,8 @@ namespace AirNavigationRaceLive
         Race Race;
         Map Map;
         Visualisation Visualisation;
+        ParcourGen ParcourGen;
+        MapLegacy MapLegacy;
 
 
         public AirNavigationRaceLive()
@@ -111,6 +113,8 @@ namespace AirNavigationRaceLive
             Race = null;
             Visualisation = null;
             Map = null;
+            ParcourGen = null;
+            MapLegacy = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
             enableControl(Credits);
@@ -193,6 +197,25 @@ namespace AirNavigationRaceLive
                 Map = new Map(Client);
             }
             enableControl(Map);
+        }
+
+        private void parcourToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ParcourGen == null)
+            {
+                ParcourGen = new ParcourGen(Client);
+            }
+            enableControl(ParcourGen);            
+        }
+
+        private void legacyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MapLegacy == null)
+            {
+                MapLegacy = new MapLegacy(Client);
+            }
+            enableControl(MapLegacy);       
+
         }
     }
 }

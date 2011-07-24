@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -74,12 +75,8 @@
     <Compile Include="Server\Impl\GPSPoint.cs" />
     <Compile Include="Server\Impl\IDImpl.cs" />
     <Compile Include="Server\Impl\Map.cs" />
-    <Compile Include="Server\Impl\PenaltyPoint.cs" />
-    <Compile Include="Server\Impl\PenaltyPolygon.cs" />
-    <Compile Include="Server\Impl\PenaltyZone.cs" />
     <Compile Include="Server\Impl\Picture.cs" />
     <Compile Include="Server\Impl\Pilot.cs" />
-    <Compile Include="Server\Impl\Race.cs" />
     <Compile Include="Server\Impl\Team.cs" />
     <Compile Include="Server\Impl\Tracker.cs" />
     <Compile Include="Server\Server.cs" />

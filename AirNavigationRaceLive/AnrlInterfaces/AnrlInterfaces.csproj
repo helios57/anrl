@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,17 +53,12 @@
     <Compile Include="IID.cs" />
     <Compile Include="IPicture.cs" />
     <Compile Include="IPilot.cs" />
-    <Compile Include="IRace.cs" />
+    <Compile Include="IPolygon.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="ITeam.cs" />
     <Compile Include="ITracker.cs" />
+    <Compile Include="IParcour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="xsd\Parcour.designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="xsd\Parcour.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -55,6 +55,7 @@
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.legacyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -136,6 +137,8 @@
             // 
             // mapToolStripMenuItem
             // 
+            this.mapToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.legacyToolStripMenuItem});
             this.mapToolStripMenuItem.Enabled = false;
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
             this.mapToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
@@ -148,6 +151,7 @@
             this.parcourToolStripMenuItem.Name = "parcourToolStripMenuItem";
             this.parcourToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.parcourToolStripMenuItem.Text = "Parcour";
+            this.parcourToolStripMenuItem.Click += new System.EventHandler(this.parcourToolStripMenuItem_Click);
             // 
             // trackerToolStripMenuItem
             // 
@@ -281,6 +285,13 @@
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
+            // legacyToolStripMenuItem
+            // 
+            this.legacyToolStripMenuItem.Name = "legacyToolStripMenuItem";
+            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.legacyToolStripMenuItem.Text = "Legacy";
+            this.legacyToolStripMenuItem.Click += new System.EventHandler(this.legacyToolStripMenuItem_Click);
+            // 
             // AirNavigationRaceLive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +342,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem addLandingResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adjustResultsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem legacyToolStripMenuItem;
     }
 }
 

@@ -39,33 +39,36 @@ namespace AnrlDB
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
+    partial void Insertt_GPSPoint(t_GPSPoint instance);
+    partial void Updatet_GPSPoint(t_GPSPoint instance);
+    partial void Deletet_GPSPoint(t_GPSPoint instance);
+    partial void Insertt_Line(t_Line instance);
+    partial void Updatet_Line(t_Line instance);
+    partial void Deletet_Line(t_Line instance);
     partial void Insertt_Log(t_Log instance);
     partial void Updatet_Log(t_Log instance);
     partial void Deletet_Log(t_Log instance);
     partial void Insertt_Map(t_Map instance);
     partial void Updatet_Map(t_Map instance);
     partial void Deletet_Map(t_Map instance);
-    partial void Insertt_PenaltyZone(t_PenaltyZone instance);
-    partial void Updatet_PenaltyZone(t_PenaltyZone instance);
-    partial void Deletet_PenaltyZone(t_PenaltyZone instance);
-    partial void Insertt_PenaltyZonePoint(t_PenaltyZonePoint instance);
-    partial void Updatet_PenaltyZonePoint(t_PenaltyZonePoint instance);
-    partial void Deletet_PenaltyZonePoint(t_PenaltyZonePoint instance);
-    partial void Insertt_PenaltyZonePolygon(t_PenaltyZonePolygon instance);
-    partial void Updatet_PenaltyZonePolygon(t_PenaltyZonePolygon instance);
-    partial void Deletet_PenaltyZonePolygon(t_PenaltyZonePolygon instance);
+    partial void Insertt_Parcour(t_Parcour instance);
+    partial void Updatet_Parcour(t_Parcour instance);
+    partial void Deletet_Parcour(t_Parcour instance);
+    partial void Insertt_Parcour_Line(t_Parcour_Line instance);
+    partial void Updatet_Parcour_Line(t_Parcour_Line instance);
+    partial void Deletet_Parcour_Line(t_Parcour_Line instance);
     partial void Insertt_Picture(t_Picture instance);
     partial void Updatet_Picture(t_Picture instance);
     partial void Deletet_Picture(t_Picture instance);
     partial void Insertt_Pilot(t_Pilot instance);
     partial void Updatet_Pilot(t_Pilot instance);
     partial void Deletet_Pilot(t_Pilot instance);
-    partial void Insertt_Race(t_Race instance);
-    partial void Updatet_Race(t_Race instance);
-    partial void Deletet_Race(t_Race instance);
-    partial void Insertt_Race_Team(t_Race_Team instance);
-    partial void Updatet_Race_Team(t_Race_Team instance);
-    partial void Deletet_Race_Team(t_Race_Team instance);
+    partial void Insertt_Polygon(t_Polygon instance);
+    partial void Updatet_Polygon(t_Polygon instance);
+    partial void Deletet_Polygon(t_Polygon instance);
+    partial void Insertt_Polygon_Line(t_Polygon_Line instance);
+    partial void Updatet_Polygon_Line(t_Polygon_Line instance);
+    partial void Deletet_Polygon_Line(t_Polygon_Line instance);
     partial void Insertt_Team(t_Team instance);
     partial void Updatet_Team(t_Team instance);
     partial void Deletet_Team(t_Team instance);
@@ -125,6 +128,22 @@ namespace AnrlDB
 			}
 		}
 		
+		public System.Data.Linq.Table<t_GPSPoint> t_GPSPoints
+		{
+			get
+			{
+				return this.GetTable<t_GPSPoint>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Line> t_Lines
+		{
+			get
+			{
+				return this.GetTable<t_Line>();
+			}
+		}
+		
 		public System.Data.Linq.Table<t_Log> t_Logs
 		{
 			get
@@ -141,27 +160,19 @@ namespace AnrlDB
 			}
 		}
 		
-		public System.Data.Linq.Table<t_PenaltyZone> t_PenaltyZones
+		public System.Data.Linq.Table<t_Parcour> t_Parcours
 		{
 			get
 			{
-				return this.GetTable<t_PenaltyZone>();
+				return this.GetTable<t_Parcour>();
 			}
 		}
 		
-		public System.Data.Linq.Table<t_PenaltyZonePoint> t_PenaltyZonePoints
+		public System.Data.Linq.Table<t_Parcour_Line> t_Parcour_Lines
 		{
 			get
 			{
-				return this.GetTable<t_PenaltyZonePoint>();
-			}
-		}
-		
-		public System.Data.Linq.Table<t_PenaltyZonePolygon> t_PenaltyZonePolygons
-		{
-			get
-			{
-				return this.GetTable<t_PenaltyZonePolygon>();
+				return this.GetTable<t_Parcour_Line>();
 			}
 		}
 		
@@ -181,19 +192,19 @@ namespace AnrlDB
 			}
 		}
 		
-		public System.Data.Linq.Table<t_Race> t_Races
+		public System.Data.Linq.Table<t_Polygon> t_Polygons
 		{
 			get
 			{
-				return this.GetTable<t_Race>();
+				return this.GetTable<t_Polygon>();
 			}
 		}
 		
-		public System.Data.Linq.Table<t_Race_Team> t_Race_Teams
+		public System.Data.Linq.Table<t_Polygon_Line> t_Polygon_Lines
 		{
 			get
 			{
-				return this.GetTable<t_Race_Team>();
+				return this.GetTable<t_Polygon_Line>();
 			}
 		}
 		
@@ -218,17 +229,13 @@ namespace AnrlDB
 		
 		private System.DateTime _Timestamp;
 		
-		private decimal _Longitude;
+		private double _Longitude;
 		
-		private decimal _Latitude;
+		private double _Latitude;
 		
-		private decimal _Altitude;
+		private double _Altitude;
 		
-		private decimal _Speed;
-		
-		private int _Penalty;
-		
-		private int _ID_Polygon;
+		private double _Speed;
 		
 		private EntityRef<t_Tracker> _t_Tracker;
 		
@@ -242,18 +249,14 @@ namespace AnrlDB
     partial void OnID_TrackerChanged();
     partial void OnTimestampChanging(System.DateTime value);
     partial void OnTimestampChanged();
-    partial void OnLongitudeChanging(decimal value);
+    partial void OnLongitudeChanging(double value);
     partial void OnLongitudeChanged();
-    partial void OnLatitudeChanging(decimal value);
+    partial void OnLatitudeChanging(double value);
     partial void OnLatitudeChanged();
-    partial void OnAltitudeChanging(decimal value);
+    partial void OnAltitudeChanging(double value);
     partial void OnAltitudeChanged();
-    partial void OnSpeedChanging(decimal value);
+    partial void OnSpeedChanging(double value);
     partial void OnSpeedChanged();
-    partial void OnPenaltyChanging(int value);
-    partial void OnPenaltyChanged();
-    partial void OnID_PolygonChanging(int value);
-    partial void OnID_PolygonChanged();
     #endregion
 		
 		public t_Daten()
@@ -326,8 +329,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="Decimal(24,18) NOT NULL")]
-		public decimal Longitude
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Longitude", DbType="Float NOT NULL")]
+		public double Longitude
 		{
 			get
 			{
@@ -346,8 +349,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="Decimal(24,18) NOT NULL")]
-		public decimal Latitude
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Latitude", DbType="Float NOT NULL")]
+		public double Latitude
 		{
 			get
 			{
@@ -366,8 +369,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Altitude", DbType="Decimal(24,18) NOT NULL")]
-		public decimal Altitude
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Altitude", DbType="Float NOT NULL")]
+		public double Altitude
 		{
 			get
 			{
@@ -386,8 +389,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Speed", DbType="Decimal(24,18) NOT NULL")]
-		public decimal Speed
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Speed", DbType="Float NOT NULL")]
+		public double Speed
 		{
 			get
 			{
@@ -402,46 +405,6 @@ namespace AnrlDB
 					this._Speed = value;
 					this.SendPropertyChanged("Speed");
 					this.OnSpeedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Penalty", DbType="Int NOT NULL")]
-		public int Penalty
-		{
-			get
-			{
-				return this._Penalty;
-			}
-			set
-			{
-				if ((this._Penalty != value))
-				{
-					this.OnPenaltyChanging(value);
-					this.SendPropertyChanging();
-					this._Penalty = value;
-					this.SendPropertyChanged("Penalty");
-					this.OnPenaltyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Polygon", DbType="Int NOT NULL")]
-		public int ID_Polygon
-		{
-			get
-			{
-				return this._ID_Polygon;
-			}
-			set
-			{
-				if ((this._ID_Polygon != value))
-				{
-					this.OnID_PolygonChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Polygon = value;
-					this.SendPropertyChanged("ID_Polygon");
-					this.OnID_PolygonChanged();
 				}
 			}
 		}
@@ -1041,6 +1004,561 @@ namespace AnrlDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_GPSPoint")]
+	public partial class t_GPSPoint : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private double _altitude;
+		
+		private double _longitude;
+		
+		private double _latitude;
+		
+		private EntitySet<t_Line> _t_Lines;
+		
+		private EntitySet<t_Line> _t_Lines1;
+		
+		private EntitySet<t_Line> _t_Lines2;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnaltitudeChanging(double value);
+    partial void OnaltitudeChanged();
+    partial void OnlongitudeChanging(double value);
+    partial void OnlongitudeChanged();
+    partial void OnlatitudeChanging(double value);
+    partial void OnlatitudeChanged();
+    #endregion
+		
+		public t_GPSPoint()
+		{
+			this._t_Lines = new EntitySet<t_Line>(new Action<t_Line>(this.attach_t_Lines), new Action<t_Line>(this.detach_t_Lines));
+			this._t_Lines1 = new EntitySet<t_Line>(new Action<t_Line>(this.attach_t_Lines1), new Action<t_Line>(this.detach_t_Lines1));
+			this._t_Lines2 = new EntitySet<t_Line>(new Action<t_Line>(this.attach_t_Lines2), new Action<t_Line>(this.detach_t_Lines2));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_altitude", DbType="Float NOT NULL")]
+		public double altitude
+		{
+			get
+			{
+				return this._altitude;
+			}
+			set
+			{
+				if ((this._altitude != value))
+				{
+					this.OnaltitudeChanging(value);
+					this.SendPropertyChanging();
+					this._altitude = value;
+					this.SendPropertyChanged("altitude");
+					this.OnaltitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="Float NOT NULL")]
+		public double longitude
+		{
+			get
+			{
+				return this._longitude;
+			}
+			set
+			{
+				if ((this._longitude != value))
+				{
+					this.OnlongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="Float NOT NULL")]
+		public double latitude
+		{
+			get
+			{
+				return this._latitude;
+			}
+			set
+			{
+				if ((this._latitude != value))
+				{
+					this.OnlatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._latitude = value;
+					this.SendPropertyChanged("latitude");
+					this.OnlatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_GPSPoint_t_Line", Storage="_t_Lines", ThisKey="ID", OtherKey="ID_PointA")]
+		public EntitySet<t_Line> t_Lines
+		{
+			get
+			{
+				return this._t_Lines;
+			}
+			set
+			{
+				this._t_Lines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_GPSPoint_t_Line1", Storage="_t_Lines1", ThisKey="ID", OtherKey="ID_PointB")]
+		public EntitySet<t_Line> t_Lines1
+		{
+			get
+			{
+				return this._t_Lines1;
+			}
+			set
+			{
+				this._t_Lines1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_GPSPoint_t_Line2", Storage="_t_Lines2", ThisKey="ID", OtherKey="ID_PointOrientation")]
+		public EntitySet<t_Line> t_Lines2
+		{
+			get
+			{
+				return this._t_Lines2;
+			}
+			set
+			{
+				this._t_Lines2.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Lines(t_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPSPoint = this;
+		}
+		
+		private void detach_t_Lines(t_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPSPoint = null;
+		}
+		
+		private void attach_t_Lines1(t_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPSPoint1 = this;
+		}
+		
+		private void detach_t_Lines1(t_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPSPoint1 = null;
+		}
+		
+		private void attach_t_Lines2(t_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPSPoint2 = this;
+		}
+		
+		private void detach_t_Lines2(t_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_GPSPoint2 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Line")]
+	public partial class t_Line : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _Type;
+		
+		private int _ID_PointA;
+		
+		private int _ID_PointB;
+		
+		private int _ID_PointOrientation;
+		
+		private EntitySet<t_Parcour_Line> _t_Parcour_Lines;
+		
+		private EntitySet<t_Polygon_Line> _t_Polygon_Lines;
+		
+		private EntityRef<t_GPSPoint> _t_GPSPoint;
+		
+		private EntityRef<t_GPSPoint> _t_GPSPoint1;
+		
+		private EntityRef<t_GPSPoint> _t_GPSPoint2;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnTypeChanging(int value);
+    partial void OnTypeChanged();
+    partial void OnID_PointAChanging(int value);
+    partial void OnID_PointAChanged();
+    partial void OnID_PointBChanging(int value);
+    partial void OnID_PointBChanged();
+    partial void OnID_PointOrientationChanging(int value);
+    partial void OnID_PointOrientationChanged();
+    #endregion
+		
+		public t_Line()
+		{
+			this._t_Parcour_Lines = new EntitySet<t_Parcour_Line>(new Action<t_Parcour_Line>(this.attach_t_Parcour_Lines), new Action<t_Parcour_Line>(this.detach_t_Parcour_Lines));
+			this._t_Polygon_Lines = new EntitySet<t_Polygon_Line>(new Action<t_Polygon_Line>(this.attach_t_Polygon_Lines), new Action<t_Polygon_Line>(this.detach_t_Polygon_Lines));
+			this._t_GPSPoint = default(EntityRef<t_GPSPoint>);
+			this._t_GPSPoint1 = default(EntityRef<t_GPSPoint>);
+			this._t_GPSPoint2 = default(EntityRef<t_GPSPoint>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL")]
+		public int Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PointA", DbType="Int NOT NULL")]
+		public int ID_PointA
+		{
+			get
+			{
+				return this._ID_PointA;
+			}
+			set
+			{
+				if ((this._ID_PointA != value))
+				{
+					if (this._t_GPSPoint.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_PointAChanging(value);
+					this.SendPropertyChanging();
+					this._ID_PointA = value;
+					this.SendPropertyChanged("ID_PointA");
+					this.OnID_PointAChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PointB", DbType="Int NOT NULL")]
+		public int ID_PointB
+		{
+			get
+			{
+				return this._ID_PointB;
+			}
+			set
+			{
+				if ((this._ID_PointB != value))
+				{
+					if (this._t_GPSPoint1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_PointBChanging(value);
+					this.SendPropertyChanging();
+					this._ID_PointB = value;
+					this.SendPropertyChanged("ID_PointB");
+					this.OnID_PointBChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PointOrientation", DbType="Int NOT NULL")]
+		public int ID_PointOrientation
+		{
+			get
+			{
+				return this._ID_PointOrientation;
+			}
+			set
+			{
+				if ((this._ID_PointOrientation != value))
+				{
+					if (this._t_GPSPoint2.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_PointOrientationChanging(value);
+					this.SendPropertyChanging();
+					this._ID_PointOrientation = value;
+					this.SendPropertyChanged("ID_PointOrientation");
+					this.OnID_PointOrientationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Parcour_Line", Storage="_t_Parcour_Lines", ThisKey="ID", OtherKey="ID_Line")]
+		public EntitySet<t_Parcour_Line> t_Parcour_Lines
+		{
+			get
+			{
+				return this._t_Parcour_Lines;
+			}
+			set
+			{
+				this._t_Parcour_Lines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Polygon_Line", Storage="_t_Polygon_Lines", ThisKey="ID", OtherKey="ID_Line")]
+		public EntitySet<t_Polygon_Line> t_Polygon_Lines
+		{
+			get
+			{
+				return this._t_Polygon_Lines;
+			}
+			set
+			{
+				this._t_Polygon_Lines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_GPSPoint_t_Line", Storage="_t_GPSPoint", ThisKey="ID_PointA", OtherKey="ID", IsForeignKey=true)]
+		public t_GPSPoint t_GPSPoint
+		{
+			get
+			{
+				return this._t_GPSPoint.Entity;
+			}
+			set
+			{
+				t_GPSPoint previousValue = this._t_GPSPoint.Entity;
+				if (((previousValue != value) 
+							|| (this._t_GPSPoint.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_GPSPoint.Entity = null;
+						previousValue.t_Lines.Remove(this);
+					}
+					this._t_GPSPoint.Entity = value;
+					if ((value != null))
+					{
+						value.t_Lines.Add(this);
+						this._ID_PointA = value.ID;
+					}
+					else
+					{
+						this._ID_PointA = default(int);
+					}
+					this.SendPropertyChanged("t_GPSPoint");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_GPSPoint_t_Line1", Storage="_t_GPSPoint1", ThisKey="ID_PointB", OtherKey="ID", IsForeignKey=true)]
+		public t_GPSPoint t_GPSPoint1
+		{
+			get
+			{
+				return this._t_GPSPoint1.Entity;
+			}
+			set
+			{
+				t_GPSPoint previousValue = this._t_GPSPoint1.Entity;
+				if (((previousValue != value) 
+							|| (this._t_GPSPoint1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_GPSPoint1.Entity = null;
+						previousValue.t_Lines1.Remove(this);
+					}
+					this._t_GPSPoint1.Entity = value;
+					if ((value != null))
+					{
+						value.t_Lines1.Add(this);
+						this._ID_PointB = value.ID;
+					}
+					else
+					{
+						this._ID_PointB = default(int);
+					}
+					this.SendPropertyChanged("t_GPSPoint1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_GPSPoint_t_Line2", Storage="_t_GPSPoint2", ThisKey="ID_PointOrientation", OtherKey="ID", IsForeignKey=true)]
+		public t_GPSPoint t_GPSPoint2
+		{
+			get
+			{
+				return this._t_GPSPoint2.Entity;
+			}
+			set
+			{
+				t_GPSPoint previousValue = this._t_GPSPoint2.Entity;
+				if (((previousValue != value) 
+							|| (this._t_GPSPoint2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_GPSPoint2.Entity = null;
+						previousValue.t_Lines2.Remove(this);
+					}
+					this._t_GPSPoint2.Entity = value;
+					if ((value != null))
+					{
+						value.t_Lines2.Add(this);
+						this._ID_PointOrientation = value.ID;
+					}
+					else
+					{
+						this._ID_PointOrientation = default(int);
+					}
+					this.SendPropertyChanged("t_GPSPoint2");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Parcour_Lines(t_Parcour_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Line = this;
+		}
+		
+		private void detach_t_Parcour_Lines(t_Parcour_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Line = null;
+		}
+		
+		private void attach_t_Polygon_Lines(t_Polygon_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Line = this;
+		}
+		
+		private void detach_t_Polygon_Lines(t_Polygon_Line entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Line = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Log")]
 	public partial class t_Log : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1494,8 +2012,8 @@ namespace AnrlDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_PenaltyZone")]
-	public partial class t_PenaltyZone : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Parcour")]
+	public partial class t_Parcour : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -1504,9 +2022,9 @@ namespace AnrlDB
 		
 		private string _Name;
 		
-		private EntitySet<t_PenaltyZonePolygon> _t_PenaltyZonePolygons;
+		private EntitySet<t_Parcour_Line> _t_Parcour_Lines;
 		
-		private EntitySet<t_Race> _t_Races;
+		private EntitySet<t_Polygon> _t_Polygons;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1518,10 +2036,10 @@ namespace AnrlDB
     partial void OnNameChanged();
     #endregion
 		
-		public t_PenaltyZone()
+		public t_Parcour()
 		{
-			this._t_PenaltyZonePolygons = new EntitySet<t_PenaltyZonePolygon>(new Action<t_PenaltyZonePolygon>(this.attach_t_PenaltyZonePolygons), new Action<t_PenaltyZonePolygon>(this.detach_t_PenaltyZonePolygons));
-			this._t_Races = new EntitySet<t_Race>(new Action<t_Race>(this.attach_t_Races), new Action<t_Race>(this.detach_t_Races));
+			this._t_Parcour_Lines = new EntitySet<t_Parcour_Line>(new Action<t_Parcour_Line>(this.attach_t_Parcour_Lines), new Action<t_Parcour_Line>(this.detach_t_Parcour_Lines));
+			this._t_Polygons = new EntitySet<t_Polygon>(new Action<t_Polygon>(this.attach_t_Polygons), new Action<t_Polygon>(this.detach_t_Polygons));
 			OnCreated();
 		}
 		
@@ -1545,7 +2063,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -1565,29 +2083,29 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_PenaltyZone_t_PenaltyZonePolygon", Storage="_t_PenaltyZonePolygons", ThisKey="ID", OtherKey="ID_PolygonGroup")]
-		public EntitySet<t_PenaltyZonePolygon> t_PenaltyZonePolygons
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Parcour_Line", Storage="_t_Parcour_Lines", ThisKey="ID", OtherKey="ID_Parcour")]
+		public EntitySet<t_Parcour_Line> t_Parcour_Lines
 		{
 			get
 			{
-				return this._t_PenaltyZonePolygons;
+				return this._t_Parcour_Lines;
 			}
 			set
 			{
-				this._t_PenaltyZonePolygons.Assign(value);
+				this._t_Parcour_Lines.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_PenaltyZone_t_Race", Storage="_t_Races", ThisKey="ID", OtherKey="ID_PenaltyZone")]
-		public EntitySet<t_Race> t_Races
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Polygon", Storage="_t_Polygons", ThisKey="ID", OtherKey="ID_Parcour")]
+		public EntitySet<t_Polygon> t_Polygons
 		{
 			get
 			{
-				return this._t_Races;
+				return this._t_Polygons;
 			}
 			set
 			{
-				this._t_Races.Assign(value);
+				this._t_Polygons.Assign(value);
 			}
 		}
 		
@@ -1611,205 +2129,174 @@ namespace AnrlDB
 			}
 		}
 		
-		private void attach_t_PenaltyZonePolygons(t_PenaltyZonePolygon entity)
+		private void attach_t_Parcour_Lines(t_Parcour_Line entity)
 		{
 			this.SendPropertyChanging();
-			entity.t_PenaltyZone = this;
+			entity.t_Parcour = this;
 		}
 		
-		private void detach_t_PenaltyZonePolygons(t_PenaltyZonePolygon entity)
+		private void detach_t_Parcour_Lines(t_Parcour_Line entity)
 		{
 			this.SendPropertyChanging();
-			entity.t_PenaltyZone = null;
+			entity.t_Parcour = null;
 		}
 		
-		private void attach_t_Races(t_Race entity)
+		private void attach_t_Polygons(t_Polygon entity)
 		{
 			this.SendPropertyChanging();
-			entity.t_PenaltyZone = this;
+			entity.t_Parcour = this;
 		}
 		
-		private void detach_t_Races(t_Race entity)
+		private void detach_t_Polygons(t_Polygon entity)
 		{
 			this.SendPropertyChanging();
-			entity.t_PenaltyZone = null;
+			entity.t_Parcour = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_PenaltyZonePoint")]
-	public partial class t_PenaltyZonePoint : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Parcour_Line")]
+	public partial class t_Parcour_Line : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private int _ID_Parcour;
 		
-		private decimal _longitude;
+		private int _ID_Line;
 		
-		private decimal _latitude;
+		private EntityRef<t_Line> _t_Line;
 		
-		private decimal _altitude;
-		
-		private int _ID_Polygon;
-		
-		private EntityRef<t_PenaltyZonePolygon> _t_PenaltyZonePolygon;
+		private EntityRef<t_Parcour> _t_Parcour;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnlongitudeChanging(decimal value);
-    partial void OnlongitudeChanged();
-    partial void OnlatitudeChanging(decimal value);
-    partial void OnlatitudeChanged();
-    partial void OnaltitudeChanging(decimal value);
-    partial void OnaltitudeChanged();
-    partial void OnID_PolygonChanging(int value);
-    partial void OnID_PolygonChanged();
+    partial void OnID_ParcourChanging(int value);
+    partial void OnID_ParcourChanged();
+    partial void OnID_LineChanging(int value);
+    partial void OnID_LineChanged();
     #endregion
 		
-		public t_PenaltyZonePoint()
+		public t_Parcour_Line()
 		{
-			this._t_PenaltyZonePolygon = default(EntityRef<t_PenaltyZonePolygon>);
+			this._t_Line = default(EntityRef<t_Line>);
+			this._t_Parcour = default(EntityRef<t_Parcour>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Parcour", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Parcour
 		{
 			get
 			{
-				return this._ID;
+				return this._ID_Parcour;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._ID_Parcour != value))
 				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="Decimal(24,14) NOT NULL")]
-		public decimal longitude
-		{
-			get
-			{
-				return this._longitude;
-			}
-			set
-			{
-				if ((this._longitude != value))
-				{
-					this.OnlongitudeChanging(value);
-					this.SendPropertyChanging();
-					this._longitude = value;
-					this.SendPropertyChanged("longitude");
-					this.OnlongitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="Decimal(24,14) NOT NULL")]
-		public decimal latitude
-		{
-			get
-			{
-				return this._latitude;
-			}
-			set
-			{
-				if ((this._latitude != value))
-				{
-					this.OnlatitudeChanging(value);
-					this.SendPropertyChanging();
-					this._latitude = value;
-					this.SendPropertyChanged("latitude");
-					this.OnlatitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_altitude", DbType="Decimal(24,14) NOT NULL")]
-		public decimal altitude
-		{
-			get
-			{
-				return this._altitude;
-			}
-			set
-			{
-				if ((this._altitude != value))
-				{
-					this.OnaltitudeChanging(value);
-					this.SendPropertyChanging();
-					this._altitude = value;
-					this.SendPropertyChanged("altitude");
-					this.OnaltitudeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Polygon", DbType="Int NOT NULL")]
-		public int ID_Polygon
-		{
-			get
-			{
-				return this._ID_Polygon;
-			}
-			set
-			{
-				if ((this._ID_Polygon != value))
-				{
-					if (this._t_PenaltyZonePolygon.HasLoadedOrAssignedValue)
+					if (this._t_Parcour.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnID_PolygonChanging(value);
+					this.OnID_ParcourChanging(value);
 					this.SendPropertyChanging();
-					this._ID_Polygon = value;
-					this.SendPropertyChanged("ID_Polygon");
-					this.OnID_PolygonChanged();
+					this._ID_Parcour = value;
+					this.SendPropertyChanged("ID_Parcour");
+					this.OnID_ParcourChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_PenaltyZonePolygon_t_PenaltyZonePoint", Storage="_t_PenaltyZonePolygon", ThisKey="ID_Polygon", OtherKey="ID", IsForeignKey=true)]
-		public t_PenaltyZonePolygon t_PenaltyZonePolygon
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Line", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Line
 		{
 			get
 			{
-				return this._t_PenaltyZonePolygon.Entity;
+				return this._ID_Line;
 			}
 			set
 			{
-				t_PenaltyZonePolygon previousValue = this._t_PenaltyZonePolygon.Entity;
+				if ((this._ID_Line != value))
+				{
+					if (this._t_Line.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_LineChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Line = value;
+					this.SendPropertyChanged("ID_Line");
+					this.OnID_LineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Parcour_Line", Storage="_t_Line", ThisKey="ID_Line", OtherKey="ID", IsForeignKey=true)]
+		public t_Line t_Line
+		{
+			get
+			{
+				return this._t_Line.Entity;
+			}
+			set
+			{
+				t_Line previousValue = this._t_Line.Entity;
 				if (((previousValue != value) 
-							|| (this._t_PenaltyZonePolygon.HasLoadedOrAssignedValue == false)))
+							|| (this._t_Line.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._t_PenaltyZonePolygon.Entity = null;
-						previousValue.t_PenaltyZonePoints.Remove(this);
+						this._t_Line.Entity = null;
+						previousValue.t_Parcour_Lines.Remove(this);
 					}
-					this._t_PenaltyZonePolygon.Entity = value;
+					this._t_Line.Entity = value;
 					if ((value != null))
 					{
-						value.t_PenaltyZonePoints.Add(this);
-						this._ID_Polygon = value.ID;
+						value.t_Parcour_Lines.Add(this);
+						this._ID_Line = value.ID;
 					}
 					else
 					{
-						this._ID_Polygon = default(int);
+						this._ID_Line = default(int);
 					}
-					this.SendPropertyChanged("t_PenaltyZonePolygon");
+					this.SendPropertyChanged("t_Line");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Parcour_Line", Storage="_t_Parcour", ThisKey="ID_Parcour", OtherKey="ID", IsForeignKey=true)]
+		public t_Parcour t_Parcour
+		{
+			get
+			{
+				return this._t_Parcour.Entity;
+			}
+			set
+			{
+				t_Parcour previousValue = this._t_Parcour.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Parcour.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Parcour.Entity = null;
+						previousValue.t_Parcour_Lines.Remove(this);
+					}
+					this._t_Parcour.Entity = value;
+					if ((value != null))
+					{
+						value.t_Parcour_Lines.Add(this);
+						this._ID_Parcour = value.ID;
+					}
+					else
+					{
+						this._ID_Parcour = default(int);
+					}
+					this.SendPropertyChanged("t_Parcour");
 				}
 			}
 		}
@@ -1832,185 +2319,6 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_PenaltyZonePolygon")]
-	public partial class t_PenaltyZonePolygon : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _ID_PolygonGroup;
-		
-		private int _Type;
-		
-		private EntitySet<t_PenaltyZonePoint> _t_PenaltyZonePoints;
-		
-		private EntityRef<t_PenaltyZone> _t_PenaltyZone;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnID_PolygonGroupChanging(int value);
-    partial void OnID_PolygonGroupChanged();
-    partial void OnTypeChanging(int value);
-    partial void OnTypeChanged();
-    #endregion
-		
-		public t_PenaltyZonePolygon()
-		{
-			this._t_PenaltyZonePoints = new EntitySet<t_PenaltyZonePoint>(new Action<t_PenaltyZonePoint>(this.attach_t_PenaltyZonePoints), new Action<t_PenaltyZonePoint>(this.detach_t_PenaltyZonePoints));
-			this._t_PenaltyZone = default(EntityRef<t_PenaltyZone>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PolygonGroup", DbType="Int NOT NULL")]
-		public int ID_PolygonGroup
-		{
-			get
-			{
-				return this._ID_PolygonGroup;
-			}
-			set
-			{
-				if ((this._ID_PolygonGroup != value))
-				{
-					if (this._t_PenaltyZone.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_PolygonGroupChanging(value);
-					this.SendPropertyChanging();
-					this._ID_PolygonGroup = value;
-					this.SendPropertyChanged("ID_PolygonGroup");
-					this.OnID_PolygonGroupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int NOT NULL")]
-		public int Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_PenaltyZonePolygon_t_PenaltyZonePoint", Storage="_t_PenaltyZonePoints", ThisKey="ID", OtherKey="ID_Polygon")]
-		public EntitySet<t_PenaltyZonePoint> t_PenaltyZonePoints
-		{
-			get
-			{
-				return this._t_PenaltyZonePoints;
-			}
-			set
-			{
-				this._t_PenaltyZonePoints.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_PenaltyZone_t_PenaltyZonePolygon", Storage="_t_PenaltyZone", ThisKey="ID_PolygonGroup", OtherKey="ID", IsForeignKey=true)]
-		public t_PenaltyZone t_PenaltyZone
-		{
-			get
-			{
-				return this._t_PenaltyZone.Entity;
-			}
-			set
-			{
-				t_PenaltyZone previousValue = this._t_PenaltyZone.Entity;
-				if (((previousValue != value) 
-							|| (this._t_PenaltyZone.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_PenaltyZone.Entity = null;
-						previousValue.t_PenaltyZonePolygons.Remove(this);
-					}
-					this._t_PenaltyZone.Entity = value;
-					if ((value != null))
-					{
-						value.t_PenaltyZonePolygons.Add(this);
-						this._ID_PolygonGroup = value.ID;
-					}
-					else
-					{
-						this._ID_PolygonGroup = default(int);
-					}
-					this.SendPropertyChanged("t_PenaltyZone");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_PenaltyZonePoints(t_PenaltyZonePoint entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_PenaltyZonePolygon = this;
-		}
-		
-		private void detach_t_PenaltyZonePoints(t_PenaltyZonePoint entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_PenaltyZonePolygon = null;
 		}
 	}
 	
@@ -2463,27 +2771,19 @@ namespace AnrlDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Race")]
-	public partial class t_Race : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Polygon")]
+	public partial class t_Polygon : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private string _Name;
+		private int _ID_Parcour;
 		
-		private int _ID_PenaltyZone;
+		private EntitySet<t_Polygon_Line> _t_Polygon_Lines;
 		
-		private System.DateTime _TimeStart;
-		
-		private System.DateTime _TimeEnd;
-		
-		private System.DateTime _TakeOff;
-		
-		private EntitySet<t_Race_Team> _t_Race_Teams;
-		
-		private EntityRef<t_PenaltyZone> _t_PenaltyZone;
+		private EntityRef<t_Parcour> _t_Parcour;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2491,22 +2791,14 @@ namespace AnrlDB
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnID_PenaltyZoneChanging(int value);
-    partial void OnID_PenaltyZoneChanged();
-    partial void OnTimeStartChanging(System.DateTime value);
-    partial void OnTimeStartChanged();
-    partial void OnTimeEndChanging(System.DateTime value);
-    partial void OnTimeEndChanged();
-    partial void OnTakeOffChanging(System.DateTime value);
-    partial void OnTakeOffChanged();
+    partial void OnID_ParcourChanging(int value);
+    partial void OnID_ParcourChanged();
     #endregion
 		
-		public t_Race()
+		public t_Polygon()
 		{
-			this._t_Race_Teams = new EntitySet<t_Race_Team>(new Action<t_Race_Team>(this.attach_t_Race_Teams), new Action<t_Race_Team>(this.detach_t_Race_Teams));
-			this._t_PenaltyZone = default(EntityRef<t_PenaltyZone>);
+			this._t_Polygon_Lines = new EntitySet<t_Polygon_Line>(new Action<t_Polygon_Line>(this.attach_t_Polygon_Lines), new Action<t_Polygon_Line>(this.detach_t_Polygon_Lines));
+			this._t_Parcour = default(EntityRef<t_Parcour>);
 			OnCreated();
 		}
 		
@@ -2530,153 +2822,73 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Parcour", DbType="Int NOT NULL")]
+		public int ID_Parcour
 		{
 			get
 			{
-				return this._Name;
+				return this._ID_Parcour;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._ID_Parcour != value))
 				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_PenaltyZone", DbType="Int NOT NULL")]
-		public int ID_PenaltyZone
-		{
-			get
-			{
-				return this._ID_PenaltyZone;
-			}
-			set
-			{
-				if ((this._ID_PenaltyZone != value))
-				{
-					if (this._t_PenaltyZone.HasLoadedOrAssignedValue)
+					if (this._t_Parcour.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnID_PenaltyZoneChanging(value);
+					this.OnID_ParcourChanging(value);
 					this.SendPropertyChanging();
-					this._ID_PenaltyZone = value;
-					this.SendPropertyChanged("ID_PenaltyZone");
-					this.OnID_PenaltyZoneChanged();
+					this._ID_Parcour = value;
+					this.SendPropertyChanged("ID_Parcour");
+					this.OnID_ParcourChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeStart", DbType="DateTime NOT NULL")]
-		public System.DateTime TimeStart
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Polygon_t_Polygon_Line", Storage="_t_Polygon_Lines", ThisKey="ID", OtherKey="ID_Polygon")]
+		public EntitySet<t_Polygon_Line> t_Polygon_Lines
 		{
 			get
 			{
-				return this._TimeStart;
+				return this._t_Polygon_Lines;
 			}
 			set
 			{
-				if ((this._TimeStart != value))
-				{
-					this.OnTimeStartChanging(value);
-					this.SendPropertyChanging();
-					this._TimeStart = value;
-					this.SendPropertyChanged("TimeStart");
-					this.OnTimeStartChanged();
-				}
+				this._t_Polygon_Lines.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeEnd", DbType="DateTime NOT NULL")]
-		public System.DateTime TimeEnd
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Polygon", Storage="_t_Parcour", ThisKey="ID_Parcour", OtherKey="ID", IsForeignKey=true)]
+		public t_Parcour t_Parcour
 		{
 			get
 			{
-				return this._TimeEnd;
+				return this._t_Parcour.Entity;
 			}
 			set
 			{
-				if ((this._TimeEnd != value))
-				{
-					this.OnTimeEndChanging(value);
-					this.SendPropertyChanging();
-					this._TimeEnd = value;
-					this.SendPropertyChanged("TimeEnd");
-					this.OnTimeEndChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TakeOff", DbType="DateTime NOT NULL")]
-		public System.DateTime TakeOff
-		{
-			get
-			{
-				return this._TakeOff;
-			}
-			set
-			{
-				if ((this._TakeOff != value))
-				{
-					this.OnTakeOffChanging(value);
-					this.SendPropertyChanging();
-					this._TakeOff = value;
-					this.SendPropertyChanged("TakeOff");
-					this.OnTakeOffChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Race_t_Race_Team", Storage="_t_Race_Teams", ThisKey="ID", OtherKey="ID_Race")]
-		public EntitySet<t_Race_Team> t_Race_Teams
-		{
-			get
-			{
-				return this._t_Race_Teams;
-			}
-			set
-			{
-				this._t_Race_Teams.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_PenaltyZone_t_Race", Storage="_t_PenaltyZone", ThisKey="ID_PenaltyZone", OtherKey="ID", IsForeignKey=true)]
-		public t_PenaltyZone t_PenaltyZone
-		{
-			get
-			{
-				return this._t_PenaltyZone.Entity;
-			}
-			set
-			{
-				t_PenaltyZone previousValue = this._t_PenaltyZone.Entity;
+				t_Parcour previousValue = this._t_Parcour.Entity;
 				if (((previousValue != value) 
-							|| (this._t_PenaltyZone.HasLoadedOrAssignedValue == false)))
+							|| (this._t_Parcour.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._t_PenaltyZone.Entity = null;
-						previousValue.t_Races.Remove(this);
+						this._t_Parcour.Entity = null;
+						previousValue.t_Polygons.Remove(this);
 					}
-					this._t_PenaltyZone.Entity = value;
+					this._t_Parcour.Entity = value;
 					if ((value != null))
 					{
-						value.t_Races.Add(this);
-						this._ID_PenaltyZone = value.ID;
+						value.t_Polygons.Add(this);
+						this._ID_Parcour = value.ID;
 					}
 					else
 					{
-						this._ID_PenaltyZone = default(int);
+						this._ID_Parcour = default(int);
 					}
-					this.SendPropertyChanged("t_PenaltyZone");
+					this.SendPropertyChanged("t_Parcour");
 				}
 			}
 		}
@@ -2701,186 +2913,162 @@ namespace AnrlDB
 			}
 		}
 		
-		private void attach_t_Race_Teams(t_Race_Team entity)
+		private void attach_t_Polygon_Lines(t_Polygon_Line entity)
 		{
 			this.SendPropertyChanging();
-			entity.t_Race = this;
+			entity.t_Polygon = this;
 		}
 		
-		private void detach_t_Race_Teams(t_Race_Team entity)
+		private void detach_t_Polygon_Lines(t_Polygon_Line entity)
 		{
 			this.SendPropertyChanging();
-			entity.t_Race = null;
+			entity.t_Polygon = null;
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Race_Team")]
-	public partial class t_Race_Team : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Polygon_Line")]
+	public partial class t_Polygon_Line : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ID;
+		private int _ID_Polygon;
 		
-		private int _ID_Race;
+		private int _ID_Line;
 		
-		private int _ID_Team;
+		private EntityRef<t_Line> _t_Line;
 		
-		private EntityRef<t_Race> _t_Race;
-		
-		private EntityRef<t_Team> _t_Team;
+		private EntityRef<t_Polygon> _t_Polygon;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnID_RaceChanging(int value);
-    partial void OnID_RaceChanged();
-    partial void OnID_TeamChanging(int value);
-    partial void OnID_TeamChanged();
+    partial void OnID_PolygonChanging(int value);
+    partial void OnID_PolygonChanged();
+    partial void OnID_LineChanging(int value);
+    partial void OnID_LineChanged();
     #endregion
 		
-		public t_Race_Team()
+		public t_Polygon_Line()
 		{
-			this._t_Race = default(EntityRef<t_Race>);
-			this._t_Team = default(EntityRef<t_Team>);
+			this._t_Line = default(EntityRef<t_Line>);
+			this._t_Polygon = default(EntityRef<t_Polygon>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Polygon", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Polygon
 		{
 			get
 			{
-				return this._ID;
+				return this._ID_Polygon;
 			}
 			set
 			{
-				if ((this._ID != value))
+				if ((this._ID_Polygon != value))
 				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Race", DbType="Int NOT NULL")]
-		public int ID_Race
-		{
-			get
-			{
-				return this._ID_Race;
-			}
-			set
-			{
-				if ((this._ID_Race != value))
-				{
-					if (this._t_Race.HasLoadedOrAssignedValue)
+					if (this._t_Polygon.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnID_RaceChanging(value);
+					this.OnID_PolygonChanging(value);
 					this.SendPropertyChanging();
-					this._ID_Race = value;
-					this.SendPropertyChanged("ID_Race");
-					this.OnID_RaceChanged();
+					this._ID_Polygon = value;
+					this.SendPropertyChanged("ID_Polygon");
+					this.OnID_PolygonChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Team", DbType="Int NOT NULL")]
-		public int ID_Team
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Line", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Line
 		{
 			get
 			{
-				return this._ID_Team;
+				return this._ID_Line;
 			}
 			set
 			{
-				if ((this._ID_Team != value))
+				if ((this._ID_Line != value))
 				{
-					if (this._t_Team.HasLoadedOrAssignedValue)
+					if (this._t_Line.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnID_TeamChanging(value);
+					this.OnID_LineChanging(value);
 					this.SendPropertyChanging();
-					this._ID_Team = value;
-					this.SendPropertyChanged("ID_Team");
-					this.OnID_TeamChanged();
+					this._ID_Line = value;
+					this.SendPropertyChanged("ID_Line");
+					this.OnID_LineChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Race_t_Race_Team", Storage="_t_Race", ThisKey="ID_Race", OtherKey="ID", IsForeignKey=true)]
-		public t_Race t_Race
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Polygon_Line", Storage="_t_Line", ThisKey="ID_Line", OtherKey="ID", IsForeignKey=true)]
+		public t_Line t_Line
 		{
 			get
 			{
-				return this._t_Race.Entity;
+				return this._t_Line.Entity;
 			}
 			set
 			{
-				t_Race previousValue = this._t_Race.Entity;
+				t_Line previousValue = this._t_Line.Entity;
 				if (((previousValue != value) 
-							|| (this._t_Race.HasLoadedOrAssignedValue == false)))
+							|| (this._t_Line.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._t_Race.Entity = null;
-						previousValue.t_Race_Teams.Remove(this);
+						this._t_Line.Entity = null;
+						previousValue.t_Polygon_Lines.Remove(this);
 					}
-					this._t_Race.Entity = value;
+					this._t_Line.Entity = value;
 					if ((value != null))
 					{
-						value.t_Race_Teams.Add(this);
-						this._ID_Race = value.ID;
+						value.t_Polygon_Lines.Add(this);
+						this._ID_Line = value.ID;
 					}
 					else
 					{
-						this._ID_Race = default(int);
+						this._ID_Line = default(int);
 					}
-					this.SendPropertyChanged("t_Race");
+					this.SendPropertyChanged("t_Line");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Race_Team", Storage="_t_Team", ThisKey="ID_Team", OtherKey="ID", IsForeignKey=true)]
-		public t_Team t_Team
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Polygon_t_Polygon_Line", Storage="_t_Polygon", ThisKey="ID_Polygon", OtherKey="ID", IsForeignKey=true)]
+		public t_Polygon t_Polygon
 		{
 			get
 			{
-				return this._t_Team.Entity;
+				return this._t_Polygon.Entity;
 			}
 			set
 			{
-				t_Team previousValue = this._t_Team.Entity;
+				t_Polygon previousValue = this._t_Polygon.Entity;
 				if (((previousValue != value) 
-							|| (this._t_Team.HasLoadedOrAssignedValue == false)))
+							|| (this._t_Polygon.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._t_Team.Entity = null;
-						previousValue.t_Race_Teams.Remove(this);
+						this._t_Polygon.Entity = null;
+						previousValue.t_Polygon_Lines.Remove(this);
 					}
-					this._t_Team.Entity = value;
+					this._t_Polygon.Entity = value;
 					if ((value != null))
 					{
-						value.t_Race_Teams.Add(this);
-						this._ID_Team = value.ID;
+						value.t_Polygon_Lines.Add(this);
+						this._ID_Polygon = value.ID;
 					}
 					else
 					{
-						this._ID_Team = default(int);
+						this._ID_Polygon = default(int);
 					}
-					this.SendPropertyChanged("t_Team");
+					this.SendPropertyChanged("t_Polygon");
 				}
 			}
 		}
@@ -2924,8 +3112,6 @@ namespace AnrlDB
 		
 		private System.Nullable<int> _ID_Flag;
 		
-		private EntitySet<t_Race_Team> _t_Race_Teams;
-		
 		private EntityRef<t_Picture> _t_Picture;
 		
 		private EntityRef<t_Pilot> _t_Pilot;
@@ -2954,7 +3140,6 @@ namespace AnrlDB
 		
 		public t_Team()
 		{
-			this._t_Race_Teams = new EntitySet<t_Race_Team>(new Action<t_Race_Team>(this.attach_t_Race_Teams), new Action<t_Race_Team>(this.detach_t_Race_Teams));
 			this._t_Picture = default(EntityRef<t_Picture>);
 			this._t_Pilot = default(EntityRef<t_Pilot>);
 			this._t_Pilot1 = default(EntityRef<t_Pilot>);
@@ -3095,19 +3280,6 @@ namespace AnrlDB
 					this.SendPropertyChanged("ID_Flag");
 					this.OnID_FlagChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Race_Team", Storage="_t_Race_Teams", ThisKey="ID", OtherKey="ID_Team")]
-		public EntitySet<t_Race_Team> t_Race_Teams
-		{
-			get
-			{
-				return this._t_Race_Teams;
-			}
-			set
-			{
-				this._t_Race_Teams.Assign(value);
 			}
 		}
 		
@@ -3265,18 +3437,6 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_t_Race_Teams(t_Race_Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Team = this;
-		}
-		
-		private void detach_t_Race_Teams(t_Race_Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Team = null;
 		}
 	}
 }
