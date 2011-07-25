@@ -19,21 +19,21 @@ namespace AirNavigationRaceLive.Components.Helper
             sizeX = map.XSize;
             sizeY = map.YSize;
         }
-        public double XtoDeg(int x)
+        public double XtoDeg(double x)
         {
             return topleftX + x * sizeX;
         }
-        public int DegToX(double deg)
+        public int DegToX(double longitude)
         {
-            return (int)((deg - topleftX) / sizeX);
+            return (int)((longitude - topleftX) / sizeX);
         }
-        public double YtoDeg(int y)
+        public double YtoDeg(double y)
         {
             return topleftY + y * sizeY;
         }
-        public int DegToY(double deg)
+        public int DegToY(double latitdude)
         {
-            return (int)((deg - topleftY) / sizeY);
+            return (int)((latitdude - topleftY) / sizeY);
         }
 
         public int getStartX(ILine l)

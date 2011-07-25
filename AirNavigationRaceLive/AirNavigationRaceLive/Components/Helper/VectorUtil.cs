@@ -28,5 +28,33 @@ namespace AirNavigationRaceLive.Components.Helper
         {
             return Math.Sqrt(Vec.X * Vec.X + Vec.Y * Vec.Y + Vec.Z * Vec.Z);
         }
+        public static Vector getMultipliedVector(Vector v, double skalar)
+        {
+            return new Vector(v.X * skalar, v.Y * skalar, v.Z * skalar);
+        }
+        public static Vector getAddedVector(Vector a, Vector b)
+        {
+            return new Vector(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
+        }
+        /// <summary>
+        /// returns the Ortsvektor of the middle
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Vector getMiddle(Vector a, Vector b)
+        {
+            return new Vector(a.X + (b.X - a.X) / 2, a.Y + (b.Y - a.Y) / 2, a.Z + (b.Z - a.Z) / 2);
+        }
+        /// <summary>
+        /// Only works for 2D (z=0)
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static Vector getOrthogonal(Vector a)
+        {
+            return new Vector(1, (-a.X)/a.Y, 0);
+        }
     }
 }
