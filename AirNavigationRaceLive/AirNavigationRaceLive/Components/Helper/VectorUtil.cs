@@ -7,7 +7,7 @@ namespace AirNavigationRaceLive.Components.Helper
 {
     public static class VectorUtil
     {
-        public static double getDistance(Vector Start, Vector End, Vector Point)
+        public static Vector getLot(Vector Start, Vector End, Vector Point)
         {
             Vector StartEnd = getVector(Start, End);
             double lambda = (StartEnd.X * Point.X - StartEnd.X*Start.X + StartEnd.Y * Point.Y - StartEnd.Y*Start.Y + StartEnd.Z * Point.Z - StartEnd.Z*Start.Z)/
@@ -16,9 +16,8 @@ namespace AirNavigationRaceLive.Components.Helper
             lambda = Math.Min(lambda, 1);
             lambda = Math.Max(lambda, 0);
             Vector SchnittPunkt = new Vector(Start.X + lambda * StartEnd.X, Start.Y + lambda * StartEnd.Y, Start.Z + lambda * StartEnd.Z);
-            Vector distVect = getVector(SchnittPunkt, Point);
-            double dist = getDistance(distVect);
-            return dist;
+            Vector lot = getVector(SchnittPunkt, Point);
+            return lot;
         }
         public static Vector getVector(Vector startPoint, Vector endPoint)
         {

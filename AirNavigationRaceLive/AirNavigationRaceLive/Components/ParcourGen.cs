@@ -135,8 +135,8 @@ namespace AirNavigationRaceLive.Components
                         int orientationX = c.getOrientationX(l);
                         int orientationY = c.getOrientationY(l);
                         Vector mousePos = new Vector(e.X, e.Y, 0);
-                        if (VectorUtil.getDistance(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos) < 3 ||
-                            VectorUtil.getDistance(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos) < 3)
+                        if (VectorUtil.getDistance(VectorUtil.getLot(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos)) < 3 ||
+                            VectorUtil.getDistance(VectorUtil.getLot(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos)) < 3)
                         {
                             SetHoverLine(l);
                             lineSet = true;
@@ -230,10 +230,9 @@ namespace AirNavigationRaceLive.Components
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             double lenght = Decimal.ToDouble(parcourLength.Value);
-            int amount = Decimal.ToInt32(amountCompetitors.Value);
             double channel = Decimal.ToDouble(channelWide.Value);
             double zoneSize = Decimal.ToDouble(penaltyZoneSize.Value);
-            ParcourGenerator.GenerateParcour(activeParcour, c, lenght,amount, channel,zoneSize);
+            ParcourGenerator.GenerateParcour(activeParcour, c, lenght,channel,zoneSize);
             pictureBox1.Invalidate();
         }
 

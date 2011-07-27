@@ -47,9 +47,6 @@ namespace AirNavigationRaceLive.Components
             this.panel4 = new System.Windows.Forms.Panel();
             this.penaltyZoneSize = new System.Windows.Forms.NumericUpDown();
             this.lblpenaltyZoneSize = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.amountCompetitors = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fldLongitude = new System.Windows.Forms.TextBox();
@@ -76,9 +73,9 @@ namespace AirNavigationRaceLive.Components
             this.label10 = new System.Windows.Forms.Label();
             this.numLatA = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new ParcourPictureBox();
-            this.btnSave = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -88,8 +85,6 @@ namespace AirNavigationRaceLive.Components
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.penaltyZoneSize)).BeginInit();
-            this.panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.amountCompetitors)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.lineBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongO)).BeginInit();
@@ -158,7 +153,6 @@ namespace AirNavigationRaceLive.Components
             this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
-            this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.btnGenerate);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
@@ -341,57 +335,12 @@ namespace AirNavigationRaceLive.Components
             this.lblpenaltyZoneSize.TabIndex = 0;
             this.lblpenaltyZoneSize.Text = "Penalty-Zone-Size(m):";
             // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel5.Controls.Add(this.amountCompetitors);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Location = new System.Drawing.Point(3, 221);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(190, 28);
-            this.panel5.TabIndex = 16;
-            // 
-            // amountCompetitors
-            // 
-            this.amountCompetitors.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.amountCompetitors.Location = new System.Drawing.Point(125, 5);
-            this.amountCompetitors.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.amountCompetitors.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.amountCompetitors.Name = "amountCompetitors";
-            this.amountCompetitors.Size = new System.Drawing.Size(62, 20);
-            this.amountCompetitors.TabIndex = 1;
-            this.amountCompetitors.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Amount of Competitors:";
-            // 
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerate.Location = new System.Drawing.Point(3, 255);
+            this.btnGenerate.Location = new System.Drawing.Point(3, 221);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(190, 23);
             this.btnGenerate.TabIndex = 15;
@@ -409,7 +358,7 @@ namespace AirNavigationRaceLive.Components
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 284);
+            this.groupBox1.Location = new System.Drawing.Point(3, 250);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -502,7 +451,7 @@ namespace AirNavigationRaceLive.Components
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 351);
+            this.lineBox.Location = new System.Drawing.Point(3, 317);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -673,6 +622,16 @@ namespace AirNavigationRaceLive.Components
             this.label9.TabIndex = 0;
             this.label9.Text = "Latitude A:";
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(3, 499);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(187, 23);
+            this.btnSave.TabIndex = 19;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // panel6
             // 
             this.panel6.AutoScroll = true;
@@ -694,16 +653,6 @@ namespace AirNavigationRaceLive.Components
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(3, 533);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(187, 23);
-            this.btnSave.TabIndex = 19;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ParcourGen
             // 
@@ -727,9 +676,6 @@ namespace AirNavigationRaceLive.Components
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.penaltyZoneSize)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.amountCompetitors)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.lineBox.ResumeLayout(false);
@@ -767,9 +713,6 @@ namespace AirNavigationRaceLive.Components
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.NumericUpDown penaltyZoneSize;
         private System.Windows.Forms.Label lblpenaltyZoneSize;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.NumericUpDown amountCompetitors;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox fldCursorY;
