@@ -7,6 +7,18 @@ namespace AirNavigationRaceLive.Components.Helper
 {
     public static class VectorUtil
     {
+        public static Vector getSchnittpunkt(Vector LineA_A, Vector LineA_B, Vector LineB_A, Vector LineB_B)
+        {
+            try
+            {
+                Vector va = getVector(LineA_A, LineA_B);
+                Vector vb = getVector(LineB_A, LineB_B);
+                double lambda = (LineA_A.Y * vb.X - LineB_A.Y * vb.X - LineA_A.X * vb.Y + LineB_A.X * vb.Y) / (va.Y * vb.X - va.X * vb.Y);
+                return getAddedVector(LineA_A, getMultipliedVector(va, lambda));
+            }
+            catch { }
+            return null;
+        }
         public static Vector getLot(Vector Start, Vector End, Vector Point)
         {
             Vector StartEnd = getVector(Start, End);

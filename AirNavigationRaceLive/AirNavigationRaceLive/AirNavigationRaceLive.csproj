@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Components\Helper\Converter.cs" />
     <Compile Include="Components\Helper\ParcourGenerator.cs" />
+    <Compile Include="Components\Helper\ParcourModel.cs" />
     <Compile Include="Components\Helper\ParcourPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
