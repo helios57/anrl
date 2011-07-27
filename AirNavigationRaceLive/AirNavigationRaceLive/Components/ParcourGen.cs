@@ -135,8 +135,8 @@ namespace AirNavigationRaceLive.Components
                         int orientationX = c.getOrientationX(l);
                         int orientationY = c.getOrientationY(l);
                         Vector mousePos = new Vector(e.X, e.Y, 0);
-                        if (VectorUtil.getDistance(VectorUtil.getLot(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos)) < 3 ||
-                            VectorUtil.getDistance(VectorUtil.getLot(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos)) < 3)
+                        if (Vector.Abs(Vector.MinDistance(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos)) < 3 ||
+                            Vector.Abs(Vector.MinDistance(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos)) < 3)
                         {
                             SetHoverLine(l);
                             lineSet = true;
