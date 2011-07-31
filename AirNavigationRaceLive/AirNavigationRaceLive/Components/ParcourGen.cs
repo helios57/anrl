@@ -231,8 +231,7 @@ namespace AirNavigationRaceLive.Components
         {
             double lenght = Decimal.ToDouble(parcourLength.Value);
             double channel = Decimal.ToDouble(channelWide.Value);
-            double zoneSize = Decimal.ToDouble(penaltyZoneSize.Value);
-            ParcourGenerator.GenerateParcour(activeParcour, c, lenght,channel,zoneSize);
+            ParcourGenerator.GenerateParcour(activeParcour, c, lenght,channel);
             pictureBox1.Invalidate();
         }
 
@@ -387,5 +386,20 @@ namespace AirNavigationRaceLive.Components
 
         }
         #endregion
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
     }
 }

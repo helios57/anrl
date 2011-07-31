@@ -14,20 +14,20 @@ namespace AirNavigationRaceLive.Components.Helper
         public ParcourModel(IParcour parcour, Converter c)
         {
             List<ILine> lines = parcour.Lines;
-            AddLineAsChannel(c, lines.Single(p => p.LineType == LineType.START_A), lines.Single(p => p.LineType == LineType.END_A));
-            AddLineAsChannel(c, lines.Single(p => p.LineType == LineType.START_B), lines.Single(p => p.LineType == LineType.END_B));
-            AddLineAsChannel(c, lines.Single(p => p.LineType == LineType.START_C), lines.Single(p => p.LineType == LineType.END_C));
-            AddLineAsChannel(c, lines.Single(p => p.LineType == LineType.START_D), lines.Single(p => p.LineType == LineType.END_D));
+            AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_A), lines.Single(p => p.LineType == LineType.END_A));
+            AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_B), lines.Single(p => p.LineType == LineType.END_B));
+            AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_C), lines.Single(p => p.LineType == LineType.END_C));
+            AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_D), lines.Single(p => p.LineType == LineType.END_D));
 
             ILine lonr = lines.Single(p => p.LineType == LineType.LINEOFNORETURN);
             LineOfNoReturnStart = getVector(c, lonr.PointA);
             LineOfNoReturnEnd = getVector(c, lonr.PointA);
         }
 
-        private void AddLineAsChannel(Converter c, ILine start, ILine end)
+        private void AddLineAsCorridor(Converter c, ILine start, ILine end)
         {
-            Vector MiddleStart = VectorUtil.getMiddle(getVector(c, start.PointA), getVector(c, start.PointB));
-            Vector MiddleEnd = VectorUtil.getMiddle(getVector(c, end.PointA), getVector(c, end.PointB));
+            Vector MiddleStart = Vector.Middle(getVector(c, start.PointA), getVector(c, start.PointB));
+            Vector MiddleEnd = Vector.Middle(getVector(c, end.PointA), getVector(c, end.PointB));
             Channels.Add(new ParcourChannel(MiddleStart, MiddleEnd));
         }
 

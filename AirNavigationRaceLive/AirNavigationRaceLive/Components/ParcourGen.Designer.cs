@@ -1,5 +1,4 @@
-﻿using Helper;
-namespace AirNavigationRaceLive.Components
+﻿namespace AirNavigationRaceLive.Components
 {
     partial class ParcourGen
     {
@@ -37,16 +36,12 @@ namespace AirNavigationRaceLive.Components
             this.btnClear = new System.Windows.Forms.Button();
             this.btnAddStartLine = new System.Windows.Forms.Button();
             this.btnAddEnd = new System.Windows.Forms.Button();
-            this.btnAddLineOfNoReturn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.parcourLength = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.channelWide = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.penaltyZoneSize = new System.Windows.Forms.NumericUpDown();
-            this.lblpenaltyZoneSize = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fldLongitude = new System.Windows.Forms.TextBox();
@@ -75,7 +70,7 @@ namespace AirNavigationRaceLive.Components
             this.label9 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new ParcourPictureBox();
+            this.pictureBox1 = new AirNavigationRaceLive.Components.ParcourPictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -83,8 +78,6 @@ namespace AirNavigationRaceLive.Components
             ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.penaltyZoneSize)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.lineBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numLongO)).BeginInit();
@@ -149,10 +142,8 @@ namespace AirNavigationRaceLive.Components
             this.flowLayoutPanel1.Controls.Add(this.btnClear);
             this.flowLayoutPanel1.Controls.Add(this.btnAddStartLine);
             this.flowLayoutPanel1.Controls.Add(this.btnAddEnd);
-            this.flowLayoutPanel1.Controls.Add(this.btnAddLineOfNoReturn);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
-            this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.btnGenerate);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
@@ -202,19 +193,6 @@ namespace AirNavigationRaceLive.Components
             this.btnAddEnd.UseVisualStyleBackColor = true;
             this.btnAddEnd.Click += new System.EventHandler(this.btnAddEnd_Click);
             // 
-            // btnAddLineOfNoReturn
-            // 
-            this.btnAddLineOfNoReturn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddLineOfNoReturn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddLineOfNoReturn.Location = new System.Drawing.Point(3, 90);
-            this.btnAddLineOfNoReturn.Name = "btnAddLineOfNoReturn";
-            this.btnAddLineOfNoReturn.Size = new System.Drawing.Size(190, 23);
-            this.btnAddLineOfNoReturn.TabIndex = 10;
-            this.btnAddLineOfNoReturn.Text = "Add line of no return";
-            this.btnAddLineOfNoReturn.UseVisualStyleBackColor = true;
-            this.btnAddLineOfNoReturn.Click += new System.EventHandler(this.btnAddLineOfNoReturn_Click);
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -222,7 +200,7 @@ namespace AirNavigationRaceLive.Components
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel2.Controls.Add(this.parcourLength);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(3, 119);
+            this.panel2.Location = new System.Drawing.Point(3, 90);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(190, 28);
             this.panel2.TabIndex = 12;
@@ -232,11 +210,21 @@ namespace AirNavigationRaceLive.Components
             this.parcourLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.parcourLength.Location = new System.Drawing.Point(125, 5);
+            this.parcourLength.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.parcourLength.Minimum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             this.parcourLength.Name = "parcourLength";
             this.parcourLength.Size = new System.Drawing.Size(62, 20);
             this.parcourLength.TabIndex = 1;
             this.parcourLength.Value = new decimal(new int[] {
-            12,
+            15,
             0,
             0,
             0});
@@ -246,9 +234,9 @@ namespace AirNavigationRaceLive.Components
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(3, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.Size = new System.Drawing.Size(105, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Parcour lenght (km):";
+            this.label2.Text = "Parcour lenght (NM):";
             // 
             // panel3
             // 
@@ -257,7 +245,7 @@ namespace AirNavigationRaceLive.Components
             this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel3.Controls.Add(this.channelWide);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(3, 153);
+            this.panel3.Location = new System.Drawing.Point(3, 124);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(190, 28);
             this.panel3.TabIndex = 13;
@@ -266,81 +254,47 @@ namespace AirNavigationRaceLive.Components
             // 
             this.channelWide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.channelWide.DecimalPlaces = 4;
+            this.channelWide.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.channelWide.Location = new System.Drawing.Point(125, 5);
             this.channelWide.Maximum = new decimal(new int[] {
-            1000,
+            2,
             0,
             0,
             0});
+            this.channelWide.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.channelWide.Name = "channelWide";
             this.channelWide.Size = new System.Drawing.Size(62, 20);
             this.channelWide.TabIndex = 1;
             this.channelWide.Value = new decimal(new int[] {
-            500,
+            5,
             0,
             0,
-            0});
+            65536});
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(3, 7);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.Size = new System.Drawing.Size(100, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Channel wide (m):";
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel4.Controls.Add(this.penaltyZoneSize);
-            this.panel4.Controls.Add(this.lblpenaltyZoneSize);
-            this.panel4.Location = new System.Drawing.Point(3, 187);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 28);
-            this.panel4.TabIndex = 14;
-            // 
-            // penaltyZoneSize
-            // 
-            this.penaltyZoneSize.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.penaltyZoneSize.Location = new System.Drawing.Point(125, 5);
-            this.penaltyZoneSize.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.penaltyZoneSize.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.penaltyZoneSize.Name = "penaltyZoneSize";
-            this.penaltyZoneSize.Size = new System.Drawing.Size(62, 20);
-            this.penaltyZoneSize.TabIndex = 1;
-            this.penaltyZoneSize.Value = new decimal(new int[] {
-            400,
-            0,
-            0,
-            0});
-            // 
-            // lblpenaltyZoneSize
-            // 
-            this.lblpenaltyZoneSize.AutoSize = true;
-            this.lblpenaltyZoneSize.Location = new System.Drawing.Point(3, 7);
-            this.lblpenaltyZoneSize.Name = "lblpenaltyZoneSize";
-            this.lblpenaltyZoneSize.Size = new System.Drawing.Size(110, 13);
-            this.lblpenaltyZoneSize.TabIndex = 0;
-            this.lblpenaltyZoneSize.Text = "Penalty-Zone-Size(m):";
+            this.label3.Text = "Corridor width (NM):";
             // 
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerate.Location = new System.Drawing.Point(3, 221);
+            this.btnGenerate.Location = new System.Drawing.Point(3, 158);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(190, 23);
             this.btnGenerate.TabIndex = 15;
@@ -358,7 +312,7 @@ namespace AirNavigationRaceLive.Components
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 250);
+            this.groupBox1.Location = new System.Drawing.Point(3, 187);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -451,7 +405,7 @@ namespace AirNavigationRaceLive.Components
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 317);
+            this.lineBox.Location = new System.Drawing.Point(3, 254);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -624,7 +578,7 @@ namespace AirNavigationRaceLive.Components
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 499);
+            this.btnSave.Location = new System.Drawing.Point(3, 436);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -651,8 +605,11 @@ namespace AirNavigationRaceLive.Components
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
             // ParcourGen
             // 
@@ -673,9 +630,6 @@ namespace AirNavigationRaceLive.Components
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.penaltyZoneSize)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.lineBox.ResumeLayout(false);
@@ -702,7 +656,6 @@ namespace AirNavigationRaceLive.Components
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAddStartLine;
         private System.Windows.Forms.Button btnAddEnd;
-        private System.Windows.Forms.Button btnAddLineOfNoReturn;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NumericUpDown parcourLength;
@@ -710,9 +663,6 @@ namespace AirNavigationRaceLive.Components
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown channelWide;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.NumericUpDown penaltyZoneSize;
-        private System.Windows.Forms.Label lblpenaltyZoneSize;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox fldCursorY;

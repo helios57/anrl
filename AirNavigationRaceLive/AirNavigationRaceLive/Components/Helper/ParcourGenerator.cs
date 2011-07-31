@@ -10,7 +10,7 @@ namespace AirNavigationRaceLive.Components.Helper
 {
     public static class ParcourGenerator
     {
-        public static void GenerateParcour(Parcour parcour, Converter c, double lenght, double channel, double zoneSize)
+        public static void GenerateParcour(Parcour parcour, Converter c, double lenght, double channel)
         {
             try
             {
@@ -109,6 +109,8 @@ namespace AirNavigationRaceLive.Components.Helper
                     Start_D.PointOrientation = new GPSPoint(c.XtoDeg(Start_D_O.X), c.YtoDeg(Start_D_O.Y), 0);
                     double lenghtStartLine = Converter.Distance(Start.PointA, Start.PointB);
                     #endregion
+
+
 
                     #region EndeVektoren
                     Vector EndeAV = new Vector(c.DegToX(Ende.PointA.Longitude), c.DegToY(Ende.PointA.Latitude), 0);

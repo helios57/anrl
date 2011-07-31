@@ -7,7 +7,7 @@ using System.Drawing;
 using AnrlInterfaces;
 using AirNavigationRaceLive.Components.Helper;
 
-namespace Helper
+namespace AirNavigationRaceLive.Components
 {
     public class ParcourPictureBox:PictureBox
     {

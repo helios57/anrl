@@ -91,5 +91,14 @@ namespace AirNavigationRaceLive.Components.Helper
         {
             return Math.PI * angle / 180.0;
         }
+
+        public static double MtoNM(double meter)
+        {
+            return meter/1.852;
+        }
+        public static double NMtoM(double nauticMiles)
+        {
+            return nauticMiles * 1.852;
+        }
     }
 }
