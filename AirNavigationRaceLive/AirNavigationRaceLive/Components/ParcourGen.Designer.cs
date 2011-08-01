@@ -35,7 +35,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnAddStartLine = new System.Windows.Forms.Button();
-            this.btnAddEnd = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.parcourLength = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -70,7 +69,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new AirNavigationRaceLive.Components.ParcourPictureBox();
+            this.pictureBox1 = new ParcourPictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -141,7 +140,6 @@
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnClear);
             this.flowLayoutPanel1.Controls.Add(this.btnAddStartLine);
-            this.flowLayoutPanel1.Controls.Add(this.btnAddEnd);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.btnGenerate);
@@ -180,19 +178,6 @@
             this.btnAddStartLine.UseVisualStyleBackColor = true;
             this.btnAddStartLine.Click += new System.EventHandler(this.btnAddStartLine_Click);
             // 
-            // btnAddEnd
-            // 
-            this.btnAddEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddEnd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddEnd.Location = new System.Drawing.Point(3, 61);
-            this.btnAddEnd.Name = "btnAddEnd";
-            this.btnAddEnd.Size = new System.Drawing.Size(190, 23);
-            this.btnAddEnd.TabIndex = 5;
-            this.btnAddEnd.Text = "Add end line";
-            this.btnAddEnd.UseVisualStyleBackColor = true;
-            this.btnAddEnd.Click += new System.EventHandler(this.btnAddEnd_Click);
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -200,7 +185,7 @@
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel2.Controls.Add(this.parcourLength);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(3, 90);
+            this.panel2.Location = new System.Drawing.Point(3, 61);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(190, 28);
             this.panel2.TabIndex = 12;
@@ -216,7 +201,7 @@
             0,
             0});
             this.parcourLength.Minimum = new decimal(new int[] {
-            15,
+            5,
             0,
             0,
             0});
@@ -245,7 +230,7 @@
             this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel3.Controls.Add(this.channelWide);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(3, 124);
+            this.panel3.Location = new System.Drawing.Point(3, 95);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(190, 28);
             this.panel3.TabIndex = 13;
@@ -294,7 +279,7 @@
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerate.Location = new System.Drawing.Point(3, 158);
+            this.btnGenerate.Location = new System.Drawing.Point(3, 129);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(190, 23);
             this.btnGenerate.TabIndex = 15;
@@ -312,7 +297,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 187);
+            this.groupBox1.Location = new System.Drawing.Point(3, 158);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -405,7 +390,7 @@
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 254);
+            this.lineBox.Location = new System.Drawing.Point(3, 225);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -578,7 +563,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 436);
+            this.btnSave.Location = new System.Drawing.Point(3, 407);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -655,7 +640,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAddStartLine;
-        private System.Windows.Forms.Button btnAddEnd;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NumericUpDown parcourLength;
