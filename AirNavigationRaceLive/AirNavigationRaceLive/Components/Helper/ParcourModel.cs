@@ -44,25 +44,25 @@ namespace AirNavigationRaceLive.Components.Helper
                 double diffSum = 0;
                 double min = Double.MaxValue;
                 double max = Double.MinValue;
-                double minDist = 0;
+                //double minDist = 0;
                 for (int i = 0; i < 4; i++)
                 {
                     lenght[i] = Channels[i].getDistance();
                     min = Math.Min(min, lenght[i]);
                     max = Math.Max(max, lenght[i]);
-                    diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
-                    for (int j = 0; j < 4; j++)
-                    {
-                        if (i != j)
-                        {
-                            minDist += Channels[i].getMinDistance(Channels[j]);
-                        }
-                    }
+                   diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
+                    /*   for (int j = 0; j < 4; j++)
+                      {
+                          if (i != j)
+                          {
+                              minDist += Channels[i].getMinDistance(Channels[j]);
+                          }
+                      }*/
                 }
                 double result = 0;
                 result += max - min;
                 result += diffSum;
-                result += (1000.0 / (minDist / 9));
+                //result += (10000.0 / (minDist / 9));
                 weight = result;
             }
                
@@ -134,13 +134,18 @@ namespace AirNavigationRaceLive.Components.Helper
                 LinearCombinations.Add(new Vector(v));
             }
         }
-        private void Randomize(double factor)
+        internal void Randomize(double factor)
         {
             for (int i = 2; i < 8; i++)
             {
                 Vector v = LinearCombinations.ElementAt(i);
-                v.X += (Utils.getNextDouble() - 0.5) * factor;
-                v.Y += (Utils.getNextDouble() - 0.5) * factor;
+                int sign = (i%2==1)?1:-1;
+                Vector orth = Vector.Orthogonal(End - Start);
+                orth = (orth / Vector.Abs(orth)) * (Utils.getNextDouble() * factor * sign);
+                v.X += orth.X;
+                v.Y += orth.Y;
+               // v.X += Utils.getNextDouble() * factor * sign;
+                //v.Y += Utils.getNextDouble() * factor * sign;
             }
         }
         public double getDistance()

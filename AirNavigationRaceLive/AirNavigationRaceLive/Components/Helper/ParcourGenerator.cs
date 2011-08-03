@@ -13,11 +13,12 @@ namespace AirNavigationRaceLive.Components.Helper
     {
         private const double EndLineDist = 0.9;
         private const double LineOfNoReturnDist = 1.5;
-        private volatile double best = double.MaxValue;
+        private double best = double.MaxValue;
         private volatile ParcourModel bestModel = null;
         private Parcour parcour;
         private Converter c;
         private Comparer comparer = new Comparer();
+        public volatile bool finished = false;
 
         public void GenerateParcour(Parcour parcour, Converter c, double lenght, double channel)
         {
@@ -249,7 +250,7 @@ namespace AirNavigationRaceLive.Components.Helper
             ParcourModel pm = new ParcourModel(parcour, c, EndLineDist);
             List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
             //System.Diagnostics.Process.GetCurrentProcess().
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 1; i++)
             {
                 List<ParcourModel> list = new List<ParcourModel>();
                 modelList.Add(list);
@@ -272,7 +273,7 @@ namespace AirNavigationRaceLive.Components.Helper
         private void ProcessList(object o)
         {
             List<ParcourModel> list = o as List<ParcourModel>;
-            while (best > 4.0)
+            while (best > 2)
             {
                 list.Sort(comparer);
                 ParcourModel first = list[0];
@@ -283,11 +284,14 @@ namespace AirNavigationRaceLive.Components.Helper
                     best = first.Weight();
                     AddBestModel();
                 }
-                for (int j = 10; j < 300; j++)
+                list.Clear();
+                list.Add(first);
+                for (int j = 0; j < 300; j++)
                 {
-                    list[j] = new ParcourModel(first, firstWeight / 10);
+                    list.Add(new ParcourModel(first, 0.1));
                 }
             }
+            finished = true;
         }
 
         private void AddBestModel()

@@ -22,6 +22,7 @@ namespace AirNavigationRaceLive.Components
         private ActivePoint ap = ActivePoint.NONE;
         private Line selectedLine = null;
         private Line hoverLine = null;
+        ParcourGenerator pc; Timer t;
 
         private enum ActivePoint
         {
@@ -124,23 +125,25 @@ namespace AirNavigationRaceLive.Components
                 else
                 {
                     bool lineSet = false;
-                    foreach (Line l in activeParcour.Lines)
-                    {
-                        int startX = c.getStartX(l);
-                        int startY = c.getStartY(l);
-                        int endX = c.getEndX(l);
-                        int endY = c.getEndY(l);
-                        int midX = startX + (endX - startX) / 2;
-                        int midY = startY + (endY - startY) / 2;
-                        int orientationX = c.getOrientationX(l);
-                        int orientationY = c.getOrientationY(l);
-                        Vector mousePos = new Vector(e.X, e.Y, 0);
-                        if (Vector.Abs(Vector.MinDistance(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos)) < 3 ||
-                            Vector.Abs(Vector.MinDistance(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos)) < 3)
+                    lock (activeParcour){
+                        foreach (Line l in activeParcour.Lines)
                         {
-                            SetHoverLine(l);
-                            lineSet = true;
-                            break;
+                            int startX = c.getStartX(l);
+                            int startY = c.getStartY(l);
+                            int endX = c.getEndX(l);
+                            int endY = c.getEndY(l);
+                            int midX = startX + (endX - startX) / 2;
+                            int midY = startY + (endY - startY) / 2;
+                            int orientationX = c.getOrientationX(l);
+                            int orientationY = c.getOrientationY(l);
+                            Vector mousePos = new Vector(e.X, e.Y, 0);
+                            if (Vector.Abs(Vector.MinDistance(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos)) < 3 ||
+                                Vector.Abs(Vector.MinDistance(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos)) < 3)
+                            {
+                                SetHoverLine(l);
+                                lineSet = true;
+                                break;
+                            }
                         }
                     }
                     if (!lineSet)
@@ -229,20 +232,26 @@ namespace AirNavigationRaceLive.Components
         
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            btnGenerate.Enabled = false;
             double lenght = Decimal.ToDouble(parcourLength.Value);
             double channel = Decimal.ToDouble(channelWide.Value);
-            Timer t = new Timer();
+            t = new Timer();
             t.Tick += new EventHandler(t_Tick);
             t.Interval = 1000;
             t.Start();
-            ParcourGenerator.GenerateParcour(activeParcour, c, lenght,channel);
+            pc = new ParcourGenerator();
+            pc.GenerateParcour(activeParcour, c, lenght,channel);
             pictureBox1.Invalidate();
-            t.Stop();
         }
 
         void t_Tick(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
+            if (pc.finished)
+            {
+                t.Stop();
+                btnGenerate.Enabled = true;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)

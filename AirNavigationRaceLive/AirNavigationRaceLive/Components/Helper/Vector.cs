@@ -65,7 +65,7 @@ namespace AirNavigationRaceLive.Components.Helper
         /// <returns></returns>
         public static Vector Orthogonal(Vector a)
         {
-            return new Vector(1, (-a.X) / a.Y, 0);
+            return new Vector(-a.Y,  a.X, 0);
         }
 
         /// <summary>

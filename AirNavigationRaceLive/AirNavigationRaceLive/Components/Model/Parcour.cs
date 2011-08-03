@@ -12,7 +12,7 @@ namespace AirNavigationRaceLive.Components.Model
         private List<IPolygon> _Polygons = new List<IPolygon>();
         private long _ID = 0;
         public volatile bool finished;
-        public volatile double best;
+        public double best;
 
         public List<ILine> Lines
         {
