@@ -3,25 +3,73 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
+using System.Windows.Forms;
 
 namespace AirNavigationRaceLive.Components.Helper
 {
     public class ParcourModel
     {
-        Vector LineOfNoReturnStart;
-        Vector LineOfNoReturnEnd;
-
-        public ParcourModel(IParcour parcour, Converter c)
+        private List<ParcourChannel> Channels = new List<ParcourChannel>(4);
+        private List<ParcourPolygon> Polygons = new List<ParcourPolygon>();
+        private double desiredLengthFactor;
+        public ParcourModel(IParcour parcour, Converter c, double desiredLengthFactor)
         {
+            this.desiredLengthFactor = desiredLengthFactor;
             List<ILine> lines = parcour.Lines;
             AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_A), lines.Single(p => p.LineType == LineType.END_A));
             AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_B), lines.Single(p => p.LineType == LineType.END_B));
             AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_C), lines.Single(p => p.LineType == LineType.END_C));
             AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_D), lines.Single(p => p.LineType == LineType.END_D));
+        }
 
-            ILine lonr = lines.Single(p => p.LineType == LineType.LINEOFNORETURN);
-            LineOfNoReturnStart = getVector(c, lonr.PointA);
-            LineOfNoReturnEnd = getVector(c, lonr.PointA);
+        public ParcourModel(ParcourModel pm, double firstWeight)
+        {
+            this.desiredLengthFactor = pm.desiredLengthFactor;
+            foreach (ParcourChannel pc in pm.Channels)
+            {
+                AddCorridor(pc);
+            }
+            Randomize(firstWeight);
+        }
+        public List<ParcourChannel> getChannels()
+        {
+            return Channels;
+        }
+        public double Weight()
+        {
+            double[] lenght = new double[4];
+            double diffSum = 0;
+            double min = Double.MaxValue;
+            double max = Double.MinValue;
+            double minDist = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                lenght[i] = Channels[i].getDistance();
+                min = Math.Min(min, lenght[i]);
+                max = Math.Max(max, lenght[i]);
+                diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
+                for (int j = 0; j < 4; j++)
+                {
+                    if (i != j)
+                    {
+                        minDist += Channels[i].getMinDistance(Channels[j]);
+                    }
+                }
+            }
+            double result = 0; 
+            result += max - min;
+            result += diffSum;
+            result += (1000.0 / (minDist/9));
+               
+            return result;
+        }
+
+        public void Randomize(double factor)
+        {
+            foreach (ParcourChannel pc in Channels)
+            {
+                pc.Randomize(factor);
+            }
         }
 
         private void AddLineAsCorridor(Converter c, ILine start, ILine end)
@@ -31,28 +79,97 @@ namespace AirNavigationRaceLive.Components.Helper
             Channels.Add(new ParcourChannel(MiddleStart, MiddleEnd));
         }
 
+        private void AddCorridor(ParcourChannel c)
+        {
+            Channels.Add(new ParcourChannel(c));
+        }
+
         private static Vector getVector(Converter c, IGPSPoint point)
         {
 
             Vector startA = new Vector(c.DegToX(point.Longitude), c.DegToY(point.Latitude), 0);
             return startA;
         }
-        List<ParcourChannel> Channels = new List<ParcourChannel>();
-        List<ParcourPolygon> Polygons = new List<ParcourPolygon>();
     }
 
     public class ParcourChannel
     {
+        Vector Start;
+        Vector End;
+        List<Vector> LinearCombinations = new List<Vector>(10);
+
+        public List<Vector> getLinearCombinations()
+        {
+            return LinearCombinations;
+        }
+
         public ParcourChannel(Vector Start, Vector End)
         {
             this.Start = Start;
             this.End = End;
+            Vector StartEnd = Vector.Direction(Start, End);
+            for (int i = 0; i < 10; i++)
+            {
+                Vector linComb = Start + (StartEnd * (i / 9.0));
+                LinearCombinations.Add(linComb);
+            }
+            double dist = getDistance();
+            double straightDist = getDistanceStraight();
+            if (dist - straightDist > 0.1)
+            {
+                System.Console.Out.WriteLine("ERROR");
+            }
         }
-        Vector Start;
-        Vector End;
-        Vector CutLONR;
-        List<Vector> LinearCombinations = new List<Vector>();
+        public ParcourChannel(ParcourChannel pc)
+        {
+            this.Start = pc.Start;
+            this.End = pc.End;
+            foreach (Vector v in pc.LinearCombinations)
+            {
+                LinearCombinations.Add(new Vector(v));
+            }
+        }
+        public void Randomize(double factor)
+        {
+            for (int i = 2; i < 8; i++)
+            {
+                Vector v = LinearCombinations.ElementAt(i);
+                v.X += (Utils.getNextDouble() - 0.5) * factor;
+                v.Y += (Utils.getNextDouble() - 0.5) * factor;
+            }
+        }
+        public double getDistance()
+        {
+            double result = 0;
+            Vector last = Start;
+            foreach (Vector v in LinearCombinations)
+            {
+                result += Vector.Abs(last - v);
+                last = v;
+            }
+            return result;
+        }
+        public double getDistanceStraight()
+        {
+            return Vector.Abs(Start - End);
+        }
+        //Optimize
+        public double getMinDistance(ParcourChannel pc)
+        {
+            double result = Double.MaxValue;
+            foreach (Vector v1 in LinearCombinations)
+            {
+                foreach (Vector v2 in pc.LinearCombinations)
+                {
+                    double dist = Vector.Abs(v1 - v2);
+                    result = Math.Min(result, dist);
+                }
+            }
+
+            return result;
+        }
     }
+
     public class ParcourPolygon
     {
         List<Vector> Edges = new List<Vector>();

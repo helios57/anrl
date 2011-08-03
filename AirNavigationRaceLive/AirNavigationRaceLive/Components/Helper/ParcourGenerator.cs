@@ -27,14 +27,14 @@ namespace AirNavigationRaceLive.Components.Helper
                 Vector StartMV = Vector.Middle(StartAV, StartBV);
                 Vector StartLotOrientation = Vector.MinDistance(StartAV, StartBV, StartOV);
 
-                double GateRadiusKm = Converter.NMtoM(0.3);         
+                double GateRadiusKm = Converter.NMtoM(0.3);
                 Vector StartABNormalized = StartAB / Vector.Abs(StartAB);
                 double StartABLength = Converter.Distance(c.XtoDeg(StartAV.X), c.YtoDeg(StartAV.Y), c.XtoDeg((StartAV + StartABNormalized).X), c.YtoDeg((StartAV + StartABNormalized).Y));
                 Vector StartAB1KM = StartABNormalized / StartABLength;
 
                 StartLotOrientation = StartLotOrientation * (Vector.Abs(StartAB1KM * GateRadiusKm) / Vector.Abs(StartLotOrientation));
                 StartOV = StartMV + (StartLotOrientation * 2);
-                
+
                 Vector Start_A_M = StartAV + (StartAB1KM * GateRadiusKm);
                 Vector Start_A_A = StartAV;
                 Vector Start_A_B = Start_A_M + (StartAB1KM * GateRadiusKm);
@@ -75,7 +75,7 @@ namespace AirNavigationRaceLive.Components.Helper
                 Start_D.PointOrientation = new GPSPoint(c.XtoDeg(Start_D_O.X), c.YtoDeg(Start_D_O.Y), 0);
 
 
-                Vector Start_B_M = Start_A_M + (Vector.Direction(Start_A_M,Start_D_M)/3.0);
+                Vector Start_B_M = Start_A_M + (Vector.Direction(Start_A_M, Start_D_M) / 3.0);
                 Vector Start_B_A = Start_B_M - (StartAB1KM * GateRadiusKm);
                 Vector Start_B_B = Start_B_M + (StartAB1KM * GateRadiusKm);
                 Vector Start_B_O = Start_B_M + StartLotOrientation;
@@ -118,7 +118,7 @@ namespace AirNavigationRaceLive.Components.Helper
                 #region EndeVektoren
                 double lengthKm = Converter.NMtoM(lenght);
                 Vector lotPoint = StartMV + StartLotOrientation;
-                double lotLenght = Converter.Distance(c.XtoDeg(StartMV.X), c.YtoDeg(StartMV.Y), c.XtoDeg(lotPoint.X),  c.YtoDeg(lotPoint.Y));
+                double lotLenght = Converter.Distance(c.XtoDeg(StartMV.X), c.YtoDeg(StartMV.Y), c.XtoDeg(lotPoint.X), c.YtoDeg(lotPoint.Y));
                 Vector StartEnd = (StartLotOrientation / lotLenght) * lengthKm * EndLineDist; //Shorten to make linearcombinations of vectors ... factor to be definded
 
                 Vector EndeAV = StartAV + StartEnd;
@@ -206,8 +206,9 @@ namespace AirNavigationRaceLive.Components.Helper
                 END_D.PointOrientation = new GPSPoint(c.XtoDeg(Ende_D_O.X), c.YtoDeg(Ende_D_O.Y), 0);
                 #endregion
 
+                #region LineOfNoReturn
                 double lengthLONRKm = Converter.NMtoM(LineOfNoReturnDist);
-                Vector StartToLONR = (StartLotOrientation / lotLenght) * ((lengthKm*EndLineDist)-lengthLONRKm);
+                Vector StartToLONR = (StartLotOrientation / lotLenght) * ((lengthKm * EndLineDist) - lengthLONRKm);
 
                 Vector LONR_A = StartAV + StartToLONR;
                 Vector LONR_B = StartBV + StartToLONR;
@@ -226,12 +227,80 @@ namespace AirNavigationRaceLive.Components.Helper
                 LONR.PointA = new GPSPoint(c.XtoDeg(LONR_A.X), c.YtoDeg(LONR_A.Y), 0);
                 LONR.PointB = new GPSPoint(c.XtoDeg(LONR_B.X), c.YtoDeg(LONR_B.Y), 0);
                 LONR.PointOrientation = new GPSPoint(c.XtoDeg(LONR_O.X), c.YtoDeg(LONR_O.Y), 0);
+                #endregion
 
+                ParcourModel pm = new ParcourModel(parcour, c, EndLineDist);
+                List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
+                for (int i = 0; i < 2; i++)
+                {
+                    List<ParcourModel> list = new List<ParcourModel>();
+                    modelList.Add(list);
+                    list.Add(pm);
+                    for (int j = 0; j < 300; j++)
+                    {
+                        list.Add(new ParcourModel(pm, 1));
+                    }
+                }
+                Comparer comparer = new Comparer();
+                double best = double.MaxValue;
+                ParcourModel bestModel = null;
+                while (best > 4.0)
+                {
+                    foreach (List<ParcourModel> list in modelList)
+                    {
+                        list.Sort(comparer);
+                        ParcourModel first = list[0];
+                        double firstWeight = first.Weight();
+                        if (first.Weight() < best)
+                        {
+                            bestModel = first;
+                            best = first.Weight();
+                            AddBestModel(parcour, c, bestModel);
+                            Application.DoEvents();
+                        }
+                        list.RemoveAll(p => p != first);
+                        for (int j = 0; j < 300; j++)
+                        {
+                            list.Add(new ParcourModel(first, firstWeight / 10));
+                        }
+                        Application.DoEvents();
+                    }
+                }
+                AddBestModel(parcour, c, bestModel);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error while generating Parcour");
             }
+        }
+
+        private static void AddBestModel(Parcour parcour, Converter c, ParcourModel bestModel)
+        {
+            parcour.Lines.RemoveAll(p => p.LineType == LineType.Point);
+            foreach (ParcourChannel pc in bestModel.getChannels())
+            {
+                Vector last = null;
+                foreach (Vector v in pc.getLinearCombinations())
+                {
+                    if (last != null)
+                    {
+                        Line l = new Line();
+                        l.LineType = LineType.Point;
+                        l.PointA = new GPSPoint(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
+                        l.PointB = new GPSPoint(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
+                        l.PointOrientation = new GPSPoint(c.XtoDeg(v.X), c.YtoDeg(v.Y), 0);
+                        parcour.Lines.Add(l);
+                    }
+                    last = v;
+                }
+            }
+        }
+    }
+    class Comparer : Comparer<ParcourModel>
+    {
+        public override int Compare(ParcourModel x, ParcourModel y)
+        {
+            return x.Weight().CompareTo(y.Weight());
         }
     }
 }

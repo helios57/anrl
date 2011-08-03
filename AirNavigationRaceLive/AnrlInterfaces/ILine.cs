@@ -26,6 +26,7 @@ namespace AnrlInterfaces
         END_C = 9,
         END_D = 10,
         LINEOFNORETURN = 11,
-        PENALTYZONE = 12        
+        PENALTYZONE = 12,
+        Point = 13
     }
 }

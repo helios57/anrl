@@ -64,6 +64,7 @@
     <Compile Include="Components\Helper\ParcourPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Components\Helper\Utils.cs" />
     <Compile Include="Components\Helper\Vector.cs" />
     <Compile Include="Components\Helper\wgs84_ch1903.cs" />
     <Compile Include="Components\Model\GPSPoint.cs" />

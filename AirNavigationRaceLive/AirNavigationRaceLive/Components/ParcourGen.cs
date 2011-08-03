@@ -231,7 +231,17 @@ namespace AirNavigationRaceLive.Components
         {
             double lenght = Decimal.ToDouble(parcourLength.Value);
             double channel = Decimal.ToDouble(channelWide.Value);
+            Timer t = new Timer();
+            t.Tick += new EventHandler(t_Tick);
+            t.Interval = 1000;
+            t.Start();
             ParcourGenerator.GenerateParcour(activeParcour, c, lenght,channel);
+            pictureBox1.Invalidate();
+            t.Stop();
+        }
+
+        void t_Tick(object sender, EventArgs e)
+        {
             pictureBox1.Invalidate();
         }
 

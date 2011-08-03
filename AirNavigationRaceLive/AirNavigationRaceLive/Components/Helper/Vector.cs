@@ -13,6 +13,13 @@ namespace AirNavigationRaceLive.Components.Helper
             this.Y = Y; 
             this.Z = Z;
         }
+
+        public Vector(Vector v)
+        {
+            X = v.X;
+            Y = v.Y;
+            Z = v.Z;
+        }
         public double X = 0;
         public double Y = 0;
         public double Z = 0;
