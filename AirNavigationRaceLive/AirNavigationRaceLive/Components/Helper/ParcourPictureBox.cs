@@ -39,34 +39,37 @@ namespace AirNavigationRaceLive.Components
             base.OnPaint(pe);
             if (Parcour != null&& c != null)
             {
-                List<ILine> lines = Parcour.Lines;
-                foreach (ILine l in lines)
+                lock (Parcour)
                 {
-                    if (l.PointA != null && l.PointB != null & l.PointOrientation != null)
+                    List<ILine> lines = Parcour.Lines;
+                    foreach (ILine l in lines)
                     {
-                        int startX = c.getStartX(l);
-                        int startY = c.getStartY(l);
-                        int endX = c.getEndX(l);
-                        int endY = c.getEndY(l);
-                        int midX = startX + (endX - startX) / 2;
-                        int midY = startY + (endY - startY) / 2;
-                        int orientationX = c.getOrientationX(l);
-                        int orientationY = c.getOrientationY(l);
-                        if (hoverLine == l)
+                        if (l.PointA != null && l.PointB != null & l.PointOrientation != null)
                         {
-                            pe.Graphics.DrawLine(PenHover, new Point(startX, startY), new Point(endX, endY));
-                            pe.Graphics.DrawLine(PenHover, new Point(midX, midY), new Point(orientationX, orientationY));
-                            pe.Graphics.DrawEllipse(PenHover, orientationX - 3, orientationY - 3, 6, 6);
-                        } 
-                        if (selectedLine == l)
-                        {
-                            pe.Graphics.DrawLine(PenSelected, new Point(startX, startY), new Point(endX, endY));
-                            pe.Graphics.DrawLine(PenSelected, new Point(midX, midY), new Point(orientationX, orientationY));
-                            pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
+                            int startX = c.getStartX(l);
+                            int startY = c.getStartY(l);
+                            int endX = c.getEndX(l);
+                            int endY = c.getEndY(l);
+                            int midX = startX + (endX - startX) / 2;
+                            int midY = startY + (endY - startY) / 2;
+                            int orientationX = c.getOrientationX(l);
+                            int orientationY = c.getOrientationY(l);
+                            if (hoverLine == l)
+                            {
+                                pe.Graphics.DrawLine(PenHover, new Point(startX, startY), new Point(endX, endY));
+                                pe.Graphics.DrawLine(PenHover, new Point(midX, midY), new Point(orientationX, orientationY));
+                                pe.Graphics.DrawEllipse(PenHover, orientationX - 3, orientationY - 3, 6, 6);
+                            }
+                            if (selectedLine == l)
+                            {
+                                pe.Graphics.DrawLine(PenSelected, new Point(startX, startY), new Point(endX, endY));
+                                pe.Graphics.DrawLine(PenSelected, new Point(midX, midY), new Point(orientationX, orientationY));
+                                pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
+                            }
+                            pe.Graphics.DrawLine(Pen, new Point(startX, startY), new Point(endX, endY));
+                            pe.Graphics.DrawLine(Pen, new Point(midX, midY), new Point(orientationX, orientationY));
+                            pe.Graphics.DrawEllipse(Pen, orientationX - 2, orientationY - 2, 4, 4);
                         }
-                        pe.Graphics.DrawLine(Pen, new Point(startX, startY), new Point(endX, endY));
-                        pe.Graphics.DrawLine(Pen, new Point(midX, midY), new Point(orientationX, orientationY));
-                        pe.Graphics.DrawEllipse(Pen, orientationX - 2, orientationY - 2, 4, 4);
                     }
                 }
             }

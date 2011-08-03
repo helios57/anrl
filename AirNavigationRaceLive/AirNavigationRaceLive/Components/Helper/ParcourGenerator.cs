@@ -5,16 +5,24 @@ using System.Text;
 using AirNavigationRaceLive.Components.Model;
 using AnrlInterfaces;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace AirNavigationRaceLive.Components.Helper
 {
-    public static class ParcourGenerator
+    public class ParcourGenerator
     {
         private const double EndLineDist = 0.9;
         private const double LineOfNoReturnDist = 1.5;
+        private volatile double best = double.MaxValue;
+        private volatile ParcourModel bestModel = null;
+        private Parcour parcour;
+        private Converter c;
+        private Comparer comparer = new Comparer();
 
-        public static void GenerateParcour(Parcour parcour, Converter c, double lenght, double channel)
+        public void GenerateParcour(Parcour parcour, Converter c, double lenght, double channel)
         {
+            this.parcour = parcour;
+            this.c = c;
             try
             {
                 Line Start = parcour.Lines.Single(p => p.LineType == LineType.START) as Line;
@@ -228,45 +236,7 @@ namespace AirNavigationRaceLive.Components.Helper
                 LONR.PointB = new GPSPoint(c.XtoDeg(LONR_B.X), c.YtoDeg(LONR_B.Y), 0);
                 LONR.PointOrientation = new GPSPoint(c.XtoDeg(LONR_O.X), c.YtoDeg(LONR_O.Y), 0);
                 #endregion
-
-                ParcourModel pm = new ParcourModel(parcour, c, EndLineDist);
-                List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
-                for (int i = 0; i < 2; i++)
-                {
-                    List<ParcourModel> list = new List<ParcourModel>();
-                    modelList.Add(list);
-                    list.Add(pm);
-                    for (int j = 0; j < 300; j++)
-                    {
-                        list.Add(new ParcourModel(pm, 1));
-                    }
-                }
-                Comparer comparer = new Comparer();
-                double best = double.MaxValue;
-                ParcourModel bestModel = null;
-                while (best > 4.0)
-                {
-                    foreach (List<ParcourModel> list in modelList)
-                    {
-                        list.Sort(comparer);
-                        ParcourModel first = list[0];
-                        double firstWeight = first.Weight();
-                        if (first.Weight() < best)
-                        {
-                            bestModel = first;
-                            best = first.Weight();
-                            AddBestModel(parcour, c, bestModel);
-                            Application.DoEvents();
-                        }
-                        list.RemoveAll(p => p != first);
-                        for (int j = 0; j < 300; j++)
-                        {
-                            list.Add(new ParcourModel(first, firstWeight / 10));
-                        }
-                        Application.DoEvents();
-                    }
-                }
-                AddBestModel(parcour, c, bestModel);
+                CalculateParcour(parcour, c);
             }
             catch (Exception e)
             {
@@ -274,24 +244,73 @@ namespace AirNavigationRaceLive.Components.Helper
             }
         }
 
-        private static void AddBestModel(Parcour parcour, Converter c, ParcourModel bestModel)
+        private void CalculateParcour(Parcour parcour, Converter c)
         {
-            parcour.Lines.RemoveAll(p => p.LineType == LineType.Point);
-            foreach (ParcourChannel pc in bestModel.getChannels())
+            ParcourModel pm = new ParcourModel(parcour, c, EndLineDist);
+            List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
+            //System.Diagnostics.Process.GetCurrentProcess().
+            for (int i = 0; i < 6; i++)
             {
-                Vector last = null;
-                foreach (Vector v in pc.getLinearCombinations())
+                List<ParcourModel> list = new List<ParcourModel>();
+                modelList.Add(list);
+                list.Add(pm);
+                for (int j = 0; j < 300; j++)
                 {
-                    if (last != null)
+                    list.Add(new ParcourModel(pm, 1));
+                }
+            }
+            best = double.MaxValue;
+            bestModel = null;
+
+            foreach (List<ParcourModel> list in modelList)
+            {
+                Thread t = new Thread(new ParameterizedThreadStart(ProcessList));
+                t.Start(list);
+            }
+        }
+
+        private void ProcessList(object o)
+        {
+            List<ParcourModel> list = o as List<ParcourModel>;
+            while (best > 4.0)
+            {
+                list.Sort(comparer);
+                ParcourModel first = list[0];
+                double firstWeight = first.Weight();
+                if (first.Weight() < best)
+                {
+                    bestModel = first;
+                    best = first.Weight();
+                    AddBestModel();
+                }
+                for (int j = 10; j < 300; j++)
+                {
+                    list[j] = new ParcourModel(first, firstWeight / 10);
+                }
+            }
+        }
+
+        private void AddBestModel()
+        {
+            lock (parcour)
+            {
+                parcour.Lines.RemoveAll(p => p.LineType == LineType.Point);
+                foreach (ParcourChannel pc in bestModel.getChannels())
+                {
+                    Vector last = null;
+                    foreach (Vector v in pc.getLinearCombinations())
                     {
-                        Line l = new Line();
-                        l.LineType = LineType.Point;
-                        l.PointA = new GPSPoint(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
-                        l.PointB = new GPSPoint(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
-                        l.PointOrientation = new GPSPoint(c.XtoDeg(v.X), c.YtoDeg(v.Y), 0);
-                        parcour.Lines.Add(l);
+                        if (last != null)
+                        {
+                            Line l = new Line();
+                            l.LineType = LineType.Point;
+                            l.PointA = new GPSPoint(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
+                            l.PointB = new GPSPoint(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
+                            l.PointOrientation = new GPSPoint(c.XtoDeg(v.X), c.YtoDeg(v.Y), 0);
+                            parcour.Lines.Add(l);
+                        }
+                        last = v;
                     }
-                    last = v;
                 }
             }
         }

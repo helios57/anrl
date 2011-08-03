@@ -12,6 +12,7 @@ namespace AirNavigationRaceLive.Components.Helper
         private List<ParcourChannel> Channels = new List<ParcourChannel>(4);
         private List<ParcourPolygon> Polygons = new List<ParcourPolygon>();
         private double desiredLengthFactor;
+        private double weight = double.MinValue;
         public ParcourModel(IParcour parcour, Converter c, double desiredLengthFactor)
         {
             this.desiredLengthFactor = desiredLengthFactor;
@@ -37,34 +38,38 @@ namespace AirNavigationRaceLive.Components.Helper
         }
         public double Weight()
         {
-            double[] lenght = new double[4];
-            double diffSum = 0;
-            double min = Double.MaxValue;
-            double max = Double.MinValue;
-            double minDist = 0;
-            for (int i = 0; i < 4; i++)
+            if (weight == double.MinValue)
             {
-                lenght[i] = Channels[i].getDistance();
-                min = Math.Min(min, lenght[i]);
-                max = Math.Max(max, lenght[i]);
-                diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
-                for (int j = 0; j < 4; j++)
+                double[] lenght = new double[4];
+                double diffSum = 0;
+                double min = Double.MaxValue;
+                double max = Double.MinValue;
+                double minDist = 0;
+                for (int i = 0; i < 4; i++)
                 {
-                    if (i != j)
+                    lenght[i] = Channels[i].getDistance();
+                    min = Math.Min(min, lenght[i]);
+                    max = Math.Max(max, lenght[i]);
+                    diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
+                    for (int j = 0; j < 4; j++)
                     {
-                        minDist += Channels[i].getMinDistance(Channels[j]);
+                        if (i != j)
+                        {
+                            minDist += Channels[i].getMinDistance(Channels[j]);
+                        }
                     }
                 }
+                double result = 0;
+                result += max - min;
+                result += diffSum;
+                result += (1000.0 / (minDist / 9));
+                weight = result;
             }
-            double result = 0; 
-            result += max - min;
-            result += diffSum;
-            result += (1000.0 / (minDist/9));
                
-            return result;
+            return weight;
         }
 
-        public void Randomize(double factor)
+        private void Randomize(double factor)
         {
             foreach (ParcourChannel pc in Channels)
             {
@@ -129,7 +134,7 @@ namespace AirNavigationRaceLive.Components.Helper
                 LinearCombinations.Add(new Vector(v));
             }
         }
-        public void Randomize(double factor)
+        private void Randomize(double factor)
         {
             for (int i = 2; i < 8; i++)
             {
