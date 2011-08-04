@@ -9,13 +9,13 @@ using AirNavigationRaceLive.Components.Helper;
 
 namespace AirNavigationRaceLive.Components
 {
-    public class ParcourPictureBox:PictureBox
+    public class ParcourPictureBox : PictureBox
     {
         private IParcour Parcour;
         private Converter c;
         private ILine selectedLine;
         private ILine hoverLine;
-        private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 4f);
+        private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 6f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
         public void SetParcour(IParcour iParcour)
@@ -37,7 +37,7 @@ namespace AirNavigationRaceLive.Components
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
-            if (Parcour != null&& c != null)
+            if (Parcour != null && c != null)
             {
                 lock (Parcour)
                 {
@@ -54,21 +54,33 @@ namespace AirNavigationRaceLive.Components
                             int midY = startY + (endY - startY) / 2;
                             int orientationX = c.getOrientationX(l);
                             int orientationY = c.getOrientationY(l);
+                            Vector start = new Vector(startX,startY,0);
+                            Vector midv = new Vector(midX,midY,0);
+                            float radius =(float) Vector.Abs(midv-start)*2;
+
+                            //Start_X/End_X
+                            if (((int)l.LineType) >= 3 && ((int)l.LineType) <= 10)
+                            {
+                                pe.Graphics.DrawEllipse(Pen, startX, startY, radius, radius);
+                            }
                             if (hoverLine == l)
                             {
                                 pe.Graphics.DrawLine(PenHover, new Point(startX, startY), new Point(endX, endY));
                                 pe.Graphics.DrawLine(PenHover, new Point(midX, midY), new Point(orientationX, orientationY));
                                 pe.Graphics.DrawEllipse(PenHover, orientationX - 3, orientationY - 3, 6, 6);
                             }
-                            if (selectedLine == l)
+                            else if (selectedLine == l)
                             {
                                 pe.Graphics.DrawLine(PenSelected, new Point(startX, startY), new Point(endX, endY));
                                 pe.Graphics.DrawLine(PenSelected, new Point(midX, midY), new Point(orientationX, orientationY));
                                 pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
                             }
-                            pe.Graphics.DrawLine(Pen, new Point(startX, startY), new Point(endX, endY));
-                            pe.Graphics.DrawLine(Pen, new Point(midX, midY), new Point(orientationX, orientationY));
-                            pe.Graphics.DrawEllipse(Pen, orientationX - 2, orientationY - 2, 4, 4);
+                            else
+                            {
+                                pe.Graphics.DrawLine(Pen, new Point(startX, startY), new Point(endX, endY));
+                                pe.Graphics.DrawLine(Pen, new Point(midX, midY), new Point(orientationX, orientationY));
+                                pe.Graphics.DrawEllipse(Pen, orientationX - 2, orientationY - 2, 4, 4);
+                            }
                         }
                     }
                 }

@@ -24,6 +24,20 @@ namespace AirNavigationRaceLive.Components.Helper
         public double Y = 0;
         public double Z = 0;
 
+        public override bool Equals(object obj)
+        {
+            Vector v = obj as Vector;
+            return v != null && v.X.Equals(X) && v.Y.Equals(Y) && v.Z.Equals(Z);
+        }
+        public override int GetHashCode()
+        {
+            return (X+Y+Z).GetHashCode();
+        }
+        public override string ToString()
+        {
+            return "X: "+X+" Y: "+Y + " Z: "+ Z;
+        }
+
         public static Vector operator / (Vector a, double b)
         {
             return new Vector(a.X / b, a.Y / b, a.Z / b);

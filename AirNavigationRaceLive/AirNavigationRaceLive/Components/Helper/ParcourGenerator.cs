@@ -316,6 +316,26 @@ namespace AirNavigationRaceLive.Components.Helper
                         last = v;
                     }
                 }
+                parcour.Lines.RemoveAll(p => p.LineType == LineType.PENALTYZONE);
+                foreach (ParcourPolygon pg in bestModel.getPolygons())
+                {
+                    Vector mid = new Vector(0,0,0);
+                    foreach (Vector v in pg.getEdges())
+                    {
+                        mid = mid + v;
+                    }
+                    mid = mid / pg.getEdges().Count;
+                    
+                    for (int i = 1; i < pg.getEdges().Count-2; i++)
+                    {
+                        Line l = new Line();
+                        l.LineType = LineType.PENALTYZONE;
+                        l.PointA = new GPSPoint(c.XtoDeg(pg.getEdges()[i].X), c.YtoDeg(pg.getEdges()[i].Y), 0);
+                        l.PointB = new GPSPoint(c.XtoDeg(pg.getEdges()[i + 1].X), c.YtoDeg(pg.getEdges()[i+1].Y), 0);
+                        l.PointOrientation = new GPSPoint(c.XtoDeg(mid.X), c.YtoDeg(mid.Y), 0);
+                        parcour.Lines.Add(l);
+                    }
+                }
             }
         }
     }

@@ -49,24 +49,40 @@ namespace AirNavigationRaceLive.Components.Helper
             double origDist = Converter.Distance(Ende, Start);
             ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0/2.0));
             Vector ortho = Vector.Orthogonal(ChannelRadius) / 10;
+            double factorLengthSides = 30.0;
 
-            for (int i = 1; i <= 9; i += 2)
+            for (int i = 1; i < 8; i += 2)
             {
-                Vector p1 = Channels[0].LinearCombinations[i] + ChannelRadius + ortho;
-                Vector p2 = Channels[0].LinearCombinations[i + 1] + ChannelRadius - ortho;
-                Vector p3 = p1 + ChannelRadius * 30 + ortho;
-                Vector p4 = p2 + ChannelRadius * 30 - ortho;
-                Polygons.Add(new ParcourPolygon(p1, p2, p3, p4));
-                Vector b1 = Channels[0].LinearCombinations[i] - ChannelRadius + ortho;
-                Vector b2 = Channels[0].LinearCombinations[i+1] - ChannelRadius - ortho;
-                //....
-
+                Vector a1 = Channels[0].LinearCombinations[i] + ChannelRadius + ortho;
+                Vector a2 = Channels[0].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector a3 = a1 + ChannelRadius * factorLengthSides + ortho;
+                Vector a4 = a2 + ChannelRadius * factorLengthSides - ortho;
+                Polygons.Add(new ParcourPolygon(a1, a2, a3, a4));
+                Vector b1 = Channels[0].LinearCombinations[i] + ChannelRadius + ortho;
+                Vector b2 = Channels[0].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector b3 = Channels[1].LinearCombinations[i] - ChannelRadius + ortho;
+                Vector b4 = Channels[1].LinearCombinations[i + 1] - ChannelRadius - ortho;
+                Polygons.Add(new ParcourPolygon(b1, b2, b3, b4));
+                Vector c1 = Channels[1].LinearCombinations[i] + ChannelRadius + ortho;
+                Vector c2 = Channels[1].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector c3 = Channels[2].LinearCombinations[i] - ChannelRadius + ortho;
+                Vector c4 = Channels[2].LinearCombinations[i + 1] - ChannelRadius - ortho;
+                Polygons.Add(new ParcourPolygon(c1, c2, c3, c4));
+                Vector d1 = Channels[3].LinearCombinations[i] - ChannelRadius + ortho;
+                Vector d2 = Channels[3].LinearCombinations[i + 1] - ChannelRadius - ortho;
+                Vector d3 = d1 - ChannelRadius * factorLengthSides + ortho;
+                Vector d4 = d2 - ChannelRadius * factorLengthSides - ortho;
+                Polygons.Add(new ParcourPolygon(d1, d2, d3, d4));
             }
         }
 
         public List<ParcourChannel> getChannels()
         {
             return Channels;
+        }
+        public List<ParcourPolygon> getPolygons()
+        {
+            return Polygons;
         }
         public double Weight()
         {
@@ -195,6 +211,10 @@ namespace AirNavigationRaceLive.Components.Helper
             Edges.Add(p2);
             Edges.Add(p3);
             Edges.Add(p4);
+        }
+        public List<Vector> getEdges()
+        {
+            return Edges;
         }
     }
 }
