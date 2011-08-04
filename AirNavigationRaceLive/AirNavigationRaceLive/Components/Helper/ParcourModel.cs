@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using AnrlInterfaces;
 using System.Windows.Forms;
+using AirNavigationRaceLive.Components.Model;
 
 namespace AirNavigationRaceLive.Components.Helper
 {
@@ -13,9 +14,14 @@ namespace AirNavigationRaceLive.Components.Helper
         private List<ParcourPolygon> Polygons = new List<ParcourPolygon>();
         private double desiredLengthFactor;
         private double weight = double.MinValue;
-        public ParcourModel(IParcour parcour, Converter c, double desiredLengthFactor)
+        private double channel;
+        private Converter c;
+
+        public ParcourModel(IParcour parcour, Converter c, double desiredLengthFactor, double channel)
         {
             this.desiredLengthFactor = desiredLengthFactor;
+            this.channel = Converter.NMtoM(channel);
+            this.c = c;
             List<ILine> lines = parcour.Lines;
             AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_A), lines.Single(p => p.LineType == LineType.END_A));
             AddLineAsCorridor(c, lines.Single(p => p.LineType == LineType.START_B), lines.Single(p => p.LineType == LineType.END_B));
@@ -26,12 +32,38 @@ namespace AirNavigationRaceLive.Components.Helper
         public ParcourModel(ParcourModel pm, double firstWeight)
         {
             this.desiredLengthFactor = pm.desiredLengthFactor;
+            this.channel = pm.channel;
             foreach (ParcourChannel pc in pm.Channels)
             {
                 AddCorridor(pc);
             }
             Randomize(firstWeight);
         }
+
+        private void addPolygons()
+        {
+            Vector ChannelRadius = Channels[3].Start - Channels[0].Start;
+
+            GPSPoint Ende = new GPSPoint(c.XtoDeg(Channels[3].Start.X), c.YtoDeg(Channels[3].Start.Y), 0);
+            GPSPoint Start = new GPSPoint(c.XtoDeg(Channels[0].Start.X), c.YtoDeg(Channels[0].Start.Y), 0);
+            double origDist = Converter.Distance(Ende, Start);
+            ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0/2.0));
+            Vector ortho = Vector.Orthogonal(ChannelRadius) / 10;
+
+            for (int i = 1; i <= 9; i += 2)
+            {
+                Vector p1 = Channels[0].LinearCombinations[i] + ChannelRadius + ortho;
+                Vector p2 = Channels[0].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector p3 = p1 + ChannelRadius * 30 + ortho;
+                Vector p4 = p2 + ChannelRadius * 30 - ortho;
+                Polygons.Add(new ParcourPolygon(p1, p2, p3, p4));
+                Vector b1 = Channels[0].LinearCombinations[i] - ChannelRadius + ortho;
+                Vector b2 = Channels[0].LinearCombinations[i+1] - ChannelRadius - ortho;
+                //....
+
+            }
+        }
+
         public List<ParcourChannel> getChannels()
         {
             return Channels;
@@ -44,28 +76,19 @@ namespace AirNavigationRaceLive.Components.Helper
                 double diffSum = 0;
                 double min = Double.MaxValue;
                 double max = Double.MinValue;
-                //double minDist = 0;
                 for (int i = 0; i < 4; i++)
                 {
                     lenght[i] = Channels[i].getDistance();
                     min = Math.Min(min, lenght[i]);
                     max = Math.Max(max, lenght[i]);
-                   diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
-                    /*   for (int j = 0; j < 4; j++)
-                      {
-                          if (i != j)
-                          {
-                              minDist += Channels[i].getMinDistance(Channels[j]);
-                          }
-                      }*/
+                    diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
                 }
                 double result = 0;
                 result += max - min;
                 result += diffSum;
-                //result += (10000.0 / (minDist / 9));
                 weight = result;
             }
-               
+
             return weight;
         }
 
@@ -99,9 +122,9 @@ namespace AirNavigationRaceLive.Components.Helper
 
     public class ParcourChannel
     {
-        Vector Start;
-        Vector End;
-        List<Vector> LinearCombinations = new List<Vector>(10);
+        internal Vector Start;
+        internal Vector End;
+        internal List<Vector> LinearCombinations = new List<Vector>(10);
 
         public List<Vector> getLinearCombinations()
         {
@@ -139,13 +162,11 @@ namespace AirNavigationRaceLive.Components.Helper
             for (int i = 2; i < 8; i++)
             {
                 Vector v = LinearCombinations.ElementAt(i);
-                int sign = (i%2==1)?1:-1;
+                int sign = (i % 2 == 1) ? 1 : -1;
                 Vector orth = Vector.Orthogonal(End - Start);
                 orth = (orth / Vector.Abs(orth)) * (Utils.getNextDouble() * factor * sign);
                 v.X += orth.X;
                 v.Y += orth.Y;
-               // v.X += Utils.getNextDouble() * factor * sign;
-                //v.Y += Utils.getNextDouble() * factor * sign;
             }
         }
         public double getDistance()
@@ -163,25 +184,17 @@ namespace AirNavigationRaceLive.Components.Helper
         {
             return Vector.Abs(Start - End);
         }
-        //Optimize
-        public double getMinDistance(ParcourChannel pc)
-        {
-            double result = Double.MaxValue;
-            foreach (Vector v1 in LinearCombinations)
-            {
-                foreach (Vector v2 in pc.LinearCombinations)
-                {
-                    double dist = Vector.Abs(v1 - v2);
-                    result = Math.Min(result, dist);
-                }
-            }
-
-            return result;
-        }
     }
 
     public class ParcourPolygon
     {
         List<Vector> Edges = new List<Vector>();
+        public ParcourPolygon(Vector p1, Vector p2, Vector p3, Vector p4)
+        {
+            Edges.Add(p1);
+            Edges.Add(p2);
+            Edges.Add(p3);
+            Edges.Add(p4);
+        }
     }
 }

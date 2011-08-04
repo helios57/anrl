@@ -237,7 +237,7 @@ namespace AirNavigationRaceLive.Components.Helper
                 LONR.PointB = new GPSPoint(c.XtoDeg(LONR_B.X), c.YtoDeg(LONR_B.Y), 0);
                 LONR.PointOrientation = new GPSPoint(c.XtoDeg(LONR_O.X), c.YtoDeg(LONR_O.Y), 0);
                 #endregion
-                CalculateParcour(parcour, c);
+                CalculateParcour(parcour, c, channel);
             }
             catch (Exception e)
             {
@@ -245,9 +245,9 @@ namespace AirNavigationRaceLive.Components.Helper
             }
         }
 
-        private void CalculateParcour(Parcour parcour, Converter c)
+        private void CalculateParcour(Parcour parcour, Converter c, double channel)
         {
-            ParcourModel pm = new ParcourModel(parcour, c, EndLineDist);
+            ParcourModel pm = new ParcourModel(parcour, c, EndLineDist,channel);
             List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
             //System.Diagnostics.Process.GetCurrentProcess().
             for (int i = 0; i < 1; i++)
