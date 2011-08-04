@@ -237,7 +237,7 @@ namespace AirNavigationRaceLive.Components
             double channel = Decimal.ToDouble(channelWide.Value);
             t = new Timer();
             t.Tick += new EventHandler(t_Tick);
-            t.Interval = 1000;
+            t.Interval = 100;
             t.Start();
             pc = new ParcourGenerator();
             pc.GenerateParcour(activeParcour, c, lenght,channel);

@@ -296,6 +296,7 @@ namespace AirNavigationRaceLive.Components.Helper
 
         private void AddBestModel()
         {
+            bestModel.addPolygons();
             lock (parcour)
             {
                 parcour.Lines.RemoveAll(p => p.LineType == LineType.Point);
@@ -324,14 +325,15 @@ namespace AirNavigationRaceLive.Components.Helper
                     {
                         mid = mid + v;
                     }
-                    mid = mid / pg.getEdges().Count;
-                    
-                    for (int i = 1; i < pg.getEdges().Count-2; i++)
+                    int count = pg.getEdges().Count;
+                    mid = mid / count;
+
+                    for (int i = 0; i < count; i++)
                     {
                         Line l = new Line();
                         l.LineType = LineType.PENALTYZONE;
                         l.PointA = new GPSPoint(c.XtoDeg(pg.getEdges()[i].X), c.YtoDeg(pg.getEdges()[i].Y), 0);
-                        l.PointB = new GPSPoint(c.XtoDeg(pg.getEdges()[i + 1].X), c.YtoDeg(pg.getEdges()[i+1].Y), 0);
+                        l.PointB = new GPSPoint(c.XtoDeg(pg.getEdges()[(i + 1) % count].X), c.YtoDeg(pg.getEdges()[(i + 1)%count].Y), 0);
                         l.PointOrientation = new GPSPoint(c.XtoDeg(mid.X), c.YtoDeg(mid.Y), 0);
                         parcour.Lines.Add(l);
                     }
