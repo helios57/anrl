@@ -36,8 +36,9 @@ namespace AnrlService
                 Reciever = new TCPReciever.Server(s.getConnectionString());
                 s.SetReciever(Reciever);
             }
-            catch
+            catch (Exception ex)
             {
+                System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
             }
         }
 
@@ -49,7 +50,10 @@ namespace AnrlService
                 {
                     Reciever.Stop();
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    System.Console.Out.WriteLine("Unable to stop Service " + ex.InnerException.Message);
+                }
             }
         }
     }

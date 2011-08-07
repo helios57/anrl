@@ -15,14 +15,13 @@ namespace AnrlService
         {
             AnrlService service = new AnrlService();
             System.Threading.Thread.Sleep(int.MaxValue);
-            /*
+            
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
 				new AnrlService() 
 			};
             ServiceBase.Run(ServicesToRun);
-             * */
         }
     }
 }

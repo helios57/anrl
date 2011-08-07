@@ -75,7 +75,7 @@ namespace AnrlDB
     #endregion
 		
 		public AnrlDataContext() : 
-				base(global::AnrlDB.Properties.Settings.Default.AnrlDBConnectionString1, mappingSource)
+				base(global::AnrlDB.Properties.Settings.Default.AnrlDBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
