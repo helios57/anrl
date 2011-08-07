@@ -76,6 +76,15 @@ namespace AnrlService.Server
             return result;
         }
 
+        public List<IParcour> getParcours()
+        {
+            List<IParcour> result = new List<IParcour>();
+            foreach (t_Parcour parcour in db.t_Parcours)
+            {
+                result.Add(new Parcour(parcour));
+            }
+            return result;
+        }
       
         public List<IData> getData(List<ITracker> trackers, DateTime from, DateTime to)
         {
@@ -228,6 +237,57 @@ namespace AnrlService.Server
             return result;
         }
 
+
+
+        public long addParcour(IParcour parcour)
+        {
+            long result = -1;
+            try
+            {
+                if (parcour != null &&
+                    parcour.ID < 0 )
+                {
+                    t_Parcour dbParcour = new t_Parcour();
+                    db.t_Parcours.InsertOnSubmit(dbParcour);
+                    db.SubmitChanges();
+                    result = dbParcour.ID;
+                    foreach (ILine line in parcour.Lines)
+                    {
+                        t_Line dbLine = new t_Line();
+                        t_GPSPoint a = getDBPoint(line.PointA);
+                        db.t_GPSPoints.InsertOnSubmit(a);
+                        t_GPSPoint b = getDBPoint(line.PointB);
+                        db.t_GPSPoints.InsertOnSubmit(b);
+                        t_GPSPoint o = getDBPoint(line.PointOrientation);
+                        db.t_GPSPoints.InsertOnSubmit(o);
+                        db.SubmitChanges();
+                        dbLine.ID_PointA = a.ID;
+                        dbLine.ID_PointB = b.ID;
+                        dbLine.ID_PointOrientation = o.ID;
+                        dbLine.Type = (int)line.LineType;
+                        db.t_Lines.InsertOnSubmit(dbLine);
+                        db.SubmitChanges();
+                        t_Parcour_Line pl = new t_Parcour_Line();
+                        pl.ID_Line = dbLine.ID;
+                        pl.ID_Parcour = dbParcour.ID;
+                        db.t_Parcour_Lines.InsertOnSubmit(pl);
+                        db.SubmitChanges();
+                    }
+                }
+            }
+            catch { result = -2; }
+            return result;
+        }
+
+        private static t_GPSPoint getDBPoint(IGPSPoint pointA)
+        {
+            t_GPSPoint a = new t_GPSPoint();
+            a.altitude = pointA.Altitude;
+            a.latitude = pointA.Latitude;
+            a.longitude = pointA.Longitude;
+            return a;
+        }
+
         public bool removePilot(long id)
         {
             bool result = false;
@@ -362,6 +422,21 @@ namespace AnrlService.Server
             return result;
         }
 
+        public bool removeParcour(long id)
+        {
+            bool result = false;
+            try
+            {
+                // TODO remove lines
+                db.t_Parcours.DeleteOnSubmit(db.t_Parcours.Single(p => p.ID == id));
+                db.SubmitChanges();
+                result = true;
+            }
+            catch
+            {
+            }
+            return result;
+        }
         #endregion   
     }
 }

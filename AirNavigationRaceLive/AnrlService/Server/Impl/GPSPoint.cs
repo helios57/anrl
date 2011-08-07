@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AnrlInterfaces;
+using AnrlDB;
 
 namespace AnrlService.Server.Impl
 {
@@ -11,6 +12,13 @@ namespace AnrlService.Server.Impl
         private double _Longitude;
         private double _Latitude;
         private double _Altitude;
+        internal GPSPoint(t_GPSPoint point)
+            : base(point.ID)
+        {
+            _Longitude = point.longitude;
+            _Latitude = point.latitude;
+            _Altitude = point.altitude;
+        }
         internal GPSPoint(long id, double longitude, double latitude, double altitude)
             : base(id)
         {

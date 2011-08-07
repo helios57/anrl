@@ -5,6 +5,7 @@ using System.Text;
 using AnrlInterfaces;
 using System.IO;
 using AirNavigationRaceLive.Components.Model;
+using Facet.Combinatorics;
 
 namespace AirNavigationRaceLive.Components.Helper
 {
@@ -14,7 +15,7 @@ namespace AirNavigationRaceLive.Components.Helper
         /// Imports a DxfFile that is in the specified Format. Any changes on the import schema may cause Errors!
         /// </summary>
         /// <param name="filepath"></param>
-        public static IParcour importFromDxf(string filepath)
+        public static Parcour importFromDxf(string filepath)
         {
             Parcour result = new Parcour();
 
@@ -42,19 +43,41 @@ namespace AirNavigationRaceLive.Components.Helper
                             double count = 0;
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
-                                
+
                                 double Longitude = Converter.CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16]) * 1000, double.Parse(lines[i + (j * 4) + 18]) * 1000);
                                 double Latitude = Converter.CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16]) * 1000, double.Parse(lines[i + (j * 4) + 18]) * 1000);
-                                Vector v =new Vector(Longitude,Latitude , 0);
+                                Vector v = new Vector(Longitude, Latitude, 0);
                                 input.Add(v);
                                 sumX += v.X;
                                 sumY += v.Y;
-                                count+=1;
+                                count += 1;
                             }
                             Vector o = new Vector(sumX / count, sumY / count, 0);
+                            List<Vector> ordered;
+                            List<Vector> listExtended = new List<Vector>(input);
+                            listExtended.Add(o);
+                            if (!Vector.hasIntersections(listExtended))
+                            {
+                                ordered = input;
+                            }
+                            else
+                            {
+                                ordered = getOrderedList(input, o);
+                            }
 
-                            Polygon forbiddenZone = new Polygon(input,o);
-                            result.Polygons.Add(forbiddenZone);
+                            for (int j = 0; j < ordered.Count; j++)
+                            {
+                                Line l = new Line();
+                                l.LineType = LineType.PENALTYZONE;
+                                int i_a = j % ordered.Count;
+                                int i_b = (j + 1) % ordered.Count;
+                                Vector a = ordered[i_a];
+                                Vector b = ordered[i_b];
+                                l.PointA = new GPSPoint(a.X, a.Y, a.Z);
+                                l.PointB = new GPSPoint(b.X, b.Y, b.Z);
+                                l.PointOrientation = new GPSPoint(o.X, o.Y, o.Z);
+                                result.Lines.Add(l);
+                            }
                         }
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("STARTPOINT-"))
@@ -62,15 +85,15 @@ namespace AirNavigationRaceLive.Components.Helper
                         Line l = new Line();
                         double Longitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
                         double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
-                        l.PointA = new GPSPoint(Longitude1, Latitude1, 0);                        
+                        l.PointA = new GPSPoint(Longitude1, Latitude1, 0);
 
                         double Longitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
                         double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
                         l.PointB = new GPSPoint(Longitude2, Latitude2, 0);
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
-                        Vector o = Vector.Middle(start, end) +  Vector.Orthogonal(end - start);
-                        l.PointOrientation = new GPSPoint(o.X,o.Y,o.Z);
+                        Vector o = Vector.Middle(start, end) + Vector.Orthogonal(end - start);
+                        l.PointOrientation = new GPSPoint(o.X, o.Y, o.Z);
 
                         string gatename = lines[i + 6].Substring(11, 1);
                         switch (gatename)
@@ -161,9 +184,38 @@ namespace AirNavigationRaceLive.Components.Helper
                         }
                     }
                 }
-            } 
+            }
             return result;
         }
-    
+
+        private static List<Vector> getOrderedList(List<Vector> input, Vector o)
+        {
+            List<int> permInput = new List<int>();
+            int i = 0;
+            foreach (Vector v in input)
+            {
+                permInput.Add(i++);
+            }
+            Permutations<int> permutations = new Permutations<int>(permInput);
+            foreach (List<int> l in permutations)
+            {
+                List<Vector> extended = getPermutedList(input, l);
+                extended.Add(o);
+                if (!Vector.hasIntersections(extended))
+                {
+                    return getPermutedList(input, l);
+                }
+            }
+            return null;
         }
+        private static List<Vector> getPermutedList(List<Vector> input, List<int> permInput)
+        {
+            List<Vector> result = new List<Vector>();
+            foreach (int i in permInput)
+            {
+                result.Add(input[i]);
+            }
+            return result;
+        }
+    }
 }

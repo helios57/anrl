@@ -14,7 +14,7 @@ using AirNavigationRaceLive.Components.Helper;
 namespace AirNavigationRaceLive.Components
 {
     public partial class ParcourGen : UserControl
-    {        
+    {
         private AnrlInterfaces.IAnrlClient Client;
         Converter c = null;
         private Parcour activeParcour;
@@ -26,7 +26,7 @@ namespace AirNavigationRaceLive.Components
 
         private enum ActivePoint
         {
-            A,B,O,NONE
+            A, B, O, NONE
         }
 
         public ParcourGen(AnrlInterfaces.IAnrlClient iClient)
@@ -41,7 +41,7 @@ namespace AirNavigationRaceLive.Components
         private void ParcourGen_Load(object sender, EventArgs e)
         {
             loadMaps();
-        }   
+        }
         private void loadMaps()
         {
             comboBoxMaps.Items.Clear();
@@ -125,7 +125,8 @@ namespace AirNavigationRaceLive.Components
                 else
                 {
                     bool lineSet = false;
-                    lock (activeParcour){
+                    lock (activeParcour)
+                    {
                         foreach (Line l in activeParcour.Lines)
                         {
                             int startX = c.getStartX(l);
@@ -229,7 +230,7 @@ namespace AirNavigationRaceLive.Components
                 pictureBox1.SetConverter(c);
             }
         }
-        
+
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             btnGenerate.Enabled = false;
@@ -240,7 +241,7 @@ namespace AirNavigationRaceLive.Components
             t.Interval = 100;
             t.Start();
             pc = new ParcourGenerator();
-            pc.GenerateParcour(activeParcour, c, lenght,channel);
+            pc.GenerateParcour(activeParcour, c, lenght, channel);
             pictureBox1.Invalidate();
         }
 
@@ -256,6 +257,7 @@ namespace AirNavigationRaceLive.Components
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Client.addParcour(activeParcour);
         }
 
         #region add Lines

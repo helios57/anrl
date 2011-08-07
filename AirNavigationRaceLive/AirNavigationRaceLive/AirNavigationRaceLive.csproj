@@ -52,12 +52,25 @@
     <Compile Include="AirNavigationRaceLive.Designer.cs">
       <DependentUpon>AirNavigationRaceLive.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Client\Client.cs" />
     <Compile Include="Components\Connect.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Components\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\ParcourImport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\ParcourImport.Designer.cs">
+      <DependentUpon>ParcourImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Helper\Combinatorics\Combinations.cs" />
+    <Compile Include="Components\Helper\Combinatorics\GenerateOption.cs" />
+    <Compile Include="Components\Helper\Combinatorics\IMetaCollection.cs" />
+    <Compile Include="Components\Helper\Combinatorics\Permutations.cs" />
+    <Compile Include="Components\Helper\Combinatorics\SmallPrimeUtility.cs" />
+    <Compile Include="Components\Helper\Combinatorics\Variations.cs" />
     <Compile Include="Components\Helper\Converter.cs" />
     <Compile Include="Components\Helper\Importer.cs" />
     <Compile Include="Components\Helper\ParcourGenerator.cs" />
@@ -71,7 +84,6 @@
     <Compile Include="Components\Model\GPSPoint.cs" />
     <Compile Include="Components\Model\Line.cs" />
     <Compile Include="Components\Model\Parcour.cs" />
-    <Compile Include="Components\Model\Polygon.cs" />
     <Compile Include="Components\ParcourGen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -137,6 +149,9 @@
     <EmbeddedResource Include="Components\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\ParcourImport.resx">
+      <DependentUpon>ParcourImport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\ParcourGen.resx">
       <DependentUpon>ParcourGen.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,6 +207,10 @@
     <ProjectReference Include="..\AnrlInterfaces\AnrlInterfaces.csproj">
       <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
       <Name>AnrlInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Protobuf-net\protobuf-net.csproj">
+      <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
+      <Name>protobuf-net</Name>
     </ProjectReference>
     <ProjectReference Include="..\RemoteHelper\RemoteHelper.csproj">
       <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>

@@ -23,6 +23,7 @@ namespace AirNavigationRaceLive
         Map Map;
         Visualisation Visualisation;
         ParcourGen ParcourGen;
+        ParcourImport ParcourImport;
         MapLegacy MapLegacy;
 
 
@@ -38,6 +39,9 @@ namespace AirNavigationRaceLive
             disconnectToolStripMenuItem.Enabled = connected;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
+            overviewToolStripMenuItem.Enabled = connected;
+            generateToolStripMenuItem.Enabled = connected;
+            importToolStripMenuItem.Enabled = connected;
             trackerToolStripMenuItem.Enabled = connected;
             connectToolStripMenuItem.Enabled = !connected;
             pilotsToolStripMenuItem.Enabled = connected;
@@ -114,6 +118,7 @@ namespace AirNavigationRaceLive
             Visualisation = null;
             Map = null;
             ParcourGen = null;
+            ParcourImport = null;
             MapLegacy = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
@@ -201,11 +206,30 @@ namespace AirNavigationRaceLive
 
         private void parcourToolStripMenuItem_Click(object sender, EventArgs e)
         {
+       
+        }
+
+        private void overviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             if (ParcourGen == null)
             {
                 ParcourGen = new ParcourGen(Client);
             }
-            enableControl(ParcourGen);            
+            enableControl(ParcourGen);     
+        }
+
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ParcourImport == null)
+            {
+                ParcourImport = new ParcourImport(Client);
+            }
+            enableControl(ParcourImport);     
         }
 
         private void legacyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -217,5 +241,6 @@ namespace AirNavigationRaceLive
             enableControl(MapLegacy);       
 
         }
+
     }
 }

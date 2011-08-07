@@ -74,6 +74,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,7 +103,9 @@
     <Compile Include="Server\Impl\Data.cs" />
     <Compile Include="Server\Impl\GPSPoint.cs" />
     <Compile Include="Server\Impl\IDImpl.cs" />
+    <Compile Include="Server\Impl\Line.cs" />
     <Compile Include="Server\Impl\Map.cs" />
+    <Compile Include="Server\Impl\Parcour.cs" />
     <Compile Include="Server\Impl\Picture.cs" />
     <Compile Include="Server\Impl\Pilot.cs" />
     <Compile Include="Server\Impl\Team.cs" />

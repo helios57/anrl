@@ -53,7 +53,6 @@
     <Compile Include="IID.cs" />
     <Compile Include="IPicture.cs" />
     <Compile Include="IPilot.cs" />
-    <Compile Include="IPolygon.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="ITeam.cs" />
     <Compile Include="ITracker.cs" />

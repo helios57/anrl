@@ -8,6 +8,5 @@ namespace AnrlInterfaces
     public interface IParcour : IID
     {
         List<ILine> Lines { get; }
-        List<IPolygon> Polygons { get; }
     }
 }

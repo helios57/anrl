@@ -105,7 +105,8 @@ namespace AirNavigationRaceLive.Components.Helper
                 Vector va = Vector.Direction(LineA_A, LineA_B);
                 Vector vb = Vector.Direction(LineB_A, LineB_B);
                 double lambda = -(LineA_A.Y * vb.X - LineB_A.Y * vb.X - LineA_A.X * vb.Y + LineB_A.X * vb.Y) / (va.Y * vb.X - va.X * vb.Y);
-                if (lambda == double.NaN|| lambda >1 || lambda <-1) { return null; }
+                double sigma = -(LineA_A.Y * va.X - LineB_A.Y * va.X - LineA_A.X * va.Y + LineB_A.X * va.Y) / (va.Y * vb.X - va.X * vb.Y);
+                if (lambda == double.NaN || lambda > 1 || lambda < 0 || sigma > 1 || sigma < 0 || LineA_A.Z + lambda * va.Z != LineB_A.Z + sigma * vb.Z) { return null; }
                 Vector result = LineA_A + (va * lambda);
                 return result;
             }
@@ -137,17 +138,16 @@ namespace AirNavigationRaceLive.Components.Helper
 
         public static bool hasIntersections(List<Vector> list)
         {
-            bool result = true;
+            bool result = false;
             int count = list.Count;
             for (int i = 0; i < count; i++)
             {
                 for (int j = 0;j<count; j++)
                 {
-                    if (Math.Abs(i-j) > 1)
+                    if (i!=j && ((i+1)%count)!=j && ((j+1)%count)!=i && ((j+1)%count)!=((i+1)%count))
                     {
-                        if (Vector.Interception(list[i % count],list[(i + 1) % count],list[i % count],list[(i + 1) % count])!=null){
-                        
-                        result = false;
+                        if (Vector.Interception(list[i % count],list[(i + 1) % count],list[j % count],list[(j + 1) % count])!=null){
+                        result = true;
                         break;
                         }
                     }

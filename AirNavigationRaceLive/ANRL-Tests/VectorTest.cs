@@ -1,6 +1,7 @@
 ﻿using AirNavigationRaceLive.Components.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace ANRL_Tests
 {
@@ -199,8 +200,24 @@ namespace ANRL_Tests
         {
             Vector LineA_A = new Vector(2, 2, 2);
             Vector LineA_B = new Vector(-2, -2, -2);
-            Vector LineB_A = new Vector(9,8, 10);
-            Vector LineB_B = new Vector(8,8, 10);
+            Vector LineB_A = new Vector(9, 8, 10);
+            Vector LineB_B = new Vector(8, 8, 10);
+            Vector expected = null;
+            Vector actual;
+            actual = Vector.Interception(LineA_A, LineA_B, LineB_A, LineB_B);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for Interception
+        ///</summary>
+        [TestMethod()]
+        public void InterceptionTest4()
+        {
+            Vector LineA_A = new Vector(-2, -2, -2);
+            Vector LineA_B = new Vector(2, 2, 2);
+            Vector LineB_A = new Vector(9, 8, 10);
+            Vector LineB_B = new Vector(8, 8, 10);
             Vector expected = null;
             Vector actual;
             actual = Vector.Interception(LineA_A, LineA_B, LineB_A, LineB_B);
@@ -347,6 +364,113 @@ namespace ANRL_Tests
             Vector expected = new Vector(28,37,46);
             Vector actual;
             actual = (a - b);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for hasIntersections
+        ///</summary>
+        [TestMethod()]
+        public void hasIntersectionsTest()
+        {
+            List<Vector> list = new List<Vector>();
+            bool expected = false;
+            bool actual;
+            actual = Vector.hasIntersections(list);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for hasIntersections
+        ///</summary>
+        [TestMethod()]
+        public void hasIntersectionsTest1()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(10, 0, 0));
+            list.Add(new Vector(10, 10, 0));
+            list.Add(new Vector(0, 10, 0));
+            bool expected = false;
+            bool actual;
+            actual = Vector.hasIntersections(list);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for hasIntersections
+        ///</summary>
+        [TestMethod()]
+        public void hasIntersectionsTest2()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(10, 0, 0));
+            list.Add(new Vector(10, 10, 0));
+            list.Add(new Vector(0, 10, 0));
+            list.Add(new Vector(0, 0, 0));
+            bool expected = false;
+            bool actual;
+            actual = Vector.hasIntersections(list);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for hasIntersections
+        ///</summary>
+        [TestMethod()]
+        public void hasIntersectionsTest3()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(10, 0, 0));
+            list.Add(new Vector(0, 10, 0));
+            list.Add(new Vector(10, 10, 0));
+            list.Add(new Vector(0, 0, 0));
+            bool expected = true;
+            bool actual;
+            actual = Vector.hasIntersections(list);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for hasIntersections
+        ///</summary>
+        [TestMethod()]
+        public void hasIntersectionsTest4()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(10, 0, 0));
+            list.Add(new Vector(10, 10, 0));
+            list.Add(new Vector(0, 10, 0));
+            list.Add(new Vector(-10, 10, 0));
+            list.Add(new Vector(-10, 0, 0));
+            list.Add(new Vector(-10, -10, 0));
+            list.Add(new Vector(0, -10, 0));
+            list.Add(new Vector(10, -10, 0));
+            list.Add(new Vector(0, 0, 0));
+            bool expected = false;
+            bool actual;
+            actual = Vector.hasIntersections(list);
+            Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        ///A test for hasIntersections
+        ///</summary>
+        [TestMethod()]
+        public void hasIntersectionsTest5()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(10, 0, 0));
+            list.Add(new Vector(10, 10, 0));
+            list.Add(new Vector(0, 10, 0));
+            list.Add(new Vector(-10, 10, 0));
+            list.Add(new Vector(-10, -10, 0));
+            list.Add(new Vector(-10, 0, 0));
+            list.Add(new Vector(0, -10, 0));
+            list.Add(new Vector(10, -10, 0));
+            list.Add(new Vector(0, 0, 0));
+            bool expected = true;
+            bool actual;
+            actual = Vector.hasIntersections(list);
             Assert.AreEqual(expected, actual);
         }
     }
