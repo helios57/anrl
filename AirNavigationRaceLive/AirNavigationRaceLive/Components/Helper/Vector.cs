@@ -104,8 +104,10 @@ namespace AirNavigationRaceLive.Components.Helper
             {
                 Vector va = Vector.Direction(LineA_A, LineA_B);
                 Vector vb = Vector.Direction(LineB_A, LineB_B);
-                double lambda = (LineA_A.Y * vb.X - LineB_A.Y * vb.X - LineA_A.X * vb.Y + LineB_A.X * vb.Y) / (va.Y * vb.X - va.X * vb.Y);
-                return LineA_A + (va * lambda);
+                double lambda = -(LineA_A.Y * vb.X - LineB_A.Y * vb.X - LineA_A.X * vb.Y + LineB_A.X * vb.Y) / (va.Y * vb.X - va.X * vb.Y);
+                if (lambda == double.NaN|| lambda >1 || lambda <-1) { return null; }
+                Vector result = LineA_A + (va * lambda);
+                return result;
             }
             catch { }
             return null;
@@ -131,6 +133,27 @@ namespace AirNavigationRaceLive.Components.Helper
                 (StartEnd.X * StartEnd.X + StartEnd.Y * StartEnd.Y + StartEnd.Z * StartEnd.Z);
             Vector SchnittPunkt = new Vector(Start.X + lambda * StartEnd.X, Start.Y + lambda * StartEnd.Y, Start.Z + lambda * StartEnd.Z);
             return SchnittPunkt;
+        }
+
+        public static bool hasIntersections(List<Vector> list)
+        {
+            bool result = true;
+            int count = list.Count;
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0;j<count; j++)
+                {
+                    if (Math.Abs(i-j) > 1)
+                    {
+                        if (Vector.Interception(list[i % count],list[(i + 1) % count],list[i % count],list[(i + 1) % count])!=null){
+                        
+                        result = false;
+                        break;
+                        }
+                    }
+                }
+            }
+            return result;
         }
     }
 }

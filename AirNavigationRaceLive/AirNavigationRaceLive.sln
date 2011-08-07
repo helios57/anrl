@@ -22,10 +22,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplikation", "TestAppl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnrlDB", "AnrlDB\AnrlDB.csproj", "{30DE453C-A020-480F-85DB-50EF7B364167}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANRL-Tests", "ANRL-Tests\ANRL-Tests.csproj", "{2A12244B-3762-49BA-9D40-3968033CBEE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8E3542C-14E1-48F3-B8DA-EDF8B4A3CDC8}"
+	ProjectSection(SolutionItems) = preProject
+		AirNavigationRaceLive.vsmdi = AirNavigationRaceLive.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AirNavigationRaceLive.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -189,6 +201,21 @@ Global
 		{30DE453C-A020-480F-85DB-50EF7B364167}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{30DE453C-A020-480F-85DB-50EF7B364167}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{30DE453C-A020-480F-85DB-50EF7B364167}.Release|x86.ActiveCfg = Release|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Default|x86.ActiveCfg = Debug|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2A12244B-3762-49BA-9D40-3968033CBEE0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
