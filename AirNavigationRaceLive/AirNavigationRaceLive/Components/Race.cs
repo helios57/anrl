@@ -10,9 +10,9 @@ using System.Windows.Forms;
 namespace AirNavigationRaceLive.Components
 {
     public partial class Race : UserControl
-    {        
-        private AnrlInterfaces.IAnrlClient Client;
-        public Race(AnrlInterfaces.IAnrlClient iClient)
+    {
+        private Client.Client Client;
+        public Race(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();

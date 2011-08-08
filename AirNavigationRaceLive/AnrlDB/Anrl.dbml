@@ -78,12 +78,12 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ID_Picture" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="XSize" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
-      <Column Name="YSize" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
-      <Column Name="XRot" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
-      <Column Name="YRot" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
-      <Column Name="XTopLeft" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
-      <Column Name="YTopLeft" Type="System.Decimal" DbType="Decimal(24,18) NOT NULL" CanBeNull="false" />
+      <Column Name="XSize" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="YSize" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="XRot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="YRot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="XTopLeft" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="YTopLeft" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="t_Picture_t_Map" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
     </Type>
   </Table>

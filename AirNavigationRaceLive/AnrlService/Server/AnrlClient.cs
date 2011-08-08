@@ -374,12 +374,12 @@ namespace AnrlService.Server
                     {
                         t_Map m = new t_Map();
                         m.Name = map.Name;
-                        m.XRot = new Decimal(map.XRot);
+                       /* m.XRot = new Decimal(map.XRot);
                         m.YRot = new Decimal(map.YRot);
                         m.XSize = new Decimal(map.XSize);
                         m.YSize = new Decimal(map.YSize);
                         m.XTopLeft= new Decimal(map.XTopLeft);
-                        m.YTopLeft = new Decimal(map.YTopLeft);
+                        m.YTopLeft = new Decimal(map.YTopLeft);*/
                         t_Picture picture;
                         if (map.Picture.ID <= 0)
                         {

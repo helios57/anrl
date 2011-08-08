@@ -27,6 +27,7 @@ namespace NetworkObjects
 
     public enum RequestType : int
     {
+        Close = -1,
         Login = 0,
         GetMaps = 1,
         SaveMap = 2,

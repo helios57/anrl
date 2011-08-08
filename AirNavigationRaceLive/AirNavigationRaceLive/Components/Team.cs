@@ -12,10 +12,10 @@ namespace AirNavigationRaceLive.Components
 {
     public partial class Team : UserControl
     {
-        private AnrlInterfaces.IAnrlClient Client;
+        private Client.Client Client;
         private bool newTeam;
 
-        public Team(AnrlInterfaces.IAnrlClient iClient)
+        public Team(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace AirNavigationRaceLive.Components
         private void UpdateListe()
         {
             resetFields();
-            List<ITeam> teams = Client.getTeams();
+            List<ITeam> teams = null;// Client.getTeams();
             listViewTeam.Items.Clear();
             foreach (ITeam p in teams)
             {
@@ -39,7 +39,7 @@ namespace AirNavigationRaceLive.Components
                 listViewTeam.Items.Add(lvi);
             }
 
-            List<IPilot> pilots = Client.getPilots();
+            List<IPilot> pilots = null;//Client.getPilots();
             listViewPilots.Items.Clear();
             foreach (IPilot p in pilots)
             {
@@ -47,13 +47,13 @@ namespace AirNavigationRaceLive.Components
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
-            List<ITracker> trackers = Client.getTrackers();
+            List<ITracker> trackers = null;// Client.getTrackers();
             listViewTracker.Items.Clear();
             foreach (ITracker t in trackers)
             {
                 listViewTracker.Items.Add(new TrackerEntry(t));
             }
-            List<IPicture> flags = Client.getPictures(true);
+            List<IPicture> flags = null;// Client.getPictures(true);
             comboBoxCountry.Items.Clear();
             foreach (IPicture p in flags)
             {
@@ -156,7 +156,7 @@ namespace AirNavigationRaceLive.Components
                 Flag f = comboBoxCountry.SelectedItem as Flag;
                 flag = f.getPicture();
                 TeamEntry te = new TeamEntry(long.Parse(textBoxID.Text),textBoxPilot.Tag as IPilot, textBoxNavigator.Tag as IPilot,textTracker.Tag as ITracker, btnColorSelect.BackColor.Name,flag);
-                Client.addTeam(te);
+                //Client.addTeam(te);
                 resetFields();
                 UpdateEnablement();
             }

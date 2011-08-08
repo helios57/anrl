@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationInfo.cs" />
+    <Compile Include="MapList.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="ResponseParameters.cs" />
     <Compile Include="Map.cs" />

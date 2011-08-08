@@ -6,8 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using AnrlInterfaces;
-using System.Runtime.Remoting;
+using AirNavigationRaceLive.Components.Client;
 
 namespace AirNavigationRaceLive.Components
 {
@@ -19,20 +18,14 @@ namespace AirNavigationRaceLive.Components
         {
             InitializeComponent();
         }
-        
+
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            IServer server = RemoteHelper.RemotingHelper.GetRemoteObjectOverTCP(typeof(IServer), "AnrlServer", fldServer.Text, 4321, false, false) as IServer;
-            if (server != null)
+            Client.Client c = new Client.Client(fldServer.Text);
+            c.Authenticate(fldUsername.Text, fldPassword.Text);
+            if (c.isAuthenticated() && Connected != null)
             {
-                IAnrlClient client = server.getAnrlClient(fldUsername.Text, fldPassword.Text);
-                if (client != null)
-                {
-                    if (Connected != null)
-                    {
-                        Connected.Invoke(client, e);
-                    }
-                }
+                Connected.Invoke(c, e);
             }
         }
     }

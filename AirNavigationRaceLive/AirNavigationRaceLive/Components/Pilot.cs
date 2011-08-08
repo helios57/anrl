@@ -14,10 +14,10 @@ namespace AirNavigationRaceLive.Components
 {
     public partial class Pilot : UserControl
     {
-        private AnrlInterfaces.IAnrlClient Client;
+        private Client.Client Client;
         private bool newPilot;
 
-        public Pilot(AnrlInterfaces.IAnrlClient iClient)
+        public Pilot(Client.Client iClient)
         {
             Client = iClient;
             newPilot = false;
@@ -31,7 +31,7 @@ namespace AirNavigationRaceLive.Components
 
         private void UpdateListe()
         {
-            List<IPilot> pilots = Client.getPilots();
+            List<IPilot> pilots = null;//Client.getPilots();
             listViewPilots.Items.Clear();
             foreach (IPilot p in pilots)
             {
@@ -111,7 +111,7 @@ namespace AirNavigationRaceLive.Components
 
             IPicture picture = new PictureEntry(picId, ms.ToArray());
             PilotEntry pe = new PilotEntry(id, textBoxLastname.Text, textBoxSurename.Text, picture);
-            Client.addPilot(pe);
+            //Client.addPilot(pe);
             newPilot = false;
             ResetFields();
             UpdateListe();

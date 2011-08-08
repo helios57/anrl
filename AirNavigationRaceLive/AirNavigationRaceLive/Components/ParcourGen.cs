@@ -15,7 +15,7 @@ namespace AirNavigationRaceLive.Components
 {
     public partial class ParcourGen : UserControl
     {
-        private AnrlInterfaces.IAnrlClient Client;
+        private Client.Client Client;
         Converter c = null;
         private Parcour activeParcour;
         private Line activeLine;
@@ -29,7 +29,7 @@ namespace AirNavigationRaceLive.Components
             A, B, O, NONE
         }
 
-        public ParcourGen(AnrlInterfaces.IAnrlClient iClient)
+        public ParcourGen(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -45,7 +45,7 @@ namespace AirNavigationRaceLive.Components
         private void loadMaps()
         {
             comboBoxMaps.Items.Clear();
-            List<IMap> maps = Client.getMaps();
+            List<IMap> maps = null;// Client.getMaps();
             foreach (IMap m in maps)
             {
                 comboBoxMaps.Items.Add(new ListItem(m));
@@ -257,7 +257,7 @@ namespace AirNavigationRaceLive.Components
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Client.addParcour(activeParcour);
+            //Client.addParcour(activeParcour);
         }
 
         #region add Lines

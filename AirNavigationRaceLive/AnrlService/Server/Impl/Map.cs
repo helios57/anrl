@@ -22,13 +22,13 @@ namespace AnrlService.Server.Impl
             : base(map.ID)
         {
             _Name = map.Name;
-            _Picture = new Picture(map.t_Picture);
+           /* _Picture = new Picture(map.t_Picture);
             _XSize = Decimal.ToDouble(map.XSize);
             _YSize = Decimal.ToDouble(map.YSize);
             _XRot = Decimal.ToDouble(map.XRot);
             _YRot = Decimal.ToDouble(map.YRot);
             _XTopLeft = Decimal.ToDouble(map.XTopLeft);
-            _YTopLeft = Decimal.ToDouble(map.YTopLeft);
+            _YTopLeft = Decimal.ToDouble(map.YTopLeft);*/
         }
         public string Name
         {

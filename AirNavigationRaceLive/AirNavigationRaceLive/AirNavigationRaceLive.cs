@@ -8,12 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using AnrlInterfaces;
 using AirNavigationRaceLive.Components;
+using AirNavigationRaceLive.Components.Client;
 
 namespace AirNavigationRaceLive
 {
     public partial class AirNavigationRaceLive : Form
     {
-        IAnrlClient Client;
+        Client Client;
         Connect Connect;
         Credits Credits;
         Tracker Tracker;
@@ -97,7 +98,7 @@ namespace AirNavigationRaceLive
 
         private void Connect_Connected(object sender, EventArgs e)
         {
-            AnrlInterfaces.IAnrlClient c = sender as IAnrlClient;
+            Client c = sender as Client;
             if (c != null)
             {
                 Client = c;

@@ -13,6 +13,9 @@ namespace NetworkObjects
         public int ID { get; set; }
 
         [ProtoMember(2)]
-        public Map NetObject { get; set; }
+        public Picture Picture { get; set; }
+
+        [ProtoMember(3)]
+        public Map Map { get; set; }
     }
 }

@@ -13,10 +13,13 @@ namespace NetworkObjects
         public int ID { get; set; }
 
         [ProtoMember(2)]
-        public Exception Exception { get; set; }
+        public String Exception { get; set; }
 
         [ProtoMember(3)]
         public Picture Picture { get; set; }
+
+        [ProtoMember(4)]
+        public MapList MapList { get; set; }
 
     }
 }

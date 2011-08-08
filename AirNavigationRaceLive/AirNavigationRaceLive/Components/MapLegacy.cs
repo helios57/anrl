@@ -14,10 +14,10 @@ using swisstopo.geodesy.gpsref;
 namespace AirNavigationRaceLive.Components
 {
     public partial class MapLegacy : UserControl
-    {        
-        private AnrlInterfaces.IAnrlClient Client;
+    {
+        private Client.Client Client;
 
-        public MapLegacy(AnrlInterfaces.IAnrlClient iClient)
+        public MapLegacy(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();   
@@ -80,7 +80,7 @@ namespace AirNavigationRaceLive.Components
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             IPicture picture = new PictureEntry(0, ms.ToArray());
             m._Picture = picture;
-            Client.addMap(m);
+            //Client.addMap(m);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -127,7 +127,7 @@ namespace AirNavigationRaceLive.Components
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
             IPicture picture = new PictureEntry(0, ms.ToArray());
             m._Picture = picture;
-            Client.addMap(m);
+           //Client.addMap(m);
         }
     }
 

@@ -1729,17 +1729,17 @@ namespace AnrlDB
 		
 		private string _Name;
 		
-		private decimal _XSize;
+		private double _XSize;
 		
-		private decimal _YSize;
+		private double _YSize;
 		
-		private decimal _XRot;
+		private double _XRot;
 		
-		private decimal _YRot;
+		private double _YRot;
 		
-		private decimal _XTopLeft;
+		private double _XTopLeft;
 		
-		private decimal _YTopLeft;
+		private double _YTopLeft;
 		
 		private EntityRef<t_Picture> _t_Picture;
 		
@@ -1753,17 +1753,17 @@ namespace AnrlDB
     partial void OnID_PictureChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void OnXSizeChanging(decimal value);
+    partial void OnXSizeChanging(double value);
     partial void OnXSizeChanged();
-    partial void OnYSizeChanging(decimal value);
+    partial void OnYSizeChanging(double value);
     partial void OnYSizeChanged();
-    partial void OnXRotChanging(decimal value);
+    partial void OnXRotChanging(double value);
     partial void OnXRotChanged();
-    partial void OnYRotChanging(decimal value);
+    partial void OnYRotChanging(double value);
     partial void OnYRotChanged();
-    partial void OnXTopLeftChanging(decimal value);
+    partial void OnXTopLeftChanging(double value);
     partial void OnXTopLeftChanged();
-    partial void OnYTopLeftChanging(decimal value);
+    partial void OnYTopLeftChanging(double value);
     partial void OnYTopLeftChanged();
     #endregion
 		
@@ -1837,8 +1837,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XSize", DbType="Decimal(24,18) NOT NULL")]
-		public decimal XSize
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XSize", DbType="Float NOT NULL")]
+		public double XSize
 		{
 			get
 			{
@@ -1857,8 +1857,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YSize", DbType="Decimal(24,18) NOT NULL")]
-		public decimal YSize
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YSize", DbType="Float NOT NULL")]
+		public double YSize
 		{
 			get
 			{
@@ -1877,8 +1877,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XRot", DbType="Decimal(24,18) NOT NULL")]
-		public decimal XRot
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XRot", DbType="Float NOT NULL")]
+		public double XRot
 		{
 			get
 			{
@@ -1897,8 +1897,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YRot", DbType="Decimal(24,18) NOT NULL")]
-		public decimal YRot
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YRot", DbType="Float NOT NULL")]
+		public double YRot
 		{
 			get
 			{
@@ -1917,8 +1917,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XTopLeft", DbType="Decimal(24,18) NOT NULL")]
-		public decimal XTopLeft
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_XTopLeft", DbType="Float NOT NULL")]
+		public double XTopLeft
 		{
 			get
 			{
@@ -1937,8 +1937,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YTopLeft", DbType="Decimal(24,18) NOT NULL")]
-		public decimal YTopLeft
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YTopLeft", DbType="Float NOT NULL")]
+		public double YTopLeft
 		{
 			get
 			{

@@ -12,9 +12,9 @@ namespace AirNavigationRaceLive.Components
 {
     public partial class Tracker : UserControl
     {
-        private AnrlInterfaces.IAnrlClient Client;
+        private Client.Client Client;
 
-        public Tracker(AnrlInterfaces.IAnrlClient iClient)
+        public Tracker(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace AirNavigationRaceLive.Components
 
         private void UpdateTrackerList()
         {
-            List<ITracker> trackers = Client.getTrackers();
+            List<ITracker> trackers = null;//Client.getTrackers();
             listViewTracker.Items.Clear();
             foreach(ITracker t in trackers)
             {
@@ -70,7 +70,7 @@ namespace AirNavigationRaceLive.Components
             if (t != null)
             {
                 ITracker tracker = t.getITracker();
-                Client.addName(new TrackerImpl(tracker.ID,textBoxName.Text,tracker.IMEI));
+                //Client.addName(new TrackerImpl(tracker.ID,textBoxName.Text,tracker.IMEI));
             }
             UpdateTrackerList();
             textBoxID.Text = "";

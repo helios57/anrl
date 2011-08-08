@@ -9,15 +9,16 @@ using System.Windows.Forms;
 using AnrlInterfaces;
 using System.IO;
 using AirNavigationRaceLive.Components.Model;
+using NetworkObjects;
 
 namespace AirNavigationRaceLive.Components
 {
     public partial class Map : UserControl
-    {        
-        private AnrlInterfaces.IAnrlClient Client;
+    {
+        private Client.Client Client;
         private ToolTip Tooltip;
 
-        public Map(AnrlInterfaces.IAnrlClient iClient)
+        public Map(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -41,8 +42,10 @@ namespace AirNavigationRaceLive.Components
         private void loadMaps()
         {
             listBox1.Items.Clear();
-            List<IMap> maps = Client.getMaps();
-            foreach (IMap m in maps)
+            Root r = new Root();
+            r.RequestType = (int)RequestType.GetMaps;
+            List<NetworkObjects.Map> maps = Client.process(r).ResponseParameters.MapList.Maps;
+            foreach (NetworkObjects.Map m in maps)
             {
                 listBox1.Items.Add(new ListItem(m));
             }
@@ -50,8 +53,8 @@ namespace AirNavigationRaceLive.Components
 
         class ListItem
         {
-            private IMap map;
-            public ListItem(IMap imap)
+            private NetworkObjects.Map map;
+            public ListItem(NetworkObjects.Map imap)
             {
                 map = imap;
             }
@@ -60,7 +63,7 @@ namespace AirNavigationRaceLive.Components
             {
                 return map.Name;
             }
-            public IMap getMap()
+            public NetworkObjects.Map getMap()
             {
                 return map;
             }
@@ -99,9 +102,12 @@ namespace AirNavigationRaceLive.Components
                 fldRotationY.Text = li.getMap().YRot.ToString();
                 fldX.Text = li.getMap().XTopLeft.ToString();
                 fldY.Text = li.getMap().YTopLeft.ToString();
-                MemoryStream ms = new MemoryStream(li.getMap().Picture.Image);
+                Root r = new Root();
+                r.RequestParameters = new RequestParameters();
+                r.RequestType = (int) RequestType.GetPicture;
+                r.RequestParameters.ID = li.getMap().ID_Picture;
+                MemoryStream ms = new MemoryStream(Client.process(r).ResponseParameters.Picture.Image);
                 pictureBox1.Image = System.Drawing.Image.FromStream(ms);
-
                 btnDelete.Enabled = true;
             }
         }
@@ -111,7 +117,11 @@ namespace AirNavigationRaceLive.Components
             ListItem li = listBox1.SelectedItem as ListItem;
             if (li != null)
             {
-                Client.removeMap(li.getMap().ID);
+                Root r = new Root();
+                r.RequestType = (int)RequestType.DeleteMap;
+                r.RequestParameters = new RequestParameters();
+                r.RequestParameters.ID = li.getMap().ID;
+                Client.process(r);
                 loadMaps();
             }
         }
@@ -197,19 +207,33 @@ namespace AirNavigationRaceLive.Components
                 btnSelectWorldFile.Enabled = false;
                 btnSave.Enabled = false;
                 fldName.Enabled = false;
-                MapImpl m = new MapImpl();
-                m._Name = fldName.Text;
-                m._XSize = Double.Parse(fldSizeX.Text);
-                m._YSize = Double.Parse(fldSizeY.Text);
-                m._XRot = Double.Parse(fldRotationX.Text);
-                m._YRot = Double.Parse(fldRotationY.Text);
-                m._XTopLeft = Double.Parse(fldX.Text);
-                m._YTopLeft = Double.Parse(fldY.Text);
+                NetworkObjects.Map m = new NetworkObjects.Map();
+                m.Name = fldName.Text;
+                m.XSize = Double.Parse(fldSizeX.Text);
+                m.YSize = Double.Parse(fldSizeY.Text);
+                m.XRot = Double.Parse(fldRotationX.Text);
+                m.YRot = Double.Parse(fldRotationY.Text);
+                m.XTopLeft = Double.Parse(fldX.Text);
+                m.YTopLeft = Double.Parse(fldY.Text);
                 MemoryStream ms = new MemoryStream();
                 pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                IPicture picture = new PictureEntry(0, ms.ToArray());
-                m._Picture = picture;
-                Client.addMap(m);
+                Picture picture = new Picture();
+                picture.Image = ms.ToArray();
+                picture.Name = m.Name;
+
+                Root pic = new Root();
+                pic.RequestParameters = new RequestParameters();
+                pic.RequestParameters.Picture = picture;
+                pic.RequestType = (int)RequestType.SavePicture;
+                Root picId = Client.process(pic);
+
+                m.ID_Picture = picId.ResponseParameters.ID;
+
+                Root map = new Root();
+                map.RequestType = (int)RequestType.SaveMap;
+                map.RequestParameters = new RequestParameters();
+                map.RequestParameters.Map = m;
+                Client.process(map);
                 loadMaps();
             }
             catch (Exception ex)
