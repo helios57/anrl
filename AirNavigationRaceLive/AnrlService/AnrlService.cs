@@ -59,23 +59,18 @@ namespace AnrlService
                 using (TcpClient client = server.EndAcceptTcpClient(result))
                 using (NetworkStream stream = client.GetStream())
                 {
-                    while (true)
+                    Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+
+                    if (processor == null || !processor.isUseable())
                     {
-                        Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-                        if (reqest.RequestType == (int)RequestType.Close)
-                        {
-                            stream.Close();
-                            client.Close();
-                            return;
-                        }
-                        if (processor == null || !processor.isUseable())
-                        {
-                            processor = new RequestProcessor();
-                        }
-                        Root response = processor.proccessRequest(reqest);
-                        Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
+                        processor = new RequestProcessor();
                     }
+                    Root response = processor.proccessRequest(reqest);
+                    Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
+                    stream.Close();
+                    client.Close();
                 }
+                server.BeginAcceptTcpClient(ClientConnected, server);
             }
             catch (Exception ex)
             {

@@ -50,6 +50,10 @@ namespace AirNavigationRaceLive.Components.Client
             {
                 MessageBox.Show("Exception on Server: " + rootAnswer.ResponseParameters.Exception);
             }
+            //optimize without this ?
+            stream.Close();
+            client.Close();
+            client = null;
             return rootAnswer;
         }
 
