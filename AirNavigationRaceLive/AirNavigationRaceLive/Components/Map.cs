@@ -36,15 +36,13 @@ namespace AirNavigationRaceLive.Components
             Tooltip.SetToolTip(fldRotationX, "rotation about x-axis; unit is degree as the position! Example: 0");
             Tooltip.SetToolTip(fldRotationY, "rotation about y-axis; unit is degree as the position! Example: 0");
             Tooltip.SetToolTip(fldX, "x-coordinate of the center of the upper left pixel; unit is degree! Example: 8.491");
-            Tooltip.SetToolTip(fldY, "y-coordinate of the center of the upper left pixel; unit is degree! Example: 50.058");            
+            Tooltip.SetToolTip(fldY, "y-coordinate of the center of the upper left pixel; unit is degree! Example: 50.058");
         }
         #region load
         private void loadMaps()
         {
             listBox1.Items.Clear();
-            Root r = new Root();
-            r.RequestType = (int)RequestType.GetMaps;
-            List<NetworkObjects.Map> maps = Client.process(r).ResponseParameters.MapList.Maps;
+            List<NetworkObjects.Map> maps = Client.getMaps();
             foreach (NetworkObjects.Map m in maps)
             {
                 listBox1.Items.Add(new ListItem(m));
@@ -102,11 +100,7 @@ namespace AirNavigationRaceLive.Components
                 fldRotationY.Text = li.getMap().YRot.ToString();
                 fldX.Text = li.getMap().XTopLeft.ToString();
                 fldY.Text = li.getMap().YTopLeft.ToString();
-                Root r = new Root();
-                r.RequestParameters = new RequestParameters();
-                r.RequestType = (int) RequestType.GetPicture;
-                r.RequestParameters.ID = li.getMap().ID_Picture;
-                MemoryStream ms = new MemoryStream(Client.process(r).ResponseParameters.Picture.Image);
+                MemoryStream ms = new MemoryStream(Client.getPicture(li.getMap().ID_Picture).Image);
                 pictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 btnDelete.Enabled = true;
             }
@@ -117,11 +111,7 @@ namespace AirNavigationRaceLive.Components
             ListItem li = listBox1.SelectedItem as ListItem;
             if (li != null)
             {
-                Root r = new Root();
-                r.RequestType = (int)RequestType.DeleteMap;
-                r.RequestParameters = new RequestParameters();
-                r.RequestParameters.ID = li.getMap().ID;
-                Client.process(r);
+                Client.deleteMap(li.getMap().ID);
                 loadMaps();
             }
         }
@@ -220,20 +210,8 @@ namespace AirNavigationRaceLive.Components
                 Picture picture = new Picture();
                 picture.Image = ms.ToArray();
                 picture.Name = m.Name;
-
-                Root pic = new Root();
-                pic.RequestParameters = new RequestParameters();
-                pic.RequestParameters.Picture = picture;
-                pic.RequestType = (int)RequestType.SavePicture;
-                Root picId = Client.process(pic);
-
-                m.ID_Picture = picId.ResponseParameters.ID;
-
-                Root map = new Root();
-                map.RequestType = (int)RequestType.SaveMap;
-                map.RequestParameters = new RequestParameters();
-                map.RequestParameters.Map = m;
-                Client.process(map);
+                m.ID_Picture = Client.savePicture(picture);
+                Client.saveMap(m);
                 loadMaps();
             }
             catch (Exception ex)
@@ -241,6 +219,6 @@ namespace AirNavigationRaceLive.Components
                 MessageBox.Show(ex.Message, "Error while Saving");
             }
         }
-        
+
     }
 }

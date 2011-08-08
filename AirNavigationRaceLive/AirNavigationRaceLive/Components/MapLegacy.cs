@@ -10,6 +10,7 @@ using AnrlInterfaces;
 using System.IO;
 using AirNavigationRaceLive.Components.Model;
 using swisstopo.geodesy.gpsref;
+using NetworkObjects;
 
 namespace AirNavigationRaceLive.Components
 {
@@ -28,6 +29,7 @@ namespace AirNavigationRaceLive.Components
 
         private void btnImportANR_Click(object sender, EventArgs e)
         {
+            btnImportANR.Enabled = false;
             OpenFileDialog ofd = new OpenFileDialog();
             string FileFilter = "JPG Dateien (*.jpg, *.jpeg, *.jpe, *.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|"
                     + "Bitmap Dateien (*.bmp)|*.bmp|"
@@ -48,8 +50,8 @@ namespace AirNavigationRaceLive.Components
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox p = new PictureBox();
             p.Image = Image.FromFile(ofd.FileName);
-            MapImpl m = new MapImpl();
-            m._Name = fldName.Text;
+            NetworkObjects.Map m = new NetworkObjects.Map();
+            m.Name = fldName.Text;
             double topLeftLatitude;
             double topLeftLongitude;
             double bottomRightLatitude;
@@ -70,21 +72,25 @@ namespace AirNavigationRaceLive.Components
             ApproxSwissProj.LV03toWGS84(topLeftLongitude, topLeftLatitude, 500.0f, ref topLeftLatitude, ref topLeftLongitude, ref dummyHeight);
             ApproxSwissProj.LV03toWGS84(bottomRightLongitude, bottomRightLatitude, 500.0f, ref bottomRightLatitude, ref bottomRightLongitude, ref dummyHeight);
 
-            m._XSize = (bottomRightLongitude - topLeftLongitude) / p.Image.Width;
-            m._YSize = (bottomRightLatitude - topLeftLatitude) / p.Image.Height;
-            m._XRot = 0;
-            m._YRot = 0;
-            m._XTopLeft = topLeftLongitude;
-            m._YTopLeft = topLeftLatitude;
+            m.XSize = (bottomRightLongitude - topLeftLongitude) / p.Image.Width;
+            m.YSize = (bottomRightLatitude - topLeftLatitude) / p.Image.Height;
+            m.XRot = 0;
+            m.YRot = 0;
+            m.XTopLeft = topLeftLongitude;
+            m.YTopLeft = topLeftLatitude;
             MemoryStream ms = new MemoryStream();
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            IPicture picture = new PictureEntry(0, ms.ToArray());
-            m._Picture = picture;
-            //Client.addMap(m);
+            Picture picture = new Picture();
+            picture.Image = ms.ToArray();
+            picture.Name = m.Name;
+            m.ID_Picture = Client.savePicture(picture);
+            Client.saveMap(m);
+            btnImportANR.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
             OpenFileDialog ofd = new OpenFileDialog();
             string FileFilter = "JPG Dateien (*.jpg, *.jpeg, *.jpe, *.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|"
                     + "Bitmap Dateien (*.bmp)|*.bmp|"
@@ -105,8 +111,8 @@ namespace AirNavigationRaceLive.Components
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox p = new PictureBox();
             p.Image = Image.FromFile(ofd.FileName);
-            MapImpl m = new MapImpl();
-            m._Name = fldName.Text;
+            NetworkObjects.Map m = new NetworkObjects.Map();
+            m.Name = fldName.Text;
             double topLeftLatitude;
             double topLeftLongitude;
             double bottomRightLatitude;
@@ -117,17 +123,20 @@ namespace AirNavigationRaceLive.Components
             bottomRightLatitude = Convert.ToDouble(coordinatesFromPath[2]);
             bottomRightLongitude = Convert.ToDouble(coordinatesFromPath[3]);
 
-            m._XSize = (bottomRightLongitude -topLeftLongitude ) / p.Image.Width;
-            m._YSize = (bottomRightLatitude - topLeftLatitude) / p.Image.Height;
-            m._XRot = 0;
-            m._YRot = 0;
-            m._XTopLeft = topLeftLongitude;
-            m._YTopLeft = topLeftLatitude;
+            m.XSize = (bottomRightLongitude -topLeftLongitude ) / p.Image.Width;
+            m.YSize = (bottomRightLatitude - topLeftLatitude) / p.Image.Height;
+            m.XRot = 0;
+            m.YRot = 0;
+            m.XTopLeft = topLeftLongitude;
+            m.YTopLeft = topLeftLatitude;
             MemoryStream ms = new MemoryStream();
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            IPicture picture = new PictureEntry(0, ms.ToArray());
-            m._Picture = picture;
-           //Client.addMap(m);
+            Picture picture = new Picture();
+            picture.Image = ms.ToArray();
+            picture.Name = m.Name;
+            m.ID_Picture = Client.savePicture(picture);
+            Client.saveMap(m);
+            button1.Enabled = true;
         }
     }
 

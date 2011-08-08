@@ -36,7 +36,7 @@ namespace AirNavigationRaceLive.Components.Client
             Token = process(r).AuthInfo.Token;
         }
 
-        public Root process(Root request)
+        private Root process(Root request)
         {
             if (client == null || !client.Connected)
             {
@@ -51,6 +51,48 @@ namespace AirNavigationRaceLive.Components.Client
                 MessageBox.Show("Exception on Server: " + rootAnswer.ResponseParameters.Exception);
             }
             return rootAnswer;
+        }
+
+        public Picture getPicture(int ID)
+        {
+            Root r = new Root();
+            r.RequestParameters = new RequestParameters();
+            r.RequestType = (int)RequestType.GetPicture;
+            r.RequestParameters.ID = ID;
+            return process(r).ResponseParameters.Picture;
+        }
+        public int savePicture(Picture picture)
+        {
+            Root pic = new Root();
+            pic.RequestParameters = new RequestParameters();
+            pic.RequestParameters.Picture = picture;
+            pic.RequestType = (int)RequestType.SavePicture;
+            Root picId = process(pic);
+            return picId.ResponseParameters.ID;
+        }
+        public List<NetworkObjects.Map> getMaps()
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.GetMaps;
+            List<NetworkObjects.Map> maps = process(r).ResponseParameters.MapList.Maps;
+            return maps;
+        }
+        public void deleteMap(int ID)
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.DeleteMap;
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.ID = ID;
+            process(r);
+        }
+        public int saveMap(NetworkObjects.Map m)
+        {
+            Root map = new Root();
+            map.RequestType = (int)RequestType.SaveMap;
+            map.RequestParameters = new RequestParameters();
+            map.RequestParameters.Map = m;
+            Root mapId = process(map);
+            return mapId.ResponseParameters.ID;
         }
     }
 }
