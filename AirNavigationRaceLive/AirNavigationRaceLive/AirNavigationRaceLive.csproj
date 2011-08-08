@@ -208,6 +208,10 @@
       <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
       <Name>AnrlInterfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
+      <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>
+      <Name>NetworkObjects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Protobuf-net\protobuf-net.csproj">
       <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
       <Name>protobuf-net</Name>

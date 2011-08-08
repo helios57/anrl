@@ -6,39 +6,73 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Net.Sockets;
+using System.Net;
+using NetworkObjects;
+using ProtoBuf;
+using System.Threading;
+using AnrlService.Server;
 
 namespace AnrlService
 {
     public partial class AnrlService : ServiceBase
     {
-        Server.Server s;
-        TCPReciever.Server Reciever;
+        private const int PORT = 1337;
+        private TcpListener server;
+        private TCPReciever.Server Reciever;
+        private static RequestProcessor processor;
         public AnrlService()
         {
-            s = new Server.Server(); 
             InitializeComponent();
-            OnStart(null);
+            OnStart(null);//Remove
         }
 
         protected override void OnStart(string[] args)
         {
-
+            if (server == null)
+            {
+                try
+                {
+                    server = new TcpListener(IPAddress.Any, PORT);
+                    server.Start();
+                    server.BeginAcceptTcpClient(ClientConnected, server);
+                }
+                catch (Exception ex)
+                {
+                    System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                }
+                try
+                {
+                    Reciever = new TCPReciever.Server();
+                }
+                catch (Exception ex)
+                {
+                    System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                }
+            }
+        }
+        static void ClientConnected(IAsyncResult result)
+        {
             try
             {
-                RemoteHelper.RemotingHelper.PublishObjectOverTCP(s, "AnrlServer", 4321, false, false);
+                TcpListener server = (TcpListener)result.AsyncState;
+                using (TcpClient client = server.EndAcceptTcpClient(result))
+                using (NetworkStream stream = client.GetStream())
+                {
+                    Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+                    if (processor == null || !processor.isUseable())
+                    {
+                        processor = new RequestProcessor();
+                    }
+                    Root response = processor.proccessRequest(reqest);
+                    Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
+                    stream.Close();
+                    client.Close();
+                }
             }
             catch (Exception ex)
             {
-                System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
-            }
-            try
-            {
-                Reciever = new TCPReciever.Server(s.getConnectionString());
-                s.SetReciever(Reciever);
-            }
-            catch (Exception ex)
-            {
-                System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
             }
         }
 

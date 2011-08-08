@@ -29,11 +29,11 @@ namespace TCPReciever
         /// <summary>
         /// Create an new Instance of the TCP-Listener on Port 5000
         /// </summary>
-        internal Server(String ConnectionString)
+        internal Server()
         {
             try
             {
-                db = new AnrlDB.AnrlDataContext(ConnectionString); 
+                db = new AnrlDB.AnrlDataContext(); 
                 if (!db.DatabaseExists())
                 {
                     db.CreateDatabase();

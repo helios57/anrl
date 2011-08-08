@@ -18,6 +18,10 @@ namespace NetworkObjects
         [ProtoMember(3)]
         public RequestParameters RequestParameters { get; set; }
 
+        [ProtoMember(4)]
+        public ResponseParameters ResponseParameters { get; set; }
+
+
 
     }
 
@@ -26,6 +30,9 @@ namespace NetworkObjects
         Login = 0,
         GetMaps = 1,
         SaveMap = 2,
-        DeleteMap = 3
+        DeleteMap = 3,
+        GetPicture = 4,
+        SavePicture = 5,
+        DeletePicture = 6
     }
 }

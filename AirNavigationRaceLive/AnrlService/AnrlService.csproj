@@ -110,6 +110,7 @@
     <Compile Include="Server\Impl\Pilot.cs" />
     <Compile Include="Server\Impl\Team.cs" />
     <Compile Include="Server\Impl\Tracker.cs" />
+    <Compile Include="Server\RequestProcessor.cs" />
     <Compile Include="Server\Server.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +126,14 @@
     <ProjectReference Include="..\AnrlInterfaces\AnrlInterfaces.csproj">
       <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
       <Name>AnrlInterfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
+      <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>
+      <Name>NetworkObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Protobuf-net\protobuf-net.csproj">
+      <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
+      <Name>protobuf-net</Name>
     </ProjectReference>
     <ProjectReference Include="..\RemoteHelper\RemoteHelper.csproj">
       <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>
