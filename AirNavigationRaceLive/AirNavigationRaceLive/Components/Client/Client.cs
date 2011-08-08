@@ -38,23 +38,31 @@ namespace AirNavigationRaceLive.Components.Client
 
         private Root process(Root request)
         {
-            if (client == null || !client.Connected)
+            try
             {
-                client = new TcpClient();
-                client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
-                stream = client.GetStream();
+                if (client == null || !client.Connected)
+                {
+                    client = new TcpClient();
+                    client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
+                    stream = client.GetStream();
+                }
+                Serializer.SerializeWithLengthPrefix(stream, request, PrefixStyle.Base128);
+                Root rootAnswer = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+                if (rootAnswer.ResponseParameters != null && rootAnswer.ResponseParameters.Exception != null)
+                {
+                    MessageBox.Show("Exception on Server: " + rootAnswer.ResponseParameters.Exception);
+                }
+                //optimize without this ?
+                stream.Close();
+                client.Close();
+                client = null;
+                return rootAnswer;
             }
-            Serializer.SerializeWithLengthPrefix(stream, request, PrefixStyle.Base128);
-            Root rootAnswer = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-            if (rootAnswer.ResponseParameters != null && rootAnswer.ResponseParameters.Exception != null)
+            catch (Exception ex)
             {
-                MessageBox.Show("Exception on Server: " + rootAnswer.ResponseParameters.Exception);
+                MessageBox.Show("Exception on Server: " + ex.ToString());
+                return null;
             }
-            //optimize without this ?
-            stream.Close();
-            client.Close();
-            client = null;
-            return rootAnswer;
         }
 
         public Picture getPicture(int ID)

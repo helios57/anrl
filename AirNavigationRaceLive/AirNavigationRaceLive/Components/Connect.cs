@@ -21,11 +21,17 @@ namespace AirNavigationRaceLive.Components
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            Client.Client c = new Client.Client(fldServer.Text);
-            c.Authenticate(fldUsername.Text, fldPassword.Text);
-            if (c.isAuthenticated() && Connected != null)
+            try
             {
-                Connected.Invoke(c, e);
+                Client.Client c = new Client.Client(fldServer.Text);
+                c.Authenticate(fldUsername.Text, fldPassword.Text);
+                if (c.isAuthenticated() && Connected != null)
+                {
+                    Connected.Invoke(c, e);
+                }
+            }
+            catch
+            {
             }
         }
     }
