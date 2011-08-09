@@ -62,11 +62,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new ParcourPictureBox();
+            this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
             this.parcourLength = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.channelWide = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.fldName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -82,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -137,6 +141,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnImport);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
+            this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 24);
@@ -452,7 +457,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 310);
+            this.btnSave.Location = new System.Drawing.Point(3, 344);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -513,6 +518,34 @@
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 0;
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel4.Controls.Add(this.fldName);
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Location = new System.Drawing.Point(3, 310);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 28);
+            this.panel4.TabIndex = 21;
+            // 
+            // fldName
+            // 
+            this.fldName.Location = new System.Drawing.Point(78, 3);
+            this.fldName.Name = "fldName";
+            this.fldName.Size = new System.Drawing.Size(100, 20);
+            this.fldName.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name:";
+            // 
             // ParcourImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -541,6 +574,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -586,5 +621,8 @@
         private System.Windows.Forms.TextBox fldLineTyp;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.TextBox fldName;
+        private System.Windows.Forms.Label label5;
     }
 }

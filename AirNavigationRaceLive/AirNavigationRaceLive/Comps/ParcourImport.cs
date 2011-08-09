@@ -237,7 +237,10 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-           //Client.addParcour(activeParcour);
+            NetworkObjects.Parcour p = new NetworkObjects.Parcour();
+            p.Name = fldName.Text;
+            p.Lines.AddRange(activeParcour.Lines);
+            Client.saveParcour(p);
         }
 
         private void pictureBox1_Click(object sender, MouseEventArgs e)
@@ -298,8 +301,9 @@ namespace AirNavigationRaceLive.Comps
         void ofd_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
-            PictureBox p = new PictureBox();
             activeParcour = Importer.importFromDxf(ofd.FileName);
+            pictureBox1.SetParcour(activeParcour);
+            pictureBox1.Invalidate();
         }
 
         #region NumUpDown

@@ -136,7 +136,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         Vector o = Vector.Middle(start, end) + Vector.Orthogonal(end - start);
                         l.O = new Point(o.X, o.Y, o.Z);
 
-                        string gatename = lines[i + 6].Substring(11, 1);
+                        string gatename = lines[i + 6].Substring(9, 1);
                         switch (gatename)
                         {
                             case "A":
