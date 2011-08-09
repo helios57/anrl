@@ -60,6 +60,16 @@ namespace AnrlService.Server
                             proccessDeletePicture(request);
                             break;
                         }
+                    case RequestType.GetParcours:
+                        {
+                            answer = proccessGetParcours(request);
+                            break;
+                        }
+                    case RequestType.SaveParcour:
+                        {
+                            answer = proccessSaveParcour(request);
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -73,6 +83,58 @@ namespace AnrlService.Server
             return answer;
         }
 
+        private Root proccessSaveParcour(Root request)
+        {
+            Root r = new Root();
+            Parcour p = request.RequestParameters.Parcour;
+            t_Parcour dbParcour = new t_Parcour();
+            dbParcour.Name = p.Name;
+            db.t_Parcours.InsertOnSubmit(dbParcour);
+            db.SubmitChanges();
+            foreach (Line l in p.Lines)
+            {
+
+            }
+
+            return r;
+        }
+
+        private Root proccessGetParcours(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            ParcourList pl = new ParcourList();
+            foreach (t_Parcour dbParcour in db.t_Parcours)
+            {
+                Parcour p = new Parcour();
+                p.ID = dbParcour.ID;
+                p.Name = dbParcour.Name;
+                foreach(t_Parcour_Line t_p_l in dbParcour.t_Parcour_Lines)
+                {
+                    t_Line t_l = t_p_l.t_Line;
+                    Line l = new Line();
+                    l.A = new Point();
+                    CopyAttributes(t_l.t_GPSPoint, l.A);
+                    l.B = new Point();
+                    CopyAttributes(t_l.t_GPSPoint1, l.B);
+                    l.O = new Point();
+                    CopyAttributes(t_l.t_GPSPoint2, l.O);
+                    p.Lines.Add(l);
+                }
+                pl.Parcours.Add(p);
+            }
+            r.ResponseParameters.ParcourList = pl;
+            return r;
+        }
+
+        private static void CopyAttributes(t_GPSPoint gp, Point p)
+        {
+            p.ID = gp.ID;
+            p.altitude = gp.altitude;
+            p.latitude = gp.latitude;
+            p.longitude = gp.longitude;
+        }
+
         private void proccessDeletePicture(Root request)
         {
             db.t_Pictures.DeleteOnSubmit(db.t_Pictures.Single(p => p.ID == request.RequestParameters.ID));
@@ -82,26 +144,13 @@ namespace AnrlService.Server
         private Root proccessSavePicture(Root request)
         {
             Root r = new Root();
-
             t_Picture pp;
-            bool neww = true;
-            if (request.RequestParameters != null && request.RequestParameters.ID <= 0)
-            {
-                pp = new t_Picture();
-            }
-            else
-            {
-                neww = false;
-                pp = db.t_Pictures.Single(p => p.ID == request.RequestParameters.ID);
-            }
+            pp = new t_Picture();
             Picture pic = request.RequestParameters.Picture;
             pp.ID = pic.ID;
             pp.Data = new System.Data.Linq.Binary(pic.Image);
             pp.Name = pic.Name;
-            if (neww)
-            {
-                db.t_Pictures.InsertOnSubmit(pp);
-            }
+            db.t_Pictures.InsertOnSubmit(pp);
             db.SubmitChanges();
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = pp.ID;

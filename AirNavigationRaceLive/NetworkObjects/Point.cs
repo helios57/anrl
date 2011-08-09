@@ -7,20 +7,13 @@ using ProtoBuf;
 namespace NetworkObjects
 {
     [ProtoContract]
-    public class RequestParameters
+    public class Point:NetObject
     {
-        [ProtoMember(1)]
-        public int ID { get; set; }
-
         [ProtoMember(2)]
-        public Picture Picture { get; set; }
-
+        public double altitude { get; set; }
         [ProtoMember(3)]
-        public Map Map { get; set; }
-
+        public double longitude { get; set; }
         [ProtoMember(4)]
-        public Parcour Parcour { get; set; }
-
-
+        public double latitude { get; set; }
     }
 }

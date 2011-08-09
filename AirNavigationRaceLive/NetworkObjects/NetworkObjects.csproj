@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationInfo.cs" />
+    <Compile Include="ParcourList.cs" />
+    <Compile Include="Parcour.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Line.cs" />
     <Compile Include="MapList.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="ResponseParameters.cs" />

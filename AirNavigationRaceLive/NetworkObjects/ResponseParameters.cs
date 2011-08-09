@@ -21,5 +21,9 @@ namespace NetworkObjects
         [ProtoMember(4)]
         public MapList MapList { get; set; }
 
+        [ProtoMember(5)]
+        public ParcourList ParcourList { get; set; }
+
+
     }
 }

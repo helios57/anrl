@@ -18,6 +18,7 @@ namespace AirNavigationRaceLive.Components.Client
         private string IpAdress;
         private TcpClient client;
         private NetworkStream stream;
+        private Dictionary<int, Picture> pictureCache = new Dictionary<int, Picture>();
 
         public Client(string IpAdress)
         {
@@ -67,11 +68,20 @@ namespace AirNavigationRaceLive.Components.Client
 
         public Picture getPicture(int ID)
         {
-            Root r = new Root();
-            r.RequestParameters = new RequestParameters();
-            r.RequestType = (int)RequestType.GetPicture;
-            r.RequestParameters.ID = ID;
-            return process(r).ResponseParameters.Picture;
+            Picture p = pictureCache[ID];
+            if (p == null)
+            {
+                Root r = new Root();
+                r.RequestParameters = new RequestParameters();
+                r.RequestType = (int)RequestType.GetPicture;
+                r.RequestParameters.ID = ID;
+                p= process(r).ResponseParameters.Picture;
+                if (p != null)
+                {
+                    pictureCache.Add(p.ID, p);
+                }
+            }
+            return p;
         }
         public int savePicture(Picture picture)
         {

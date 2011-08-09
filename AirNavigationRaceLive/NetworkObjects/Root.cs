@@ -34,6 +34,9 @@ namespace NetworkObjects
         DeleteMap = 3,
         GetPicture = 4,
         SavePicture = 5,
-        DeletePicture = 6
+        DeletePicture = 6,
+        GetParcours = 7,
+        SaveParcour = 8,
+        DeleteParcour = 9
     }
 }
