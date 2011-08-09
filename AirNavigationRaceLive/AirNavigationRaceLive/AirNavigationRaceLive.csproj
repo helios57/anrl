@@ -46,137 +46,132 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AirNavigationRaceLive.cs">
+    <Compile Include="AirNavigationRaceLiveMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AirNavigationRaceLive.Designer.cs">
-      <DependentUpon>AirNavigationRaceLive.cs</DependentUpon>
+    <Compile Include="AirNavigationRaceLiveMain.Designer.cs">
+      <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Client\Client.cs" />
-    <Compile Include="Components\Connect.cs">
+    <Compile Include="Comps\Client\Client.cs" />
+    <Compile Include="Comps\Connect.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Connect.Designer.cs">
+    <Compile Include="Comps\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\ParcourImport.cs">
+    <Compile Include="Comps\ParcourImport.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\ParcourImport.Designer.cs">
+    <Compile Include="Comps\ParcourImport.Designer.cs">
       <DependentUpon>ParcourImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Helper\Combinatorics\Combinations.cs" />
-    <Compile Include="Components\Helper\Combinatorics\GenerateOption.cs" />
-    <Compile Include="Components\Helper\Combinatorics\IMetaCollection.cs" />
-    <Compile Include="Components\Helper\Combinatorics\Permutations.cs" />
-    <Compile Include="Components\Helper\Combinatorics\SmallPrimeUtility.cs" />
-    <Compile Include="Components\Helper\Combinatorics\Variations.cs" />
-    <Compile Include="Components\Helper\Converter.cs" />
-    <Compile Include="Components\Helper\Importer.cs" />
-    <Compile Include="Components\Helper\ParcourGenerator.cs" />
-    <Compile Include="Components\Helper\ParcourModel.cs" />
-    <Compile Include="Components\Helper\ParcourPictureBox.cs">
+    <Compile Include="Comps\Helper\Combinatorics\Combinations.cs" />
+    <Compile Include="Comps\Helper\Combinatorics\GenerateOption.cs" />
+    <Compile Include="Comps\Helper\Combinatorics\IMetaCollection.cs" />
+    <Compile Include="Comps\Helper\Combinatorics\Permutations.cs" />
+    <Compile Include="Comps\Helper\Combinatorics\SmallPrimeUtility.cs" />
+    <Compile Include="Comps\Helper\Combinatorics\Variations.cs" />
+    <Compile Include="Comps\Helper\Converter.cs" />
+    <Compile Include="Comps\Helper\Importer.cs" />
+    <Compile Include="Comps\Helper\ParcourGenerator.cs" />
+    <Compile Include="Comps\Helper\ParcourModel.cs" />
+    <Compile Include="Comps\Helper\ParcourPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Helper\Utils.cs" />
-    <Compile Include="Components\Helper\Vector.cs" />
-    <Compile Include="Components\Helper\wgs84_ch1903.cs" />
-    <Compile Include="Components\Model\GPSPoint.cs" />
-    <Compile Include="Components\Model\Line.cs" />
-    <Compile Include="Components\Model\Parcour.cs" />
-    <Compile Include="Components\ParcourGen.cs">
+    <Compile Include="Comps\Helper\Utils.cs" />
+    <Compile Include="Comps\Helper\Vector.cs" />
+    <Compile Include="Comps\Helper\wgs84_ch1903.cs" />
+    <Compile Include="Comps\Model\Parcour.cs" />
+    <Compile Include="Comps\ParcourGen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\ParcourGen.Designer.cs">
+    <Compile Include="Comps\ParcourGen.Designer.cs">
       <DependentUpon>ParcourGen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\MapLegacy.cs">
+    <Compile Include="Comps\MapLegacy.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\MapLegacy.Designer.cs">
+    <Compile Include="Comps\MapLegacy.Designer.cs">
       <DependentUpon>MapLegacy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Map.cs">
+    <Compile Include="Comps\Map.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Map.Designer.cs">
+    <Compile Include="Comps\Map.Designer.cs">
       <DependentUpon>Map.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Credits.cs">
+    <Compile Include="Comps\Credits.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Credits.Designer.cs">
+    <Compile Include="Comps\Credits.Designer.cs">
       <DependentUpon>Credits.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Model\MapImpl.cs" />
-    <Compile Include="Components\Model\PictureEntry.cs" />
-    <Compile Include="Components\Model\PilotEntry.cs" />
-    <Compile Include="Components\Pilot.cs">
+    <Compile Include="Comps\Pilot.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Pilot.Designer.cs">
+    <Compile Include="Comps\Pilot.Designer.cs">
       <DependentUpon>Pilot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Race.cs">
+    <Compile Include="Comps\Race.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Race.Designer.cs">
+    <Compile Include="Comps\Race.Designer.cs">
       <DependentUpon>Race.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Team.cs">
+    <Compile Include="Comps\Team.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Team.Designer.cs">
+    <Compile Include="Comps\Team.Designer.cs">
       <DependentUpon>Team.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Tracker.cs">
+    <Compile Include="Comps\Tracker.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Tracker.Designer.cs">
+    <Compile Include="Comps\Tracker.Designer.cs">
       <DependentUpon>Tracker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\Visualisation.cs">
+    <Compile Include="Comps\Visualisation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\Visualisation.Designer.cs">
+    <Compile Include="Comps\Visualisation.Designer.cs">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AirNavigationRaceLive.resx">
-      <DependentUpon>AirNavigationRaceLive.cs</DependentUpon>
+    <EmbeddedResource Include="AirNavigationRaceLiveMain.resx">
+      <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Connect.resx">
+    <EmbeddedResource Include="Comps\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\ParcourImport.resx">
+    <EmbeddedResource Include="Comps\ParcourImport.resx">
       <DependentUpon>ParcourImport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\ParcourGen.resx">
+    <EmbeddedResource Include="Comps\ParcourGen.resx">
       <DependentUpon>ParcourGen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\MapLegacy.resx">
+    <EmbeddedResource Include="Comps\MapLegacy.resx">
       <DependentUpon>MapLegacy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Map.resx">
+    <EmbeddedResource Include="Comps\Map.resx">
       <DependentUpon>Map.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Credits.resx">
+    <EmbeddedResource Include="Comps\Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Pilot.resx">
+    <EmbeddedResource Include="Comps\Pilot.resx">
       <DependentUpon>Pilot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Race.resx">
+    <EmbeddedResource Include="Comps\Race.resx">
       <DependentUpon>Race.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Team.resx">
+    <EmbeddedResource Include="Comps\Team.resx">
       <DependentUpon>Team.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Tracker.resx">
+    <EmbeddedResource Include="Comps\Tracker.resx">
       <DependentUpon>Tracker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\Visualisation.resx">
+    <EmbeddedResource Include="Comps\Visualisation.resx">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -204,10 +199,6 @@
     <None Include="Resources\Logo_051.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AnrlInterfaces\AnrlInterfaces.csproj">
-      <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
-      <Name>AnrlInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
       <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>
       <Name>NetworkObjects</Name>

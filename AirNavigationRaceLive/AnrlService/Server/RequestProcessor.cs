@@ -70,6 +70,11 @@ namespace AnrlService.Server
                             answer = proccessSaveParcour(request);
                             break;
                         }
+                    case RequestType.DeleteParcour:
+                        {
+                            proccessDeleteParcour(request);
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -83,6 +88,24 @@ namespace AnrlService.Server
             return answer;
         }
 
+        private void proccessDeleteParcour(Root request)
+        {
+            foreach (t_Parcour dbParcour in db.t_Parcours.Where(p=>p.ID == request.RequestParameters.ID))
+            {
+                foreach (t_Parcour_Line t_p_l in dbParcour.t_Parcour_Lines)
+                {
+                    t_Line t_l = t_p_l.t_Line;
+                    db.t_GPSPoints.DeleteOnSubmit(t_l.t_GPSPoint);
+                    db.t_GPSPoints.DeleteOnSubmit(t_l.t_GPSPoint1);
+                    db.t_GPSPoints.DeleteOnSubmit(t_l.t_GPSPoint2);
+                    db.t_Lines.DeleteOnSubmit(t_l);
+                    db.t_Parcour_Lines.DeleteOnSubmit(t_p_l);
+                }
+                db.t_Parcours.DeleteOnSubmit(dbParcour);
+            }
+            db.SubmitChanges();
+        }
+
         private Root proccessSaveParcour(Root request)
         {
             Root r = new Root();
@@ -93,9 +116,34 @@ namespace AnrlService.Server
             db.SubmitChanges();
             foreach (Line l in p.Lines)
             {
+                t_Line line = new t_Line();
+                t_GPSPoint a = new t_GPSPoint();
+                CopyAttributes(l.A, a);
+                db.t_GPSPoints.InsertOnSubmit(a);
 
+                t_GPSPoint b = new t_GPSPoint();
+                CopyAttributes(l.B, b);
+                db.t_GPSPoints.InsertOnSubmit(b);
+
+                t_GPSPoint o = new t_GPSPoint();
+                CopyAttributes(l.O, o);
+                db.t_GPSPoints.InsertOnSubmit(o);
+                db.SubmitChanges();
+
+                line.ID_PointA = a.ID;
+                line.ID_PointB = b.ID;
+                line.ID_PointOrientation = o.ID;
+                line.Type = l.Type;
+                db.t_Lines.InsertOnSubmit(line);
+                db.SubmitChanges();
+                t_Parcour_Line pl = new t_Parcour_Line();
+                pl.ID_Line = line.ID;
+                pl.ID_Parcour = dbParcour.ID;
+                db.t_Parcour_Lines.InsertOnSubmit(pl);
+                db.SubmitChanges();
             }
-
+            r.ResponseParameters = new ResponseParameters();
+            r.ResponseParameters.ID = p.ID;
             return r;
         }
 
@@ -109,7 +157,7 @@ namespace AnrlService.Server
                 Parcour p = new Parcour();
                 p.ID = dbParcour.ID;
                 p.Name = dbParcour.Name;
-                foreach(t_Parcour_Line t_p_l in dbParcour.t_Parcour_Lines)
+                foreach (t_Parcour_Line t_p_l in dbParcour.t_Parcour_Lines)
                 {
                     t_Line t_l = t_p_l.t_Line;
                     Line l = new Line();
@@ -128,6 +176,13 @@ namespace AnrlService.Server
         }
 
         private static void CopyAttributes(t_GPSPoint gp, Point p)
+        {
+            p.ID = gp.ID;
+            p.altitude = gp.altitude;
+            p.latitude = gp.latitude;
+            p.longitude = gp.longitude;
+        }
+        private static void CopyAttributes(Point gp, t_GPSPoint p)
         {
             p.ID = gp.ID;
             p.altitude = gp.altitude;

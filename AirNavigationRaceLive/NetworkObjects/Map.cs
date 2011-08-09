@@ -7,8 +7,11 @@ using ProtoBuf;
 namespace NetworkObjects
 {
     [ProtoContract]
-    public class Map:NetObject
+    public class Map
     {
+        [ProtoMember(1)]
+        public int ID { get; set; }
+
         [ProtoMember(2)]
         public int ID_Picture { get; set; }
 

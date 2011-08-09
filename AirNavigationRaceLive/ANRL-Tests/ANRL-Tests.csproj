@@ -60,10 +60,6 @@
       <Project>{B483E041-0DA3-4659-8B40-BB5DB3FE5959}</Project>
       <Name>AirNavigationRaceLive</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AnrlInterfaces\AnrlInterfaces.csproj">
-      <Project>{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}</Project>
-      <Name>AnrlInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RemoteHelper\RemoteHelper.csproj">
       <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>
       <Name>RemoteHelper</Name>

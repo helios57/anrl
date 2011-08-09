@@ -7,8 +7,11 @@ using ProtoBuf;
 namespace NetworkObjects
 {
     [ProtoContract]
-    public class Line:NetObject
+    public class Line
     {
+        [ProtoMember(1)]
+        public int ID { get; set; }
+
         [ProtoMember(2)]
         public Point A { get; set; }
 
@@ -18,7 +21,7 @@ namespace NetworkObjects
         [ProtoMember(4)]
         public Point O { get; set; }
 
-        [ProtoMember(4)]
+        [ProtoMember(5)]
         public int Type { get; set; }
 
 

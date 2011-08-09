@@ -7,8 +7,11 @@ using ProtoBuf;
 namespace NetworkObjects
 {
     [ProtoContract]
-    public class Parcour:NetObject
+    public class Parcour
     {
+        [ProtoMember(1)]
+        public int ID { get; set; }
+
         private List<Line> list = new List<Line>();
 
         [ProtoMember(2)]

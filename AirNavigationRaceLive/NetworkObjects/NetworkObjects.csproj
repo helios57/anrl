@@ -49,7 +49,6 @@
     <Compile Include="Picture.cs" />
     <Compile Include="ResponseParameters.cs" />
     <Compile Include="Map.cs" />
-    <Compile Include="NetObject.cs" />
     <Compile Include="RequestParameters.cs" />
     <Compile Include="Root.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

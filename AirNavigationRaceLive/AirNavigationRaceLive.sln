@@ -16,8 +16,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old", "Old", "{FA460DC2-706
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnrlService", "AnrlService\AnrlService.csproj", "{42123A7B-3B6F-4EE3-A7B9-2253499D8D08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnrlInterfaces", "AnrlInterfaces\AnrlInterfaces.csproj", "{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplikation", "TestApplikation\TestApplikation.csproj", "{5632D2C3-736F-48F7-A50E-8716F30766EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnrlDB", "AnrlDB\AnrlDB.csproj", "{30DE453C-A020-480F-85DB-50EF7B364167}"
@@ -286,41 +284,6 @@ Global
 		{42123A7B-3B6F-4EE3-A7B9-2253499D8D08}.Silverlight2|Mixed Platforms.Build.0 = Release|x86
 		{42123A7B-3B6F-4EE3-A7B9-2253499D8D08}.Silverlight2|x86.ActiveCfg = Release|x86
 		{42123A7B-3B6F-4EE3-A7B9-2253499D8D08}.Silverlight2|x86.Build.0 = Release|x86
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Default|Any CPU.ActiveCfg = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Default|Any CPU.Build.0 = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Default|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Default|Mixed Platforms.Build.0 = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Default|x86.ActiveCfg = Debug|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.iOS|Any CPU.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.iOS|Any CPU.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.iOS|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.iOS|Mixed Platforms.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.iOS|x86.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Net20|Any CPU.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Net20|Any CPU.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Net20|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Net20|Mixed Platforms.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Net20|x86.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Profile|Any CPU.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Profile|Any CPU.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Profile|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Profile|Mixed Platforms.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Profile|x86.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Release|x86.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Silverlight2|Any CPU.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Silverlight2|Any CPU.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Silverlight2|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Silverlight2|Mixed Platforms.Build.0 = Release|Any CPU
-		{967CA0A2-A84B-48DB-8F1D-E6C3DD3277EE}.Silverlight2|x86.ActiveCfg = Release|Any CPU
 		{5632D2C3-736F-48F7-A50E-8716F30766EA}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{5632D2C3-736F-48F7-A50E-8716F30766EA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{5632D2C3-736F-48F7-A50E-8716F30766EA}.Debug|Mixed Platforms.Build.0 = Debug|x86

@@ -7,10 +7,10 @@ namespace AnrlInterfaces
 {
     public interface ILine : IID
     {
-        IGPSPoint PointA { get; }
-        IGPSPoint PointB { get; }
-        IGPSPoint PointOrientation { get; }
-        LineType LineType { get; }
+        IGPSPoint A { get; }
+        IGPSPoint B { get; }
+        IGPSPoint O { get; }
+        LineType Type { get; }
     }
 
     public enum LineType:int

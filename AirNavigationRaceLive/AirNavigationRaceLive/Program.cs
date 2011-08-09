@@ -15,7 +15,7 @@ namespace AirNavigationRaceLive
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AirNavigationRaceLive());
+            Application.Run(new AirNavigationRaceLiveMain());
         }
     }
 }
