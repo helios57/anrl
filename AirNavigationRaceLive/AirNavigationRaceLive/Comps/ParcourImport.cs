@@ -169,7 +169,7 @@ namespace AirNavigationRaceLive.Comps
                     numLongA.Value = (decimal)l.A.longitude;
                     numLongB.Value = (decimal)l.B.longitude;
                     numLongO.Value = (decimal)l.O.longitude;
-                    fldLineTyp.Text = l.Type.ToString();
+                    fldLineTyp.Text = ((LineType)l.Type).ToString();
                 }
                 else
                 {
@@ -202,7 +202,7 @@ namespace AirNavigationRaceLive.Comps
                         numLongA.Value = (decimal)l.A.longitude;
                         numLongB.Value = (decimal)l.B.longitude;
                         numLongO.Value = (decimal)l.O.longitude;
-                        fldLineTyp.Text = l.Type.ToString();
+                        fldLineTyp.Text = ((LineType)l.Type).ToString();
                     }
                     else
                     {

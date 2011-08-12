@@ -10,7 +10,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         public Vector(double X, double Y, double Z)
         {
             this.X = X;
-            this.Y = Y; 
+            this.Y = Y;
             this.Z = Z;
         }
 
@@ -31,14 +31,14 @@ namespace AirNavigationRaceLive.Comps.Helper
         }
         public override int GetHashCode()
         {
-            return (X+Y+Z).GetHashCode();
+            return (X + Y + Z).GetHashCode();
         }
         public override string ToString()
         {
-            return "X: "+X+" Y: "+Y + " Z: "+ Z;
+            return "X: " + X + " Y: " + Y + " Z: " + Z;
         }
 
-        public static Vector operator / (Vector a, double b)
+        public static Vector operator /(Vector a, double b)
         {
             return new Vector(a.X / b, a.Y / b, a.Z / b);
         }
@@ -48,7 +48,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         }
         public static double operator *(Vector a, Vector b)
         {
-            return a.X*b.X + a.Y*b.Y+a.Z*b.Z;
+            return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
         }
         public static Vector operator +(Vector a, Vector b)
         {
@@ -68,9 +68,9 @@ namespace AirNavigationRaceLive.Comps.Helper
         }
         public static double Abs(Vector a)
         {
-            return Math.Sqrt(a.X*a.X + a.Y*a.Y+a.Z*a.Z);
-        }        
-        
+            return Math.Sqrt(a.X * a.X + a.Y * a.Y + a.Z * a.Z);
+        }
+
         /// <summary>
         /// Only works for 2D (z=0)
         /// </summary>
@@ -79,7 +79,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// <returns></returns>
         public static Vector Orthogonal(Vector a)
         {
-            return new Vector(-a.Y,  a.X, 0);
+            return new Vector(-a.Y, a.X, 0);
         }
 
         /// <summary>
@@ -108,6 +108,21 @@ namespace AirNavigationRaceLive.Comps.Helper
                 double sigma = -(LineA_A.Y * va.X - LineB_A.Y * va.X - LineA_A.X * va.Y + LineB_A.X * va.Y) / (va.Y * vb.X - va.X * vb.Y);
                 if (lambda == double.NaN || lambda > 1 || lambda < 0 || sigma > 1 || sigma < 0 || LineA_A.Z + lambda * va.Z != LineB_A.Z + sigma * vb.Z) { return null; }
                 Vector result = LineA_A + (va * lambda);
+                return result;
+            }
+            catch { }
+            return null;
+        }
+        public static Vector InterceptionLine(Vector A, Vector vA, Vector LineB_A, Vector LineB_B)
+        {
+            try
+            {
+                Vector va = vA;
+                Vector vb = Vector.Direction(LineB_A, LineB_B);
+                double lambda = -(A.Y * vb.X - LineB_A.Y * vb.X - A.X * vb.Y + LineB_A.X * vb.Y) / (va.Y * vb.X - va.X * vb.Y);
+                double sigma = -(A.Y * va.X - LineB_A.Y * va.X - A.X * va.Y + LineB_A.X * va.Y) / (va.Y * vb.X - va.X * vb.Y);
+                if (lambda == double.NaN || sigma == double.NaN || sigma > 1 || sigma < 0 || A.Z + lambda * va.Z != LineB_A.Z + sigma * vb.Z) { return null; }
+                Vector result = A + (va * lambda);
                 return result;
             }
             catch { }
@@ -142,17 +157,222 @@ namespace AirNavigationRaceLive.Comps.Helper
             int count = list.Count;
             for (int i = 0; i < count; i++)
             {
-                for (int j = 0;j<count; j++)
+                for (int j = 0; j < count; j++)
                 {
-                    if (i!=j && ((i+1)%count)!=j && ((j+1)%count)!=i && ((j+1)%count)!=((i+1)%count))
+                    if (i != j && ((i + 1) % count) != j && ((j + 1) % count) != i && ((j + 1) % count) != ((i + 1) % count))
                     {
-                        if (Vector.Interception(list[i % count],list[(i + 1) % count],list[j % count],list[(j + 1) % count])!=null){
-                        result = true;
-                        break;
+                        if (Vector.Interception(list[i % count], list[(i + 1) % count], list[j % count], list[(j + 1) % count]) != null)
+                        {
+                            result = true;
+                            break;
                         }
                     }
                 }
             }
+            return result;
+        }
+        /// <summary>
+        /// Calculates the Angle in Radians between point a and c in point b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns>Angle in Radians</returns>
+        public static double Angle(Vector Point_A, Vector Point_B, Vector Point_C)
+        {
+            return Angle(Point_A - Point_B, Point_C - Point_B);
+        }
+
+        /// <summary>
+        /// Calculates the Angle in Radians between vector a and vector b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns>Angle in Radians</returns>
+        public static double Angle(Vector a, Vector b)
+        {
+            return Math.Acos((a * b) / (Abs(a) * Abs(b)));
+        }
+
+        /// <summary>
+        /// Calculates the Clokwise Angle in Radians between point a and c in point b
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns>Angle in Radians</returns>
+        public static double AngleClockwise(Vector Point_A, Vector Point_B, Vector Point_C)
+        {
+            return AngleClockwise(Point_A - Point_B, Point_C - Point_B);
+        }
+
+        public static double AngleClockwise(Vector a, Vector b)
+        {
+            return ((Math.Atan2(a.Y, a.X) - Math.Atan2(b.Y, b.X)) + (Math.PI * 2)) % (Math.PI * 2);
+        }
+        public static Vector Normalized(Vector a)
+        {
+            return a / Abs(a);
+        }
+        public static Vector AngleHalf(Vector Point_A, Vector Point_B, Vector Point_C)
+        {
+            return Middle(Point_B + Normalized(Point_A - Point_B), Point_B + Normalized(Point_C - Point_B));
+        }
+
+        public static List<List<Vector>> KonvexPolygons(List<Vector> input)
+        {
+            List<List<Vector>> result = new List<List<Vector>>();
+            List<Vector> NoDoubles = new List<Vector>();
+            foreach (Vector v in input)
+            {
+                if (!(NoDoubles.Count(p => p.Equals(v)) >0))
+                {
+                    NoDoubles.Add(v);
+                }
+            }
+            List<Vector> list = NoDoubles;
+            while (!IsKonvex(list))
+            {
+                int count = list.Count;
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (AngleClockwise(list[(i + 2) % count], list[(i + 1) % count], list[i % count]) > Math.PI)
+                    {
+                        Vector va = AngleHalf(list[(i + 2) % count], list[(i + 1) % count], list[i % count]);
+                        double minDist = double.MaxValue;
+                        Vector nearestInterceptionPoint = null;
+                        int leftInterceptionPoint = 0;
+                        int rightInterceptionPoint = 0;
+                        for (int j = 0; j < list.Count; j++)
+                        {
+                            if (j != ((i + 1) % count) && ((j + 1) % count) != (i + 1) % count)
+                            {
+                                Vector interception = InterceptionLine(list[(i + 1) % count], va, list[j], list[(j + 1) % count]);
+                                if (interception != null)
+                                {
+                                    double dist = Abs(interception - list[(i + 1) % count]);
+                                    if (dist < minDist)
+                                    {
+                                        minDist = dist;
+                                        nearestInterceptionPoint = interception;
+                                        leftInterceptionPoint = (j + 1) % count;
+                                        rightInterceptionPoint = j;
+                                    }
+                                }
+                            }
+                        }
+                        if (nearestInterceptionPoint == null)
+                        {
+                            break;
+                        }
+                        //Umkehren und nochmal probieren
+                      /*  if (rightInterceptionPoint > i)
+                        {
+                            List<Vector> newlist2 = new List<Vector>();
+                            for (int l = 1; l <= count; l++)
+                            {
+                                newlist2.Add(list[((count)-l)%count]);
+                            }
+                            list = newlist2;
+                            break;
+                        }*/
+                        List<Vector> konvex = new List<Vector>();
+                        for (int k = leftInterceptionPoint; k <= i + 1; k++)
+                        {
+                            konvex.Add(list[k%count]);
+                        }
+                        konvex.Add(nearestInterceptionPoint);
+                        List<Vector> newlist = new List<Vector>();
+                        for (int l = 0; l <= rightInterceptionPoint; l++)
+                        {
+                            newlist.Add(list[l % count]);
+                        }
+                        newlist.Add(nearestInterceptionPoint);
+                        for (int l = i + 1; l < list.Count; l++)
+                        {
+                            newlist.Add(list[l % count]);
+                        }
+                        if (IsKonvex(newlist))
+                        {
+                            result.Add(newlist);
+                            list = konvex;
+                        }
+                        else
+                        {
+                            result.Add(Sort(konvex));
+                            list = newlist;
+                        }
+                        break;
+                    }
+                }
+            }
+            result.Add(Sort(list));
+            return result;
+        }
+
+        public static bool IsKonvex(List<Vector> input)
+        {
+            bool result = true;
+            int count = input.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (AngleClockwise(input[(i +2)% count], input[(i + 1) % count], input[i % count]) > Math.PI)
+                {
+                    result = false;
+                    break;
+                }
+            }
+            return result;
+        }
+        /// <summary>
+        ///Graham-Scan (Only 2D !! z = 0)
+        ///bestimme Punkt q mit minimaler y-Koordinate;
+        ///sortiere die Punkte des Arrays nach ihrem Winkel, und bei gleichem Winkel nach ihrem Abstand zum Nullpunkt (der Punkt q wird zu p0);
+        ///Z will be set to 0 for all Vectors!!
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static List<Vector> Sort(List<Vector> input)
+        {
+            List<Vector> result = new List<Vector>();
+            List<Vector> list = new List<Vector>(input);
+            Vector minY = input[0];
+            int count = 0;
+            int pos = 0;
+            foreach (Vector v in list)
+            {
+                v.Z = 0;
+                if (v.Y < minY.Y)
+                {
+                    minY = v;
+                    pos = count;
+                }
+                count++;
+            }
+            result.Add(minY);
+            list.Remove(minY);
+            Vector reference = minY - new Vector(1, 1, 0);
+            while (list.Count > 0)
+            {
+                Vector minVec = list[0];
+                double minAngle = Vector.AngleClockwise(reference, minY, minVec);
+                double minDist = Vector.Abs(minVec - minY);
+                foreach (Vector v in list)
+                {
+                    double minAngleTmp = Vector.AngleClockwise(reference, minY, v);
+                    double minDistTmp = Vector.Abs(v - minY);
+                    if (minAngleTmp < minAngle || (minAngleTmp == minAngle && minDistTmp < minDist))
+                    {
+                        minVec = v;
+                        minAngle = minAngleTmp;
+                        minDist = minDistTmp;
+                    }
+                }
+                list.Remove(minVec);
+                result.Add(minVec);
+            }
+
             return result;
         }
     }

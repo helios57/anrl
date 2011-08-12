@@ -473,5 +473,174 @@ namespace ANRL_Tests
             actual = Vector.hasIntersections(list);
             Assert.AreEqual(expected, actual);
         }
+
+   
+        [TestMethod()]
+        public void AngleTest()
+        {
+            Vector a = new Vector(0, 10, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = new Vector(10, 0, 0);
+            double expected = Math.PI / 2;
+            double actual;
+            actual = Vector.Angle(a, b, c);
+            Assert.AreEqual(expected, actual);
+        }
+
+
+        [TestMethod()]
+        public void AngleTest2()
+        {
+            Vector a = new Vector(0, 10, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = Vector.Middle(a, new Vector(10, 0, 0));
+            double expected = Math.PI / 4;
+            double actual;
+            actual = Vector.Angle(a, b, c);
+            Assert.IsTrue(Math.Abs(expected - actual) < 0.00000000001);
+        }
+ 
+        [TestMethod()]
+        public void AngleTest3()
+        {
+            Vector a = new Vector(10, 0, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = new Vector(0, 10, 0);
+            double expected = Math.PI / 2;
+            double actual;
+            actual = Vector.Angle(a, b, c);
+            Assert.AreEqual(expected, actual);
+        }
+  
+        [TestMethod()]
+        public void AngleTest4()
+        {
+            Vector a = new Vector(10, 0, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = new Vector(-10, 0, 0);
+            double expected = Math.PI;
+            double actual;
+            actual = Vector.Angle(a, b, c);
+            Assert.AreEqual(expected, actual);
+        }
+
+   
+        [TestMethod()]
+        public void AngleClockwiseTest1()
+        {
+            Vector a = new Vector(10, 0, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = new Vector(-10, 0, 0);
+            double expected = Math.PI;
+            double actual;
+            actual = Vector.AngleClockwise(a, b, c);
+            Assert.AreEqual(expected, actual);
+        }
+
+      
+        [TestMethod()]
+        public void AngleClockwiseTest2()
+        {
+            Vector a = new Vector(10, 0, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = new Vector(0, 10, 0);
+            double expected =(Math.PI*2)- Math.PI / 2;
+            double actual;
+            actual = Vector.AngleClockwise(a, b, c);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void AngleClockwiseTest3()
+        {
+            Vector a = new Vector(0, 10, 0);
+            Vector b = new Vector(0, 0, 0);
+            Vector c = new Vector(10, 0, 0);
+            double expected = Math.PI / 2;
+            double actual;
+            actual = Vector.AngleClockwise(a, b, c);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void AngleClockwiseTest4()
+        {
+            Vector a1 = new Vector(9, -11, 0);
+            Vector b1 = new Vector(10, -10, 0);
+            Vector c1 = new Vector(2, -9, 0);
+            double angle1 = Vector.AngleClockwise(a1, b1, c1);
+
+            Vector a2 = new Vector(9, -11, 0);
+            Vector b2 = new Vector(10, -10, 0);
+            Vector c2 = new Vector(3, 3, 0);
+            double angle2 = Vector.AngleClockwise(a2, b2, c2);
+            Assert.IsTrue(angle1 < angle2);
+
+            Vector a3 = new Vector(9, -11, 0);
+            Vector b3 = new Vector(10, -10, 0);
+            Vector c3 = new Vector(-10, 5, 0);
+            double angle3 = Vector.AngleClockwise(a3, b3, c3);
+            Assert.IsTrue(angle1 < angle3);
+
+            Vector a4 = new Vector(9, -11, 0);
+            Vector b4 = new Vector(10, -10, 0);
+            Vector c4 = new Vector(11, -9, 0);
+            double angle4 = Vector.AngleClockwise(a4, b4, c4);
+            Assert.IsTrue(angle1 < angle4);
+
+        }
+
+
+        [TestMethod()]
+        public void SortTest1()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(11, -9, 0));
+            list.Add(new Vector(5, 5, 0));
+            list.Add(new Vector(-10, 5, 0));
+            list.Add(new Vector(3, 3, 0));
+            list.Add(new Vector(10, -8, 0));
+            list.Add(new Vector(10, -10, 0));
+            list.Add(new Vector(2, -9, 0));
+            List<Vector> expected = new List<Vector>();
+            expected.Add(new Vector(10, -10, 0));
+            expected.Add(new Vector(2, -9, 0));
+            expected.Add(new Vector(-10, 5, 0));
+            expected.Add(new Vector(3, 3, 0));
+            expected.Add(new Vector(5, 5, 0));
+            expected.Add(new Vector(10, -8, 0));
+            expected.Add(new Vector(11, -9, 0));
+            List<Vector> actual = Vector.Sort(list);
+            for (int i = 0; i < list.Count; i++)
+            {
+                Assert.IsTrue(expected[i].Equals(actual[i]));
+            }
+        }
+
+        [TestMethod()]
+        public void KovexPolygonsTest1()
+        {
+            List<Vector> list = new List<Vector>();
+            list.Add(new Vector(11, -9, 0));
+            list.Add(new Vector(5, 5, 0));
+            list.Add(new Vector(-10, 5, 0));
+            list.Add(new Vector(3, 3, 0));
+            list.Add(new Vector(10, -8, 0));
+            list.Add(new Vector(10, -10, 0));
+            list.Add(new Vector(2, -9, 0));
+            List<Vector> expected = new List<Vector>();
+            expected.Add(new Vector(10, -10, 0));
+            expected.Add(new Vector(2, -9, 0));
+            expected.Add(new Vector(-10, 5, 0));
+            expected.Add(new Vector(3, 3, 0));
+            expected.Add(new Vector(5, 5, 0));
+            expected.Add(new Vector(10, -8, 0));
+            expected.Add(new Vector(11, -9, 0));
+            List<List<Vector>> actual = Vector.KonvexPolygons(list);
+            Assert.AreEqual(3, actual.Count);
+            Assert.AreEqual(3, actual[0].Count);
+            Assert.AreEqual(3, actual[1].Count);
+            Assert.AreEqual(5, actual[2].Count);
+        }
     }
 }
