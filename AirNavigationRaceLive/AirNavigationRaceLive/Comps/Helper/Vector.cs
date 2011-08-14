@@ -239,7 +239,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     if (AngleClockwise(list[(i + 2) % count], list[(i + 1) % count], list[i % count]) > Math.PI)
                     {
-                        Vector va = AngleHalf(list[(i + 2) % count], list[(i + 1) % count], list[i % count]);
+                        #region old
+                        /*Vector va = AngleHalf(list[(i + 2) % count], list[(i + 1) % count], list[i % count]);
                         double minDist = double.MaxValue;
                         Vector nearestInterceptionPoint = null;
                         int leftInterceptionPoint = 0;
@@ -276,7 +277,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                             }
                             list = newlist2;
                             break;
-                        }*/
+                        }*//*
                         List<Vector> konvex = new List<Vector>();
                         for (int k = leftInterceptionPoint; k <= i + 1; k++)
                         {
@@ -303,7 +304,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                             result.Add(Sort(konvex));
                             list = newlist;
                         }
-                        break;
+                        break;*/
+                        #endregion
                     }
                 }
             }
