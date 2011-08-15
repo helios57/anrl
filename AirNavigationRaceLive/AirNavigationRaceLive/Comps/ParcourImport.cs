@@ -301,9 +301,16 @@ namespace AirNavigationRaceLive.Comps
         void ofd_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
-            activeParcour = Importer.importFromDxf(ofd.FileName);
-            pictureBox1.SetParcour(activeParcour);
-            pictureBox1.Invalidate();
+            try
+            {
+                activeParcour = Importer.importFromDxf(ofd.FileName);
+                pictureBox1.SetParcour(activeParcour);
+                pictureBox1.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(),"Error while Parsing File" );
+            }
         }
 
         #region NumUpDown

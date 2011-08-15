@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GeometryUtility;
+using PolygonCuttingEar;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -226,90 +228,35 @@ namespace AirNavigationRaceLive.Comps.Helper
             List<Vector> NoDoubles = new List<Vector>();
             foreach (Vector v in input)
             {
-                if (!(NoDoubles.Count(p => p.Equals(v)) >0))
+                if (!(NoDoubles.Count(p => p.Equals(v)) > 0))
                 {
                     NoDoubles.Add(v);
                 }
             }
             List<Vector> list = NoDoubles;
-            while (!IsKonvex(list))
+
+
+            int nVertices = list.Count;
+
+            CPoint2D[] vertices = new CPoint2D[nVertices];
+            for (int i = 0; i < nVertices; i++)
             {
-                int count = list.Count;
-                for (int i = 0; i < list.Count; i++)
-                {
-                    if (AngleClockwise(list[(i + 2) % count], list[(i + 1) % count], list[i % count]) > Math.PI)
-                    {
-                        #region old
-                        /*Vector va = AngleHalf(list[(i + 2) % count], list[(i + 1) % count], list[i % count]);
-                        double minDist = double.MaxValue;
-                        Vector nearestInterceptionPoint = null;
-                        int leftInterceptionPoint = 0;
-                        int rightInterceptionPoint = 0;
-                        for (int j = 0; j < list.Count; j++)
-                        {
-                            if (j != ((i + 1) % count) && ((j + 1) % count) != (i + 1) % count)
-                            {
-                                Vector interception = InterceptionLine(list[(i + 1) % count], va, list[j], list[(j + 1) % count]);
-                                if (interception != null)
-                                {
-                                    double dist = Abs(interception - list[(i + 1) % count]);
-                                    if (dist < minDist)
-                                    {
-                                        minDist = dist;
-                                        nearestInterceptionPoint = interception;
-                                        leftInterceptionPoint = (j + 1) % count;
-                                        rightInterceptionPoint = j;
-                                    }
-                                }
-                            }
-                        }
-                        if (nearestInterceptionPoint == null)
-                        {
-                            break;
-                        }
-                        //Umkehren und nochmal probieren
-                      /*  if (rightInterceptionPoint > i)
-                        {
-                            List<Vector> newlist2 = new List<Vector>();
-                            for (int l = 1; l <= count; l++)
-                            {
-                                newlist2.Add(list[((count)-l)%count]);
-                            }
-                            list = newlist2;
-                            break;
-                        }*//*
-                        List<Vector> konvex = new List<Vector>();
-                        for (int k = leftInterceptionPoint; k <= i + 1; k++)
-                        {
-                            konvex.Add(list[k%count]);
-                        }
-                        konvex.Add(nearestInterceptionPoint);
-                        List<Vector> newlist = new List<Vector>();
-                        for (int l = 0; l <= rightInterceptionPoint; l++)
-                        {
-                            newlist.Add(list[l % count]);
-                        }
-                        newlist.Add(nearestInterceptionPoint);
-                        for (int l = i + 1; l < list.Count; l++)
-                        {
-                            newlist.Add(list[l % count]);
-                        }
-                        if (IsKonvex(newlist))
-                        {
-                            result.Add(newlist);
-                            list = konvex;
-                        }
-                        else
-                        {
-                            result.Add(Sort(konvex));
-                            list = newlist;
-                        }
-                        break;*/
-                        #endregion
-                    }
-                }
+                vertices[i] = new CPoint2D(list[i].X,
+                    list[i].Y);
             }
-            result.Add(Sort(list));
+            CPolygonShape cutPolygon = new CPolygonShape(vertices);
+            cutPolygon.CutEar();
+            
+            for (int i = 0; i < cutPolygon.NumberOfPolygons; i++)
+            {
+                int nPoints = cutPolygon.Polygons(i).Length;
+                List<Vector> polygon = new List<Vector>();
+                for (int j = 0; j < nPoints; j++)
+                {
+                    polygon.Add(new Vector(cutPolygon.Polygons(i)[j].X,cutPolygon.Polygons(i)[j].Y,0));
+                }
+                result.Add(polygon);
+            }
             return result;
         }
 
@@ -319,7 +266,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             int count = input.Count;
             for (int i = 0; i < count; i++)
             {
-                if (AngleClockwise(input[(i +2)% count], input[(i + 1) % count], input[i % count]) > Math.PI)
+                if (AngleClockwise(input[(i + 2) % count], input[(i + 1) % count], input[i % count]) > Math.PI)
                 {
                     result = false;
                     break;

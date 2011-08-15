@@ -59,6 +59,12 @@
     <Compile Include="Comps\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Helper\Geometry\AnalyticGeometryException.cs" />
+    <Compile Include="Comps\Helper\Geometry\CLine.cs" />
+    <Compile Include="Comps\Helper\Geometry\CPoint2D.cs" />
+    <Compile Include="Comps\Helper\Geometry\CPolygon.cs" />
+    <Compile Include="Comps\Helper\Geometry\CPolygonShape.cs" />
+    <Compile Include="Comps\Helper\Geometry\Definition.cs" />
     <Compile Include="Comps\ParcourImport.cs">
       <SubType>UserControl</SubType>
     </Compile>

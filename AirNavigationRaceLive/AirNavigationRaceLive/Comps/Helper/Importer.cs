@@ -47,34 +47,36 @@ namespace AirNavigationRaceLive.Comps.Helper
                                 input.Add(v);
 
                             }
-                            List<List<Vector>> konvexLists = Vector.KonvexPolygons(input);
-                            foreach (List<Vector> list in konvexLists)
+                            if (input.Count > 2)
                             {
-                                double sumX = 0;
-                                double sumY = 0;
-                                double count = 0;
-                                foreach (Vector v in list)
+                                List<List<Vector>> konvexLists = Vector.KonvexPolygons(input);
+                                foreach (List<Vector> list in konvexLists)
                                 {
-                                    sumX += v.X;
-                                    sumY += v.Y;
-                                    count += 1;
+                                    double sumX = 0;
+                                    double sumY = 0;
+                                    double count = 0;
+                                    foreach (Vector v in list)
+                                    {
+                                        sumX += v.X;
+                                        sumY += v.Y;
+                                        count += 1;
+                                    }
+                                    Vector o = new Vector(sumX / count, sumY / count, 0);
+                                    for (int j = 0; j < list.Count; j++)
+                                    {
+                                        Line l = new Line();
+                                        l.Type = (int)LineType.PENALTYZONE;
+                                        int i_a = j % list.Count;
+                                        int i_b = (j + 1) % list.Count;
+                                        Vector a = list[i_a];
+                                        Vector b = list[i_b];
+                                        l.A = new Point(a.X, a.Y, a.Z);
+                                        l.B = new Point(b.X, b.Y, b.Z);
+                                        l.O = new Point(o.X, o.Y, o.Z);
+                                        result.Lines.Add(l);
+                                    }
                                 }
-                                Vector o = new Vector(sumX / count, sumY / count, 0);
-                                for (int j = 0; j < list.Count; j++)
-                                {
-                                    Line l = new Line();
-                                    l.Type = (int)LineType.PENALTYZONE;
-                                    int i_a = j % list.Count;
-                                    int i_b = (j + 1) % list.Count;
-                                    Vector a = list[i_a];
-                                    Vector b = list[i_b];
-                                    l.A = new Point(a.X, a.Y, a.Z);
-                                    l.B = new Point(b.X, b.Y, b.Z);
-                                    l.O = new Point(o.X, o.Y, o.Z);
-                                    result.Lines.Add(l);
-                                }
-                            }
-                    
+                            }                    
                         }
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("STARTPOINT-"))
