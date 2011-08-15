@@ -84,6 +84,7 @@
       <Column Name="YRot" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="XTopLeft" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="YTopLeft" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="t_Map_t_Parcour" Member="t_Parcours" ThisKey="ID" OtherKey="ID_Map" Type="t_Parcour" />
       <Association Name="t_Picture_t_Map" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
     </Type>
   </Table>
@@ -91,8 +92,10 @@
     <Type Name="t_Parcour">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Map" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Parcour_t_Parcour_Line" Member="t_Parcour_Lines" ThisKey="ID" OtherKey="ID_Parcour" Type="t_Parcour_Line" />
       <Association Name="t_Parcour_t_Polygon" Member="t_Polygons" ThisKey="ID" OtherKey="ID_Parcour" Type="t_Polygon" />
+      <Association Name="t_Map_t_Parcour" Member="t_Map" ThisKey="ID_Map" OtherKey="ID" Type="t_Map" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Parcour_Line" Member="t_Parcour_Lines">

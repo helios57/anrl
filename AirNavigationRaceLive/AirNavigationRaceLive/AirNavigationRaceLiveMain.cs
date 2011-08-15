@@ -238,9 +238,7 @@ namespace AirNavigationRaceLive
             {
                 MapLegacy = new MapLegacy(Client);
             }
-            enableControl(MapLegacy);       
-
+            enableControl(MapLegacy);
         }
-
     }
 }

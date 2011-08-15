@@ -12,7 +12,7 @@ using NetworkObjects;
 
 namespace AirNavigationRaceLive.Comps
 {
-    public partial class ParcourImport : UserControl
+    public partial class ParcourOverview : UserControl
     {
         private Client.Client Client;
         Converter c = null;
@@ -27,7 +27,7 @@ namespace AirNavigationRaceLive.Comps
             A, B, O, NONE
         }
 
-        public ParcourImport(Client.Client iClient)
+        public ParcourOverview(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -36,19 +36,6 @@ namespace AirNavigationRaceLive.Comps
             pictureBox1.SetParcour(activeParcour);
         }
         #region load
-        private void ParcourGen_Load(object sender, EventArgs e)
-        {
-            loadMaps();
-        }
-        private void loadMaps()
-        {
-            comboBoxMaps.Items.Clear();
-            List<NetworkObjects.Map> maps = Client.getMaps();
-            foreach (NetworkObjects.Map m in maps)
-            {
-                comboBoxMaps.Items.Add(new ListItem(m));
-            }
-        }
 
         class ListItem
         {
@@ -217,52 +204,74 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        private void comboBoxMaps_SelectedIndexChanged(object sender, EventArgs e)
+        
+        #region add Lines
+        private void btnAddStartLine_Click(object sender, EventArgs e)
         {
-            ListItem li = comboBoxMaps.SelectedItem as ListItem;
-            if (li != null)
+            SetSelectedLine(null);
+            if (activeParcour.Lines.Exists(p => p.Type == (int)LineType.START))
             {
-                MemoryStream ms = new MemoryStream(Client.getPicture(li.getMap().ID_Picture).Image);
-                pictureBox1.Image = System.Drawing.Image.FromStream(ms);
-                c = new Converter(li.getMap());
-                pictureBox1.SetConverter(c);
-
-                activeParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
-                pictureBox1.SetParcour(activeParcour);
-                SetHoverLine(null);
-                SetSelectedLine(null);
-                pictureBox1.Invalidate();
+                activeLine = activeParcour.Lines.Single(p => p.Type == (int)LineType.START) as Line;
             }
+            else
+            {
+                activeLine = new Line();
+                activeLine.Type = (int)LineType.START;
+                activeParcour.Lines.Add(activeLine);
+            }
+            ap = ActivePoint.A;
         }
-
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnAddEnd_Click(object sender, EventArgs e)
         {
-            NetworkObjects.Parcour p = new NetworkObjects.Parcour();
-            p.Name = fldName.Text;
-            p.Lines.AddRange(activeParcour.Lines);
-            Client.saveParcour(p);
-            MessageBox.Show("Successfully saved");
+            SetSelectedLine(null);
+            if (activeParcour.Lines.Exists(p => p.Type == (int)LineType.END))
+            {
+                activeLine = activeParcour.Lines.Single(p => p.Type == (int)LineType.END) as Line;
+            }
+            else
+            {
+                activeLine = new Line();
+                activeLine.Type = (int)LineType.END;
+                activeParcour.Lines.Add(activeLine);
+            }
+            ap = ActivePoint.A;
         }
+        private void btnAddLineOfNoReturn_Click(object sender, EventArgs e)
+        {
+            SetSelectedLine(null);
+            if (activeParcour.Lines.Exists(p => p.Type == (int)LineType.LINEOFNORETURN))
+            {
+                activeLine = activeParcour.Lines.Single(p => p.Type == (int)LineType.LINEOFNORETURN) as Line;
+            }
+            else
+            {
+                activeLine = new Line();
+                activeLine.Type = (int)LineType.LINEOFNORETURN;
+                activeParcour.Lines.Add(activeLine);
+            }
+            ap = ActivePoint.A;
 
+        }
+        #endregion
         private void pictureBox1_Click(object sender, MouseEventArgs e)
         {
             if (activeLine != null)
             {
                 switch (ap)
                 {
-                    case ActivePoint.A:
+                    case ParcourOverview.ActivePoint.A:
                         {
-                            ap = ActivePoint.B;
+                            ap = ParcourOverview.ActivePoint.B;
                             break;
                         }
-                    case ActivePoint.B:
+                    case ParcourOverview.ActivePoint.B:
                         {
-                            ap = ActivePoint.O;
+                            ap = ParcourOverview.ActivePoint.O;
                             break;
                         }
-                    case ActivePoint.O:
+                    case ParcourOverview.ActivePoint.O:
                         {
-                            ap = ActivePoint.NONE;
+                            ap = ParcourOverview.ActivePoint.NONE;
                             activeLine = null;
                             break;
                         }
@@ -275,7 +284,7 @@ namespace AirNavigationRaceLive.Comps
         }
         private void ParcourGen_VisibleChanged(object sender, EventArgs e)
         {
-            loadMaps();
+
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -285,35 +294,6 @@ namespace AirNavigationRaceLive.Comps
             SetSelectedLine(null);
             pictureBox1.Invalidate();
         }
-
-
-        private void btnImport_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            string FileFilter = "DXF  (*.dxf)|*.dxf";
-            ofd.Title = "DXF Import";
-            ofd.RestoreDirectory = true;
-            ofd.Multiselect = false;
-            ofd.Filter = FileFilter;
-            ofd.FileOk += new CancelEventHandler(ofd_FileOk);
-            ofd.ShowDialog();
-        }
-
-        void ofd_FileOk(object sender, CancelEventArgs e)
-        {
-            OpenFileDialog ofd = sender as OpenFileDialog;
-            try
-            {
-                activeParcour = Importer.importFromDxf(ofd.FileName);
-                pictureBox1.SetParcour(activeParcour);
-                pictureBox1.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(),"Error while Parsing File" );
-            }
-        }
-
         #region NumUpDown
         private void numLatA_ValueChanged(object sender, EventArgs e)
         {

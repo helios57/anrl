@@ -59,6 +59,12 @@
     <Compile Include="Comps\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\ParcourOverview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\ParcourOverview.Designer.cs">
+      <DependentUpon>ParcourOverview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Helper\Geometry\AnalyticGeometryException.cs" />
     <Compile Include="Comps\Helper\Geometry\CLine.cs" />
     <Compile Include="Comps\Helper\Geometry\CPoint2D.cs" />
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\ParcourOverview.resx">
+      <DependentUpon>ParcourOverview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourImport.resx">
       <DependentUpon>ParcourImport.cs</DependentUpon>
