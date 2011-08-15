@@ -21,6 +21,7 @@ namespace AirNavigationRaceLive.Comps
         private ActivePoint ap = ActivePoint.NONE;
         private Line selectedLine = null;
         private Line hoverLine = null;
+        private NetworkObjects.Map CurrentMap = null;
 
         private enum ActivePoint
         {
@@ -231,17 +232,26 @@ namespace AirNavigationRaceLive.Comps
                 pictureBox1.SetParcour(activeParcour);
                 SetHoverLine(null);
                 SetSelectedLine(null);
+                CurrentMap = li.getMap();
                 pictureBox1.Invalidate();
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            NetworkObjects.Parcour p = new NetworkObjects.Parcour();
-            p.Name = fldName.Text;
-            p.Lines.AddRange(activeParcour.Lines);
-            Client.saveParcour(p);
-            MessageBox.Show("Successfully saved");
+            if (CurrentMap == null)
+            {
+                MessageBox.Show("No Map selected", "Incomplete Data");
+            }
+            else
+            {
+                NetworkObjects.Parcour p = new NetworkObjects.Parcour();
+                p.Name = fldName.Text;
+                p.Lines.AddRange(activeParcour.Lines);
+                p.ID_Map = CurrentMap.ID;
+                Client.saveParcour(p);
+                MessageBox.Show("Successfully saved");
+            }
         }
 
         private void pictureBox1_Click(object sender, MouseEventArgs e)
@@ -310,7 +320,7 @@ namespace AirNavigationRaceLive.Comps
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(),"Error while Parsing File" );
+                MessageBox.Show(ex.ToString(), "Error while Parsing File");
             }
         }
 

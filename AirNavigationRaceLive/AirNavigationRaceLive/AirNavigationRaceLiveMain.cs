@@ -24,6 +24,7 @@ namespace AirNavigationRaceLive
         Visualisation Visualisation;
         ParcourGen ParcourGen;
         ParcourImport ParcourImport;
+        ParcourOverview ParcourOverview;
         MapLegacy MapLegacy;
 
 
@@ -206,12 +207,17 @@ namespace AirNavigationRaceLive
 
         private void parcourToolStripMenuItem_Click(object sender, EventArgs e)
         {
-       
+
         }
 
         private void overviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+            if (ParcourOverview == null)
+            {
+                ParcourOverview = new ParcourOverview(Client);
+            }
+            enableControl(ParcourOverview);
         }
 
         private void generateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -220,7 +226,7 @@ namespace AirNavigationRaceLive
             {
                 ParcourGen = new ParcourGen(Client);
             }
-            enableControl(ParcourGen);     
+            enableControl(ParcourGen);
         }
 
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
@@ -229,7 +235,7 @@ namespace AirNavigationRaceLive
             {
                 ParcourImport = new ParcourImport(Client);
             }
-            enableControl(ParcourImport);     
+            enableControl(ParcourImport);
         }
 
         private void legacyToolStripMenuItem_Click(object sender, EventArgs e)

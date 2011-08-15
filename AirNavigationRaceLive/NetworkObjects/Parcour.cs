@@ -19,5 +19,8 @@ namespace NetworkObjects
 
         [ProtoMember(3)]
         public String Name { get; set; }
+
+        [ProtoMember(4)]
+        public int ID_Map { get; set; }
     }
 }

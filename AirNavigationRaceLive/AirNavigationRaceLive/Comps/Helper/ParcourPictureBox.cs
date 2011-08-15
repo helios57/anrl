@@ -12,7 +12,7 @@ namespace AirNavigationRaceLive.Comps
 {
     public class ParcourPictureBox : PictureBox
     {
-        private AirNavigationRaceLive.Comps.Model.Parcour Parcour;
+        private NetworkObjects.Parcour Parcour;
         private Converter c;
         private Line selectedLine;
         private Line hoverLine;
@@ -20,7 +20,7 @@ namespace AirNavigationRaceLive.Comps
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
         private SolidBrush Brush = new SolidBrush(Color.FromArgb(100,255,0,0));
-        public void SetParcour(AirNavigationRaceLive.Comps.Model.Parcour iParcour)
+        public void SetParcour(NetworkObjects.Parcour iParcour)
         {
             Parcour = iParcour;
         }

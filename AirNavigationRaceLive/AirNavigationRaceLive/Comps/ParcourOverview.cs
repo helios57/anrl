@@ -16,11 +16,11 @@ namespace AirNavigationRaceLive.Comps
     {
         private Client.Client Client;
         Converter c = null;
-        private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
         private Line activeLine;
         private ActivePoint ap = ActivePoint.NONE;
         private Line selectedLine = null;
         private Line hoverLine = null;
+        private NetworkObjects.Parcour activeParcour = new NetworkObjects.Parcour();
 
         private enum ActivePoint
         {
@@ -32,29 +32,86 @@ namespace AirNavigationRaceLive.Comps
             Client = iClient;
             InitializeComponent();
             pictureBox1.Cursor = new Cursor(@"Resources\GPSCursor.cur");
-            activeParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
-            pictureBox1.SetParcour(activeParcour);
         }
         #region load
 
         class ListItem
         {
-            private NetworkObjects.Map map;
-            public ListItem(NetworkObjects.Map imap)
+            private NetworkObjects.Parcour parcour;
+            public ListItem(NetworkObjects.Parcour iParcour)
             {
-                map = imap;
+                parcour = iParcour;
             }
 
             public override String ToString()
             {
-                return map.Name;
+                return parcour.Name;
             }
-            public NetworkObjects.Map getMap()
+            public NetworkObjects.Parcour getParcour()
             {
-                return map;
+                return parcour;
+            }
+        }
+
+        private void loadParcours()
+        {
+            deleteToolStripMenuItem.Enabled = false;
+            pictureBox1.SetConverter(c);
+            pictureBox1.Image = null;
+            activeParcour = new NetworkObjects.Parcour();
+            pictureBox1.SetParcour(activeParcour);
+            SetHoverLine(null);
+            SetSelectedLine(null);
+            pictureBox1.Invalidate();
+
+            listBox1.Items.Clear();
+            List<NetworkObjects.Parcour> parcours = Client.getParcours();
+            foreach (NetworkObjects.Parcour p in parcours)
+            {
+                listBox1.Items.Add(new ListItem(p));
             }
         }
         #endregion
+        private void ParcourGen_VisibleChanged(object sender, EventArgs e)
+        {
+            loadParcours();
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadParcours();
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListItem li = listBox1.SelectedItem as ListItem;
+            if (li != null)
+            {
+                Client.deleteParcour(li.getParcour().ID);
+                loadParcours();
+            }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListItem li = listBox1.SelectedItem as ListItem;
+            if (li != null)
+            {
+                deleteToolStripMenuItem.Enabled = true;
+                NetworkObjects.Map map = Client.getMap(li.getParcour().ID_Map);
+
+                MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
+                pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+                c = new Converter(map);
+                pictureBox1.SetConverter(c);
+
+                pictureBox1.SetParcour(li.getParcour());
+                activeParcour = li.getParcour();
+                SetHoverLine(null);
+                SetSelectedLine(null);
+                pictureBox1.Invalidate();
+            }
+        }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -204,7 +261,7 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        
+
         #region add Lines
         private void btnAddStartLine_Click(object sender, EventArgs e)
         {
@@ -281,91 +338,6 @@ namespace AirNavigationRaceLive.Comps
             {
                 SetSelectedLine(hoverLine);
             }
-        }
-        private void ParcourGen_VisibleChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            activeParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
-            pictureBox1.SetParcour(activeParcour);
-            SetHoverLine(null);
-            SetSelectedLine(null);
-            pictureBox1.Invalidate();
-        }
-        #region NumUpDown
-        private void numLatA_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.A as Point).latitude = Decimal.ToDouble(numLatA.Value);
-                pictureBox1.Invalidate();
-            }
-        }
-
-        private void numLongA_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.A as Point).longitude = Decimal.ToDouble(numLongA.Value);
-                pictureBox1.Invalidate();
-            }
-        }
-
-        private void numLatB_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.B as Point).latitude = Decimal.ToDouble(numLatB.Value);
-                pictureBox1.Invalidate();
-            }
-        }
-
-        private void numLongB_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.B as Point).longitude = Decimal.ToDouble(numLongB.Value);
-                pictureBox1.Invalidate();
-            }
-
-        }
-
-        private void numLatO_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.O as Point).latitude = Decimal.ToDouble(numLatO.Value);
-                pictureBox1.Invalidate();
-            }
-
-        }
-
-        private void numLongO_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.O as Point).longitude = Decimal.ToDouble(numLongO.Value);
-                pictureBox1.Invalidate();
-            }
-
-        }
-        #endregion
-
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_MouseLeave(object sender, EventArgs e)
-        {
-
         }
 
     }

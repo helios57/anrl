@@ -112,6 +112,7 @@ namespace AnrlService.Server
             Parcour p = request.RequestParameters.Parcour;
             t_Parcour dbParcour = new t_Parcour();
             dbParcour.Name = p.Name;
+            dbParcour.ID_Map = p.ID_Map;
             db.t_Parcours.InsertOnSubmit(dbParcour);
             db.SubmitChanges();
             foreach (Line l in p.Lines)
@@ -157,6 +158,7 @@ namespace AnrlService.Server
                 Parcour p = new Parcour();
                 p.ID = dbParcour.ID;
                 p.Name = dbParcour.Name;
+                p.ID_Map = dbParcour.ID_Map;
                 foreach (t_Parcour_Line t_p_l in dbParcour.t_Parcour_Lines)
                 {
                     t_Line t_l = t_p_l.t_Line;
@@ -167,6 +169,7 @@ namespace AnrlService.Server
                     CopyAttributes(t_l.t_GPSPoint1, l.B);
                     l.O = new Point();
                     CopyAttributes(t_l.t_GPSPoint2, l.O);
+                    l.Type = t_l.Type;
                     p.Lines.Add(l);
                 }
                 pl.Parcours.Add(p);
@@ -270,21 +273,37 @@ namespace AnrlService.Server
             Root r = new Root();
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.MapList = new MapList();
-            foreach (t_Map dbMap in db.t_Maps)
+            if (r.RequestParameters != null && r.RequestParameters.ID != 0)
             {
-                Map m = new Map();
-                m.ID = dbMap.ID;
-                m.Name = dbMap.Name;
-                m.ID_Picture = dbMap.ID_Picture;
-                m.XRot = dbMap.XRot;
-                m.XSize = dbMap.XSize;
-                m.XTopLeft = dbMap.XTopLeft;
-                m.YRot = dbMap.YRot;
-                m.YSize = dbMap.YSize;
-                m.YTopLeft = dbMap.YTopLeft;
-                r.ResponseParameters.MapList.Maps.Add(m);
+                foreach (t_Map dbMap in db.t_Maps.Where(p=>p.ID==r.RequestParameters.ID))
+                {
+                    addMapToRoot(r, dbMap);
+                }
+
+            }
+            else
+            {
+                foreach (t_Map dbMap in db.t_Maps)
+                {
+                    addMapToRoot(r, dbMap);
+                }
             }
             return r;
+        }
+
+        private static void addMapToRoot(Root r, t_Map dbMap)
+        {
+            Map m = new Map();
+            m.ID = dbMap.ID;
+            m.Name = dbMap.Name;
+            m.ID_Picture = dbMap.ID_Picture;
+            m.XRot = dbMap.XRot;
+            m.XSize = dbMap.XSize;
+            m.XTopLeft = dbMap.XTopLeft;
+            m.YRot = dbMap.YRot;
+            m.YSize = dbMap.YSize;
+            m.YTopLeft = dbMap.YTopLeft;
+            r.ResponseParameters.MapList.Maps.Add(m);
         }
 
         private Root proccessLogin(Root request)

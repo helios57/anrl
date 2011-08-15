@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fldLongitude = new System.Windows.Forms.TextBox();
             this.fldLatitude = new System.Windows.Forms.TextBox();
@@ -57,7 +59,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -70,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -98,6 +103,16 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(194, 553);
             this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            this.listBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(3, 3);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(191, 290);
+            this.listBox1.TabIndex = 19;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -247,7 +262,6 @@
             this.numLongO.Name = "numLongO";
             this.numLongO.Size = new System.Drawing.Size(100, 20);
             this.numLongO.TabIndex = 11;
-            this.numLongO.ValueChanged += new System.EventHandler(this.numLongO_ValueChanged);
             // 
             // label13
             // 
@@ -270,7 +284,6 @@
             this.numLatO.Name = "numLatO";
             this.numLatO.Size = new System.Drawing.Size(100, 20);
             this.numLatO.TabIndex = 9;
-            this.numLatO.ValueChanged += new System.EventHandler(this.numLatO_ValueChanged);
             // 
             // label14
             // 
@@ -293,7 +306,6 @@
             this.numLongB.Name = "numLongB";
             this.numLongB.Size = new System.Drawing.Size(100, 20);
             this.numLongB.TabIndex = 7;
-            this.numLongB.ValueChanged += new System.EventHandler(this.numLongB_ValueChanged);
             // 
             // label11
             // 
@@ -316,7 +328,6 @@
             this.numLatB.Name = "numLatB";
             this.numLatB.Size = new System.Drawing.Size(100, 20);
             this.numLatB.TabIndex = 5;
-            this.numLatB.ValueChanged += new System.EventHandler(this.numLatB_ValueChanged);
             // 
             // label12
             // 
@@ -339,7 +350,6 @@
             this.numLongA.Name = "numLongA";
             this.numLongA.Size = new System.Drawing.Size(100, 20);
             this.numLongA.TabIndex = 3;
-            this.numLongA.ValueChanged += new System.EventHandler(this.numLongA_ValueChanged);
             // 
             // label10
             // 
@@ -362,7 +372,6 @@
             this.numLatA.Name = "numLatA";
             this.numLatA.Size = new System.Drawing.Size(100, 20);
             this.numLatA.TabIndex = 1;
-            this.numLatA.ValueChanged += new System.EventHandler(this.numLatA_ValueChanged);
             // 
             // label9
             // 
@@ -393,18 +402,29 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
-            this.pictureBox1.MouseLeave += new System.EventHandler(this.pictureBox1_MouseLeave);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // listBox1
+            // contextMenuStrip1
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(191, 290);
-            this.listBox1.TabIndex = 19;
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(114, 48);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // ParcourOverview
             // 
@@ -429,6 +449,7 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -465,5 +486,8 @@
         private System.Windows.Forms.TextBox fldLineTyp;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

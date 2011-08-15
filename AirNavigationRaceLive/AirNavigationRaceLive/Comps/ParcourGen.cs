@@ -22,6 +22,7 @@ namespace AirNavigationRaceLive.Comps
         private Line selectedLine = null;
         private Line hoverLine = null;
         ParcourGenerator pc; Timer t;
+        private NetworkObjects.Map CurrentMap = null;
 
         private enum ActivePoint
         {
@@ -227,27 +228,44 @@ namespace AirNavigationRaceLive.Comps
                 pictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 c = new Converter(li.getMap());
                 pictureBox1.SetConverter(c);
+                CurrentMap = li.getMap();
             }
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             btnGenerate.Enabled = false;
-            double lenght = Decimal.ToDouble(parcourLength.Value);
-            double channel = Decimal.ToDouble(channelWide.Value);
-            t = new Timer();
-            t.Tick += new EventHandler(t_Tick);
-            t.Interval = 100;
-            t.Start();
-            pc = new ParcourGenerator();
-            pc.GenerateParcour(activeParcour, c, lenght, channel);
-            pictureBox1.Invalidate();
+            try
+            {
+                double lenght = Decimal.ToDouble(parcourLength.Value);
+                double channel = Decimal.ToDouble(channelWide.Value);
+                t = new Timer();
+                t.Tick += new EventHandler(t_Tick);
+                t.Interval = 100;
+                t.Start();
+                pc = new ParcourGenerator();
+                pc.GenerateParcour(activeParcour, c, lenght, channel);
+                pictureBox1.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                btnGenerate.Enabled = true;
+                MessageBox.Show(ex.Message, "Error while generating Parcour");
+            }
         }
 
         void t_Tick(object sender, EventArgs e)
         {
-            pictureBox1.Invalidate();
-            if (pc.finished)
+            try
+            {
+                pictureBox1.Invalidate();
+                if (pc.finished)
+                {
+                    t.Stop();
+                    btnGenerate.Enabled = true;
+                }
+            }
+            catch
             {
                 t.Stop();
                 btnGenerate.Enabled = true;
@@ -256,11 +274,19 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            NetworkObjects.Parcour p = new NetworkObjects.Parcour();
-            p.Name = fldName.Text;
-            p.Lines.AddRange(activeParcour.Lines);
-            Client.saveParcour(p);
-            MessageBox.Show("Successfully saved");
+            if (CurrentMap == null)
+            {
+                MessageBox.Show("No Map selected", "Incomplete Data");
+            }
+            else
+            {
+                NetworkObjects.Parcour p = new NetworkObjects.Parcour();
+                p.Name = fldName.Text;
+                p.Lines.AddRange(activeParcour.Lines);
+                p.ID_Map = CurrentMap.ID;
+                Client.saveParcour(p);
+                MessageBox.Show("Successfully saved");
+            }
         }
 
         #region add Lines

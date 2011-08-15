@@ -99,10 +99,34 @@ namespace AirNavigationRaceLive.Comps.Client
             List<NetworkObjects.Map> maps = process(r).ResponseParameters.MapList.Maps;
             return maps;
         }
+        public NetworkObjects.Map getMap(int ID)
+        {
+            Root r = new Root();
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.ID = ID;
+            r.RequestType = (int)RequestType.GetMaps;
+            List<NetworkObjects.Map> maps = process(r).ResponseParameters.MapList.Maps;
+            return maps.Single(p=>p.ID == ID);
+        }
+        public List<NetworkObjects.Parcour> getParcours()
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.GetParcours;
+            List<NetworkObjects.Parcour> parcours = process(r).ResponseParameters.ParcourList.Parcours;
+            return parcours;
+        }
         public void deleteMap(int ID)
         {
             Root r = new Root();
             r.RequestType = (int)RequestType.DeleteMap;
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.ID = ID;
+            process(r);
+        }
+        public void deleteParcour(int ID)
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.DeleteParcour;
             r.RequestParameters = new RequestParameters();
             r.RequestParameters.ID = ID;
             process(r);
