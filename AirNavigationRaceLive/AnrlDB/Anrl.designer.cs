@@ -227,7 +227,7 @@ namespace AnrlDB
 		
 		private int _ID_Tracker;
 		
-		private System.DateTime _Timestamp;
+		private long _Timestamp;
 		
 		private double _Longitude;
 		
@@ -236,6 +236,10 @@ namespace AnrlDB
 		private double _Altitude;
 		
 		private double _Speed;
+		
+		private System.Nullable<double> _Accuracy;
+		
+		private System.Nullable<double> _Bearing;
 		
 		private EntityRef<t_Tracker> _t_Tracker;
 		
@@ -247,7 +251,7 @@ namespace AnrlDB
     partial void OnIDChanged();
     partial void OnID_TrackerChanging(int value);
     partial void OnID_TrackerChanged();
-    partial void OnTimestampChanging(System.DateTime value);
+    partial void OnTimestampChanging(long value);
     partial void OnTimestampChanged();
     partial void OnLongitudeChanging(double value);
     partial void OnLongitudeChanged();
@@ -257,6 +261,10 @@ namespace AnrlDB
     partial void OnAltitudeChanged();
     partial void OnSpeedChanging(double value);
     partial void OnSpeedChanged();
+    partial void OnAccuracyChanging(System.Nullable<double> value);
+    partial void OnAccuracyChanged();
+    partial void OnBearingChanging(System.Nullable<double> value);
+    partial void OnBearingChanged();
     #endregion
 		
 		public t_Daten()
@@ -309,8 +317,8 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="DateTime NOT NULL")]
-		public System.DateTime Timestamp
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Timestamp", DbType="BigInt NOT NULL")]
+		public long Timestamp
 		{
 			get
 			{
@@ -405,6 +413,46 @@ namespace AnrlDB
 					this._Speed = value;
 					this.SendPropertyChanged("Speed");
 					this.OnSpeedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Accuracy", DbType="Float")]
+		public System.Nullable<double> Accuracy
+		{
+			get
+			{
+				return this._Accuracy;
+			}
+			set
+			{
+				if ((this._Accuracy != value))
+				{
+					this.OnAccuracyChanging(value);
+					this.SendPropertyChanging();
+					this._Accuracy = value;
+					this.SendPropertyChanged("Accuracy");
+					this.OnAccuracyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Bearing", DbType="Float")]
+		public System.Nullable<double> Bearing
+		{
+			get
+			{
+				return this._Bearing;
+			}
+			set
+			{
+				if ((this._Bearing != value))
+				{
+					this.OnBearingChanging(value);
+					this.SendPropertyChanging();
+					this._Bearing = value;
+					this.SendPropertyChanged("Bearing");
+					this.OnBearingChanged();
 				}
 			}
 		}

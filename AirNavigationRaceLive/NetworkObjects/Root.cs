@@ -27,7 +27,6 @@ namespace NetworkObjects
 
     public enum RequestType : int
     {
-        Close = -1,
         Login = 0,
         GetMaps = 1,
         SaveMap = 2,
@@ -37,6 +36,9 @@ namespace NetworkObjects
         DeletePicture = 6,
         GetParcours = 7,
         SaveParcour = 8,
-        DeleteParcour = 9
+        DeleteParcour = 9,
+        GetTrackers = 10,
+        SaveTracker = 11,
+        DeleteTracker = 12
     }
 }

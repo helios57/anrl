@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationInfo.cs" />
+    <Compile Include="Tracker.cs" />
+    <Compile Include="TrackerList.cs" />
+    <Compile Include="GPSInput\GPSInput.cs" />
+    <Compile Include="GPSInput\RootMessage.cs" />
     <Compile Include="ParcourList.cs" />
     <Compile Include="Parcour.cs" />
     <Compile Include="Point.cs" />

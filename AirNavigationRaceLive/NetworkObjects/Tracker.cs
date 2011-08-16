@@ -7,22 +7,15 @@ using ProtoBuf;
 namespace NetworkObjects
 {
     [ProtoContract]
-    public class RequestParameters
+    public class Tracker
     {
         [ProtoMember(1)]
         public int ID { get; set; }
 
         [ProtoMember(2)]
-        public Picture Picture { get; set; }
+        public String IMEI { get; set; }
 
         [ProtoMember(3)]
-        public Map Map { get; set; }
-
-        [ProtoMember(4)]
-        public Parcour Parcour { get; set; }
-
-        [ProtoMember(5)]
-        public Tracker Tracker { get; set; }
-
+        public String Name { get; set; }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="anrl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +57,14 @@
     <ProjectReference Include="..\AnrlDB\AnrlDB.csproj">
       <Project>{30DE453C-A020-480F-85DB-50EF7B364167}</Project>
       <Name>AnrlDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
+      <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>
+      <Name>NetworkObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Protobuf-net\protobuf-net.csproj">
+      <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
+      <Name>protobuf-net</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

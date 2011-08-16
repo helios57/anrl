@@ -285,7 +285,7 @@ namespace TCPReciever
                             {
                                 t_Daten InsertData = new t_Daten();
                                 InsertData.t_Tracker = tr;
-                                InsertData.Timestamp = GPS_IN.TimestampTracker;
+                                InsertData.Timestamp = GPS_IN.TimestampTracker.Ticks;
                                 InsertData.Latitude = ConvertCoordinates(GPS_IN.latitude);
                                 InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
                                 InsertData.Altitude = double.Parse(GPS_IN.altitude);

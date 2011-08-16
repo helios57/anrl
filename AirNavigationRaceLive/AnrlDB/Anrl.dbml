@@ -4,11 +4,13 @@
     <Type Name="t_Daten">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Timestamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Timestamp" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Longitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Latitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Altitude" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="Speed" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="Accuracy" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Bearing" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="t_Tracker_t_Daten" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
     </Type>
   </Table>

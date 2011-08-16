@@ -75,6 +75,21 @@ namespace AnrlService.Server
                             proccessDeleteParcour(request);
                             break;
                         }
+                    case RequestType.GetTrackers:
+                        {
+                            answer = proccessGetTrackers(request);
+                            break;
+                        }
+                    case RequestType.SaveTracker:
+                        {
+                            answer = proccessSaveTracker(request);
+                            break;
+                        }
+                    case RequestType.DeleteTracker:
+                        {
+                            proccessDeleteTracker(request);
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -86,6 +101,40 @@ namespace AnrlService.Server
                 answer.ResponseParameters.Exception = ex.ToString();
             }
             return answer;
+        }
+
+        private Root proccessSaveTracker(Root request)
+        {
+            Root r = new Root();
+            t_Tracker t_d = db.t_Trackers.Single(p => p.ID == request.RequestParameters.Tracker.ID);
+            t_d.Name = request.RequestParameters.Tracker.Name;
+            db.SubmitChanges();
+            r.ResponseParameters = new ResponseParameters();
+            r.ResponseParameters.ID = t_d.ID;
+            return r;
+        }
+
+        private Root proccessGetTrackers(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            TrackerList tl = new TrackerList();
+            foreach(t_Tracker t_d in db.t_Trackers)
+            {
+                Tracker t = new Tracker();
+                t.ID = t_d.ID;
+                t.Name = t_d.Name;
+                t.IMEI = t_d.IMEI;
+                tl.Trackers.Add(t);
+            }
+            r.ResponseParameters.TrackerList = tl;
+            return r;
+        }
+
+        private void proccessDeleteTracker(Root request)
+        {
+            db.t_Datens.DeleteAllOnSubmit(db.t_Datens.Where(p=>p.ID_Tracker==request.RequestParameters.ID));
+            db.SubmitChanges();
         }
 
         private void proccessDeleteParcour(Root request)

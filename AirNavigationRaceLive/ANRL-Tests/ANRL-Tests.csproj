@@ -60,10 +60,6 @@
       <Project>{B483E041-0DA3-4659-8B40-BB5DB3FE5959}</Project>
       <Name>AirNavigationRaceLive</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RemoteHelper\RemoteHelper.csproj">
-      <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>
-      <Name>RemoteHelper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reciever\Reciever.cs" />
+    <Compile Include="Server\GPSRequestProcessor.cs" />
     <Compile Include="Server\RequestProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,10 +118,6 @@
     <ProjectReference Include="..\Protobuf-net\protobuf-net.csproj">
       <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
       <Name>protobuf-net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RemoteHelper\RemoteHelper.csproj">
-      <Project>{1B6A7977-58B9-4369-A4D2-DCB0A286F429}</Project>
-      <Name>RemoteHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,11 @@ using System.Text;
 using System.IO;
 using AnrlDB;
 using System.Drawing;
+using System.Net.Sockets;
+using System.Net;
+using ProtoBuf;
+using System.Threading;
+using NetworkObjects.GPSInput;
 
 namespace TestApplikation
 {
@@ -12,9 +17,16 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
+            int PORT = 1337;
+            TcpListener server;
+            server = new TcpListener(IPAddress.Any, PORT);
+            server.Start();
+            server.BeginAcceptTcpClient(ClientConnected, server);
+            Thread.Sleep(Int32.MaxValue);
+            /*
             AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
             db.DatabaseExists();
-            db.CreateDatabase();
+            db.CreateDatabase();*/
 
             /*
             string path = @"C:\Users\Helios6x\Downloads\flags_style1_medium";
@@ -33,6 +45,31 @@ namespace TestApplikation
                 db.t_Pictures.InsertOnSubmit(pic);
             }
             db.SubmitChanges();*/
+        }
+        static void ClientConnected(IAsyncResult result)
+        {
+            try
+            {
+                TcpListener server = (TcpListener)result.AsyncState;
+                using (TcpClient client = server.EndAcceptTcpClient(result))
+                {
+                    server.BeginAcceptTcpClient(ClientConnected, server);
+                    using (NetworkStream stream = client.GetStream())
+                    {
+                        RootMessage reqest = Serializer.DeserializeWithLengthPrefix<RootMessage>(stream, PrefixStyle.Fixed32BigEndian);
+                        RootMessage response = new RootMessage();
+                        response.response = new Response();
+                        response.response.countAdded = 99;
+                        Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Fixed32BigEndian);
+                        stream.Close();
+                        client.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+            }
         }
     }
 }
