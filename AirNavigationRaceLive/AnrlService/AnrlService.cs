@@ -29,7 +29,7 @@ namespace AnrlService
         public AnrlService()
         {
             InitializeComponent();
-            OnStart(null);//Remove
+           // OnStart(null);//Remove
         }
 
         protected override void OnStart(string[] args)

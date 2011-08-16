@@ -13,8 +13,8 @@ namespace AnrlService
         /// </summary>
         static void Main()
         {
-            AnrlService service = new AnrlService();
-            System.Threading.Thread.Sleep(int.MaxValue);
+           // AnrlService service = new AnrlService();
+           // System.Threading.Thread.Sleep(int.MaxValue);
             
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
