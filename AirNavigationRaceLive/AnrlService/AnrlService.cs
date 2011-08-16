@@ -25,11 +25,11 @@ namespace AnrlService
         private TCPReciever.Server Reciever;
         private static RequestProcessor processor;
         private static GPSRequestProcessor GPSprocessor;
-        
+
         public AnrlService()
         {
             InitializeComponent();
-           // OnStart(null);//Remove
+            // OnStart(null);//Remove
         }
 
         protected override void OnStart(string[] args)
@@ -99,16 +99,26 @@ namespace AnrlService
                     server.BeginAcceptTcpClient(GPSClientConnected, server);
                     using (NetworkStream stream = client.GetStream())
                     {
-
-                        RootMessage reqest = Serializer.DeserializeWithLengthPrefix<RootMessage>(stream, PrefixStyle.Fixed32BigEndian);
-                        if (GPSprocessor == null || !GPSprocessor.isUseable())
+                        try
                         {
-                            GPSprocessor = new GPSRequestProcessor();
+                            RootMessage reqest = Serializer.DeserializeWithLengthPrefix<RootMessage>(stream, PrefixStyle.Fixed32BigEndian);
+                            if (GPSprocessor == null || !GPSprocessor.isUseable())
+                            {
+                                GPSprocessor = new GPSRequestProcessor();
+                            }
+                            RootMessage response = GPSprocessor.proccessRequest(reqest);
+                            Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Fixed32BigEndian);
                         }
-                        RootMessage response = GPSprocessor.proccessRequest(reqest);
-                        Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Fixed32BigEndian);
-                        stream.Close();
-                        client.Close();
+                        catch (Exception ex)
+                        {
+                            System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+
+                        }
+                        finally
+                        {
+                            stream.Close();
+                            client.Close();
+                        }
                     }
                 }
             }

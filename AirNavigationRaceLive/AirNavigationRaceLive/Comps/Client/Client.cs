@@ -149,5 +149,23 @@ namespace AirNavigationRaceLive.Comps.Client
             return process(r).ResponseParameters.ID;
 
         }
+
+        public List<NetworkObjects.Tracker> getTrackers()
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.GetTrackers;
+            List<NetworkObjects.Tracker> trackers = process(r).ResponseParameters.TrackerList.Trackers;
+            return trackers;
+        }
+
+        public int saveTracker(NetworkObjects.Tracker t)
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.SaveTracker;
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.Tracker = t;
+            return process(r).ResponseParameters.ID;
+        }
+    
     }
 }

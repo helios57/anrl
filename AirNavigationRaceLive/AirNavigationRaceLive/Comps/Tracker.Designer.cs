@@ -134,6 +134,7 @@
             this.textBoxID.Enabled = false;
             this.textBoxID.Location = new System.Drawing.Point(66, 165);
             this.textBoxID.Name = "textBoxID";
+            this.textBoxID.ReadOnly = true;
             this.textBoxID.Size = new System.Drawing.Size(149, 20);
             this.textBoxID.TabIndex = 7;
             // 
@@ -149,6 +150,7 @@
             this.textBoxIMEI.Enabled = false;
             this.textBoxIMEI.Location = new System.Drawing.Point(66, 219);
             this.textBoxIMEI.Name = "textBoxIMEI";
+            this.textBoxIMEI.ReadOnly = true;
             this.textBoxIMEI.Size = new System.Drawing.Size(149, 20);
             this.textBoxIMEI.TabIndex = 9;
             // 

@@ -33,12 +33,12 @@ namespace AirNavigationRaceLive.Comps
 
         private void listViewTracker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*if (listViewTracker.SelectedItems.Count == 1)
+            if (listViewTracker.SelectedItems.Count == 1)
             {
                 TrackerEntry t = listViewTracker.SelectedItems[0] as TrackerEntry;
-                textBoxID.Text = t.getITracker().ID.ToString();
-                textBoxName.Text = t.getITracker().Name;
-                textBoxIMEI.Text = t.getITracker().IMEI;
+                textBoxID.Text = t.getTracker().ID.ToString();
+                textBoxName.Text = t.getTracker().Name;
+                textBoxIMEI.Text = t.getTracker().IMEI;
             }
             else
             {
@@ -46,35 +46,33 @@ namespace AirNavigationRaceLive.Comps
                 textBoxName.Text ="";
                 textBoxIMEI.Text ="";
             }
-            UpdateEnablement();*/
+            UpdateEnablement();
         }
 
         private void UpdateTrackerList()
         {
-            /*List<ITracker> trackers = null;//Client.getTrackers();
+            List<NetworkObjects.Tracker> trackers = Client.getTrackers();
             listViewTracker.Items.Clear();
-            foreach(ITracker t in trackers)
+            foreach (NetworkObjects.Tracker t in trackers)
             {
                 listViewTracker.Items.Add(new TrackerEntry(t));
             }
             textBoxID.Text = "";
             textBoxName.Text = "";
             textBoxIMEI.Text = "";
-            UpdateEnablement();*/
+            UpdateEnablement();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            /*TrackerEntry t = listViewTracker.SelectedItems[0] as TrackerEntry;
+            TrackerEntry t = listViewTracker.SelectedItems[0] as TrackerEntry;
             if (t != null)
             {
-                ITracker tracker = t.getITracker();
-                //Client.addName(new TrackerImpl(tracker.ID,textBoxName.Text,tracker.IMEI));
+                NetworkObjects.Tracker tracker = t.getTracker();
+                tracker.Name = textBoxName.Text;
+                Client.saveTracker(tracker);
             }
             UpdateTrackerList();
-            textBoxID.Text = "";
-            textBoxName.Text = "";
-            textBoxIMEI.Text = "";*/
         }
 
         public void UpdateEnablement()
@@ -84,45 +82,18 @@ namespace AirNavigationRaceLive.Comps
 
         partial class TrackerEntry : ListViewItem
         {
-            /*private ITracker ITracker;
+            private NetworkObjects.Tracker Tracker;
 
-            public TrackerEntry(ITracker iTracker)
+            public TrackerEntry(NetworkObjects.Tracker iTracker)
                 : base(new String[] { iTracker.ID.ToString().Trim(), iTracker.Name.Trim(), iTracker.IMEI.Trim() })
             {
-                ITracker = iTracker;
+                Tracker = iTracker;
             }
 
-            public ITracker getITracker()
+            public NetworkObjects.Tracker getTracker()
             {
-                return ITracker;
-            }*/
-        }
-        class TrackerImpl : MarshalByRefObject/*, ITracker*/
-        {
-            long _ID; 
-            string _Name; 
-            string _IMEI;
-
-            public TrackerImpl(long iID, string iName, string iIMEI)
-            {
-                _ID = iID;
-                _Name = iName;
-                _IMEI = iIMEI;
+                return Tracker;
             }
-            public string Name
-            {
-                get { return _Name; }
-            }
-
-            public string IMEI
-            {
-                get {return _IMEI; }
-            }
-            public long ID
-            {
-                get { return _ID; }
-            }
-
         }
     }
 }
