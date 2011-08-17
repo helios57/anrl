@@ -90,6 +90,21 @@ namespace AnrlService.Server
                             proccessDeleteTracker(request);
                             break;
                         }
+                    case RequestType.GetPilots:
+                        {
+                            answer = proccessGetPilots(request);
+                            break;
+                        }
+                    case RequestType.SavePilot:
+                        {
+                            answer = proccessSavePilot(request);
+                            break;
+                        }
+                    case RequestType.DeletePilot:
+                        {
+                            proccessDeletePilot(request);
+                            break;
+                        }
                 }
             }
             catch (Exception ex)
@@ -101,6 +116,63 @@ namespace AnrlService.Server
                 answer.ResponseParameters.Exception = ex.ToString();
             }
             return answer;
+        }
+
+        private void proccessDeletePilot(Root request)
+        {
+            if (db.t_Pilots.Count(p => p.ID == request.RequestParameters.ID) == 1)
+            {
+                t_Pilot p_d;
+                p_d = db.t_Pilots.Single(p => p.ID == request.RequestParameters.ID);
+                db.t_Pilots.DeleteOnSubmit(p_d);
+                db.SubmitChanges();
+            }
+        }
+
+        private Root proccessSavePilot(Root request)
+        {
+            Root r = new Root();
+            t_Pilot p_d;
+            if (db.t_Pilots.Count(p => p.ID == request.RequestParameters.Pilot.ID) == 1)
+            {
+                p_d = db.t_Pilots.Single(p => p.ID == request.RequestParameters.Pilot.ID);
+            }
+            else
+            {
+                p_d = new t_Pilot();
+                db.t_Pilots.InsertOnSubmit(p_d);
+            }
+            if (request.RequestParameters.Pilot.ID_Picture == 0)
+            {
+                p_d.ID_Picture=null;
+            }
+            else
+            {
+                p_d.ID_Picture = request.RequestParameters.Pilot.ID_Picture;
+            }
+            p_d.SureName = request.RequestParameters.Pilot.Surename;
+            p_d.LastName = request.RequestParameters.Pilot.Name;
+            db.SubmitChanges();
+            r.ResponseParameters = new ResponseParameters();
+            r.ResponseParameters.ID = p_d.ID;
+            return r;
+        }
+
+        private Root proccessGetPilots(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            r.ResponseParameters.PilotList = new PilotList();
+            foreach (t_Pilot p_d in db.t_Pilots)
+            {
+                Pilot p = new Pilot();
+                p.ID = p_d.ID;
+                p.Surename = p_d.SureName;
+                p.Name = p_d.LastName;
+                p.ID_Picture = p_d.ID_Picture.HasValue ? p_d.ID_Picture.Value : -1;
+                r.ResponseParameters.PilotList.Pilots.Add(p);
+            }
+            return r;
         }
 
         private Root proccessSaveTracker(Root request)

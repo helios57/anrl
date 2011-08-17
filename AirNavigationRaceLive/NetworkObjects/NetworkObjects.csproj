@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationInfo.cs" />
+    <Compile Include="Pilot.cs" />
+    <Compile Include="PilotList.cs" />
     <Compile Include="Tracker.cs" />
     <Compile Include="TrackerList.cs" />
     <Compile Include="GPSInput\GPSInput.cs" />

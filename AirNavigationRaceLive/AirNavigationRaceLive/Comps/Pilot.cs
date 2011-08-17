@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using AirNavigationRaceLive.Comps.Model;
+using NetworkObjects;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -30,15 +31,15 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateListe()
         {
-            /*List<IPilot> pilots = null;//Client.getPilots();
+            List<NetworkObjects.Pilot> pilots =Client.getPilots();
             listViewPilots.Items.Clear();
-            foreach (IPilot p in pilots)
+            foreach (NetworkObjects.Pilot p in pilots)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.Name, p.Surename });
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
-            UpdateEnablement();*/
+            UpdateEnablement();
         }
 
         private void UpdateEnablement()
@@ -51,23 +52,23 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewPilots.SelectedItems.Count == 1)
             {
-               /* ListViewItem lvi = listViewPilots.SelectedItems[0];
-                IPilot pilot = lvi.Tag as IPilot;
+                ListViewItem lvi = listViewPilots.SelectedItems[0];
+                NetworkObjects.Pilot pilot = lvi.Tag as NetworkObjects.Pilot;
                 textBoxID.Text = pilot.ID.ToString();
                 textBoxLastname.Text = pilot.Name;
                 textBoxSurename.Text = pilot.Surename;
                 newPilot = false;
-                if (pilot.Picture != null)
+                if (pilot.ID_Picture > 0)
                 {
-                    MemoryStream ms = new MemoryStream(pilot.Picture.Image);
+                    MemoryStream ms = new MemoryStream(Client.getPicture(pilot.ID_Picture).Image);
                     pictureBox.Image = System.Drawing.Image.FromStream(ms);
-                    textBoxPictureId.Text = pilot.Picture.ID.ToString(); 
+                    textBoxPictureId.Text = Client.getPicture(pilot.ID_Picture).ID.ToString(); 
                 }
                 else
                 {
                     pictureBox.Image = null;
-                    textBoxPictureId.Text ="0"; 
-                }*/
+                    textBoxPictureId.Text ="0";
+                }
             }
             else
             {
@@ -103,18 +104,27 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            long id=Int32.Parse(textBoxID.Text);
-            long picId = Int32.Parse(textBoxPictureId.Text);
-            MemoryStream ms = new MemoryStream();
-            pictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-
-            /*IPicture picture = new PictureEntry(picId, ms.ToArray());
-            PilotEntry pe = new PilotEntry(id, textBoxLastname.Text, textBoxSurename.Text, picture);
-            //Client.addPilot(pe);
+            int id=Int32.Parse(textBoxID.Text);
+            int picId = Int32.Parse(textBoxPictureId.Text);
+            if (picId == -1)
+            {
+                MemoryStream ms = new MemoryStream();
+                pictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                Picture picture = new Picture();
+                picture.Image = ms.ToArray();
+                picture.Name = textBoxLastname.Text + textBoxSurename.Text;
+                picId = Client.savePicture(picture);
+            }
+            NetworkObjects.Pilot pilot = new NetworkObjects.Pilot();
+            pilot.ID = id;
+            pilot.Name = textBoxLastname.Text;
+            pilot.Surename =  textBoxSurename.Text;
+            pilot.ID_Picture = picId;
+            Client.savePilot(pilot);
             newPilot = false;
             ResetFields();
             UpdateListe();
-            UpdateEnablement();*/
+            UpdateEnablement();
         }
 
         
@@ -140,6 +150,7 @@ namespace AirNavigationRaceLive.Comps
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
             pictureBox.Image = Image.FromFile(ofd.FileName);
+            textBoxPictureId.Text = "-1";
             UpdateEnablement();
         }
     }

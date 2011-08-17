@@ -85,7 +85,7 @@ namespace AirNavigationRaceLive.Comps
             private NetworkObjects.Tracker Tracker;
 
             public TrackerEntry(NetworkObjects.Tracker iTracker)
-                : base(new String[] { iTracker.ID.ToString().Trim(), iTracker.Name.Trim(), iTracker.IMEI.Trim() })
+                : base(new String[] { iTracker.ID.ToString().Trim(),iTracker.Name!=null?iTracker.Name.Trim():"", iTracker.IMEI.Trim() })
             {
                 Tracker = iTracker;
             }

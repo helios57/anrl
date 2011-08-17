@@ -166,6 +166,28 @@ namespace AirNavigationRaceLive.Comps.Client
             r.RequestParameters.Tracker = t;
             return process(r).ResponseParameters.ID;
         }
-    
+        public void deletePilot(int ID)
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.DeletePilot;
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.ID = ID;
+            process(r);
+        }
+        public List<NetworkObjects.Pilot> getPilots()
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.GetPilots;
+            List<NetworkObjects.Pilot> pilots = process(r).ResponseParameters.PilotList.Pilots;
+            return pilots;
+        }
+        public int savePilot(NetworkObjects.Pilot p)
+        {
+            Root r = new Root();
+            r.RequestType = (int)RequestType.SavePilot;
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.Pilot = p;
+            return process(r).ResponseParameters.ID;
+        }
     }
 }

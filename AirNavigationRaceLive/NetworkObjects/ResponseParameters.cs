@@ -27,5 +27,8 @@ namespace NetworkObjects
         [ProtoMember(6)]
         public TrackerList TrackerList { get; set; }
 
+        [ProtoMember(7)]
+        public PilotList PilotList { get; set; }
+
     }
 }

@@ -39,6 +39,9 @@ namespace NetworkObjects
         DeleteParcour = 9,
         GetTrackers = 10,
         SaveTracker = 11,
-        DeleteTracker = 12
+        DeleteTracker = 12,
+        GetPilots = 13,
+        SavePilot = 14,
+        DeletePilot = 15
     }
 }
