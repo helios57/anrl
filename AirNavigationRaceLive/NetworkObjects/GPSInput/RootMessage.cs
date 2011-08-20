@@ -14,6 +14,8 @@ namespace NetworkObjects.GPSInput
         public List<GPSData> gpsdata { get { return GPSDataList; } }
         [ProtoMember(2)]
         public Response response { get; set; }
+        [ProtoMember(3)]
+        public String exception { get; set; }
     }
     [ProtoContract]
     public class Response

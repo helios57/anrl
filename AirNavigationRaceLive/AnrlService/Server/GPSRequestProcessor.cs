@@ -22,35 +22,42 @@ namespace AnrlService.Server
         public RootMessage proccessRequest(RootMessage request){
             RootMessage response = new RootMessage();
             response.response = new Response();
-            if (request != null && request.gpsdata.Count > 0)
+            try
             {
-                t_Tracker tracker;
-                if (db.t_Trackers.Count(p => p.IMEI == request.gpsdata[0].identifier) == 1)
+                if (request != null && request.gpsdata.Count > 0)
                 {
-                    tracker = db.t_Trackers.Single(p => p.IMEI == request.gpsdata[0].identifier);
-                }
-                else
-                {
-                    tracker = new t_Tracker();
-                    tracker.IMEI = request.gpsdata[0].identifier;
-                    db.t_Trackers.InsertOnSubmit(tracker);
+                    t_Tracker tracker;
+                    if (db.t_Trackers.Count(p => p.IMEI == request.gpsdata[0].identifier) == 1)
+                    {
+                        tracker = db.t_Trackers.Single(p => p.IMEI == request.gpsdata[0].identifier);
+                    }
+                    else
+                    {
+                        tracker = new t_Tracker();
+                        tracker.IMEI = request.gpsdata[0].identifier;
+                        db.t_Trackers.InsertOnSubmit(tracker);
+                        db.SubmitChanges();
+                    }
+                    foreach (GPSData data in request.gpsdata)
+                    {
+                        t_Daten t_d = new t_Daten();
+                        t_d.Accuracy = data.accuracy;
+                        t_d.Altitude = data.altitude;
+                        t_d.Bearing = data.bearing;
+                        t_d.Latitude = data.latitude;
+                        t_d.Longitude = data.longitude;
+                        t_d.Speed = data.speed;
+                        t_d.Timestamp = data.timestampGPS;
+                        t_d.ID_Tracker = tracker.ID;
+                        db.t_Datens.InsertOnSubmit(t_d);
+                        response.response.countAdded++;
+                    }
                     db.SubmitChanges();
                 }
-                foreach (GPSData data in request.gpsdata)
-                {
-                    t_Daten t_d = new t_Daten();
-                    t_d.Accuracy = data.accuracy;
-                    t_d.Altitude = data.altitude;
-                    t_d.Bearing = data.bearing;
-                    t_d.Latitude = data.latitude;
-                    t_d.Longitude = data.longitude;
-                    t_d.Speed = data.speed;
-                    t_d.Timestamp = data.timestampGPS;
-                    t_d.ID_Tracker = tracker.ID;
-                    db.t_Datens.InsertOnSubmit(t_d);
-                    response.response.countAdded++;
-                }
-                db.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                response.exception = ex.ToString();
             }
             return response;
         }

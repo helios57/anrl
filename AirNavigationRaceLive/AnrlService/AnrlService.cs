@@ -108,6 +108,7 @@ namespace AnrlService
                             }
                             RootMessage response = GPSprocessor.proccessRequest(reqest);
                             Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Fixed32BigEndian);
+                            stream.Flush();
                         }
                         catch (Exception ex)
                         {
