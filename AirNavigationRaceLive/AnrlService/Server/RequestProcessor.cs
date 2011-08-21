@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NetworkObjects;
 using AnrlDB;
+using System.Diagnostics;
 
 namespace AnrlService.Server
 {
@@ -114,6 +115,8 @@ namespace AnrlService.Server
                     answer.ResponseParameters = new ResponseParameters();
                 }
                 answer.ResponseParameters.Exception = ex.ToString();
+
+                EventLog.WriteEntry("Anrl-Service", "Exception in RequestProcessor.proccessRequest" + ex.InnerException.Message, EventLogEntryType.Error, 10);
             }
             return answer;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using NetworkObjects;
 using AnrlDB;
 using NetworkObjects.GPSInput;
+using System.Diagnostics;
 
 namespace AnrlService.Server
 {
@@ -57,6 +58,7 @@ namespace AnrlService.Server
             }
             catch (Exception ex)
             {
+                EventLog.WriteEntry("Anrl-Service", "Exception in GPSRequestProcessor.proccessRequest" + ex.InnerException.Message, EventLogEntryType.Error, 9);
                 response.exception = ex.ToString();
             }
             return response;

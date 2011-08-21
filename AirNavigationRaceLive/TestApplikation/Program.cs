@@ -17,7 +17,10 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
-            int PORT = 1337;
+            AnrlService.AnrlService service = new AnrlService.AnrlService();
+            service.start();
+            Thread.Sleep(Int32.MaxValue);
+            /*int PORT = 1337;
             TcpListener server;
             server = new TcpListener(IPAddress.Any, PORT);
             server.Start();
@@ -46,7 +49,7 @@ namespace TestApplikation
             }
             db.SubmitChanges();*/
         }
-        static void ClientConnected(IAsyncResult result)
+        /*static void ClientConnected(IAsyncResult result)
         {
             try
             {
@@ -70,6 +73,6 @@ namespace TestApplikation
             {
                 System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
             }
-        }
+        }*/
     }
 }

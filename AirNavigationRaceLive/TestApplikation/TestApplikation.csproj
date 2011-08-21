@@ -40,13 +40,13 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="anrl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +57,10 @@
     <ProjectReference Include="..\AnrlDB\AnrlDB.csproj">
       <Project>{30DE453C-A020-480F-85DB-50EF7B364167}</Project>
       <Name>AnrlDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AnrlService\AnrlService.csproj">
+      <Project>{42123A7B-3B6F-4EE3-A7B9-2253499D8D08}</Project>
+      <Name>AnrlService</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
       <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>

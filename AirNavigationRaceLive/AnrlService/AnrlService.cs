@@ -29,7 +29,13 @@ namespace AnrlService
         public AnrlService()
         {
             InitializeComponent();
-            // OnStart(null);//Remove
+            if (!EventLog.SourceExists(ServiceName))
+                EventLog.CreateEventSource(ServiceName, "Application");
+        }
+
+        public void start()
+        {
+            OnStart(null);
         }
 
         protected override void OnStart(string[] args)
@@ -48,7 +54,7 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                    EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 1);
                 }
                 try
                 {
@@ -56,7 +62,7 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    System.Console.Out.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                    EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 2);
                 }
             }
         }
@@ -85,7 +91,7 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-                System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+                EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 4);
             }
         }
 
@@ -112,8 +118,7 @@ namespace AnrlService
                         }
                         catch (Exception ex)
                         {
-                            System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
-
+                            EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 5);
                         }
                         finally
                         {
@@ -125,7 +130,7 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-                System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+                EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 5);
             }
         }
 
@@ -137,7 +142,7 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-                System.Console.Out.WriteLine("Unable to stop Service " + ex.InnerException.Message);
+                EventLog.WriteEntry("Anrl-Service", "Unable to stop Service " + ex.InnerException.Message, EventLogEntryType.Error, 6);
             }
             try
             {
@@ -145,7 +150,7 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-                System.Console.Out.WriteLine("Unable to stop Service " + ex.InnerException.Message);
+                EventLog.WriteEntry("Anrl-Service", "Unable to stop Service " + ex.InnerException.Message, EventLogEntryType.Error, 7);
             }
             if (Reciever != null)
             {
@@ -155,7 +160,7 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    System.Console.Out.WriteLine("Unable to stop Service " + ex.InnerException.Message);
+                    EventLog.WriteEntry("Anrl-Service", "Unable to stop Service " + ex.InnerException.Message, EventLogEntryType.Error, 8);
                 }
             }
         }
