@@ -17,10 +17,10 @@
   <Table Name="dbo.t_Tracker" Member="t_Trackers">
     <Type Name="t_Tracker">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IMEI" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="IMEI" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
-      <Association Name="t_Tracker_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team" />
+      <Association Name="t_Tracker_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team_Tracker" />
     </Type>
   </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
@@ -52,6 +52,21 @@
       <Association Name="t_GPSPoint_t_Line2" Member="t_Lines2" ThisKey="ID" OtherKey="ID_PointOrientation" Type="t_Line" />
     </Type>
   </Table>
+  <Table Name="dbo.t_Group" Member="t_Groups">
+    <Type Name="t_Group">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="t_Group_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Group" Type="t_Group_Team" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Group_Team" Member="t_Group_Teams">
+    <Type Name="t_Group_Team">
+      <Column Name="ID_Group" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="t_Group_t_Group_Team" Member="t_Group" ThisKey="ID_Group" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
+      <Association Name="t_Team_t_Group_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_Line" Member="t_Lines">
     <Type Name="t_Line">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -60,7 +75,6 @@
       <Column Name="ID_PointB" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_PointOrientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Line_t_Parcour_Line" Member="t_Parcour_Lines" ThisKey="ID" OtherKey="ID_Line" Type="t_Parcour_Line" />
-      <Association Name="t_Line_t_Polygon_Line" Member="t_Polygon_Lines" ThisKey="ID" OtherKey="ID_Line" Type="t_Polygon_Line" />
       <Association Name="t_GPSPoint_t_Line" Member="t_GPSPoint" ThisKey="ID_PointA" OtherKey="ID" Type="t_GPSPoint" IsForeignKey="true" />
       <Association Name="t_GPSPoint_t_Line1" Member="t_GPSPoint1" ThisKey="ID_PointB" OtherKey="ID" Type="t_GPSPoint" IsForeignKey="true" />
       <Association Name="t_GPSPoint_t_Line2" Member="t_GPSPoint2" ThisKey="ID_PointOrientation" OtherKey="ID" Type="t_GPSPoint" IsForeignKey="true" />
@@ -96,7 +110,6 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Map" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Parcour_t_Parcour_Line" Member="t_Parcour_Lines" ThisKey="ID" OtherKey="ID_Parcour" Type="t_Parcour_Line" />
-      <Association Name="t_Parcour_t_Polygon" Member="t_Polygons" ThisKey="ID" OtherKey="ID_Parcour" Type="t_Polygon" />
       <Association Name="t_Map_t_Parcour" Member="t_Map" ThisKey="ID_Map" OtherKey="ID" Type="t_Map" IsForeignKey="true" />
     </Type>
   </Table>
@@ -122,42 +135,36 @@
   <Table Name="dbo.t_Pilot" Member="t_Pilots">
     <Type Name="t_Pilot">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="LastName" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="SureName" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SureName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Picture" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="t_Pilot_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Pilot" Type="t_Team" />
       <Association Name="t_Pilot_t_Team1" Member="t_Teams1" ThisKey="ID" OtherKey="ID_Navigator" Type="t_Team" />
       <Association Name="t_Picture_t_Pilot" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.t_Polygon" Member="t_Polygons">
-    <Type Name="t_Polygon">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ID_Parcour" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Polygon_t_Polygon_Line" Member="t_Polygon_Lines" ThisKey="ID" OtherKey="ID_Polygon" Type="t_Polygon_Line" />
-      <Association Name="t_Parcour_t_Polygon" Member="t_Parcour" ThisKey="ID_Parcour" OtherKey="ID" Type="t_Parcour" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Polygon_Line" Member="t_Polygon_Lines">
-    <Type Name="t_Polygon_Line">
-      <Column Name="ID_Polygon" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ID_Line" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="t_Line_t_Polygon_Line" Member="t_Line" ThisKey="ID_Line" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
-      <Association Name="t_Polygon_t_Polygon_Line" Member="t_Polygon" ThisKey="ID_Polygon" OtherKey="ID" Type="t_Polygon" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_Team" Member="t_Teams">
     <Type Name="t_Team">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="ID_Pilot" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_Navigator" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ID_Tracker" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Color" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Color" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="ID_Flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="t_Team_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Group_Team" />
+      <Association Name="t_Team_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Team" Type="t_Team_Tracker" />
       <Association Name="t_Picture_t_Team" Member="t_Picture" ThisKey="ID_Flag" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team" Member="t_Pilot" ThisKey="ID_Pilot" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team1" Member="t_Pilot1" ThisKey="ID_Navigator" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
-      <Association Name="t_Tracker_t_Team" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Team_Tracker" Member="t_Team_Trackers">
+    <Type Name="t_Team_Tracker">
+      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="t_Team_t_Team_Tracker" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
+      <Association Name="t_Tracker_t_Team_Tracker" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

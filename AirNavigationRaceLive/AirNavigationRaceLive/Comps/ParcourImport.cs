@@ -88,9 +88,9 @@ namespace AirNavigationRaceLive.Comps
                     {
                         case ActivePoint.A:
                             {
-                                Point a = new Point(longitude, latitude, 0);
-                                Point b = new Point(a.longitude, a.latitude, a.altitude);
-                                Point o = new Point(a.longitude, a.latitude, a.altitude);
+                                Point a = NetworkObjects.Helper.Point(longitude, latitude, 0);
+                                Point b = NetworkObjects.Helper.Point(a.longitude, a.latitude, a.altitude);
+                                Point o = NetworkObjects.Helper.Point(a.longitude, a.latitude, a.altitude);
                                 activeLine.A = a;
                                 activeLine.B = b;
                                 activeLine.O = o;
@@ -99,8 +99,8 @@ namespace AirNavigationRaceLive.Comps
                             }
                         case ActivePoint.B:
                             {
-                                Point b = new Point(longitude, latitude, 0);
-                                Point o = new Point(b.longitude, b.latitude, b.altitude);
+                                Point b = NetworkObjects.Helper.Point(longitude, latitude, 0);
+                                Point o = NetworkObjects.Helper.Point(b.longitude, b.latitude, b.altitude);
                                 activeLine.B = b;
                                 activeLine.O = o;
                                 pictureBox1.Invalidate();
@@ -108,7 +108,7 @@ namespace AirNavigationRaceLive.Comps
                             }
                         case ActivePoint.O:
                             {
-                                Point o = new Point(longitude, latitude, 0);
+                                Point o = NetworkObjects.Helper.Point(longitude, latitude, 0);
                                 activeLine.O = o;
                                 pictureBox1.Invalidate();
                                 break;
@@ -126,7 +126,7 @@ namespace AirNavigationRaceLive.Comps
                     bool lineSet = false;
                     lock (activeParcour)
                     {
-                        foreach (Line l in activeParcour.Lines)
+                        foreach (Line l in activeParcour.LineList)
                         {
                             int startX = c.getStartX(l);
                             int startY = c.getStartY(l);
@@ -247,7 +247,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 NetworkObjects.Parcour p = new NetworkObjects.Parcour();
                 p.Name = fldName.Text;
-                p.Lines.AddRange(activeParcour.Lines);
+                p.LineList.AddRange(activeParcour.LineList);
                 p.ID_Map = CurrentMap.ID;
                 Client.saveParcour(p);
                 MessageBox.Show("Successfully saved");

@@ -22,7 +22,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             this.desiredLengthFactor = desiredLengthFactor;
             this.channel = Converter.NMtoM(channel);
             this.c = c;
-            List<Line> lines = parcour.Lines;
+            List<Line> lines = new List<Line>(parcour.LineList);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_A), lines.Single(p => p.Type == (int)LineType.END_A));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_B), lines.Single(p => p.Type == (int)LineType.END_B));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_C), lines.Single(p => p.Type == (int)LineType.END_C));
@@ -45,8 +45,12 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             Vector ChannelRadius = Channels[3].Start - Channels[0].Start;
 
-            Point Ende = new Point(c.XtoDeg(Channels[3].Start.X), c.YtoDeg(Channels[3].Start.Y), 0);
-            Point Start = new Point(c.XtoDeg(Channels[0].Start.X), c.YtoDeg(Channels[0].Start.Y), 0);
+            Point Ende = new Point();
+            Ende.longitude = c.XtoDeg(Channels[3].Start.X);
+            Ende.latitude = c.YtoDeg(Channels[3].Start.Y);
+            Point Start = new Point();
+            Start.longitude = c.XtoDeg(Channels[0].Start.X);
+            Start.latitude = c.YtoDeg(Channels[0].Start.Y);
             double origDist = Converter.Distance(Ende, Start);
             ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0/2.0));
             Vector ortho = Vector.Orthogonal(ChannelRadius)/10.0;

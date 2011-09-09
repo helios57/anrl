@@ -16,13 +16,12 @@ namespace AirNavigationRaceLive.Comps.Client
         private const int PORT = 1337;
         private String Token;
         private string IpAdress;
-        private TcpClient client;
-        private NetworkStream stream;
-        private Dictionary<int, Picture> pictureCache = new Dictionary<int, Picture>();
+        private ClientCache cache;
 
         public Client(string IpAdress)
         {
             this.IpAdress = IpAdress;
+            cache = new ClientCache(this);
         }
         public bool isAuthenticated()
         {
@@ -36,23 +35,21 @@ namespace AirNavigationRaceLive.Comps.Client
             r.AuthInfo.Password = password;
             Token = process(r).AuthInfo.Token;
         }
-        private Root process(Root request)
+        internal Root process(Root request)
         {
             try
             {
-                if (client == null || !client.Connected)
-                {
-                    client = new TcpClient();
-                    client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
-                    stream = client.GetStream();
-                }
+                TcpClient client = new TcpClient();
+                client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
+                NetworkStream stream = client.GetStream();
+
                 Serializer.SerializeWithLengthPrefix(stream, request, PrefixStyle.Base128);
+                stream.Flush();
                 Root rootAnswer = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-                if (rootAnswer.ResponseParameters != null && rootAnswer.ResponseParameters.Exception != null)
+                if (rootAnswer.ResponseParameters != null && rootAnswer.ResponseParameters.Exception != null && rootAnswer.ResponseParameters.Exception.Length >0)
                 {
                     MessageBox.Show("Exception on Server: " + rootAnswer.ResponseParameters.Exception);
                 }
-                //optimize without this ?
                 stream.Close();
                 client.Close();
                 client = null;
@@ -66,128 +63,76 @@ namespace AirNavigationRaceLive.Comps.Client
         }
         public Picture getPicture(int ID)
         {
-            Picture p;
-            if (pictureCache.ContainsKey(ID))
-            {
-                p = pictureCache[ID];
-            }else{
-                Root r = new Root();
-                r.RequestParameters = new RequestParameters();
-                r.RequestType = (int)RequestType.GetPicture;
-                r.RequestParameters.ID = ID;
-                p= process(r).ResponseParameters.Picture;
-                if (p != null)
-                {
-                    pictureCache.Add(p.ID, p);
-                }
-            }
-            return p;
+            return cache.cachePicture.get(ID);
         }
         public int savePicture(Picture picture)
         {
-            Root pic = new Root();
-            pic.RequestParameters = new RequestParameters();
-            pic.RequestParameters.Picture = picture;
-            pic.RequestType = (int)RequestType.SavePicture;
-            Root picId = process(pic);
-            return picId.ResponseParameters.ID;
+            return cache.cachePicture.add(picture);
         }
         public List<NetworkObjects.Map> getMaps()
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.GetMaps;
-            List<NetworkObjects.Map> maps = process(r).ResponseParameters.MapList.Maps;
-            return maps;
+            return cache.cacheMap.getAll();
         }
         public NetworkObjects.Map getMap(int ID)
         {
-            Root r = new Root();
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.ID = ID;
-            r.RequestType = (int)RequestType.GetMaps;
-            List<NetworkObjects.Map> maps = process(r).ResponseParameters.MapList.Maps;
-            return maps.Single(p=>p.ID == ID);
+            return cache.cacheMap.get(ID);
         }
         public List<NetworkObjects.Parcour> getParcours()
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.GetParcours;
-            List<NetworkObjects.Parcour> parcours = process(r).ResponseParameters.ParcourList.Parcours;
-            return parcours;
+            return cache.cacheParcour.getAll();
         }
         public void deleteMap(int ID)
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.DeleteMap;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.ID = ID;
-            process(r);
+            cache.cacheMap.delete(ID);
         }
         public void deleteParcour(int ID)
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.DeleteParcour;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.ID = ID;
-            process(r);
+            cache.cacheParcour.delete(ID);
         }
         public int saveMap(NetworkObjects.Map m)
         {
-            Root map = new Root();
-            map.RequestType = (int)RequestType.SaveMap;
-            map.RequestParameters = new RequestParameters();
-            map.RequestParameters.Map = m;
-            Root mapId = process(map);
-            return mapId.ResponseParameters.ID;
+            return cache.cacheMap.add(m);
         }
         public int saveParcour(Parcour p)
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.SaveParcour;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.Parcour = p;
-            return process(r).ResponseParameters.ID;
-
+            return cache.cacheParcour.add(p);
         }
 
         public List<NetworkObjects.Tracker> getTrackers()
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.GetTrackers;
-            List<NetworkObjects.Tracker> trackers = process(r).ResponseParameters.TrackerList.Trackers;
-            return trackers;
+            return cache.cacheTracker.getAll();
         }
 
         public int saveTracker(NetworkObjects.Tracker t)
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.SaveTracker;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.Tracker = t;
-            return process(r).ResponseParameters.ID;
+            return cache.cacheTracker.add(t);
         }
         public void deletePilot(int ID)
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.DeletePilot;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.ID = ID;
-            process(r);
+            cache.cachePilot.delete(ID);
         }
         public List<NetworkObjects.Pilot> getPilots()
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.GetPilots;
-            List<NetworkObjects.Pilot> pilots = process(r).ResponseParameters.PilotList.Pilots;
-            return pilots;
+            return cache.cachePilot.getAll();
         }
         public int savePilot(NetworkObjects.Pilot p)
         {
-            Root r = new Root();
-            r.RequestType = (int)RequestType.SavePilot;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.Pilot = p;
-            return process(r).ResponseParameters.ID;
+            return cache.cachePilot.add(p);
+        }
+
+        internal List<NetworkObjects.Team> getTeams()
+        {
+            return cache.cacheTeam.getAll();
+        }
+
+        internal NetworkObjects.Pilot getPilot(int ID)
+        {
+            return cache.cachePilot.get(ID);
+        }
+
+        internal int saveTeam(NetworkObjects.Team team)
+        {
+            return cache.cacheTeam.add(team);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             this.parcour = parcour;
             this.c = c;
-            NetworkObjects.Line Start = parcour.Lines.Single(p => p.Type == (int)NetworkObjects.LineType.START) as NetworkObjects.Line;
+            NetworkObjects.Line Start = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START) as NetworkObjects.Line;
             if (Start == null) return;
             #region StartVektoren
             Vector StartAV = new Vector(c.DegToX(Start.A.longitude), c.DegToY(Start.A.latitude), 0);
@@ -48,38 +48,38 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Start_A_O = Start_A_M + StartLotOrientation;
 
             Line Start_A;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.START_A))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.START_A))
             {
-                Start_A = parcour.Lines.Single(p => p.Type == (int)LineType.START_A) as Line;
+                Start_A = parcour.LineList.Single(p => p.Type == (int)LineType.START_A) as Line;
             }
             else
             {
                 Start_A = new Line();
                 Start_A.Type = (int)LineType.START_A;
-                parcour.Lines.Add(Start_A);
+                parcour.LineList.Add(Start_A);
             }
-            Start_A.A = new Point(c.XtoDeg(Start_A_A.X), c.YtoDeg(Start_A_A.Y), 0);
-            Start_A.B = new Point(c.XtoDeg(Start_A_B.X), c.YtoDeg(Start_A_B.Y), 0);
-            Start_A.O = new Point(c.XtoDeg(Start_A_O.X), c.YtoDeg(Start_A_O.Y), 0);
+            Start_A.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_A_A.X), c.YtoDeg(Start_A_A.Y), 0);
+            Start_A.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_A_B.X), c.YtoDeg(Start_A_B.Y), 0);
+            Start_A.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_A_O.X), c.YtoDeg(Start_A_O.Y), 0);
 
             Vector Start_D_M = StartBV - (StartAB1KM * GateRadiusKm);
             Vector Start_D_B = StartBV;
             Vector Start_D_A = Start_D_M - (StartAB1KM * GateRadiusKm);
             Vector Start_D_O = Start_D_M + StartLotOrientation;
             Line Start_D;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.START_D))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.START_D))
             {
-                Start_D = parcour.Lines.Single(p => p.Type == (int)LineType.START_D) as Line;
+                Start_D = parcour.LineList.Single(p => p.Type == (int)LineType.START_D) as Line;
             }
             else
             {
                 Start_D = new Line();
                 Start_D.Type = (int)LineType.START_D;
-                parcour.Lines.Add(Start_D);
+                parcour.LineList.Add(Start_D);
             }
-            Start_D.A = new Point(c.XtoDeg(Start_D_A.X), c.YtoDeg(Start_D_A.Y), 0);
-            Start_D.B = new Point(c.XtoDeg(Start_D_B.X), c.YtoDeg(Start_D_B.Y), 0);
-            Start_D.O = new Point(c.XtoDeg(Start_D_O.X), c.YtoDeg(Start_D_O.Y), 0);
+            Start_D.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_D_A.X), c.YtoDeg(Start_D_A.Y), 0);
+            Start_D.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_D_B.X), c.YtoDeg(Start_D_B.Y), 0);
+            Start_D.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_D_O.X), c.YtoDeg(Start_D_O.Y), 0);
 
 
             Vector Start_B_M = Start_A_M + (Vector.Direction(Start_A_M, Start_D_M) / 3.0);
@@ -88,38 +88,38 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Start_B_O = Start_B_M + StartLotOrientation;
 
             Line Start_B;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.START_B))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.START_B))
             {
-                Start_B = parcour.Lines.Single(p => p.Type == (int)LineType.START_B) as Line;
+                Start_B = parcour.LineList.Single(p => p.Type == (int)LineType.START_B) as Line;
             }
             else
             {
                 Start_B = new Line();
                 Start_B.Type = (int)LineType.START_B;
-                parcour.Lines.Add(Start_B);
+                parcour.LineList.Add(Start_B);
             }
-            Start_B.A = new Point(c.XtoDeg(Start_B_A.X), c.YtoDeg(Start_B_A.Y), 0);
-            Start_B.B = new Point(c.XtoDeg(Start_B_B.X), c.YtoDeg(Start_B_B.Y), 0);
-            Start_B.O = new Point(c.XtoDeg(Start_B_O.X), c.YtoDeg(Start_B_O.Y), 0);
+            Start_B.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_B_A.X), c.YtoDeg(Start_B_A.Y), 0);
+            Start_B.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_B_B.X), c.YtoDeg(Start_B_B.Y), 0);
+            Start_B.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_B_O.X), c.YtoDeg(Start_B_O.Y), 0);
 
             Vector Start_C_M = Start_A_M + ((Vector.Direction(Start_A_M, Start_D_M) * 2) / 3.0);
             Vector Start_C_B = Start_C_M - (StartAB1KM * GateRadiusKm);
             Vector Start_C_A = Start_C_M + (StartAB1KM * GateRadiusKm);
             Vector Start_C_O = Start_C_M + StartLotOrientation;
             Line Start_C;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.START_C))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.START_C))
             {
-                Start_C = parcour.Lines.Single(p => p.Type == (int)LineType.START_C) as Line;
+                Start_C = parcour.LineList.Single(p => p.Type == (int)LineType.START_C) as Line;
             }
             else
             {
                 Start_C = new Line();
                 Start_C.Type = (int)LineType.START_C;
-                parcour.Lines.Add(Start_C);
+                parcour.LineList.Add(Start_C);
             }
-            Start_C.A = new Point(c.XtoDeg(Start_C_A.X), c.YtoDeg(Start_C_A.Y), 0);
-            Start_C.B = new Point(c.XtoDeg(Start_C_B.X), c.YtoDeg(Start_C_B.Y), 0);
-            Start_C.O = new Point(c.XtoDeg(Start_C_O.X), c.YtoDeg(Start_C_O.Y), 0);
+            Start_C.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_C_A.X), c.YtoDeg(Start_C_A.Y), 0);
+            Start_C.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_C_B.X), c.YtoDeg(Start_C_B.Y), 0);
+            Start_C.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_C_O.X), c.YtoDeg(Start_C_O.Y), 0);
             #endregion
 
             #region EndeVektoren
@@ -140,19 +140,19 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Ende_A_O = Start_A_O + StartEnd;
 
             Line END_A;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.END_A))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.END_A))
             {
-                END_A = parcour.Lines.Single(p => p.Type == (int)LineType.END_A) as Line;
+                END_A = parcour.LineList.Single(p => p.Type == (int)LineType.END_A) as Line;
             }
             else
             {
                 END_A = new Line();
                 END_A.Type = (int)LineType.END_A;
-                parcour.Lines.Add(END_A);
+                parcour.LineList.Add(END_A);
             }
-            END_A.A = new Point(c.XtoDeg(Ende_A_A.X), c.YtoDeg(Ende_A_A.Y), 0);
-            END_A.B = new Point(c.XtoDeg(Ende_A_B.X), c.YtoDeg(Ende_A_B.Y), 0);
-            END_A.O = new Point(c.XtoDeg(Ende_A_O.X), c.YtoDeg(Ende_A_O.Y), 0);
+            END_A.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_A_A.X), c.YtoDeg(Ende_A_A.Y), 0);
+            END_A.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_A_B.X), c.YtoDeg(Ende_A_B.Y), 0);
+            END_A.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_A_O.X), c.YtoDeg(Ende_A_O.Y), 0);
 
             Vector Ende_B_A = Start_B_A + StartEnd;
             Vector Ende_B_B = Start_B_B + StartEnd;
@@ -160,57 +160,57 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Ende_B_O = Start_B_O + StartEnd;
 
             Line END_B;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.END_B))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.END_B))
             {
-                END_B = parcour.Lines.Single(p => p.Type == (int)LineType.END_B) as Line;
+                END_B = parcour.LineList.Single(p => p.Type == (int)LineType.END_B) as Line;
             }
             else
             {
                 END_B = new Line();
                 END_B.Type = (int)LineType.END_B;
-                parcour.Lines.Add(END_B);
+                parcour.LineList.Add(END_B);
             }
-            END_B.A = new Point(c.XtoDeg(Ende_B_A.X), c.YtoDeg(Ende_B_A.Y), 0);
-            END_B.B = new Point(c.XtoDeg(Ende_B_B.X), c.YtoDeg(Ende_B_B.Y), 0);
-            END_B.O = new Point(c.XtoDeg(Ende_B_O.X), c.YtoDeg(Ende_B_O.Y), 0);
+            END_B.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_B_A.X), c.YtoDeg(Ende_B_A.Y), 0);
+            END_B.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_B_B.X), c.YtoDeg(Ende_B_B.Y), 0);
+            END_B.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_B_O.X), c.YtoDeg(Ende_B_O.Y), 0);
 
             Vector Ende_C_A = Start_C_A + StartEnd;
             Vector Ende_C_B = Start_C_B + StartEnd;
             Vector Ende_C_M = Start_C_M + StartEnd;
             Vector Ende_C_O = Start_C_O + StartEnd;
             Line END_C;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.END_C))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.END_C))
             {
-                END_C = parcour.Lines.Single(p => p.Type == (int)LineType.END_C) as Line;
+                END_C = parcour.LineList.Single(p => p.Type == (int)LineType.END_C) as Line;
             }
             else
             {
                 END_C = new Line();
                 END_C.Type = (int)LineType.END_C;
-                parcour.Lines.Add(END_C);
+                parcour.LineList.Add(END_C);
             }
-            END_C.A = new Point(c.XtoDeg(Ende_C_A.X), c.YtoDeg(Ende_C_A.Y), 0);
-            END_C.B = new Point(c.XtoDeg(Ende_C_B.X), c.YtoDeg(Ende_C_B.Y), 0);
-            END_C.O = new Point(c.XtoDeg(Ende_C_O.X), c.YtoDeg(Ende_C_O.Y), 0);
+            END_C.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_C_A.X), c.YtoDeg(Ende_C_A.Y), 0);
+            END_C.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_C_B.X), c.YtoDeg(Ende_C_B.Y), 0);
+            END_C.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_C_O.X), c.YtoDeg(Ende_C_O.Y), 0);
 
             Vector Ende_D_A = Start_D_A + StartEnd;
             Vector Ende_D_B = Start_D_B + StartEnd;
             Vector Ende_D_M = Start_D_M + StartEnd;
             Vector Ende_D_O = Start_D_O + StartEnd;
             Line END_D;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.END_D))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.END_D))
             {
-                END_D = parcour.Lines.Single(p => p.Type == (int)LineType.END_D) as Line;
+                END_D = parcour.LineList.Single(p => p.Type == (int)LineType.END_D) as Line;
             }
             else
             {
                 END_D = new Line();
                 END_D.Type = (int)LineType.END_D;
-                parcour.Lines.Add(END_D);
+                parcour.LineList.Add(END_D);
             }
-            END_D.A = new Point(c.XtoDeg(Ende_D_A.X), c.YtoDeg(Ende_D_A.Y), 0);
-            END_D.B = new Point(c.XtoDeg(Ende_D_B.X), c.YtoDeg(Ende_D_B.Y), 0);
-            END_D.O = new Point(c.XtoDeg(Ende_D_O.X), c.YtoDeg(Ende_D_O.Y), 0);
+            END_D.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_D_A.X), c.YtoDeg(Ende_D_A.Y), 0);
+            END_D.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_D_B.X), c.YtoDeg(Ende_D_B.Y), 0);
+            END_D.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_D_O.X), c.YtoDeg(Ende_D_O.Y), 0);
             #endregion
 
             #region LineOfNoReturn
@@ -221,19 +221,19 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector LONR_B = StartBV + StartToLONR;
             Vector LONR_O = StartOV + StartToLONR;
             Line LONR;
-            if (parcour.Lines.Exists(p => p.Type == (int)LineType.LINEOFNORETURN))
+            if (parcour.LineList.Exists(p => p.Type == (int)LineType.LINEOFNORETURN))
             {
-                LONR = parcour.Lines.Single(p => p.Type == (int)LineType.LINEOFNORETURN) as Line;
+                LONR = parcour.LineList.Single(p => p.Type == (int)LineType.LINEOFNORETURN) as Line;
             }
             else
             {
                 LONR = new Line();
                 LONR.Type = (int)LineType.LINEOFNORETURN;
-                parcour.Lines.Add(LONR);
+                parcour.LineList.Add(LONR);
             }
-            LONR.A = new Point(c.XtoDeg(LONR_A.X), c.YtoDeg(LONR_A.Y), 0);
-            LONR.B = new Point(c.XtoDeg(LONR_B.X), c.YtoDeg(LONR_B.Y), 0);
-            LONR.O = new Point(c.XtoDeg(LONR_O.X), c.YtoDeg(LONR_O.Y), 0);
+            LONR.A = NetworkObjects.Helper.Point(c.XtoDeg(LONR_A.X), c.YtoDeg(LONR_A.Y), 0);
+            LONR.B = NetworkObjects.Helper.Point(c.XtoDeg(LONR_B.X), c.YtoDeg(LONR_B.Y), 0);
+            LONR.O = NetworkObjects.Helper.Point(c.XtoDeg(LONR_O.X), c.YtoDeg(LONR_O.Y), 0);
             #endregion
             CalculateParcour(parcour, c, channel);
 
@@ -293,7 +293,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             bestModel.addPolygons();
             lock (parcour)
             {
-                parcour.Lines.RemoveAll(p => p.Type == (int)LineType.Point);
+                parcour.LineList.RemoveAll(p => p.Type == (int)LineType.Point);
                 foreach (ParcourChannel pc in bestModel.getChannels())
                 {
                     Vector last = null;
@@ -303,15 +303,15 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             Line l = new Line();
                             l.Type = (int)LineType.Point;
-                            l.A = new Point(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
-                            l.B = new Point(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
-                            l.O = new Point(c.XtoDeg(v.X), c.YtoDeg(v.Y), 0);
-                            parcour.Lines.Add(l);
+                            l.A = NetworkObjects.Helper.Point(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
+                            l.B = NetworkObjects.Helper.Point(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
+                            l.O = NetworkObjects.Helper.Point(c.XtoDeg(v.X), c.YtoDeg(v.Y), 0);
+                            parcour.LineList.Add(l);
                         }
                         last = v;
                     }
                 }
-                parcour.Lines.RemoveAll(p => p.Type == (int)LineType.PENALTYZONE);
+                parcour.LineList.RemoveAll(p => p.Type == (int)LineType.PENALTYZONE);
                 foreach (ParcourPolygon pg in bestModel.getPolygons())
                 {
                     Vector mid = new Vector(0, 0, 0);
@@ -326,10 +326,10 @@ namespace AirNavigationRaceLive.Comps.Helper
                     {
                         Line l = new Line();
                         l.Type = (int)LineType.PENALTYZONE;
-                        l.A = new Point(c.XtoDeg(pg.getEdges()[i].X), c.YtoDeg(pg.getEdges()[i].Y), 0);
-                        l.B = new Point(c.XtoDeg(pg.getEdges()[(i + 1) % count].X), c.YtoDeg(pg.getEdges()[(i + 1) % count].Y), 0);
-                        l.O = new Point(c.XtoDeg(mid.X), c.YtoDeg(mid.Y), 0);
-                        parcour.Lines.Add(l);
+                        l.A = NetworkObjects.Helper.Point(c.XtoDeg(pg.getEdges()[i].X), c.YtoDeg(pg.getEdges()[i].Y), 0);
+                        l.B = NetworkObjects.Helper.Point(c.XtoDeg(pg.getEdges()[(i + 1) % count].X), c.YtoDeg(pg.getEdges()[(i + 1) % count].Y), 0);
+                        l.O = NetworkObjects.Helper.Point(c.XtoDeg(mid.X), c.YtoDeg(mid.Y), 0);
+                        parcour.LineList.Add(l);
                     }
                 }
             }

@@ -12,8 +12,6 @@ using NetworkObjects;
 using ProtoBuf;
 using System.Threading;
 using AnrlService.Server;
-using NetworkObjects.GPSInput;
-
 namespace AnrlService
 {
     public partial class AnrlService : ServiceBase
@@ -29,8 +27,10 @@ namespace AnrlService
         public AnrlService()
         {
             InitializeComponent();
+#if !DEBUG
             if (!EventLog.SourceExists(ServiceName))
                 EventLog.CreateEventSource(ServiceName, "Application");
+#endif
         }
 
         public void start()
@@ -46,15 +46,22 @@ namespace AnrlService
                 {
                     server = new TcpListener(IPAddress.Any, PORT);
                     server.Start();
-                    server.BeginAcceptTcpClient(ClientConnected, server);
 
                     serverGPS = new TcpListener(IPAddress.Any, PORTGPS);
                     serverGPS.Start();
-                    serverGPS.BeginAcceptTcpClient(GPSClientConnected, server);
+                    for (int i = 0; i < 10; i++)
+                    {
+                        server.BeginAcceptTcpClient(ClientConnected, server);
+                        serverGPS.BeginAcceptTcpClient(GPSClientConnected, serverGPS);
+                    }
                 }
                 catch (Exception ex)
                 {
+#if !DEBUG
                     EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 1);
+#else
+                    System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
+#endif
                 }
                 try
                 {
@@ -62,7 +69,11 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
+#if !DEBUG
                     EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 2);
+#else
+                    System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
+#endif
                 }
             }
         }
@@ -76,23 +87,39 @@ namespace AnrlService
                     server.BeginAcceptTcpClient(ClientConnected, server);
                     using (NetworkStream stream = client.GetStream())
                     {
-                        Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-
-                        if (processor == null || !processor.isUseable())
+                        try
                         {
-                            processor = new RequestProcessor();
+                            processConnection(client, stream);
                         }
-                        Root response = processor.proccessRequest(reqest);
-                        Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
-                        stream.Close();
-                        client.Close();
+                        catch //1 Retry
+                        {
+                            processConnection(client, stream);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
+#if !DEBUG
                 EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 4);
+#else
+                System.Console.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+#endif
             }
+        }
+
+        private static void processConnection(TcpClient client, NetworkStream stream)
+        {
+            Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+
+            if (processor == null || !processor.isUseable())
+            {
+                processor = new RequestProcessor();
+            }
+            Root response = processor.proccessRequest(reqest);
+            Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
+            stream.Close();
+            client.Close();
         }
 
         static void GPSClientConnected(IAsyncResult result)

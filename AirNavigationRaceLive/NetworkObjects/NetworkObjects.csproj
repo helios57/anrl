@@ -40,23 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationInfo.cs" />
-    <Compile Include="Pilot.cs" />
-    <Compile Include="PilotList.cs" />
-    <Compile Include="Tracker.cs" />
-    <Compile Include="TrackerList.cs" />
-    <Compile Include="GPSInput\GPSInput.cs" />
-    <Compile Include="GPSInput\RootMessage.cs" />
-    <Compile Include="ParcourList.cs" />
-    <Compile Include="Parcour.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Line.cs" />
-    <Compile Include="MapList.cs" />
-    <Compile Include="Picture.cs" />
-    <Compile Include="ResponseParameters.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="RequestParameters.cs" />
-    <Compile Include="Root.cs" />
+    <Compile Include="anrl.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>anrl.proto</DependentUpon>
+    </Compile>
+    <Compile Include="Enums.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +55,12 @@
       <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
       <Name>protobuf-net</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="anrl.proto">
+      <Generator>ProtoBufTool</Generator>
+      <LastGenOutput>anrl.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

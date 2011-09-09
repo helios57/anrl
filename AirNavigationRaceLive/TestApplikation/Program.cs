@@ -9,7 +9,6 @@ using System.Net.Sockets;
 using System.Net;
 using ProtoBuf;
 using System.Threading;
-using NetworkObjects.GPSInput;
 
 namespace TestApplikation
 {

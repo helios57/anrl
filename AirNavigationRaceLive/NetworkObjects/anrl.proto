@@ -1,0 +1,182 @@
+package NetworkObjects;
+option optimize_for = SPEED;
+
+    message Root
+    {
+        optional AuthenticationInfo AuthInfo = 1;
+
+        optional int32 RequestType = 2;
+
+        optional int32 ObjectType = 3;
+
+        optional RequestParameters RequestParameters =4;
+
+        optional ResponseParameters ResponseParameters = 5;
+
+    }
+
+	message AuthenticationInfo
+	{
+        optional string Username =1;
+
+        optional string Password =2;
+
+        optional string Token =3;
+	}
+	message RequestParameters
+	{
+        optional int32 ID = 1;
+
+        repeated int32 IDS =2;
+
+        optional Picture Picture=3;
+
+        optional Map Map =4;
+
+        optional Parcour Parcour =5;
+
+		optional Tracker Tracker =6;
+		
+        optional Pilot Pilot =7;
+
+        optional Team Team =8;
+	}
+	message ResponseParameters
+	{
+		optional int32 ID =1;
+		
+        repeated int32 DeletedIDList=2;
+
+        optional string Exception=3;
+
+        repeated Picture PictureList =4;
+
+        repeated Map MapList =5;
+
+        repeated Parcour ParcourList =6;
+
+        repeated Tracker TrackerList =7;
+
+        repeated Pilot PilotList =8;
+
+		repeated Team TeamList = 9;
+	}
+	message Picture
+	{
+	    optional int32 ID=1;
+
+        optional bytes Image =2;
+
+        optional string Name =3;
+	}
+	message Map
+	{
+	    optional int32 ID = 1;
+
+        optional int32 ID_Picture=2;
+
+        optional string Name =3;
+
+        optional double XSize =4;
+
+        optional double YSize=5;
+
+        optional double XRot=6;
+
+        optional double YRot =7;
+
+        optional double XTopLeft =8;
+
+        optional double YTopLeft =9;
+	}
+	message Parcour
+	{
+        optional int32 ID =1;
+
+        repeated Line LineList = 2;
+
+        optional string Name =3;
+
+        optional int32 ID_Map = 4;
+	}
+	message Line
+	{
+	    optional int32 ID =1;
+
+        optional Point A =2;
+
+        optional Point B =3;
+
+        optional Point O =4;
+
+        optional int32 Type =5;
+	}
+	message Point
+	{
+        optional int32 ID =1;
+
+        optional double altitude =2;
+
+        optional double longitude=3;
+
+        optional double latitude =4;
+	}
+	message Tracker
+	{
+        optional int32 ID = 1;
+
+        optional string IMEI =2;
+
+        optional string Name =3;
+	}
+	message Pilot
+	{
+        optional int32 ID=1;
+
+        optional string Name =2;
+
+        optional string Surename =3;
+
+        optional int32 ID_Picture =4;
+	}
+	message Team
+	{
+        optional int32 ID=1;
+		
+        optional int32 ID_Pilot=2;
+		
+        optional int32 ID_Navigator=3;
+
+		optional string Name = 4;
+
+		optional string Color = 5;
+
+		optional int32 ID_Flag = 6;
+
+		optional string Description = 7;
+
+		repeated int32 ID_Tracker = 8;
+
+	}
+
+message RootMessage {
+	repeated GPSData gpsdata = 1;
+	optional Response response = 2;
+	optional string exception = 3;
+}
+
+message GPSData {
+	optional int64 timestampSender = 1;
+	optional int64 timestampGPS = 2;
+	optional double altitude = 3;
+	optional double latitude = 4;
+	optional double longitude = 5;
+	optional double accuracy = 6;
+	optional double speed = 7;
+	optional double bearing = 8;
+	optional string identifier = 9;
+}
+
+message Response{
+	optional int32 countAdded = 1;
+}

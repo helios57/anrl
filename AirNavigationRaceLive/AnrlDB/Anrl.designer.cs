@@ -42,6 +42,12 @@ namespace AnrlDB
     partial void Insertt_GPSPoint(t_GPSPoint instance);
     partial void Updatet_GPSPoint(t_GPSPoint instance);
     partial void Deletet_GPSPoint(t_GPSPoint instance);
+    partial void Insertt_Group(t_Group instance);
+    partial void Updatet_Group(t_Group instance);
+    partial void Deletet_Group(t_Group instance);
+    partial void Insertt_Group_Team(t_Group_Team instance);
+    partial void Updatet_Group_Team(t_Group_Team instance);
+    partial void Deletet_Group_Team(t_Group_Team instance);
     partial void Insertt_Line(t_Line instance);
     partial void Updatet_Line(t_Line instance);
     partial void Deletet_Line(t_Line instance);
@@ -63,15 +69,12 @@ namespace AnrlDB
     partial void Insertt_Pilot(t_Pilot instance);
     partial void Updatet_Pilot(t_Pilot instance);
     partial void Deletet_Pilot(t_Pilot instance);
-    partial void Insertt_Polygon(t_Polygon instance);
-    partial void Updatet_Polygon(t_Polygon instance);
-    partial void Deletet_Polygon(t_Polygon instance);
-    partial void Insertt_Polygon_Line(t_Polygon_Line instance);
-    partial void Updatet_Polygon_Line(t_Polygon_Line instance);
-    partial void Deletet_Polygon_Line(t_Polygon_Line instance);
     partial void Insertt_Team(t_Team instance);
     partial void Updatet_Team(t_Team instance);
     partial void Deletet_Team(t_Team instance);
+    partial void Insertt_Team_Tracker(t_Team_Tracker instance);
+    partial void Updatet_Team_Tracker(t_Team_Tracker instance);
+    partial void Deletet_Team_Tracker(t_Team_Tracker instance);
     #endregion
 		
 		public AnrlDataContext() : 
@@ -136,6 +139,22 @@ namespace AnrlDB
 			}
 		}
 		
+		public System.Data.Linq.Table<t_Group> t_Groups
+		{
+			get
+			{
+				return this.GetTable<t_Group>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Group_Team> t_Group_Teams
+		{
+			get
+			{
+				return this.GetTable<t_Group_Team>();
+			}
+		}
+		
 		public System.Data.Linq.Table<t_Line> t_Lines
 		{
 			get
@@ -192,27 +211,19 @@ namespace AnrlDB
 			}
 		}
 		
-		public System.Data.Linq.Table<t_Polygon> t_Polygons
-		{
-			get
-			{
-				return this.GetTable<t_Polygon>();
-			}
-		}
-		
-		public System.Data.Linq.Table<t_Polygon_Line> t_Polygon_Lines
-		{
-			get
-			{
-				return this.GetTable<t_Polygon_Line>();
-			}
-		}
-		
 		public System.Data.Linq.Table<t_Team> t_Teams
 		{
 			get
 			{
 				return this.GetTable<t_Team>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Team_Tracker> t_Team_Trackers
+		{
+			get
+			{
+				return this.GetTable<t_Team_Tracker>();
 			}
 		}
 	}
@@ -526,7 +537,7 @@ namespace AnrlDB
 		
 		private EntitySet<t_Daten> _t_Datens;
 		
-		private EntitySet<t_Team> _t_Teams;
+		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -543,7 +554,7 @@ namespace AnrlDB
 		public t_Tracker()
 		{
 			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
-			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
+			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
 			OnCreated();
 		}
 		
@@ -567,7 +578,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string IMEI
 		{
 			get
@@ -587,7 +598,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
 		public string Name
 		{
 			get
@@ -620,16 +631,16 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team", Storage="_t_Teams", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Team> t_Teams
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team_Tracker", Storage="_t_Team_Trackers", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Team_Tracker> t_Team_Trackers
 		{
 			get
 			{
-				return this._t_Teams;
+				return this._t_Team_Trackers;
 			}
 			set
 			{
-				this._t_Teams.Assign(value);
+				this._t_Team_Trackers.Assign(value);
 			}
 		}
 		
@@ -665,13 +676,13 @@ namespace AnrlDB
 			entity.t_Tracker = null;
 		}
 		
-		private void attach_t_Teams(t_Team entity)
+		private void attach_t_Team_Trackers(t_Team_Tracker entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_Tracker = this;
 		}
 		
-		private void detach_t_Teams(t_Team entity)
+		private void detach_t_Team_Trackers(t_Team_Tracker entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_Tracker = null;
@@ -1270,6 +1281,288 @@ namespace AnrlDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Group")]
+	public partial class t_Group : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private EntitySet<t_Group_Team> _t_Group_Teams;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public t_Group()
+		{
+			this._t_Group_Teams = new EntitySet<t_Group_Team>(new Action<t_Group_Team>(this.attach_t_Group_Teams), new Action<t_Group_Team>(this.detach_t_Group_Teams));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Group_Team", Storage="_t_Group_Teams", ThisKey="ID", OtherKey="ID_Group")]
+		public EntitySet<t_Group_Team> t_Group_Teams
+		{
+			get
+			{
+				return this._t_Group_Teams;
+			}
+			set
+			{
+				this._t_Group_Teams.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Group_Teams(t_Group_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Group = this;
+		}
+		
+		private void detach_t_Group_Teams(t_Group_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Group = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Group_Team")]
+	public partial class t_Group_Team : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Group;
+		
+		private int _ID_Team;
+		
+		private EntityRef<t_Group> _t_Group;
+		
+		private EntityRef<t_Team> _t_Team;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_GroupChanging(int value);
+    partial void OnID_GroupChanged();
+    partial void OnID_TeamChanging(int value);
+    partial void OnID_TeamChanged();
+    #endregion
+		
+		public t_Group_Team()
+		{
+			this._t_Group = default(EntityRef<t_Group>);
+			this._t_Team = default(EntityRef<t_Team>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Group", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Group
+		{
+			get
+			{
+				return this._ID_Group;
+			}
+			set
+			{
+				if ((this._ID_Group != value))
+				{
+					if (this._t_Group.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_GroupChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Group = value;
+					this.SendPropertyChanged("ID_Group");
+					this.OnID_GroupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Team", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Team
+		{
+			get
+			{
+				return this._ID_Team;
+			}
+			set
+			{
+				if ((this._ID_Team != value))
+				{
+					if (this._t_Team.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_TeamChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Team = value;
+					this.SendPropertyChanged("ID_Team");
+					this.OnID_TeamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Group_Team", Storage="_t_Group", ThisKey="ID_Group", OtherKey="ID", IsForeignKey=true)]
+		public t_Group t_Group
+		{
+			get
+			{
+				return this._t_Group.Entity;
+			}
+			set
+			{
+				t_Group previousValue = this._t_Group.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Group.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Group.Entity = null;
+						previousValue.t_Group_Teams.Remove(this);
+					}
+					this._t_Group.Entity = value;
+					if ((value != null))
+					{
+						value.t_Group_Teams.Add(this);
+						this._ID_Group = value.ID;
+					}
+					else
+					{
+						this._ID_Group = default(int);
+					}
+					this.SendPropertyChanged("t_Group");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Group_Team", Storage="_t_Team", ThisKey="ID_Team", OtherKey="ID", IsForeignKey=true)]
+		public t_Team t_Team
+		{
+			get
+			{
+				return this._t_Team.Entity;
+			}
+			set
+			{
+				t_Team previousValue = this._t_Team.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Team.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Team.Entity = null;
+						previousValue.t_Group_Teams.Remove(this);
+					}
+					this._t_Team.Entity = value;
+					if ((value != null))
+					{
+						value.t_Group_Teams.Add(this);
+						this._ID_Team = value.ID;
+					}
+					else
+					{
+						this._ID_Team = default(int);
+					}
+					this.SendPropertyChanged("t_Team");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Line")]
 	public partial class t_Line : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1287,8 +1580,6 @@ namespace AnrlDB
 		private int _ID_PointOrientation;
 		
 		private EntitySet<t_Parcour_Line> _t_Parcour_Lines;
-		
-		private EntitySet<t_Polygon_Line> _t_Polygon_Lines;
 		
 		private EntityRef<t_GPSPoint> _t_GPSPoint;
 		
@@ -1315,7 +1606,6 @@ namespace AnrlDB
 		public t_Line()
 		{
 			this._t_Parcour_Lines = new EntitySet<t_Parcour_Line>(new Action<t_Parcour_Line>(this.attach_t_Parcour_Lines), new Action<t_Parcour_Line>(this.detach_t_Parcour_Lines));
-			this._t_Polygon_Lines = new EntitySet<t_Polygon_Line>(new Action<t_Polygon_Line>(this.attach_t_Polygon_Lines), new Action<t_Polygon_Line>(this.detach_t_Polygon_Lines));
 			this._t_GPSPoint = default(EntityRef<t_GPSPoint>);
 			this._t_GPSPoint1 = default(EntityRef<t_GPSPoint>);
 			this._t_GPSPoint2 = default(EntityRef<t_GPSPoint>);
@@ -1444,19 +1734,6 @@ namespace AnrlDB
 			set
 			{
 				this._t_Parcour_Lines.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Polygon_Line", Storage="_t_Polygon_Lines", ThisKey="ID", OtherKey="ID_Line")]
-		public EntitySet<t_Polygon_Line> t_Polygon_Lines
-		{
-			get
-			{
-				return this._t_Polygon_Lines;
-			}
-			set
-			{
-				this._t_Polygon_Lines.Assign(value);
 			}
 		}
 		
@@ -1589,18 +1866,6 @@ namespace AnrlDB
 		}
 		
 		private void detach_t_Parcour_Lines(t_Parcour_Line entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Line = null;
-		}
-		
-		private void attach_t_Polygon_Lines(t_Polygon_Line entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Line = this;
-		}
-		
-		private void detach_t_Polygon_Lines(t_Polygon_Line entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_Line = null;
@@ -2102,8 +2367,6 @@ namespace AnrlDB
 		
 		private EntitySet<t_Parcour_Line> _t_Parcour_Lines;
 		
-		private EntitySet<t_Polygon> _t_Polygons;
-		
 		private EntityRef<t_Map> _t_Map;
 		
     #region Extensibility Method Definitions
@@ -2121,7 +2384,6 @@ namespace AnrlDB
 		public t_Parcour()
 		{
 			this._t_Parcour_Lines = new EntitySet<t_Parcour_Line>(new Action<t_Parcour_Line>(this.attach_t_Parcour_Lines), new Action<t_Parcour_Line>(this.detach_t_Parcour_Lines));
-			this._t_Polygons = new EntitySet<t_Polygon>(new Action<t_Polygon>(this.attach_t_Polygons), new Action<t_Polygon>(this.detach_t_Polygons));
 			this._t_Map = default(EntityRef<t_Map>);
 			OnCreated();
 		}
@@ -2203,19 +2465,6 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Polygon", Storage="_t_Polygons", ThisKey="ID", OtherKey="ID_Parcour")]
-		public EntitySet<t_Polygon> t_Polygons
-		{
-			get
-			{
-				return this._t_Polygons;
-			}
-			set
-			{
-				this._t_Polygons.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Map_t_Parcour", Storage="_t_Map", ThisKey="ID_Map", OtherKey="ID", IsForeignKey=true)]
 		public t_Map t_Map
 		{
@@ -2277,18 +2526,6 @@ namespace AnrlDB
 		}
 		
 		private void detach_t_Parcour_Lines(t_Parcour_Line entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Parcour = null;
-		}
-		
-		private void attach_t_Polygons(t_Polygon entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Parcour = this;
-		}
-		
-		private void detach_t_Polygons(t_Polygon entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_Parcour = null;
@@ -2743,7 +2980,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string LastName
 		{
 			get
@@ -2763,7 +3000,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SureName", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SureName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string SureName
 		{
 			get
@@ -2912,329 +3149,6 @@ namespace AnrlDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Polygon")]
-	public partial class t_Polygon : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private int _ID_Parcour;
-		
-		private EntitySet<t_Polygon_Line> _t_Polygon_Lines;
-		
-		private EntityRef<t_Parcour> _t_Parcour;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnID_ParcourChanging(int value);
-    partial void OnID_ParcourChanged();
-    #endregion
-		
-		public t_Polygon()
-		{
-			this._t_Polygon_Lines = new EntitySet<t_Polygon_Line>(new Action<t_Polygon_Line>(this.attach_t_Polygon_Lines), new Action<t_Polygon_Line>(this.detach_t_Polygon_Lines));
-			this._t_Parcour = default(EntityRef<t_Parcour>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Parcour", DbType="Int NOT NULL")]
-		public int ID_Parcour
-		{
-			get
-			{
-				return this._ID_Parcour;
-			}
-			set
-			{
-				if ((this._ID_Parcour != value))
-				{
-					if (this._t_Parcour.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_ParcourChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Parcour = value;
-					this.SendPropertyChanged("ID_Parcour");
-					this.OnID_ParcourChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Polygon_t_Polygon_Line", Storage="_t_Polygon_Lines", ThisKey="ID", OtherKey="ID_Polygon")]
-		public EntitySet<t_Polygon_Line> t_Polygon_Lines
-		{
-			get
-			{
-				return this._t_Polygon_Lines;
-			}
-			set
-			{
-				this._t_Polygon_Lines.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Polygon", Storage="_t_Parcour", ThisKey="ID_Parcour", OtherKey="ID", IsForeignKey=true)]
-		public t_Parcour t_Parcour
-		{
-			get
-			{
-				return this._t_Parcour.Entity;
-			}
-			set
-			{
-				t_Parcour previousValue = this._t_Parcour.Entity;
-				if (((previousValue != value) 
-							|| (this._t_Parcour.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_Parcour.Entity = null;
-						previousValue.t_Polygons.Remove(this);
-					}
-					this._t_Parcour.Entity = value;
-					if ((value != null))
-					{
-						value.t_Polygons.Add(this);
-						this._ID_Parcour = value.ID;
-					}
-					else
-					{
-						this._ID_Parcour = default(int);
-					}
-					this.SendPropertyChanged("t_Parcour");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_Polygon_Lines(t_Polygon_Line entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Polygon = this;
-		}
-		
-		private void detach_t_Polygon_Lines(t_Polygon_Line entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Polygon = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Polygon_Line")]
-	public partial class t_Polygon_Line : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID_Polygon;
-		
-		private int _ID_Line;
-		
-		private EntityRef<t_Line> _t_Line;
-		
-		private EntityRef<t_Polygon> _t_Polygon;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnID_PolygonChanging(int value);
-    partial void OnID_PolygonChanged();
-    partial void OnID_LineChanging(int value);
-    partial void OnID_LineChanged();
-    #endregion
-		
-		public t_Polygon_Line()
-		{
-			this._t_Line = default(EntityRef<t_Line>);
-			this._t_Polygon = default(EntityRef<t_Polygon>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Polygon", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID_Polygon
-		{
-			get
-			{
-				return this._ID_Polygon;
-			}
-			set
-			{
-				if ((this._ID_Polygon != value))
-				{
-					if (this._t_Polygon.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_PolygonChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Polygon = value;
-					this.SendPropertyChanged("ID_Polygon");
-					this.OnID_PolygonChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Line", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int ID_Line
-		{
-			get
-			{
-				return this._ID_Line;
-			}
-			set
-			{
-				if ((this._ID_Line != value))
-				{
-					if (this._t_Line.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_LineChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Line = value;
-					this.SendPropertyChanged("ID_Line");
-					this.OnID_LineChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Polygon_Line", Storage="_t_Line", ThisKey="ID_Line", OtherKey="ID", IsForeignKey=true)]
-		public t_Line t_Line
-		{
-			get
-			{
-				return this._t_Line.Entity;
-			}
-			set
-			{
-				t_Line previousValue = this._t_Line.Entity;
-				if (((previousValue != value) 
-							|| (this._t_Line.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_Line.Entity = null;
-						previousValue.t_Polygon_Lines.Remove(this);
-					}
-					this._t_Line.Entity = value;
-					if ((value != null))
-					{
-						value.t_Polygon_Lines.Add(this);
-						this._ID_Line = value.ID;
-					}
-					else
-					{
-						this._ID_Line = default(int);
-					}
-					this.SendPropertyChanged("t_Line");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Polygon_t_Polygon_Line", Storage="_t_Polygon", ThisKey="ID_Polygon", OtherKey="ID", IsForeignKey=true)]
-		public t_Polygon t_Polygon
-		{
-			get
-			{
-				return this._t_Polygon.Entity;
-			}
-			set
-			{
-				t_Polygon previousValue = this._t_Polygon.Entity;
-				if (((previousValue != value) 
-							|| (this._t_Polygon.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_Polygon.Entity = null;
-						previousValue.t_Polygon_Lines.Remove(this);
-					}
-					this._t_Polygon.Entity = value;
-					if ((value != null))
-					{
-						value.t_Polygon_Lines.Add(this);
-						this._ID_Polygon = value.ID;
-					}
-					else
-					{
-						this._ID_Polygon = default(int);
-					}
-					this.SendPropertyChanged("t_Polygon");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Team")]
 	public partial class t_Team : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3243,15 +3157,21 @@ namespace AnrlDB
 		
 		private int _ID;
 		
+		private string _Name;
+		
 		private int _ID_Pilot;
 		
 		private System.Nullable<int> _ID_Navigator;
 		
-		private System.Nullable<int> _ID_Tracker;
-		
 		private string _Color;
 		
 		private System.Nullable<int> _ID_Flag;
+		
+		private string _Description;
+		
+		private EntitySet<t_Group_Team> _t_Group_Teams;
+		
+		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
 		
 		private EntityRef<t_Picture> _t_Picture;
 		
@@ -3259,32 +3179,33 @@ namespace AnrlDB
 		
 		private EntityRef<t_Pilot> _t_Pilot1;
 		
-		private EntityRef<t_Tracker> _t_Tracker;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     partial void OnID_PilotChanging(int value);
     partial void OnID_PilotChanged();
     partial void OnID_NavigatorChanging(System.Nullable<int> value);
     partial void OnID_NavigatorChanged();
-    partial void OnID_TrackerChanging(System.Nullable<int> value);
-    partial void OnID_TrackerChanged();
     partial void OnColorChanging(string value);
     partial void OnColorChanged();
     partial void OnID_FlagChanging(System.Nullable<int> value);
     partial void OnID_FlagChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
     #endregion
 		
 		public t_Team()
 		{
+			this._t_Group_Teams = new EntitySet<t_Group_Team>(new Action<t_Group_Team>(this.attach_t_Group_Teams), new Action<t_Group_Team>(this.detach_t_Group_Teams));
+			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
 			this._t_Picture = default(EntityRef<t_Picture>);
 			this._t_Pilot = default(EntityRef<t_Pilot>);
 			this._t_Pilot1 = default(EntityRef<t_Pilot>);
-			this._t_Tracker = default(EntityRef<t_Tracker>);
 			OnCreated();
 		}
 		
@@ -3304,6 +3225,26 @@ namespace AnrlDB
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
@@ -3356,31 +3297,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Tracker", DbType="Int")]
-		public System.Nullable<int> ID_Tracker
-		{
-			get
-			{
-				return this._ID_Tracker;
-			}
-			set
-			{
-				if ((this._ID_Tracker != value))
-				{
-					if (this._t_Tracker.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_TrackerChanging(value);
-					this.SendPropertyChanging();
-					this._ID_Tracker = value;
-					this.SendPropertyChanged("ID_Tracker");
-					this.OnID_TrackerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="NChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Color", DbType="VarChar(10)")]
 		public string Color
 		{
 			get
@@ -3421,6 +3338,52 @@ namespace AnrlDB
 					this.SendPropertyChanged("ID_Flag");
 					this.OnID_FlagChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(500)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Group_Team", Storage="_t_Group_Teams", ThisKey="ID", OtherKey="ID_Team")]
+		public EntitySet<t_Group_Team> t_Group_Teams
+		{
+			get
+			{
+				return this._t_Group_Teams;
+			}
+			set
+			{
+				this._t_Group_Teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Team_Tracker", Storage="_t_Team_Trackers", ThisKey="ID", OtherKey="ID_Team")]
+		public EntitySet<t_Team_Tracker> t_Team_Trackers
+		{
+			get
+			{
+				return this._t_Team_Trackers;
+			}
+			set
+			{
+				this._t_Team_Trackers.Assign(value);
 			}
 		}
 		
@@ -3526,7 +3489,165 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team", Storage="_t_Tracker", ThisKey="ID_Tracker", OtherKey="ID", IsForeignKey=true)]
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Group_Teams(t_Group_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Team = this;
+		}
+		
+		private void detach_t_Group_Teams(t_Group_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Team = null;
+		}
+		
+		private void attach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Team = this;
+		}
+		
+		private void detach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Team = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Team_Tracker")]
+	public partial class t_Team_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Team;
+		
+		private int _ID_Tracker;
+		
+		private EntityRef<t_Team> _t_Team;
+		
+		private EntityRef<t_Tracker> _t_Tracker;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_TeamChanging(int value);
+    partial void OnID_TeamChanged();
+    partial void OnID_TrackerChanging(int value);
+    partial void OnID_TrackerChanged();
+    #endregion
+		
+		public t_Team_Tracker()
+		{
+			this._t_Team = default(EntityRef<t_Team>);
+			this._t_Tracker = default(EntityRef<t_Tracker>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Team", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Team
+		{
+			get
+			{
+				return this._ID_Team;
+			}
+			set
+			{
+				if ((this._ID_Team != value))
+				{
+					if (this._t_Team.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_TeamChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Team = value;
+					this.SendPropertyChanged("ID_Team");
+					this.OnID_TeamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Tracker", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Tracker
+		{
+			get
+			{
+				return this._ID_Tracker;
+			}
+			set
+			{
+				if ((this._ID_Tracker != value))
+				{
+					if (this._t_Tracker.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_TrackerChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Tracker = value;
+					this.SendPropertyChanged("ID_Tracker");
+					this.OnID_TrackerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Team_Tracker", Storage="_t_Team", ThisKey="ID_Team", OtherKey="ID", IsForeignKey=true)]
+		public t_Team t_Team
+		{
+			get
+			{
+				return this._t_Team.Entity;
+			}
+			set
+			{
+				t_Team previousValue = this._t_Team.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Team.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Team.Entity = null;
+						previousValue.t_Team_Trackers.Remove(this);
+					}
+					this._t_Team.Entity = value;
+					if ((value != null))
+					{
+						value.t_Team_Trackers.Add(this);
+						this._ID_Team = value.ID;
+					}
+					else
+					{
+						this._ID_Team = default(int);
+					}
+					this.SendPropertyChanged("t_Team");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team_Tracker", Storage="_t_Tracker", ThisKey="ID_Tracker", OtherKey="ID", IsForeignKey=true)]
 		public t_Tracker t_Tracker
 		{
 			get
@@ -3543,17 +3664,17 @@ namespace AnrlDB
 					if ((previousValue != null))
 					{
 						this._t_Tracker.Entity = null;
-						previousValue.t_Teams.Remove(this);
+						previousValue.t_Team_Trackers.Remove(this);
 					}
 					this._t_Tracker.Entity = value;
 					if ((value != null))
 					{
-						value.t_Teams.Add(this);
+						value.t_Team_Trackers.Add(this);
 						this._ID_Tracker = value.ID;
 					}
 					else
 					{
-						this._ID_Tracker = default(Nullable<int>);
+						this._ID_Tracker = default(int);
 					}
 					this.SendPropertyChanged("t_Tracker");
 				}

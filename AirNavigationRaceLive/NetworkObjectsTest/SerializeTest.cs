@@ -44,9 +44,9 @@ namespace NetworkObjectsTest
                     Root root = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
                     Console.WriteLine("SERVER: Got customer:");
                     Console.WriteLine(root.AuthInfo.Username);
-                    switch ((RequestType)root.RequestType)
+                    switch ((ERequestType)root.RequestType)
                     {
-                        case RequestType.Login:
+                        case ERequestType.Login:
                             {
                                 root.AuthInfo.Token = "Token " + Environment.MachineName;
                                 break;
@@ -81,7 +81,7 @@ namespace NetworkObjectsTest
             Root root = new Root();
             root.AuthInfo = new AuthenticationInfo();
             root.AuthInfo.Username = "Testtt ";
-            root.RequestType = (int)RequestType.Login;
+            root.RequestType = (int)ERequestType.Login;
             Console.WriteLine("CLIENT: Opening connection...");
             using (TcpClient client = new TcpClient())
             {

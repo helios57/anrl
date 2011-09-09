@@ -2,29 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ProtoBuf;
 
 namespace NetworkObjects
 {
-    [ProtoContract]
-    public class Line
+    public enum ERequestType : int
     {
-        [ProtoMember(1)]
-        public int ID { get; set; }
+        Login = 0,
+        Get = 1,
+        Save = 2,
+        Delete = 3,
+        GetAll = 4
+    }
 
-        [ProtoMember(2)]
-        public Point A { get; set; }
-
-        [ProtoMember(3)]
-        public Point B { get; set; }
-
-        [ProtoMember(4)]
-        public Point O { get; set; }
-
-        [ProtoMember(5)]
-        public int Type { get; set; }
-
-
+    public enum EObjectType : int
+    {
+        Login = 0,
+        Map = 1,
+        Picture = 2,
+        Parcour = 3,
+        Tracker = 4,
+        Pilot = 5,
+        Team = 6
     }
     public enum LineType : int
     {

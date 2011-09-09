@@ -69,6 +69,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -87,6 +88,11 @@
       <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\Client\Client.cs" />
+    <Compile Include="Comps\Client\ClientCache.cs" />
+    <Compile Include="Comps\Client\ClientCacheDirtyEvent.cs" />
+    <Compile Include="Comps\Client\ClientCacheEntry.cs" />
+    <Compile Include="Comps\Client\ClientCacheList.cs" />
+    <Compile Include="Comps\Client\ClientCacheLoader.cs" />
     <Compile Include="Comps\Connect.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -284,6 +290,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

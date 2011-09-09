@@ -1,7 +1,7 @@
-﻿using AirNavigationRaceLive.Comps.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using AirNavigationRaceLive.Comps.Helper;
 
 namespace ANRL_Tests
 {

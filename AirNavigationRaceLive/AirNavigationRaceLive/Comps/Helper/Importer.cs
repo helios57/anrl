@@ -70,10 +70,10 @@ namespace AirNavigationRaceLive.Comps.Helper
                                         int i_b = (j + 1) % list.Count;
                                         Vector a = list[i_a];
                                         Vector b = list[i_b];
-                                        l.A = new Point(a.X, a.Y, a.Z);
-                                        l.B = new Point(b.X, b.Y, b.Z);
-                                        l.O = new Point(o.X, o.Y, o.Z);
-                                        result.Lines.Add(l);
+                                        l.A = NetworkObjects.Helper.Point(a.X, a.Y, a.Z);
+                                        l.B = NetworkObjects.Helper.Point(b.X, b.Y, b.Z);
+                                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                                        result.LineList.Add(l);
                                     }
                                 }
                             }                    
@@ -84,15 +84,15 @@ namespace AirNavigationRaceLive.Comps.Helper
                         Line l = new Line();
                         double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
                         double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                        l.A = new Point(Longitude1, Latitude1, 0);
+                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
                         double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
                         double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
-                        l.B = new Point(Longitude2, Latitude2, 0);
+                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = new Point(o.X, o.Y, o.Z);
+                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
 
                         string gatename = lines[i + 6].Substring(11, 1);
                         switch (gatename)
@@ -118,22 +118,22 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.Lines.Add(l);
+                        result.LineList.Add(l);
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("ENDPOINT-"))
                     {
                         Line l = new Line();
                         double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
                         double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                        l.A = new Point(Longitude1, Latitude1, 0);
+                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
                         double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
                         double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
-                        l.B = new Point(Longitude2, Latitude2, 0);
+                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = new Point(o.X, o.Y, o.Z);
+                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
 
                         string gatename = lines[i + 6].Substring(9, 1);
                         switch (gatename)
@@ -159,7 +159,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.Lines.Add(l);
+                        result.LineList.Add(l);
 
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
@@ -169,17 +169,17 @@ namespace AirNavigationRaceLive.Comps.Helper
                             Line l = new Line();
                             double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
                             double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
-                            l.A = new Point(Longitude1, Latitude1, 0);
+                            l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
                             double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
                             double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                            l.B = new Point(Longitude2, Latitude2, 0);
+                            l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
                             Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                            l.O = new Point(o.X, o.Y, o.Z);
+                            l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
                             l.Type = (int)LineType.LINEOFNORETURN;
-                            result.Lines.Add(l);
+                            result.LineList.Add(l);
                         }
                     }
                 }

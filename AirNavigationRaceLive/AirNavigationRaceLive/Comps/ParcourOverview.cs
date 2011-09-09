@@ -131,9 +131,9 @@ namespace AirNavigationRaceLive.Comps
                     {
                         case ActivePoint.A:
                             {
-                                Point a = new Point(longitude, latitude, 0);
-                                Point b = new Point(a.longitude, a.latitude, a.altitude);
-                                Point o = new Point(a.longitude, a.latitude, a.altitude);
+                                Point a = NetworkObjects.Helper.Point(longitude, latitude, 0);
+                                Point b = NetworkObjects.Helper.Point(a.longitude, a.latitude, a.altitude);
+                                Point o = NetworkObjects.Helper.Point(a.longitude, a.latitude, a.altitude);
                                 activeLine.A = a;
                                 activeLine.B = b;
                                 activeLine.O = o;
@@ -142,8 +142,8 @@ namespace AirNavigationRaceLive.Comps
                             }
                         case ActivePoint.B:
                             {
-                                Point b = new Point(longitude, latitude, 0);
-                                Point o = new Point(b.longitude, b.latitude, b.altitude);
+                                Point b = NetworkObjects.Helper.Point(longitude, latitude, 0);
+                                Point o = NetworkObjects.Helper.Point(b.longitude, b.latitude, b.altitude);
                                 activeLine.B = b;
                                 activeLine.O = o;
                                 pictureBox1.Invalidate();
@@ -151,7 +151,7 @@ namespace AirNavigationRaceLive.Comps
                             }
                         case ActivePoint.O:
                             {
-                                Point o = new Point(longitude, latitude, 0);
+                                Point o = NetworkObjects.Helper.Point(longitude, latitude, 0);
                                 activeLine.O = o;
                                 pictureBox1.Invalidate();
                                 break;
@@ -169,7 +169,7 @@ namespace AirNavigationRaceLive.Comps
                     bool lineSet = false;
                     lock (activeParcour)
                     {
-                        foreach (Line l in activeParcour.Lines)
+                        foreach (Line l in activeParcour.LineList)
                         {
                             int startX = c.getStartX(l);
                             int startY = c.getStartY(l);
@@ -266,45 +266,45 @@ namespace AirNavigationRaceLive.Comps
         private void btnAddStartLine_Click(object sender, EventArgs e)
         {
             SetSelectedLine(null);
-            if (activeParcour.Lines.Exists(p => p.Type == (int)LineType.START))
+            if (activeParcour.LineList.Exists(p => p.Type == (int)LineType.START))
             {
-                activeLine = activeParcour.Lines.Single(p => p.Type == (int)LineType.START) as Line;
+                activeLine = activeParcour.LineList.Single(p => p.Type == (int)LineType.START) as Line;
             }
             else
             {
                 activeLine = new Line();
                 activeLine.Type = (int)LineType.START;
-                activeParcour.Lines.Add(activeLine);
+                activeParcour.LineList.Add(activeLine);
             }
             ap = ActivePoint.A;
         }
         private void btnAddEnd_Click(object sender, EventArgs e)
         {
             SetSelectedLine(null);
-            if (activeParcour.Lines.Exists(p => p.Type == (int)LineType.END))
+            if (activeParcour.LineList.Exists(p => p.Type == (int)LineType.END))
             {
-                activeLine = activeParcour.Lines.Single(p => p.Type == (int)LineType.END) as Line;
+                activeLine = activeParcour.LineList.Single(p => p.Type == (int)LineType.END) as Line;
             }
             else
             {
                 activeLine = new Line();
                 activeLine.Type = (int)LineType.END;
-                activeParcour.Lines.Add(activeLine);
+                activeParcour.LineList.Add(activeLine);
             }
             ap = ActivePoint.A;
         }
         private void btnAddLineOfNoReturn_Click(object sender, EventArgs e)
         {
             SetSelectedLine(null);
-            if (activeParcour.Lines.Exists(p => p.Type == (int)LineType.LINEOFNORETURN))
+            if (activeParcour.LineList.Exists(p => p.Type == (int)LineType.LINEOFNORETURN))
             {
-                activeLine = activeParcour.Lines.Single(p => p.Type == (int)LineType.LINEOFNORETURN) as Line;
+                activeLine = activeParcour.LineList.Single(p => p.Type == (int)LineType.LINEOFNORETURN) as Line;
             }
             else
             {
                 activeLine = new Line();
                 activeLine.Type = (int)LineType.LINEOFNORETURN;
-                activeParcour.Lines.Add(activeLine);
+                activeParcour.LineList.Add(activeLine);
             }
             ap = ActivePoint.A;
 

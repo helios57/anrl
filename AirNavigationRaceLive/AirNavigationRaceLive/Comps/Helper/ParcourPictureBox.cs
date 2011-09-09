@@ -43,7 +43,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 lock (Parcour)
                 {
-                    List<Line> lines = Parcour.Lines;
+                    List<Line> lines = Parcour.LineList;
                     List<Line> linespenalty = lines.Where(p => p.Type == (int)NetworkObjects.LineType.PENALTYZONE).ToList();
                     foreach (Line l in linespenalty)
                     {

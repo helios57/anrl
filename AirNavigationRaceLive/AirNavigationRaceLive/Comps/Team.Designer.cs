@@ -49,18 +49,15 @@
             this.btnClearNavigator = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.btnClearTracker = new System.Windows.Forms.Button();
-            this.textTracker = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listViewTracker = new System.Windows.Forms.ListView();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.IMEIl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnAddTracker = new System.Windows.Forms.Button();
             this.comboBoxCountry = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnColorSelect = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.trackerListView = new System.Windows.Forms.ListView();
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TrackerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.IMEI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -79,7 +76,7 @@
             this.listViewTeam.MultiSelect = false;
             this.listViewTeam.Name = "listViewTeam";
             this.listViewTeam.ShowGroups = false;
-            this.listViewTeam.Size = new System.Drawing.Size(344, 160);
+            this.listViewTeam.Size = new System.Drawing.Size(344, 281);
             this.listViewTeam.TabIndex = 5;
             this.listViewTeam.UseCompatibleStateImageBehavior = false;
             this.listViewTeam.View = System.Windows.Forms.View.Details;
@@ -125,7 +122,7 @@
             this.listViewPilots.GridLines = true;
             this.listViewPilots.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewPilots.LabelWrap = false;
-            this.listViewPilots.Location = new System.Drawing.Point(3, 169);
+            this.listViewPilots.Location = new System.Drawing.Point(3, 290);
             this.listViewPilots.MultiSelect = false;
             this.listViewPilots.Name = "listViewPilots";
             this.listViewPilots.ShowGroups = false;
@@ -206,7 +203,7 @@
             // 
             // btnAddPilot
             // 
-            this.btnAddPilot.Location = new System.Drawing.Point(253, 169);
+            this.btnAddPilot.Location = new System.Drawing.Point(253, 290);
             this.btnAddPilot.Name = "btnAddPilot";
             this.btnAddPilot.Size = new System.Drawing.Size(94, 23);
             this.btnAddPilot.TabIndex = 19;
@@ -216,7 +213,7 @@
             // 
             // btnAddNavigator
             // 
-            this.btnAddNavigator.Location = new System.Drawing.Point(253, 198);
+            this.btnAddNavigator.Location = new System.Drawing.Point(253, 319);
             this.btnAddNavigator.Name = "btnAddNavigator";
             this.btnAddNavigator.Size = new System.Drawing.Size(94, 23);
             this.btnAddNavigator.TabIndex = 19;
@@ -264,87 +261,19 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // btnClearTracker
-            // 
-            this.btnClearTracker.Location = new System.Drawing.Point(541, 137);
-            this.btnClearTracker.Name = "btnClearTracker";
-            this.btnClearTracker.Size = new System.Drawing.Size(56, 23);
-            this.btnClearTracker.TabIndex = 26;
-            this.btnClearTracker.Text = "Clear";
-            this.btnClearTracker.UseVisualStyleBackColor = true;
-            this.btnClearTracker.Click += new System.EventHandler(this.btnClearTracker_Click);
-            // 
-            // textTracker
-            // 
-            this.textTracker.Enabled = false;
-            this.textTracker.Location = new System.Drawing.Point(411, 139);
-            this.textTracker.Name = "textTracker";
-            this.textTracker.Size = new System.Drawing.Size(124, 20);
-            this.textTracker.TabIndex = 25;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(350, 142);
+            this.label1.Location = new System.Drawing.Point(352, 201);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 24;
             this.label1.Text = "Tracker";
             // 
-            // listViewTracker
-            // 
-            this.listViewTracker.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listViewTracker.AutoArrange = false;
-            this.listViewTracker.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader3,
-            this.IMEIl});
-            this.listViewTracker.FullRowSelect = true;
-            this.listViewTracker.GridLines = true;
-            this.listViewTracker.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewTracker.LabelWrap = false;
-            this.listViewTracker.Location = new System.Drawing.Point(3, 282);
-            this.listViewTracker.MultiSelect = false;
-            this.listViewTracker.Name = "listViewTracker";
-            this.listViewTracker.ShowGroups = false;
-            this.listViewTracker.Size = new System.Drawing.Size(244, 115);
-            this.listViewTracker.TabIndex = 27;
-            this.listViewTracker.UseCompatibleStateImageBehavior = false;
-            this.listViewTracker.View = System.Windows.Forms.View.Details;
-            this.listViewTracker.SelectedIndexChanged += new System.EventHandler(this.listViewTracker_SelectedIndexChanged);
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Tag = "IDl";
-            this.columnHeader2.Text = "ID";
-            this.columnHeader2.Width = 42;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Tag = "Namel";
-            this.columnHeader3.Text = "Name";
-            this.columnHeader3.Width = 100;
-            // 
-            // IMEIl
-            // 
-            this.IMEIl.Tag = "IMEIl";
-            this.IMEIl.Text = "IMEI";
-            this.IMEIl.Width = 191;
-            // 
-            // btnAddTracker
-            // 
-            this.btnAddTracker.Location = new System.Drawing.Point(253, 282);
-            this.btnAddTracker.Name = "btnAddTracker";
-            this.btnAddTracker.Size = new System.Drawing.Size(94, 23);
-            this.btnAddTracker.TabIndex = 28;
-            this.btnAddTracker.Text = "AddTracker";
-            this.btnAddTracker.UseVisualStyleBackColor = true;
-            this.btnAddTracker.Click += new System.EventHandler(this.btnAddTracker_Click);
-            // 
             // comboBoxCountry
             // 
             this.comboBoxCountry.FormattingEnabled = true;
-            this.comboBoxCountry.Location = new System.Drawing.Point(411, 198);
+            this.comboBoxCountry.Location = new System.Drawing.Point(411, 171);
             this.comboBoxCountry.Name = "comboBoxCountry";
             this.comboBoxCountry.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCountry.TabIndex = 29;
@@ -353,7 +282,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(353, 201);
+            this.label5.Location = new System.Drawing.Point(353, 174);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 30;
@@ -361,7 +290,7 @@
             // 
             // btnColorSelect
             // 
-            this.btnColorSelect.Location = new System.Drawing.Point(411, 166);
+            this.btnColorSelect.Location = new System.Drawing.Point(411, 139);
             this.btnColorSelect.Name = "btnColorSelect";
             this.btnColorSelect.Size = new System.Drawing.Size(121, 23);
             this.btnColorSelect.TabIndex = 31;
@@ -372,24 +301,53 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(353, 171);
+            this.label6.Location = new System.Drawing.Point(353, 144);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
             this.label6.Text = "Color";
             // 
+            // trackerListView
+            // 
+            this.trackerListView.CheckBoxes = true;
+            this.trackerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ID,
+            this.TrackerName,
+            this.IMEI});
+            this.trackerListView.FullRowSelect = true;
+            this.trackerListView.GridLines = true;
+            this.trackerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.trackerListView.HideSelection = false;
+            this.trackerListView.Location = new System.Drawing.Point(411, 201);
+            this.trackerListView.Name = "trackerListView";
+            this.trackerListView.Size = new System.Drawing.Size(186, 196);
+            this.trackerListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.trackerListView.TabIndex = 34;
+            this.trackerListView.UseCompatibleStateImageBehavior = false;
+            this.trackerListView.View = System.Windows.Forms.View.Details;
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
+            this.ID.Width = 30;
+            // 
+            // TrackerName
+            // 
+            this.TrackerName.Text = "Name";
+            // 
+            // IMEI
+            // 
+            this.IMEI.Text = "IMEI";
+            // 
             // Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.trackerListView);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnColorSelect);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxCountry);
-            this.Controls.Add(this.btnAddTracker);
-            this.Controls.Add(this.listViewTracker);
-            this.Controls.Add(this.btnClearTracker);
-            this.Controls.Add(this.textTracker);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnNew);
@@ -437,17 +395,14 @@
         private System.Windows.Forms.Button btnClearNavigator;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.Button btnClearTracker;
-        private System.Windows.Forms.TextBox textTracker;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView listViewTracker;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader IMEIl;
-        private System.Windows.Forms.Button btnAddTracker;
         private System.Windows.Forms.ComboBox comboBoxCountry;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnColorSelect;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListView trackerListView;
+        private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.ColumnHeader TrackerName;
+        private System.Windows.Forms.ColumnHeader IMEI;
     }
 }

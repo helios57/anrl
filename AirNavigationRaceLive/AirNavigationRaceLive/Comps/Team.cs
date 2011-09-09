@@ -28,31 +28,55 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateListe()
         {
-            /*resetFields();
-            List<ITeam> teams = null;// Client.getTeams();
+            resetFields();
+            List<NetworkObjects.Pilot> pilots = Client.getPilots();
+            List<NetworkObjects.Team> teams = Client.getTeams();
             listViewTeam.Items.Clear();
-            foreach (ITeam p in teams)
+            foreach (NetworkObjects.Team team in teams)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.Pilot.Name,(p.Navigator!=null)? p.Navigator.Name:"-" });
-                lvi.Tag = p;
+                NetworkObjects.Pilot pilot;
+                NetworkObjects.Pilot navigator = null;
+                if (pilots.Count(p => p.ID == team.ID_Pilot) == 1)
+                {
+                    pilot = pilots.Single(p => p.ID == team.ID_Pilot);
+                }
+                else
+                {
+                    pilot = Client.getPilot(team.ID_Pilot);
+                }
+                if (team.ID_Navigator > 0)
+                {
+                    if (pilots.Count(p => p.ID == team.ID_Navigator) == 1)
+                    {
+                        navigator = pilots.Single(p => p.ID == team.ID_Navigator);
+                    }
+                    else
+                    {
+                        navigator = Client.getPilot(team.ID_Navigator);
+                    }
+                }
+
+                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), pilot.Name, (navigator != null) ? navigator.Name : "-" });
+                lvi.Tag = team;
                 listViewTeam.Items.Add(lvi);
             }
 
-            List<IPilot> pilots = null;//Client.getPilots();
             listViewPilots.Items.Clear();
-            foreach (IPilot p in pilots)
+            foreach (NetworkObjects.Pilot p in pilots)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.Name, p.Surename });
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
-            List<ITracker> trackers = null;// Client.getTrackers();
-            listViewTracker.Items.Clear();
-            foreach (ITracker t in trackers)
+            List<NetworkObjects.Tracker> trackers = Client.getTrackers();
+            trackerListView.Items.Clear();
+            foreach (NetworkObjects.Tracker t in trackers)
             {
-                listViewTracker.Items.Add(new TrackerEntry(t));
+                ListViewItem lvi = new ListViewItem(new string[] { t.ID.ToString(), t.Name, t.IMEI });
+                lvi.Tag = t;
+                trackerListView.Items.Add(lvi);
             }
-            List<IPicture> flags = null;// Client.getPictures(true);
+            /*List<IPicture> flags = null;// Client.getPictures(true);
             comboBoxCountry.Items.Clear();
             foreach (IPicture p in flags)
             {
@@ -63,7 +87,6 @@ namespace AirNavigationRaceLive.Comps
                     comboBoxCountry.SelectedItem = f;
                 }
             }*/
-
         }
 
         private void UpdateEnablement()
@@ -75,11 +98,10 @@ namespace AirNavigationRaceLive.Comps
             btnClearPilot.Enabled = teamSelected && textBoxPilot.Tag != null;
             btnAddNavigator.Enabled = teamSelected && pilotSelected && textBoxNavigator.Tag == null;
             btnAddPilot.Enabled = teamSelected && pilotSelected && textBoxPilot.Tag == null;
-            btnClearTracker.Enabled = teamSelected && textTracker.Tag != null;
-            btnAddTracker.Enabled = teamSelected && (listViewTracker.SelectedItems.Count == 1);
-            btnSave.Enabled = teamSelected && textBoxPilot.Tag != null && comboBoxCountry.SelectedItem!=null;
+            btnSave.Enabled = teamSelected && textBoxPilot.Tag != null /*&& comboBoxCountry.SelectedItem != null*/;
             btnColorSelect.Enabled = teamSelected;
             comboBoxCountry.Enabled = teamSelected;
+            trackerListView.Enabled = teamSelected;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -102,19 +124,12 @@ namespace AirNavigationRaceLive.Comps
             UpdateEnablement();
         }
 
-        private void btnClearTracker_Click(object sender, EventArgs e)
-        {
-            textTracker.Tag = null;
-            textTracker.Text = "";
-            UpdateEnablement();
-        }
-
         private void btnAddPilot_Click(object sender, EventArgs e)
         {
             if (listViewPilots.SelectedItems.Count == 1)
             {
                 textBoxPilot.Tag = listViewPilots.SelectedItems[0].Tag;
-                //textBoxPilot.Text = ((IPilot)listViewPilots.SelectedItems[0].Tag).Name;
+                textBoxPilot.Text = ((NetworkObjects.Pilot)listViewPilots.SelectedItems[0].Tag).Name;
             }
             UpdateEnablement();
         }
@@ -124,17 +139,7 @@ namespace AirNavigationRaceLive.Comps
             if (listViewPilots.SelectedItems.Count == 1)
             {
                 textBoxNavigator.Tag = listViewPilots.SelectedItems[0].Tag;
-                //textBoxNavigator.Text = ((IPilot)listViewPilots.SelectedItems[0].Tag).Name;
-            }
-            UpdateEnablement();
-        }
-
-        private void btnAddTracker_Click(object sender, EventArgs e)
-        {
-            if (listViewTracker.SelectedItems.Count == 1)
-            {
-                textTracker.Tag = listViewTracker.SelectedItems[0].Tag;
-               // textTracker.Text = ((ITracker)listViewTracker.SelectedItems[0].Tag).Name;
+                textBoxNavigator.Text = ((NetworkObjects.Pilot)listViewPilots.SelectedItems[0].Tag).Name;
             }
             UpdateEnablement();
         }
@@ -149,15 +154,32 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if ((textBoxID.Tag != null || newTeam) && comboBoxCountry.SelectedItem!=null)
+            if ((textBoxID.Tag != null || newTeam) && textBoxPilot.Tag != null/*&& comboBoxCountry.SelectedItem != null*/)
             {
                 /*IPicture flag;
                 Flag f = comboBoxCountry.SelectedItem as Flag;
                 flag = f.getPicture();
-                TeamEntry te = new TeamEntry(long.Parse(textBoxID.Text),textBoxPilot.Tag as IPilot, textBoxNavigator.Tag as IPilot,textTracker.Tag as ITracker, btnColorSelect.BackColor.Name,flag);
-                //Client.addTeam(te);
+                TeamEntry te = new TeamEntry(,textBoxPilot.Tag as IPilot, textBoxNavigator.Tag as IPilot,textTracker.Tag as ITracker, btnColorSelect.BackColor.Name,flag);
+                //Client.addTeam(te);*/
+                NetworkObjects.Team team = new NetworkObjects.Team();
+                team.ID = Math.Max(Int32.Parse(textBoxID.Text), 0);
+                team.ID_Pilot = (textBoxPilot.Tag as NetworkObjects.Pilot).ID;
+                if (textBoxNavigator.Tag != null)
+                {
+                    team.ID_Navigator = (textBoxNavigator.Tag as NetworkObjects.Pilot).ID;
+                }
+                team.Color = btnColorSelect.BackColor.Name;
+                foreach (ListViewItem lvi in trackerListView.Items)
+                {
+                    if (lvi.Checked)
+                    {
+                        NetworkObjects.Tracker tracker = lvi.Tag as NetworkObjects.Tracker;
+                        team.ID_Tracker.Add(tracker.ID);
+                    }
+                }
+                int id = Client.saveTeam(team);
                 resetFields();
-                UpdateEnablement();*/
+                UpdateEnablement();
             }
             UpdateListe();
             UpdateEnablement();
@@ -170,25 +192,35 @@ namespace AirNavigationRaceLive.Comps
             textBoxPilot.Tag = null;
             textBoxPilot.Text = "";
             textBoxNavigator.Tag = null;
-            textBoxNavigator.Text = ""; 
-            textTracker.Tag = null;
-            textTracker.Text = "";
+            textBoxNavigator.Text = "";
             btnColorSelect.BackColor = Color.Gray;
+            trackerListView.SelectedItems.Clear();
+            foreach (ListViewItem lvi in trackerListView.Items)
+            {
+                lvi.Checked = false;
+            }
         }
 
         private void listViewTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
             if (listViewTeam.SelectedItems.Count == 1)
             {
-                /*ITeam team = listViewTeam.SelectedItems[0].Tag as ITeam;
+                NetworkObjects.Team team = listViewTeam.SelectedItems[0].Tag as NetworkObjects.Team;
                 textBoxID.Tag = team;
                 textBoxID.Text = team.ID.ToString();
-                textBoxPilot.Tag = team.Pilot;
-                textBoxPilot.Text = team.Pilot.Name;
-                textBoxNavigator.Tag = team.Navigator;
-                textBoxNavigator.Text = (team.Navigator!=null)?team.Navigator.Name:"";
-                textTracker.Tag = team.Tracker;
-                textTracker.Text = team.Tracker.Name;
+                NetworkObjects.Pilot pilot = Client.getPilot(team.ID_Pilot);
+                NetworkObjects.Pilot navigator = null;
+                if (team.ID_Navigator > 0)
+                {
+                    navigator = Client.getPilot(team.ID_Navigator);
+                }
+                textBoxPilot.Tag = pilot;
+                textBoxPilot.Text = pilot.Name;
+                textBoxNavigator.Tag = navigator;
+                textBoxNavigator.Text = (navigator != null) ? navigator.Name : "";
+                /*
                 Flag selected = null;
                 String flagName = team.FlagPicture.Name.Trim();
                 foreach (object o in comboBoxCountry.Items)
@@ -199,8 +231,13 @@ namespace AirNavigationRaceLive.Comps
                         selected = f;
                     }
                 }
-                comboBoxCountry.SelectedItem = selected;
-                btnColorSelect.BackColor = Color.FromName(team.Color.Trim());*/
+                comboBoxCountry.SelectedItem = selected;*/
+                btnColorSelect.BackColor = Color.FromName(team.Color.Trim());
+                foreach (ListViewItem lvi in trackerListView.Items)
+                {
+                    NetworkObjects.Tracker tracker = lvi.Tag as NetworkObjects.Tracker;
+                    lvi.Checked = team.ID_Tracker.Contains(tracker.ID);
+                }
             }
             else
             {
@@ -233,125 +270,5 @@ namespace AirNavigationRaceLive.Comps
         {
             UpdateEnablement();
         }
-
-
-    }/*
-    class TeamEntry : MarshalByRefObject, ITeam
-    {
-        private IPilot _Pilot;
-        private IPilot _Navigator;
-        private IPicture _Picture;
-        private ITracker _Tracker;
-        private String _Color;
-        private long _ID;
-
-        internal TeamEntry(long iID, IPilot iPilot, IPilot iNavigator, ITracker iTracker, String iColor, IPicture flag)
-        {
-            _ID = iID;
-            _Pilot = iPilot;
-            _Navigator = iNavigator;
-            _Tracker = iTracker;
-            _Color = iColor;
-            _Picture = flag;
-        }
-
-        #region ITeam Members
-
-        public IPilot Pilot
-        {
-            get { return _Pilot; }
-        }
-
-        public IPilot Navigator
-        {
-            get {return _Navigator; }
-        }
-
-        public IPicture FlagPicture
-        {
-            get { return _Picture; }
-        }
-        
-        public ITracker Tracker
-        {
-            get { return _Tracker; }
-        }
-
-        public String Color
-        {
-            get { return _Color; }
-        }
-
-        #endregion
-
-        #region IID Members
-
-        public long ID
-        {
-            get {return _ID; }
-        }
-
-        #endregion
     }
-    partial class TrackerEntry : ListViewItem
-    {
-        private ITracker ITracker;
-
-        public TrackerEntry(ITracker iTracker)
-            : base(new String[] { iTracker.ID.ToString().Trim(), iTracker.Name.Trim(), iTracker.IMEI.Trim() })
-        {
-            ITracker = iTracker;
-            Tag = iTracker;
-        }
-
-        public ITracker getITracker()
-        {
-            return ITracker;
-        }
-    }
-    class TrackerImpl : MarshalByRefObject, ITracker
-    {
-        long _ID;
-        string _Name;
-        string _IMEI;
-
-        public TrackerImpl(long iID, string iName, string iIMEI)
-        {
-            _ID = iID;
-            _Name = iName;
-            _IMEI = iIMEI;
-        }
-        public string Name
-        {
-            get { return _Name; }
-        }
-
-        public string IMEI
-        {
-            get { return _IMEI; }
-        }
-        public long ID
-        {
-            get { return _ID; }
-        }
-
-    }
-    class Flag
-    {
-        IPicture _Picture;
-        String name;
-        public Flag(IPicture picture)
-        {
-            _Picture = picture;
-            name = picture.Name.Trim();
-        }
-        public IPicture getPicture()
-        {
-            return _Picture;
-        }
-        public override String ToString()
-        {
-            return name;
-        }
-    }*/
 }

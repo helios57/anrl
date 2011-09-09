@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using NetworkObjects;
 using AnrlDB;
-using NetworkObjects.GPSInput;
 using System.Diagnostics;
 
 namespace AnrlService.Server
@@ -23,6 +22,7 @@ namespace AnrlService.Server
         public RootMessage proccessRequest(RootMessage request){
             RootMessage response = new RootMessage();
             response.response = new Response();
+            response.response.countAdded = 0;
             try
             {
                 if (request != null && request.gpsdata.Count > 0)
