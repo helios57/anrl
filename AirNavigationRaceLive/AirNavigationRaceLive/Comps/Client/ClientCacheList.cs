@@ -69,12 +69,12 @@ namespace AirNavigationRaceLive.Comps.Client
                 }
                 else
                 {
-                     T result = loader.Load(ID);
-                     if (result != null)
-                     {                         
-                         cache.Add(ID, new ClientCacheEntry<T>(result));
-                     }
-                     return result;
+                    T result = loader.Load(ID);
+                    if (result != null)
+                    {
+                        cache.Add(ID, new ClientCacheEntry<T>(result));
+                    }
+                    return result;
                 }
             }
         }
@@ -128,14 +128,17 @@ namespace AirNavigationRaceLive.Comps.Client
             {
                 List<T> list = loader.LoadAll(0);
                 cache.Clear();
-                lock (this)
+                if (list != null)
                 {
-                    foreach (T t in list)
+                    lock (this)
                     {
-                        ClientCacheEntry<T> e;
-                        e = new ClientCacheEntry<T>(t);
-                        dynamic d = t;
-                        cache.Add(d.ID, e);
+                        foreach (T t in list)
+                        {
+                            ClientCacheEntry<T> e;
+                            e = new ClientCacheEntry<T>(t);
+                            dynamic d = t;
+                            cache.Add(d.ID, e);
+                        }
                     }
                 }
             }

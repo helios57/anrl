@@ -105,7 +105,14 @@ namespace AirNavigationRaceLive.Comps.Client
                 case EObjectType.Competition: r.RequestParameters.Competition = entry as NetworkObjects.Competition; break;
             }
             Root response = c.process(r);
-            return response.ResponseParameters.ID;
+            if (response != null)
+            {
+                return response.ResponseParameters.ID;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         internal bool IsUnmodifiable()
