@@ -41,6 +41,12 @@ namespace AirNavigationRaceLive.Comps.Client
             {
                 TcpClient client = new TcpClient();
                 client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
+                int wait = 0;
+                while (!client.Connected && wait < 100)
+                {
+                    wait++;
+                    Thread.Sleep(10);
+                }
                 NetworkStream stream = client.GetStream();
 
                 Serializer.SerializeWithLengthPrefix(stream, request, PrefixStyle.Base128);
@@ -52,7 +58,6 @@ namespace AirNavigationRaceLive.Comps.Client
                 }
                 stream.Close();
                 client.Close();
-                client = null;
                 return rootAnswer;
             }
             catch (Exception ex)

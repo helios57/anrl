@@ -10,7 +10,6 @@ namespace AirNavigationRaceLive.Comps.Client
     {
         Client c;
         EObjectType type;
-        private int requestType;
         public ClientCacheLoader(Client c, EObjectType type)
         {
             this.c = c;

@@ -219,6 +219,7 @@ message GPSData {
 	optional double accuracy = 6;
 	optional double speed = 7;
 	optional double bearing = 8;
+
 	optional string identifier = 9;
 }
 

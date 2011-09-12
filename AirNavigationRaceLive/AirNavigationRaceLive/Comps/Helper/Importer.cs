@@ -76,7 +76,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                         result.LineList.Add(l);
                                     }
                                 }
-                            }                    
+                            }
                         }
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("STARTPOINT-"))
@@ -122,13 +122,30 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("ENDPOINT-"))
                     {
+                        double[] res = new double[4];
+                        res[3] = 0.0f;
+                        int resCount = 0;
+                        for (int j = 0; resCount < 4; j++)
+                        {
+                            try
+                            {
+                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                int dummy;
+                                if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
+                                {
+                                    res[resCount++] = parsed;
+                                }
+                            }
+                            catch { }
+                        }
+
                         Line l = new Line();
-                        double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                        double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        double Longitude1 = Converter.CHtoWGSlng(res[0] * 1000, res[1] * 1000);
+                        double Latitude1 = Converter.CHtoWGSlat(res[0] * 1000, res[1] * 1000);
                         l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
-                        double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
-                        double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
+                        double Longitude2 = Converter.CHtoWGSlng(res[2] * 1000, res[3] * 1000);
+                        double Latitude2 = Converter.CHtoWGSlat(res[2] * 1000, res[3] * 1000);
                         l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);

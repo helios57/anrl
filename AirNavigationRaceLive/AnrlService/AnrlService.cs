@@ -18,12 +18,11 @@ namespace AnrlService
     {
         private const int PORT = 1337;
         private const int PORTGPS = 1338;
-        private TcpListener server;
-        private TcpListener serverGPS;
         private TCPReciever.Server Reciever;
         private static RequestProcessor processor;
         private static GPSRequestProcessor GPSprocessor;
-
+        private Socket listener;
+        private Socket listenerGPS;
         public AnrlService()
         {
             InitializeComponent();
@@ -40,63 +39,63 @@ namespace AnrlService
 
         protected override void OnStart(string[] args)
         {
-            if (server == null)
-            {
-                try
-                {
-                    server = new TcpListener(IPAddress.Any, PORT);
-                    server.Start();
+            IPEndPoint localEP = new IPEndPoint(IPAddress.Any, PORT);
+            listener = new Socket(localEP.Address.AddressFamily,
+                SocketType.Stream, ProtocolType.Tcp);
+            listener.Bind(localEP);
+            listener.Listen(100);
 
-                    serverGPS = new TcpListener(IPAddress.Any, PORTGPS);
-                    serverGPS.Start();
-                    for (int i = 0; i < 10; i++)
-                    {
-                        server.BeginAcceptTcpClient(ClientConnected, server);
-                        serverGPS.BeginAcceptTcpClient(GPSClientConnected, serverGPS);
-                    }
-                }
-                catch (Exception ex)
-                {
+            IPEndPoint localEPGPS = new IPEndPoint(IPAddress.Any, PORTGPS);
+            listenerGPS = new Socket(localEP.Address.AddressFamily,
+                SocketType.Stream, ProtocolType.Tcp);
+            listenerGPS.Bind(localEPGPS);
+            listenerGPS.Listen(100);
+
+            try
+            {
+                listener.BeginAccept(new AsyncCallback(ClientConnected), listener);
+                listenerGPS.BeginAccept(new AsyncCallback(GPSClientConnected), listenerGPS);
+
+            }
+            catch (Exception ex)
+            {
 #if !DEBUG
                     EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 1);
 #else
-                    System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
 #endif
-                }
-                try
-                {
-                    Reciever = new TCPReciever.Server();
-                }
-                catch (Exception ex)
-                {
+            }
+            try
+            {
+                Reciever = new TCPReciever.Server();
+            }
+            catch (Exception ex)
+            {
 #if !DEBUG
                     EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 2);
 #else
-                    System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
 #endif
-                }
             }
+
         }
-        static void ClientConnected(IAsyncResult result)
+        private void ClientConnected(IAsyncResult result)
         {
             try
             {
-                TcpListener server = (TcpListener)result.AsyncState;
-                using (TcpClient client = server.EndAcceptTcpClient(result))
+                Socket listener = (Socket)result.AsyncState;
+                Socket handler = listener.EndAccept(result);
+                listener.BeginAccept(new AsyncCallback(ClientConnected), listener);
+
+                try
                 {
-                    server.BeginAcceptTcpClient(ClientConnected, server);
-                    using (NetworkStream stream = client.GetStream())
-                    {
-                        try
-                        {
-                            processConnection(client, stream);
-                        }
-                        catch //1 Retry
-                        {
-                            processConnection(client, stream);
-                        }
-                    }
+                    processConnection(handler);
                 }
+                catch (Exception ex)
+                {
+                    System.Console.WriteLine(ex.ToString());
+                }
+
             }
             catch (Exception ex)
             {
@@ -108,8 +107,10 @@ namespace AnrlService
             }
         }
 
-        private static void processConnection(TcpClient client, NetworkStream stream)
+        private void processConnection(Socket handler)
         {
+
+            NetworkStream stream = new NetworkStream(handler);
             Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
 
             if (processor == null || !processor.isUseable())
@@ -118,41 +119,36 @@ namespace AnrlService
             }
             Root response = processor.proccessRequest(reqest);
             Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
+            stream.Flush();
             stream.Close();
-            client.Close();
+            handler.Close();
         }
 
         static void GPSClientConnected(IAsyncResult result)
         {
             try
             {
-                TcpListener server = (TcpListener)result.AsyncState;
-                using (TcpClient client = server.EndAcceptTcpClient(result))
+                Socket listener = (Socket)result.AsyncState;
+                Socket handler = listener.EndAccept(result);
+                listener.BeginAccept(new AsyncCallback(GPSClientConnected), listener);
+                try
                 {
-                    server.BeginAcceptTcpClient(GPSClientConnected, server);
-                    using (NetworkStream stream = client.GetStream())
+                    NetworkStream stream = new NetworkStream(handler);
+                    RootMessage reqest = Serializer.DeserializeWithLengthPrefix<RootMessage>(stream, PrefixStyle.Fixed32BigEndian);
+
+                    if (GPSprocessor == null || !GPSprocessor.isUseable())
                     {
-                        try
-                        {
-                            RootMessage reqest = Serializer.DeserializeWithLengthPrefix<RootMessage>(stream, PrefixStyle.Fixed32BigEndian);
-                            if (GPSprocessor == null || !GPSprocessor.isUseable())
-                            {
-                                GPSprocessor = new GPSRequestProcessor();
-                            }
-                            RootMessage response = GPSprocessor.proccessRequest(reqest);
-                            Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Fixed32BigEndian);
-                            stream.Flush();
-                        }
-                        catch (Exception ex)
-                        {
-                            EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 5);
-                        }
-                        finally
-                        {
-                            stream.Close();
-                            client.Close();
-                        }
+                        GPSprocessor = new GPSRequestProcessor();
                     }
+                    RootMessage response = GPSprocessor.proccessRequest(reqest);
+                    Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Fixed32BigEndian);
+                    stream.Flush();
+                    stream.Close();
+                    handler.Close();
+                }
+                catch (Exception ex)
+                {
+                    EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 5);
                 }
             }
             catch (Exception ex)
@@ -165,19 +161,17 @@ namespace AnrlService
         {
             try
             {
-                server.Stop();
+                listener.Close();
             }
-            catch (Exception ex)
+            catch
             {
-                EventLog.WriteEntry("Anrl-Service", "Unable to stop Service " + ex.InnerException.Message, EventLogEntryType.Error, 6);
             }
             try
             {
-                serverGPS.Stop();
+                listenerGPS.Close();
             }
-            catch (Exception ex)
+            catch
             {
-                EventLog.WriteEntry("Anrl-Service", "Unable to stop Service " + ex.InnerException.Message, EventLogEntryType.Error, 7);
             }
             if (Reciever != null)
             {
