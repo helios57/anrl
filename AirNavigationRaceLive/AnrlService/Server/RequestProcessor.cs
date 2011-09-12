@@ -62,6 +62,16 @@ namespace AnrlService.Server
                                 answer = proccessTeam(request);
                                 break;
                             }
+                        case EObjectType.Group:
+                            {
+                                answer = proccessGroup(request);
+                                break;
+                            }
+                        case EObjectType.Competition:
+                            {
+                                answer = proccessCompetition(request);
+                                break;
+                            }
                     }
                 }
             }
@@ -653,6 +663,223 @@ namespace AnrlService.Server
             }
             return r;
         }
+
+
+        private Root proccessGroup(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            switch ((ERequestType)request.RequestType)
+            {
+                case ERequestType.Delete:
+                    {
+                        db.t_Group_Teams.DeleteAllOnSubmit(db.t_Group_Teams.Where(p => p.ID_Group == request.RequestParameters.ID));
+                        db.t_Groups.DeleteAllOnSubmit(db.t_Groups.Where(p => p.ID == request.RequestParameters.ID));
+                        db.SubmitChanges();
+                        break;
+                    }
+                case ERequestType.Get:
+                    {
+                        if (request.RequestParameters != null && request.RequestParameters.ID != 0)
+                        {
+                            foreach (t_Group t_g in db.t_Groups.Where(p => p.ID == request.RequestParameters.ID))
+                            {
+                                Group g = new Group();
+                                g.ID = t_g.ID;
+                                g.Name = t_g.Name;
+                                foreach (t_Group_Team d_g_t in t_g.t_Group_Teams)
+                                {
+                                    GroupTeam gt = new GroupTeam();
+                                    gt.ID_Team = d_g_t.ID_Team;
+                                    gt.Pos = d_g_t.Pos;
+                                    g.GroupTeamList.Add(gt);
+                                }
+                                r.ResponseParameters.GroupList.Add(g);
+                            }
+                        }
+                        break;
+                    }
+                case ERequestType.GetAll:
+                    {
+                        List<int> ids = new List<int>(request.RequestParameters.IDS);
+                        foreach (t_Group t_g in db.t_Groups)
+                        {
+                            if (!ids.Contains(t_g.ID))
+                            {
+                                Group g = new Group();
+                                g.ID = t_g.ID;
+                                g.Name = t_g.Name;
+                                foreach (t_Group_Team d_g_t in t_g.t_Group_Teams)
+                                {
+                                    GroupTeam gt = new GroupTeam();
+                                    gt.ID_Team = d_g_t.ID_Team;
+                                    gt.Pos = d_g_t.Pos;
+                                    g.GroupTeamList.Add(gt);
+                                }
+                                r.ResponseParameters.GroupList.Add(g);
+                            }
+                            else
+                            {
+                                ids.Remove(t_g.ID);
+                            }
+                        }
+                        r.ResponseParameters.DeletedIDList.AddRange(ids);
+                        break;
+                    }
+                case ERequestType.Save:
+                    {
+                        t_Group t_g;
+                        if (request.RequestParameters.Group.ID > 0)
+                        {
+                            t_g = db.t_Groups.Single(p => p.ID == request.RequestParameters.Group.ID);
+                            db.t_Group_Teams.DeleteAllOnSubmit(db.t_Group_Teams.Where(p => p.ID_Group == request.RequestParameters.Group.ID));
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            t_g = new t_Group();
+                            db.t_Groups.InsertOnSubmit(t_g);
+                        }
+                        t_g.Name = request.RequestParameters.Group.Name;
+
+                        db.SubmitChanges();
+                        foreach (GroupTeam gt in request.RequestParameters.Group.GroupTeamList)
+                        {
+                            if (db.t_Group_Teams.Count(p => p.ID_Group == t_g.ID && p.ID_Team == gt.ID_Team) == 0)
+                            {
+                                t_Group_Team tgt = new t_Group_Team();
+                                tgt.ID_Team = gt.ID_Team;
+                                tgt.ID_Group = t_g.ID;
+                                tgt.Pos = gt.Pos;
+                                db.t_Group_Teams.InsertOnSubmit(tgt);
+                            }
+                        }
+                        db.SubmitChanges();
+                        r.ResponseParameters = new ResponseParameters();
+                        r.ResponseParameters.ID = t_g.ID;
+                        break;
+                    }
+            }
+            return r;
+        }
+
+
+
+        private Root proccessCompetition(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            switch ((ERequestType)request.RequestType)
+            {
+                case ERequestType.Delete:
+                    {
+                        db.t_Competition_Groups.DeleteAllOnSubmit(db.t_Competition_Groups.Where(p => p.ID_Competition == request.RequestParameters.ID));
+                        db.t_Competitions.DeleteAllOnSubmit(db.t_Competitions.Where(p => p.ID == request.RequestParameters.ID));
+                        db.SubmitChanges();
+                        break;
+                    }
+                case ERequestType.Get:
+                    {
+                        if (request.RequestParameters != null && request.RequestParameters.ID != 0)
+                        {
+                            foreach (t_Competition t_c in db.t_Competitions.Where(p => p.ID == request.RequestParameters.ID))
+                            {
+                                Competition c = new Competition();
+                                c.ID = t_c.ID;
+                                c.Name = t_c.Name;
+                                c.ID_Parcour = t_c.ID_Parcour;
+                                c.ID_TakeOffLine = t_c.ID_TakeOffLine;
+                                c.TimeEndLine = t_c.TimeEndLine;
+                                c.TimeStartLine = t_c.TimeStartLine;
+                                c.TimeTakeOff = t_c.TimeTakeOff;
+
+                                foreach (t_Competition_Group d_c_g in t_c.t_Competition_Groups)
+                                {
+                                    CompetitionGroup cg = new CompetitionGroup();
+                                    cg.ID_Group = d_c_g.ID_Group;
+                                    cg.Pos = d_c_g.Pos;
+                                    c.CompetitionGroupList.Add(cg);
+                                }
+                                r.ResponseParameters.CompetitionList.Add(c);
+                            }
+                        }
+                        break;
+                    }
+                case ERequestType.GetAll:
+                    {
+                        List<int> ids = new List<int>(request.RequestParameters.IDS);
+                        foreach (t_Competition t_c in db.t_Competitions)
+                        {
+                            if (!ids.Contains(t_c.ID))
+                            {
+                                Competition c = new Competition();
+                                c.ID = t_c.ID;
+                                c.Name = t_c.Name;
+                                c.ID_Parcour = t_c.ID_Parcour;
+                                c.ID_TakeOffLine = t_c.ID_TakeOffLine;
+                                c.TimeEndLine = t_c.TimeEndLine;
+                                c.TimeStartLine = t_c.TimeStartLine;
+                                c.TimeTakeOff = t_c.TimeTakeOff;
+
+                                foreach (t_Competition_Group d_c_g in t_c.t_Competition_Groups)
+                                {
+                                    CompetitionGroup cg = new CompetitionGroup();
+                                    cg.ID_Group = d_c_g.ID_Group;
+                                    cg.Pos = d_c_g.Pos;
+                                    c.CompetitionGroupList.Add(cg);
+                                }
+                                r.ResponseParameters.CompetitionList.Add(c);
+                            }
+                            else
+                            {
+                                ids.Remove(t_c.ID);
+                            }
+                        }
+                        r.ResponseParameters.DeletedIDList.AddRange(ids);
+                        break;
+                    }
+                case ERequestType.Save:
+                    {
+                        t_Competition t_c;
+                        if (request.RequestParameters.Competition.ID > 0)
+                        {
+                            t_c = db.t_Competitions.Single(p => p.ID == request.RequestParameters.Competition.ID);
+                            db.t_Competition_Groups.DeleteAllOnSubmit(db.t_Competition_Groups.Where(p => p.ID_Competition == request.RequestParameters.Competition.ID));
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            t_c = new t_Competition();
+                            db.t_Competitions.InsertOnSubmit(t_c);
+                        }
+                        t_c.Name = request.RequestParameters.Competition.Name;
+                        t_c.ID_Parcour = request.RequestParameters.Competition.ID_Parcour;
+                        t_c.ID_TakeOffLine = request.RequestParameters.Competition.ID_TakeOffLine;
+                        t_c.TimeEndLine = request.RequestParameters.Competition.TimeEndLine;
+                        t_c.TimeStartLine = request.RequestParameters.Competition.TimeStartLine;
+                        t_c.TimeTakeOff = request.RequestParameters.Competition.TimeTakeOff;
+                        db.SubmitChanges();
+
+                        foreach (CompetitionGroup cg in request.RequestParameters.Competition.CompetitionGroupList)
+                        {
+                            if (db.t_Competition_Groups.Count(p => p.ID_Competition == t_c.ID && p.ID_Group == cg.ID_Group) == 0)
+                            {
+                                t_Competition_Group tcg = new t_Competition_Group();
+                                tcg.ID_Group = cg.ID_Group;
+                                tcg.ID_Competition = t_c.ID;
+                                tcg.Pos = cg.Pos;
+                                db.t_Competition_Groups.InsertOnSubmit(tcg);
+                            }
+                        }
+                        db.SubmitChanges();
+                        r.ResponseParameters = new ResponseParameters();
+                        r.ResponseParameters.ID = t_c.ID;
+                        break;
+                    }
+            }
+            return r;
+        }
+
 
         private Root proccessLogin(Root request)
         {

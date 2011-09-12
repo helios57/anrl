@@ -134,5 +134,42 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return cache.cacheTeam.add(team);
         }
+        internal NetworkObjects.Group getGroup(int ID)
+        {
+            return cache.cacheGroup.get(ID);
+        }
+        internal int saveGroup(NetworkObjects.Group group)
+        {
+            return cache.cacheGroup.add(group);
+        }
+
+        internal List<NetworkObjects.Group> getGroups()
+        {
+            return cache.cacheGroup.getAll();
+        }
+
+        internal NetworkObjects.Team getTeam(int ID)
+        {
+            return cache.cacheTeam.get(ID);
+        }
+
+        internal void deleteGroup(int ID)
+        {
+            cache.cacheGroup.delete(ID);
+        }
+        internal int saveCompetition(NetworkObjects.Competition competition)
+        {
+            return cache.cacheCompetition.add(competition);
+        }
+
+        internal List<NetworkObjects.Competition> getCompetitions()
+        {
+            return cache.cacheCompetition.getAll();
+        }
+
+        internal void deleteCompetition(int ID)
+        {
+            cache.cacheCompetition.delete(ID);
+        }
     }
 }

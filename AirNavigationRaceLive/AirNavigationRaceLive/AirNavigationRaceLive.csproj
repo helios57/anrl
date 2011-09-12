@@ -99,6 +99,12 @@
     <Compile Include="Comps\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Group.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\Group.Designer.cs">
+      <DependentUpon>Group.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\ParcourOverview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\Group.resx">
+      <DependentUpon>Group.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourOverview.resx">
       <DependentUpon>ParcourOverview.cs</DependentUpon>

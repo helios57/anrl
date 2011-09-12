@@ -177,6 +177,24 @@ namespace NetworkObjects
       get { return _Team; }
       set { _Team = value; }
     }
+
+    private NetworkObjects.Group _Group = null;
+    [global::ProtoBuf.ProtoMember(9, IsRequired = false, Name=@"Group", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NetworkObjects.Group Group
+    {
+      get { return _Group; }
+      set { _Group = value; }
+    }
+
+    private NetworkObjects.Competition _Competition = null;
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"Competition", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NetworkObjects.Competition Competition
+    {
+      get { return _Competition; }
+      set { _Competition = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -252,6 +270,20 @@ namespace NetworkObjects
     public global::System.Collections.Generic.List<NetworkObjects.Team> TeamList
     {
       get { return _TeamList; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NetworkObjects.Group> _GroupList = new global::System.Collections.Generic.List<NetworkObjects.Group>();
+    [global::ProtoBuf.ProtoMember(10, Name=@"GroupList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.Group> GroupList
+    {
+      get { return _GroupList; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NetworkObjects.Competition> _CompetitionList = new global::System.Collections.Generic.List<NetworkObjects.Competition>();
+    [global::ProtoBuf.ProtoMember(11, Name=@"CompetitionList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.Competition> CompetitionList
+    {
+      get { return _CompetitionList; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -690,6 +722,177 @@ namespace NetworkObjects
       get { return _ID_Tracker; }
     }
   
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Group")]
+  public partial class Group : global::ProtoBuf.IExtensible
+  {
+    public Group() {}
+    
+
+    private int _ID = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID
+    {
+      get { return _ID; }
+      set { _ID = value; }
+    }
+
+    private string _Name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Name
+    {
+      get { return _Name; }
+      set { _Name = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NetworkObjects.GroupTeam> _GroupTeamList = new global::System.Collections.Generic.List<NetworkObjects.GroupTeam>();
+    [global::ProtoBuf.ProtoMember(3, Name=@"GroupTeamList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.GroupTeam> GroupTeamList
+    {
+      get { return _GroupTeamList; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GroupTeam")]
+  public partial class GroupTeam : global::ProtoBuf.IExtensible
+  {
+    public GroupTeam() {}
+    
+
+    private int _ID_Team = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ID_Team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_Team
+    {
+      get { return _ID_Team; }
+      set { _ID_Team = value; }
+    }
+
+    private int _Pos = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Pos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Pos
+    {
+      get { return _Pos; }
+      set { _Pos = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Competition")]
+  public partial class Competition : global::ProtoBuf.IExtensible
+  {
+    public Competition() {}
+    
+
+    private int _ID = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID
+    {
+      get { return _ID; }
+      set { _ID = value; }
+    }
+
+    private string _Name = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Name
+    {
+      get { return _Name; }
+      set { _Name = value; }
+    }
+
+    private long _TimeTakeOff = default(long);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"TimeTakeOff", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(long))]
+    public long TimeTakeOff
+    {
+      get { return _TimeTakeOff; }
+      set { _TimeTakeOff = value; }
+    }
+
+    private long _TimeStartLine = default(long);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"TimeStartLine", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(long))]
+    public long TimeStartLine
+    {
+      get { return _TimeStartLine; }
+      set { _TimeStartLine = value; }
+    }
+
+    private long _TimeEndLine = default(long);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"TimeEndLine", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(long))]
+    public long TimeEndLine
+    {
+      get { return _TimeEndLine; }
+      set { _TimeEndLine = value; }
+    }
+
+    private int _ID_TakeOffLine = default(int);
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"ID_TakeOffLine", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_TakeOffLine
+    {
+      get { return _ID_TakeOffLine; }
+      set { _ID_TakeOffLine = value; }
+    }
+
+    private int _ID_Parcour = default(int);
+    [global::ProtoBuf.ProtoMember(7, IsRequired = false, Name=@"ID_Parcour", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_Parcour
+    {
+      get { return _ID_Parcour; }
+      set { _ID_Parcour = value; }
+    }
+    private readonly global::System.Collections.Generic.List<NetworkObjects.CompetitionGroup> _CompetitionGroupList = new global::System.Collections.Generic.List<NetworkObjects.CompetitionGroup>();
+    [global::ProtoBuf.ProtoMember(8, Name=@"CompetitionGroupList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.CompetitionGroup> CompetitionGroupList
+    {
+      get { return _CompetitionGroupList; }
+    }
+  
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CompetitionGroup")]
+  public partial class CompetitionGroup : global::ProtoBuf.IExtensible
+  {
+    public CompetitionGroup() {}
+    
+
+    private int _ID_Group = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ID_Group", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_Group
+    {
+      get { return _ID_Group; }
+      set { _ID_Group = value; }
+    }
+
+    private int _Pos = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Pos", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Pos
+    {
+      get { return _Pos; }
+      set { _Pos = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

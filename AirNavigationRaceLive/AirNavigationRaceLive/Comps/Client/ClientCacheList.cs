@@ -116,6 +116,10 @@ namespace AirNavigationRaceLive.Comps.Client
                         ClientCacheEntry<T> e;
                         e = new ClientCacheEntry<T>(t);
                         dynamic d = t;
+                        if (cache.ContainsKey(d.ID))
+                        {
+                            cache.Remove(d.ID);
+                        }
                         cache.Add(d.ID, e);
                     }
                 }

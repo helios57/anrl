@@ -38,8 +38,12 @@ option optimize_for = SPEED;
 		optional Tracker Tracker =6;
 		
         optional Pilot Pilot =7;
-
+		
         optional Team Team =8;
+		
+        optional Group Group =9;
+
+        optional Competition Competition =10;
 	}
 	message ResponseParameters
 	{
@@ -60,6 +64,10 @@ option optimize_for = SPEED;
         repeated Pilot PilotList =8;
 
 		repeated Team TeamList = 9;
+		
+		repeated Group GroupList = 10;
+
+		repeated Competition CompetitionList = 11;
 	}
 	message Picture
 	{
@@ -156,7 +164,44 @@ option optimize_for = SPEED;
 		optional string Description = 7;
 
 		repeated int32 ID_Tracker = 8;
+	}
+	message Group
+	{
+        optional int32 ID=1;
+		
+		optional string Name = 2;
 
+        repeated GroupTeam GroupTeamList=3;
+	}
+	message GroupTeam
+	{
+		optional int32 ID_Team=1;
+
+		optional int32 Pos=2;
+	}
+	message Competition
+	{
+        optional int32 ID=1;
+		
+		optional string Name = 2;
+		
+		optional int64 TimeTakeOff = 3;
+		
+		optional int64 TimeStartLine = 4;
+		
+		optional int64 TimeEndLine = 5;
+		
+		optional int32 ID_TakeOffLine = 6;
+
+		optional int32 ID_Parcour = 7;
+
+		repeated CompetitionGroup CompetitionGroupList = 8;
+	}
+	message CompetitionGroup
+	{
+		optional int32 ID_Group=1;
+
+		optional int32 Pos=2;
 	}
 
 message RootMessage {

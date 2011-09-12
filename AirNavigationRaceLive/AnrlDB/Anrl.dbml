@@ -1,5 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AnrlDB" Class="AnrlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=AnrlDB;Integrated Security=True" SettingsObjectName="AnrlDB.Properties.Settings" SettingsPropertyName="AnrlDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_Competition" Member="t_Competitions">
+    <Type Name="t_Competition">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TimeTakeOff" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStartLine" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="TimeEndLine" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ID_TakeOffLine" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Parcour" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Competition_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Group" />
+      <Association Name="t_Line_t_Competition" Member="t_Line" ThisKey="ID_TakeOffLine" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Tracker" Member="t_Trackers">
+    <Type Name="t_Tracker">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IMEI" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
+      <Association Name="t_Tracker_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team_Tracker" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Competition_Group" Member="t_Competition_Groups">
+    <Type Name="t_Competition_Group">
+      <Column Name="ID_Competition" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Group" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Competition_t_Competition_Group" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
+      <Association Name="t_Group_t_Competition_Group" Member="t_Group" ThisKey="ID_Competition" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_Daten" Member="t_Datens">
     <Type Name="t_Daten">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -12,15 +43,6 @@
       <Column Name="Accuracy" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Bearing" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="t_Tracker_t_Daten" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Tracker" Member="t_Trackers">
-    <Type Name="t_Tracker">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IMEI" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="t_Tracker_t_Daten" Member="t_Datens" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Daten" />
-      <Association Name="t_Tracker_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team_Tracker" />
     </Type>
   </Table>
   <Table Name="dbo.t_GPS_IN" Member="t_GPS_INs">
@@ -56,6 +78,7 @@
     <Type Name="t_Group">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="t_Group_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Group" />
       <Association Name="t_Group_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Group" Type="t_Group_Team" />
     </Type>
   </Table>
@@ -63,6 +86,7 @@
     <Type Name="t_Group_Team">
       <Column Name="ID_Group" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Group_t_Group_Team" Member="t_Group" ThisKey="ID_Group" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
       <Association Name="t_Team_t_Group_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
@@ -74,6 +98,7 @@
       <Column Name="ID_PointA" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_PointB" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_PointOrientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Line_t_Competition" Member="t_Competitions" ThisKey="ID" OtherKey="ID_TakeOffLine" Type="t_Competition" />
       <Association Name="t_Line_t_Parcour_Line" Member="t_Parcour_Lines" ThisKey="ID" OtherKey="ID_Line" Type="t_Parcour_Line" />
       <Association Name="t_GPSPoint_t_Line" Member="t_GPSPoint" ThisKey="ID_PointA" OtherKey="ID" Type="t_GPSPoint" IsForeignKey="true" />
       <Association Name="t_GPSPoint_t_Line1" Member="t_GPSPoint1" ThisKey="ID_PointB" OtherKey="ID" Type="t_GPSPoint" IsForeignKey="true" />

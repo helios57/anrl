@@ -26,6 +26,7 @@ namespace AirNavigationRaceLive
         ParcourImport ParcourImport;
         ParcourOverview ParcourOverview;
         MapLegacy MapLegacy;
+        Group Group;
 
 
         public AirNavigationRaceLiveMain()
@@ -121,6 +122,7 @@ namespace AirNavigationRaceLive
             ParcourGen = null;
             ParcourImport = null;
             MapLegacy = null;
+            Group = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
             enableControl(Credits);
@@ -245,6 +247,15 @@ namespace AirNavigationRaceLive
                 MapLegacy = new MapLegacy(Client);
             }
             enableControl(MapLegacy);
+        }
+
+        private void groupsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Group == null)
+            {
+                Group = new Group(Client);
+            }
+            enableControl(Group);
         }
     }
 }

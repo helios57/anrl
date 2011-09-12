@@ -58,6 +58,9 @@
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TrackerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.IMEI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -66,6 +69,7 @@
             this.listViewTeam.AutoArrange = false;
             this.listViewTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.IDl,
+            this.columnHeader2,
             this.Pilot,
             this.Navigator});
             this.listViewTeam.FullRowSelect = true;
@@ -153,7 +157,7 @@
             // textBoxNavigator
             // 
             this.textBoxNavigator.Enabled = false;
-            this.textBoxNavigator.Location = new System.Drawing.Point(411, 113);
+            this.textBoxNavigator.Location = new System.Drawing.Point(411, 142);
             this.textBoxNavigator.Name = "textBoxNavigator";
             this.textBoxNavigator.Size = new System.Drawing.Size(124, 20);
             this.textBoxNavigator.TabIndex = 18;
@@ -161,7 +165,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(350, 116);
+            this.label4.Location = new System.Drawing.Point(350, 145);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 17;
@@ -170,7 +174,7 @@
             // textBoxPilot
             // 
             this.textBoxPilot.Enabled = false;
-            this.textBoxPilot.Location = new System.Drawing.Point(411, 87);
+            this.textBoxPilot.Location = new System.Drawing.Point(411, 116);
             this.textBoxPilot.Name = "textBoxPilot";
             this.textBoxPilot.Size = new System.Drawing.Size(124, 20);
             this.textBoxPilot.TabIndex = 16;
@@ -178,7 +182,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(350, 90);
+            this.label3.Location = new System.Drawing.Point(350, 119);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 15;
@@ -223,7 +227,7 @@
             // 
             // btnClearPilot
             // 
-            this.btnClearPilot.Location = new System.Drawing.Point(541, 85);
+            this.btnClearPilot.Location = new System.Drawing.Point(541, 114);
             this.btnClearPilot.Name = "btnClearPilot";
             this.btnClearPilot.Size = new System.Drawing.Size(56, 23);
             this.btnClearPilot.TabIndex = 20;
@@ -233,7 +237,7 @@
             // 
             // btnClearNavigator
             // 
-            this.btnClearNavigator.Location = new System.Drawing.Point(541, 111);
+            this.btnClearNavigator.Location = new System.Drawing.Point(541, 140);
             this.btnClearNavigator.Name = "btnClearNavigator";
             this.btnClearNavigator.Size = new System.Drawing.Size(56, 23);
             this.btnClearNavigator.TabIndex = 21;
@@ -264,7 +268,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(352, 201);
+            this.label1.Location = new System.Drawing.Point(352, 225);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 24;
@@ -273,7 +277,7 @@
             // comboBoxCountry
             // 
             this.comboBoxCountry.FormattingEnabled = true;
-            this.comboBoxCountry.Location = new System.Drawing.Point(411, 171);
+            this.comboBoxCountry.Location = new System.Drawing.Point(411, 200);
             this.comboBoxCountry.Name = "comboBoxCountry";
             this.comboBoxCountry.Size = new System.Drawing.Size(121, 21);
             this.comboBoxCountry.TabIndex = 29;
@@ -282,7 +286,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(353, 174);
+            this.label5.Location = new System.Drawing.Point(353, 203);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 30;
@@ -290,7 +294,7 @@
             // 
             // btnColorSelect
             // 
-            this.btnColorSelect.Location = new System.Drawing.Point(411, 139);
+            this.btnColorSelect.Location = new System.Drawing.Point(411, 168);
             this.btnColorSelect.Name = "btnColorSelect";
             this.btnColorSelect.Size = new System.Drawing.Size(121, 23);
             this.btnColorSelect.TabIndex = 31;
@@ -301,7 +305,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(353, 144);
+            this.label6.Location = new System.Drawing.Point(353, 173);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
@@ -318,9 +322,9 @@
             this.trackerListView.GridLines = true;
             this.trackerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.trackerListView.HideSelection = false;
-            this.trackerListView.Location = new System.Drawing.Point(411, 201);
+            this.trackerListView.Location = new System.Drawing.Point(411, 225);
             this.trackerListView.Name = "trackerListView";
-            this.trackerListView.Size = new System.Drawing.Size(186, 196);
+            this.trackerListView.Size = new System.Drawing.Size(186, 172);
             this.trackerListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.trackerListView.TabIndex = 34;
             this.trackerListView.UseCompatibleStateImageBehavior = false;
@@ -339,10 +343,34 @@
             // 
             this.IMEI.Text = "IMEI";
             // 
+            // textBoxName
+            // 
+            this.textBoxName.Enabled = false;
+            this.textBoxName.Location = new System.Drawing.Point(411, 87);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(124, 20);
+            this.textBoxName.TabIndex = 36;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(350, 90);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Name";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 83;
+            // 
             // Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.trackerListView);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnColorSelect);
@@ -404,5 +432,8 @@
         private System.Windows.Forms.ColumnHeader ID;
         private System.Windows.Forms.ColumnHeader TrackerName;
         private System.Windows.Forms.ColumnHeader IMEI;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

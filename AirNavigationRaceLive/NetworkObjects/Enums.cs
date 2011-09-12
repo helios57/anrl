@@ -22,7 +22,9 @@ namespace NetworkObjects
         Parcour = 3,
         Tracker = 4,
         Pilot = 5,
-        Team = 6
+        Team = 6,
+        Group = 7,
+        Competition = 8
     }
     public enum LineType : int
     {
@@ -39,5 +41,12 @@ namespace NetworkObjects
         LINEOFNORETURN = 11,
         PENALTYZONE = 12,
         Point = 13
+    }
+    public enum GroupPosType : int
+    {
+        A = 1,
+        B = 2,
+        C = 3,
+        D = 4
     }
 }

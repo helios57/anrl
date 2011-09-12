@@ -56,7 +56,7 @@ namespace AirNavigationRaceLive.Comps
                     }
                 }
 
-                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), pilot.Name, (navigator != null) ? navigator.Name : "-" });
+                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.Name!=null?team.Name:"" ,pilot.Name, (navigator != null) ? navigator.Name : "-" });
                 lvi.Tag = team;
                 listViewTeam.Items.Add(lvi);
             }
@@ -102,6 +102,7 @@ namespace AirNavigationRaceLive.Comps
             btnColorSelect.Enabled = teamSelected;
             comboBoxCountry.Enabled = teamSelected;
             trackerListView.Enabled = teamSelected;
+            textBoxName.Enabled = teamSelected;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -164,6 +165,7 @@ namespace AirNavigationRaceLive.Comps
                 NetworkObjects.Team team = new NetworkObjects.Team();
                 team.ID = Math.Max(Int32.Parse(textBoxID.Text), 0);
                 team.ID_Pilot = (textBoxPilot.Tag as NetworkObjects.Pilot).ID;
+                team.Name = textBoxName.Text;
                 if (textBoxNavigator.Tag != null)
                 {
                     team.ID_Navigator = (textBoxNavigator.Tag as NetworkObjects.Pilot).ID;
@@ -194,6 +196,7 @@ namespace AirNavigationRaceLive.Comps
             textBoxNavigator.Tag = null;
             textBoxNavigator.Text = "";
             btnColorSelect.BackColor = Color.Gray;
+            textBoxName.Text = "";
             trackerListView.SelectedItems.Clear();
             foreach (ListViewItem lvi in trackerListView.Items)
             {

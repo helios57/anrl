@@ -14,6 +14,8 @@ namespace AirNavigationRaceLive.Comps.Client
         public readonly ClientCacheList<NetworkObjects.Pilot> cachePilot;
         public readonly ClientCacheList<NetworkObjects.Tracker> cacheTracker;
         public readonly ClientCacheList<NetworkObjects.Team> cacheTeam;
+        public readonly ClientCacheList<NetworkObjects.Group> cacheGroup;
+        public readonly ClientCacheList<NetworkObjects.Competition> cacheCompetition;
         private bool first = true;
         private Timer t;
         private Client c;
@@ -27,6 +29,8 @@ namespace AirNavigationRaceLive.Comps.Client
             cachePilot = new ClientCacheList<NetworkObjects.Pilot>(new ClientCacheLoader<NetworkObjects.Pilot>(c, NetworkObjects.EObjectType.Pilot));
             cacheTracker = new ClientCacheList<NetworkObjects.Tracker>(new ClientCacheLoader<NetworkObjects.Tracker>(c, NetworkObjects.EObjectType.Tracker));
             cacheTeam = new ClientCacheList<NetworkObjects.Team>(new ClientCacheLoader<NetworkObjects.Team>(c, NetworkObjects.EObjectType.Team));
+            cacheGroup = new ClientCacheList<NetworkObjects.Group>(new ClientCacheLoader<NetworkObjects.Group>(c, NetworkObjects.EObjectType.Group));
+            cacheCompetition = new ClientCacheList<NetworkObjects.Competition>(new ClientCacheLoader<NetworkObjects.Competition>(c, NetworkObjects.EObjectType.Competition));
             t = new Timer(10);
             t.Elapsed += new ElapsedEventHandler(t_Elapsed);
             t.Start();
@@ -57,6 +61,8 @@ namespace AirNavigationRaceLive.Comps.Client
             cachePicture.update(partial);
             cacheParcour.update(partial);
             cacheTeam.update(partial);
+            cacheGroup.update(partial);
+            cacheCompetition.update(partial);
             updating = false;
         }
     }

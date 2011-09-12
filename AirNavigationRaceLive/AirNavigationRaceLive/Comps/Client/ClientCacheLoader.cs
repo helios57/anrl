@@ -63,6 +63,8 @@ namespace AirNavigationRaceLive.Comps.Client
                 case EObjectType.Pilot: return resp.ResponseParameters.PilotList as List<T>;
                 case EObjectType.Tracker: return resp.ResponseParameters.TrackerList as List<T>;
                 case EObjectType.Team: return resp.ResponseParameters.TeamList as List<T>;
+                case EObjectType.Group: return resp.ResponseParameters.GroupList as List<T>;
+                case EObjectType.Competition: return resp.ResponseParameters.CompetitionList as List<T>;
             }
             return null;
         }
@@ -100,6 +102,8 @@ namespace AirNavigationRaceLive.Comps.Client
                 case EObjectType.Pilot: r.RequestParameters.Pilot = entry as NetworkObjects.Pilot; break;
                 case EObjectType.Tracker: r.RequestParameters.Tracker = entry as NetworkObjects.Tracker; break;
                 case EObjectType.Team: r.RequestParameters.Team = entry as NetworkObjects.Team; break;
+                case EObjectType.Group: r.RequestParameters.Group = entry as NetworkObjects.Group; break;
+                case EObjectType.Competition: r.RequestParameters.Competition = entry as NetworkObjects.Competition; break;
             }
             Root response = c.process(r);
             return response.ResponseParameters.ID;
@@ -115,6 +119,8 @@ namespace AirNavigationRaceLive.Comps.Client
                 case EObjectType.Pilot: return false;
                 case EObjectType.Tracker: return false;
                 case EObjectType.Team: return false;
+                case EObjectType.Group: return false;
+                case EObjectType.Competition: return false;
             }
             return false;
         }

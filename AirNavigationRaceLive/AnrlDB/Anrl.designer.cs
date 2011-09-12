@@ -30,12 +30,18 @@ namespace AnrlDB
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertt_Daten(t_Daten instance);
-    partial void Updatet_Daten(t_Daten instance);
-    partial void Deletet_Daten(t_Daten instance);
+    partial void Insertt_Competition(t_Competition instance);
+    partial void Updatet_Competition(t_Competition instance);
+    partial void Deletet_Competition(t_Competition instance);
     partial void Insertt_Tracker(t_Tracker instance);
     partial void Updatet_Tracker(t_Tracker instance);
     partial void Deletet_Tracker(t_Tracker instance);
+    partial void Insertt_Competition_Group(t_Competition_Group instance);
+    partial void Updatet_Competition_Group(t_Competition_Group instance);
+    partial void Deletet_Competition_Group(t_Competition_Group instance);
+    partial void Insertt_Daten(t_Daten instance);
+    partial void Updatet_Daten(t_Daten instance);
+    partial void Deletet_Daten(t_Daten instance);
     partial void Insertt_GPS_IN(t_GPS_IN instance);
     partial void Updatet_GPS_IN(t_GPS_IN instance);
     partial void Deletet_GPS_IN(t_GPS_IN instance);
@@ -107,11 +113,11 @@ namespace AnrlDB
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<t_Daten> t_Datens
+		public System.Data.Linq.Table<t_Competition> t_Competitions
 		{
 			get
 			{
-				return this.GetTable<t_Daten>();
+				return this.GetTable<t_Competition>();
 			}
 		}
 		
@@ -120,6 +126,22 @@ namespace AnrlDB
 			get
 			{
 				return this.GetTable<t_Tracker>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Competition_Group> t_Competition_Groups
+		{
+			get
+			{
+				return this.GetTable<t_Competition_Group>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Daten> t_Datens
+		{
+			get
+			{
+				return this.GetTable<t_Daten>();
 			}
 		}
 		
@@ -224,6 +246,635 @@ namespace AnrlDB
 			get
 			{
 				return this.GetTable<t_Team_Tracker>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Competition")]
+	public partial class t_Competition : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private long _TimeTakeOff;
+		
+		private long _TimeStartLine;
+		
+		private long _TimeEndLine;
+		
+		private int _ID_TakeOffLine;
+		
+		private string _Name;
+		
+		private int _ID_Parcour;
+		
+		private EntitySet<t_Competition_Group> _t_Competition_Groups;
+		
+		private EntityRef<t_Line> _t_Line;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnTimeTakeOffChanging(long value);
+    partial void OnTimeTakeOffChanged();
+    partial void OnTimeStartLineChanging(long value);
+    partial void OnTimeStartLineChanged();
+    partial void OnTimeEndLineChanging(long value);
+    partial void OnTimeEndLineChanged();
+    partial void OnID_TakeOffLineChanging(int value);
+    partial void OnID_TakeOffLineChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnID_ParcourChanging(int value);
+    partial void OnID_ParcourChanged();
+    #endregion
+		
+		public t_Competition()
+		{
+			this._t_Competition_Groups = new EntitySet<t_Competition_Group>(new Action<t_Competition_Group>(this.attach_t_Competition_Groups), new Action<t_Competition_Group>(this.detach_t_Competition_Groups));
+			this._t_Line = default(EntityRef<t_Line>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeTakeOff", DbType="BigInt NOT NULL")]
+		public long TimeTakeOff
+		{
+			get
+			{
+				return this._TimeTakeOff;
+			}
+			set
+			{
+				if ((this._TimeTakeOff != value))
+				{
+					this.OnTimeTakeOffChanging(value);
+					this.SendPropertyChanging();
+					this._TimeTakeOff = value;
+					this.SendPropertyChanged("TimeTakeOff");
+					this.OnTimeTakeOffChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeStartLine", DbType="BigInt NOT NULL")]
+		public long TimeStartLine
+		{
+			get
+			{
+				return this._TimeStartLine;
+			}
+			set
+			{
+				if ((this._TimeStartLine != value))
+				{
+					this.OnTimeStartLineChanging(value);
+					this.SendPropertyChanging();
+					this._TimeStartLine = value;
+					this.SendPropertyChanged("TimeStartLine");
+					this.OnTimeStartLineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeEndLine", DbType="BigInt NOT NULL")]
+		public long TimeEndLine
+		{
+			get
+			{
+				return this._TimeEndLine;
+			}
+			set
+			{
+				if ((this._TimeEndLine != value))
+				{
+					this.OnTimeEndLineChanging(value);
+					this.SendPropertyChanging();
+					this._TimeEndLine = value;
+					this.SendPropertyChanged("TimeEndLine");
+					this.OnTimeEndLineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_TakeOffLine", DbType="Int NOT NULL")]
+		public int ID_TakeOffLine
+		{
+			get
+			{
+				return this._ID_TakeOffLine;
+			}
+			set
+			{
+				if ((this._ID_TakeOffLine != value))
+				{
+					if (this._t_Line.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_TakeOffLineChanging(value);
+					this.SendPropertyChanging();
+					this._ID_TakeOffLine = value;
+					this.SendPropertyChanged("ID_TakeOffLine");
+					this.OnID_TakeOffLineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Parcour", DbType="Int NOT NULL")]
+		public int ID_Parcour
+		{
+			get
+			{
+				return this._ID_Parcour;
+			}
+			set
+			{
+				if ((this._ID_Parcour != value))
+				{
+					this.OnID_ParcourChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Parcour = value;
+					this.SendPropertyChanged("ID_Parcour");
+					this.OnID_ParcourChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Competition_Group", Storage="_t_Competition_Groups", ThisKey="ID", OtherKey="ID_Competition")]
+		public EntitySet<t_Competition_Group> t_Competition_Groups
+		{
+			get
+			{
+				return this._t_Competition_Groups;
+			}
+			set
+			{
+				this._t_Competition_Groups.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Competition", Storage="_t_Line", ThisKey="ID_TakeOffLine", OtherKey="ID", IsForeignKey=true)]
+		public t_Line t_Line
+		{
+			get
+			{
+				return this._t_Line.Entity;
+			}
+			set
+			{
+				t_Line previousValue = this._t_Line.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Line.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Line.Entity = null;
+						previousValue.t_Competitions.Remove(this);
+					}
+					this._t_Line.Entity = value;
+					if ((value != null))
+					{
+						value.t_Competitions.Add(this);
+						this._ID_TakeOffLine = value.ID;
+					}
+					else
+					{
+						this._ID_TakeOffLine = default(int);
+					}
+					this.SendPropertyChanged("t_Line");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Competition_Groups(t_Competition_Group entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Competition = this;
+		}
+		
+		private void detach_t_Competition_Groups(t_Competition_Group entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Competition = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Tracker")]
+	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _IMEI;
+		
+		private string _Name;
+		
+		private EntitySet<t_Daten> _t_Datens;
+		
+		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnIMEIChanging(string value);
+    partial void OnIMEIChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public t_Tracker()
+		{
+			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
+			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string IMEI
+		{
+			get
+			{
+				return this._IMEI;
+			}
+			set
+			{
+				if ((this._IMEI != value))
+				{
+					this.OnIMEIChanging(value);
+					this.SendPropertyChanging();
+					this._IMEI = value;
+					this.SendPropertyChanged("IMEI");
+					this.OnIMEIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Daten> t_Datens
+		{
+			get
+			{
+				return this._t_Datens;
+			}
+			set
+			{
+				this._t_Datens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team_Tracker", Storage="_t_Team_Trackers", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Team_Tracker> t_Team_Trackers
+		{
+			get
+			{
+				return this._t_Team_Trackers;
+			}
+			set
+			{
+				this._t_Team_Trackers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
+		}
+		
+		private void attach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Competition_Group")]
+	public partial class t_Competition_Group : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_Competition;
+		
+		private int _ID_Group;
+		
+		private int _Pos;
+		
+		private EntityRef<t_Competition> _t_Competition;
+		
+		private EntityRef<t_Group> _t_Group;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_CompetitionChanging(int value);
+    partial void OnID_CompetitionChanged();
+    partial void OnID_GroupChanging(int value);
+    partial void OnID_GroupChanged();
+    partial void OnPosChanging(int value);
+    partial void OnPosChanged();
+    #endregion
+		
+		public t_Competition_Group()
+		{
+			this._t_Competition = default(EntityRef<t_Competition>);
+			this._t_Group = default(EntityRef<t_Group>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Competition", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Competition
+		{
+			get
+			{
+				return this._ID_Competition;
+			}
+			set
+			{
+				if ((this._ID_Competition != value))
+				{
+					if ((this._t_Competition.HasLoadedOrAssignedValue || this._t_Group.HasLoadedOrAssignedValue))
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Competition = value;
+					this.SendPropertyChanged("ID_Competition");
+					this.OnID_CompetitionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Group", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_Group
+		{
+			get
+			{
+				return this._ID_Group;
+			}
+			set
+			{
+				if ((this._ID_Group != value))
+				{
+					this.OnID_GroupChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Group = value;
+					this.SendPropertyChanged("ID_Group");
+					this.OnID_GroupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pos", DbType="Int NOT NULL")]
+		public int Pos
+		{
+			get
+			{
+				return this._Pos;
+			}
+			set
+			{
+				if ((this._Pos != value))
+				{
+					this.OnPosChanging(value);
+					this.SendPropertyChanging();
+					this._Pos = value;
+					this.SendPropertyChanged("Pos");
+					this.OnPosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Competition_Group", Storage="_t_Competition", ThisKey="ID_Competition", OtherKey="ID", IsForeignKey=true)]
+		public t_Competition t_Competition
+		{
+			get
+			{
+				return this._t_Competition.Entity;
+			}
+			set
+			{
+				t_Competition previousValue = this._t_Competition.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Competition.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Competition.Entity = null;
+						previousValue.t_Competition_Groups.Remove(this);
+					}
+					this._t_Competition.Entity = value;
+					if ((value != null))
+					{
+						value.t_Competition_Groups.Add(this);
+						this._ID_Competition = value.ID;
+					}
+					else
+					{
+						this._ID_Competition = default(int);
+					}
+					this.SendPropertyChanged("t_Competition");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Competition_Group", Storage="_t_Group", ThisKey="ID_Competition", OtherKey="ID", IsForeignKey=true)]
+		public t_Group t_Group
+		{
+			get
+			{
+				return this._t_Group.Entity;
+			}
+			set
+			{
+				t_Group previousValue = this._t_Group.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Group.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Group.Entity = null;
+						previousValue.t_Competition_Groups.Remove(this);
+					}
+					this._t_Group.Entity = value;
+					if ((value != null))
+					{
+						value.t_Competition_Groups.Add(this);
+						this._ID_Competition = value.ID;
+					}
+					else
+					{
+						this._ID_Competition = default(int);
+					}
+					this.SendPropertyChanged("t_Group");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -520,172 +1171,6 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Tracker")]
-	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _IMEI;
-		
-		private string _Name;
-		
-		private EntitySet<t_Daten> _t_Datens;
-		
-		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnIMEIChanging(string value);
-    partial void OnIMEIChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public t_Tracker()
-		{
-			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
-			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string IMEI
-		{
-			get
-			{
-				return this._IMEI;
-			}
-			set
-			{
-				if ((this._IMEI != value))
-				{
-					this.OnIMEIChanging(value);
-					this.SendPropertyChanging();
-					this._IMEI = value;
-					this.SendPropertyChanged("IMEI");
-					this.OnIMEIChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Daten> t_Datens
-		{
-			get
-			{
-				return this._t_Datens;
-			}
-			set
-			{
-				this._t_Datens.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team_Tracker", Storage="_t_Team_Trackers", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Team_Tracker> t_Team_Trackers
-		{
-			get
-			{
-				return this._t_Team_Trackers;
-			}
-			set
-			{
-				this._t_Team_Trackers.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = this;
-		}
-		
-		private void detach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = null;
-		}
-		
-		private void attach_t_Team_Trackers(t_Team_Tracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = this;
-		}
-		
-		private void detach_t_Team_Trackers(t_Team_Tracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = null;
 		}
 	}
 	
@@ -1291,6 +1776,8 @@ namespace AnrlDB
 		
 		private string _Name;
 		
+		private EntitySet<t_Competition_Group> _t_Competition_Groups;
+		
 		private EntitySet<t_Group_Team> _t_Group_Teams;
 		
     #region Extensibility Method Definitions
@@ -1305,6 +1792,7 @@ namespace AnrlDB
 		
 		public t_Group()
 		{
+			this._t_Competition_Groups = new EntitySet<t_Competition_Group>(new Action<t_Competition_Group>(this.attach_t_Competition_Groups), new Action<t_Competition_Group>(this.detach_t_Competition_Groups));
 			this._t_Group_Teams = new EntitySet<t_Group_Team>(new Action<t_Group_Team>(this.attach_t_Group_Teams), new Action<t_Group_Team>(this.detach_t_Group_Teams));
 			OnCreated();
 		}
@@ -1349,6 +1837,19 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Competition_Group", Storage="_t_Competition_Groups", ThisKey="ID", OtherKey="ID_Competition")]
+		public EntitySet<t_Competition_Group> t_Competition_Groups
+		{
+			get
+			{
+				return this._t_Competition_Groups;
+			}
+			set
+			{
+				this._t_Competition_Groups.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Group_Team", Storage="_t_Group_Teams", ThisKey="ID", OtherKey="ID_Group")]
 		public EntitySet<t_Group_Team> t_Group_Teams
 		{
@@ -1382,6 +1883,18 @@ namespace AnrlDB
 			}
 		}
 		
+		private void attach_t_Competition_Groups(t_Competition_Group entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Group = this;
+		}
+		
+		private void detach_t_Competition_Groups(t_Competition_Group entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Group = null;
+		}
+		
 		private void attach_t_Group_Teams(t_Group_Team entity)
 		{
 			this.SendPropertyChanging();
@@ -1405,6 +1918,8 @@ namespace AnrlDB
 		
 		private int _ID_Team;
 		
+		private int _Pos;
+		
 		private EntityRef<t_Group> _t_Group;
 		
 		private EntityRef<t_Team> _t_Team;
@@ -1417,6 +1932,8 @@ namespace AnrlDB
     partial void OnID_GroupChanged();
     partial void OnID_TeamChanging(int value);
     partial void OnID_TeamChanged();
+    partial void OnPosChanging(int value);
+    partial void OnPosChanged();
     #endregion
 		
 		public t_Group_Team()
@@ -1470,6 +1987,26 @@ namespace AnrlDB
 					this._ID_Team = value;
 					this.SendPropertyChanged("ID_Team");
 					this.OnID_TeamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pos", DbType="Int NOT NULL")]
+		public int Pos
+		{
+			get
+			{
+				return this._Pos;
+			}
+			set
+			{
+				if ((this._Pos != value))
+				{
+					this.OnPosChanging(value);
+					this.SendPropertyChanging();
+					this._Pos = value;
+					this.SendPropertyChanged("Pos");
+					this.OnPosChanged();
 				}
 			}
 		}
@@ -1579,6 +2116,8 @@ namespace AnrlDB
 		
 		private int _ID_PointOrientation;
 		
+		private EntitySet<t_Competition> _t_Competitions;
+		
 		private EntitySet<t_Parcour_Line> _t_Parcour_Lines;
 		
 		private EntityRef<t_GPSPoint> _t_GPSPoint;
@@ -1605,6 +2144,7 @@ namespace AnrlDB
 		
 		public t_Line()
 		{
+			this._t_Competitions = new EntitySet<t_Competition>(new Action<t_Competition>(this.attach_t_Competitions), new Action<t_Competition>(this.detach_t_Competitions));
 			this._t_Parcour_Lines = new EntitySet<t_Parcour_Line>(new Action<t_Parcour_Line>(this.attach_t_Parcour_Lines), new Action<t_Parcour_Line>(this.detach_t_Parcour_Lines));
 			this._t_GPSPoint = default(EntityRef<t_GPSPoint>);
 			this._t_GPSPoint1 = default(EntityRef<t_GPSPoint>);
@@ -1721,6 +2261,19 @@ namespace AnrlDB
 					this.SendPropertyChanged("ID_PointOrientation");
 					this.OnID_PointOrientationChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Competition", Storage="_t_Competitions", ThisKey="ID", OtherKey="ID_TakeOffLine")]
+		public EntitySet<t_Competition> t_Competitions
+		{
+			get
+			{
+				return this._t_Competitions;
+			}
+			set
+			{
+				this._t_Competitions.Assign(value);
 			}
 		}
 		
@@ -1857,6 +2410,18 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_t_Competitions(t_Competition entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Line = this;
+		}
+		
+		private void detach_t_Competitions(t_Competition entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Line = null;
 		}
 		
 		private void attach_t_Parcour_Lines(t_Parcour_Line entity)
