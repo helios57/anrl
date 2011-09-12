@@ -213,6 +213,7 @@ namespace AirNavigationRaceLive.Comps
                 NetworkObjects.Team team = listViewTeam.SelectedItems[0].Tag as NetworkObjects.Team;
                 textBoxID.Tag = team;
                 textBoxID.Text = team.ID.ToString();
+                textBoxName.Text = team.Name;
                 NetworkObjects.Pilot pilot = Client.getPilot(team.ID_Pilot);
                 NetworkObjects.Pilot navigator = null;
                 if (team.ID_Navigator > 0)

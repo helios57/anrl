@@ -755,7 +755,6 @@ namespace AnrlService.Server
                             }
                         }
                         db.SubmitChanges();
-                        r.ResponseParameters = new ResponseParameters();
                         r.ResponseParameters.ID = t_g.ID;
                         break;
                     }
