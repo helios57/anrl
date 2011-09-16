@@ -32,7 +32,7 @@ namespace swisstopo.geodesy.gpsref
 
 
 		// Convert WGS lat/long (° dec) to CH y
-		private static double WGStoCHy(double lat, double lng) 
+		public static double WGStoCHy(double lat, double lng) 
 		{
 			// Converts degrees dec to sex
 			lat = DecToSexAngle(lat);
@@ -57,7 +57,7 @@ namespace swisstopo.geodesy.gpsref
 		}
 
 		// Convert WGS lat/long (° dec) to CH x
-		private static double WGStoCHx(double lat, double lng) 
+		public static double WGStoCHx(double lat, double lng) 
 		{
 			// Converts degrees dec to sex
 			lat = DecToSexAngle(lat);

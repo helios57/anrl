@@ -195,7 +195,6 @@
             this.fldY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fldY.Location = new System.Drawing.Point(115, 3);
             this.fldY.Name = "fldY";
-            this.fldY.ReadOnly = true;
             this.fldY.Size = new System.Drawing.Size(106, 20);
             this.fldY.TabIndex = 3;
             // 
@@ -229,7 +228,6 @@
             this.fldX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fldX.Location = new System.Drawing.Point(115, 3);
             this.fldX.Name = "fldX";
-            this.fldX.ReadOnly = true;
             this.fldX.Size = new System.Drawing.Size(106, 20);
             this.fldX.TabIndex = 3;
             // 
@@ -263,7 +261,6 @@
             this.fldSizeY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fldSizeY.Location = new System.Drawing.Point(115, 3);
             this.fldSizeY.Name = "fldSizeY";
-            this.fldSizeY.ReadOnly = true;
             this.fldSizeY.Size = new System.Drawing.Size(106, 20);
             this.fldSizeY.TabIndex = 3;
             // 
@@ -297,7 +294,6 @@
             this.fldRotationX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fldRotationX.Location = new System.Drawing.Point(115, 3);
             this.fldRotationX.Name = "fldRotationX";
-            this.fldRotationX.ReadOnly = true;
             this.fldRotationX.Size = new System.Drawing.Size(106, 20);
             this.fldRotationX.TabIndex = 3;
             // 
@@ -331,7 +327,6 @@
             this.fldRotationY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fldRotationY.Location = new System.Drawing.Point(115, 3);
             this.fldRotationY.Name = "fldRotationY";
-            this.fldRotationY.ReadOnly = true;
             this.fldRotationY.Size = new System.Drawing.Size(106, 20);
             this.fldRotationY.TabIndex = 2;
             // 
@@ -353,7 +348,7 @@
             this.btnSelectWorldFile.Name = "btnSelectWorldFile";
             this.btnSelectWorldFile.Size = new System.Drawing.Size(224, 24);
             this.btnSelectWorldFile.TabIndex = 3;
-            this.btnSelectWorldFile.Text = "Select World File";
+            this.btnSelectWorldFile.Text = "Select World File ( in WGS84 )";
             this.btnSelectWorldFile.UseVisualStyleBackColor = true;
             this.btnSelectWorldFile.Click += new System.EventHandler(this.btnSelectWorldFile_Click);
             // 
@@ -423,7 +418,6 @@
             this.fldSizeX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fldSizeX.Location = new System.Drawing.Point(115, 3);
             this.fldSizeX.Name = "fldSizeX";
-            this.fldSizeX.ReadOnly = true;
             this.fldSizeX.Size = new System.Drawing.Size(106, 20);
             this.fldSizeX.TabIndex = 1;
             // 

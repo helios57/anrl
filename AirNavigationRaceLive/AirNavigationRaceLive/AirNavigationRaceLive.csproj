@@ -99,6 +99,12 @@
     <Compile Include="Comps\Connect.Designer.cs">
       <DependentUpon>Connect.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Competition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\Competition.Designer.cs">
+      <DependentUpon>Competition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Group.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,12 +176,6 @@
     <Compile Include="Comps\Pilot.Designer.cs">
       <DependentUpon>Pilot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comps\Race.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Comps\Race.Designer.cs">
-      <DependentUpon>Race.cs</DependentUpon>
-    </Compile>
     <Compile Include="Comps\Team.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -194,6 +194,12 @@
     <Compile Include="Comps\Visualisation.Designer.cs">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\Calculator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\Calculator.Designer.cs">
+      <DependentUpon>Calculator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AirNavigationRaceLiveMain.resx">
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Connect.resx">
       <DependentUpon>Connect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\Competition.resx">
+      <DependentUpon>Competition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Group.resx">
       <DependentUpon>Group.cs</DependentUpon>
@@ -226,9 +235,6 @@
     <EmbeddedResource Include="Comps\Pilot.resx">
       <DependentUpon>Pilot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comps\Race.resx">
-      <DependentUpon>Race.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Comps\Team.resx">
       <DependentUpon>Team.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,6 +243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Visualisation.resx">
       <DependentUpon>Visualisation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\Calculator.resx">
+      <DependentUpon>Calculator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

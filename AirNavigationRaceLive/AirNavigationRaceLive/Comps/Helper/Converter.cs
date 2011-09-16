@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NetworkObjects;
+using swisstopo.geodesy.gpsref;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -141,6 +142,15 @@ namespace AirNavigationRaceLive.Comps.Helper
             lng = lng * 100 / 36;
 
             return lng;
+        }
+
+        public static double WGStoChEastY(double longitude, double latitude)
+        {
+            return ApproxSwissProj.WGStoCHy(latitude, longitude);
+        }
+        public static double WGStoChNorthX(double longitude, double latitude)
+        {
+            return ApproxSwissProj.WGStoCHx(latitude, longitude);
         }
     }
 }

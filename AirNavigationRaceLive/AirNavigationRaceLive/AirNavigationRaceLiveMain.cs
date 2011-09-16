@@ -19,7 +19,7 @@ namespace AirNavigationRaceLive
         Tracker Tracker;
         Pilot Pilot;
         Team Team;
-        Race Race;
+        Competition Competition;
         Map Map;
         Visualisation Visualisation;
         ParcourGen ParcourGen;
@@ -116,7 +116,7 @@ namespace AirNavigationRaceLive
             Tracker = null;
             Pilot = null;
             Team = null;
-            Race = null;
+            Competition = null;
             Visualisation = null;
             Map = null;
             ParcourGen = null;
@@ -162,11 +162,11 @@ namespace AirNavigationRaceLive
 
         private void racesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Race == null)
+            if (Competition == null)
             {
-                Race = new Race(Client);
+                Competition = new Competition(Client);
             }
-            enableControl(Race);
+            enableControl(Competition);
         }
 
         private void visualisationToolStripMenuItem_Click(object sender, EventArgs e)
