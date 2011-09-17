@@ -83,7 +83,8 @@ namespace AnrlService.Server
                 }
                 answer.ResponseParameters.Exception = ex.ToString();
 #if !DEBUG
-                EventLog.WriteEntry("Anrl-Service", "Exception in RequestProcessor.proccessRequest" + ex.InnerException.Message, EventLogEntryType.Error, 10);
+
+                Logger.Log(db, "Exception in RequestProcessor.proccessRequest" + ex.InnerException.Message, 0);
 #else
                 System.Console.WriteLine("Exception in RequestProcessor.proccessRequest " + ex.InnerException.Message);
 #endif

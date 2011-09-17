@@ -12,6 +12,7 @@ using NetworkObjects;
 using ProtoBuf;
 using System.Threading;
 using AnrlService.Server;
+using AnrlDB;
 namespace AnrlService
 {
     public partial class AnrlService : ServiceBase
@@ -26,10 +27,6 @@ namespace AnrlService
         public AnrlService()
         {
             InitializeComponent();
-#if !DEBUG
-            if (!EventLog.SourceExists(ServiceName))
-                EventLog.CreateEventSource(ServiceName, "Application");
-#endif
         }
 
         public void start()
@@ -60,7 +57,7 @@ namespace AnrlService
             catch (Exception ex)
             {
 #if !DEBUG
-                    EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 1);
+                Logger.Log("Unable to start Service " + ex.InnerException.Message, 0);
 #else
                 System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
 #endif
@@ -72,7 +69,8 @@ namespace AnrlService
             catch (Exception ex)
             {
 #if !DEBUG
-                    EventLog.WriteEntry(ServiceName, "Unable to start Service " + ex.InnerException.Message, EventLogEntryType.Error, 2);
+
+                Logger.Log("Unable to start Service " + ex.InnerException.Message, 0);
 #else
                 System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
 #endif
@@ -100,7 +98,8 @@ namespace AnrlService
             catch (Exception ex)
             {
 #if !DEBUG
-                EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 4);
+
+                Logger.Log("Unable to recieve Connection " + ex.InnerException.Message, 0);
 #else
                 System.Console.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
 #endif
@@ -148,12 +147,12 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 5);
+                    Logger.Log("Unable to recieve Connection " + ex.InnerException.Message, 0);
                 }
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("Anrl-Service", "Unable to recieve Connection " + ex.InnerException.Message, EventLogEntryType.Error, 5);
+                Logger.Log("Unable to recieve Connection " + ex.InnerException.Message, 0);
             }
         }
 
@@ -181,7 +180,7 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    EventLog.WriteEntry("Anrl-Service", "Unable to stop Service " + ex.InnerException.Message, EventLogEntryType.Error, 8);
+                    Logger.Log("Unable to stop Service " + ex.InnerException.Message, 0);
                 }
             }
         }
