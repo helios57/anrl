@@ -5,6 +5,7 @@ using System.Text;
 using System.Timers;
 using System.IO;
 using ProtoBuf;
+using NetworkObjects;
 
 namespace AirNavigationRaceLive.Comps.Client
 {
@@ -37,7 +38,8 @@ namespace AirNavigationRaceLive.Comps.Client
             t.Elapsed += new ElapsedEventHandler(t_Elapsed);
             t.Start();
         }
-        public void persist()
+
+        public void Persist()
         {
             String file = Path.GetTempPath() + @"\ANRL.tmp";
             FileInfo fileInfo = new FileInfo(file);
@@ -55,10 +57,35 @@ namespace AirNavigationRaceLive.Comps.Client
             {
                 fileInfo.Delete();
             }
-            fileInfo.Create();
-            Stream s  = fileInfo.OpenWrite();
+            Stream s = fileInfo.Create();
             Serializer.SerializeWithLengthPrefix(s, r, PrefixStyle.Base128);
             s.Close();
+        }
+
+        public bool LoadPersisted()
+        {
+            String file = Path.GetTempPath() + @"\ANRL.tmp";
+            FileInfo fileInfo = new FileInfo(file);
+            if (fileInfo.Exists)
+            {
+                try
+                {
+                    Stream s = fileInfo.OpenRead();
+                    Root root = Serializer.DeserializeWithLengthPrefix<Root>(s, PrefixStyle.Base128);
+                    cacheMap.addAll(root.ResponseParameters.MapList);
+                    cachePicture.addAll(root.ResponseParameters.PictureList);
+                    cacheParcour.addAll(root.ResponseParameters.ParcourList);
+                    cachePilot.addAll(root.ResponseParameters.PilotList);
+                    cacheTracker.addAll(root.ResponseParameters.TrackerList);
+                    cacheTeam.addAll(root.ResponseParameters.TeamList);
+                    cacheGroup.addAll(root.ResponseParameters.GroupList);
+                    cacheCompetition.addAll(root.ResponseParameters.CompetitionList);
+                    s.Close();
+                    return true;
+                }
+                catch { }
+            }
+            return false;
         }
         public void update()
         {
@@ -71,6 +98,10 @@ namespace AirNavigationRaceLive.Comps.Client
             {
                 t.Interval = 10000;
                 bool partial = !first;
+                if (first)
+                {
+                    partial = LoadPersisted();
+                }
                 updateCaches(partial);
                 first = false;
             }
@@ -87,6 +118,7 @@ namespace AirNavigationRaceLive.Comps.Client
             cacheTeam.update(partial);
             cacheGroup.update(partial);
             cacheCompetition.update(partial);
+            Persist();
             updating = false;
         }
         public bool initialLoadComplete()

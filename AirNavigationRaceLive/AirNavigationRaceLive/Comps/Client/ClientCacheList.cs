@@ -78,6 +78,24 @@ namespace AirNavigationRaceLive.Comps.Client
                 }
             }
         }
+        internal void addAll(List<T> list)
+        {
+            lock (this)
+            {
+                foreach (T t in list)
+                {
+                    ClientCacheEntry<T> e;
+                    e = new ClientCacheEntry<T>(t);
+                    dynamic d = t;
+                    if (cache.ContainsKey(d.ID))
+                    {
+                        cache.Remove(d.ID);
+                    }
+                    cache.Add(d.ID, e);
+                }
+
+            }
+        }
 
         public List<T> getAll()
         {
@@ -111,17 +129,7 @@ namespace AirNavigationRaceLive.Comps.Client
                     {
                         cache.Remove(i);
                     }
-                    foreach (T t in list)
-                    {
-                        ClientCacheEntry<T> e;
-                        e = new ClientCacheEntry<T>(t);
-                        dynamic d = t;
-                        if (cache.ContainsKey(d.ID))
-                        {
-                            cache.Remove(d.ID);
-                        }
-                        cache.Add(d.ID, e);
-                    }
+                    addAll(list);
                 }
             }
             else
@@ -132,13 +140,7 @@ namespace AirNavigationRaceLive.Comps.Client
                 {
                     lock (this)
                     {
-                        foreach (T t in list)
-                        {
-                            ClientCacheEntry<T> e;
-                            e = new ClientCacheEntry<T>(t);
-                            dynamic d = t;
-                            cache.Add(d.ID, e);
-                        }
+                        addAll(list);
                     }
                 }
             }
