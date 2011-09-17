@@ -41,7 +41,7 @@ namespace AirNavigationRaceLive.Comps.Client
 
         public void Persist()
         {
-            String file = Path.GetTempPath() + @"\ANRL.tmp";
+            String file = Path.GetTempPath() + @"\ANRL"+c.getIpAdress()+".tmp";
             FileInfo fileInfo = new FileInfo(file);
             NetworkObjects.Root r = new NetworkObjects.Root();
             r.ResponseParameters = new NetworkObjects.ResponseParameters();
@@ -64,7 +64,7 @@ namespace AirNavigationRaceLive.Comps.Client
 
         public bool LoadPersisted()
         {
-            String file = Path.GetTempPath() + @"\ANRL.tmp";
+            String file = Path.GetTempPath() + @"\ANRL" + c.getIpAdress() + ".tmp";
             FileInfo fileInfo = new FileInfo(file);
             if (fileInfo.Exists)
             {

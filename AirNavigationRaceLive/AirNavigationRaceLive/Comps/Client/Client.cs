@@ -27,6 +27,10 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return Token != null;
         }
+        internal string getIpAdress()
+        {
+            return IpAdress;
+        }
         public void Authenticate(String username, String password)
         {
             Root r = new Root();
