@@ -92,7 +92,7 @@ namespace AnrlService.Server
 
                 //Logger.Log(db, "Exception in RequestProcessor.proccessRequest" + ex.InnerException.Message, 0);
 #else
-                System.Console.WriteLine("Exception in RequestProcessor.proccessRequest " + ex.InnerException.Message);
+                //System.Console.WriteLine("Exception in RequestProcessor.proccessRequest " + ex.InnerException.Message);
 #endif
             }
             return answer;
