@@ -50,35 +50,91 @@ namespace AirNavigationRaceLive.Comps
             }
             UpdateEnablement();
         }
+        private void LoadParcours()
+        {
+            List<NetworkObjects.Parcour> parcour = Client.getParcours();
+            parcours.Items.Clear();
+            foreach (NetworkObjects.Parcour c in parcour)
+            {
+                ComboParcour cp = new ComboParcour(c);
+                parcours.Items.Add(cp);
+            }
+            UpdateEnablement();
+        }
 
         private void UpdateEnablement()
         {
+            bool CompetitionSelected = listViewCompetition.SelectedItems.Count == 1;
+            bool GroupSelected = listViewGroups.SelectedItems.Count == 1;
+            bool CompetitionGroupSelected = listViewSelectedGroup.SelectedItems.Count == 1;
+            bool Ediable = textID.Text != "";
+            bool parcourSelected = parcours.SelectedItem != null;
 
+            btnDeleteCompetitions.Enabled = CompetitionSelected;
+            btnSave.Enabled = Ediable && parcourSelected;
+            textName.Enabled = Ediable;
+            date.Enabled = Ediable;
+            timeTakeOff.Enabled = Ediable;
+            timeStart.Enabled = Ediable;
+            timeEnd.Enabled = Ediable;
+            parcours.Enabled = Ediable;
+            takeOffLeftLatitude.Enabled = Ediable;
+            takeOffLeftLongitude.Enabled = Ediable;
+            takeOffRightLatitude.Enabled = Ediable;
+            takeOffRightLongitude.Enabled = Ediable;
+            listViewSelectedGroup.Enabled = Ediable;
+            btnUp.Enabled = Ediable && CompetitionGroupSelected;
+            btnDown.Enabled = Ediable && CompetitionGroupSelected;
+            btnAddToCompetition.Enabled = Ediable && GroupSelected;
+        }
+        private void Reset()
+        {
+            textID.Text = "";
+            textName.Text = "";
+            parcours.SelectedItem = null;
+            parcours.Text = "";
+            takeOffLeftLatitude.Text = "";
+            takeOffLeftLongitude.Text = "";
+            takeOffRightLatitude.Text = "";
+            takeOffRightLongitude.Text = "";
+            listViewSelectedGroup.Items.Clear();
+            UpdateEnablement();
         }
 
         private void Competition_Load(object sender, EventArgs e)
         {
-
+            LoadParcours();
+            Reset();
+            LoadCompetition();
+            LoadGroups();
         }
 
         private void btnRefreshCompetitions_Click(object sender, EventArgs e)
         {
-
+            Reset();
+            LoadCompetition();
         }
 
         private void btnDeleteCompetitions_Click(object sender, EventArgs e)
         {
-
+            if (listViewCompetition.SelectedItems.Count == 1)
+            {
+                NetworkObjects.Competition c = listViewCompetition.SelectedItems[0].Tag as NetworkObjects.Competition;
+                Client.deleteCompetition(c.ID);
+                LoadCompetition();
+            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-
+            LoadParcours();
+            textID.Text = "0";
+            UpdateEnablement();
         }
 
         private void listViewSelectedGroup_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            UpdateEnablement();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -98,17 +154,40 @@ namespace AirNavigationRaceLive.Comps
 
         private void listViewGroups_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            UpdateEnablement();
         }
 
         private void btnAddToCompetition_Click(object sender, EventArgs e)
         {
-
+            if (listViewGroups.SelectedItems.Count == 1)
+            {
+                ListViewItem lvi = listViewGroups.SelectedItems[0];
+                NetworkObjects.Group g = lvi.Tag as NetworkObjects.Group;
+                //TODO
+            }
         }
 
         private void btnRefreshGroup_Click(object sender, EventArgs e)
         {
+            LoadGroups();
+        }
 
+        private void parcours_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateEnablement();
+        }
+    }
+    class ComboParcour
+    {
+        NetworkObjects.Parcour p;
+        public ComboParcour(NetworkObjects.Parcour p)
+        {
+            this.p = p;
+        }
+
+        public override string ToString()
+        {
+            return p.ID + " " + p.Name;
         }
     }
 }

@@ -267,11 +267,17 @@
             // 
             // parcours
             // 
+            this.parcours.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.parcours.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.parcours.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.parcours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parcours.FormattingEnabled = true;
             this.parcours.Location = new System.Drawing.Point(327, 241);
             this.parcours.Name = "parcours";
             this.parcours.Size = new System.Drawing.Size(146, 21);
             this.parcours.TabIndex = 40;
+            this.parcours.SelectedIndexChanged += new System.EventHandler(this.parcours_SelectedIndexChanged);
             // 
             // btnNew
             // 
@@ -309,6 +315,8 @@
             // 
             // takeOffLeftLongitude
             // 
+            this.takeOffLeftLongitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.takeOffLeftLongitude.Location = new System.Drawing.Point(375, 288);
             this.takeOffLeftLongitude.Name = "takeOffLeftLongitude";
             this.takeOffLeftLongitude.Size = new System.Drawing.Size(98, 20);
@@ -316,6 +324,8 @@
             // 
             // takeOffLeftLatitude
             // 
+            this.takeOffLeftLatitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.takeOffLeftLatitude.Location = new System.Drawing.Point(375, 313);
             this.takeOffLeftLatitude.Name = "takeOffLeftLatitude";
             this.takeOffLeftLatitude.Size = new System.Drawing.Size(98, 20);
@@ -334,6 +344,8 @@
             // 
             // takeOffRightLatitude
             // 
+            this.takeOffRightLatitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.takeOffRightLatitude.Location = new System.Drawing.Point(375, 365);
             this.takeOffRightLatitude.Name = "takeOffRightLatitude";
             this.takeOffRightLatitude.Size = new System.Drawing.Size(98, 20);
@@ -352,6 +364,8 @@
             // 
             // takeOffRightLongitude
             // 
+            this.takeOffRightLongitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.takeOffRightLongitude.Location = new System.Drawing.Point(375, 340);
             this.takeOffRightLongitude.Name = "takeOffRightLongitude";
             this.takeOffRightLongitude.Size = new System.Drawing.Size(98, 20);
@@ -382,8 +396,9 @@
             // 
             // listViewSelectedGroup
             // 
-            this.listViewSelectedGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewSelectedGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewSelectedGroup.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
             this.columnHeader4,
@@ -395,7 +410,7 @@
             this.listViewSelectedGroup.Location = new System.Drawing.Point(264, 391);
             this.listViewSelectedGroup.MultiSelect = false;
             this.listViewSelectedGroup.Name = "listViewSelectedGroup";
-            this.listViewSelectedGroup.Size = new System.Drawing.Size(388, 117);
+            this.listViewSelectedGroup.Size = new System.Drawing.Size(265, 117);
             this.listViewSelectedGroup.TabIndex = 52;
             this.listViewSelectedGroup.UseCompatibleStateImageBehavior = false;
             this.listViewSelectedGroup.View = System.Windows.Forms.View.Details;
@@ -418,9 +433,10 @@
             // 
             // btnUp
             // 
-            this.btnUp.Location = new System.Drawing.Point(658, 417);
+            this.btnUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUp.Location = new System.Drawing.Point(535, 409);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(49, 27);
+            this.btnUp.Size = new System.Drawing.Size(85, 27);
             this.btnUp.TabIndex = 53;
             this.btnUp.Text = "Up";
             this.btnUp.UseVisualStyleBackColor = true;
@@ -428,9 +444,10 @@
             // 
             // btnDown
             // 
-            this.btnDown.Location = new System.Drawing.Point(658, 450);
+            this.btnDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDown.Location = new System.Drawing.Point(535, 442);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(49, 27);
+            this.btnDown.Size = new System.Drawing.Size(85, 27);
             this.btnDown.TabIndex = 54;
             this.btnDown.Text = "Down";
             this.btnDown.UseVisualStyleBackColor = true;
@@ -438,7 +455,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(264, 514);
             this.btnSave.Name = "btnSave";
@@ -451,7 +468,7 @@
             // listViewGroups
             // 
             this.listViewGroups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewGroups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7,
             this.columnHeader8});
@@ -480,7 +497,7 @@
             // 
             // btnAddToCompetition
             // 
-            this.btnAddToCompetition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddToCompetition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddToCompetition.Location = new System.Drawing.Point(531, 321);
             this.btnAddToCompetition.Name = "btnAddToCompetition";
             this.btnAddToCompetition.Size = new System.Drawing.Size(212, 29);
@@ -491,7 +508,7 @@
             // 
             // btnRefreshGroup
             // 
-            this.btnRefreshGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefreshGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefreshGroup.Location = new System.Drawing.Point(531, 356);
             this.btnRefreshGroup.Name = "btnRefreshGroup";
             this.btnRefreshGroup.Size = new System.Drawing.Size(212, 29);

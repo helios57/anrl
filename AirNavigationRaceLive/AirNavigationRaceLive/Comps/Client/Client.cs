@@ -35,6 +35,10 @@ namespace AirNavigationRaceLive.Comps.Client
             r.AuthInfo.Password = password;
             Token = process(r).AuthInfo.Token;
         }
+        public bool IsInitialLoadComplete()
+        {
+            return cache.initialLoadComplete();
+        }
         internal Root process(Root request)
         {
             try

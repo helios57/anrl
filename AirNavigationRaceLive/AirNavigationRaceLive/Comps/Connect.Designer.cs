@@ -35,6 +35,8 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.fldPassword = new System.Windows.Forms.TextBox();
             this.fldUsername = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textStatus = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblAnrlServer
@@ -104,10 +106,28 @@
             this.fldUsername.TabIndex = 10;
             this.fldUsername.Text = "anrl";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(105, 272);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Status";
+            // 
+            // textStatus
+            // 
+            this.textStatus.Location = new System.Drawing.Point(181, 269);
+            this.textStatus.Name = "textStatus";
+            this.textStatus.Size = new System.Drawing.Size(210, 20);
+            this.textStatus.TabIndex = 15;
+            // 
             // Connect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textStatus);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblAnrlServer);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.fldServer);
@@ -117,6 +137,7 @@
             this.Controls.Add(this.fldUsername);
             this.Name = "Connect";
             this.Size = new System.Drawing.Size(600, 400);
+            this.Load += new System.EventHandler(this.Connect_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,5 +152,7 @@
         private System.Windows.Forms.Button btnConnect;
         protected System.Windows.Forms.TextBox fldPassword;
         protected System.Windows.Forms.TextBox fldUsername;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textStatus;
     }
 }

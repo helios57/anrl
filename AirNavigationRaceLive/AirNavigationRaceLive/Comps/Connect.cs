@@ -27,12 +27,29 @@ namespace AirNavigationRaceLive.Comps
                 c.Authenticate(fldUsername.Text, fldPassword.Text);
                 if (c.isAuthenticated() && Connected != null)
                 {
+                    textStatus.Text = "Connected to Server, downloading data";
+                    while (!c.IsInitialLoadComplete())
+                    {
+                        Application.DoEvents();
+                        System.Threading.Thread.Sleep(100);
+                    }
+                    textStatus.Text = "Connected to Server, download finished";
+
                     Connected.Invoke(c, e);
+                }
+                else
+                {
+                    textStatus.Text = "Connection failed";
                 }
             }
             catch
             {
             }
+        }
+
+        private void Connect_Load(object sender, EventArgs e)
+        {
+            textStatus.Text = "";
         }
     }
 }

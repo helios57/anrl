@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using System.IO;
+using ProtoBuf;
 
 namespace AirNavigationRaceLive.Comps.Client
 {
@@ -35,7 +37,29 @@ namespace AirNavigationRaceLive.Comps.Client
             t.Elapsed += new ElapsedEventHandler(t_Elapsed);
             t.Start();
         }
-
+        public void persist()
+        {
+            String file = Path.GetTempPath() + @"\ANRL.tmp";
+            FileInfo fileInfo = new FileInfo(file);
+            NetworkObjects.Root r = new NetworkObjects.Root();
+            r.ResponseParameters = new NetworkObjects.ResponseParameters();
+            r.ResponseParameters.MapList.AddRange(cacheMap.getAll());
+            r.ResponseParameters.PictureList.AddRange(cachePicture.getAll());
+            r.ResponseParameters.ParcourList.AddRange(cacheParcour.getAll());
+            r.ResponseParameters.PilotList.AddRange(cachePilot.getAll());
+            r.ResponseParameters.TrackerList.AddRange(cacheTracker.getAll());
+            r.ResponseParameters.TeamList.AddRange(cacheTeam.getAll());
+            r.ResponseParameters.GroupList.AddRange(cacheGroup.getAll());
+            r.ResponseParameters.CompetitionList.AddRange(cacheCompetition.getAll());
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
+            }
+            fileInfo.Create();
+            Stream s  = fileInfo.OpenWrite();
+            Serializer.SerializeWithLengthPrefix(s, r, PrefixStyle.Base128);
+            s.Close();
+        }
         public void update()
         {
             t.Interval = 10;
@@ -64,6 +88,10 @@ namespace AirNavigationRaceLive.Comps.Client
             cacheGroup.update(partial);
             cacheCompetition.update(partial);
             updating = false;
+        }
+        public bool initialLoadComplete()
+        {
+            return !first && !updating;
         }
     }
 }
