@@ -22,6 +22,12 @@ namespace AnrlService.Server
         public Root proccessRequest(Root request)
         {
             Root answer = new Root();
+            if (request == null)
+            {
+                answer.ResponseParameters = new ResponseParameters();
+                answer.ResponseParameters.Exception = "request was null, network Error";
+                return answer;
+            }
             try
             {
                 if (request.RequestType == (int)ERequestType.Login)

@@ -111,7 +111,10 @@ namespace AnrlService
 
             NetworkStream stream = new NetworkStream(handler);
             Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-
+            if (reqest == null)
+            {
+                reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+            }
             if (processor == null || !processor.isUseable())
             {
                 processor = new RequestProcessor();
