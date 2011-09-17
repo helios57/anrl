@@ -115,11 +115,13 @@ namespace AnrlService
             {
                 reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
             }
-            if (processor == null || !processor.isUseable())
+            /*if (processor == null || !processor.isUseable())
             {
                 processor = new RequestProcessor();
             }
-            Root response = processor.proccessRequest(reqest);
+            Root response = processor.proccessRequest(reqest);*/
+            Root response = new RequestProcessor().proccessRequest(reqest);
+            
             Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
             stream.Flush();
             stream.Close();
