@@ -64,7 +64,9 @@ namespace AnrlService
             }
             try
             {
+#if !DEBUG
                 Reciever = new TCPReciever.Server();
+#endif
             }
             catch (Exception ex)
             {
@@ -121,7 +123,7 @@ namespace AnrlService
             }
             Root response = processor.proccessRequest(reqest);*/
             Root response = new RequestProcessor().proccessRequest(reqest);
-            
+
             Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
             stream.Flush();
             stream.Close();

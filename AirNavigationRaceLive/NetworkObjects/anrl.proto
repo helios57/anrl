@@ -191,7 +191,7 @@ option optimize_for = SPEED;
 		
 		optional int64 TimeEndLine = 5;
 		
-		optional int32 ID_TakeOffLine = 6;
+		optional Line TakeOffLine = 6;
 
 		optional int32 ID_Parcour = 7;
 

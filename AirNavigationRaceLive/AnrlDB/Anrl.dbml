@@ -2,7 +2,7 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=AnrlDB;Integrated Security=True" SettingsObjectName="AnrlDB.Properties.Settings" SettingsPropertyName="AnrlDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.t_Competition" Member="t_Competitions">
     <Type Name="t_Competition">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TimeTakeOff" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TimeStartLine" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="TimeEndLine" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />

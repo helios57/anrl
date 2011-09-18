@@ -841,13 +841,13 @@ namespace NetworkObjects
       set { _TimeEndLine = value; }
     }
 
-    private int _ID_TakeOffLine = default(int);
-    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"ID_TakeOffLine", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
-    [global::System.ComponentModel.DefaultValue(default(int))]
-    public int ID_TakeOffLine
+    private NetworkObjects.Line _TakeOffLine = null;
+    [global::ProtoBuf.ProtoMember(6, IsRequired = false, Name=@"TakeOffLine", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NetworkObjects.Line TakeOffLine
     {
-      get { return _ID_TakeOffLine; }
-      set { _ID_TakeOffLine = value; }
+      get { return _TakeOffLine; }
+      set { _TakeOffLine = value; }
     }
 
     private int _ID_Parcour = default(int);

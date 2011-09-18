@@ -40,7 +40,8 @@ namespace NetworkObjects
         END_D = 10,
         LINEOFNORETURN = 11,
         PENALTYZONE = 12,
-        Point = 13
+        Point = 13,
+        TakeOff = 14,
     }
     public enum GroupPosType : int
     {

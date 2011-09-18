@@ -550,6 +550,18 @@ namespace AnrlService.Server
             p.latitude = gp.latitude;
             p.longitude = gp.longitude;
         }
+        private static void CopyAttributesWithoutId(t_GPSPoint gp, Point p)
+        {
+            p.altitude = gp.altitude;
+            p.latitude = gp.latitude;
+            p.longitude = gp.longitude;
+        }
+        private static void CopyAttributesWithoutId(Point gp, t_GPSPoint p)
+        {
+            p.altitude = gp.altitude;
+            p.latitude = gp.latitude;
+            p.longitude = gp.longitude;
+        }
 
 
         private Root proccessTeam(Root request)
@@ -794,7 +806,15 @@ namespace AnrlService.Server
                                 c.ID = t_c.ID;
                                 c.Name = t_c.Name;
                                 c.ID_Parcour = t_c.ID_Parcour;
-                                c.ID_TakeOffLine = t_c.ID_TakeOffLine;
+
+                                Line l = new Line();
+                                l.A = new Point();
+                                CopyAttributes(t_c.t_Line.t_GPSPoint, l.A);
+                                l.B = new Point();
+                                CopyAttributes(t_c.t_Line.t_GPSPoint1, l.B);
+                                l.O = new Point();
+                                CopyAttributes(t_c.t_Line.t_GPSPoint2, l.O);
+                                c.TakeOffLine = l;
                                 c.TimeEndLine = t_c.TimeEndLine;
                                 c.TimeStartLine = t_c.TimeStartLine;
                                 c.TimeTakeOff = t_c.TimeTakeOff;
@@ -822,7 +842,14 @@ namespace AnrlService.Server
                                 c.ID = t_c.ID;
                                 c.Name = t_c.Name;
                                 c.ID_Parcour = t_c.ID_Parcour;
-                                c.ID_TakeOffLine = t_c.ID_TakeOffLine;
+                                Line l = new Line();
+                                l.A = new Point();
+                                CopyAttributes(t_c.t_Line.t_GPSPoint, l.A);
+                                l.B = new Point();
+                                CopyAttributes(t_c.t_Line.t_GPSPoint1, l.B);
+                                l.O = new Point();
+                                CopyAttributes(t_c.t_Line.t_GPSPoint2, l.O);
+                                c.TakeOffLine = l;
                                 c.TimeEndLine = t_c.TimeEndLine;
                                 c.TimeStartLine = t_c.TimeStartLine;
                                 c.TimeTakeOff = t_c.TimeTakeOff;
@@ -847,23 +874,58 @@ namespace AnrlService.Server
                 case ERequestType.Save:
                     {
                         t_Competition t_c;
+                        t_Line line;
+
+                        t_GPSPoint a;
+                        t_GPSPoint b;
+                        t_GPSPoint o;
+
                         if (request.RequestParameters.Competition.ID > 0)
                         {
                             t_c = db.t_Competitions.Single(p => p.ID == request.RequestParameters.Competition.ID);
                             db.t_Competition_Groups.DeleteAllOnSubmit(db.t_Competition_Groups.Where(p => p.ID_Competition == request.RequestParameters.Competition.ID));
                             db.SubmitChanges();
+                            line = t_c.t_Line;
+                            a = line.t_GPSPoint;
+                            b = line.t_GPSPoint1;
+                            o = line.t_GPSPoint2;
                         }
                         else
                         {
+                            a = new t_GPSPoint();
+                            b = new t_GPSPoint();
+                            o = new t_GPSPoint();
+
+                            db.t_GPSPoints.InsertOnSubmit(a);
+                            db.t_GPSPoints.InsertOnSubmit(b);
+                            db.t_GPSPoints.InsertOnSubmit(o);
+                            db.SubmitChanges();
+
+                            line = new t_Line();
+                            db.t_Lines.InsertOnSubmit(line);
+                            line.ID_PointA = a.ID;
+                            line.ID_PointB = b.ID;
+                            line.ID_PointOrientation = o.ID;
+                            line.Type = (int)LineType.TakeOff;
+                            db.SubmitChanges();
+
                             t_c = new t_Competition();
                             db.t_Competitions.InsertOnSubmit(t_c);
+                            t_c.ID_TakeOffLine = line.ID;
                         }
                         t_c.Name = request.RequestParameters.Competition.Name;
                         t_c.ID_Parcour = request.RequestParameters.Competition.ID_Parcour;
-                        t_c.ID_TakeOffLine = request.RequestParameters.Competition.ID_TakeOffLine;
+
+                        CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.A, a);
+
+                        CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.B, b);
+
+                        CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.O, o);
+
                         t_c.TimeEndLine = request.RequestParameters.Competition.TimeEndLine;
                         t_c.TimeStartLine = request.RequestParameters.Competition.TimeStartLine;
                         t_c.TimeTakeOff = request.RequestParameters.Competition.TimeTakeOff;
+
                         db.SubmitChanges();
 
                         foreach (CompetitionGroup cg in request.RequestParameters.Competition.CompetitionGroupList)

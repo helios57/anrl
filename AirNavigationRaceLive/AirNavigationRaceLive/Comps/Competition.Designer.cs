@@ -113,6 +113,7 @@
             this.listViewCompetition.TabIndex = 3;
             this.listViewCompetition.UseCompatibleStateImageBehavior = false;
             this.listViewCompetition.View = System.Windows.Forms.View.Details;
+            this.listViewCompetition.SelectedIndexChanged += new System.EventHandler(this.listViewCompetition_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -321,6 +322,7 @@
             this.takeOffLeftLongitude.Name = "takeOffLeftLongitude";
             this.takeOffLeftLongitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffLeftLongitude.TabIndex = 44;
+            this.takeOffLeftLongitude.TextChanged += new System.EventHandler(this.takeOffLeftLongitude_TextChanged);
             // 
             // takeOffLeftLatitude
             // 
@@ -330,6 +332,7 @@
             this.takeOffLeftLatitude.Name = "takeOffLeftLatitude";
             this.takeOffLeftLatitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffLeftLatitude.TabIndex = 46;
+            this.takeOffLeftLatitude.TextChanged += new System.EventHandler(this.takeOffLeftLatitude_TextChanged);
             // 
             // label11
             // 
@@ -350,6 +353,7 @@
             this.takeOffRightLatitude.Name = "takeOffRightLatitude";
             this.takeOffRightLatitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffRightLatitude.TabIndex = 50;
+            this.takeOffRightLatitude.TextChanged += new System.EventHandler(this.takeOffRightLatitude_TextChanged);
             // 
             // label12
             // 
@@ -370,6 +374,7 @@
             this.takeOffRightLongitude.Name = "takeOffRightLongitude";
             this.takeOffRightLongitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffRightLongitude.TabIndex = 48;
+            this.takeOffRightLongitude.TextChanged += new System.EventHandler(this.takeOffRightLongitude_TextChanged);
             // 
             // label13
             // 
@@ -411,6 +416,7 @@
             this.listViewSelectedGroup.MultiSelect = false;
             this.listViewSelectedGroup.Name = "listViewSelectedGroup";
             this.listViewSelectedGroup.Size = new System.Drawing.Size(265, 117);
+            this.listViewSelectedGroup.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewSelectedGroup.TabIndex = 52;
             this.listViewSelectedGroup.UseCompatibleStateImageBehavior = false;
             this.listViewSelectedGroup.View = System.Windows.Forms.View.Details;
