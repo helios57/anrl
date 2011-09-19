@@ -203,5 +203,71 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             return result;
         }
+
+        /// <summary>
+        /// Imports a GAC File of a Flight.
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns>The created Flight object</returns>
+        public List<GPSData> GPSdataFromGAC(string filename)
+        {
+            List<GPSData> result = new List<GPSData>();
+            StreamReader gacFileStreamReader = new StreamReader(filename);
+            string line = string.Empty;
+            DateTime newPointTimeStamp = DateTime.Now;
+            double newPointLatitude = 0;
+            double newPointLongitude = 0;
+            line = gacFileStreamReader.ReadLine();
+            while (!line.Substring(0, 1).Equals("I") && !gacFileStreamReader.EndOfStream)
+            {
+                line = gacFileStreamReader.ReadLine();
+            }
+            {
+                while (!gacFileStreamReader.EndOfStream)
+                {
+                    line = gacFileStreamReader.ReadLine();
+                    if (line.Substring(0, 1).Equals("B"))
+                    {
+                        // timestamp
+                        newPointTimeStamp = new DateTime(1, 1, 1, Convert.ToInt32(line.Substring(1, 2)), Convert.ToInt32(line.Substring(3, 2)), Convert.ToInt32(line.Substring(5, 2)));
+                        // latitude
+                        newPointLatitude = Convert.ToDouble(line.Substring(7, 2)) * 3600 + Convert.ToDouble(line.Substring(9, 2)) * 60 + Convert.ToDouble(line.Substring(11, 3)) * 60 / 1000;
+                        switch (line.Substring(14, 1))
+                        {
+                            case "N":
+                                break;
+                            case "S":
+                                newPointLatitude *= (-1);
+                                break;
+                            default:
+                                // TODO: Error
+                                break;
+                        }
+                        // longitude
+                        newPointLongitude = Convert.ToDouble(line.Substring(15, 3)) * 3600 + Convert.ToDouble(line.Substring(18, 2)) * 60 + Convert.ToDouble(line.Substring(20, 3)) * 60 / 1000;
+                        switch (line.Substring(23, 1))
+                        {
+                            case "E":
+                                break;
+                            case "W":
+                                newPointLongitude *= (-1);
+                                break;
+                            default:
+                                // ToDo: Error
+                                break;
+                        }
+                        GPSData data = new GPSData();
+                        data.accuracy = 0;
+                        data.timestampGPS = newPointTimeStamp.Ticks;
+                        data.speed = 0;
+                       // data.
+                       // TrackPoint newTrackPoint = new TrackPoint(newPointLatitude, newPointLongitude, newPointTimeStamp, GpsPointFormatImport.WGS84);
+
+                       // trackpoints.Add(newTrackPoint);
+                    }
+                }
+            }
+            return result;
+        }
     }
 }
