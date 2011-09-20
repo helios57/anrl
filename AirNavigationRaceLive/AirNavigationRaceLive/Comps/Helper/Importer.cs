@@ -34,15 +34,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                     //Reading out Layer ( "8" [\n] layerName) = Type of Element
                     if (lines[i + 5] == "  8" && lines[i + 6].Contains("PROH")) // "Prohibited Zone" = ForbiddenZone
                     {
-                        if (lines[i + 9 + 4] == " 90")
+                        if (lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90")
                         {
-                            int numberOfVertexes = int.Parse(lines[i + 10 + 4]);
+                            int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
+                            int numberOfVertexes = int.Parse(lines[i + 10 + correctur]);
                             List<Vector> input = new List<Vector>();
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
 
-                                double Longitude = Converter.CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16 + 4]) * 1000, double.Parse(lines[i + (j * 4) + 18 + 4]) * 1000);
-                                double Latitude = Converter.CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16 + 4]) * 1000, double.Parse(lines[i + (j * 4) + 18 + 4]) * 1000);
+                                double Longitude = Converter.CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16 + correctur]) * 1000, double.Parse(lines[i + (j * 4) + 18 + correctur]) * 1000);
+                                double Latitude = Converter.CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16 + correctur]) * 1000, double.Parse(lines[i + (j * 4) + 18 + correctur]) * 1000);
                                 Vector v = new Vector(Longitude, Latitude, 0);
                                 input.Add(v);
 
@@ -81,14 +82,32 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("STARTPOINT-"))
                     {
+                        double[] res = new double[4];
+                        res[3] = 0.0f;
+                        int resCount = 0;
+                        for (int j = 0; resCount < 4; j++)
+                        {
+                            try
+                            {
+                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                int dummy;
+                                if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
+                                {
+                                    res[resCount++] = parsed;
+                                }
+                            }
+                            catch { }
+                        }
+
                         Line l = new Line();
-                        double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                        double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        double Longitude1 = Converter.CHtoWGSlng(res[0] * 1000, res[1] * 1000);
+                        double Latitude1 = Converter.CHtoWGSlat(res[0] * 1000, res[1] * 1000);
                         l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
-                        double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
-                        double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 24]) * 1000, double.Parse(lines[i + 26]) * 1000);
+                        double Longitude2 = Converter.CHtoWGSlng(res[2] * 1000, res[3] * 1000);
+                        double Latitude2 = Converter.CHtoWGSlat(res[2] * 1000, res[3] * 1000);
                         l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
@@ -181,15 +200,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
                     {
-                        if (lines[i + 9] == " 90" && double.Parse(lines[10]) == 2)
+                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10]) == 2)
                         {
+                            int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
                             Line l = new Line();
-                            double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
-                            double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                            double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 16 + correctur]) * 1000, double.Parse(lines[i + 18 + correctur]) * 1000);
+                            double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16 + correctur]) * 1000, double.Parse(lines[i + 18 + correctur]) * 1000);
                             l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
-                            double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                            double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                            double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 20 + correctur]) * 1000, double.Parse(lines[i + 22 + correctur]) * 1000);
+                            double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20 + correctur]) * 1000, double.Parse(lines[i + 22 + correctur]) * 1000);
                             l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
@@ -209,7 +229,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// </summary>
         /// <param name="filepath"></param>
         /// <returns>The created Flight object</returns>
-        public List<GPSData> GPSdataFromGAC(string filename)
+        public static List<GPSData> GPSdataFromGAC(string filename)
         {
             List<GPSData> result = new List<GPSData>();
             StreamReader gacFileStreamReader = new StreamReader(filename);
