@@ -229,14 +229,11 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// </summary>
         /// <param name="filepath"></param>
         /// <returns>The created Flight object</returns>
-        public static List<GPSData> GPSdataFromGAC(string filename)
+        public static List<GPSData> GPSdataFromGAC(int year, int month, int day, string IdentifierTracker, string filename)
         {
             List<GPSData> result = new List<GPSData>();
             StreamReader gacFileStreamReader = new StreamReader(filename);
             string line = string.Empty;
-            DateTime newPointTimeStamp = DateTime.Now;
-            double newPointLatitude = 0;
-            double newPointLongitude = 0;
             line = gacFileStreamReader.ReadLine();
             while (!line.Substring(0, 1).Equals("I") && !gacFileStreamReader.EndOfStream)
             {
@@ -249,9 +246,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                     if (line.Substring(0, 1).Equals("B"))
                     {
                         // timestamp
-                        newPointTimeStamp = new DateTime(1, 1, 1, Convert.ToInt32(line.Substring(1, 2)), Convert.ToInt32(line.Substring(3, 2)), Convert.ToInt32(line.Substring(5, 2)));
+                        DateTime newPointTimeStamp = new DateTime(year, month, day, Convert.ToInt32(line.Substring(1, 2)), Convert.ToInt32(line.Substring(3, 2)), Convert.ToInt32(line.Substring(5, 2)));
                         // latitude
-                        newPointLatitude = Convert.ToDouble(line.Substring(7, 2)) * 3600 + Convert.ToDouble(line.Substring(9, 2)) * 60 + Convert.ToDouble(line.Substring(11, 3)) * 60 / 1000;
+                        double newPointLatitude = Convert.ToDouble(line.Substring(7, 2)) * 3600 + Convert.ToDouble(line.Substring(9, 2)) * 60 + Convert.ToDouble(line.Substring(11, 3)) * 60 / 1000;
                         switch (line.Substring(14, 1))
                         {
                             case "N":
@@ -264,7 +261,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                 break;
                         }
                         // longitude
-                        newPointLongitude = Convert.ToDouble(line.Substring(15, 3)) * 3600 + Convert.ToDouble(line.Substring(18, 2)) * 60 + Convert.ToDouble(line.Substring(20, 3)) * 60 / 1000;
+                        double newPointLongitude = Convert.ToDouble(line.Substring(15, 3)) * 3600 + Convert.ToDouble(line.Substring(18, 2)) * 60 + Convert.ToDouble(line.Substring(20, 3)) * 60 / 1000;
                         switch (line.Substring(23, 1))
                         {
                             case "E":
@@ -276,14 +273,22 @@ namespace AirNavigationRaceLive.Comps.Helper
                                 // ToDo: Error
                                 break;
                         }
-                        GPSData data = new GPSData();
-                        data.accuracy = 0;
-                        data.timestampGPS = newPointTimeStamp.Ticks;
-                        data.speed = 0;
-                       // data.
-                       // TrackPoint newTrackPoint = new TrackPoint(newPointLatitude, newPointLongitude, newPointTimeStamp, GpsPointFormatImport.WGS84);
+                        double altitude = double.Parse(line.Substring(30, 5)) * 0.3048f; //Feet to Meter
+                        double speed = (double.Parse(line.Substring(35, 4)) * 10) / 0.514444444f; //Knot to m/s
+                        double bearing = double.Parse(line.Substring(39,3));
+                        double acc = double.Parse(line.Substring(42,4));
 
-                       // trackpoints.Add(newTrackPoint);
+                        GPSData data = new GPSData();
+                        data.timestampGPS = newPointTimeStamp.Ticks;
+                        data.latitude = newPointLatitude;
+                        data.longitude = newPointLongitude;
+                        data.altitude = altitude;
+                        data.speed = speed;
+                        data.bearing = bearing;
+                        data.accuracy = acc;
+                        data.identifier = IdentifierTracker;
+                        data.timestampSender = new DateTime().Ticks;
+                        result.Add(data);
                     }
                 }
             }

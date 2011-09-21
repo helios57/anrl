@@ -59,6 +59,7 @@
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.uploadTrackerDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -244,7 +245,8 @@
             this.individualToplistToolStripMenuItem,
             this.toolStripSeparator2,
             this.addLandingResultsToolStripMenuItem,
-            this.adjustResultsToolStripMenuItem});
+            this.adjustResultsToolStripMenuItem,
+            this.uploadTrackerDataToolStripMenuItem});
             this.resultsToolStripMenuItem.Enabled = false;
             this.resultsToolStripMenuItem.Name = "resultsToolStripMenuItem";
             this.resultsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
@@ -321,6 +323,14 @@
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
+            // uploadTrackerDataToolStripMenuItem
+            // 
+            this.uploadTrackerDataToolStripMenuItem.Enabled = false;
+            this.uploadTrackerDataToolStripMenuItem.Name = "uploadTrackerDataToolStripMenuItem";
+            this.uploadTrackerDataToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.uploadTrackerDataToolStripMenuItem.Text = "Upload Tracker Data";
+            this.uploadTrackerDataToolStripMenuItem.Click += new System.EventHandler(this.uploadTrackerDataToolStripMenuItem_Click);
+            // 
             // AirNavigationRaceLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,6 +385,7 @@
         private System.Windows.Forms.ToolStripMenuItem overviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uploadTrackerDataToolStripMenuItem;
     }
 }
 

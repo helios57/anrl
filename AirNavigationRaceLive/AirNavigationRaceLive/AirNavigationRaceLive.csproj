@@ -105,6 +105,12 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\UploadGPS.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\UploadGPS.Designer.cs">
+      <DependentUpon>UploadGPS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Group.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\UploadGPS.resx">
+      <DependentUpon>UploadGPS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Group.resx">
       <DependentUpon>Group.cs</DependentUpon>
