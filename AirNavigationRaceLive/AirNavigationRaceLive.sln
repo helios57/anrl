@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkObjectsTest", "Netwo
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ANRLServiceInstaller", "ServiceInstaller\ServiceInstaller.vdproj", "{B48AB2A3-0CC7-4D09-B9C9-4C4D08F66895}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTMtoWGS", "UTMtoWGS\UTMtoWGS.csproj", "{94F11550-8475-4AB8-B0ED-D6D2B11928FA}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -483,6 +485,41 @@ Global
 		{B48AB2A3-0CC7-4D09-B9C9-4C4D08F66895}.Silverlight2|Any CPU.ActiveCfg = Release
 		{B48AB2A3-0CC7-4D09-B9C9-4C4D08F66895}.Silverlight2|Mixed Platforms.ActiveCfg = Release
 		{B48AB2A3-0CC7-4D09-B9C9-4C4D08F66895}.Silverlight2|x86.ActiveCfg = Release
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Debug|x86.ActiveCfg = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Debug|x86.Build.0 = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Default|Any CPU.ActiveCfg = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Default|Mixed Platforms.ActiveCfg = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Default|Mixed Platforms.Build.0 = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Default|x86.ActiveCfg = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Default|x86.Build.0 = Debug|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.iOS|Any CPU.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.iOS|Mixed Platforms.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.iOS|Mixed Platforms.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.iOS|x86.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.iOS|x86.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Net20|Any CPU.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Net20|Mixed Platforms.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Net20|Mixed Platforms.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Net20|x86.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Net20|x86.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Profile|Any CPU.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Profile|Mixed Platforms.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Profile|Mixed Platforms.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Profile|x86.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Profile|x86.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Release|Any CPU.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Release|Mixed Platforms.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Release|x86.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Release|x86.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Silverlight2|Any CPU.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Silverlight2|Mixed Platforms.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Silverlight2|Mixed Platforms.Build.0 = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Silverlight2|x86.ActiveCfg = Release|x86
+		{94F11550-8475-4AB8-B0ED-D6D2B11928FA}.Silverlight2|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
