@@ -53,7 +53,13 @@ namespace AirNavigationRaceLive.Comps
                         int endYp = c.getEndY(l);
                         int orientationXp = c.getOrientationX(l);
                         int orientationYp = c.getOrientationY(l);
-                        pe.Graphics.FillPolygon(Brush, new System.Drawing.Point[] { new System.Drawing.Point(startXp, startYp), new System.Drawing.Point(endXp, endYp), new System.Drawing.Point(orientationXp, orientationYp) });
+                        try
+                        {
+                            pe.Graphics.FillPolygon(Brush, new System.Drawing.Point[] { new System.Drawing.Point(startXp, startYp), new System.Drawing.Point(endXp, endYp), new System.Drawing.Point(orientationXp, orientationYp) });
+                        }
+                        catch { 
+                        //TODO
+                        }
                     }
                     foreach (Line l in lines)
                     {
@@ -70,28 +76,34 @@ namespace AirNavigationRaceLive.Comps
                             Vector start = new Vector(startX, startY, 0);
                             Vector midv = new Vector(midX, midY, 0);
                             float radius = (float)Vector.Abs(midv - start);
-                            if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE)
+                            try
                             {
-                                //Start_X/End_X
-                                if (((int)l.Type) >= 3 && ((int)l.Type) <= 10)
+                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE)
                                 {
-                                    pe.Graphics.DrawEllipse(Pen, midX - radius, midY - radius, radius * 2, radius * 2);
+                                    //Start_X/End_X
+                                    if (((int)l.Type) >= 3 && ((int)l.Type) <= 10)
+                                    {
+                                        pe.Graphics.DrawEllipse(Pen, midX - radius, midY - radius, radius * 2, radius * 2);
+                                    }
+                                    if (selectedLine == l)
+                                    {
+                                        pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
+                                        pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
+                                        pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
+                                    }
+                                    if (hoverLine == l)
+                                    {
+                                        pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
+                                        pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
+                                        pe.Graphics.DrawEllipse(PenHover, orientationX - 2, orientationY - 2, 4, 4);
+                                    }
+                                    pe.Graphics.DrawLine(Pen, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
+                                    pe.Graphics.DrawLine(Pen, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
+                                    pe.Graphics.DrawEllipse(Pen, orientationX - 1, orientationY - 1, 2, 2);
                                 }
-                                if (selectedLine == l)
-                                {
-                                    pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
-                                    pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
-                                    pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
-                                }
-                                if (hoverLine == l)
-                                {
-                                    pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
-                                    pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
-                                    pe.Graphics.DrawEllipse(PenHover, orientationX - 2, orientationY - 2, 4, 4);
-                                }
-                                pe.Graphics.DrawLine(Pen, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
-                                pe.Graphics.DrawLine(Pen, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
-                                pe.Graphics.DrawEllipse(Pen, orientationX - 1, orientationY - 1, 2, 2);
+                            }
+                            catch {
+                            //TODO
                             }
                         }
                     }

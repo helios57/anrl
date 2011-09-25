@@ -60,6 +60,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.numLatA = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.fldName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
@@ -67,9 +70,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.channelWide = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.fldName = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.btnImportDxfWGS = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -81,11 +82,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
+            this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -138,6 +139,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnClear);
+            this.flowLayoutPanel1.Controls.Add(this.btnImportDxfWGS);
             this.flowLayoutPanel1.Controls.Add(this.btnImport);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
@@ -167,11 +169,11 @@
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnImport.Location = new System.Drawing.Point(3, 32);
+            this.btnImport.Location = new System.Drawing.Point(3, 61);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(190, 23);
             this.btnImport.TabIndex = 0;
-            this.btnImport.Text = "Import DXF";
+            this.btnImport.Text = "Import DXF (CH1904)";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
@@ -185,7 +187,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 61);
+            this.groupBox1.Location = new System.Drawing.Point(3, 90);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -278,7 +280,7 @@
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 128);
+            this.lineBox.Location = new System.Drawing.Point(3, 157);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -455,9 +457,37 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Latitude A:";
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel4.Controls.Add(this.fldName);
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Location = new System.Drawing.Point(3, 339);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 28);
+            this.panel4.TabIndex = 21;
+            // 
+            // fldName
+            // 
+            this.fldName.Location = new System.Drawing.Point(78, 3);
+            this.fldName.Name = "fldName";
+            this.fldName.Size = new System.Drawing.Size(100, 20);
+            this.fldName.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name:";
+            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 344);
+            this.btnSave.Location = new System.Drawing.Point(3, 373);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -518,33 +548,18 @@
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 0;
             // 
-            // panel4
+            // btnImportDxfWGS
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.btnImportDxfWGS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel4.Controls.Add(this.fldName);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 310);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 28);
-            this.panel4.TabIndex = 21;
-            // 
-            // fldName
-            // 
-            this.fldName.Location = new System.Drawing.Point(78, 3);
-            this.fldName.Name = "fldName";
-            this.fldName.Size = new System.Drawing.Size(100, 20);
-            this.fldName.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Name:";
+            this.btnImportDxfWGS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImportDxfWGS.Location = new System.Drawing.Point(3, 32);
+            this.btnImportDxfWGS.Name = "btnImportDxfWGS";
+            this.btnImportDxfWGS.Size = new System.Drawing.Size(190, 23);
+            this.btnImportDxfWGS.TabIndex = 22;
+            this.btnImportDxfWGS.Text = "Import DXF (WGS84)";
+            this.btnImportDxfWGS.UseVisualStyleBackColor = true;
+            this.btnImportDxfWGS.Click += new System.EventHandler(this.btnImportDxfWGS_Click);
             // 
             // ParcourImport
             // 
@@ -569,13 +584,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.channelWide)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -624,5 +639,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox fldName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnImportDxfWGS;
     }
 }

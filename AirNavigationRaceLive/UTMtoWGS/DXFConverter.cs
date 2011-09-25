@@ -118,8 +118,8 @@ namespace UTM
             double[] latlon = UTMtoWGS.UTMConverter.getLatLon(zone, double.Parse(x), double.Parse(y), southhemi);
             linesWGS[i_x] = latlon[0].ToString();
             linesWGS[i_y] = latlon[1].ToString();
-            linesCH[i_x] = Converter.WGStoChEastY(latlon[1], latlon[0]).ToString();
-            linesCH[i_y] = Converter.WGStoChNorthX(latlon[1], latlon[0]).ToString();
+            linesCH[i_x] = (Converter.WGStoChEastY(latlon[1], latlon[0])/1000).ToString();
+            linesCH[i_y] = (Converter.WGStoChNorthX(latlon[1], latlon[0]/1000)/1000).ToString();
         }
     }
 }

@@ -41,7 +41,7 @@ namespace AirNavigationRaceLive.Comps.Client
 
         public void Persist()
         {
-            String file = Path.GetTempPath() + @"\ANRL"+c.getIpAdress()+".tmp";
+            String file = Path.GetTempPath() + @"\ANRL" + c.getIpAdress() + ".tmp";
             FileInfo fileInfo = new FileInfo(file);
             NetworkObjects.Root r = new NetworkObjects.Root();
             r.ResponseParameters = new NetworkObjects.ResponseParameters();
@@ -53,13 +53,18 @@ namespace AirNavigationRaceLive.Comps.Client
             r.ResponseParameters.TeamList.AddRange(cacheTeam.getAll());
             r.ResponseParameters.GroupList.AddRange(cacheGroup.getAll());
             r.ResponseParameters.CompetitionList.AddRange(cacheCompetition.getAll());
-            if (fileInfo.Exists)
+            try
             {
-                fileInfo.Delete();
+                if (fileInfo.Exists)
+                {
+                    fileInfo.Delete();
+                }
+
+                Stream s = fileInfo.Create();
+                Serializer.SerializeWithLengthPrefix(s, r, PrefixStyle.Base128);
+                s.Close();
             }
-            Stream s = fileInfo.Create();
-            Serializer.SerializeWithLengthPrefix(s, r, PrefixStyle.Base128);
-            s.Close();
+            catch { }
         }
 
         public bool LoadPersisted()

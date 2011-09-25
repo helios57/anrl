@@ -301,7 +301,7 @@ namespace AirNavigationRaceLive.Comps
         {
             OpenFileDialog ofd = new OpenFileDialog();
             string FileFilter = "DXF  (*.dxf)|*.dxf";
-            ofd.Title = "DXF Import";
+            ofd.Title = "DXF Import (CH1904) !!!!!!!!!!!!!";
             ofd.RestoreDirectory = true;
             ofd.Multiselect = false;
             ofd.Filter = FileFilter;
@@ -314,7 +314,7 @@ namespace AirNavigationRaceLive.Comps
             OpenFileDialog ofd = sender as OpenFileDialog;
             try
             {
-                activeParcour = Importer.importFromDxf(ofd.FileName);
+                activeParcour = Importer.importFromDxfCH(ofd.FileName);
                 pictureBox1.SetParcour(activeParcour);
                 pictureBox1.Invalidate();
             }
@@ -396,6 +396,33 @@ namespace AirNavigationRaceLive.Comps
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnImportDxfWGS_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            string FileFilter = "DXF  (*.dxf)|*.dxf";
+            ofd.Title = "DXF Import (WGS84) !!!!!!!!!!!!!";
+            ofd.RestoreDirectory = true;
+            ofd.Multiselect = false;
+            ofd.Filter = FileFilter;
+            ofd.FileOk += new CancelEventHandler(ofd_FileOkWGS);
+            ofd.ShowDialog();
+        }
+        void ofd_FileOkWGS(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog ofd = sender as OpenFileDialog;
+            try
+            {
+                activeParcour = Importer.importFromDxfWGS(ofd.FileName);
+                pictureBox1.SetParcour(activeParcour);
+                pictureBox1.Invalidate();
+                pictureBox1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error while Parsing File");
+            }
         }
 
     }

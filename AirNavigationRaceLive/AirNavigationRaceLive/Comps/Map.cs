@@ -93,12 +93,15 @@ namespace AirNavigationRaceLive.Comps
             if (li != null)
             {
                 fldName.Text = li.getMap().Name;
-                fldSizeX.Text = li.getMap().XSize.ToString();
-                fldSizeY.Text = li.getMap().YSize.ToString();
+                fldSizeX.Text = li.getMap().YSize.ToString();
+                fldSizeY.Text = li.getMap().XSize.ToString();
                 fldRotationX.Text = li.getMap().XRot.ToString();
                 fldRotationY.Text = li.getMap().YRot.ToString();
-                fldX.Text = li.getMap().XTopLeft.ToString();
-                fldY.Text = li.getMap().YTopLeft.ToString();
+
+                //Invert becuase my x goes to left and my y goes down !!
+                fldX.Text = li.getMap().YTopLeft.ToString();
+                fldY.Text = li.getMap().XTopLeft.ToString();
+
                 MemoryStream ms = new MemoryStream(Client.getPicture(li.getMap().ID_Picture).Image);
                 pictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 btnDelete.Enabled = true;
@@ -198,12 +201,15 @@ namespace AirNavigationRaceLive.Comps
                 fldName.Enabled = false;
                 NetworkObjects.Map m = new NetworkObjects.Map();
                 m.Name = fldName.Text;
-                m.XSize = Double.Parse(fldSizeX.Text);
-                m.YSize = Double.Parse(fldSizeY.Text);
-                m.XRot = Double.Parse(fldRotationX.Text);
-                m.YRot = Double.Parse(fldRotationY.Text);
-                m.XTopLeft = Double.Parse(fldX.Text);
-                m.YTopLeft = Double.Parse(fldY.Text);
+                m.YSize = Double.Parse(fldSizeX.Text);
+                m.XSize = Double.Parse(fldSizeY.Text);
+                m.YRot = Double.Parse(fldRotationX.Text);
+                m.XRot = Double.Parse(fldRotationY.Text);
+                //Invert becuase my x goes to left and my y goes down !!
+                //m.XTopLeft = Double.Parse(fldX.Text);
+                //m.YTopLeft = Double.Parse(fldY.Text);
+                m.YTopLeft = Double.Parse(fldX.Text);
+                m.XTopLeft = Double.Parse(fldY.Text);
                 MemoryStream ms = new MemoryStream();
                 pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Picture picture = new Picture();
