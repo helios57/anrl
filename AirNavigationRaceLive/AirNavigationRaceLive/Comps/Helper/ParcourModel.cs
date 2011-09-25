@@ -46,11 +46,11 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector ChannelRadius = Channels[3].Start - Channels[0].Start;
 
             Point Ende = new Point();
-            Ende.longitude = c.XtoDeg(Channels[3].Start.X);
-            Ende.latitude = c.YtoDeg(Channels[3].Start.Y);
+            Ende.longitude = c.XtoLongitude(Channels[3].Start.X);
+            Ende.latitude = c.YtoLatitude(Channels[3].Start.Y);
             Point Start = new Point();
-            Start.longitude = c.XtoDeg(Channels[0].Start.X);
-            Start.latitude = c.YtoDeg(Channels[0].Start.Y);
+            Start.longitude = c.XtoLongitude(Channels[0].Start.X);
+            Start.latitude = c.YtoLatitude(Channels[0].Start.Y);
             double origDist = Converter.Distance(Ende, Start);
             ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0/2.0));
             Vector ortho = Vector.Orthogonal(ChannelRadius)/10.0;
@@ -146,7 +146,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         private static Vector getVector(Converter c, Point point)
         {
 
-            Vector startA = new Vector(c.DegToX(point.longitude), c.DegToY(point.latitude), 0);
+            Vector startA = new Vector(c.LongitudeToX(point.longitude), c.LatitudeToY(point.latitude), 0);
             return startA;
         }
     }

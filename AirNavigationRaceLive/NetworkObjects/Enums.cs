@@ -11,7 +11,8 @@ namespace NetworkObjects
         Get = 1,
         Save = 2,
         Delete = 3,
-        GetAll = 4
+        GetAll = 4,
+        Upload = 5
     }
 
     public enum EObjectType : int
@@ -24,7 +25,8 @@ namespace NetworkObjects
         Pilot = 5,
         Team = 6,
         Group = 7,
-        Competition = 8
+        Competition = 8,
+        GPSData = 9
     }
     public enum LineType : int
     {

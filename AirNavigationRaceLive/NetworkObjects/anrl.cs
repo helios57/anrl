@@ -195,6 +195,13 @@ namespace NetworkObjects
       get { return _Competition; }
       set { _Competition = value; }
     }
+    private readonly global::System.Collections.Generic.List<NetworkObjects.GPSData> _GPSDataList = new global::System.Collections.Generic.List<NetworkObjects.GPSData>();
+    [global::ProtoBuf.ProtoMember(11, Name=@"GPSDataList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.GPSData> GPSDataList
+    {
+      get { return _GPSDataList; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

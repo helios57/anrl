@@ -184,5 +184,15 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             cache.cacheCompetition.delete(ID);
         }
+
+        internal void uploadGPSData(List<GPSData> list)
+        {
+            Root r = new Root();
+            r.ObjectType = (int) NetworkObjects.EObjectType.GPSData;
+            r.RequestType = (int)ERequestType.Upload;
+            r.RequestParameters = new RequestParameters();
+            r.RequestParameters.GPSDataList.AddRange(list);
+            process(r);
+        }
     }
 }

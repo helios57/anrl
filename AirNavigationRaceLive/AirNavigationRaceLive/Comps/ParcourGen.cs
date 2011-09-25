@@ -77,8 +77,8 @@ namespace AirNavigationRaceLive.Comps
             fldCursorY.Text = e.Y.ToString();
             if (c != null)
             {
-                double latitude = c.YtoDeg(e.Y);
-                double longitude = c.XtoDeg(e.X);
+                double latitude = c.YtoLatitude(e.Y);
+                double longitude = c.XtoLongitude(e.X);
                 fldLatitude.Text = latitude.ToString();
                 fldLongitude.Text = longitude.ToString();
                 if (activeLine != null)

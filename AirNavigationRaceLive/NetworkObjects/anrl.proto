@@ -42,8 +42,10 @@ option optimize_for = SPEED;
         optional Team Team =8;
 		
         optional Group Group =9;
-
+		
         optional Competition Competition =10;
+
+        repeated GPSData GPSDataList =11;
 	}
 	message ResponseParameters
 	{
@@ -66,7 +68,7 @@ option optimize_for = SPEED;
 		repeated Team TeamList = 9;
 		
 		repeated Group GroupList = 10;
-
+		
 		repeated Competition CompetitionList = 11;
 	}
 	message Picture

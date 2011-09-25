@@ -9,57 +9,56 @@ namespace AirNavigationRaceLive.Comps.Helper
 {
     public class Converter
     {
-        double topleftX;
-        double topleftY;
-        double sizeX;
-        double sizeY;
+        private double topLeftLongitude;
+        private double topLeftLatitude;
+        double sizeLongitude;
+        double sizeLatitude;
         public Converter(NetworkObjects.Map map)
         {
-            topleftX  = map.XTopLeft;
-            topleftY = map.YTopLeft;
-            sizeX = map.XSize;
-            sizeY = map.YSize;
+            topLeftLongitude = map.YTopLeft;
+            topLeftLatitude = map.XTopLeft;
+            sizeLongitude = map.XSize;
+            sizeLatitude = map.YSize;
         }
-        public double XtoDeg(double x)
+        public double XtoLongitude(double x)
         {
-            return topleftX + x * sizeX;
+            return topLeftLongitude + x * sizeLongitude;
         }
-        public int DegToX(double longitude)
+        public int LongitudeToX(double longitude)
         {
-            return (int)((longitude - topleftX) / sizeX);
+            return (int)((topLeftLongitude - longitude) / sizeLongitude);
         }
-        public double YtoDeg(double y)
+        public double YtoLatitude(double y)
         {
-            return topleftY + y * sizeY;
+            return topLeftLatitude + y * sizeLatitude;
         }
-        public int DegToY(double latitdude)
+        public int LatitudeToY(double latitdude)
         {
-            return (int)((latitdude - topleftY) / sizeY);
+            return (int)((topLeftLatitude -latitdude) / sizeLatitude);
         }
-
         public int getStartX(Line l)
         {
-            return DegToX(l.A.longitude);
+            return LongitudeToX(l.A.longitude);
         }
         public int getStartY(Line l)
         {
-            return DegToY(l.A.latitude);
+            return LatitudeToY(l.A.latitude);
         }
         public int getEndX(Line l)
         {
-            return DegToX(l.B.longitude);
+            return LongitudeToX(l.B.longitude);
         }
         public int getEndY(Line l)
         {
-            return DegToY(l.B.latitude);
+            return LatitudeToY(l.B.latitude);
         }
         public int getOrientationX(Line l)
         {
-            return DegToX(l.O.longitude);
+            return LongitudeToX(l.O.longitude);
         }
         public int getOrientationY(Line l)
         {
-            return DegToY(l.O.latitude);
+            return LatitudeToY(l.O.latitude);
         }
         public static double Distance(Point point1,Point point2)
         {
@@ -109,6 +108,27 @@ namespace AirNavigationRaceLive.Comps.Helper
             double y_aux = (y - 600000) / 1000000;
             double x_aux = (x - 200000) / 1000000;
 
+            // Process long
+            double lng = 2.6779094
+                + 4.728982 * y_aux
+                + 0.791484 * y_aux * x_aux
+                + 0.1306 * y_aux * Math.Pow(x_aux, 2)
+                - 0.0436 * Math.Pow(y_aux, 3);
+
+            // Unit 10000" to 1 " and converts seconds to degrees (dec)
+            lng = lng * 100 / 36;
+
+            return lng;
+        }
+
+        // Convert CH y/x to WGS long
+        public static double CHtoWGSlng(double y, double x)
+        {
+            // Converts militar to civil and  to unit = 1000km
+            // Axiliary values (% Bern)
+            double y_aux = (y - 600000) / 1000000;
+            double x_aux = (x - 200000) / 1000000;
+
             // Process lat
             double lat = 16.9023892
                 + 3.238272 * x_aux
@@ -121,27 +141,6 @@ namespace AirNavigationRaceLive.Comps.Helper
             lat = lat * 100 / 36;
 
             return lat;
-        }
-
-        // Convert CH y/x to WGS long
-        public static double CHtoWGSlng(double y, double x)
-        {
-            // Converts militar to civil and  to unit = 1000km
-            // Axiliary values (% Bern)
-            double y_aux = (y - 600000) / 1000000;
-            double x_aux = (x - 200000) / 1000000;
-
-            // Process long
-            double lng = 2.6779094
-                + 4.728982 * y_aux
-                + 0.791484 * y_aux * x_aux
-                + 0.1306 * y_aux * Math.Pow(x_aux, 2)
-                - 0.0436 * Math.Pow(y_aux, 3);
-
-            // Unit 10000" to 1 " and converts seconds to degrees (dec)
-            lng = lng * 100 / 36;
-
-            return lng;
         }
 
         public static double WGStoChEastY(double longitude, double latitude)

@@ -27,16 +27,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             NetworkObjects.Line Start = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START) as NetworkObjects.Line;
             if (Start == null) return;
             #region StartVektoren
-            Vector StartAV = new Vector(c.DegToX(Start.A.longitude), c.DegToY(Start.A.latitude), 0);
-            Vector StartBV = new Vector(c.DegToX(Start.B.longitude), c.DegToY(Start.B.latitude), 0);
-            Vector StartOV = new Vector(c.DegToX(Start.O.longitude), c.DegToY(Start.O.latitude), 0);
+            Vector StartAV = new Vector(c.LongitudeToX(Start.A.longitude), c.LatitudeToY(Start.A.latitude), 0);
+            Vector StartBV = new Vector(c.LongitudeToX(Start.B.longitude), c.LatitudeToY(Start.B.latitude), 0);
+            Vector StartOV = new Vector(c.LongitudeToX(Start.O.longitude), c.LatitudeToY(Start.O.latitude), 0);
             Vector StartAB = Vector.Direction(StartAV, StartBV);
             Vector StartMV = Vector.Middle(StartAV, StartBV);
             Vector StartLotOrientation = Vector.MinDistance(StartAV, StartBV, StartOV);
 
             double GateRadiusKm = Converter.NMtoM(0.3);
             Vector StartABNormalized = StartAB / Vector.Abs(StartAB);
-            double StartABLength = Converter.Distance(c.XtoDeg(StartAV.X), c.YtoDeg(StartAV.Y), c.XtoDeg((StartAV + StartABNormalized).X), c.YtoDeg((StartAV + StartABNormalized).Y));
+            double StartABLength = Converter.Distance(c.XtoLongitude(StartAV.X), c.YtoLatitude(StartAV.Y), c.XtoLongitude((StartAV + StartABNormalized).X), c.YtoLatitude((StartAV + StartABNormalized).Y));
             Vector StartAB1KM = StartABNormalized / StartABLength;
 
             StartLotOrientation = StartLotOrientation * (Vector.Abs(StartAB1KM * GateRadiusKm) / Vector.Abs(StartLotOrientation));
@@ -58,9 +58,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 Start_A.Type = (int)LineType.START_A;
                 parcour.LineList.Add(Start_A);
             }
-            Start_A.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_A_A.X), c.YtoDeg(Start_A_A.Y), 0);
-            Start_A.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_A_B.X), c.YtoDeg(Start_A_B.Y), 0);
-            Start_A.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_A_O.X), c.YtoDeg(Start_A_O.Y), 0);
+            Start_A.A = NetworkObjects.Helper.Point(c.XtoLongitude(Start_A_A.X), c.YtoLatitude(Start_A_A.Y), 0);
+            Start_A.B = NetworkObjects.Helper.Point(c.XtoLongitude(Start_A_B.X), c.YtoLatitude(Start_A_B.Y), 0);
+            Start_A.O = NetworkObjects.Helper.Point(c.XtoLongitude(Start_A_O.X), c.YtoLatitude(Start_A_O.Y), 0);
 
             Vector Start_D_M = StartBV - (StartAB1KM * GateRadiusKm);
             Vector Start_D_B = StartBV;
@@ -77,9 +77,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 Start_D.Type = (int)LineType.START_D;
                 parcour.LineList.Add(Start_D);
             }
-            Start_D.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_D_A.X), c.YtoDeg(Start_D_A.Y), 0);
-            Start_D.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_D_B.X), c.YtoDeg(Start_D_B.Y), 0);
-            Start_D.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_D_O.X), c.YtoDeg(Start_D_O.Y), 0);
+            Start_D.A = NetworkObjects.Helper.Point(c.XtoLongitude(Start_D_A.X), c.YtoLatitude(Start_D_A.Y), 0);
+            Start_D.B = NetworkObjects.Helper.Point(c.XtoLongitude(Start_D_B.X), c.YtoLatitude(Start_D_B.Y), 0);
+            Start_D.O = NetworkObjects.Helper.Point(c.XtoLongitude(Start_D_O.X), c.YtoLatitude(Start_D_O.Y), 0);
 
 
             Vector Start_B_M = Start_A_M + (Vector.Direction(Start_A_M, Start_D_M) / 3.0);
@@ -98,9 +98,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 Start_B.Type = (int)LineType.START_B;
                 parcour.LineList.Add(Start_B);
             }
-            Start_B.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_B_A.X), c.YtoDeg(Start_B_A.Y), 0);
-            Start_B.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_B_B.X), c.YtoDeg(Start_B_B.Y), 0);
-            Start_B.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_B_O.X), c.YtoDeg(Start_B_O.Y), 0);
+            Start_B.A = NetworkObjects.Helper.Point(c.XtoLongitude(Start_B_A.X), c.YtoLatitude(Start_B_A.Y), 0);
+            Start_B.B = NetworkObjects.Helper.Point(c.XtoLongitude(Start_B_B.X), c.YtoLatitude(Start_B_B.Y), 0);
+            Start_B.O = NetworkObjects.Helper.Point(c.XtoLongitude(Start_B_O.X), c.YtoLatitude(Start_B_O.Y), 0);
 
             Vector Start_C_M = Start_A_M + ((Vector.Direction(Start_A_M, Start_D_M) * 2) / 3.0);
             Vector Start_C_B = Start_C_M - (StartAB1KM * GateRadiusKm);
@@ -117,15 +117,15 @@ namespace AirNavigationRaceLive.Comps.Helper
                 Start_C.Type = (int)LineType.START_C;
                 parcour.LineList.Add(Start_C);
             }
-            Start_C.A = NetworkObjects.Helper.Point(c.XtoDeg(Start_C_A.X), c.YtoDeg(Start_C_A.Y), 0);
-            Start_C.B = NetworkObjects.Helper.Point(c.XtoDeg(Start_C_B.X), c.YtoDeg(Start_C_B.Y), 0);
-            Start_C.O = NetworkObjects.Helper.Point(c.XtoDeg(Start_C_O.X), c.YtoDeg(Start_C_O.Y), 0);
+            Start_C.A = NetworkObjects.Helper.Point(c.XtoLongitude(Start_C_A.X), c.YtoLatitude(Start_C_A.Y), 0);
+            Start_C.B = NetworkObjects.Helper.Point(c.XtoLongitude(Start_C_B.X), c.YtoLatitude(Start_C_B.Y), 0);
+            Start_C.O = NetworkObjects.Helper.Point(c.XtoLongitude(Start_C_O.X), c.YtoLatitude(Start_C_O.Y), 0);
             #endregion
 
             #region EndeVektoren
             double lengthKm = Converter.NMtoM(lenght);
             Vector lotPoint = StartMV + StartLotOrientation;
-            double lotLenght = Converter.Distance(c.XtoDeg(StartMV.X), c.YtoDeg(StartMV.Y), c.XtoDeg(lotPoint.X), c.YtoDeg(lotPoint.Y));
+            double lotLenght = Converter.Distance(c.XtoLongitude(StartMV.X), c.YtoLatitude(StartMV.Y), c.XtoLongitude(lotPoint.X), c.YtoLatitude(lotPoint.Y));
             Vector StartEnd = (StartLotOrientation / lotLenght) * lengthKm * EndLineDist; //Shorten to make linearcombinations of vectors ... factor to be definded
 
             Vector EndeAV = StartAV + StartEnd;
@@ -150,9 +150,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 END_A.Type = (int)LineType.END_A;
                 parcour.LineList.Add(END_A);
             }
-            END_A.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_A_A.X), c.YtoDeg(Ende_A_A.Y), 0);
-            END_A.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_A_B.X), c.YtoDeg(Ende_A_B.Y), 0);
-            END_A.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_A_O.X), c.YtoDeg(Ende_A_O.Y), 0);
+            END_A.A = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_A_A.X), c.YtoLatitude(Ende_A_A.Y), 0);
+            END_A.B = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_A_B.X), c.YtoLatitude(Ende_A_B.Y), 0);
+            END_A.O = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_A_O.X), c.YtoLatitude(Ende_A_O.Y), 0);
 
             Vector Ende_B_A = Start_B_A + StartEnd;
             Vector Ende_B_B = Start_B_B + StartEnd;
@@ -170,9 +170,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 END_B.Type = (int)LineType.END_B;
                 parcour.LineList.Add(END_B);
             }
-            END_B.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_B_A.X), c.YtoDeg(Ende_B_A.Y), 0);
-            END_B.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_B_B.X), c.YtoDeg(Ende_B_B.Y), 0);
-            END_B.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_B_O.X), c.YtoDeg(Ende_B_O.Y), 0);
+            END_B.A = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_B_A.X), c.YtoLatitude(Ende_B_A.Y), 0);
+            END_B.B = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_B_B.X), c.YtoLatitude(Ende_B_B.Y), 0);
+            END_B.O = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_B_O.X), c.YtoLatitude(Ende_B_O.Y), 0);
 
             Vector Ende_C_A = Start_C_A + StartEnd;
             Vector Ende_C_B = Start_C_B + StartEnd;
@@ -189,9 +189,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 END_C.Type = (int)LineType.END_C;
                 parcour.LineList.Add(END_C);
             }
-            END_C.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_C_A.X), c.YtoDeg(Ende_C_A.Y), 0);
-            END_C.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_C_B.X), c.YtoDeg(Ende_C_B.Y), 0);
-            END_C.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_C_O.X), c.YtoDeg(Ende_C_O.Y), 0);
+            END_C.A = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_C_A.X), c.YtoLatitude(Ende_C_A.Y), 0);
+            END_C.B = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_C_B.X), c.YtoLatitude(Ende_C_B.Y), 0);
+            END_C.O = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_C_O.X), c.YtoLatitude(Ende_C_O.Y), 0);
 
             Vector Ende_D_A = Start_D_A + StartEnd;
             Vector Ende_D_B = Start_D_B + StartEnd;
@@ -208,9 +208,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 END_D.Type = (int)LineType.END_D;
                 parcour.LineList.Add(END_D);
             }
-            END_D.A = NetworkObjects.Helper.Point(c.XtoDeg(Ende_D_A.X), c.YtoDeg(Ende_D_A.Y), 0);
-            END_D.B = NetworkObjects.Helper.Point(c.XtoDeg(Ende_D_B.X), c.YtoDeg(Ende_D_B.Y), 0);
-            END_D.O = NetworkObjects.Helper.Point(c.XtoDeg(Ende_D_O.X), c.YtoDeg(Ende_D_O.Y), 0);
+            END_D.A = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_D_A.X), c.YtoLatitude(Ende_D_A.Y), 0);
+            END_D.B = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_D_B.X), c.YtoLatitude(Ende_D_B.Y), 0);
+            END_D.O = NetworkObjects.Helper.Point(c.XtoLongitude(Ende_D_O.X), c.YtoLatitude(Ende_D_O.Y), 0);
             #endregion
 
             #region LineOfNoReturn
@@ -231,9 +231,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 LONR.Type = (int)LineType.LINEOFNORETURN;
                 parcour.LineList.Add(LONR);
             }
-            LONR.A = NetworkObjects.Helper.Point(c.XtoDeg(LONR_A.X), c.YtoDeg(LONR_A.Y), 0);
-            LONR.B = NetworkObjects.Helper.Point(c.XtoDeg(LONR_B.X), c.YtoDeg(LONR_B.Y), 0);
-            LONR.O = NetworkObjects.Helper.Point(c.XtoDeg(LONR_O.X), c.YtoDeg(LONR_O.Y), 0);
+            LONR.A = NetworkObjects.Helper.Point(c.XtoLongitude(LONR_A.X), c.YtoLatitude(LONR_A.Y), 0);
+            LONR.B = NetworkObjects.Helper.Point(c.XtoLongitude(LONR_B.X), c.YtoLatitude(LONR_B.Y), 0);
+            LONR.O = NetworkObjects.Helper.Point(c.XtoLongitude(LONR_O.X), c.YtoLatitude(LONR_O.Y), 0);
             #endregion
             CalculateParcour(parcour, c, channel);
 
@@ -303,9 +303,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             Line l = new Line();
                             l.Type = (int)LineType.Point;
-                            l.A = NetworkObjects.Helper.Point(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
-                            l.B = NetworkObjects.Helper.Point(c.XtoDeg(last.X), c.YtoDeg(last.Y), 0);
-                            l.O = NetworkObjects.Helper.Point(c.XtoDeg(v.X), c.YtoDeg(v.Y), 0);
+                            l.A = NetworkObjects.Helper.Point(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
+                            l.B = NetworkObjects.Helper.Point(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
+                            l.O = NetworkObjects.Helper.Point(c.XtoLongitude(v.X), c.YtoLatitude(v.Y), 0);
                             parcour.LineList.Add(l);
                         }
                         last = v;
@@ -326,9 +326,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                     {
                         Line l = new Line();
                         l.Type = (int)LineType.PENALTYZONE;
-                        l.A = NetworkObjects.Helper.Point(c.XtoDeg(pg.getEdges()[i].X), c.YtoDeg(pg.getEdges()[i].Y), 0);
-                        l.B = NetworkObjects.Helper.Point(c.XtoDeg(pg.getEdges()[(i + 1) % count].X), c.YtoDeg(pg.getEdges()[(i + 1) % count].Y), 0);
-                        l.O = NetworkObjects.Helper.Point(c.XtoDeg(mid.X), c.YtoDeg(mid.Y), 0);
+                        l.A = NetworkObjects.Helper.Point(c.XtoLongitude(pg.getEdges()[i].X), c.YtoLatitude(pg.getEdges()[i].Y), 0);
+                        l.B = NetworkObjects.Helper.Point(c.XtoLongitude(pg.getEdges()[(i + 1) % count].X), c.YtoLatitude(pg.getEdges()[(i + 1) % count].Y), 0);
+                        l.O = NetworkObjects.Helper.Point(c.XtoLongitude(mid.X), c.YtoLatitude(mid.Y), 0);
                         parcour.LineList.Add(l);
                     }
                 }
