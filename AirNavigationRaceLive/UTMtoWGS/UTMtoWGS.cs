@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace UTMtoWGS
 {
-    public partial class Form1 : Form
+    public partial class UTMtoWGS : Form
     {
-        public Form1()
+        public UTMtoWGS()
         {
             InitializeComponent();
         }

@@ -45,29 +45,13 @@ namespace UTM
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].ToUpper().Contains("STARTPOINT-"))
                     {
-                        int i_x = i + 20;
-                        int i_y = i + 22;
-                        transform(zone, southhemi, lines, linesCH, linesWGS, i_x, i_y);
-                        transform(zone, southhemi, lines, linesCH, linesWGS, i_x + 4, i_y + 4);
+                        int[] ints = getNext4Doubles(lines, i);
+                        transform(zone, southhemi, lines, linesCH, linesWGS, ints[0], ints[1]);
+                        transform(zone, southhemi, lines, linesCH, linesWGS, ints[2], ints[3]);
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].ToUpper().Contains("ENDPOINT-"))
                     {
-                        int[] ints= new int[4];
-                        int resCount = 0;
-                        for (int j = 0; resCount < 4; j++)
-                        {
-                            try
-                            {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
-                                int dummy;
-                                if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
-                                {
-                                    ints[resCount++] = i + 6 + 8 + j;
-                                }
-                            }
-                            catch { }
-                        }
-
+                        int[] ints = getNext4Doubles(lines, i);
                         transform(zone, southhemi, lines, linesCH, linesWGS, ints[0], ints[1]);
                         transform(zone, southhemi, lines, linesCH, linesWGS, ints[2], ints[3]);
                     }
@@ -105,6 +89,26 @@ namespace UTM
             }
             sw_ch.Close();
             sw_wgs.Close();
+        }
+
+        private static int[] getNext4Doubles(string[] lines, int i)
+        {
+            int[] ints = new int[4];
+            int resCount = 0;
+            for (int j = 0; resCount < 4; j++)
+            {
+                try
+                {
+                    double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                    int dummy;
+                    if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
+                    {
+                        ints[resCount++] = i + 6 + 8 + j;
+                    }
+                }
+                catch { }
+            }
+            return ints;
         }
 
         private static void transform(int zone, bool southhemi, string[] lines, string[] linesCH, string[] linesWGS, int i_x, int i_y)

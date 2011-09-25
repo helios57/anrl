@@ -1,6 +1,6 @@
 ﻿namespace UTMtoWGS
 {
-    partial class Form1
+    partial class UTMtoWGS
     {
         /// <summary>
         /// Required designer variable.
