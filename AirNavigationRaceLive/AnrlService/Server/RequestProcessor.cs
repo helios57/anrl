@@ -78,6 +78,11 @@ namespace AnrlService.Server
                                 answer = proccessCompetition(request);
                                 break;
                             }
+                        case EObjectType.GPSData:
+                            {
+                                answer = proccessGPSData(request);
+                                break;
+                            }
                     }
                 }
             }
@@ -96,6 +101,46 @@ namespace AnrlService.Server
 #endif
             }
             return answer;
+        }
+
+        private Root proccessGPSData(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            if (((ERequestType)request.RequestType) == ERequestType.Upload)
+            {
+
+                t_Tracker tracker;
+                    if (db.t_Trackers.Count(p => p.IMEI == request.RequestParameters.GPSDataList[0].identifier) == 1)
+                    {
+                        tracker = db.t_Trackers.Single(p => p.IMEI == request.RequestParameters.GPSDataList[0].identifier);
+                    }
+                    else
+                    {
+                        tracker = new t_Tracker();
+                        tracker.IMEI = request.RequestParameters.GPSDataList[0].identifier;
+                        tracker.Name = request.RequestParameters.GPSDataList[0].trackerName;
+                        db.t_Trackers.InsertOnSubmit(tracker);
+                        db.SubmitChanges();
+                    }
+                    foreach (GPSData data in request.RequestParameters.GPSDataList)
+                    {
+                        t_Daten t_d = new t_Daten();
+                        t_d.Accuracy = data.accuracy;
+                        t_d.Altitude = data.altitude;
+                        t_d.Bearing = data.bearing;
+                        t_d.Latitude = data.latitude;
+                        t_d.Longitude = data.longitude;
+                        t_d.Speed = data.speed;
+                        t_d.Timestamp = data.timestampGPS;
+                        t_d.ID_Tracker = tracker.ID;
+                        db.t_Datens.InsertOnSubmit(t_d);
+                    }
+                    db.SubmitChanges();
+                    r.ResponseParameters.ID = tracker.ID;
+                }           
+
+            return r;
         }
 
         #region Map

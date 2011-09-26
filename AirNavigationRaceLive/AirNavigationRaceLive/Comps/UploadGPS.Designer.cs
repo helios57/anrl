@@ -150,6 +150,7 @@
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(149, 20);
             this.textBoxName.TabIndex = 8;
+            this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             // 
             // textBoxIMEI
             // 
@@ -159,6 +160,7 @@
             this.textBoxIMEI.Size = new System.Drawing.Size(149, 20);
             this.textBoxIMEI.TabIndex = 9;
             this.textBoxIMEI.Text = "GAC-Import-A";
+            this.textBoxIMEI.TextChanged += new System.EventHandler(this.textBoxIMEI_TextChanged);
             // 
             // buttonNewTracker
             // 

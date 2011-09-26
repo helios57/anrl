@@ -128,6 +128,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 MessageBox.Show(ex.ToString(), "Error while Parsing File");
             }
+            UpdateEnablement();
         }
         
 
@@ -136,6 +137,7 @@ namespace AirNavigationRaceLive.Comps
             if (textBoxPositions.Tag != null)
             {
                 List<GPSData> list = textBoxPositions.Tag as List<GPSData>;
+                list[0].trackerName = textBoxName.Text;
                 Client.uploadGPSData(list);
                 MessageBox.Show("Upload Successfull");
             }
@@ -146,6 +148,16 @@ namespace AirNavigationRaceLive.Comps
         {
             Reset();
             textBoxID.Text = "0";
+            UpdateEnablement();
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            UpdateEnablement();
+        }
+
+        private void textBoxIMEI_TextChanged(object sender, EventArgs e)
+        {
             UpdateEnablement();
         }
     }

@@ -1026,6 +1026,15 @@ namespace NetworkObjects
       get { return _identifier; }
       set { _identifier = value; }
     }
+
+    private string _trackerName = "";
+    [global::ProtoBuf.ProtoMember(10, IsRequired = false, Name=@"trackerName", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string trackerName
+    {
+      get { return _trackerName; }
+      set { _trackerName = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
