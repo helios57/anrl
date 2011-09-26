@@ -115,7 +115,7 @@ namespace UTM
         {
             String x = lines[i_x];
             String y = lines[i_y];
-            double[] latlon = UTMtoWGS.UTMConverter.getLatLon(zone, double.Parse(x), double.Parse(y), southhemi);
+            double[] latlon = UTMtoWGS.UTMConverter.getLatLon(zone, double.Parse(y), double.Parse(x), southhemi);
             linesWGS[i_x] = latlon[0].ToString();
             linesWGS[i_y] = latlon[1].ToString();
             linesCH[i_x] = (Converter.WGStoChEastY(latlon[1], latlon[0])/1000).ToString();
