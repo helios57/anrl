@@ -10,6 +10,7 @@ using System.IO;
 using AirNavigationRaceLive.Comps.Model;
 using swisstopo.geodesy.gpsref;
 using NetworkObjects;
+using AirNavigationRaceLive.Comps.Helper;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -51,10 +52,6 @@ namespace AirNavigationRaceLive.Comps
             p.Image = Image.FromFile(ofd.FileName);
             NetworkObjects.Map m = new NetworkObjects.Map();
             m.Name = fldName.Text;
-            double topLeftLatitude;
-            double topLeftLongitude;
-            double bottomRightLatitude;
-            double bottomRightLongitude;
             string[] coordinatesFromPath = ofd.FileName.Remove(ofd.FileName.LastIndexOf(".")).Substring(ofd.FileName.LastIndexOf(@"\") + 1).Split("_".ToCharArray());
             foreach (string coordinate in coordinatesFromPath)
             {
@@ -63,13 +60,11 @@ namespace AirNavigationRaceLive.Comps
                     throw (new FormatException("Coordinates in image name not in correct format!"));
                 }
             }
-            topLeftLongitude = Convert.ToDouble(coordinatesFromPath[0]);
-            topLeftLatitude = Convert.ToDouble(coordinatesFromPath[1]);
-            bottomRightLongitude = Convert.ToDouble(coordinatesFromPath[2]);
-            bottomRightLatitude = Convert.ToDouble(coordinatesFromPath[3]);
-            double dummyHeight = 0;
-            ApproxSwissProj.LV03toWGS84(topLeftLongitude, topLeftLatitude, 500.0f, ref topLeftLatitude, ref topLeftLongitude, ref dummyHeight);
-            ApproxSwissProj.LV03toWGS84(bottomRightLongitude, bottomRightLatitude, 500.0f, ref bottomRightLatitude, ref bottomRightLongitude, ref dummyHeight);
+
+            double topLeftLatitude = Converter.CHtoWGSlat(Convert.ToDouble(coordinatesFromPath[0]), Convert.ToDouble(coordinatesFromPath[1]));
+            double topLeftLongitude = Converter.CHtoWGSlng(Convert.ToDouble(coordinatesFromPath[0]), Convert.ToDouble(coordinatesFromPath[1]));
+            double bottomRightLatitude = Converter.CHtoWGSlat(Convert.ToDouble(coordinatesFromPath[2]), Convert.ToDouble(coordinatesFromPath[3]));
+            double bottomRightLongitude = Converter.CHtoWGSlng(Convert.ToDouble(coordinatesFromPath[2]), Convert.ToDouble(coordinatesFromPath[3]));
 
             m.XSize = (bottomRightLongitude - topLeftLongitude) / p.Image.Width;
             m.YSize = (bottomRightLatitude - topLeftLatitude) / p.Image.Height;

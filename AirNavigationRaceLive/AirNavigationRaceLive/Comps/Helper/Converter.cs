@@ -15,8 +15,8 @@ namespace AirNavigationRaceLive.Comps.Helper
         double sizeLatitude;
         public Converter(NetworkObjects.Map map)
         {
-            topLeftLongitude = map.YTopLeft;
-            topLeftLatitude = map.XTopLeft;
+            topLeftLongitude = map.XTopLeft;
+            topLeftLatitude = map.YTopLeft;
             sizeLongitude = map.XSize;
             sizeLatitude = map.YSize;
         }
@@ -26,7 +26,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         }
         public int LongitudeToX(double longitude)
         {
-            return (int)((topLeftLongitude - longitude) / sizeLongitude);
+            return (int)((longitude - topLeftLongitude) / sizeLongitude);
         }
         public double YtoLatitude(double y)
         {
@@ -34,7 +34,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         }
         public int LatitudeToY(double latitdude)
         {
-            return (int)((topLeftLatitude -latitdude) / sizeLatitude);
+            return (int)((latitdude - topLeftLatitude) / sizeLatitude);
         }
         public int getStartX(Line l)
         {
@@ -100,29 +100,9 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             return nauticMiles * 1.852;
         }
+
         // Convert CH y/x to WGS lat
         public static double CHtoWGSlat(double y, double x)
-        {
-            // Converts militar to civil and  to unit = 1000km
-            // Axiliary values (% Bern)
-            double y_aux = (y - 600000) / 1000000;
-            double x_aux = (x - 200000) / 1000000;
-
-            // Process long
-            double lng = 2.6779094
-                + 4.728982 * y_aux
-                + 0.791484 * y_aux * x_aux
-                + 0.1306 * y_aux * Math.Pow(x_aux, 2)
-                - 0.0436 * Math.Pow(y_aux, 3);
-
-            // Unit 10000" to 1 " and converts seconds to degrees (dec)
-            lng = lng * 100 / 36;
-
-            return lng;
-        }
-
-        // Convert CH y/x to WGS long
-        public static double CHtoWGSlng(double y, double x)
         {
             // Converts militar to civil and  to unit = 1000km
             // Axiliary values (% Bern)
@@ -141,6 +121,27 @@ namespace AirNavigationRaceLive.Comps.Helper
             lat = lat * 100 / 36;
 
             return lat;
+        }
+
+        // Convert CH y/x to WGS long
+        public static double CHtoWGSlng(double y, double x)
+        {
+            // Converts militar to civil and  to unit = 1000km
+            // Axiliary values (% Bern)
+            double y_aux = (y - 600000) / 1000000;
+            double x_aux = (x - 200000) / 1000000;
+
+            // Process long
+            double lng = 2.6779094
+                + 4.728982 * y_aux
+                + 0.791484 * y_aux * x_aux
+                + 0.1306 * y_aux * Math.Pow(x_aux, 2)
+                - 0.0436 * Math.Pow(y_aux, 3);
+
+            // Unit 10000" to 1 " and converts seconds to degrees (dec)
+            lng = lng * 100 / 36;
+
+            return lng;
         }
 
         public static double WGStoChEastY(double longitude, double latitude)
