@@ -30,18 +30,15 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBoxMaps = new System.Windows.Forms.ComboBox();
+            this.comboBoxParcours = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnAddStartLine = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.parcourLength = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.channelWide = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnGenerate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fldLongitude = new System.Windows.Forms.TextBox();
             this.fldLatitude = new System.Windows.Forms.TextBox();
@@ -67,12 +64,16 @@
             this.label10 = new System.Windows.Forms.Label();
             this.numLatA = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.fldName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new ParcourPictureBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.fldName = new System.Windows.Forms.TextBox();
+            this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btnRecalc = new System.Windows.Forms.Button();
+            this.chkAutocalc = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -88,9 +89,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
+            this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -112,7 +114,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.comboBoxMaps);
+            this.panel1.Controls.Add(this.comboBoxParcours);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -120,35 +122,34 @@
             this.panel1.Size = new System.Drawing.Size(194, 15);
             this.panel1.TabIndex = 1;
             // 
-            // comboBoxMaps
+            // comboBoxParcours
             // 
-            this.comboBoxMaps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.comboBoxParcours.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxMaps.FormattingEnabled = true;
-            this.comboBoxMaps.Location = new System.Drawing.Point(40, -3);
-            this.comboBoxMaps.Name = "comboBoxMaps";
-            this.comboBoxMaps.Size = new System.Drawing.Size(151, 21);
-            this.comboBoxMaps.TabIndex = 1;
-            this.comboBoxMaps.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaps_SelectedIndexChanged);
+            this.comboBoxParcours.FormattingEnabled = true;
+            this.comboBoxParcours.Location = new System.Drawing.Point(56, -3);
+            this.comboBoxParcours.Name = "comboBoxParcours";
+            this.comboBoxParcours.Size = new System.Drawing.Size(135, 21);
+            this.comboBoxParcours.TabIndex = 1;
+            this.comboBoxParcours.SelectedIndexChanged += new System.EventHandler(this.comboBoxParcours_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Map:";
+            this.label1.Text = "Parcour:";
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.btnClear);
-            this.flowLayoutPanel1.Controls.Add(this.btnAddStartLine);
             this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.panel3);
-            this.flowLayoutPanel1.Controls.Add(this.btnGenerate);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
+            this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.btnRecalc);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,32 +158,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(194, 553);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // btnClear
-            // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClear.Location = new System.Drawing.Point(3, 3);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(190, 23);
-            this.btnClear.TabIndex = 11;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnAddStartLine
-            // 
-            this.btnAddStartLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddStartLine.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddStartLine.Location = new System.Drawing.Point(3, 32);
-            this.btnAddStartLine.Name = "btnAddStartLine";
-            this.btnAddStartLine.Size = new System.Drawing.Size(190, 23);
-            this.btnAddStartLine.TabIndex = 0;
-            this.btnAddStartLine.Text = "Add start line";
-            this.btnAddStartLine.UseVisualStyleBackColor = true;
-            this.btnAddStartLine.Click += new System.EventHandler(this.btnAddStartLine_Click);
-            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -190,7 +165,7 @@
             this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel2.Controls.Add(this.parcourLength);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(3, 61);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(190, 28);
             this.panel2.TabIndex = 12;
@@ -235,7 +210,7 @@
             this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel3.Controls.Add(this.channelWide);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(3, 95);
+            this.panel3.Location = new System.Drawing.Point(3, 37);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(190, 28);
             this.panel3.TabIndex = 13;
@@ -279,19 +254,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Corridor width (NM):";
             // 
-            // btnGenerate
-            // 
-            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnGenerate.Location = new System.Drawing.Point(3, 129);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(190, 23);
-            this.btnGenerate.TabIndex = 15;
-            this.btnGenerate.Text = "Generate Parcour";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.fldLongitude);
@@ -302,7 +264,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 158);
+            this.groupBox1.Location = new System.Drawing.Point(3, 71);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -395,7 +357,7 @@
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 225);
+            this.lineBox.Location = new System.Drawing.Point(3, 138);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -566,9 +528,37 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Latitude A:";
             // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel4.Controls.Add(this.fldName);
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Location = new System.Drawing.Point(3, 383);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 28);
+            this.panel4.TabIndex = 20;
+            // 
+            // fldName
+            // 
+            this.fldName.Location = new System.Drawing.Point(78, 3);
+            this.fldName.Name = "fldName";
+            this.fldName.Size = new System.Drawing.Size(100, 20);
+            this.fldName.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name:";
+            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 441);
+            this.btnSave.Location = new System.Drawing.Point(3, 417);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -601,40 +591,51 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // panel4
+            // panel5
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel4.Controls.Add(this.fldName);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 407);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 28);
-            this.panel4.TabIndex = 20;
+            this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel5.Controls.Add(this.chkAutocalc);
+            this.panel5.Controls.Add(this.label17);
+            this.panel5.Location = new System.Drawing.Point(3, 320);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(190, 28);
+            this.panel5.TabIndex = 21;
             // 
-            // label5
+            // label17
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Name:";
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 7);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(75, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Autocalculate:";
             // 
-            // fldName
+            // btnRecalc
             // 
-            this.fldName.Location = new System.Drawing.Point(78, 3);
-            this.fldName.Name = "fldName";
-            this.fldName.Size = new System.Drawing.Size(100, 20);
-            this.fldName.TabIndex = 1;
+            this.btnRecalc.Location = new System.Drawing.Point(3, 354);
+            this.btnRecalc.Name = "btnRecalc";
+            this.btnRecalc.Size = new System.Drawing.Size(187, 23);
+            this.btnRecalc.TabIndex = 22;
+            this.btnRecalc.Text = "Recalculate";
+            this.btnRecalc.UseVisualStyleBackColor = true;
             // 
-            // ParcourGen
+            // chkAutocalc
+            // 
+            this.chkAutocalc.AutoSize = true;
+            this.chkAutocalc.Location = new System.Drawing.Point(163, 7);
+            this.chkAutocalc.Name = "chkAutocalc";
+            this.chkAutocalc.Size = new System.Drawing.Size(15, 14);
+            this.chkAutocalc.TabIndex = 2;
+            this.chkAutocalc.UseVisualStyleBackColor = true;
+            // 
+            // ParcourEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "ParcourGen";
+            this.Name = "ParcourEdit";
             this.Size = new System.Drawing.Size(1110, 580);
             this.Load += new System.EventHandler(this.ParcourGen_Load);
             this.VisibleChanged += new System.EventHandler(this.ParcourGen_VisibleChanged);
@@ -658,11 +659,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -671,18 +674,15 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBoxMaps;
+        private System.Windows.Forms.ComboBox comboBoxParcours;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnAddStartLine;
-        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.NumericUpDown parcourLength;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.NumericUpDown channelWide;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox fldCursorY;
         private System.Windows.Forms.Label label6;
@@ -714,5 +714,9 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox fldName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.CheckBox chkAutocalc;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Button btnRecalc;
     }
 }

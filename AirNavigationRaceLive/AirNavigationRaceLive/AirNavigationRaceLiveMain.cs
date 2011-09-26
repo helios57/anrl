@@ -25,6 +25,7 @@ namespace AirNavigationRaceLive
         ParcourGen ParcourGen;
         ParcourImport ParcourImport;
         ParcourOverview ParcourOverview;
+        ParcourEdit ParcourEdit;
         MapLegacy MapLegacy;
         Group Group;
         UploadGPS UploadGPS;
@@ -61,6 +62,7 @@ namespace AirNavigationRaceLive
             adjustResultsToolStripMenuItem.Enabled = connected;
             visualisationToolStripMenuItem.Enabled = connected;
             uploadTrackerDataToolStripMenuItem.Enabled = connected;
+            editToolStripMenuItem.Enabled = connected;
         }
 
         private void AirNavigationRaceLive_Load(object sender, EventArgs e)
@@ -123,6 +125,7 @@ namespace AirNavigationRaceLive
             Map = null;
             ParcourGen = null;
             ParcourImport = null;
+            ParcourEdit = null;
             MapLegacy = null;
             Group = null;
             UploadGPS = null;
@@ -267,7 +270,16 @@ namespace AirNavigationRaceLive
             {
                 UploadGPS = new UploadGPS(Client);
             }
-            enableControl(UploadGPS);            
+            enableControl(UploadGPS);
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ParcourEdit == null)
+            {
+                ParcourEdit = new ParcourEdit(Client);
+            }
+            enableControl(ParcourEdit);
         }
     }
 }

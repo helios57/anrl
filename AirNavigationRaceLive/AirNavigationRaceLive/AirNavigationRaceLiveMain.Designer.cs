@@ -56,10 +56,11 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.addLandingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adjustResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uploadTrackerDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.uploadTrackerDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -161,7 +162,8 @@
             this.parcourToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.overviewToolStripMenuItem,
             this.generateToolStripMenuItem,
-            this.importToolStripMenuItem});
+            this.importToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.parcourToolStripMenuItem.Enabled = false;
             this.parcourToolStripMenuItem.Name = "parcourToolStripMenuItem";
             this.parcourToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
@@ -171,21 +173,21 @@
             // overviewToolStripMenuItem
             // 
             this.overviewToolStripMenuItem.Name = "overviewToolStripMenuItem";
-            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.overviewToolStripMenuItem.Text = "Overview";
             this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewToolStripMenuItem_Click);
             // 
             // generateToolStripMenuItem
             // 
             this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
-            this.generateToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.generateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.generateToolStripMenuItem.Text = "Generate";
             this.generateToolStripMenuItem.Click += new System.EventHandler(this.generateToolStripMenuItem_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
@@ -299,6 +301,14 @@
             this.adjustResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.adjustResultsToolStripMenuItem.Text = "Adjust Results";
             // 
+            // uploadTrackerDataToolStripMenuItem
+            // 
+            this.uploadTrackerDataToolStripMenuItem.Enabled = false;
+            this.uploadTrackerDataToolStripMenuItem.Name = "uploadTrackerDataToolStripMenuItem";
+            this.uploadTrackerDataToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.uploadTrackerDataToolStripMenuItem.Text = "Upload Tracker Data";
+            this.uploadTrackerDataToolStripMenuItem.Click += new System.EventHandler(this.uploadTrackerDataToolStripMenuItem_Click);
+            // 
             // visualisationToolStripMenuItem
             // 
             this.visualisationToolStripMenuItem.Enabled = false;
@@ -323,13 +333,12 @@
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
-            // uploadTrackerDataToolStripMenuItem
+            // editToolStripMenuItem
             // 
-            this.uploadTrackerDataToolStripMenuItem.Enabled = false;
-            this.uploadTrackerDataToolStripMenuItem.Name = "uploadTrackerDataToolStripMenuItem";
-            this.uploadTrackerDataToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.uploadTrackerDataToolStripMenuItem.Text = "Upload Tracker Data";
-            this.uploadTrackerDataToolStripMenuItem.Click += new System.EventHandler(this.uploadTrackerDataToolStripMenuItem_Click);
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // AirNavigationRaceLiveMain
             // 
@@ -386,6 +395,7 @@
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uploadTrackerDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }
 

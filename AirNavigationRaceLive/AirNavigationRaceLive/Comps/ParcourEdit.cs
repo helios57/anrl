@@ -19,17 +19,13 @@ namespace AirNavigationRaceLive.Comps
         private Client.Client Client;
         Converter c = null;
         private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
-        private Line activeLine;
-        private ActivePoint ap = ActivePoint.NONE;
-        private Line selectedLine = null;
-        private Line hoverLine = null;
-        ParcourGenerator pc; Timer t;
+        private Point dragPoint = null;
+        private Point hoverPoint = null;
+        ParcourGenerator pc;
+        Timer t;
         private NetworkObjects.Map CurrentMap = null;
-
-        private enum ActivePoint
-        {
-            A, B, O, NONE
-        }
+        private volatile bool drag = false;
+        private const List<Line> modified = new List<Line>();
 
         public ParcourEdit(Client.Client iClient)
         {
@@ -46,29 +42,29 @@ namespace AirNavigationRaceLive.Comps
         }
         private void loadMaps()
         {
-            comboBoxMaps.Items.Clear();
-            List<NetworkObjects.Map> maps = Client.getMaps();
-            foreach (NetworkObjects.Map m in maps)
+            comboBoxParcours.Items.Clear();
+            List<NetworkObjects.Parcour> parcours = Client.getParcours();
+            foreach (NetworkObjects.Parcour p in parcours)
             {
-                comboBoxMaps.Items.Add(new ListItem(m));
+                comboBoxParcours.Items.Add(new ListItem(p));
             }
         }
 
         class ListItem
         {
-            private NetworkObjects.Map map;
-            public ListItem(NetworkObjects.Map imap)
+            private NetworkObjects.Parcour parcour;
+            public ListItem(NetworkObjects.Parcour iparcour)
             {
-                map = imap;
+                parcour = iparcour;
             }
 
             public override String ToString()
             {
-                return map.Name;
+                return parcour.Name;
             }
-            public NetworkObjects.Map getMap()
+            public NetworkObjects.Parcour getParcour()
             {
-                return map;
+                return parcour;
             }
         }
         #endregion
@@ -83,50 +79,13 @@ namespace AirNavigationRaceLive.Comps
                 double longitude = c.XtoLongitude(e.X);
                 fldLatitude.Text = latitude.ToString();
                 fldLongitude.Text = longitude.ToString();
-                if (activeLine != null)
+                if (drag)
                 {
-                    pictureBox1.SetSelectedLine(null);
-                    #region activeLine != null
-                    switch (ap)
-                    {
-                        case ActivePoint.A:
-                            {
-                                Point a = NetworkObjects.Helper.Point(longitude, latitude, 0);
-                                Point b = NetworkObjects.Helper.Point(a.longitude, a.latitude, a.altitude);
-                                Point o = NetworkObjects.Helper.Point(a.longitude, a.latitude, a.altitude);
-                                activeLine.A = a;
-                                activeLine.B = b;
-                                activeLine.O = o;
-                                pictureBox1.Invalidate();
-                                break;
-                            }
-                        case ActivePoint.B:
-                            {
-                                Point b = NetworkObjects.Helper.Point(longitude, latitude, 0);
-                                Point o = NetworkObjects.Helper.Point(b.longitude, b.latitude, b.altitude);
-                                activeLine.B = b;
-                                activeLine.O = o;
-                                pictureBox1.Invalidate();
-                                break;
-                            }
-                        case ActivePoint.O:
-                            {
-                                Point o = NetworkObjects.Helper.Point(longitude, latitude, 0);
-                                activeLine.O = o;
-                                pictureBox1.Invalidate();
-                                break;
-                            }
-                        case ActivePoint.NONE:
-                            {
-
-                                break;
-                            }
-                    }
-                    #endregion
+                    //TODO
                 }
                 else
                 {
-                    bool lineSet = false;
+                    bool pointSet = false;
                     lock (activeParcour)
                     {
                         foreach (Line l in activeParcour.LineList)
@@ -140,62 +99,49 @@ namespace AirNavigationRaceLive.Comps
                             int orientationX = c.getOrientationX(l);
                             int orientationY = c.getOrientationY(l);
                             Vector mousePos = new Vector(e.X, e.Y, 0);
-                            if (Vector.Abs(Vector.MinDistance(new Vector(startX, startY, 0), new Vector(endX, endY, 0), mousePos)) < 3 ||
-                                Vector.Abs(Vector.MinDistance(new Vector(midX, midY, 0), new Vector(orientationX, orientationY, 0), mousePos)) < 3)
+                            if (Vector.Abs(mousePos - new Vector(startX, startY, 0)) < 3)
                             {
-                                SetHoverLine(l);
-                                lineSet = true;
+                                SetHoverPoint(l.A, l);
+                                pointSet = true;
+                                pictureBox1.Cursor = move;
+                                break;
+                            }
+                            else if (Vector.Abs(mousePos - new Vector(endX, endY, 0)) < 3)
+                            {
+                                SetHoverPoint(l.B, l);
+                                pointSet = true;
+                                pictureBox1.Cursor = move;
+                                break;
+
+                            }
+                            else if (Vector.Abs(mousePos - new Vector(orientationX, orientationY, 0)) < 3)
+                            {
+                                SetHoverPoint(l.O, l);
+                                pointSet = true;
+                                pictureBox1.Cursor = move;
                                 break;
                             }
                         }
+
                     }
-                    if (!lineSet)
+                    if (!pointSet)
                     {
-                        SetHoverLine(null);
+                        SetHoverPoint(null, null);
+                        pictureBox1.Cursor = select;
                     }
                 }
             }
         }
-        private void SetSelectedLine(Line l)
+
+        private void SetHoverPoint(Point p, Line l)
         {
-            bool change = selectedLine != l;
+            bool change = hoverPoint != p;
             if (change)
             {
-                selectedLine = l;
-                pictureBox1.SetSelectedLine(l);
-                pictureBox1.Invalidate();
-                lineBox.Enabled = l != null;
-                if (l != null)
-                {
-                    numLatA.Value = (decimal)l.A.latitude;
-                    numLatB.Value = (decimal)l.B.latitude;
-                    numLatO.Value = (decimal)l.O.latitude;
-                    numLongA.Value = (decimal)l.A.longitude;
-                    numLongB.Value = (decimal)l.B.longitude;
-                    numLongO.Value = (decimal)l.O.longitude;
-                    fldLineTyp.Text = ((LineType)l.Type).ToString();
-                }
-                else
-                {
-                    numLatA.Value = 0;
-                    numLatB.Value = 0;
-                    numLatO.Value = 0;
-                    numLongA.Value = 0;
-                    numLongB.Value = 0;
-                    numLongO.Value = 0;
-                    fldLineTyp.Text = "";
-                }
-            }
-        }
-        private void SetHoverLine(Line l)
-        {
-            bool change = hoverLine != l;
-            if (change)
-            {
-                hoverLine = l;
+                hoverPoint = p;
                 pictureBox1.SetHoverLine(l);
                 pictureBox1.Invalidate();
-                if (selectedLine == null)
+                if (hoverPoint == null)
                 {
                     lineBox.Enabled = l != null;
                     if (l != null)
@@ -221,9 +167,9 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        private void comboBoxMaps_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxParcours_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListItem li = comboBoxMaps.SelectedItem as ListItem;
+            ListItem li = comboBoxParcours.SelectedItem as ListItem;
             if (li != null)
             {
                 MemoryStream ms = new MemoryStream(Client.getPicture(li.getMap().ID_Picture).Image);
@@ -234,9 +180,9 @@ namespace AirNavigationRaceLive.Comps
             }
         }
 
-        private void btnGenerate_Click(object sender, EventArgs e)
+        private void btnRecalc_Click(object sender, EventArgs e)
         {
-            btnGenerate.Enabled = false;
+            btnRecalc.Enabled = false;
             try
             {
                 double lenght = Decimal.ToDouble(parcourLength.Value);
@@ -251,7 +197,7 @@ namespace AirNavigationRaceLive.Comps
             }
             catch (Exception ex)
             {
-                btnGenerate.Enabled = true;
+                btnRecalc.Enabled = true;
                 MessageBox.Show(ex.Message, "Error while generating Parcour");
             }
         }
@@ -264,13 +210,13 @@ namespace AirNavigationRaceLive.Comps
                 if (pc.finished)
                 {
                     t.Stop();
-                    btnGenerate.Enabled = true;
+                    btnRecalc.Enabled = true;
                 }
             }
             catch
             {
                 t.Stop();
-                btnGenerate.Enabled = true;
+                btnRecalc.Enabled = true;
             }
         }
 
@@ -291,95 +237,9 @@ namespace AirNavigationRaceLive.Comps
             }
         }
 
-        #region add Lines
-        private void btnAddStartLine_Click(object sender, EventArgs e)
-        {
-            SetSelectedLine(null);
-            if (activeParcour.LineList.Exists(p => p.Type == (int)LineType.START))
-            {
-                activeLine = activeParcour.LineList.Single(p => p.Type == (int)LineType.START) as Line;
-            }
-            else
-            {
-                activeLine = new Line();
-                activeLine.Type = (int)LineType.START;
-                activeParcour.LineList.Add(activeLine);
-            }
-            ap = ActivePoint.A;
-        }
-        private void btnAddEnd_Click(object sender, EventArgs e)
-        {
-            SetSelectedLine(null);
-            if (activeParcour.LineList.Exists(p => p.Type == (int)LineType.END))
-            {
-                activeLine = activeParcour.LineList.Single(p => p.Type == (int)LineType.END) as Line;
-            }
-            else
-            {
-                activeLine = new Line();
-                activeLine.Type = (int)LineType.END;
-                activeParcour.LineList.Add(activeLine);
-            }
-            ap = ActivePoint.A;
-        }
-        private void btnAddLineOfNoReturn_Click(object sender, EventArgs e)
-        {
-            SetSelectedLine(null);
-            if (activeParcour.LineList.Exists(p => p.Type == (int)LineType.LINEOFNORETURN))
-            {
-                activeLine = activeParcour.LineList.Single(p => p.Type == (int)LineType.LINEOFNORETURN) as Line;
-            }
-            else
-            {
-                activeLine = new Line();
-                activeLine.Type = (int)LineType.LINEOFNORETURN;
-                activeParcour.LineList.Add(activeLine);
-            }
-            ap = ActivePoint.A;
-
-        }
-        #endregion
-        private void pictureBox1_Click(object sender, MouseEventArgs e)
-        {
-            if (activeLine != null)
-            {
-                switch (ap)
-                {
-                    case ActivePoint.A:
-                        {
-                            ap = ActivePoint.B;
-                            break;
-                        }
-                    case ActivePoint.B:
-                        {
-                            ap = ActivePoint.O;
-                            break;
-                        }
-                    case ActivePoint.O:
-                        {
-                            ap = ActivePoint.NONE;
-                            activeLine = null;
-                            break;
-                        }
-                }
-            }
-            else
-            {
-                SetSelectedLine(hoverLine);
-            }
-        }
-
         private void ParcourGen_VisibleChanged(object sender, EventArgs e)
         {
             loadMaps();
-        }
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            activeParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
-            pictureBox1.SetParcour(activeParcour);
-            SetHoverLine(null);
-            SetSelectedLine(null);
-            pictureBox1.Invalidate();
         }
         #region NumUpDown
         private void numLatA_ValueChanged(object sender, EventArgs e)
