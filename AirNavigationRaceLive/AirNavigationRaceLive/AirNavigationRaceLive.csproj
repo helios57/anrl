@@ -105,6 +105,12 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\ParcourEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\ParcourEdit.Designer.cs">
+      <DependentUpon>ParcourEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\UploadGPS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Comps\ParcourEdit.resx">
+      <DependentUpon>ParcourEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Comps\UploadGPS.resx">
       <DependentUpon>UploadGPS.cs</DependentUpon>
     </EmbeddedResource>
@@ -292,6 +301,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\GPSCursorModify.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\GPSCursor.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
