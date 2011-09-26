@@ -456,10 +456,12 @@ namespace AirNavigationRaceLive.Comps.Helper
                     line = gacFileStreamReader.ReadLine();
                     if (line.Substring(0, 1).Equals("B"))
                     {
+                        //B082337 4758489N 008 30 945 E A99999 0224901011680001
+                        //B1601114816962N00700724EA003100037007532330012
                         // timestamp
                         DateTime newPointTimeStamp = new DateTime(year, month, day, Convert.ToInt32(line.Substring(1, 2)), Convert.ToInt32(line.Substring(3, 2)), Convert.ToInt32(line.Substring(5, 2)));
                         // latitude
-                        double newPointLatitude = Convert.ToDouble(line.Substring(7, 2)) * 3600 + Convert.ToDouble(line.Substring(9, 2)) * 60 + Convert.ToDouble(line.Substring(11, 3)) * 60 / 1000;
+                        double newPointLatitude = Convert.ToDouble(line.Substring(7, 2)) + Convert.ToDouble(line.Substring(9, 2)+"."+line.Substring(11, 3)) / 60;
                         switch (line.Substring(14, 1))
                         {
                             case "N":
@@ -472,7 +474,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                 break;
                         }
                         // longitude
-                        double newPointLongitude = Convert.ToDouble(line.Substring(15, 3)) * 3600 + Convert.ToDouble(line.Substring(18, 2)) * 60 + Convert.ToDouble(line.Substring(20, 3)) * 60 / 1000;
+                        double newPointLongitude = Convert.ToDouble(line.Substring(15, 3)) + Convert.ToDouble(line.Substring(18, 2)+"."+line.Substring(20, 3)) / 60;
                         switch (line.Substring(23, 1))
                         {
                             case "E":
@@ -485,7 +487,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                 break;
                         }
                         double altitude = double.Parse(line.Substring(30, 5)) * 0.3048f; //Feet to Meter
-                        double speed = (double.Parse(line.Substring(35, 4)) * 10) / 0.514444444f; //Knot to m/s
+                        double speed = (double.Parse(line.Substring(35, 4)) / 10) / 0.514444444f; //Knot to m/s
                         double bearing = double.Parse(line.Substring(39,3));
                         double acc = double.Parse(line.Substring(42,4));
 
