@@ -21,11 +21,11 @@ namespace AirNavigationRaceLive.Comps
         private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
         private Point dragPoint = null;
         private Point hoverPoint = null;
+        private Line selectedLine = null;
         ParcourGenerator pc;
         Timer t;
         private NetworkObjects.Map CurrentMap = null;
         private volatile bool drag = false;
-        private const List<Line> modified = new List<Line>();
 
         public ParcourEdit(Client.Client iClient)
         {
@@ -79,12 +79,19 @@ namespace AirNavigationRaceLive.Comps
                 double longitude = c.XtoLongitude(e.X);
                 fldLatitude.Text = latitude.ToString();
                 fldLongitude.Text = longitude.ToString();
-                if (drag)
+                if (drag && (hoverPoint != null || dragPoint != null))
                 {
-                    //TODO
+                    if (dragPoint == null )
+                    {
+                        dragPoint = hoverPoint;
+                    }
+                    dragPoint.latitude = c.YtoLatitude(e.Y);
+                    dragPoint.longitude = c.XtoLongitude(e.X);
+                    pictureBox1.Invalidate();
                 }
                 else
                 {
+                    dragPoint = null;
                     bool pointSet = false;
                     lock (activeParcour)
                     {
@@ -138,6 +145,7 @@ namespace AirNavigationRaceLive.Comps
             bool change = hoverPoint != p;
             if (change)
             {
+                selectedLine = l;
                 hoverPoint = p;
                 pictureBox1.SetHoverLine(l);
                 pictureBox1.Invalidate();
@@ -172,11 +180,15 @@ namespace AirNavigationRaceLive.Comps
             ListItem li = comboBoxParcours.SelectedItem as ListItem;
             if (li != null)
             {
-                MemoryStream ms = new MemoryStream(Client.getPicture(li.getMap().ID_Picture).Image);
+                NetworkObjects.Parcour p = li.getParcour();
+                NetworkObjects.Map m = Client.getMap(p.ID_Map);
+                MemoryStream ms = new MemoryStream(Client.getPicture(m.ID_Picture).Image);
                 pictureBox1.Image = System.Drawing.Image.FromStream(ms);
-                c = new Converter(li.getMap());
+                c = new Converter(m);
                 pictureBox1.SetConverter(c);
-                CurrentMap = li.getMap();
+                CurrentMap = m;
+                activeParcour = new Model.Parcour(p);
+                pictureBox1.SetParcour(activeParcour);
             }
         }
 
@@ -302,17 +314,17 @@ namespace AirNavigationRaceLive.Comps
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-
+            drag = true;
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-
+            drag = false;
         }
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
-
+            drag = false;
         }
 
     }
