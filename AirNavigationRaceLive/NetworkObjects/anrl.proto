@@ -46,6 +46,8 @@ option optimize_for = SPEED;
         optional Competition Competition =10;
 
         repeated GPSData GPSDataList =11;
+
+		optional GPSDataRequest GPSDataRequest = 12;
 	}
 	message ResponseParameters
 	{
@@ -70,6 +72,8 @@ option optimize_for = SPEED;
 		repeated Group GroupList = 10;
 		
 		repeated Competition CompetitionList = 11;
+
+		repeated GPSData GPSDataList =12;
 	}
 	message Picture
 	{
@@ -205,6 +209,14 @@ option optimize_for = SPEED;
 
 		optional int32 Pos=2;
 	}
+	message GPSDataRequest
+	{
+		repeated int32 ID_Tracker = 1;
+		
+		required int64 TimestampFrom = 2;
+
+		required int64 TimestampTo = 3;
+	}
 
 message RootMessage {
 	repeated GPSData gpsdata = 1;
@@ -223,6 +235,7 @@ message GPSData {
 	optional double bearing = 8;
 	optional string identifier = 9;
 	optional string trackerName = 10;
+	optional int32 trackerID = 11;
 }
 
 message Response{

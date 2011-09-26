@@ -202,6 +202,15 @@ namespace NetworkObjects
       get { return _GPSDataList; }
     }
   
+
+    private NetworkObjects.GPSDataRequest _GPSDataRequest = null;
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"GPSDataRequest", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NetworkObjects.GPSDataRequest GPSDataRequest
+    {
+      get { return _GPSDataRequest; }
+      set { _GPSDataRequest = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -291,6 +300,13 @@ namespace NetworkObjects
     public global::System.Collections.Generic.List<NetworkObjects.Competition> CompetitionList
     {
       get { return _CompetitionList; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NetworkObjects.GPSData> _GPSDataList = new global::System.Collections.Generic.List<NetworkObjects.GPSData>();
+    [global::ProtoBuf.ProtoMember(12, Name=@"GPSDataList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.GPSData> GPSDataList
+    {
+      get { return _GPSDataList; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -905,6 +921,37 @@ namespace NetworkObjects
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"GPSDataRequest")]
+  public partial class GPSDataRequest : global::ProtoBuf.IExtensible
+  {
+    public GPSDataRequest() {}
+    
+    private readonly global::System.Collections.Generic.List<int> _ID_Tracker = new global::System.Collections.Generic.List<int>();
+    [global::ProtoBuf.ProtoMember(1, Name=@"ID_Tracker", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public global::System.Collections.Generic.List<int> ID_Tracker
+    {
+      get { return _ID_Tracker; }
+    }
+  
+    private long _TimestampFrom;
+    [global::ProtoBuf.ProtoMember(2, IsRequired = true, Name=@"TimestampFrom", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long TimestampFrom
+    {
+      get { return _TimestampFrom; }
+      set { _TimestampFrom = value; }
+    }
+    private long _TimestampTo;
+    [global::ProtoBuf.ProtoMember(3, IsRequired = true, Name=@"TimestampTo", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    public long TimestampTo
+    {
+      get { return _TimestampTo; }
+      set { _TimestampTo = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RootMessage")]
   public partial class RootMessage : global::ProtoBuf.IExtensible
   {
@@ -1034,6 +1081,15 @@ namespace NetworkObjects
     {
       get { return _trackerName; }
       set { _trackerName = value; }
+    }
+
+    private int _trackerID = default(int);
+    [global::ProtoBuf.ProtoMember(11, IsRequired = false, Name=@"trackerID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int trackerID
+    {
+      get { return _trackerID; }
+      set { _trackerID = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
