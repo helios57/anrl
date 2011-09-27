@@ -20,6 +20,7 @@ namespace AirNavigationRaceLive.Comps
         Converter c = null;
         private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
         private Point dragPoint = null;
+        private readonly List<Point> gluePoints = new List<Point>();
         private Point hoverPoint = null;
         private Line selectedLine = null;
         ParcourGenerator pc;
@@ -85,8 +86,15 @@ namespace AirNavigationRaceLive.Comps
                     {
                         dragPoint = hoverPoint;
                     }
-                    dragPoint.latitude = c.YtoLatitude(e.Y);
-                    dragPoint.longitude = c.XtoLongitude(e.X);
+                    double diffLatitude = c.YtoLatitude(e.Y) - dragPoint.latitude;
+                    double diffLongitude = c.XtoLongitude(e.X) -dragPoint.longitude;
+                    dragPoint.latitude += diffLatitude;
+                    dragPoint.longitude += diffLongitude;
+                    foreach (Point p in gluePoints)
+                    {
+                        p.latitude += diffLatitude;
+                        p.longitude += diffLongitude;
+                    }
                     pictureBox1.Invalidate();
                 }
                 else
@@ -109,6 +117,8 @@ namespace AirNavigationRaceLive.Comps
                             if (Vector.Abs(mousePos - new Vector(startX, startY, 0)) < 3)
                             {
                                 SetHoverPoint(l.A, l);
+                                gluePoints.Clear();
+                                gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.A));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -116,6 +126,7 @@ namespace AirNavigationRaceLive.Comps
                             else if (Vector.Abs(mousePos - new Vector(endX, endY, 0)) < 3)
                             {
                                 SetHoverPoint(l.B, l);
+                                gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.B));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -124,6 +135,7 @@ namespace AirNavigationRaceLive.Comps
                             else if (Vector.Abs(mousePos - new Vector(orientationX, orientationY, 0)) < 3)
                             {
                                 SetHoverPoint(l.O, l);
+                                gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.O));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -139,7 +151,30 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-
+        private List<Point> findGluePoints(List<Line> linelist, Point original)
+        {
+            List<Point> result = new List<Point>();
+            foreach (Line l in linelist)
+            {
+                if (samePos(l.A, original) && !(original == l.A))
+                {
+                    result.Add(l.A);
+                } 
+                if (samePos(l.B, original) && !(original == l.B))
+                {
+                    result.Add(l.B);
+                } 
+                if (samePos(l.O, original) && !(original == l.O))
+                {
+                    result.Add(l.O);
+                }
+            }
+            return result;
+        }
+        private bool samePos(Point a, Point b)
+        {
+            return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) ==0;
+        }
         private void SetHoverPoint(Point p, Line l)
         {
             bool change = hoverPoint != p;

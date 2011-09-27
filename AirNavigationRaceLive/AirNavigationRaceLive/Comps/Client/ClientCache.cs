@@ -130,5 +130,19 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return !first && !updating;
         }
+
+        internal void clear()
+        {
+            String file = Path.GetTempPath() + @"\ANRL" + c.getIpAdress() + ".tmp";
+            FileInfo fileInfo = new FileInfo(file);
+            try
+            {
+                if (fileInfo.Exists)
+                {
+                    fileInfo.Delete();
+                }
+            }
+            catch { }
+        }
     }
 }

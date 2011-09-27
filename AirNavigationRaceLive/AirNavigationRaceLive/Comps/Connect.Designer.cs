@@ -37,6 +37,7 @@
             this.fldUsername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textStatus = new System.Windows.Forms.TextBox();
+            this.checkBoxClearCache = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblAnrlServer
@@ -122,10 +123,21 @@
             this.textStatus.Size = new System.Drawing.Size(210, 20);
             this.textStatus.TabIndex = 15;
             // 
+            // checkBoxClearCache
+            // 
+            this.checkBoxClearCache.AutoSize = true;
+            this.checkBoxClearCache.Location = new System.Drawing.Point(460, 161);
+            this.checkBoxClearCache.Name = "checkBoxClearCache";
+            this.checkBoxClearCache.Size = new System.Drawing.Size(84, 17);
+            this.checkBoxClearCache.TabIndex = 16;
+            this.checkBoxClearCache.Text = "Clear Cache";
+            this.checkBoxClearCache.UseVisualStyleBackColor = true;
+            // 
             // Connect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.checkBoxClearCache);
             this.Controls.Add(this.textStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblAnrlServer);
@@ -154,5 +166,6 @@
         protected System.Windows.Forms.TextBox fldUsername;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textStatus;
+        private System.Windows.Forms.CheckBox checkBoxClearCache;
     }
 }

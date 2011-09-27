@@ -194,5 +194,10 @@ namespace AirNavigationRaceLive.Comps.Client
             r.RequestParameters.GPSDataList.AddRange(list);
             process(r);
         }
+
+        internal void clearCache()
+        {
+            cache.clear();
+        }
     }
 }

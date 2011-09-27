@@ -24,6 +24,10 @@ namespace AirNavigationRaceLive.Comps
             try
             {
                 Client.Client c = new Client.Client(fldServer.Text);
+                if (checkBoxClearCache.Checked)
+                {
+                    c.clearCache();
+                }
                 c.Authenticate(fldUsername.Text, fldPassword.Text);
                 if (c.isAuthenticated() && Connected != null)
                 {
