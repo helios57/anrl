@@ -28,6 +28,18 @@ namespace AirNavigationRaceLive.Comps.Helper
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_C), lines.Single(p => p.Type == (int)LineType.END_C));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_D), lines.Single(p => p.Type == (int)LineType.END_D));
         }
+        public ParcourModel(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double desiredLengthFactor, double channel, bool regenerate)
+        {
+            this.desiredLengthFactor = desiredLengthFactor;
+            this.channel = Converter.NMtoM(channel);
+            this.c = c;
+            List<Line> lines = new List<Line>(parcour.LineList);
+            AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_A), lines.Single(p => p.Type == (int)LineType.END_A), lines, LineType.START_A);
+            AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_B), lines.Single(p => p.Type == (int)LineType.END_B), lines, LineType.START_B);
+            AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_C), lines.Single(p => p.Type == (int)LineType.END_C), lines, LineType.START_C);
+            AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_D), lines.Single(p => p.Type == (int)LineType.END_D), lines, LineType.START_D);
+        }
+
 
         public ParcourModel(ParcourModel pm, double firstWeight)
         {
@@ -52,8 +64,8 @@ namespace AirNavigationRaceLive.Comps.Helper
             Start.longitude = c.XtoLongitude(Channels[0].Start.X);
             Start.latitude = c.YtoLatitude(Channels[0].Start.Y);
             double origDist = Converter.Distance(Ende, Start);
-            ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0/2.0));
-            Vector ortho = Vector.Orthogonal(ChannelRadius)/10.0;
+            ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0 / 2.0));
+            Vector ortho = Vector.Orthogonal(ChannelRadius) / 10.0;
             double factorLengthSides = 20.0;
 
             for (int i = 1; i < 8; i += 1)
@@ -74,8 +86,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                 Vector c2 = Channels[1].LinearCombinations[i + 1] - ChannelRadius - ortho;
                 Vector c3 = Channels[2].LinearCombinations[i] + ChannelRadius + ortho;
                 Vector c4 = Channels[2].LinearCombinations[i + 1] + ChannelRadius - ortho;
-                Polygons.Add(new ParcourPolygon(c1, c2, c4, c3)); 
-                
+                Polygons.Add(new ParcourPolygon(c1, c2, c4, c3));
+
                 Vector d1 = Channels[2].LinearCombinations[i] - ChannelRadius + ortho;
                 Vector d2 = Channels[2].LinearCombinations[i + 1] - ChannelRadius - ortho;
                 Vector d3 = Channels[3].LinearCombinations[i] + ChannelRadius + ortho;
@@ -138,12 +150,19 @@ namespace AirNavigationRaceLive.Comps.Helper
             Channels.Add(new ParcourChannel(MiddleStart, MiddleEnd));
         }
 
+        private void AddLineAsCorridor(Converter c, Line start, Line end, List<Line> lines, LineType lineType)
+        {
+            Vector MiddleStart = Vector.Middle(getVector(c, start.A), getVector(c, start.B));
+            Vector MiddleEnd = Vector.Middle(getVector(c, end.A), getVector(c, end.B));
+            Channels.Add(new ParcourChannel(MiddleStart, MiddleEnd,lineType, lines, c));
+        }
+
         private void AddCorridor(ParcourChannel c)
         {
             Channels.Add(new ParcourChannel(c));
         }
 
-        private static Vector getVector(Converter c, Point point)
+        public static Vector getVector(Converter c, Point point)
         {
 
             Vector startA = new Vector(c.LongitudeToX(point.longitude), c.LatitudeToY(point.latitude), 0);
@@ -156,6 +175,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         internal Vector Start;
         internal Vector End;
         internal List<Vector> LinearCombinations = new List<Vector>(10);
+        internal List<Vector> ImmutablePoints = new List<Vector>();
 
         public List<Vector> getLinearCombinations()
         {
@@ -179,6 +199,50 @@ namespace AirNavigationRaceLive.Comps.Helper
                 System.Console.Out.WriteLine("ERROR");
             }
         }
+        public ParcourChannel(Vector Start, Vector End, LineType type, List<Line> lines, Converter c)
+        {
+            this.Start = Start;
+            this.End = End;
+            List<Line> pointLine = lines.Where(p => p.Type == (int)LineType.Point).ToList();
+            int i = 0;
+            if (type == LineType.START_B)
+            {
+                i = 9;
+            }
+            else if (type == LineType.START_C)
+            {
+                i = 18;
+            }
+            else if (type == LineType.START_D)
+            {
+                i = 27;
+            }
+            List<Line> corridorPoints = new List<Line>();
+            for (int j = 0; j < 9; j++)
+            {
+                corridorPoints.Add(pointLine[i + j]);
+            }
+            foreach (Line l in corridorPoints)
+            {
+                Vector v = ParcourModel.getVector(c, l.A);
+
+                if (isEdited(l))
+                {
+                    ImmutablePoints.Add(v);
+                }
+                LinearCombinations.Add(v);
+            }
+            LinearCombinations.Add(End);
+        }
+        private bool isEdited(Line l)
+        {
+            return l.A.edited || l.B.edited;
+        }
+        private bool samePos(Point a, Point b)
+        {
+            return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) < 0.00001;
+        }
+
         public ParcourChannel(ParcourChannel pc)
         {
             this.Start = pc.Start;
@@ -188,6 +252,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 LinearCombinations.Add(new Vector(v));
             }
         }
+
         internal void Randomize(double factor)
         {
             for (int i = 2; i < 8; i++)

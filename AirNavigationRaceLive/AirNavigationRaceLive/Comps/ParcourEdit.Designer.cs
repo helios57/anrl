@@ -64,16 +64,16 @@
             this.label10 = new System.Windows.Forms.Label();
             this.numLatA = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.chkAutocalc = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btnRecalc = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.fldName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.btnRecalc = new System.Windows.Forms.Button();
-            this.chkAutocalc = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -89,10 +89,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
+            this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -528,6 +528,46 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Latitude A:";
             // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel5.Controls.Add(this.chkAutocalc);
+            this.panel5.Controls.Add(this.label17);
+            this.panel5.Location = new System.Drawing.Point(3, 320);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(190, 28);
+            this.panel5.TabIndex = 21;
+            // 
+            // chkAutocalc
+            // 
+            this.chkAutocalc.AutoSize = true;
+            this.chkAutocalc.Location = new System.Drawing.Point(163, 7);
+            this.chkAutocalc.Name = "chkAutocalc";
+            this.chkAutocalc.Size = new System.Drawing.Size(15, 14);
+            this.chkAutocalc.TabIndex = 2;
+            this.chkAutocalc.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(3, 7);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(75, 13);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Autocalculate:";
+            // 
+            // btnRecalc
+            // 
+            this.btnRecalc.Location = new System.Drawing.Point(3, 354);
+            this.btnRecalc.Name = "btnRecalc";
+            this.btnRecalc.Size = new System.Drawing.Size(187, 23);
+            this.btnRecalc.TabIndex = 22;
+            this.btnRecalc.Text = "Recalculate";
+            this.btnRecalc.UseVisualStyleBackColor = true;
+            this.btnRecalc.Click += new System.EventHandler(this.btnRecalc_Click);
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -590,45 +630,6 @@
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel5.Controls.Add(this.chkAutocalc);
-            this.panel5.Controls.Add(this.label17);
-            this.panel5.Location = new System.Drawing.Point(3, 320);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(190, 28);
-            this.panel5.TabIndex = 21;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(3, 7);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(75, 13);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Autocalculate:";
-            // 
-            // btnRecalc
-            // 
-            this.btnRecalc.Location = new System.Drawing.Point(3, 354);
-            this.btnRecalc.Name = "btnRecalc";
-            this.btnRecalc.Size = new System.Drawing.Size(187, 23);
-            this.btnRecalc.TabIndex = 22;
-            this.btnRecalc.Text = "Recalculate";
-            this.btnRecalc.UseVisualStyleBackColor = true;
-            // 
-            // chkAutocalc
-            // 
-            this.chkAutocalc.AutoSize = true;
-            this.chkAutocalc.Location = new System.Drawing.Point(163, 7);
-            this.chkAutocalc.Name = "chkAutocalc";
-            this.chkAutocalc.Size = new System.Drawing.Size(15, 14);
-            this.chkAutocalc.TabIndex = 2;
-            this.chkAutocalc.UseVisualStyleBackColor = true;
-            // 
             // ParcourEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -658,13 +659,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }

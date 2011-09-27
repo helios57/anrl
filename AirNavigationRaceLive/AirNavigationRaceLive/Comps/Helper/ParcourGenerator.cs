@@ -334,6 +334,33 @@ namespace AirNavigationRaceLive.Comps.Helper
                 }
             }
         }
+
+        internal void RecalcParcour(Model.Parcour parcour, Converter c, double lenght, double channel)
+        {
+            this.parcour = parcour;
+            this.c = c;
+            ParcourModel pm = new ParcourModel(parcour, c, EndLineDist, channel,true);
+            List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
+            //System.Diagnostics.Process.GetCurrentProcess().
+            for (int i = 0; i < 1; i++)
+            {
+                List<ParcourModel> list = new List<ParcourModel>();
+                modelList.Add(list);
+                list.Add(pm);
+                for (int j = 0; j < 300; j++)
+                {
+                    list.Add(new ParcourModel(pm, 1));
+                }
+            }
+            best = double.MaxValue;
+            bestModel = null;
+
+            foreach (List<ParcourModel> list in modelList)
+            {
+                Thread t = new Thread(new ParameterizedThreadStart(ProcessList));
+                t.Start(list);
+            }
+        }
     }
     class Comparer : Comparer<ParcourModel>
     {

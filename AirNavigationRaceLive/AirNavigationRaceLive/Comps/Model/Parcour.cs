@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NetworkObjects;
 
 namespace AirNavigationRaceLive.Comps.Model
 {
@@ -14,7 +15,10 @@ namespace AirNavigationRaceLive.Comps.Model
         {
             this.ID = p.ID;
             this.ID_Map = p.ID_Map;
-            this.LineList.AddRange(p.LineList);
+            foreach (Line l in p.LineList)
+            {
+                this.LineList.Add(NetworkObjects.Helper.Line(l));
+            }
             this.Name = p.Name;
         }
         public volatile bool finished;

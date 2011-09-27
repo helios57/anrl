@@ -134,6 +134,8 @@ option optimize_for = SPEED;
         optional double longitude=3;
 
         optional double latitude =4;
+
+		optional bool edited = 5;
 	}
 	message Tracker
 	{

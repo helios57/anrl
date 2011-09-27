@@ -86,14 +86,16 @@ namespace AirNavigationRaceLive.Comps
                     {
                         dragPoint = hoverPoint;
                     }
-                    double diffLatitude = c.YtoLatitude(e.Y) - dragPoint.latitude;
-                    double diffLongitude = c.XtoLongitude(e.X) -dragPoint.longitude;
-                    dragPoint.latitude += diffLatitude;
-                    dragPoint.longitude += diffLongitude;
+                    double newLatitude = c.YtoLatitude(e.Y);
+                    double newLongitude = c.XtoLongitude(e.X);
+                    dragPoint.latitude = newLatitude;
+                    dragPoint.longitude = newLongitude;
+                    dragPoint.edited = true;
                     foreach (Point p in gluePoints)
                     {
-                        p.latitude += diffLatitude;
-                        p.longitude += diffLongitude;
+                        p.latitude = newLatitude;
+                        p.longitude = newLongitude;
+                        p.edited = true;
                     }
                     pictureBox1.Invalidate();
                 }
@@ -126,6 +128,7 @@ namespace AirNavigationRaceLive.Comps
                             else if (Vector.Abs(mousePos - new Vector(endX, endY, 0)) < 3)
                             {
                                 SetHoverPoint(l.B, l);
+                                gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.B));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
@@ -135,6 +138,7 @@ namespace AirNavigationRaceLive.Comps
                             else if (Vector.Abs(mousePos - new Vector(orientationX, orientationY, 0)) < 3)
                             {
                                 SetHoverPoint(l.O, l);
+                                gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.O));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
@@ -224,6 +228,10 @@ namespace AirNavigationRaceLive.Comps
                 CurrentMap = m;
                 activeParcour = new Model.Parcour(p);
                 pictureBox1.SetParcour(activeParcour);
+                bool generatedParcour = activeParcour.LineList.Count(pp=>pp.Type == (int)LineType.Point) > 0;
+                btnRecalc.Enabled = generatedParcour;
+                chkAutocalc.Enabled = generatedParcour;
+                chkAutocalc.Checked = generatedParcour;
             }
         }
 
@@ -239,7 +247,7 @@ namespace AirNavigationRaceLive.Comps
                 t.Interval = 100;
                 t.Start();
                 pc = new ParcourGenerator();
-                pc.GenerateParcour(activeParcour, c, lenght, channel);
+                pc.RecalcParcour(activeParcour, c, lenght, channel);
                 pictureBox1.Invalidate();
             }
             catch (Exception ex)
@@ -355,12 +363,17 @@ namespace AirNavigationRaceLive.Comps
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             drag = false;
+            if (chkAutocalc.Checked)
+            {
+                btnRecalc_Click(null, null);
+            }
         }
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
         {
             drag = false;
         }
+
 
     }
 }

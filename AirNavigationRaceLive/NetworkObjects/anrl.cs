@@ -582,6 +582,15 @@ namespace NetworkObjects
       get { return _latitude; }
       set { _latitude = value; }
     }
+
+    private bool _edited = default(bool);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"edited", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(default(bool))]
+    public bool edited
+    {
+      get { return _edited; }
+      set { _edited = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
