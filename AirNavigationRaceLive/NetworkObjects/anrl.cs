@@ -1100,6 +1100,15 @@ namespace NetworkObjects
       get { return _trackerID; }
       set { _trackerID = value; }
     }
+
+    private int _ID = default(int);
+    [global::ProtoBuf.ProtoMember(12, IsRequired = false, Name=@"ID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID
+    {
+      get { return _ID; }
+      set { _ID = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

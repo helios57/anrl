@@ -238,6 +238,7 @@ message GPSData {
 	optional string identifier = 9;
 	optional string trackerName = 10;
 	optional int32 trackerID = 11;
+	optional int32 ID = 12;
 }
 
 message Response{
