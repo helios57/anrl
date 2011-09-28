@@ -136,6 +136,7 @@
             this.fldTrackerHeight.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.fldTrackerHeight.Size = new System.Drawing.Size(46, 20);
             this.fldTrackerHeight.TabIndex = 94;
+            this.fldTrackerHeight.ValueChanged += new System.EventHandler(this.fldTrackerHeight_ValueChanged);
             // 
             // fldPenaltyHeight
             // 
@@ -155,6 +156,7 @@
             0,
             0,
             0});
+            this.fldPenaltyHeight.ValueChanged += new System.EventHandler(this.fldPenaltyHeight_ValueChanged);
             // 
             // fldVisualLineWidth
             // 
@@ -174,6 +176,7 @@
             0,
             0,
             0});
+            this.fldVisualLineWidth.ValueChanged += new System.EventHandler(this.fldVisualLineWidth_ValueChanged);
             // 
             // fldVisualPlaySpeed
             // 

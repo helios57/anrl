@@ -106,6 +106,7 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Helper\GEControll.cs" />
     <Compile Include="Comps\Helper\VisualisationPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -32,5 +32,10 @@ namespace AirNavigationRaceLive.Dialogs
             MessageBox.Show("Error: " + error, "Plugin Load Error", MessageBoxButtons.OK,
                 MessageBoxIcon.Exclamation);
         }
+
+        public IGEPlugin getPlugin()
+        {
+            return plugin;
+        }
     }
 }
