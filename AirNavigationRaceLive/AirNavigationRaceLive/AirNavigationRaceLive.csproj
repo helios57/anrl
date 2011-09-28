@@ -40,12 +40,13 @@
     <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -104,6 +105,9 @@
     </Compile>
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comps\Helper\VisualisationPictureBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Comps\ParcourEdit.cs">
       <SubType>UserControl</SubType>
@@ -206,6 +210,12 @@
     <Compile Include="Comps\Visualisation.Designer.cs">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\VisualisationPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\VisualisationPopup.Designer.cs">
+      <DependentUpon>VisualisationPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Calculator.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +272,10 @@
     <EmbeddedResource Include="Comps\Visualisation.resx">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\VisualisationPopup.resx">
+      <DependentUpon>VisualisationPopup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\Calculator.resx">
       <DependentUpon>Calculator.cs</DependentUpon>
     </EmbeddedResource>
@@ -288,6 +302,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\KMLTemplates\footer.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\KMLTemplates\KML_Samples.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\KMLTemplates\footerPolygon.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\KMLTemplates\header.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\KMLTemplates\headerPolygon.kml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\pluginhost.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Logo_051.png" />
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +361,17 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="GEPlugin">
+      <Guid>{F9152AEC-3462-4632-8087-EEE3C3CDDA35}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

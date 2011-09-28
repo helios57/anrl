@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AirNavigationRaceLive.Dialogs;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -16,6 +17,12 @@ namespace AirNavigationRaceLive.Comps
         {
             Client = iClient;
             InitializeComponent();
+        }
+
+        private void btnStartClient_Click(object sender, EventArgs e)
+        {
+            VisualisationPopup vp = new VisualisationPopup();
+            vp.Show();
         }
     }
 }

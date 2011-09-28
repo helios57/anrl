@@ -19,7 +19,9 @@ namespace AnrlService
     {
         private const int PORT = 1337;
         private const int PORTGPS = 1338;
+#if !DEBUG
         private TCPReciever.Server Reciever;
+#endif
         private static RequestProcessor processor;
         private static GPSRequestProcessor GPSprocessor;
         private Socket listener;
@@ -117,12 +119,12 @@ namespace AnrlService
             {
                 reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
             }
-            /*if (processor == null || !processor.isUseable())
+            if (processor == null || !processor.isUseable())
             {
                 processor = new RequestProcessor();
             }
-            Root response = processor.proccessRequest(reqest);*/
-            Root response = new RequestProcessor().proccessRequest(reqest);
+            Root response = processor.proccessRequest(reqest);
+            // Root response = new RequestProcessor().proccessRequest(reqest);
 
             Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
             stream.Flush();
@@ -179,6 +181,8 @@ namespace AnrlService
             catch
             {
             }
+            
+#if !DEBUG
             if (Reciever != null)
             {
                 try
@@ -190,6 +194,7 @@ namespace AnrlService
                     Logger.Log("Unable to stop Service " + ex.InnerException.Message, 0);
                 }
             }
+#endif
         }
     }
 }

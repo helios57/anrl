@@ -10,6 +10,7 @@ using System.Linq;
 using System.Timers;
 using AnrlDB;
 using System.Diagnostics;
+using AnrlService;
 
 namespace TCPReciever
 {
@@ -51,7 +52,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("Anrl-Service", "Exception in Server.Server" + ex.InnerException.Message, EventLogEntryType.Error, 11);
+                Logger.Log("Exception in Server.Server" + ex.InnerException.Message, 11);
             }
         }
 
@@ -119,7 +120,7 @@ namespace TCPReciever
                 }
                 catch (Exception ex)
                 {
-                    EventLog.WriteEntry("Anrl-Service", "Exception in Server.ProcessRecievedGPSData" + ex.InnerException.Message, EventLogEntryType.Error, 12);
+                    Logger.Log("Exception in Server.ProcessRecievedGPSData" + ex.InnerException.Message, 12);
                 }
             }
         }
@@ -147,7 +148,7 @@ namespace TCPReciever
                 }
                 catch (Exception ex)
                 {
-                    EventLog.WriteEntry("Anrl-Service", "Exception in Server.ListenForClients" + ex.InnerException.Message, EventLogEntryType.Error, 13);
+                    Logger.Log("Exception in Server.ListenForClients" + ex.InnerException.Message,13);
                 }
             }
         }
@@ -177,7 +178,7 @@ namespace TCPReciever
                     }
                     catch (Exception ex)
                     {
-                        EventLog.WriteEntry("Anrl-Service", "Exception in Server.HandleClientComm" + ex.InnerException.Message, EventLogEntryType.Error, 16);
+                        Logger.Log("Exception in Server.HandleClientComm" + ex.InnerException.Message,  16);
                         //a socket error has occured
                         break;
                     }
@@ -197,7 +198,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("Anrl-Service", "Exception in Server.HandleClientComm" + ex.InnerException.Message, EventLogEntryType.Error, 14);
+                Logger.Log("Exception in Server.HandleClientComm" + ex.InnerException.Message, 14);
             }
         }
 
@@ -223,7 +224,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("Anrl-Service", "Exception in Server.Stop" + ex.InnerException.Message, EventLogEntryType.Error, 15);
+                Logger.Log("Exception in Server.Stop" + ex.InnerException.Message,15);
             }
         }
 
@@ -262,7 +263,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("Anrl-Service", "Exception in Server.ConvertCoordinates" + ex.InnerException.Message, EventLogEntryType.Error, 17);
+                Logger.Log("Exception in Server.ConvertCoordinates" + ex.InnerException.Message, 17);
             }
             return 0;
         }
@@ -302,20 +303,20 @@ namespace TCPReciever
                             }
                             catch (Exception ex)
                             {
-                                EventLog.WriteEntry("Anrl-Service", "Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message, EventLogEntryType.Error, 18);
+                                Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message,  18);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        EventLog.WriteEntry("Anrl-Service", "Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message, EventLogEntryType.Error, 19);
+                        Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message,  19);
                     }
                 }
                 db.SubmitChanges();
             }
             catch (Exception ex)
             {
-                EventLog.WriteEntry("Anrl-Service", "Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message, EventLogEntryType.Error, 20);
+                Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message, 20);
             }
         }
     }

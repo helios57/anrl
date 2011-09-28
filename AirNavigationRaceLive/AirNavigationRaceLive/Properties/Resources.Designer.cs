@@ -66,5 +66,12 @@ namespace AirNavigationRaceLive.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        internal static string Plugin {
+            get
+            {
+                return ResourceManager.GetString("Plugin", resourceCulture);
+            }
+        }
     }
 }

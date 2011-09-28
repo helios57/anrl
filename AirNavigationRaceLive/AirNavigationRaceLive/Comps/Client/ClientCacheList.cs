@@ -13,7 +13,7 @@ namespace AirNavigationRaceLive.Comps.Client
             this.loader = loader;
         }
         private Dictionary<int, ClientCacheEntry<T>> cache = new Dictionary<int, ClientCacheEntry<T>>();
-        public EventHandler<ClientCacheDirtyEvent> DirtyChanged;
+        //public EventHandler<ClientCacheDirtyEvent> DirtyChanged;
         private bool _Dirty = true;
         public bool Dirty
         {
