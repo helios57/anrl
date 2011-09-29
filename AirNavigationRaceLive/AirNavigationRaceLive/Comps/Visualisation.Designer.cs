@@ -249,6 +249,7 @@
             this.Name = "Visualisation";
             this.Size = new System.Drawing.Size(924, 542);
             this.Load += new System.EventHandler(this.Visualisation_Load);
+            this.VisibleChanged += new System.EventHandler(this.Visualisation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).EndInit();

@@ -14,7 +14,7 @@ namespace AirNavigationRaceLive.Comps.Client
     class ClientCacheGPSDaten
     {
         private Client c;
-        private List<GPSData> chache = new List<GPSData>();
+        private List<GPSData> cache = new List<GPSData>();
         private volatile bool requesting = false;
         public ClientCacheGPSDaten(Client c)
         {
@@ -40,9 +40,9 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             ParameterClass pc = o as ParameterClass;
             int maxId = 0;
-            if (chache.Count > 0 && chache.Count(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)) > 1)
+            if (cache.Count > 0 && cache.Count(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)) > 1)
             {
-                maxId = chache.Where(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)).Max(p => p.ID);
+                maxId = cache.Where(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)).Max(p => p.ID);
             }
             Root req = new Root();
             req.RequestParameters = new RequestParameters();
@@ -55,9 +55,9 @@ namespace AirNavigationRaceLive.Comps.Client
             req.RequestParameters.GPSDataRequest.TimestampTo = pc.to;
 
             Root resp = c.process(req);
-            chache.AddRange(resp.ResponseParameters.GPSDataList);
+            cache.AddRange(resp.ResponseParameters.GPSDataList);
 
-            List<GPSData> result = chache.Where(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)).ToList();
+            List<GPSData> result = cache.Where(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)).ToList();
             //result.Sort(new DateComparer());
             pc.finished.Invoke(new GPSDataAsyncResult(result));
             requesting = false;

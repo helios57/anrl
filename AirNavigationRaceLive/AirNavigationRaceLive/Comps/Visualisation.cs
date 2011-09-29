@@ -22,6 +22,7 @@ namespace AirNavigationRaceLive.Comps
         private List<int> trackerlist = new List<int>();
         private List<NetworkObjects.Team> teamlist = new List<NetworkObjects.Team>();
         private volatile bool updating = false;
+        private NetworkObjects.Parcour parcour;
 
         public Visualisation(Client.Client iClient)
         {
@@ -75,7 +76,7 @@ namespace AirNavigationRaceLive.Comps
                 {
                     comp = cce.comp;
 
-                    NetworkObjects.Parcour parcour = Client.getParcour(comp.ID_Parcour);
+                    parcour = Client.getParcour(comp.ID_Parcour);
                     NetworkObjects.Map map = Client.getMap(parcour.ID_Map);
                     MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
                     visualisationPictureBox1.Image = System.Drawing.Image.FromStream(ms);
@@ -98,6 +99,10 @@ namespace AirNavigationRaceLive.Comps
             vp.Show();
             while (vp.getPlugin() == null) Application.DoEvents();
             controll.SetPlugin(vp.getPlugin());
+            if (parcour != null)
+            {
+                controll.SetParcour(parcour);
+            }
         }
 
 
@@ -119,6 +124,10 @@ namespace AirNavigationRaceLive.Comps
         private void fldPenaltyHeight_ValueChanged(object sender, EventArgs e)
         {
             controll.SetHeightPenalty((int)fldPenaltyHeight.Value);
+            if (parcour != null)
+            {
+                controll.SetParcour(parcour);
+            }
         }
 
         private void fldTrackerHeight_ValueChanged(object sender, EventArgs e)

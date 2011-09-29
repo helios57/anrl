@@ -65,7 +65,12 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             if (Container != null)
             {
-                Container.replaceChild(plugin.parseKml(GetKml(gpsDatenListe, teams)), Container.getFirstChild());
+                try
+                {
+                    Container.replaceChild(plugin.parseKml(GetKml(gpsDatenListe, teams)), Container.getFirstChild());
+                }
+                catch {//Error on close
+                }
             }
         }
 
