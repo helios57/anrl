@@ -204,6 +204,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(238, 21);
             this.comboBox1.TabIndex = 95;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -223,6 +224,7 @@
             this.visualisationPictureBox1.Location = new System.Drawing.Point(7, 29);
             this.visualisationPictureBox1.Name = "visualisationPictureBox1";
             this.visualisationPictureBox1.Size = new System.Drawing.Size(729, 497);
+            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.visualisationPictureBox1.TabIndex = 97;
             this.visualisationPictureBox1.TabStop = false;
             // 
@@ -246,6 +248,7 @@
             this.Controls.Add(this.btnStartClient);
             this.Name = "Visualisation";
             this.Size = new System.Drawing.Size(924, 542);
+            this.Load += new System.EventHandler(this.Visualisation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).EndInit();

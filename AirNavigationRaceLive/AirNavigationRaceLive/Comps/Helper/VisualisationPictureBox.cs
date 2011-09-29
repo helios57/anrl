@@ -28,14 +28,7 @@ namespace AirNavigationRaceLive.Comps
         {
             c = iConverter;
         }
-        public void SetSelectedLine(Line iLine)
-        {
-            selectedLine = iLine;
-        }
-        public void SetHoverLine(Line iLine)
-        {
-            hoverLine = iLine;
-        }
+       
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
@@ -47,12 +40,12 @@ namespace AirNavigationRaceLive.Comps
                     List<Line> linespenalty = lines.Where(p => p.Type == (int)NetworkObjects.LineType.PENALTYZONE).ToList();
                     foreach (Line l in linespenalty)
                     {
-                        int startXp = c.getStartX(l);
-                        int startYp = c.getStartY(l);
-                        int endXp = c.getEndX(l);
-                        int endYp = c.getEndY(l);
-                        int orientationXp = c.getOrientationX(l);
-                        int orientationYp = c.getOrientationY(l);
+                        int startXp = (int)(c.getStartX(l)*( Width/Image.Width));
+                        int startYp = (int)(c.getStartY(l)*( Height/Image.Height));
+                        int endXp = (int)(c.getEndX(l)*( Width/Image.Width));
+                        int endYp = (int)(c.getEndY(l)*( Height/Image.Height));
+                        int orientationXp = (int)(c.getOrientationX(l) * (Width / Image.Width));
+                        int orientationYp = (int)(c.getOrientationY(l) * (Height / Image.Height));
                         try
                         {
                             pe.Graphics.FillPolygon(Brush, new System.Drawing.Point[] { new System.Drawing.Point(startXp, startYp), new System.Drawing.Point(endXp, endYp), new System.Drawing.Point(orientationXp, orientationYp) });
@@ -78,7 +71,7 @@ namespace AirNavigationRaceLive.Comps
                             float radius = (float)Vector.Abs(midv - start);
                             try
                             {
-                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE)
+                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE && l.Type != (int)NetworkObjects.LineType.Point)
                                 {
                                     //Start_X/End_X
                                     if (((int)l.Type) >= 3 && ((int)l.Type) <= 10)

@@ -205,5 +205,10 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return cacheGPSData;
         }
+
+        internal NetworkObjects.Parcour getParcour(int p)
+        {
+            return cache.cacheParcour.get(p);
+        }
     }
 }
