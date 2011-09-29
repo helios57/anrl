@@ -17,11 +17,47 @@ namespace AirNavigationRaceLive.Comps.Helper
         private int HeightPenalty = 300;
         private int LineWidth = 2;
 
+        private static double averageLongitude(List<NetworkObjects.Line> lines)
+        {
+            if (lines.Count == 0)
+            {
+                return 0;
+            }
+            double sum = 0;
+            int counter = 0;
+            foreach (Line l in lines)
+            {
+                sum += l.A.longitude;
+                counter++;
+            }
+
+            return sum / counter;
+        }
+        private static double averageLatitude(List<NetworkObjects.Line> lines)
+        {
+            if (lines.Count == 0)
+            {
+                return 0;
+            }
+            double sum = 0;
+            int counter = 0;
+            foreach (Line l in lines)
+            {
+                sum += l.A.latitude;
+                counter++;
+            }
+
+            return sum / counter;
+        }
+
         public void SetParcour(NetworkObjects.Parcour parcour)
         {
             if (Container != null)
             {
                 Container.replaceChild(plugin.parseKml(GetPolygonKml(parcour)), Container.getLastChild());
+                KmlLookAtCoClass lookAt = plugin.createLookAt("");
+                lookAt.set(averageLatitude(parcour.LineList), averageLongitude(parcour.LineList), 15000, plugin.ALTITUDE_RELATIVE_TO_GROUND, 0, 0, 10000);
+                plugin.getView().setAbstractView(lookAt);
             }
         }
 
@@ -116,14 +152,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             int i = 0;
             foreach (Line n in parcour.LineList.Where(p => p.Type == (int)LineType.PENALTYZONE))
             {
-                result += @"
-<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
+                result += @"<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
-                result += n.B.longitude + "," + n.B.latitude + "," + HeightPenalty + " ";
                 result += n.O.longitude + "," + n.O.latitude + "," + HeightPenalty + " ";
+                result += n.B.longitude + "," + n.B.latitude + "," + HeightPenalty + " ";
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
-                result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>
-";
+                result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
             result += GetKMLTemplateContent("footerPolygon");
             return result;
