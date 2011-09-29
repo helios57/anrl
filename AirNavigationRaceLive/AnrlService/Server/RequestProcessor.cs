@@ -190,6 +190,7 @@ namespace AnrlService.Server
         }
 
         #region Map
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessMap(Root request)
         {
             Root r = new Root();

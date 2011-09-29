@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AirNavigationRaceLive.Comps.Helper;
 using NetworkObjects;
+using System.Threading;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -56,7 +57,7 @@ namespace AirNavigationRaceLive.Comps
             foreach (NetworkObjects.Tracker t in trackers)
             {
                 listViewTracker.Items.Add(new TrackerEntry(t));
-            } 
+            }
             Reset();
         }
         public void Reset()
@@ -79,7 +80,7 @@ namespace AirNavigationRaceLive.Comps
             textBoxName.Enabled = newTracker || selected;
             textBoxIMEI.Enabled = newTracker || selected;
 
-            bool validTracker = textBoxID.Text != "" && textBoxIMEI.Text.Length>3 && textBoxName.Text.Length > 2;
+            bool validTracker = textBoxID.Text != "" && textBoxIMEI.Text.Length > 3 && textBoxName.Text.Length > 2;
             dateGAC.Enabled = validTracker;
             btnImportGAC.Enabled = validTracker;
             bool imported = validTracker && textBoxPositions.Tag != null;
@@ -120,7 +121,7 @@ namespace AirNavigationRaceLive.Comps
             try
             {
                 DateTime dt = dateGAC.Value;
-                List<GPSData> list = Importer.GPSdataFromGAC(dt.Year,dt.Month,dt.Day,textBoxIMEI.Text,ofd.FileName);
+                List<GPSData> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, textBoxIMEI.Text, ofd.FileName);
                 textBoxPositions.Text = list.Count.ToString();
                 textBoxPositions.Tag = list;
             }
@@ -130,18 +131,58 @@ namespace AirNavigationRaceLive.Comps
             }
             UpdateEnablement();
         }
-        
+
 
         private void btnUploadData_Click(object sender, EventArgs e)
         {
             if (textBoxPositions.Tag != null)
             {
                 List<GPSData> list = textBoxPositions.Tag as List<GPSData>;
-                list[0].trackerName = textBoxName.Text;
-                Client.uploadGPSData(list);
-                MessageBox.Show("Upload Successfull");
+                string trackername = textBoxName.Text;
+
+                list[0].trackerName = trackername;
+                Thread thread = new Thread(new ParameterizedThreadStart(upload));
+                thread.Start(list);
+                //upload(list);
+
+                MessageBox.Show("Upload Started in Background!");
             }
             Reset();
+        }
+
+        private void upload(object o)
+        {
+            List<GPSData> list = o as List<GPSData>;
+            int count = 0;
+            int length = list.Count;
+            List<GPSData> subList = null;
+            while (count < length)
+            {
+                if (count % 1000 == 0)
+                {
+                    if (subList == null)
+                    {
+                        subList = new List<GPSData>();
+                    }
+                    else
+                    {
+                        subList[0].trackerName = list[0].trackerName;
+                        Client.uploadGPSData(subList);
+                        Application.DoEvents();
+                        subList = new List<GPSData>();
+                    }
+                }
+                subList.Add(list[count++]);
+            }
+            if (subList != null && subList.Count > 0)
+            {
+
+                subList[0].trackerName = list[0].trackerName;
+                Client.uploadGPSData(subList);
+            }
+
+
+            MessageBox.Show("Upload Finished!");
         }
 
         private void buttonNewTracker_Click(object sender, EventArgs e)
