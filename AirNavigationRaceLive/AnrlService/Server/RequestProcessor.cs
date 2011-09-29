@@ -147,10 +147,23 @@ namespace AnrlService.Server
                         if (request.RequestParameters.GPSDataRequest.ID_Tracker.Count > 0)
                         {
                             List<int> trackers = request.RequestParameters.GPSDataRequest.ID_Tracker;
-                            foreach (t_Daten db_daten in db.t_Datens.Where(p =>
+                            IQueryable<t_Daten> selected;
+                            if (request.RequestParameters.GPSDataRequest.LastId != 0)
+                            {
+                                selected = db.t_Datens.Where(p => p.ID > request.RequestParameters.GPSDataRequest.LastId &&
                                 trackers.Contains(p.ID_Tracker) &&
                                 p.Timestamp <= request.RequestParameters.GPSDataRequest.TimestampTo &&
-                                p.Timestamp >= request.RequestParameters.GPSDataRequest.TimestampFrom))
+                                p.Timestamp >= request.RequestParameters.GPSDataRequest.TimestampFrom);
+                            }
+                            else
+                            {
+                                selected = db.t_Datens.Where(p =>
+                                trackers.Contains(p.ID_Tracker) &&
+                                p.Timestamp <= request.RequestParameters.GPSDataRequest.TimestampTo &&
+                                p.Timestamp >= request.RequestParameters.GPSDataRequest.TimestampFrom);
+                            }
+
+                            foreach (t_Daten db_daten in selected)
                             {
                                 GPSData data = new GPSData();
                                 data.accuracy = db_daten.Accuracy.HasValue ? db_daten.Accuracy.Value : 0;
@@ -161,6 +174,7 @@ namespace AnrlService.Server
                                 data.speed = db_daten.Speed;
                                 data.timestampGPS = db_daten.Timestamp;
                                 data.trackerID = db_daten.ID_Tracker;
+                                data.ID = db_daten.ID;
                                 r.ResponseParameters.GPSDataList.Add(data);
                             }
                         }

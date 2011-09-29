@@ -17,11 +17,13 @@ namespace AirNavigationRaceLive.Comps.Client
         private String Token;
         private string IpAdress;
         private ClientCache cache;
+        private ClientCacheGPSDaten cacheGPSData;
 
         public Client(string IpAdress)
         {
             this.IpAdress = IpAdress;
             cache = new ClientCache(this);
+            cacheGPSData = new ClientCacheGPSDaten(this);
         }
         public bool isAuthenticated()
         {
@@ -198,6 +200,10 @@ namespace AirNavigationRaceLive.Comps.Client
         internal void clearCache()
         {
             cache.clear();
+        }
+        internal ClientCacheGPSDaten getGPSDatenCache()
+        {
+            return cacheGPSData;
         }
     }
 }

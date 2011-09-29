@@ -94,6 +94,7 @@
     <Compile Include="Comps\Client\ClientCacheEntry.cs" />
     <Compile Include="Comps\Client\ClientCacheList.cs" />
     <Compile Include="Comps\Client\ClientCacheLoader.cs" />
+    <Compile Include="Comps\Client\ClientCacheGPSDaten.cs" />
     <Compile Include="Comps\Connect.cs">
       <SubType>UserControl</SubType>
     </Compile>

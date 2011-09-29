@@ -218,6 +218,8 @@ option optimize_for = SPEED;
 		required int64 TimestampFrom = 2;
 
 		required int64 TimestampTo = 3;
+
+		optional int32 LastId = 4;
 	}
 
 message RootMessage {

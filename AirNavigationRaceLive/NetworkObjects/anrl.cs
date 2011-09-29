@@ -956,6 +956,15 @@ namespace NetworkObjects
       get { return _TimestampTo; }
       set { _TimestampTo = value; }
     }
+
+    private int _LastId = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"LastId", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int LastId
+    {
+      get { return _LastId; }
+      set { _LastId = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
