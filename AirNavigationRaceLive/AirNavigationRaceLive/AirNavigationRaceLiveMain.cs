@@ -29,6 +29,7 @@ namespace AirNavigationRaceLive
         MapLegacy MapLegacy;
         Group Group;
         UploadGPS UploadGPS;
+        ParcourOverviewZoomed ParcourOverviewZoomed;
 
 
         public AirNavigationRaceLiveMain()
@@ -43,6 +44,7 @@ namespace AirNavigationRaceLive
             disconnectToolStripMenuItem.Enabled = connected;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
+            overviewZoomedToolStripMenuItem.Enabled = connected;
             overviewToolStripMenuItem.Enabled = connected;
             generateToolStripMenuItem.Enabled = connected;
             importToolStripMenuItem.Enabled = connected;
@@ -126,6 +128,7 @@ namespace AirNavigationRaceLive
             ParcourGen = null;
             ParcourImport = null;
             ParcourEdit = null;
+            ParcourOverviewZoomed = null;
             MapLegacy = null;
             Group = null;
             UploadGPS = null;
@@ -280,6 +283,16 @@ namespace AirNavigationRaceLive
                 ParcourEdit = new ParcourEdit(Client);
             }
             enableControl(ParcourEdit);
+        }
+
+        private void overviewZoomedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (ParcourOverviewZoomed == null)
+            {
+                ParcourOverviewZoomed = new ParcourOverviewZoomed(Client);
+            }
+            enableControl(ParcourOverviewZoomed);
         }
     }
 }

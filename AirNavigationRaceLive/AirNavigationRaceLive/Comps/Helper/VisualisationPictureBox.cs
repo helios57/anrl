@@ -34,18 +34,32 @@ namespace AirNavigationRaceLive.Comps
             base.OnPaint(pe);
             if (Parcour != null && c != null)
             {
+                double widthFactor = (double) Width/ Image.Width;
+                double heightFactor = (double)Height / Image.Height;
+                double factor = Math.Min(widthFactor,heightFactor);
+                double factorDiff = Math.Abs(widthFactor - heightFactor);
+                int y0 = 0;
+                int x0 = 0;
+                if (widthFactor < heightFactor)
+                {
+                    y0 = (int)((Height - (Image.Height * factor))/2);
+                }
+                else
+                {
+                    x0 = (int)((Width - (Image.Width * factor)) / 2);
+                }
                 lock (Parcour)
                 {
                     List<Line> lines = Parcour.LineList;
                     List<Line> linespenalty = lines.Where(p => p.Type == (int)NetworkObjects.LineType.PENALTYZONE).ToList();
                     foreach (Line l in linespenalty)
                     {
-                        int startXp = (int)(c.getStartX(l)*( Width/Image.Width));
-                        int startYp = (int)(c.getStartY(l)*( Height/Image.Height));
-                        int endXp = (int)(c.getEndX(l)*( Width/Image.Width));
-                        int endYp = (int)(c.getEndY(l)*( Height/Image.Height));
-                        int orientationXp = (int)(c.getOrientationX(l) * (Width / Image.Width));
-                        int orientationYp = (int)(c.getOrientationY(l) * (Height / Image.Height));
+                        int startXp = x0 +(int)(c.getStartX(l)*factor);
+                        int startYp = y0 + (int)(c.getStartY(l) * factor);
+                        int endXp = x0 + (int)(c.getEndX(l) * factor);
+                        int endYp = y0 + (int)(c.getEndY(l) * factor);
+                        int orientationXp = x0 + (int)(c.getOrientationX(l) * factor);
+                        int orientationYp = y0 + (int)(c.getOrientationY(l) * factor);
                         try
                         {
                             pe.Graphics.FillPolygon(Brush, new System.Drawing.Point[] { new System.Drawing.Point(startXp, startYp), new System.Drawing.Point(endXp, endYp), new System.Drawing.Point(orientationXp, orientationYp) });
@@ -58,14 +72,15 @@ namespace AirNavigationRaceLive.Comps
                     {
                         if (l.A != null && l.B != null & l.O != null)
                         {
-                            int startX = c.getStartX(l);
-                            int startY = c.getStartY(l);
-                            int endX = c.getEndX(l);
-                            int endY = c.getEndY(l);
+                            int startX = x0 + (int)(c.getStartX(l) * factor);
+                            int startY = y0 + (int)(c.getStartY(l) * factor);
+                            int endX = x0 + (int)(c.getEndX(l) * factor);
+                            int endY = y0 + (int)(c.getEndY(l) * factor);
+                            int orientationX = x0 + (int)(c.getOrientationX(l) * factor);
+                            int orientationY = y0 + (int)(c.getOrientationY(l) * factor);
+         
                             int midX = startX + (endX - startX) / 2;
                             int midY = startY + (endY - startY) / 2;
-                            int orientationX = c.getOrientationX(l);
-                            int orientationY = c.getOrientationY(l);
                             Vector start = new Vector(startX, startY, 0);
                             Vector midv = new Vector(midX, midY, 0);
                             float radius = (float)Vector.Abs(midv - start);

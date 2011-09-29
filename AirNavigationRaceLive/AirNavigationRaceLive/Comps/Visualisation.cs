@@ -22,24 +22,26 @@ namespace AirNavigationRaceLive.Comps
             Client = iClient;
             InitializeComponent();
         }
-        
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem != null)
             {
-                ListViewItem lvi = comboBox1.SelectedItem as ListViewItem;
-                if (lvi != null)
+                CompetitionComboEntry cce = comboBox1.SelectedItem as CompetitionComboEntry;
+                if (cce != null)
                 {
-                    NetworkObjects.Competition comp = lvi.Tag as NetworkObjects.Competition;
-                    if (comp != null)
-                    {
-                        NetworkObjects.Parcour parcour = Client.getParcour(comp.ID_Parcour);
-                        NetworkObjects.Map map = Client.getMap(parcour.ID_Map);
-                        MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
-                        visualisationPictureBox1.Image = System.Drawing.Image.FromStream(ms);
-                        visualisationPictureBox1.SetParcour(parcour);
-                    }
+                    NetworkObjects.Competition comp = cce.comp;
+
+                    NetworkObjects.Parcour parcour = Client.getParcour(comp.ID_Parcour);
+                    NetworkObjects.Map map = Client.getMap(parcour.ID_Map);
+                    MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
+                    visualisationPictureBox1.Image = System.Drawing.Image.FromStream(ms);
+                    visualisationPictureBox1.SetConverter(new Converter(map));
+                    visualisationPictureBox1.SetParcour(parcour);
+                    visualisationPictureBox1.Invalidate();
+                    visualisationPictureBox1.Refresh();
+                    controll.SetParcour(parcour);
                 }
             }
         }
@@ -63,9 +65,7 @@ namespace AirNavigationRaceLive.Comps
             comboBox1.Items.Clear();
             foreach (NetworkObjects.Competition c in comps)
             {
-                ListViewItem lvi = new ListViewItem(new String[] { c.ID.ToString(), c.Name });
-                lvi.Tag = c;
-                comboBox1.Items.Add(lvi);
+                comboBox1.Items.Add(new CompetitionComboEntry(c));
             }
         }
 
@@ -82,6 +82,18 @@ namespace AirNavigationRaceLive.Comps
         private void fldTrackerHeight_ValueChanged(object sender, EventArgs e)
         {
             controll.SetTrackerHeightAdjustment((int)fldTrackerHeight.Value);
+        }
+    }
+    class CompetitionComboEntry
+    {
+        public readonly NetworkObjects.Competition comp;
+        public CompetitionComboEntry(NetworkObjects.Competition comp)
+        {
+            this.comp = comp;
+        }
+        public override string ToString()
+        {
+            return comp.ID + " " + comp.Name;
         }
     }
 }

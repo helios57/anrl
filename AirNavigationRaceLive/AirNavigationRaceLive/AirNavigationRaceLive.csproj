@@ -107,6 +107,12 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\ParcourOverviewZoomed.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\ParcourOverviewZoomed.Designer.cs">
+      <DependentUpon>ParcourOverviewZoomed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Helper\GEControll.cs" />
     <Compile Include="Comps\Helper\VisualisationPictureBox.cs">
       <SubType>Component</SubType>
@@ -234,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\ParcourOverviewZoomed.resx">
+      <DependentUpon>ParcourOverviewZoomed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourEdit.resx">
       <DependentUpon>ParcourEdit.cs</DependentUpon>
