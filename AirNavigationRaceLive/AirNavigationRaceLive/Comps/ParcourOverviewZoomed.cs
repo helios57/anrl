@@ -16,10 +16,6 @@ namespace AirNavigationRaceLive.Comps
     {
         private Client.Client Client;
         Converter c = null;
-        private Line activeLine;
-        private ActivePoint ap = ActivePoint.NONE;
-        private Line selectedLine = null;
-        private Line hoverLine = null;
         private NetworkObjects.Parcour activeParcour = new NetworkObjects.Parcour();
 
         private enum ActivePoint
