@@ -30,6 +30,7 @@
         {
             this.listViewTeam = new System.Windows.Forms.ListView();
             this.IDl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pilot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Navigator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -60,7 +61,6 @@
             this.IMEI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -91,6 +91,11 @@
             this.IDl.Tag = "IDl";
             this.IDl.Text = "ID";
             this.IDl.Width = 40;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 83;
             // 
             // Pilot
             // 
@@ -360,11 +365,6 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "Name";
             // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 83;
-            // 
             // Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +395,7 @@
             this.Name = "Team";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.Team_Load);
+            this.VisibleChanged += new System.EventHandler(this.Team_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

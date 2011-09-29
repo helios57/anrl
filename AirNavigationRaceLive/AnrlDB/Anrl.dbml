@@ -28,7 +28,7 @@
       <Column Name="ID_Group" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Pos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Competition_t_Competition_Group" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
-      <Association Name="t_Group_t_Competition_Group" Member="t_Group" ThisKey="ID_Competition" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
+      <Association Name="t_Group_t_Competition_Group" Member="t_Group" ThisKey="ID_Group" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Daten" Member="t_Datens">
@@ -78,7 +78,7 @@
     <Type Name="t_Group">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="t_Group_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Group" />
+      <Association Name="t_Group_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Group" Type="t_Competition_Group" />
       <Association Name="t_Group_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Group" Type="t_Group_Team" />
     </Type>
   </Table>

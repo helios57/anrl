@@ -737,7 +737,7 @@ namespace AnrlDB
 			{
 				if ((this._ID_Competition != value))
 				{
-					if ((this._t_Competition.HasLoadedOrAssignedValue || this._t_Group.HasLoadedOrAssignedValue))
+					if (this._t_Competition.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -761,6 +761,10 @@ namespace AnrlDB
 			{
 				if ((this._ID_Group != value))
 				{
+					if (this._t_Group.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnID_GroupChanging(value);
 					this.SendPropertyChanging();
 					this._ID_Group = value;
@@ -824,7 +828,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Competition_Group", Storage="_t_Group", ThisKey="ID_Competition", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Competition_Group", Storage="_t_Group", ThisKey="ID_Group", OtherKey="ID", IsForeignKey=true)]
 		public t_Group t_Group
 		{
 			get
@@ -847,11 +851,11 @@ namespace AnrlDB
 					if ((value != null))
 					{
 						value.t_Competition_Groups.Add(this);
-						this._ID_Competition = value.ID;
+						this._ID_Group = value.ID;
 					}
 					else
 					{
-						this._ID_Competition = default(int);
+						this._ID_Group = default(int);
 					}
 					this.SendPropertyChanged("t_Group");
 				}
@@ -1837,7 +1841,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Competition_Group", Storage="_t_Competition_Groups", ThisKey="ID", OtherKey="ID_Competition")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Group_t_Competition_Group", Storage="_t_Competition_Groups", ThisKey="ID", OtherKey="ID_Group")]
 		public EntitySet<t_Competition_Group> t_Competition_Groups
 		{
 			get

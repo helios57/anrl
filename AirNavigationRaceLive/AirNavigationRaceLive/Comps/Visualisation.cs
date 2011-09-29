@@ -17,10 +17,52 @@ namespace AirNavigationRaceLive.Comps
         private Client.Client Client;
         private VisualisationPopup vp;
         private GEControll controll = new GEControll();
+        private Timer t;
+        private NetworkObjects.Competition comp;
+        private List<int> trackerlist = new List<int>();
+        private List<NetworkObjects.Team> teamlist = new List<NetworkObjects.Team>();
+        private volatile bool updating = false;
+
         public Visualisation(Client.Client iClient)
         {
             Client = iClient;
             InitializeComponent();
+            t = new Timer();
+            t.Interval = 5000;
+            t.Tick += new EventHandler(t_Tick);
+            t.Start();
+        }
+
+        void t_Tick(object sender, EventArgs e)
+        {
+            if (this.Visible && comp != null && !updating)
+            {
+                updating = true;
+                foreach (NetworkObjects.CompetitionGroup g in comp.CompetitionGroupList)
+                {
+                    NetworkObjects.Group group = Client.getGroup(g.ID_Group);
+                    trackerlist.Clear();
+                    teamlist.Clear();
+                    foreach (NetworkObjects.GroupTeam gt in group.GroupTeamList)
+                    {
+                        NetworkObjects.Team t = Client.getTeam(gt.ID_Team);
+                        teamlist.Add(t);
+                        trackerlist.AddRange(t.ID_Tracker);
+                    }
+                }
+                Client.getGPSDatenCache().requestGPSData(trackerlist, comp.TimeTakeOff - 100000, comp.TimeEndLine + 100000, new AsyncCallback(recieveData));
+            }
+        }
+        public void recieveData(IAsyncResult result)
+        {
+            List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
+            if (data != null)
+            {
+                controll.SetDaten(data, teamlist.ToList());
+                visualisationPictureBox1.SetData(data, teamlist.ToList());
+                visualisationPictureBox1.Invalidate();
+            }
+            updating = false;
         }
 
 
@@ -31,7 +73,7 @@ namespace AirNavigationRaceLive.Comps
                 CompetitionComboEntry cce = comboBox1.SelectedItem as CompetitionComboEntry;
                 if (cce != null)
                 {
-                    NetworkObjects.Competition comp = cce.comp;
+                    comp = cce.comp;
 
                     NetworkObjects.Parcour parcour = Client.getParcour(comp.ID_Parcour);
                     NetworkObjects.Map map = Client.getMap(parcour.ID_Map);

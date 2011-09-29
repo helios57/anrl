@@ -14,10 +14,12 @@ namespace AirNavigationRaceLive.Comps
     {
         private NetworkObjects.Parcour Parcour;
         private Converter c;
+        private List<GPSData> data;
+        private List<NetworkObjects.Team> teams;
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
-        private SolidBrush Brush = new SolidBrush(Color.FromArgb(100,255,0,0));
+        private SolidBrush Brush = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
         public void SetParcour(NetworkObjects.Parcour iParcour)
         {
             Parcour = iParcour;
@@ -26,21 +28,26 @@ namespace AirNavigationRaceLive.Comps
         {
             c = iConverter;
         }
-       
+        public void SetData(List<GPSData> data, List<NetworkObjects.Team> teams)
+        {
+            this.data = data;
+            this.teams = teams;
+        }
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
+            #region parcour
             if (Parcour != null && c != null)
             {
-                double widthFactor = (double) Width/ Image.Width;
+                double widthFactor = (double)Width / Image.Width;
                 double heightFactor = (double)Height / Image.Height;
-                double factor = Math.Min(widthFactor,heightFactor);
+                double factor = Math.Min(widthFactor, heightFactor);
                 double factorDiff = Math.Abs(widthFactor - heightFactor);
                 int y0 = 0;
                 int x0 = 0;
                 if (widthFactor < heightFactor)
                 {
-                    y0 = (int)((Height - (Image.Height * factor))/2);
+                    y0 = (int)((Height - (Image.Height * factor)) / 2);
                 }
                 else
                 {
@@ -52,7 +59,7 @@ namespace AirNavigationRaceLive.Comps
                     List<Line> linespenalty = lines.Where(p => p.Type == (int)NetworkObjects.LineType.PENALTYZONE).ToList();
                     foreach (Line l in linespenalty)
                     {
-                        int startXp = x0 +(int)(c.getStartX(l)*factor);
+                        int startXp = x0 + (int)(c.getStartX(l) * factor);
                         int startYp = y0 + (int)(c.getStartY(l) * factor);
                         int endXp = x0 + (int)(c.getEndX(l) * factor);
                         int endYp = y0 + (int)(c.getEndY(l) * factor);
@@ -62,8 +69,9 @@ namespace AirNavigationRaceLive.Comps
                         {
                             pe.Graphics.FillPolygon(Brush, new System.Drawing.Point[] { new System.Drawing.Point(startXp, startYp), new System.Drawing.Point(endXp, endYp), new System.Drawing.Point(orientationXp, orientationYp) });
                         }
-                        catch { 
-                        //TODO
+                        catch
+                        {
+                            //TODO
                         }
                     }
                     foreach (Line l in lines)
@@ -76,7 +84,7 @@ namespace AirNavigationRaceLive.Comps
                             int endY = y0 + (int)(c.getEndY(l) * factor);
                             int orientationX = x0 + (int)(c.getOrientationX(l) * factor);
                             int orientationY = y0 + (int)(c.getOrientationY(l) * factor);
-         
+
                             int midX = startX + (endX - startX) / 2;
                             int midY = startY + (endY - startY) / 2;
                             Vector start = new Vector(startX, startY, 0);
@@ -96,11 +104,43 @@ namespace AirNavigationRaceLive.Comps
                                     pe.Graphics.DrawEllipse(Pen, orientationX - 1, orientationY - 1, 2, 2);
                                 }
                             }
-                            catch {
-                            //TODO
+                            catch
+                            {
+                                //TODO
                             }
                         }
                     }
+                }
+            }
+            #endregion
+
+            if (data != null && teams != null && data.Count > 10 && teams.Count >=1)
+            {
+                double widthFactor = (double)Width / Image.Width;
+                double heightFactor = (double)Height / Image.Height;
+                double factor = Math.Min(widthFactor, heightFactor);
+                double factorDiff = Math.Abs(widthFactor - heightFactor);
+                int y0 = 0;
+                int x0 = 0;
+                if (widthFactor < heightFactor)
+                {
+                    y0 = (int)((Height - (Image.Height * factor)) / 2);
+                }
+                else
+                {
+                    x0 = (int)((Width - (Image.Width * factor)) / 2);
+                }
+                foreach (NetworkObjects.Team Team in teams)
+                {
+                    Color Color = Color.FromName(Team.Color);
+                    List<System.Drawing.Point> points = new List<System.Drawing.Point>();
+                    foreach (GPSData gd in data.Where(p => Team.ID_Tracker.Contains(p.trackerID)))
+                    {
+                        int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
+                        int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);
+                        points.Add(new System.Drawing.Point(startXp, startYp));
+                    }
+                    pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), 2f), points.ToArray());
                 }
             }
         }

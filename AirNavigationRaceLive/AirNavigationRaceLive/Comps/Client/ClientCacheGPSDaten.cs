@@ -21,11 +21,15 @@ namespace AirNavigationRaceLive.Comps.Client
 
         public void requestGPSData(List<int> trackersID, long from, long to, AsyncCallback finished)
         {
-            if (c.isAuthenticated())
-            {
-                int maxId = chache.Where(p => p.timestampGPS >= from && p.timestampGPS <= to && trackersID.Contains(p.trackerID)).Max(p => p.ID);
+            if (c.isAuthenticated()){            
+                int maxId = 0;
+                if (chache.Count>0){
+                    maxId = chache.Where(p => p.timestampGPS >= from && p.timestampGPS <= to && trackersID.Contains(p.trackerID)).Max(p => p.ID);
+                }
                 Root req = new Root();
                 req.RequestParameters = new RequestParameters();
+                req.RequestType = (int)ERequestType.GetAll;
+                req.ObjectType = (int)EObjectType.GPSData;
                 req.RequestParameters.GPSDataRequest = new GPSDataRequest();
                 req.RequestParameters.GPSDataRequest.ID_Tracker.AddRange(trackersID);
                 req.RequestParameters.GPSDataRequest.LastId = maxId;
@@ -35,7 +39,7 @@ namespace AirNavigationRaceLive.Comps.Client
                 chache.AddRange(resp.ResponseParameters.GPSDataList);
 
                 List<GPSData> result = chache.Where(p => p.timestampGPS >= from && p.timestampGPS <= to && trackersID.Contains(p.trackerID)).ToList();
-                result.Sort(new DateComparer());
+                //result.Sort(new DateComparer());
                 finished.Invoke(new GPSDataAsyncResult(result));
             }
         }

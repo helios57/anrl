@@ -181,6 +181,7 @@
             this.Name = "Tracker";
             this.Size = new System.Drawing.Size(600, 400);
             this.Load += new System.EventHandler(this.Tracker_Load);
+            this.VisibleChanged += new System.EventHandler(this.Tracker_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

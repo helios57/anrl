@@ -5,6 +5,7 @@ using System.Text;
 using NetworkObjects;
 using AnrlDB;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace AnrlService.Server
 {
@@ -103,6 +104,7 @@ namespace AnrlService.Server
             return answer;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessGPSData(Root request)
         {
             Root r = new Root();
@@ -276,7 +278,7 @@ namespace AnrlService.Server
             r.ResponseParameters.MapList.Add(m);
         }
         #endregion
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessParcour(Root request)
         {
             Root r = new Root();
@@ -407,7 +409,7 @@ namespace AnrlService.Server
             return r;
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessPicture(Root request)
         {
             Root r = new Root();
@@ -473,7 +475,7 @@ namespace AnrlService.Server
             }
             return r;
         }
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessPilot(Root request)
         {
             Root r = new Root();
@@ -559,6 +561,7 @@ namespace AnrlService.Server
             }
             return r;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessTracker(Root request)
         {
             Root r = new Root();
@@ -649,7 +652,7 @@ namespace AnrlService.Server
             p.longitude = gp.longitude;
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessTeam(Root request)
         {
             Root r = new Root();
@@ -769,7 +772,7 @@ namespace AnrlService.Server
             return r;
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessGroup(Root request)
         {
             Root r = new Root();
@@ -868,7 +871,7 @@ namespace AnrlService.Server
         }
 
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessCompetition(Root request)
         {
             Root r = new Root();
@@ -1034,7 +1037,7 @@ namespace AnrlService.Server
             return r;
         }
 
-
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessLogin(Root request)
         {
             Root r = new Root();
