@@ -126,6 +126,7 @@ namespace AnrlService.Server
                             db.t_Trackers.InsertOnSubmit(tracker);
                             db.SubmitChanges();
                         }
+                        List<t_Daten> toInsert = new List<t_Daten>();
                         foreach (GPSData data in request.RequestParameters.GPSDataList)
                         {
                             t_Daten t_d = new t_Daten();
@@ -137,8 +138,10 @@ namespace AnrlService.Server
                             t_d.Speed = data.speed;
                             t_d.Timestamp = data.timestampGPS;
                             t_d.ID_Tracker = tracker.ID;
-                            db.t_Datens.InsertOnSubmit(t_d);
+                            toInsert.Add(t_d);
                         }
+
+                        db.t_Datens.InsertAllOnSubmit(toInsert);
                         db.SubmitChanges();
                         r.ResponseParameters.ID = tracker.ID;
 

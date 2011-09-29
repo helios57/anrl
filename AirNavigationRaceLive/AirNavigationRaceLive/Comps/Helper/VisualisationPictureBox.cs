@@ -140,7 +140,10 @@ namespace AirNavigationRaceLive.Comps
                         int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);
                         points.Add(new System.Drawing.Point(startXp, startYp));
                     }
-                    pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), 2f), points.ToArray());
+                    if (points.Count > 2)
+                    {
+                        pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), 2f), points.ToArray());
+                    }
                 }
             }
         }

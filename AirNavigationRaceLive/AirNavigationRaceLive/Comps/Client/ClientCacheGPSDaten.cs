@@ -23,7 +23,8 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             if (c.isAuthenticated()){            
                 int maxId = 0;
-                if (chache.Count>0){
+                if (chache.Count > 0 && chache.Count(p => p.timestampGPS >= from && p.timestampGPS <= to && trackersID.Contains(p.trackerID)) >1)
+                {
                     maxId = chache.Where(p => p.timestampGPS >= from && p.timestampGPS <= to && trackersID.Contains(p.trackerID)).Max(p => p.ID);
                 }
                 Root req = new Root();

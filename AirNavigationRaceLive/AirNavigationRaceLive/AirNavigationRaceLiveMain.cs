@@ -197,8 +197,10 @@ namespace AirNavigationRaceLive
 
         private void enableControl(Control c)
         {
+            foreach (Control cc in MainPanel.Controls) { cc.Visible = false; }
             MainPanel.Controls.Clear();
             MainPanel.Controls.Add(c);
+            c.Visible = true;
             UpdateEnablement();
             resize();
         }
