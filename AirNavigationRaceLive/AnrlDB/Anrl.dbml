@@ -10,6 +10,7 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Parcour" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Competition_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Group" />
+      <Association Name="t_Competition_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Competition" Type="t_Penalty" />
       <Association Name="t_Line_t_Competition" Member="t_Line" ThisKey="ID_TakeOffLine" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
     </Type>
   </Table>
@@ -199,6 +200,8 @@
       <Column Name="Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Reason" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Competition" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Competition_t_Penalty" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
       <Association Name="t_Team_t_Penalty" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
   </Table>

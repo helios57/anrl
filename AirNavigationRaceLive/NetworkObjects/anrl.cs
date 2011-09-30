@@ -1025,6 +1025,15 @@ namespace NetworkObjects
       get { return _ID_Team; }
       set { _ID_Team = value; }
     }
+
+    private int _ID_Competition = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ID_Competition", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_Competition
+    {
+      get { return _ID_Competition; }
+      set { _ID_Competition = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 16.75" name="Anrl">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 16.875" name="Anrl">
   <DataContextMoniker Name="/AnrlDataContext" />
   <nestedChildShapes>
     <classShape Id="672efb53-ea17-4219-9e6d-3b7a99ef929f" absoluteBounds="9, 14.375, 2, 2.1554996744791666">
@@ -174,21 +174,21 @@
         <classShapeMoniker Id="1751dfef-9429-4499-8af1-f3ced9137bb2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 7.11099812825521); (8.54166666666667 : 7.11099812825521 : JumpStart); (8.70833333333333 : 7.11099812825521 : JumpEnd); (9 : 7.11099812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(8.25 : 7.11099812825521); (8.54166666666667 : 7.11099812825521 : JumpStart); (8.77083333333333 : 7.11099812825521 : JumpEnd); (9 : 7.11099812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/AnrlDataContext/t_Parcour/t_Parcour_t_Parcour_Line" />
       <nodes>
         <classShapeMoniker Id="d4eca02f-d501-46d9-b7e3-b94a11b746a0" />
         <classShapeMoniker Id="1751dfef-9429-4499-8af1-f3ced9137bb2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.60179768880208); (3.5 : 6.60179768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.60179768880208); (3.04166666666667 : 6.60179768880208 : JumpStart); (3.20833333333333 : 6.60179768880208 : JumpEnd); (3.5 : 6.60179768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/AnrlDataContext/t_Picture/t_Picture_t_Map" />
       <nodes>
         <classShapeMoniker Id="a3175992-03e0-4f8d-a13a-88a2103e4cc0" />
         <classShapeMoniker Id="a2033741-e2fd-4300-a62c-0197871778e4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 5.5); (1.75 : 4.66429768880208); (2.19791916666667 : 4.66429768880208 : JumpStart); (2.36458583333333 : 4.66429768880208 : JumpEnd); (3.5 : 4.66429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(1.75 : 5.5); (1.75 : 4.76849609375); (3.04166666666667 : 4.76849609375 : JumpStart); (3.20833333333333 : 4.76849609375 : JumpEnd); (3.5 : 4.76849609375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/AnrlDataContext/t_Picture/t_Picture_t_Pilot" />
       <nodes>
         <classShapeMoniker Id="a3175992-03e0-4f8d-a13a-88a2103e4cc0" />
@@ -202,21 +202,21 @@
         <classShapeMoniker Id="37bcf2c8-2df8-4cc0-9a19-b14efee749f5" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.2812525 : 5.5); (2.2812525 : 3.66429768880208); (6.25 : 3.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 6.28929768880208); (3.04166666666667 : 6.28929768880208 : JumpStart); (3.20833333333333 : 6.28929768880208 : JumpEnd); (3.25 : 6.28929768880208); (3.25 : 5.875); (7.25 : 5.875); (7.25 : 5.53049967447917)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/AnrlDataContext/t_Picture/t_Picture_t_Team" />
       <nodes>
         <classShapeMoniker Id="a3175992-03e0-4f8d-a13a-88a2103e4cc0" />
         <classShapeMoniker Id="14289b23-e049-4258-83cf-9d3939e0823c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.66429768880208); (6.25 : 4.66429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 4.66429768880208); (6.25 : 4.66429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/AnrlDataContext/t_Pilot/t_Pilot_t_Team" />
       <nodes>
         <classShapeMoniker Id="cd7bfa22-f9eb-47e7-bfab-effc5f8f8757" />
         <classShapeMoniker Id="14289b23-e049-4258-83cf-9d3939e0823c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 4.20714884440104); (6.25 : 4.20714884440104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 4.20714884440104); (6.25 : 4.20714884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/AnrlDataContext/t_Pilot/t_Pilot_t_Team1" />
       <nodes>
         <classShapeMoniker Id="cd7bfa22-f9eb-47e7-bfab-effc5f8f8757" />
@@ -237,17 +237,24 @@
         <classShapeMoniker Id="8593875f-cc11-45aa-bf75-4c20a3145e46" />
       </nodes>
     </associationConnector>
-    <classShape Id="f9c8f825-d966-4905-a329-f125a4f844f3" absoluteBounds="4.125, 1.875, 2, 1.5785953776041666">
+    <classShape Id="0327c6d8-ed4e-43ba-befe-2cba023d6a31" absoluteBounds="3, 1.375, 2, 1.7708968098958331">
       <DataClassMoniker Name="/AnrlDataContext/t_Penalty" />
       <nestedChildShapes>
-        <elementListCompartment Id="16848a42-ed6a-47a4-82af-2999ecade998" absoluteBounds="4.14, 2.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b0002877-8eed-471b-952f-9eaa6fc33f1b" absoluteBounds="3.015, 1.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.718748 : 3.375); (6.718748 : 2.66429768880208); (6.125 : 2.66429768880208)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(9 : 16.4319482421875); (3.125 : 16.4319482421875); (3.125 : 3.14589680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AnrlDataContext/t_Competition/t_Competition_t_Penalty" />
+      <nodes>
+        <classShapeMoniker Id="672efb53-ea17-4219-9e6d-3b7a99ef929f" />
+        <classShapeMoniker Id="0327c6d8-ed4e-43ba-befe-2cba023d6a31" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.25 : 3.59375); (3.3125025 : 3.59375); (3.3125025 : 3.14589680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/AnrlDataContext/t_Team/t_Team_t_Penalty" />
       <nodes>
         <classShapeMoniker Id="14289b23-e049-4258-83cf-9d3939e0823c" />
-        <classShapeMoniker Id="f9c8f825-d966-4905-a329-f125a4f844f3" />
+        <classShapeMoniker Id="0327c6d8-ed4e-43ba-befe-2cba023d6a31" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -234,6 +234,8 @@ option optimize_for = SPEED;
 		optional string Reason = 3;
 
 		optional int32 ID_Team = 4;
+
+		optional int32 ID_Competition = 5;
 	}
 
 message RootMessage {

@@ -19,9 +19,7 @@ namespace AnrlService
     {
         private const int PORT = 1337;
         private const int PORTGPS = 1338;
-#if !DEBUG
         private TCPReciever.Server Reciever;
-#endif
         private static RequestProcessor processor;
         private static GPSRequestProcessor GPSprocessor;
         private Socket listener;
@@ -66,9 +64,7 @@ namespace AnrlService
             }
             try
             {
-#if !DEBUG
                 Reciever = new TCPReciever.Server();
-#endif
             }
             catch (Exception ex)
             {
@@ -181,8 +177,7 @@ namespace AnrlService
             catch
             {
             }
-            
-#if !DEBUG
+
             if (Reciever != null)
             {
                 try
@@ -194,7 +189,6 @@ namespace AnrlService
                     Logger.Log("Unable to stop Service " + ex.InnerException.Message, 0);
                 }
             }
-#endif
         }
     }
 }

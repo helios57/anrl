@@ -123,9 +123,19 @@ namespace AnrlService.Server
                             db_penalty.ID_Team = p.ID_Team;
                             db_penalty.Points = p.Points;
                             db_penalty.Reason = p.Reason;
+                            db_penalty.ID_Competition = p.ID_Competition;
                             db.t_Penalties.InsertOnSubmit(db_penalty);
                         }
                         db.SubmitChanges();
+                        break;
+                    }
+                case ERequestType.Delete:
+                    {
+                        if (db.t_Penalties.Count(p=>p.ID == request.RequestParameters.ID)>0)
+                        {
+                            db.t_Penalties.DeleteOnSubmit(db.t_Penalties.First(p => p.ID == request.RequestParameters.ID));
+                            db.SubmitChanges();
+                        }
                         break;
                     }
                 case ERequestType.GetAll:
@@ -136,6 +146,7 @@ namespace AnrlService.Server
                             penalty.ID_Team = p.ID_Team;
                             penalty.Points = p.Points;
                             penalty.Reason = p.Reason;
+                            penalty.ID_Competition = p.ID_Competition;
                             r.ResponseParameters.PenaltyList.Add(penalty);
                         }
                         break;

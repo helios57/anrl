@@ -283,6 +283,8 @@ namespace AnrlDB
 		
 		private EntitySet<t_Competition_Group> _t_Competition_Groups;
 		
+		private EntitySet<t_Penalty> _t_Penalties;
+		
 		private EntityRef<t_Line> _t_Line;
 		
     #region Extensibility Method Definitions
@@ -308,6 +310,7 @@ namespace AnrlDB
 		public t_Competition()
 		{
 			this._t_Competition_Groups = new EntitySet<t_Competition_Group>(new Action<t_Competition_Group>(this.attach_t_Competition_Groups), new Action<t_Competition_Group>(this.detach_t_Competition_Groups));
+			this._t_Penalties = new EntitySet<t_Penalty>(new Action<t_Penalty>(this.attach_t_Penalties), new Action<t_Penalty>(this.detach_t_Penalties));
 			this._t_Line = default(EntityRef<t_Line>);
 			OnCreated();
 		}
@@ -469,6 +472,19 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Penalty", Storage="_t_Penalties", ThisKey="ID", OtherKey="ID_Competition")]
+		public EntitySet<t_Penalty> t_Penalties
+		{
+			get
+			{
+				return this._t_Penalties;
+			}
+			set
+			{
+				this._t_Penalties.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Line_t_Competition", Storage="_t_Line", ThisKey="ID_TakeOffLine", OtherKey="ID", IsForeignKey=true)]
 		public t_Line t_Line
 		{
@@ -530,6 +546,18 @@ namespace AnrlDB
 		}
 		
 		private void detach_t_Competition_Groups(t_Competition_Group entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Competition = null;
+		}
+		
+		private void attach_t_Penalties(t_Penalty entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Competition = this;
+		}
+		
+		private void detach_t_Penalties(t_Penalty entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_Competition = null;
@@ -4324,6 +4352,10 @@ namespace AnrlDB
 		
 		private int _ID_Team;
 		
+		private int _ID_Competition;
+		
+		private EntityRef<t_Competition> _t_Competition;
+		
 		private EntityRef<t_Team> _t_Team;
 		
     #region Extensibility Method Definitions
@@ -4338,10 +4370,13 @@ namespace AnrlDB
     partial void OnReasonChanged();
     partial void OnID_TeamChanging(int value);
     partial void OnID_TeamChanged();
+    partial void OnID_CompetitionChanging(int value);
+    partial void OnID_CompetitionChanged();
     #endregion
 		
 		public t_Penalty()
 		{
+			this._t_Competition = default(EntityRef<t_Competition>);
 			this._t_Team = default(EntityRef<t_Team>);
 			OnCreated();
 		}
@@ -4426,6 +4461,64 @@ namespace AnrlDB
 					this._ID_Team = value;
 					this.SendPropertyChanged("ID_Team");
 					this.OnID_TeamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Competition", DbType="Int NOT NULL")]
+		public int ID_Competition
+		{
+			get
+			{
+				return this._ID_Competition;
+			}
+			set
+			{
+				if ((this._ID_Competition != value))
+				{
+					if (this._t_Competition.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Competition = value;
+					this.SendPropertyChanged("ID_Competition");
+					this.OnID_CompetitionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Penalty", Storage="_t_Competition", ThisKey="ID_Competition", OtherKey="ID", IsForeignKey=true)]
+		public t_Competition t_Competition
+		{
+			get
+			{
+				return this._t_Competition.Entity;
+			}
+			set
+			{
+				t_Competition previousValue = this._t_Competition.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Competition.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Competition.Entity = null;
+						previousValue.t_Penalties.Remove(this);
+					}
+					this._t_Competition.Entity = value;
+					if ((value != null))
+					{
+						value.t_Penalties.Add(this);
+						this._ID_Competition = value.ID;
+					}
+					else
+					{
+						this._ID_Competition = default(int);
+					}
+					this.SendPropertyChanged("t_Competition");
 				}
 			}
 		}
