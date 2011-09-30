@@ -30,6 +30,7 @@ namespace AirNavigationRaceLive
         Group Group;
         UploadGPS UploadGPS;
         ParcourOverviewZoomed ParcourOverviewZoomed;
+        Results Results;
 
 
         public AirNavigationRaceLiveMain()
@@ -132,6 +133,7 @@ namespace AirNavigationRaceLive
             MapLegacy = null;
             Group = null;
             UploadGPS = null;
+            Results = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
             enableControl(Credits);
@@ -295,6 +297,16 @@ namespace AirNavigationRaceLive
                 ParcourOverviewZoomed = new ParcourOverviewZoomed(Client);
             }
             enableControl(ParcourOverviewZoomed);
+        }
+
+        private void adjustResultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Results == null)
+            {
+                Results = new Results(Client);
+            }
+            enableControl(Results);
+
         }
     }
 }

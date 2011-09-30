@@ -40,6 +40,7 @@
             this.legacyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parcourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.overviewZoomedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.overviewZoomedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -179,6 +179,13 @@
             this.overviewToolStripMenuItem.Text = "Overview";
             this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewToolStripMenuItem_Click);
             // 
+            // overviewZoomedToolStripMenuItem
+            // 
+            this.overviewZoomedToolStripMenuItem.Name = "overviewZoomedToolStripMenuItem";
+            this.overviewZoomedToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.overviewZoomedToolStripMenuItem.Text = "Overview Zoomed";
+            this.overviewZoomedToolStripMenuItem.Click += new System.EventHandler(this.overviewZoomedToolStripMenuItem_Click);
+            // 
             // generateToolStripMenuItem
             // 
             this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
@@ -269,6 +276,7 @@
             this.toplistToolStripMenuItem.Name = "toplistToolStripMenuItem";
             this.toplistToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.toplistToolStripMenuItem.Text = "Toplist";
+            this.toplistToolStripMenuItem.Visible = false;
             // 
             // toplistFlightToolStripMenuItem
             // 
@@ -276,6 +284,7 @@
             this.toplistFlightToolStripMenuItem.Name = "toplistFlightToolStripMenuItem";
             this.toplistFlightToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.toplistFlightToolStripMenuItem.Text = "Toplist Flight";
+            this.toplistFlightToolStripMenuItem.Visible = false;
             // 
             // toplistLandingToolStripMenuItem
             // 
@@ -283,6 +292,7 @@
             this.toplistLandingToolStripMenuItem.Name = "toplistLandingToolStripMenuItem";
             this.toplistLandingToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.toplistLandingToolStripMenuItem.Text = "Toplist Landing";
+            this.toplistLandingToolStripMenuItem.Visible = false;
             // 
             // individualToplistToolStripMenuItem
             // 
@@ -290,11 +300,13 @@
             this.individualToplistToolStripMenuItem.Name = "individualToplistToolStripMenuItem";
             this.individualToplistToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.individualToplistToolStripMenuItem.Text = "Individual Toplist";
+            this.individualToplistToolStripMenuItem.Visible = false;
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(179, 6);
+            this.toolStripSeparator2.Visible = false;
             // 
             // addLandingResultsToolStripMenuItem
             // 
@@ -302,6 +314,7 @@
             this.addLandingResultsToolStripMenuItem.Name = "addLandingResultsToolStripMenuItem";
             this.addLandingResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.addLandingResultsToolStripMenuItem.Text = "Add Landing Results";
+            this.addLandingResultsToolStripMenuItem.Visible = false;
             // 
             // adjustResultsToolStripMenuItem
             // 
@@ -309,6 +322,7 @@
             this.adjustResultsToolStripMenuItem.Name = "adjustResultsToolStripMenuItem";
             this.adjustResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.adjustResultsToolStripMenuItem.Text = "Adjust Results";
+            this.adjustResultsToolStripMenuItem.Click += new System.EventHandler(this.adjustResultsToolStripMenuItem_Click);
             // 
             // uploadTrackerDataToolStripMenuItem
             // 
@@ -341,13 +355,6 @@
             this.MainPanel.Size = new System.Drawing.Size(928, 602);
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
-            // 
-            // overviewZoomedToolStripMenuItem
-            // 
-            this.overviewZoomedToolStripMenuItem.Name = "overviewZoomedToolStripMenuItem";
-            this.overviewZoomedToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.overviewZoomedToolStripMenuItem.Text = "Overview Zoomed";
-            this.overviewZoomedToolStripMenuItem.Click += new System.EventHandler(this.overviewZoomedToolStripMenuItem_Click);
             // 
             // AirNavigationRaceLiveMain
             // 

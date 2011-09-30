@@ -72,6 +72,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="sharpPDF, Version=1.0.1870.19498, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\sharpPDF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -107,6 +111,12 @@
     </Compile>
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comps\Results.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\Results.Designer.cs">
+      <DependentUpon>Results.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\Helper\GeneratePenalty.cs" />
     <Compile Include="Comps\ParcourOverviewZoomed.cs">
@@ -249,6 +259,9 @@
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Comps\Results.resx">
+      <DependentUpon>Results.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourOverviewZoomed.resx">
       <DependentUpon>ParcourOverviewZoomed.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +355,7 @@
     <Content Include="Resources\pluginhost.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="sharpPDF.dll" />
     <None Include="Resources\Logo_051.png" />
   </ItemGroup>
   <ItemGroup>
