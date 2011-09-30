@@ -81,6 +81,9 @@ namespace AnrlDB
     partial void Insertt_Team_Tracker(t_Team_Tracker instance);
     partial void Updatet_Team_Tracker(t_Team_Tracker instance);
     partial void Deletet_Team_Tracker(t_Team_Tracker instance);
+    partial void Insertt_Penalty(t_Penalty instance);
+    partial void Updatet_Penalty(t_Penalty instance);
+    partial void Deletet_Penalty(t_Penalty instance);
     #endregion
 		
 		public AnrlDataContext() : 
@@ -246,6 +249,14 @@ namespace AnrlDB
 			get
 			{
 				return this.GetTable<t_Team_Tracker>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_Penalty> t_Penalties
+		{
+			get
+			{
+				return this.GetTable<t_Penalty>();
 			}
 		}
 	}
@@ -3742,6 +3753,8 @@ namespace AnrlDB
 		
 		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
 		
+		private EntitySet<t_Penalty> _t_Penalties;
+		
 		private EntityRef<t_Picture> _t_Picture;
 		
 		private EntityRef<t_Pilot> _t_Pilot;
@@ -3772,6 +3785,7 @@ namespace AnrlDB
 		{
 			this._t_Group_Teams = new EntitySet<t_Group_Team>(new Action<t_Group_Team>(this.attach_t_Group_Teams), new Action<t_Group_Team>(this.detach_t_Group_Teams));
 			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
+			this._t_Penalties = new EntitySet<t_Penalty>(new Action<t_Penalty>(this.attach_t_Penalties), new Action<t_Penalty>(this.detach_t_Penalties));
 			this._t_Picture = default(EntityRef<t_Picture>);
 			this._t_Pilot = default(EntityRef<t_Pilot>);
 			this._t_Pilot1 = default(EntityRef<t_Pilot>);
@@ -3956,6 +3970,19 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Penalty", Storage="_t_Penalties", ThisKey="ID", OtherKey="ID_Team")]
+		public EntitySet<t_Penalty> t_Penalties
+		{
+			get
+			{
+				return this._t_Penalties;
+			}
+			set
+			{
+				this._t_Penalties.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Picture_t_Team", Storage="_t_Picture", ThisKey="ID_Flag", OtherKey="ID", IsForeignKey=true)]
 		public t_Picture t_Picture
 		{
@@ -4097,6 +4124,18 @@ namespace AnrlDB
 		}
 		
 		private void detach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Team = null;
+		}
+		
+		private void attach_t_Penalties(t_Penalty entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Team = this;
+		}
+		
+		private void detach_t_Penalties(t_Penalty entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_Team = null;
@@ -4246,6 +4285,181 @@ namespace AnrlDB
 						this._ID_Tracker = default(int);
 					}
 					this.SendPropertyChanged("t_Tracker");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Penalty")]
+	public partial class t_Penalty : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _Points;
+		
+		private string _Reason;
+		
+		private int _ID_Team;
+		
+		private EntityRef<t_Team> _t_Team;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPointsChanging(int value);
+    partial void OnPointsChanged();
+    partial void OnReasonChanging(string value);
+    partial void OnReasonChanged();
+    partial void OnID_TeamChanging(int value);
+    partial void OnID_TeamChanged();
+    #endregion
+		
+		public t_Penalty()
+		{
+			this._t_Team = default(EntityRef<t_Team>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Points", DbType="Int NOT NULL")]
+		public int Points
+		{
+			get
+			{
+				return this._Points;
+			}
+			set
+			{
+				if ((this._Points != value))
+				{
+					this.OnPointsChanging(value);
+					this.SendPropertyChanging();
+					this._Points = value;
+					this.SendPropertyChanged("Points");
+					this.OnPointsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reason", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Reason
+		{
+			get
+			{
+				return this._Reason;
+			}
+			set
+			{
+				if ((this._Reason != value))
+				{
+					this.OnReasonChanging(value);
+					this.SendPropertyChanging();
+					this._Reason = value;
+					this.SendPropertyChanged("Reason");
+					this.OnReasonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Team", DbType="Int NOT NULL")]
+		public int ID_Team
+		{
+			get
+			{
+				return this._ID_Team;
+			}
+			set
+			{
+				if ((this._ID_Team != value))
+				{
+					if (this._t_Team.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_TeamChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Team = value;
+					this.SendPropertyChanged("ID_Team");
+					this.OnID_TeamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Penalty", Storage="_t_Team", ThisKey="ID_Team", OtherKey="ID", IsForeignKey=true)]
+		public t_Team t_Team
+		{
+			get
+			{
+				return this._t_Team.Entity;
+			}
+			set
+			{
+				t_Team previousValue = this._t_Team.Entity;
+				if (((previousValue != value) 
+							|| (this._t_Team.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_Team.Entity = null;
+						previousValue.t_Penalties.Remove(this);
+					}
+					this._t_Team.Entity = value;
+					if ((value != null))
+					{
+						value.t_Penalties.Add(this);
+						this._ID_Team = value.ID;
+					}
+					else
+					{
+						this._ID_Team = default(int);
+					}
+					this.SendPropertyChanged("t_Team");
 				}
 			}
 		}

@@ -211,6 +211,13 @@ namespace NetworkObjects
       get { return _GPSDataRequest; }
       set { _GPSDataRequest = value; }
     }
+    private readonly global::System.Collections.Generic.List<NetworkObjects.Penalty> _PenaltyList = new global::System.Collections.Generic.List<NetworkObjects.Penalty>();
+    [global::ProtoBuf.ProtoMember(13, Name=@"PenaltyList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.Penalty> PenaltyList
+    {
+      get { return _PenaltyList; }
+    }
+  
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -307,6 +314,13 @@ namespace NetworkObjects
     public global::System.Collections.Generic.List<NetworkObjects.GPSData> GPSDataList
     {
       get { return _GPSDataList; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NetworkObjects.Penalty> _PenaltyList = new global::System.Collections.Generic.List<NetworkObjects.Penalty>();
+    [global::ProtoBuf.ProtoMember(13, Name=@"PenaltyList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.Penalty> PenaltyList
+    {
+      get { return _PenaltyList; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;

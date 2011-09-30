@@ -179,6 +179,7 @@
       <Column Name="Description" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Association Name="t_Team_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Group_Team" />
       <Association Name="t_Team_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Team" Type="t_Team_Tracker" />
+      <Association Name="t_Team_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Team" Type="t_Penalty" />
       <Association Name="t_Picture_t_Team" Member="t_Picture" ThisKey="ID_Flag" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team" Member="t_Pilot" ThisKey="ID_Pilot" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team1" Member="t_Pilot1" ThisKey="ID_Navigator" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
@@ -190,6 +191,15 @@
       <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="t_Team_t_Team_Tracker" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
       <Association Name="t_Tracker_t_Team_Tracker" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_Penalty" Member="t_Penalties">
+    <Type Name="t_Penalty">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reason" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Team_t_Penalty" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

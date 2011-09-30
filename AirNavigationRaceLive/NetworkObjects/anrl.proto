@@ -48,6 +48,8 @@ option optimize_for = SPEED;
         repeated GPSData GPSDataList =11;
 
 		optional GPSDataRequest GPSDataRequest = 12;
+
+		repeated Penalty PenaltyList = 13;
 	}
 	message ResponseParameters
 	{
@@ -74,6 +76,8 @@ option optimize_for = SPEED;
 		repeated Competition CompetitionList = 11;
 
 		repeated GPSData GPSDataList =12;
+
+		repeated Penalty PenaltyList = 13;
 	}
 	message Picture
 	{

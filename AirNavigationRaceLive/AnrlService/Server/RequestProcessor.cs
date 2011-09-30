@@ -84,6 +84,11 @@ namespace AnrlService.Server
                                 answer = proccessGPSData(request);
                                 break;
                             }
+                        case EObjectType.Penalty:
+                            {
+                                answer = proccessPenalty(request);
+                                break;
+                            }
                     }
                 }
             }
@@ -102,6 +107,42 @@ namespace AnrlService.Server
 #endif
             }
             return answer;
+        }
+
+        private Root proccessPenalty(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+            switch ((ERequestType)request.RequestType)
+            {
+                case ERequestType.Save:
+                    {
+                        foreach(Penalty p in request.RequestParameters.PenaltyList)
+                        {
+                            t_Penalty db_penalty = new t_Penalty();
+                            db_penalty.ID_Team = p.ID_Team;
+                            db_penalty.Points = p.Points;
+                            db_penalty.Reason = p.Reason;
+                            db.t_Penalties.InsertOnSubmit(db_penalty);
+                        }
+                        db.SubmitChanges();
+                        break;
+                    }
+                case ERequestType.GetAll:
+                    {
+                        foreach (t_Penalty p in db.t_Penalties)
+                        {
+                            Penalty penalty = new Penalty();
+                            penalty.ID_Team = p.ID_Team;
+                            penalty.Points = p.Points;
+                            penalty.Reason = p.Reason;
+                            r.ResponseParameters.PenaltyList.Add(penalty);
+                        }
+                        break;
+                    }
+            }
+            return r;
+
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]

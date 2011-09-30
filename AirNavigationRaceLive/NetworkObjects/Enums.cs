@@ -26,7 +26,8 @@ namespace NetworkObjects
         Team = 6,
         Group = 7,
         Competition = 8,
-        GPSData = 9
+        GPSData = 9,
+        Penalty = 10
     }
     public enum LineType : int
     {
