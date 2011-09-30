@@ -100,7 +100,7 @@ namespace AirNavigationRaceLive.Comps
             btnAddPilot.Enabled = teamSelected && pilotSelected && textBoxPilot.Tag == null;
             btnSave.Enabled = teamSelected && textBoxPilot.Tag != null /*&& comboBoxCountry.SelectedItem != null*/;
             btnColorSelect.Enabled = teamSelected;
-            comboBoxCountry.Enabled = teamSelected;
+            fldAC.Enabled = teamSelected;
             trackerListView.Enabled = teamSelected;
             textBoxName.Enabled = teamSelected;
         }
@@ -166,6 +166,7 @@ namespace AirNavigationRaceLive.Comps
                 team.ID = Math.Max(Int32.Parse(textBoxID.Text), 0);
                 team.ID_Pilot = (textBoxPilot.Tag as NetworkObjects.Pilot).ID;
                 team.Name = textBoxName.Text;
+                team.Description = fldAC.Text;
                 if (textBoxNavigator.Tag != null)
                 {
                     team.ID_Navigator = (textBoxNavigator.Tag as NetworkObjects.Pilot).ID;
@@ -197,6 +198,7 @@ namespace AirNavigationRaceLive.Comps
             textBoxNavigator.Text = "";
             btnColorSelect.BackColor = Color.Gray;
             textBoxName.Text = "";
+            fldAC.Text = "";
             trackerListView.SelectedItems.Clear();
             foreach (ListViewItem lvi in trackerListView.Items)
             {
@@ -224,6 +226,7 @@ namespace AirNavigationRaceLive.Comps
                 textBoxPilot.Text = pilot.Name;
                 textBoxNavigator.Tag = navigator;
                 textBoxNavigator.Text = (navigator != null) ? navigator.Name : "";
+                fldAC.Text = team.Description;
                 /*
                 Flag selected = null;
                 String flagName = team.FlagPicture.Name.Trim();

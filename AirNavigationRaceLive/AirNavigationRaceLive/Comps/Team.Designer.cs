@@ -51,7 +51,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxCountry = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnColorSelect = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -61,6 +60,7 @@
             this.IMEI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.fldAC = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -279,23 +279,14 @@
             this.label1.TabIndex = 24;
             this.label1.Text = "Tracker";
             // 
-            // comboBoxCountry
-            // 
-            this.comboBoxCountry.FormattingEnabled = true;
-            this.comboBoxCountry.Location = new System.Drawing.Point(411, 200);
-            this.comboBoxCountry.Name = "comboBoxCountry";
-            this.comboBoxCountry.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxCountry.TabIndex = 29;
-            this.comboBoxCountry.SelectedIndexChanged += new System.EventHandler(this.comboBoxCountry_SelectedIndexChanged);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(353, 203);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 30;
-            this.label5.Text = "Country";
+            this.label5.Text = "AC";
             // 
             // btnColorSelect
             // 
@@ -365,17 +356,25 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "Name";
             // 
+            // fldAC
+            // 
+            this.fldAC.Enabled = false;
+            this.fldAC.Location = new System.Drawing.Point(411, 196);
+            this.fldAC.Name = "fldAC";
+            this.fldAC.Size = new System.Drawing.Size(124, 20);
+            this.fldAC.TabIndex = 37;
+            // 
             // Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.fldAC);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.trackerListView);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnColorSelect);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBoxCountry);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnNew);
@@ -425,7 +424,6 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxCountry;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnColorSelect;
         private System.Windows.Forms.Label label6;
@@ -436,5 +434,6 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.TextBox fldAC;
     }
 }
