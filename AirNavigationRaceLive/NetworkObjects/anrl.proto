@@ -221,6 +221,16 @@ option optimize_for = SPEED;
 
 		optional int32 LastId = 4;
 	}
+	message Penalty 
+	{
+		optional int32 ID = 1;
+
+		optional int32 Points = 2;
+
+		optional string Reason = 3;
+
+		optional int32 ID_Team = 4;
+	}
 
 message RootMessage {
 	repeated GPSData gpsdata = 1;

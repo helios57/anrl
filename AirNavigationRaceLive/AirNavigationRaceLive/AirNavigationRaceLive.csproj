@@ -107,6 +107,7 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Helper\GeneratePenalty.cs" />
     <Compile Include="Comps\ParcourOverviewZoomed.cs">
       <SubType>UserControl</SubType>
     </Compile>

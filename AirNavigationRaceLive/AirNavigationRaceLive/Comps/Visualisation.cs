@@ -51,7 +51,7 @@ namespace AirNavigationRaceLive.Comps
                         trackerlist.AddRange(t.ID_Tracker);
                     }
                 }
-                Client.getGPSDatenCache().requestGPSData(trackerlist, comp.TimeTakeOff - 100000, comp.TimeEndLine + 100000, new AsyncCallback(recieveData));
+                Client.getGPSDatenCache().requestGPSData(trackerlist, comp.TimeTakeOff - 10000000, comp.TimeEndLine + 10000000, new AsyncCallback(recieveData));
             }
         }
         public void recieveData(IAsyncResult result)
@@ -62,6 +62,28 @@ namespace AirNavigationRaceLive.Comps
                 controll.SetDaten(data, teamlist.ToList());
                 visualisationPictureBox1.SetData(data, teamlist.ToList());
                 visualisationPictureBox1.Invalidate();
+
+                if (comp != null)
+                {
+                    foreach (NetworkObjects.CompetitionGroup g in comp.CompetitionGroupList)
+                    {
+                        NetworkObjects.Group group = Client.getGroup(g.ID_Group);
+                        trackerlist.Clear();
+                        teamlist.Clear();
+                        foreach (NetworkObjects.GroupTeam gt in group.GroupTeamList)
+                        {
+                            NetworkObjects.Team t = Client.getTeam(gt.ID_Team);
+                            if (t.ID_Tracker.Count > 0)
+                            {
+                                List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, Client.getParcour(comp.ID_Parcour), data.Where(p => t.ID_Tracker.Contains(p.trackerID)).ToList(), (NetworkObjects.GroupPosType)gt.Pos);
+                                foreach (NetworkObjects.Penalty p in penalties)
+                                {
+                                    System.Console.Out.WriteLine(p.Reason);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             updating = false;
         }

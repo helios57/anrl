@@ -970,6 +970,52 @@ namespace NetworkObjects
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
   }
   
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"Penalty")]
+  public partial class Penalty : global::ProtoBuf.IExtensible
+  {
+    public Penalty() {}
+    
+
+    private int _ID = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID
+    {
+      get { return _ID; }
+      set { _ID = value; }
+    }
+
+    private int _Points = default(int);
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Points", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int Points
+    {
+      get { return _Points; }
+      set { _Points = value; }
+    }
+
+    private string _Reason = "";
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"Reason", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Reason
+    {
+      get { return _Reason; }
+      set { _Reason = value; }
+    }
+
+    private int _ID_Team = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ID_Team", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_Team
+    {
+      get { return _ID_Team; }
+      set { _ID_Team = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
   [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"RootMessage")]
   public partial class RootMessage : global::ProtoBuf.IExtensible
   {
