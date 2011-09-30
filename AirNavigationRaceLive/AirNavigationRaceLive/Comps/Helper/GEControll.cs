@@ -164,6 +164,14 @@ namespace AirNavigationRaceLive.Comps.Helper
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
+            foreach (Line n in parcour.LineList.Where(p => p.Type >= 3 && p.Type <= 10))
+            {
+                result += @"<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
+                result += n.B.longitude + "," + n.B.latitude + "," + HeightPenalty + " ";
+                result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
+                result += n.B.longitude + "," + n.B.latitude + "," + HeightPenalty + " ";
+                result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
+            }
             result += GetKMLTemplateContent("footerPolygon");
             return result;
         }

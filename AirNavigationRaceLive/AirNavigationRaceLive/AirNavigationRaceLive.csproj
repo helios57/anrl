@@ -219,6 +219,12 @@
     <Compile Include="Comps\Visualisation.Designer.cs">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\RankForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\RankForm.Designer.cs">
+      <DependentUpon>RankForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\VisualisationPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Visualisation.resx">
       <DependentUpon>Visualisation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\RankForm.resx">
+      <DependentUpon>RankForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\VisualisationPopup.resx">
       <DependentUpon>VisualisationPopup.cs</DependentUpon>

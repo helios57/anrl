@@ -23,7 +23,8 @@ namespace AirNavigationRaceLive.Comps
         private List<NetworkObjects.Team> teamlist = new List<NetworkObjects.Team>();
         private volatile bool updating = false;
         private NetworkObjects.Parcour parcour;
-
+        private RankForm rankForm;
+        private List<NetworkObjects.Penalty> penaltyPoints = new List<NetworkObjects.Penalty>();
         public Visualisation(Client.Client iClient)
         {
             Client = iClient;
@@ -65,6 +66,7 @@ namespace AirNavigationRaceLive.Comps
 
                 if (comp != null)
                 {
+                    penaltyPoints.Clear();
                     foreach (NetworkObjects.CompetitionGroup g in comp.CompetitionGroupList)
                     {
                         NetworkObjects.Group group = Client.getGroup(g.ID_Group);
@@ -75,13 +77,19 @@ namespace AirNavigationRaceLive.Comps
                             NetworkObjects.Team t = Client.getTeam(gt.ID_Team);
                             if (t.ID_Tracker.Count > 0)
                             {
+                                teamlist.Add(t);
                                 List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, Client.getParcour(comp.ID_Parcour), data.Where(p => t.ID_Tracker.Contains(p.trackerID)).ToList(), (NetworkObjects.GroupPosType)gt.Pos);
                                 foreach (NetworkObjects.Penalty p in penalties)
                                 {
-                                    System.Console.Out.WriteLine(p.Reason);
+                                    p.ID_Team = t.ID;
                                 }
+                                penaltyPoints.AddRange(penalties);
                             }
                         }
+                    }
+                    if (rankForm != null && !rankForm.IsDisposed)
+                    {
+                        rankForm.SetData(penaltyPoints, teamlist.ToList(), Client);
                     }
                 }
             }
@@ -155,6 +163,16 @@ namespace AirNavigationRaceLive.Comps
         private void fldTrackerHeight_ValueChanged(object sender, EventArgs e)
         {
             controll.SetTrackerHeightAdjustment((int)fldTrackerHeight.Value);
+        }
+
+        private void btnShowRanking_Click(object sender, EventArgs e)
+        {
+            if (rankForm != null && ! rankForm.IsDisposed)
+            {
+                rankForm.Close();
+            }
+            rankForm = new RankForm();
+            rankForm.Show();
         }
     }
     class CompetitionComboEntry

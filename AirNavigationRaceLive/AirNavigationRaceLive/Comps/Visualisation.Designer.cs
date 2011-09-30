@@ -42,6 +42,7 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
+            this.btnShowRanking = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).BeginInit();
@@ -228,10 +229,22 @@
             this.visualisationPictureBox1.TabIndex = 97;
             this.visualisationPictureBox1.TabStop = false;
             // 
+            // btnShowRanking
+            // 
+            this.btnShowRanking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowRanking.Location = new System.Drawing.Point(745, 164);
+            this.btnShowRanking.Name = "btnShowRanking";
+            this.btnShowRanking.Size = new System.Drawing.Size(176, 28);
+            this.btnShowRanking.TabIndex = 98;
+            this.btnShowRanking.Text = "Show Ranking";
+            this.btnShowRanking.UseVisualStyleBackColor = true;
+            this.btnShowRanking.Click += new System.EventHandler(this.btnShowRanking_Click);
+            // 
             // Visualisation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnShowRanking);
             this.Controls.Add(this.visualisationPictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -276,5 +289,6 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private VisualisationPictureBox visualisationPictureBox1;
+        private System.Windows.Forms.Button btnShowRanking;
     }
 }
