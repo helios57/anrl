@@ -58,14 +58,30 @@ namespace AirNavigationRaceLive.Comps.Client
             cache.AddRange(resp.ResponseParameters.GPSDataList);
 
             List<GPSData> result = cache.Where(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)).ToList();
+            List<GPSData> toDelete = new List<GPSData>();
+            foreach (GPSData data in result)
+            {
+                if (result.Count(p => p.trackerID == data.trackerID && p.timestampGPS == data.timestampGPS)>1)
+                {
+                    toDelete.AddRange(result.Where(pp => pp != data && pp.trackerID == data.trackerID && pp.timestampGPS == data.timestampGPS));
+                }
+            }
+            foreach (GPSData data in toDelete)
+            {
+                result.Remove(data);
+            }
             //result.Sort(new DateComparer());
             pc.finished.Invoke(new GPSDataAsyncResult(result));
             requesting = false;
         }
+        public bool isEqual(GPSData a, GPSData b)
+        {
+            return a.longitude.Equals(b.longitude) && a.latitude.Equals(b.latitude) && a.timestampGPS.Equals(b.timestampGPS);
+        }
     }
     class ParameterClass
     {
-        public List<int> trackersID;public  long from; public long to; public AsyncCallback finished;
+        public List<int> trackersID; public long from; public long to; public AsyncCallback finished;
 
     }
     class DateComparer : Comparer<GPSData>

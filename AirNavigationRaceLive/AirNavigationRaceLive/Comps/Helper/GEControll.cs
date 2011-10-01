@@ -52,26 +52,30 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         public void SetParcour(NetworkObjects.Parcour parcour)
         {
-            if (Container != null)
+            try
             {
-                Container.replaceChild(plugin.parseKml(GetPolygonKml(parcour)), Container.getLastChild());
-                KmlLookAtCoClass lookAt = plugin.createLookAt("");
-                lookAt.set(averageLatitude(parcour.LineList), averageLongitude(parcour.LineList), 15000, plugin.ALTITUDE_RELATIVE_TO_GROUND, 0, 0, 10000);
-                plugin.getView().setAbstractView(lookAt);
+                if (Container != null)
+                {
+                    Container.replaceChild(plugin.parseKml(GetPolygonKml(parcour)), Container.getLastChild());
+                    KmlLookAtCoClass lookAt = plugin.createLookAt("");
+                    lookAt.set(averageLatitude(parcour.LineList), averageLongitude(parcour.LineList), 15000, plugin.ALTITUDE_RELATIVE_TO_GROUND, 0, 0, 10000);
+                    plugin.getView().setAbstractView(lookAt);
+                }
             }
+            catch { }
         }
 
         public void SetDaten(List<NetworkObjects.GPSData> gpsDatenListe, List<NetworkObjects.Team> teams)
         {
-            if (Container != null)
+            try
             {
-                try
+                if (Container != null)
                 {
                     Container.replaceChild(plugin.parseKml(GetKml(gpsDatenListe, teams)), Container.getFirstChild());
-                }
-                catch {//Error on close
+
                 }
             }
+            catch { }
         }
 
         public void SetPlugin(IGEPlugin plugin)

@@ -52,47 +52,51 @@ namespace AirNavigationRaceLive.Comps
                         trackerlist.AddRange(t.ID_Tracker);
                     }
                 }
-                Client.getGPSDatenCache().requestGPSData(trackerlist, comp.TimeTakeOff - 10000000, comp.TimeEndLine + 10000000, new AsyncCallback(recieveData));
+                Client.getGPSDatenCache().requestGPSData(trackerlist, comp.TimeTakeOff - 1000000000, comp.TimeEndLine + 10000000000, new AsyncCallback(recieveData));
             }
         }
         public void recieveData(IAsyncResult result)
         {
-            List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
-            if (data != null)
+            try
             {
-                controll.SetDaten(data, teamlist.ToList());
-                visualisationPictureBox1.SetData(data, teamlist.ToList());
-                visualisationPictureBox1.Invalidate();
-
-                if (comp != null)
+                List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
+                if (data != null)
                 {
-                    penaltyPoints.Clear();
-                    foreach (NetworkObjects.CompetitionGroup g in comp.CompetitionGroupList)
+                    controll.SetDaten(data, teamlist.ToList());
+                    visualisationPictureBox1.SetData(data, teamlist.ToList());
+                    visualisationPictureBox1.Invalidate();
+
+                    if (comp != null)
                     {
-                        NetworkObjects.Group group = Client.getGroup(g.ID_Group);
-                        trackerlist.Clear();
-                        teamlist.Clear();
-                        foreach (NetworkObjects.GroupTeam gt in group.GroupTeamList)
+                        penaltyPoints.Clear();
+                        foreach (NetworkObjects.CompetitionGroup g in comp.CompetitionGroupList)
                         {
-                            NetworkObjects.Team t = Client.getTeam(gt.ID_Team);
-                            if (t.ID_Tracker.Count > 0)
+                            NetworkObjects.Group group = Client.getGroup(g.ID_Group);
+                            trackerlist.Clear();
+                            teamlist.Clear();
+                            foreach (NetworkObjects.GroupTeam gt in group.GroupTeamList)
                             {
-                                teamlist.Add(t);
-                                List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, Client.getParcour(comp.ID_Parcour), data.Where(p => t.ID_Tracker.Contains(p.trackerID)).ToList(), (NetworkObjects.GroupPosType)gt.Pos);
-                                foreach (NetworkObjects.Penalty p in penalties)
+                                NetworkObjects.Team t = Client.getTeam(gt.ID_Team);
+                                if (t.ID_Tracker.Count > 0)
                                 {
-                                    p.ID_Team = t.ID;
+                                    teamlist.Add(t);
+                                    List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, Client.getParcour(comp.ID_Parcour), data.Where(p => t.ID_Tracker.Contains(p.trackerID)).ToList(), (NetworkObjects.GroupPosType)gt.Pos);
+                                    foreach (NetworkObjects.Penalty p in penalties)
+                                    {
+                                        p.ID_Team = t.ID;
+                                    }
+                                    penaltyPoints.AddRange(penalties);
                                 }
-                                penaltyPoints.AddRange(penalties);
                             }
                         }
-                    }
-                    if (rankForm != null && !rankForm.IsDisposed)
-                    {
-                        rankForm.SetData(penaltyPoints, teamlist.ToList(), Client);
+                        if (rankForm != null && !rankForm.IsDisposed)
+                        {
+                            rankForm.SetData(penaltyPoints, teamlist.ToList(), Client);
+                        }
                     }
                 }
             }
+            catch { }
             updating = false;
         }
 

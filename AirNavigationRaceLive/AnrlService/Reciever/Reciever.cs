@@ -52,7 +52,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                Logger.Log("Exception in Server.Server" + ex.InnerException.Message, 11);
+                Logger.Log("Exception in Server.Server" + ex.ToString(), 11);
             }
         }
 
@@ -126,7 +126,7 @@ namespace TCPReciever
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log("Exception in Server.ProcessRecievedGPSData" + ex.InnerException.Message, 12);
+                        Logger.Log("Exception in Server.ProcessRecievedGPSData" + ex.ToString(), 12);
                     }
                 }
             }
@@ -158,7 +158,7 @@ namespace TCPReciever
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log("Exception in Server.ListenForClients" + ex.InnerException.Message, 13);
+                        Logger.Log("Exception in Server.ListenForClients" + ex.ToString(), 13);
                     }
                 }
             }
@@ -190,7 +190,7 @@ namespace TCPReciever
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log("Exception in Server.HandleClientComm" + ex.InnerException.Message,  16);
+                        Logger.Log("Exception in Server.HandleClientComm" + ex.ToString(), 16);
                         //a socket error has occured
                         break;
                     }
@@ -210,7 +210,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                Logger.Log("Exception in Server.HandleClientComm" + ex.InnerException.Message, 14);
+                Logger.Log("Exception in Server.HandleClientComm" + ex.ToString(), 14);
             }
         }
 
@@ -236,7 +236,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                Logger.Log("Exception in Server.Stop" + ex.InnerException.Message,15);
+                Logger.Log("Exception in Server.Stop" + ex.ToString(), 15);
             }
         }
 
@@ -275,7 +275,7 @@ namespace TCPReciever
             }
             catch (Exception ex)
             {
-                Logger.Log("Exception in Server.ConvertCoordinates" + ex.InnerException.Message, 17);
+                Logger.Log("Exception in Server.ConvertCoordinates" + ex.ToString(), 17);
             }
             return 0;
         }
@@ -315,20 +315,20 @@ namespace TCPReciever
                             }
                             catch (Exception ex)
                             {
-                                Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message,  18);
+                                Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.ToString(), 18);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message,  19);
+                        Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.ToString(), 19);
                     }
                 }
                 db.SubmitChanges();
             }
             catch (Exception ex)
             {
-                Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.InnerException.Message, 20);
+                Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.ToString(), 20);
             }
         }
     }

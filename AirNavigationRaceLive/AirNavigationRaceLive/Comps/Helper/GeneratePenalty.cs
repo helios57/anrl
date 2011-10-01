@@ -85,13 +85,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     haveCrossedEnd = true;
                     double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionEnd);
-                    double diff = crossTime - competition.TimeStartLine;
+                    double diff = crossTime - competition.TimeEndLine;
                     if (Math.Abs(diff) > tickOfSecond)
                     {
                         NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
                         double seconds = Math.Abs(diff / tickOfSecond);
                         penalty.Points = Math.Min((int)seconds * 3, 200);
-                        penalty.Reason = "Crossed End-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competition.TimeStartLine).ToLongTimeString();
+                        penalty.Reason = "Crossed End-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competition.TimeEndLine).ToLongTimeString();
                         result.Add(penalty);
                     }
                 }

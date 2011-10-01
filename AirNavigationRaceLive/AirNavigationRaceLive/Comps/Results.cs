@@ -77,7 +77,7 @@ namespace AirNavigationRaceLive.Comps
                     pos = cbt.pos;
                     if (team.ID_Tracker.Count > 0)
                     {
-                        Client.getGPSDatenCache().requestGPSData(team.ID_Tracker, competition.TimeTakeOff - 10000000, competition.TimeEndLine + 10000000, new AsyncCallback(recieveData));
+                        Client.getGPSDatenCache().requestGPSData(team.ID_Tracker, competition.TimeTakeOff - 1000000000, competition.TimeEndLine + 10000000000, new AsyncCallback(recieveData));
                     }
                 }
             }
