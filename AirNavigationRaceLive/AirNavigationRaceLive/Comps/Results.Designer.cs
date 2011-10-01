@@ -36,7 +36,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.fldTotalPoints = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,6 +44,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxReason = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,12 +100,15 @@
             this.columnHeader2,
             this.columnHeader3});
             this.listViewPenalty.FullRowSelect = true;
+            this.listViewPenalty.GridLines = true;
+            this.listViewPenalty.HideSelection = false;
             this.listViewPenalty.Location = new System.Drawing.Point(270, 3);
             this.listViewPenalty.Name = "listViewPenalty";
             this.listViewPenalty.Size = new System.Drawing.Size(651, 154);
             this.listViewPenalty.TabIndex = 100;
             this.listViewPenalty.UseCompatibleStateImageBehavior = false;
             this.listViewPenalty.View = System.Windows.Forms.View.Details;
+            this.listViewPenalty.SelectedIndexChanged += new System.EventHandler(this.listViewPenalty_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -116,18 +123,6 @@
             // 
             this.columnHeader3.Text = "Reason";
             this.columnHeader3.Width = 555;
-            // 
-            // visualisationPictureBox1
-            // 
-            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 163);
-            this.visualisationPictureBox1.Name = "visualisationPictureBox1";
-            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 376);
-            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.visualisationPictureBox1.TabIndex = 97;
-            this.visualisationPictureBox1.TabStop = false;
             // 
             // label3
             // 
@@ -197,10 +192,66 @@
             this.label6.TabIndex = 107;
             this.label6.Text = "Reason";
             // 
+            // visualisationPictureBox1
+            // 
+            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 163);
+            this.visualisationPictureBox1.Name = "visualisationPictureBox1";
+            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 376);
+            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.visualisationPictureBox1.TabIndex = 97;
+            this.visualisationPictureBox1.TabStop = false;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Location = new System.Drawing.Point(103, 134);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(161, 23);
+            this.btnNew.TabIndex = 109;
+            this.btnNew.Text = "New";
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(103, 324);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(161, 23);
+            this.btnAdd.TabIndex = 110;
+            this.btnAdd.Text = "Add to List";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(103, 353);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(161, 23);
+            this.btnDelete.TabIndex = 111;
+            this.btnDelete.Text = "Delete from List";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.Location = new System.Drawing.Point(103, 382);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(161, 23);
+            this.btnSubmit.TabIndex = 112;
+            this.btnSubmit.Text = "Save List to Server";
+            this.btnSubmit.UseVisualStyleBackColor = true;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnSubmit);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnNew);
             this.Controls.Add(this.textBoxReason);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxPoints);
@@ -244,5 +295,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxReason;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnSubmit;
     }
 }

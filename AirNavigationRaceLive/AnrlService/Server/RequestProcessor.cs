@@ -143,6 +143,7 @@ namespace AnrlService.Server
                         foreach (t_Penalty p in db.t_Penalties)
                         {
                             Penalty penalty = new Penalty();
+                            penalty.ID = p.ID;
                             penalty.ID_Team = p.ID_Team;
                             penalty.Points = p.Points;
                             penalty.Reason = p.Reason;

@@ -253,6 +253,7 @@
             this.rulesToolStripMenuItem.Name = "rulesToolStripMenuItem";
             this.rulesToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.rulesToolStripMenuItem.Text = "Rules";
+            this.rulesToolStripMenuItem.Visible = false;
             // 
             // resultsToolStripMenuItem
             // 

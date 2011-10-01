@@ -210,5 +210,14 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return cache.cacheParcour.get(p);
         }
+
+        internal void savePenalty(Penalty penalty)
+        {
+            cache.cachePenalty.add(penalty);
+        }
+        internal List<Penalty> getPenalties()
+        {
+            return cache.cachePenalty.getAll();
+        }
     }
 }
