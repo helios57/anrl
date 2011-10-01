@@ -102,24 +102,32 @@ namespace AnrlService
 
         private void processConnection(Socket handler)
         {
-
-            NetworkStream stream = new NetworkStream(handler);
-            Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-            if (reqest == null)
+            try
             {
-                reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+                NetworkStream stream = new NetworkStream(handler);
+                Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+                if (reqest == null)
+                {
+                    reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
+                }
+                if (processor == null || !processor.isUseable())
+                {
+                    processor = new RequestProcessor();
+                }
+                Root response = processor.proccessRequest(reqest);
+                // Root response = new RequestProcessor().proccessRequest(reqest);
+                if (response != null)
+                {
+                    Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
+                }
+                stream.Flush();
+                stream.Close();
+                handler.Close();
             }
-            if (processor == null || !processor.isUseable())
+            catch (Exception ex)
             {
-                processor = new RequestProcessor();
+                System.Console.WriteLine("Error " + ex.InnerException.Message);
             }
-            Root response = processor.proccessRequest(reqest);
-            // Root response = new RequestProcessor().proccessRequest(reqest);
-
-            Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);
-            stream.Flush();
-            stream.Close();
-            handler.Close();
         }
 
         static void GPSClientConnected(IAsyncResult result)
