@@ -109,6 +109,7 @@ namespace AnrlService.Server
             return answer;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private Root proccessPenalty(Root request)
         {
             Root r = new Root();
