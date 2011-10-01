@@ -41,17 +41,17 @@ namespace AnrlService
                 SocketType.Stream, ProtocolType.Tcp);
             listener.Bind(localEP);
             listener.Listen(100);
-
+            /*
             IPEndPoint localEPGPS = new IPEndPoint(IPAddress.Any, PORTGPS);
             listenerGPS = new Socket(localEP.Address.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
             listenerGPS.Bind(localEPGPS);
             listenerGPS.Listen(100);
-
+            */
             try
             {
                 listener.BeginAccept(new AsyncCallback(ClientConnected), listener);
-                listenerGPS.BeginAccept(new AsyncCallback(GPSClientConnected), listenerGPS);
+                //listenerGPS.BeginAccept(new AsyncCallback(GPSClientConnected), listenerGPS);
 
             }
             catch (Exception ex)
