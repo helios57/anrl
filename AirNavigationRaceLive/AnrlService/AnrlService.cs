@@ -64,7 +64,7 @@ namespace AnrlService
             }
             try
             {
-                //Reciever = new TCPReciever.Server();
+                Reciever = new TCPReciever.Server();
             }
             catch (Exception ex)
             {
