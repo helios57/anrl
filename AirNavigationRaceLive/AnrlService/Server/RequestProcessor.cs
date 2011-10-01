@@ -144,16 +144,25 @@ namespace AnrlService.Server
                     }
                 case ERequestType.GetAll:
                     {
+                        List<int> ids = new List<int>(request.RequestParameters.IDS);
                         foreach (t_Penalty p in db.t_Penalties)
                         {
-                            Penalty penalty = new Penalty();
-                            penalty.ID = p.ID;
-                            penalty.ID_Team = p.ID_Team;
-                            penalty.Points = p.Points;
-                            penalty.Reason = p.Reason;
-                            penalty.ID_Competition = p.ID_Competition;
-                            r.ResponseParameters.PenaltyList.Add(penalty);
+                            if (!ids.Contains(p.ID))
+                            {
+                                Penalty penalty = new Penalty();
+                                penalty.ID = p.ID;
+                                penalty.ID_Team = p.ID_Team;
+                                penalty.Points = p.Points;
+                                penalty.Reason = p.Reason;
+                                penalty.ID_Competition = p.ID_Competition;
+                                r.ResponseParameters.PenaltyList.Add(penalty);
+                            }
+                            else
+                            {
+                                ids.Remove(p.ID);
+                            }
                         }
+                        r.ResponseParameters.DeletedIDList.AddRange(ids);
                         break;
                     }
             }
