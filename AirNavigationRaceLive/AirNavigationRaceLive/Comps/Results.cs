@@ -232,6 +232,12 @@ namespace AirNavigationRaceLive.Comps
                 textBoxReason.Text = p.Reason;
             }
         }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            sharpPDF.pdfDocument d = new sharpPDF.pdfDocument("Test", "SharpSoft");
+            
+        }
     }
     class ComboBoxTeam
     {

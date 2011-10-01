@@ -49,6 +49,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnPdf = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -244,10 +245,22 @@
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // btnPdf
+            // 
+            this.btnPdf.Location = new System.Drawing.Point(103, 411);
+            this.btnPdf.Name = "btnPdf";
+            this.btnPdf.Size = new System.Drawing.Size(161, 23);
+            this.btnPdf.TabIndex = 113;
+            this.btnPdf.Text = "Export as PDF";
+            this.btnPdf.UseVisualStyleBackColor = true;
+            this.btnPdf.Visible = false;
+            this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPdf);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnAdd);
@@ -299,5 +312,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Button btnPdf;
     }
 }
