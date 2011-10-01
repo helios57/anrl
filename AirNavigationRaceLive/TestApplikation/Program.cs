@@ -70,7 +70,7 @@ namespace TestApplikation
             }
             catch (Exception ex)
             {
-                System.Console.Out.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+                System.Console.Out.WriteLine("Unable to recieve Connection " + ex.ToString());
             }
         }*/
     }

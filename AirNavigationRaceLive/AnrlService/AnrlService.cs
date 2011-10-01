@@ -57,9 +57,9 @@ namespace AnrlService
             catch (Exception ex)
             {
 #if !DEBUG
-                Logger.Log("Unable to start Service " + ex.InnerException.Message, 0);
+                Logger.Log("Unable to start Service " + ex.ToString(), 0);
 #else
-                System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
+                System.Console.WriteLine("Unable to start Service " + ex.ToString());
 #endif
             }
             try
@@ -68,7 +68,7 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-                Logger.Log("Unable to start Service " + ex.InnerException.Message, 0);
+                Logger.Log("Unable to start Service " + ex.ToString(), 0);
             }
         }
         private void ClientConnected(IAsyncResult result)
@@ -93,9 +93,9 @@ namespace AnrlService
             {
 #if !DEBUG
 
-                Logger.Log("Unable to recieve Connection " + ex.InnerException.Message, 0);
+                Logger.Log("Unable to recieve Connection " + ex.ToString(), 0);
 #else
-                System.Console.WriteLine("Unable to recieve Connection " + ex.InnerException.Message);
+                System.Console.WriteLine("Unable to recieve Connection " + ex.ToString());
 #endif
             }
         }
@@ -126,7 +126,7 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Error " + ex.InnerException.Message);
+                System.Console.WriteLine("Error " + ex.ToString());
             }
         }
 
@@ -154,12 +154,12 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log("Unable to recieve Connection " + ex.InnerException.Message, 0);
+                    Logger.Log("Unable to recieve Connection " + ex.ToString(), 0);
                 }
             }
             catch (Exception ex)
             {
-                Logger.Log("Unable to recieve Connection " + ex.InnerException.Message, 0);
+                Logger.Log("Unable to recieve Connection " + ex.ToString(), 0);
             }
         }
 
@@ -188,7 +188,7 @@ namespace AnrlService
                 }
                 catch (Exception ex)
                 {
-                    Logger.Log("Unable to stop Service " + ex.InnerException.Message, 0);
+                    Logger.Log("Unable to stop Service " + ex.ToString(), 0);
                 }
             }
         }
