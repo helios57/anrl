@@ -192,7 +192,18 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewPenalty.SelectedItems.Count == 1)
             {
-                listViewPenalty.Items.Remove(listViewPenalty.SelectedItems[0]);
+                ListViewItem lvi = listViewPenalty.SelectedItems[0];
+                NetworkObjects.Penalty p = lvi.Tag as NetworkObjects.Penalty;
+                if (p.ID > 0)
+                {
+                    Client.deletePenalty(p.ID);
+                    listViewPenalty.Items.Clear();
+                    Client.getGPSDatenCache().requestGPSData(team.ID_Tracker, competition.TimeTakeOff - 10000000, competition.TimeEndLine + 10000000, new AsyncCallback(recieveData));
+                }
+                else
+                {
+                    listViewPenalty.Items.Remove(lvi);
+                }
             }
         }
 

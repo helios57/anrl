@@ -119,6 +119,10 @@ namespace AnrlService.Server
                     {
                         foreach(Penalty p in request.RequestParameters.PenaltyList)
                         {
+                            if (p.ID > 0)
+                            {
+                                db.t_Penalties.DeleteOnSubmit(db.t_Penalties.First(pp => pp.ID == p.ID));
+                            }
                             t_Penalty db_penalty = new t_Penalty();
                             db_penalty.ID_Team = p.ID_Team;
                             db_penalty.Points = p.Points;

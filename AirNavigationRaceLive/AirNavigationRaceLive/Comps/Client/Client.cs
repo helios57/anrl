@@ -219,5 +219,10 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return cache.cachePenalty.getAll();
         }
+
+        internal void deletePenalty(int ID)
+        {
+            cache.cachePenalty.delete(ID);
+        }
     }
 }
