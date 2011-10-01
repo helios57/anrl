@@ -62,8 +62,12 @@ namespace TCPReciever
         /// <param name="message">The Message recieved from TCP</param>
         private void Message_Received_Processor(string message)
         {
-            Thread t = new Thread(new ParameterizedThreadStart(ProcessRecievedGPSData));
-            t.Start(message);
+            try
+            {
+                Thread t = new Thread(new ParameterizedThreadStart(ProcessRecievedGPSData));
+                t.Start(message);
+            }
+            catch { }
         }
         /// <summary>
         /// Handels the Data recieved and processed in the Message_Received_Processor
@@ -73,56 +77,60 @@ namespace TCPReciever
         /// <param name="GPSData">THe Data</param>
         private void ProcessRecievedGPSData(object GPSData)
         {
-            String incomingData = GPSData as String;
-            if (incomingData != null)
+            try
             {
-                try
+                String incomingData = GPSData as String;
+                if (incomingData != null)
                 {
-                    String trimedGPSData = incomingData.Trim(new char[] { '!', '$' });
-                    String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
-
-                    if (db.t_Trackers.Count(p => p.IMEI == GPScoords[0]) == 0)
+                    try
                     {
-                        t_Tracker t = new t_Tracker();
-                        t.IMEI = GPScoords[0];
-                        db.t_Trackers.InsertOnSubmit(t);
-                        db.SubmitChanges();
-                    }
-                    string yy = GPScoords[3].Substring(4, 2);
-                    string mm = GPScoords[3].Substring(2, 2);
-                    string dd = GPScoords[3].Substring(0, 2);
-                    if (yy != "00" && mm != "00" && dd != "00") //Only save sensefull data
-                    {
-                        t_GPS_IN new_position = new t_GPS_IN();
-                        new_position.IMEI = GPScoords[0];
-                        new_position.Status = Int32.Parse(GPScoords[1]);
-                        new_position.GPS_fix = Int32.Parse(GPScoords[2]);
-                        new_position.TimestampTracker = new DateTime(
-                                                Int32.Parse("20" + yy),
-                                                Int32.Parse(mm),
-                                                Int32.Parse(dd),
-                                                Int32.Parse(GPScoords[4].Substring(0, 2)),
-                                                Int32.Parse(GPScoords[4].Substring(2, 2)),
-                                                Int32.Parse(GPScoords[4].Substring(4, 2)));
-                        new_position.longitude = GPScoords[5];
-                        new_position.latitude = GPScoords[6];
-                        new_position.altitude = GPScoords[7];
-                        new_position.speed = GPScoords[8];
-                        new_position.heading = GPScoords[9];
-                        new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
-                        new_position.HDOP = GPScoords[11];
-                        new_position.Timestamp = DateTime.Now;
-                        new_position.Processed = false;
+                        String trimedGPSData = incomingData.Trim(new char[] { '!', '$' });
+                        String[] GPScoords = trimedGPSData.Split(new char[] { ',', '*' });
 
-                        db.t_GPS_INs.InsertOnSubmit(new_position);
-                        db.SubmitChanges();
+                        if (db.t_Trackers.Count(p => p.IMEI == GPScoords[0]) == 0)
+                        {
+                            t_Tracker t = new t_Tracker();
+                            t.IMEI = GPScoords[0];
+                            db.t_Trackers.InsertOnSubmit(t);
+                            db.SubmitChanges();
+                        }
+                        string yy = GPScoords[3].Substring(4, 2);
+                        string mm = GPScoords[3].Substring(2, 2);
+                        string dd = GPScoords[3].Substring(0, 2);
+                        if (yy != "00" && mm != "00" && dd != "00") //Only save sensefull data
+                        {
+                            t_GPS_IN new_position = new t_GPS_IN();
+                            new_position.IMEI = GPScoords[0];
+                            new_position.Status = Int32.Parse(GPScoords[1]);
+                            new_position.GPS_fix = Int32.Parse(GPScoords[2]);
+                            new_position.TimestampTracker = new DateTime(
+                                                    Int32.Parse("20" + yy),
+                                                    Int32.Parse(mm),
+                                                    Int32.Parse(dd),
+                                                    Int32.Parse(GPScoords[4].Substring(0, 2)),
+                                                    Int32.Parse(GPScoords[4].Substring(2, 2)),
+                                                    Int32.Parse(GPScoords[4].Substring(4, 2)));
+                            new_position.longitude = GPScoords[5];
+                            new_position.latitude = GPScoords[6];
+                            new_position.altitude = GPScoords[7];
+                            new_position.speed = GPScoords[8];
+                            new_position.heading = GPScoords[9];
+                            new_position.nr_used_sat = Int32.Parse(GPScoords[10]);
+                            new_position.HDOP = GPScoords[11];
+                            new_position.Timestamp = DateTime.Now;
+                            new_position.Processed = false;
+
+                            db.t_GPS_INs.InsertOnSubmit(new_position);
+                            db.SubmitChanges();
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logger.Log("Exception in Server.ProcessRecievedGPSData" + ex.InnerException.Message, 12);
+                    catch (Exception ex)
+                    {
+                        Logger.Log("Exception in Server.ProcessRecievedGPSData" + ex.InnerException.Message, 12);
+                    }
                 }
             }
+            catch { }
         }
 
         /// <summary>
@@ -131,26 +139,30 @@ namespace TCPReciever
         /// </summary>
         private void ListenForClients()
         {
-            this.tcpListener.Start();
-
-            while (running)
+            try
             {
-                try
-                {
-                    //blocks until a client has connected to the server
-                    TcpClient client = this.tcpListener.AcceptTcpClient();
+                this.tcpListener.Start();
 
-                    //create a thread to handle communication
-                    //with connected client
-                    Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
-                    ThreadList.Add(clientThread);
-                    clientThread.Start(client);
-                }
-                catch (Exception ex)
+                while (running)
                 {
-                    Logger.Log("Exception in Server.ListenForClients" + ex.InnerException.Message,13);
+                    try
+                    {
+                        //blocks until a client has connected to the server
+                        TcpClient client = this.tcpListener.AcceptTcpClient();
+
+                        //create a thread to handle communication
+                        //with connected client
+                        Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
+                        ThreadList.Add(clientThread);
+                        clientThread.Start(client);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log("Exception in Server.ListenForClients" + ex.InnerException.Message, 13);
+                    }
                 }
             }
+            catch { }
         }
 
         /// <summary>

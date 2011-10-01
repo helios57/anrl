@@ -68,14 +68,8 @@ namespace AnrlService
             }
             catch (Exception ex)
             {
-#if !DEBUG
-
                 Logger.Log("Unable to start Service " + ex.InnerException.Message, 0);
-#else
-                System.Console.WriteLine("Unable to start Service " + ex.InnerException.Message);
-#endif
             }
-
         }
         private void ClientConnected(IAsyncResult result)
         {
