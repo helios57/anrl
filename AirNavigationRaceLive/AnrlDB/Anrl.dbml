@@ -9,8 +9,7 @@
       <Column Name="ID_TakeOffLine" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Parcour" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Competition_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Group" />
-      <Association Name="t_Competition_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Competition" Type="t_Penalty" />
+      <Association Name="t_Competition_t_Competition_Team" Member="t_Competition_Teams" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Team" />
       <Association Name="t_Line_t_Competition" Member="t_Line" ThisKey="ID_TakeOffLine" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
     </Type>
   </Table>
@@ -23,13 +22,20 @@
       <Association Name="t_Tracker_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Tracker" Type="t_Team_Tracker" />
     </Type>
   </Table>
-  <Table Name="dbo.t_Competition_Group" Member="t_Competition_Groups">
-    <Type Name="t_Competition_Group">
-      <Column Name="ID_Competition" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ID_Group" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Pos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Competition_t_Competition_Group" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
-      <Association Name="t_Group_t_Competition_Group" Member="t_Group" ThisKey="ID_Group" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
+  <Table Name="dbo.t_Competition_Team" Member="t_Competition_Teams">
+    <Type Name="t_Competition_Team">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StartID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Route" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Competition" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeTakeOff" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStart" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="TimeEnd" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="t_Competition_Team_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Competition_Team" Type="t_Penalty" />
+      <Association Name="t_Competition_Team_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Competition_Team" Type="t_Team_Tracker" />
+      <Association Name="t_Competition_t_Competition_Team" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
+      <Association Name="t_Team_t_Competition_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Daten" Member="t_Datens">
@@ -73,23 +79,6 @@
       <Association Name="t_GPSPoint_t_Line" Member="t_Lines" ThisKey="ID" OtherKey="ID_PointA" Type="t_Line" />
       <Association Name="t_GPSPoint_t_Line1" Member="t_Lines1" ThisKey="ID" OtherKey="ID_PointB" Type="t_Line" />
       <Association Name="t_GPSPoint_t_Line2" Member="t_Lines2" ThisKey="ID" OtherKey="ID_PointOrientation" Type="t_Line" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Group" Member="t_Groups">
-    <Type Name="t_Group">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="t_Group_t_Competition_Group" Member="t_Competition_Groups" ThisKey="ID" OtherKey="ID_Group" Type="t_Competition_Group" />
-      <Association Name="t_Group_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Group" Type="t_Group_Team" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Group_Team" Member="t_Group_Teams">
-    <Type Name="t_Group_Team">
-      <Column Name="ID_Group" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Pos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Group_t_Group_Team" Member="t_Group" ThisKey="ID_Group" OtherKey="ID" Type="t_Group" IsForeignKey="true" />
-      <Association Name="t_Team_t_Group_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Line" Member="t_Lines">
@@ -147,6 +136,15 @@
       <Association Name="t_Parcour_t_Parcour_Line" Member="t_Parcour" ThisKey="ID_Parcour" OtherKey="ID" Type="t_Parcour" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.t_Penalty" Member="t_Penalties">
+    <Type Name="t_Penalty">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reason" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Competition_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="t_Competition_Team_t_Penalty" Member="t_Competition_Team" ThisKey="ID_Competition_Team" OtherKey="ID" Type="t_Competition_Team" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.t_Picture" Member="t_Pictures">
     <Type Name="t_Picture">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -178,9 +176,7 @@
       <Column Name="Color" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="ID_Flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Association Name="t_Team_t_Group_Team" Member="t_Group_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Group_Team" />
-      <Association Name="t_Team_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Team" Type="t_Team_Tracker" />
-      <Association Name="t_Team_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Team" Type="t_Penalty" />
+      <Association Name="t_Team_t_Competition_Team" Member="t_Competition_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Competition_Team" />
       <Association Name="t_Picture_t_Team" Member="t_Picture" ThisKey="ID_Flag" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team" Member="t_Pilot" ThisKey="ID_Pilot" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team1" Member="t_Pilot1" ThisKey="ID_Navigator" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
@@ -188,21 +184,10 @@
   </Table>
   <Table Name="dbo.t_Team_Tracker" Member="t_Team_Trackers">
     <Type Name="t_Team_Tracker">
-      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ID_Competition_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="t_Team_t_Team_Tracker" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
+      <Association Name="t_Competition_Team_t_Team_Tracker" Member="t_Competition_Team" ThisKey="ID_Competition_Team" OtherKey="ID" Type="t_Competition_Team" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Tracker_t_Team_Tracker" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.t_Penalty" Member="t_Penalties">
-    <Type Name="t_Penalty">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Points" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Reason" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="ID_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ID_Competition" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_Competition_t_Penalty" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
-      <Association Name="t_Team_t_Penalty" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

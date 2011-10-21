@@ -16,8 +16,7 @@ namespace AirNavigationRaceLive.Comps
     {
         private Client.Client Client;
         private NetworkObjects.Competition competition = null;
-        private NetworkObjects.Team team = null;
-        private int pos;
+        private NetworkObjects.Parcour parcour;
 
         public Results(Client.Client iClient)
         {
@@ -33,17 +32,21 @@ namespace AirNavigationRaceLive.Comps
                 if (cce != null)
                 {
                     competition = cce.comp;
-                    comboBoxTeam.Items.Clear();
-                    foreach (NetworkObjects.CompetitionGroup cg in cce.comp.CompetitionGroupList)
+                    listViewCompetitionTeam.Items.Clear();
+                    List<int> trackers = new List<int>();
+                    long min = long.MaxValue;
+                    long max = long.MinValue;
+                    foreach (NetworkObjects.CompetitionTeam ct in competition.CompetitionTeamList)
                     {
-                        NetworkObjects.Group g = Client.getGroup(cg.ID_Group);
-                        foreach (NetworkObjects.GroupTeam gt in g.GroupTeamList)
-                        {
-                            comboBoxTeam.Items.Add(new ComboBoxTeam(Client.getTeam(gt.ID_Team), gt.Pos));
-                        }
+                        ComboBoxCompetitionTeam lvi2 = new ComboBoxCompetitionTeam(ct, new string[] { ct.StartID.ToString(), "0", getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
+                        lvi2.Tag = ct;
+                        listViewCompetitionTeam.Items.Add(lvi2);
+                        trackers.AddRange(ct.ID_TrackerList);
+                        min = Math.Min(ct.TimeTakeOff, min);
+                        max = Math.Max(ct.TimeEndLine, max);
                     }
-                    comboBoxTeam.Enabled = true;
-                    NetworkObjects.Parcour parcour = Client.getParcour(cce.comp.ID_Parcour);
+                    listViewCompetitionTeam.Enabled = true;
+                    parcour = Client.getParcour(cce.comp.ID_Parcour);
                     NetworkObjects.Map map = Client.getMap(parcour.ID_Map);
                     MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
                     visualisationPictureBox1.Image = System.Drawing.Image.FromStream(ms);
@@ -51,70 +54,70 @@ namespace AirNavigationRaceLive.Comps
                     visualisationPictureBox1.SetParcour(parcour);
                     visualisationPictureBox1.Invalidate();
                     visualisationPictureBox1.Refresh();
+                    Client.getGPSDatenCache().requestGPSData(trackers, min - 1000000000, max + 10000000000, new AsyncCallback(recieveData));
+
                 }
                 else
                 {
-                    comboBoxTeam.Enabled = false;
+                    listViewCompetitionTeam.Enabled = false;
                 }
             }
             else
             {
-                comboBoxTeam.Enabled = false;
+                listViewCompetitionTeam.Enabled = false;
             }
+        }
+        private string getTeamDsc(int ID_Team)
+        {
+            NetworkObjects.Team team = Client.getTeam(ID_Team);
+            NetworkObjects.Pilot pilot = Client.getPilot(team.ID_Pilot);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
+            if (team.ID_Navigator > 0)
+            {
+                NetworkObjects.Pilot navi = Client.getPilot(team.ID_Navigator);
+                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+            }
+            return sb.ToString();
+        }
+        private string getRouteText(int id)
+        {
+            return ((NetworkObjects.Route)id).ToString();
         }
 
-        private void comboBoxTeam_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            team = null;
-            listViewPenalty.Items.Clear();
-            fldTotalPoints.Text = "";
-            if (comboBoxTeam.SelectedItem != null)
-            {
-                ComboBoxTeam cbt = comboBoxTeam.SelectedItem as ComboBoxTeam;
-                if (cbt != null)
-                {
-                    team = cbt.team;
-                    pos = cbt.pos;
-                    if (team.ID_Tracker.Count > 0)
-                    {
-                        Client.getGPSDatenCache().requestGPSData(team.ID_Tracker, competition.TimeTakeOff - 1000000000, competition.TimeEndLine + 10000000000, new AsyncCallback(recieveData));
-                    }
-                }
-            }
-        }
+        delegate void RecieveDataCallback(IAsyncResult result);
         public void recieveData(IAsyncResult result)
         {
-            List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
-            if (data != null && team != null && competition != null)
+            if (listViewCompetitionTeam.InvokeRequired)
             {
-                visualisationPictureBox1.SetData(data, new List<NetworkObjects.Team>(new NetworkObjects.Team[] { team }));
-                visualisationPictureBox1.Invalidate();
-                if (Client.getPenalties().Count(p => p.ID_Competition == competition.ID && p.ID_Team == team.ID) > 0)
+                RecieveDataCallback d = new RecieveDataCallback(recieveData);
+                listViewCompetitionTeam.Invoke(d, new object[] { result });
+            }
+            else
+            {
+                List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
+                if (data != null && competition != null && parcour != null)
                 {
-                    List<ListViewItem> ppp = new List<ListViewItem>();
-                    foreach (NetworkObjects.Penalty p in Client.getPenalties().Where(p => p.ID_Competition == competition.ID && p.ID_Team == team.ID))
+                    foreach (ListViewItem lvi in listViewCompetitionTeam.Items)
                     {
-                        p.ID_Team = team.ID;
-                        p.ID_Competition = competition.ID;
-                        ListViewItem lvi = new ListViewItem(new String[] { p.ID.ToString(), p.Points.ToString(), p.Reason });
-                        lvi.Tag = p;
-                        ppp.Add(lvi);
+                        ComboBoxCompetitionTeam item = lvi as ComboBoxCompetitionTeam;
+                        item.penalty.Clear();
+                        item.penalty.AddRange(Client.getPenalties().Where(p => p.ID_Competition_Team == item.competitionTeam.ID));
+                        item.data.Clear();
+                        item.data.AddRange(data.Where(p => item.competitionTeam.ID_TrackerList.Contains(p.trackerID)));
+                        if (item.penalty.Count == 0)
+                        {
+                            List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(competition, item.competitionTeam, parcour, item.data, (NetworkObjects.Route)item.competitionTeam.Route);
+                            item.penalty.AddRange(penalties);
+                        }
+                        int sum = 0;
+                        foreach (NetworkObjects.Penalty p in item.penalty)
+                        {
+                            sum += p.Points;
+                        }
+                        item.SubItems[1].Text = sum.ToString();
                     }
-                    SetPenalties(ppp);
-                }
-                else
-                {
-                    List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(competition, Client.getParcour(competition.ID_Parcour), data.Where(p => team.ID_Tracker.Contains(p.trackerID)).ToList(), (NetworkObjects.GroupPosType)pos);
-                    List<ListViewItem> ppp = new List<ListViewItem>();
-                    foreach (NetworkObjects.Penalty p in penalties)
-                    {
-                        p.ID_Team = team.ID;
-                        p.ID_Competition = competition.ID;
-                        ListViewItem lvi = new ListViewItem(new String[] { p.ID.ToString(), p.Points.ToString(), p.Reason });
-                        lvi.Tag = p;
-                        ppp.Add(lvi);
-                    }
-                    SetPenalties(ppp);
+                    listViewCompetitionTeam.Invalidate();
                 }
             }
         }
@@ -131,13 +134,8 @@ namespace AirNavigationRaceLive.Comps
             }
             else
             {
-                int sum = 0;
-                foreach (ListViewItem lvi in penalties)
-                {
-                    listViewPenalty.Items.Add(lvi);
-                    sum += (lvi.Tag as NetworkObjects.Penalty).Points;
-                }
-                fldTotalPoints.Text = sum.ToString();
+                listViewPenalty.Items.Clear();
+                listViewPenalty.Items.AddRange(penalties.ToArray());
             }
         }
 
@@ -156,67 +154,64 @@ namespace AirNavigationRaceLive.Comps
             textBoxPenaltyID.Text = "0";
             textBoxPoints.Text = "0";
             textBoxReason.Text = "";
-            textBoxPenaltyID.Tag = null;
+            textBoxPenaltyID.Tag = new NetworkObjects.Penalty(); ;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            NetworkObjects.Penalty p;
-            if (textBoxPenaltyID.Tag != null)
+            if (listViewCompetitionTeam.SelectedItems.Count == 1 && textBoxPenaltyID.Tag != null)
             {
-                p = textBoxPenaltyID.Tag as NetworkObjects.Penalty;
-                ListViewItem lvi = null;
-                foreach (ListViewItem lvit in listViewPenalty.Items)
+                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                NetworkObjects.Penalty p = textBoxPenaltyID.Tag as NetworkObjects.Penalty;
+                p.ID_Competition_Team = competitionTeam.competitionTeam.ID;
+                p.Points = Int32.Parse(textBoxPoints.Text);
+                p.Reason = textBoxReason.Text;
+                if (!competitionTeam.penalty.Contains(p))
                 {
-                    if (lvit.Tag == p)
-                    {
-                        lvi = lvit;
-                    }
+                    competitionTeam.penalty.Add(p);
                 }
-                listViewPenalty.Items.Remove(lvi);
+                listViewCompetitionTeam_SelectedIndexChanged(null, null);
             }
-            else
-            {
-                p = new NetworkObjects.Penalty();
-                p.ID_Team = team.ID;
-                p.ID_Competition = competition.ID;
-            }
-            p.Points = Int32.Parse(textBoxPoints.Text);
-            p.Reason = textBoxReason.Text;
-            ListViewItem lvi2 = new ListViewItem(new String[] { p.ID.ToString(), p.Points.ToString(), p.Reason });
-            lvi2.Tag = p;
-            listViewPenalty.Items.Add(lvi2);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (listViewPenalty.SelectedItems.Count == 1)
+            if (listViewCompetitionTeam.SelectedItems.Count == 1)
             {
-                ListViewItem lvi = listViewPenalty.SelectedItems[0];
-                NetworkObjects.Penalty p = lvi.Tag as NetworkObjects.Penalty;
-                if (p.ID > 0)
+                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                if (listViewPenalty.SelectedItems.Count == 1)
                 {
-                    Client.deletePenalty(p.ID);
-                    listViewPenalty.Items.Clear();
-                    Client.getGPSDatenCache().requestGPSData(team.ID_Tracker, competition.TimeTakeOff - 10000000, competition.TimeEndLine + 10000000, new AsyncCallback(recieveData));
-                }
-                else
-                {
-                    listViewPenalty.Items.Remove(lvi);
+                    ListViewItem lvi = listViewPenalty.SelectedItems[0];
+                    NetworkObjects.Penalty p = lvi.Tag as NetworkObjects.Penalty;
+                    competitionTeam.penalty.Remove(p);
+                    if (p.ID > 0)
+                    {
+                        Client.deletePenalty(p.ID);
+                    }
+                    listViewCompetitionTeam_SelectedIndexChanged(null, null);
                 }
             }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem lvi in listViewPenalty.Items)
+            if (listViewCompetitionTeam.SelectedItems.Count == 1)
             {
-                Client.savePenalty(lvi.Tag as NetworkObjects.Penalty);
-            }
-            listViewPenalty.Items.Clear();
-            if (team.ID_Tracker.Count > 0)
-            {
-                Client.getGPSDatenCache().requestGPSData(team.ID_Tracker, competition.TimeTakeOff - 10000000, competition.TimeEndLine + 10000000, new AsyncCallback(recieveData));
+                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                foreach (ListViewItem lvi in listViewPenalty.Items)
+                {
+                    NetworkObjects.Penalty penalty = lvi.Tag as NetworkObjects.Penalty;
+                    penalty.ID_Competition_Team = competitionTeam.competitionTeam.ID;
+
+                    if (penalty.ID > 0)
+                    {
+                        Client.deletePenalty(penalty.ID);
+                    }
+                    Client.savePenalty(penalty);
+                }
+                competitionTeam.penalty.Clear();
+                competitionTeam.penalty.AddRange(Client.getPenalties().Where(p => p.ID_Competition_Team == competitionTeam.competitionTeam.ID));
+                listViewCompetitionTeam_SelectedIndexChanged(null, null);
             }
         }
 
@@ -236,21 +231,37 @@ namespace AirNavigationRaceLive.Comps
         private void btnPdf_Click(object sender, EventArgs e)
         {
             sharpPDF.pdfDocument d = new sharpPDF.pdfDocument("Test", "SharpSoft");
-            
+
+        }
+
+        private void listViewCompetitionTeam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (listViewCompetitionTeam.SelectedItems.Count == 1)
+            {
+                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                visualisationPictureBox1.SetData(competitionTeam.data, new List<NetworkObjects.Team>(new NetworkObjects.Team[] { Client.getTeam(competitionTeam.competitionTeam.ID_Team) }), new List<NetworkObjects.CompetitionTeam>(new NetworkObjects.CompetitionTeam[] { competitionTeam.competitionTeam }));
+                visualisationPictureBox1.Invalidate();
+                List<ListViewItem> ppp = new List<ListViewItem>();
+                foreach (NetworkObjects.Penalty p in competitionTeam.penalty)
+                {
+                    ListViewItem lvi = new ListViewItem(new String[] { p.ID.ToString(), p.Points.ToString(), p.Reason });
+                    lvi.Tag = p;
+                    ppp.Add(lvi);
+                }
+                SetPenalties(ppp);
+            }
         }
     }
-    class ComboBoxTeam
+    class ComboBoxCompetitionTeam : ListViewItem
     {
-        public readonly NetworkObjects.Team team;
-        public readonly int pos;
-        public ComboBoxTeam(NetworkObjects.Team team, int pos)
+        public readonly NetworkObjects.CompetitionTeam competitionTeam;
+        public readonly List<NetworkObjects.Penalty> penalty = new List<NetworkObjects.Penalty>();
+        public readonly List<NetworkObjects.GPSData> data = new List<NetworkObjects.GPSData>();
+        public ComboBoxCompetitionTeam(NetworkObjects.CompetitionTeam team, string[] display)
+            : base(display)
         {
-            this.team = team;
-            this.pos = pos;
-        }
-        public override string ToString()
-        {
-            return team.Name;
+            this.competitionTeam = team;
         }
     }
 }

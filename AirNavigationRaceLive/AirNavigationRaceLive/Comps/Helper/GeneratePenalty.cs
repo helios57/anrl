@@ -9,7 +9,7 @@ namespace AirNavigationRaceLive.Comps.Helper
     {
         private const long tickOfSecond = 10000000;
         private const long tickOfMinute = tickOfSecond * 60;
-        public static List<NetworkObjects.Penalty> CalculatePenaltyPoints(NetworkObjects.Competition competition, NetworkObjects.Parcour parcour, List<NetworkObjects.GPSData> data, NetworkObjects.GroupPosType type)
+        public static List<NetworkObjects.Penalty> CalculatePenaltyPoints(NetworkObjects.Competition competition, NetworkObjects.CompetitionTeam competitionTeam, NetworkObjects.Parcour parcour, List<NetworkObjects.GPSData> data, NetworkObjects.Route type)
         {
             List<NetworkObjects.Penalty> result = new List<NetworkObjects.Penalty>();
             NetworkObjects.GPSData last = null;
@@ -49,9 +49,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 maxTimestamp = Math.Max(d.timestampGPS, maxTimestamp);
             }
-            bool shouldHaveCrossedTakeOff = (maxTimestamp - 2 * tickOfMinute) > competition.TimeTakeOff;
-            bool shouldHaveCrossedStart = (maxTimestamp - 2 * tickOfMinute) > competition.TimeStartLine;
-            bool shouldHaveCrossedEnd = (maxTimestamp - 2 * tickOfMinute) > competition.TimeEndLine;
+            bool shouldHaveCrossedTakeOff = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeTakeOff;
+            bool shouldHaveCrossedStart = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeStartLine;
+            bool shouldHaveCrossedEnd = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeEndLine;
 
             bool haveCrossedTakeOff = false;
             bool haveCrossedStart = false;
@@ -71,13 +71,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     haveCrossedStart = true;
                     double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
-                    double diff = crossTime - competition.TimeStartLine;
+                    double diff = crossTime - competitionTeam.TimeStartLine;
                     if (Math.Abs(diff) > tickOfSecond)
                     {
                         NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
                         double seconds = Math.Abs(diff / tickOfSecond);
                         penalty.Points = (int)Math.Min(seconds * 3, 200);
-                        penalty.Reason = "Crossed Start-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competition.TimeStartLine).ToLongTimeString();
+                        penalty.Reason = "Crossed Start-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competitionTeam.TimeStartLine).ToLongTimeString();
                         result.Add(penalty);
                     }
                 }
@@ -85,13 +85,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     haveCrossedEnd = true;
                     double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionEnd);
-                    double diff = crossTime - competition.TimeEndLine;
+                    double diff = crossTime - competitionTeam.TimeEndLine;
                     if (Math.Abs(diff) > tickOfSecond)
                     {
                         NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
                         double seconds = Math.Abs(diff / tickOfSecond);
                         penalty.Points = Math.Min((int)seconds * 3, 200);
-                        penalty.Reason = "Crossed End-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competition.TimeEndLine).ToLongTimeString();
+                        penalty.Reason = "Crossed End-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competitionTeam.TimeEndLine).ToLongTimeString();
                         result.Add(penalty);
                     }
                 }
@@ -181,26 +181,26 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             return -1;
         }
-        private static LineP getStartLine(NetworkObjects.Parcour parcour, NetworkObjects.GroupPosType type)
+        private static LineP getStartLine(NetworkObjects.Parcour parcour, NetworkObjects.Route type)
         {
             NetworkObjects.Line nl = null;
             try
             {
                 switch (type)
                 {
-                    case NetworkObjects.GroupPosType.A:
+                    case NetworkObjects.Route.A:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START_A); break;
                         }
-                    case NetworkObjects.GroupPosType.B:
+                    case NetworkObjects.Route.B:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START_B); break;
                         }
-                    case NetworkObjects.GroupPosType.C:
+                    case NetworkObjects.Route.C:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START_C); break;
                         }
-                    case NetworkObjects.GroupPosType.D:
+                    case NetworkObjects.Route.D:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START_D); break;
                         }
@@ -217,26 +217,26 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             return l;
         }
-        private static LineP getEndLine(NetworkObjects.Parcour parcour, NetworkObjects.GroupPosType type)
+        private static LineP getEndLine(NetworkObjects.Parcour parcour, NetworkObjects.Route type)
         {
             NetworkObjects.Line nl = null;
             try
             {
                 switch (type)
                 {
-                    case NetworkObjects.GroupPosType.A:
+                    case NetworkObjects.Route.A:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.END_A); break;
                         }
-                    case NetworkObjects.GroupPosType.B:
+                    case NetworkObjects.Route.B:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.END_B); break;
                         }
-                    case NetworkObjects.GroupPosType.C:
+                    case NetworkObjects.Route.C:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.END_C); break;
                         }
-                    case NetworkObjects.GroupPosType.D:
+                    case NetworkObjects.Route.D:
                         {
                             nl = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.END_D); break;
                         }

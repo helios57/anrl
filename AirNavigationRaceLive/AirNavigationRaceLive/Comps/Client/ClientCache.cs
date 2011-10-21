@@ -17,7 +17,6 @@ namespace AirNavigationRaceLive.Comps.Client
         public readonly ClientCacheList<NetworkObjects.Pilot> cachePilot;
         public readonly ClientCacheList<NetworkObjects.Tracker> cacheTracker;
         public readonly ClientCacheList<NetworkObjects.Team> cacheTeam;
-        public readonly ClientCacheList<NetworkObjects.Group> cacheGroup;
         public readonly ClientCacheList<NetworkObjects.Competition> cacheCompetition;
         public readonly ClientCacheList<NetworkObjects.Penalty> cachePenalty;
         private bool first = true;
@@ -33,7 +32,6 @@ namespace AirNavigationRaceLive.Comps.Client
             cachePilot = new ClientCacheList<NetworkObjects.Pilot>(new ClientCacheLoader<NetworkObjects.Pilot>(c, NetworkObjects.EObjectType.Pilot));
             cacheTracker = new ClientCacheList<NetworkObjects.Tracker>(new ClientCacheLoader<NetworkObjects.Tracker>(c, NetworkObjects.EObjectType.Tracker));
             cacheTeam = new ClientCacheList<NetworkObjects.Team>(new ClientCacheLoader<NetworkObjects.Team>(c, NetworkObjects.EObjectType.Team));
-            cacheGroup = new ClientCacheList<NetworkObjects.Group>(new ClientCacheLoader<NetworkObjects.Group>(c, NetworkObjects.EObjectType.Group));
             cacheCompetition = new ClientCacheList<NetworkObjects.Competition>(new ClientCacheLoader<NetworkObjects.Competition>(c, NetworkObjects.EObjectType.Competition));
             cachePenalty = new ClientCacheList<NetworkObjects.Penalty>(new ClientCacheLoader<NetworkObjects.Penalty>(c, NetworkObjects.EObjectType.Penalty));
             t = new Timer(10);
@@ -53,7 +51,6 @@ namespace AirNavigationRaceLive.Comps.Client
             r.ResponseParameters.PilotList.AddRange(cachePilot.getAll());
             r.ResponseParameters.TrackerList.AddRange(cacheTracker.getAll());
             r.ResponseParameters.TeamList.AddRange(cacheTeam.getAll());
-            r.ResponseParameters.GroupList.AddRange(cacheGroup.getAll());
             r.ResponseParameters.CompetitionList.AddRange(cacheCompetition.getAll());
             r.ResponseParameters.PenaltyList.AddRange(cachePenalty.getAll());
             try
@@ -86,7 +83,6 @@ namespace AirNavigationRaceLive.Comps.Client
                     cachePilot.addAll(root.ResponseParameters.PilotList);
                     cacheTracker.addAll(root.ResponseParameters.TrackerList);
                     cacheTeam.addAll(root.ResponseParameters.TeamList);
-                    cacheGroup.addAll(root.ResponseParameters.GroupList);
                     cacheCompetition.addAll(root.ResponseParameters.CompetitionList);
                     cachePenalty.addAll(root.ResponseParameters.PenaltyList);
                     s.Close();
@@ -125,7 +121,6 @@ namespace AirNavigationRaceLive.Comps.Client
             cachePicture.update(partial);
             cacheParcour.update(partial);
             cacheTeam.update(partial);
-            cacheGroup.update(partial);
             cacheCompetition.update(partial);
             cachePenalty.update(partial);
             Persist();

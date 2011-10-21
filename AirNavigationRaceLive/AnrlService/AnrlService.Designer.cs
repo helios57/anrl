@@ -1,6 +1,6 @@
 ﻿namespace AnrlService
 {
-    partial class AnrlService
+    partial class AnrlServiceImpl
     {
         /// <summary> 
         /// Required designer variable.

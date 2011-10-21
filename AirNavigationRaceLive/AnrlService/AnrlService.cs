@@ -15,7 +15,7 @@ using AnrlService.Server;
 using AnrlDB;
 namespace AnrlService
 {
-    public partial class AnrlService : ServiceBase
+    public partial class AnrlServiceImpl : ServiceBase
     {
         private const int PORT = 1337;
         private const int PORTGPS = 1338;
@@ -24,7 +24,7 @@ namespace AnrlService
         private static GPSRequestProcessor GPSprocessor;
         private Socket listener;
         private Socket listenerGPS;
-        public AnrlService()
+        public AnrlServiceImpl()
         {
             InitializeComponent();
         }
@@ -110,12 +110,12 @@ namespace AnrlService
                 {
                     reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
                 }
-                if (processor == null || !processor.isUseable())
+                if (processor == null)
                 {
                     processor = new RequestProcessor();
                 }
-                Root response = processor.proccessRequest(reqest);
-                // Root response = new RequestProcessor().proccessRequest(reqest);
+                Root response = processor.proccess(reqest);
+
                 if (response != null)
                 {
                     Serializer.SerializeWithLengthPrefix(stream, response, PrefixStyle.Base128);

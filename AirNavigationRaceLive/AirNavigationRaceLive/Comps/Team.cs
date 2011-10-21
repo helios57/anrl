@@ -69,24 +69,6 @@ namespace AirNavigationRaceLive.Comps
                 listViewPilots.Items.Add(lvi);
             }
             List<NetworkObjects.Tracker> trackers = Client.getTrackers();
-            trackerListView.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers)
-            {
-                ListViewItem lvi = new ListViewItem(new string[] { t.ID.ToString(), t.Name, t.IMEI });
-                lvi.Tag = t;
-                trackerListView.Items.Add(lvi);
-            }
-            /*List<IPicture> flags = null;// Client.getPictures(true);
-            comboBoxCountry.Items.Clear();
-            foreach (IPicture p in flags)
-            {
-                Flag f = new Flag(p);
-                comboBoxCountry.Items.Add(f);
-                if (f.ToString() == "Switzerland")
-                {
-                    comboBoxCountry.SelectedItem = f;
-                }
-            }*/
         }
 
         private void UpdateEnablement()
@@ -101,7 +83,6 @@ namespace AirNavigationRaceLive.Comps
             btnSave.Enabled = teamSelected && textBoxPilot.Tag != null /*&& comboBoxCountry.SelectedItem != null*/;
             btnColorSelect.Enabled = teamSelected;
             fldAC.Enabled = teamSelected;
-            trackerListView.Enabled = teamSelected;
             textBoxName.Enabled = teamSelected;
         }
 
@@ -155,13 +136,8 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if ((textBoxID.Tag != null || newTeam) && textBoxPilot.Tag != null/*&& comboBoxCountry.SelectedItem != null*/)
+            if ((textBoxID.Tag != null || newTeam) && textBoxPilot.Tag != null)
             {
-                /*IPicture flag;
-                Flag f = comboBoxCountry.SelectedItem as Flag;
-                flag = f.getPicture();
-                TeamEntry te = new TeamEntry(,textBoxPilot.Tag as IPilot, textBoxNavigator.Tag as IPilot,textTracker.Tag as ITracker, btnColorSelect.BackColor.Name,flag);
-                //Client.addTeam(te);*/
                 NetworkObjects.Team team = new NetworkObjects.Team();
                 team.ID = Math.Max(Int32.Parse(textBoxID.Text), 0);
                 team.ID_Pilot = (textBoxPilot.Tag as NetworkObjects.Pilot).ID;
@@ -172,14 +148,6 @@ namespace AirNavigationRaceLive.Comps
                     team.ID_Navigator = (textBoxNavigator.Tag as NetworkObjects.Pilot).ID;
                 }
                 team.Color = btnColorSelect.BackColor.Name;
-                foreach (ListViewItem lvi in trackerListView.Items)
-                {
-                    if (lvi.Checked)
-                    {
-                        NetworkObjects.Tracker tracker = lvi.Tag as NetworkObjects.Tracker;
-                        team.ID_Tracker.Add(tracker.ID);
-                    }
-                }
                 int id = Client.saveTeam(team);
                 resetFields();
                 UpdateEnablement();
@@ -199,11 +167,6 @@ namespace AirNavigationRaceLive.Comps
             btnColorSelect.BackColor = Color.Gray;
             textBoxName.Text = "";
             fldAC.Text = "";
-            trackerListView.SelectedItems.Clear();
-            foreach (ListViewItem lvi in trackerListView.Items)
-            {
-                lvi.Checked = false;
-            }
         }
 
         private void listViewTeam_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,24 +190,7 @@ namespace AirNavigationRaceLive.Comps
                 textBoxNavigator.Tag = navigator;
                 textBoxNavigator.Text = (navigator != null) ? navigator.Name : "";
                 fldAC.Text = team.Description;
-                /*
-                Flag selected = null;
-                String flagName = team.FlagPicture.Name.Trim();
-                foreach (object o in comboBoxCountry.Items)
-                {
-                    Flag f = o as Flag;
-                    if (f!= null && f.ToString() == flagName )
-                    {
-                        selected = f;
-                    }
-                }
-                comboBoxCountry.SelectedItem = selected;*/
                 btnColorSelect.BackColor = Color.FromName(team.Color.Trim());
-                foreach (ListViewItem lvi in trackerListView.Items)
-                {
-                    NetworkObjects.Tracker tracker = lvi.Tag as NetworkObjects.Tracker;
-                    lvi.Checked = team.ID_Tracker.Contains(tracker.ID);
-                }
             }
             else
             {

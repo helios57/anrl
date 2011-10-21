@@ -16,7 +16,7 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
-            AnrlService.AnrlService service = new AnrlService.AnrlService();
+            AnrlService.AnrlServiceImpl service = new AnrlService.AnrlServiceImpl();
             service.start();
             Thread.Sleep(Int32.MaxValue);
             /*int PORT = 1337;

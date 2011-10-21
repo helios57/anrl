@@ -113,10 +113,10 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 Tracker t = new Tracker(Team.ID);
                 t.Color = Color.FromName(Team.Color);
-                foreach (GPSData data in gpsList.Where(p => Team.ID_Tracker.Contains(p.trackerID)))
-                {
+                //TODOforeach (GPSData data in gpsList.Where(p => Team.ID_Tracker.Contains(p.trackerID)))
+                /*{
                     t.Pointlist.Add(new Points((decimal)data.longitude, (decimal)data.latitude, (decimal)data.altitude));
-                }
+                }*/
                 TrackList.Add(t);
             }
             result += GenerateKMLHeader(TrackList);

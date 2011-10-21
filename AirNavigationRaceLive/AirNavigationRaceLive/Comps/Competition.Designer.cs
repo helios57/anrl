@@ -42,10 +42,6 @@
             this.date = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.timeTakeOff = new System.Windows.Forms.DateTimePicker();
-            this.timeStart = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.timeEnd = new System.Windows.Forms.DateTimePicker();
-            this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.parcours = new System.Windows.Forms.ComboBox();
             this.btnNew = new System.Windows.Forms.Button();
@@ -59,18 +55,33 @@
             this.takeOffRightLongitude = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.btnCalc = new System.Windows.Forms.Button();
-            this.listViewSelectedGroup = new System.Windows.Forms.ListView();
+            this.listViewCompetitionTeam = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnUp = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.listViewGroups = new System.Windows.Forms.ListView();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnAddToCompetition = new System.Windows.Forms.Button();
-            this.btnRefreshGroup = new System.Windows.Forms.Button();
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnDeleteCompetitionTeam = new System.Windows.Forms.Button();
+            this.btnNewCompetitionTeam = new System.Windows.Forms.Button();
+            this.textBoxStartId = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.comboBoxTeam = new System.Windows.Forms.ComboBox();
+            this.timeStart = new System.Windows.Forms.DateTimePicker();
+            this.label16 = new System.Windows.Forms.Label();
+            this.timeEnd = new System.Windows.Forms.DateTimePicker();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBoxRoute = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.btnSaveCompetitionTeam = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.listViewTrackers = new System.Windows.Forms.ListView();
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btnDeleteCompetitions
@@ -139,11 +150,9 @@
             // 
             // textName
             // 
-            this.textName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.textName.Location = new System.Drawing.Point(327, 113);
             this.textName.Name = "textName";
-            this.textName.Size = new System.Drawing.Size(146, 20);
+            this.textName.Size = new System.Drawing.Size(140, 20);
             this.textName.TabIndex = 30;
             // 
             // label2
@@ -162,7 +171,7 @@
             this.textID.Enabled = false;
             this.textID.Location = new System.Drawing.Point(327, 87);
             this.textID.Name = "textID";
-            this.textID.Size = new System.Drawing.Size(84, 20);
+            this.textID.Size = new System.Drawing.Size(140, 20);
             this.textID.TabIndex = 28;
             // 
             // label1
@@ -181,7 +190,7 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(267, 142);
+            this.label3.Location = new System.Drawing.Point(433, 379);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 31;
@@ -190,9 +199,9 @@
             // date
             // 
             this.date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date.Location = new System.Drawing.Point(327, 139);
+            this.date.Location = new System.Drawing.Point(436, 395);
             this.date.Name = "date";
-            this.date.Size = new System.Drawing.Size(84, 20);
+            this.date.Size = new System.Drawing.Size(73, 20);
             this.date.TabIndex = 32;
             // 
             // label4
@@ -200,7 +209,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(267, 165);
+            this.label4.Location = new System.Drawing.Point(512, 379);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 33;
@@ -208,59 +217,20 @@
             // 
             // timeTakeOff
             // 
-            this.timeTakeOff.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timeTakeOff.Location = new System.Drawing.Point(327, 165);
+            this.timeTakeOff.CustomFormat = "HH:mm";
+            this.timeTakeOff.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeTakeOff.Location = new System.Drawing.Point(515, 395);
             this.timeTakeOff.Name = "timeTakeOff";
             this.timeTakeOff.ShowUpDown = true;
-            this.timeTakeOff.Size = new System.Drawing.Size(84, 20);
+            this.timeTakeOff.Size = new System.Drawing.Size(50, 20);
             this.timeTakeOff.TabIndex = 34;
-            // 
-            // timeStart
-            // 
-            this.timeStart.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timeStart.Location = new System.Drawing.Point(327, 191);
-            this.timeStart.Name = "timeStart";
-            this.timeStart.ShowUpDown = true;
-            this.timeStart.Size = new System.Drawing.Size(84, 20);
-            this.timeStart.TabIndex = 36;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(267, 194);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Start";
-            // 
-            // timeEnd
-            // 
-            this.timeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.timeEnd.Location = new System.Drawing.Point(327, 217);
-            this.timeEnd.Name = "timeEnd";
-            this.timeEnd.ShowUpDown = true;
-            this.timeEnd.Size = new System.Drawing.Size(84, 20);
-            this.timeEnd.TabIndex = 38;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(267, 220);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 13);
-            this.label6.TabIndex = 37;
-            this.label6.Text = "End";
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(267, 244);
+            this.label8.Location = new System.Drawing.Point(267, 142);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 13);
             this.label8.TabIndex = 39;
@@ -268,22 +238,18 @@
             // 
             // parcours
             // 
-            this.parcours.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.parcours.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.parcours.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.parcours.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.parcours.FormattingEnabled = true;
-            this.parcours.Location = new System.Drawing.Point(327, 241);
+            this.parcours.Location = new System.Drawing.Point(327, 139);
             this.parcours.Name = "parcours";
-            this.parcours.Size = new System.Drawing.Size(146, 21);
+            this.parcours.Size = new System.Drawing.Size(140, 21);
             this.parcours.TabIndex = 40;
             this.parcours.SelectedIndexChanged += new System.EventHandler(this.parcours_SelectedIndexChanged);
             // 
             // btnNew
             // 
-            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNew.Location = new System.Drawing.Point(264, 56);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(203, 25);
@@ -297,7 +263,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(267, 272);
+            this.label9.Location = new System.Drawing.Point(475, 68);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(124, 13);
             this.label9.TabIndex = 42;
@@ -308,7 +274,7 @@
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(267, 291);
+            this.label10.Location = new System.Drawing.Point(475, 93);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 13);
             this.label10.TabIndex = 43;
@@ -316,9 +282,7 @@
             // 
             // takeOffLeftLongitude
             // 
-            this.takeOffLeftLongitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.takeOffLeftLongitude.Location = new System.Drawing.Point(375, 288);
+            this.takeOffLeftLongitude.Location = new System.Drawing.Point(583, 90);
             this.takeOffLeftLongitude.Name = "takeOffLeftLongitude";
             this.takeOffLeftLongitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffLeftLongitude.TabIndex = 44;
@@ -326,9 +290,7 @@
             // 
             // takeOffLeftLatitude
             // 
-            this.takeOffLeftLatitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.takeOffLeftLatitude.Location = new System.Drawing.Point(375, 313);
+            this.takeOffLeftLatitude.Location = new System.Drawing.Point(583, 115);
             this.takeOffLeftLatitude.Name = "takeOffLeftLatitude";
             this.takeOffLeftLatitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffLeftLatitude.TabIndex = 46;
@@ -339,7 +301,7 @@
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(267, 316);
+            this.label11.Location = new System.Drawing.Point(475, 118);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(93, 13);
             this.label11.TabIndex = 45;
@@ -347,9 +309,7 @@
             // 
             // takeOffRightLatitude
             // 
-            this.takeOffRightLatitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.takeOffRightLatitude.Location = new System.Drawing.Point(375, 365);
+            this.takeOffRightLatitude.Location = new System.Drawing.Point(583, 167);
             this.takeOffRightLatitude.Name = "takeOffRightLatitude";
             this.takeOffRightLatitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffRightLatitude.TabIndex = 50;
@@ -360,7 +320,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(267, 368);
+            this.label12.Location = new System.Drawing.Point(475, 170);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 13);
             this.label12.TabIndex = 49;
@@ -368,9 +328,7 @@
             // 
             // takeOffRightLongitude
             // 
-            this.takeOffRightLongitude.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.takeOffRightLongitude.Location = new System.Drawing.Point(375, 340);
+            this.takeOffRightLongitude.Location = new System.Drawing.Point(583, 142);
             this.takeOffRightLongitude.Name = "takeOffRightLongitude";
             this.takeOffRightLongitude.Size = new System.Drawing.Size(98, 20);
             this.takeOffRightLongitude.TabIndex = 48;
@@ -381,7 +339,7 @@
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(267, 343);
+            this.label13.Location = new System.Drawing.Point(475, 145);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(109, 13);
             this.label13.TabIndex = 47;
@@ -389,9 +347,7 @@
             // 
             // btnCalc
             // 
-            this.btnCalc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCalc.Location = new System.Drawing.Point(397, 264);
+            this.btnCalc.Location = new System.Drawing.Point(605, 64);
             this.btnCalc.Name = "btnCalc";
             this.btnCalc.Size = new System.Drawing.Size(76, 21);
             this.btnCalc.TabIndex = 51;
@@ -399,141 +355,281 @@
             this.btnCalc.UseVisualStyleBackColor = true;
             this.btnCalc.Click += new System.EventHandler(this.btnCalc_Click);
             // 
-            // listViewSelectedGroup
+            // listViewCompetitionTeam
             // 
-            this.listViewSelectedGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.listViewCompetitionTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewSelectedGroup.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewCompetitionTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
-            this.listViewSelectedGroup.FullRowSelect = true;
-            this.listViewSelectedGroup.GridLines = true;
-            this.listViewSelectedGroup.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewSelectedGroup.HideSelection = false;
-            this.listViewSelectedGroup.Location = new System.Drawing.Point(264, 391);
-            this.listViewSelectedGroup.MultiSelect = false;
-            this.listViewSelectedGroup.Name = "listViewSelectedGroup";
-            this.listViewSelectedGroup.Size = new System.Drawing.Size(265, 117);
-            this.listViewSelectedGroup.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.listViewSelectedGroup.TabIndex = 52;
-            this.listViewSelectedGroup.UseCompatibleStateImageBehavior = false;
-            this.listViewSelectedGroup.View = System.Windows.Forms.View.Details;
-            this.listViewSelectedGroup.SelectedIndexChanged += new System.EventHandler(this.listViewSelectedGroup_SelectedIndexChanged);
+            this.columnHeader9,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader10});
+            this.listViewCompetitionTeam.FullRowSelect = true;
+            this.listViewCompetitionTeam.GridLines = true;
+            this.listViewCompetitionTeam.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewCompetitionTeam.HideSelection = false;
+            this.listViewCompetitionTeam.Location = new System.Drawing.Point(264, 193);
+            this.listViewCompetitionTeam.MultiSelect = false;
+            this.listViewCompetitionTeam.Name = "listViewCompetitionTeam";
+            this.listViewCompetitionTeam.Size = new System.Drawing.Size(602, 183);
+            this.listViewCompetitionTeam.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listViewCompetitionTeam.TabIndex = 52;
+            this.listViewCompetitionTeam.UseCompatibleStateImageBehavior = false;
+            this.listViewCompetitionTeam.View = System.Windows.Forms.View.Details;
+            this.listViewCompetitionTeam.SelectedIndexChanged += new System.EventHandler(this.listViewCompetitionTeam_SelectedIndexChanged);
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Position";
-            this.columnHeader3.Width = 54;
+            this.columnHeader3.Text = "Start ID";
+            this.columnHeader3.Width = 50;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "ID_Group";
+            this.columnHeader4.Text = "ID_Crew";
             this.columnHeader4.Width = 58;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "AC";
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Name";
-            this.columnHeader5.Width = 267;
+            this.columnHeader5.Text = "Crew";
+            this.columnHeader5.Width = 207;
             // 
-            // btnUp
+            // columnHeader6
             // 
-            this.btnUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUp.Location = new System.Drawing.Point(535, 409);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(85, 27);
-            this.btnUp.TabIndex = 53;
-            this.btnUp.Text = "Up";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            this.columnHeader6.Text = "Take Off";
             // 
-            // btnDown
+            // columnHeader7
             // 
-            this.btnDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDown.Location = new System.Drawing.Point(535, 442);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(85, 27);
-            this.btnDown.TabIndex = 54;
-            this.btnDown.Text = "Down";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            this.columnHeader7.Text = "Start";
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "End";
+            this.columnHeader8.Width = 51;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Route";
+            this.columnHeader10.Width = 48;
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Location = new System.Drawing.Point(264, 514);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(203, 28);
+            this.btnSave.Size = new System.Drawing.Size(326, 28);
             this.btnSave.TabIndex = 55;
             this.btnSave.Text = "Save Competition";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // listViewGroups
+            // btnDeleteCompetitionTeam
             // 
-            this.listViewGroups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.btnDeleteCompetitionTeam.Location = new System.Drawing.Point(308, 420);
+            this.btnDeleteCompetitionTeam.Name = "btnDeleteCompetitionTeam";
+            this.btnDeleteCompetitionTeam.Size = new System.Drawing.Size(48, 28);
+            this.btnDeleteCompetitionTeam.TabIndex = 56;
+            this.btnDeleteCompetitionTeam.Text = "Delete";
+            this.btnDeleteCompetitionTeam.UseVisualStyleBackColor = true;
+            this.btnDeleteCompetitionTeam.Click += new System.EventHandler(this.btnDeleteCompetitionTeam_Click);
+            // 
+            // btnNewCompetitionTeam
+            // 
+            this.btnNewCompetitionTeam.Location = new System.Drawing.Point(264, 420);
+            this.btnNewCompetitionTeam.Name = "btnNewCompetitionTeam";
+            this.btnNewCompetitionTeam.Size = new System.Drawing.Size(38, 28);
+            this.btnNewCompetitionTeam.TabIndex = 57;
+            this.btnNewCompetitionTeam.Text = "New";
+            this.btnNewCompetitionTeam.UseVisualStyleBackColor = true;
+            this.btnNewCompetitionTeam.Click += new System.EventHandler(this.btnNewCompetitionTeam_Click);
+            // 
+            // textBoxStartId
+            // 
+            this.textBoxStartId.Enabled = false;
+            this.textBoxStartId.Location = new System.Drawing.Point(264, 394);
+            this.textBoxStartId.Name = "textBoxStartId";
+            this.textBoxStartId.Size = new System.Drawing.Size(38, 20);
+            this.textBoxStartId.TabIndex = 58;
+            this.textBoxStartId.TextChanged += new System.EventHandler(this.textBoxStartId_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewGroups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8});
-            this.listViewGroups.FullRowSelect = true;
-            this.listViewGroups.GridLines = true;
-            this.listViewGroups.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewGroups.HideSelection = false;
-            this.listViewGroups.Location = new System.Drawing.Point(531, 3);
-            this.listViewGroups.MultiSelect = false;
-            this.listViewGroups.Name = "listViewGroups";
-            this.listViewGroups.Size = new System.Drawing.Size(212, 312);
-            this.listViewGroups.TabIndex = 56;
-            this.listViewGroups.UseCompatibleStateImageBehavior = false;
-            this.listViewGroups.View = System.Windows.Forms.View.Details;
-            this.listViewGroups.SelectedIndexChanged += new System.EventHandler(this.listViewGroups_SelectedIndexChanged);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(264, 379);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 13);
+            this.label14.TabIndex = 59;
+            this.label14.Text = "Start ID";
             // 
-            // columnHeader7
+            // label15
             // 
-            this.columnHeader7.Text = "ID_Group";
-            this.columnHeader7.Width = 58;
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(313, 379);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(31, 13);
+            this.label15.TabIndex = 60;
+            this.label15.Text = "Crew";
             // 
-            // columnHeader8
+            // comboBoxTeam
             // 
-            this.columnHeader8.Text = "Name";
-            this.columnHeader8.Width = 150;
+            this.comboBoxTeam.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxTeam.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTeam.FormattingEnabled = true;
+            this.comboBoxTeam.Location = new System.Drawing.Point(308, 393);
+            this.comboBoxTeam.Name = "comboBoxTeam";
+            this.comboBoxTeam.Size = new System.Drawing.Size(119, 21);
+            this.comboBoxTeam.TabIndex = 61;
+            this.comboBoxTeam.SelectedIndexChanged += new System.EventHandler(this.comboBoxTeam_SelectedIndexChanged);
             // 
-            // btnAddToCompetition
+            // timeStart
             // 
-            this.btnAddToCompetition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddToCompetition.Location = new System.Drawing.Point(531, 321);
-            this.btnAddToCompetition.Name = "btnAddToCompetition";
-            this.btnAddToCompetition.Size = new System.Drawing.Size(212, 29);
-            this.btnAddToCompetition.TabIndex = 57;
-            this.btnAddToCompetition.Text = "Add to Competition";
-            this.btnAddToCompetition.UseVisualStyleBackColor = true;
-            this.btnAddToCompetition.Click += new System.EventHandler(this.btnAddToCompetition_Click);
+            this.timeStart.CustomFormat = "HH:mm";
+            this.timeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeStart.Location = new System.Drawing.Point(571, 395);
+            this.timeStart.Name = "timeStart";
+            this.timeStart.ShowUpDown = true;
+            this.timeStart.Size = new System.Drawing.Size(50, 20);
+            this.timeStart.TabIndex = 63;
             // 
-            // btnRefreshGroup
+            // label16
             // 
-            this.btnRefreshGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefreshGroup.Location = new System.Drawing.Point(531, 356);
-            this.btnRefreshGroup.Name = "btnRefreshGroup";
-            this.btnRefreshGroup.Size = new System.Drawing.Size(212, 29);
-            this.btnRefreshGroup.TabIndex = 58;
-            this.btnRefreshGroup.Text = "Refresh Group List";
-            this.btnRefreshGroup.UseVisualStyleBackColor = true;
-            this.btnRefreshGroup.Click += new System.EventHandler(this.btnRefreshGroup_Click);
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(568, 379);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(55, 13);
+            this.label16.TabIndex = 62;
+            this.label16.Text = "Start Gate";
+            // 
+            // timeEnd
+            // 
+            this.timeEnd.CustomFormat = "HH:mm";
+            this.timeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeEnd.Location = new System.Drawing.Point(627, 395);
+            this.timeEnd.Name = "timeEnd";
+            this.timeEnd.ShowUpDown = true;
+            this.timeEnd.Size = new System.Drawing.Size(50, 20);
+            this.timeEnd.TabIndex = 64;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(624, 379);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(52, 13);
+            this.label17.TabIndex = 65;
+            this.label17.Text = "End Gate";
+            // 
+            // comboBoxRoute
+            // 
+            this.comboBoxRoute.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxRoute.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxRoute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRoute.FormattingEnabled = true;
+            this.comboBoxRoute.Location = new System.Drawing.Point(683, 393);
+            this.comboBoxRoute.Name = "comboBoxRoute";
+            this.comboBoxRoute.Size = new System.Drawing.Size(54, 21);
+            this.comboBoxRoute.TabIndex = 66;
+            this.comboBoxRoute.SelectedIndexChanged += new System.EventHandler(this.comboBoxRoute_SelectedIndexChanged);
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(682, 379);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(36, 13);
+            this.label18.TabIndex = 67;
+            this.label18.Text = "Route";
+            // 
+            // btnSaveCompetitionTeam
+            // 
+            this.btnSaveCompetitionTeam.Location = new System.Drawing.Point(362, 420);
+            this.btnSaveCompetitionTeam.Name = "btnSaveCompetitionTeam";
+            this.btnSaveCompetitionTeam.Size = new System.Drawing.Size(73, 28);
+            this.btnSaveCompetitionTeam.TabIndex = 68;
+            this.btnSaveCompetitionTeam.Text = "Add / Save";
+            this.btnSaveCompetitionTeam.UseVisualStyleBackColor = true;
+            this.btnSaveCompetitionTeam.Click += new System.EventHandler(this.btnSaveCompetitionTeam_Click);
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(743, 379);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(55, 13);
+            this.label19.TabIndex = 69;
+            this.label19.Text = "Tracker(s)";
+            // 
+            // listViewTrackers
+            // 
+            this.listViewTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewTrackers.CheckBoxes = true;
+            this.listViewTrackers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader11,
+            this.columnHeader12});
+            this.listViewTrackers.FullRowSelect = true;
+            this.listViewTrackers.GridLines = true;
+            this.listViewTrackers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewTrackers.HideSelection = false;
+            this.listViewTrackers.Location = new System.Drawing.Point(743, 396);
+            this.listViewTrackers.Name = "listViewTrackers";
+            this.listViewTrackers.Size = new System.Drawing.Size(123, 152);
+            this.listViewTrackers.TabIndex = 70;
+            this.listViewTrackers.UseCompatibleStateImageBehavior = false;
+            this.listViewTrackers.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "ID";
+            this.columnHeader11.Width = 35;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Name";
+            this.columnHeader12.Width = 100;
             // 
             // Competition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnRefreshGroup);
-            this.Controls.Add(this.btnAddToCompetition);
-            this.Controls.Add(this.listViewGroups);
+            this.Controls.Add(this.listViewTrackers);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.btnSaveCompetitionTeam);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.comboBoxRoute);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.timeEnd);
+            this.Controls.Add(this.timeStart);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.comboBoxTeam);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.textBoxStartId);
+            this.Controls.Add(this.btnNewCompetitionTeam);
+            this.Controls.Add(this.btnDeleteCompetitionTeam);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnDown);
-            this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.listViewSelectedGroup);
+            this.Controls.Add(this.listViewCompetitionTeam);
             this.Controls.Add(this.btnCalc);
             this.Controls.Add(this.takeOffRightLatitude);
             this.Controls.Add(this.label12);
@@ -547,10 +643,6 @@
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.parcours);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.timeEnd);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.timeStart);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.timeTakeOff);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.date);
@@ -564,7 +656,7 @@
             this.Controls.Add(this.btnRefreshCompetitions);
             this.Controls.Add(this.listViewCompetition);
             this.Name = "Competition";
-            this.Size = new System.Drawing.Size(746, 548);
+            this.Size = new System.Drawing.Size(869, 548);
             this.Load += new System.EventHandler(this.Competition_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -587,10 +679,6 @@
         private System.Windows.Forms.DateTimePicker date;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DateTimePicker timeTakeOff;
-        private System.Windows.Forms.DateTimePicker timeStart;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker timeEnd;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox parcours;
         private System.Windows.Forms.Button btnNew;
@@ -604,18 +692,33 @@
         private System.Windows.Forms.TextBox takeOffRightLongitude;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnCalc;
-        private System.Windows.Forms.ListView listViewSelectedGroup;
+        private System.Windows.Forms.ListView listViewCompetitionTeam;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.ListView listViewGroups;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.Button btnAddToCompetition;
-        private System.Windows.Forms.Button btnRefreshGroup;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.Button btnDeleteCompetitionTeam;
+        private System.Windows.Forms.Button btnNewCompetitionTeam;
+        private System.Windows.Forms.TextBox textBoxStartId;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox comboBoxTeam;
+        private System.Windows.Forms.DateTimePicker timeStart;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.DateTimePicker timeEnd;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox comboBoxRoute;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button btnSaveCompetitionTeam;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ListView listViewTrackers;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
 
 
     }

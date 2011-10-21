@@ -100,6 +100,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reciever\Reciever.cs" />
     <Compile Include="Server\GPSRequestProcessor.cs" />
+    <Compile Include="Server\Processors\AProcessor.cs" />
+    <Compile Include="Server\Processors\CompetitionProcessor.cs" />
+    <Compile Include="Server\Processors\GPSDataProcessor.cs" />
+    <Compile Include="Server\Processors\TeamProcessor.cs" />
+    <Compile Include="Server\Processors\TrackerProcessor.cs" />
+    <Compile Include="Server\Processors\PilotProcessor.cs" />
+    <Compile Include="Server\Processors\PictureProcessor.cs" />
+    <Compile Include="Server\Processors\ParcourProcessor.cs" />
+    <Compile Include="Server\Processors\MapProcessor.cs" />
+    <Compile Include="Server\Processors\IProcessor.cs" />
+    <Compile Include="Server\Processors\PenaltyProcessor.cs" />
     <Compile Include="Server\RequestProcessor.cs" />
   </ItemGroup>
   <ItemGroup>

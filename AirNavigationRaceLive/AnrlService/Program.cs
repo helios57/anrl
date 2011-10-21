@@ -14,7 +14,7 @@ namespace AnrlService
         static void Main()
         {
 #if DEBUG
-           AnrlService service = new AnrlService();
+           AnrlServiceImpl service = new AnrlServiceImpl();
            service.start();
            System.Threading.Thread.Sleep(int.MaxValue);
 #endif
@@ -22,7 +22,7 @@ namespace AnrlService
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new AnrlService() 
+				new AnrlServiceImpl() 
 			};
             ServiceBase.Run(ServicesToRun);
         }

@@ -47,7 +47,6 @@
             this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.competitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +90,6 @@
             this.trackerToolStripMenuItem,
             this.pilotsToolStripMenuItem,
             this.teamsToolStripMenuItem,
-            this.groupsToolStripMenuItem,
             this.competitionToolStripMenuItem,
             this.rulesToolStripMenuItem,
             this.resultsToolStripMenuItem,
@@ -147,14 +145,14 @@
             this.legacyToolStripMenuItem});
             this.mapToolStripMenuItem.Enabled = false;
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
-            this.mapToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
-            this.mapToolStripMenuItem.Text = "Map";
+            this.mapToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.mapToolStripMenuItem.Text = "Maps";
             this.mapToolStripMenuItem.Click += new System.EventHandler(this.mapToolStripMenuItem_Click);
             // 
             // legacyToolStripMenuItem
             // 
             this.legacyToolStripMenuItem.Name = "legacyToolStripMenuItem";
-            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.legacyToolStripMenuItem.Text = "Legacy";
             this.legacyToolStripMenuItem.Click += new System.EventHandler(this.legacyToolStripMenuItem_Click);
             // 
@@ -168,8 +166,8 @@
             this.editToolStripMenuItem});
             this.parcourToolStripMenuItem.Enabled = false;
             this.parcourToolStripMenuItem.Name = "parcourToolStripMenuItem";
-            this.parcourToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.parcourToolStripMenuItem.Text = "Parcour";
+            this.parcourToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.parcourToolStripMenuItem.Text = "Parcours";
             this.parcourToolStripMenuItem.Click += new System.EventHandler(this.parcourToolStripMenuItem_Click);
             // 
             // overviewToolStripMenuItem
@@ -211,40 +209,32 @@
             // 
             this.trackerToolStripMenuItem.Enabled = false;
             this.trackerToolStripMenuItem.Name = "trackerToolStripMenuItem";
-            this.trackerToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.trackerToolStripMenuItem.Text = "Tracker";
+            this.trackerToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.trackerToolStripMenuItem.Text = "Trackers";
             this.trackerToolStripMenuItem.Click += new System.EventHandler(this.trackerToolStripMenuItem_Click);
             // 
             // pilotsToolStripMenuItem
             // 
             this.pilotsToolStripMenuItem.Enabled = false;
             this.pilotsToolStripMenuItem.Name = "pilotsToolStripMenuItem";
-            this.pilotsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.pilotsToolStripMenuItem.Text = "Pilots";
+            this.pilotsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.pilotsToolStripMenuItem.Text = "Participants";
             this.pilotsToolStripMenuItem.Click += new System.EventHandler(this.pilotsToolStripMenuItem_Click);
             // 
             // teamsToolStripMenuItem
             // 
             this.teamsToolStripMenuItem.Enabled = false;
             this.teamsToolStripMenuItem.Name = "teamsToolStripMenuItem";
-            this.teamsToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.teamsToolStripMenuItem.Text = "Teams";
+            this.teamsToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.teamsToolStripMenuItem.Text = "Crews";
             this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
-            // 
-            // groupsToolStripMenuItem
-            // 
-            this.groupsToolStripMenuItem.Enabled = false;
-            this.groupsToolStripMenuItem.Name = "groupsToolStripMenuItem";
-            this.groupsToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.groupsToolStripMenuItem.Text = "Groups";
-            this.groupsToolStripMenuItem.Click += new System.EventHandler(this.groupsToolStripMenuItem_Click);
             // 
             // competitionToolStripMenuItem
             // 
             this.competitionToolStripMenuItem.Enabled = false;
             this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem";
-            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
-            this.competitionToolStripMenuItem.Text = "Competition";
+            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.competitionToolStripMenuItem.Text = "Competitions";
             this.competitionToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
             // 
             // rulesToolStripMenuItem
@@ -397,7 +387,6 @@
         private System.Windows.Forms.ToolStripMenuItem teamsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mapToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem parcourToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem groupsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rulesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toplistToolStripMenuItem;

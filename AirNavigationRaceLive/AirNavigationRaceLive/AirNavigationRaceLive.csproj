@@ -141,12 +141,6 @@
     <Compile Include="Comps\UploadGPS.Designer.cs">
       <DependentUpon>UploadGPS.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comps\Group.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Comps\Group.Designer.cs">
-      <DependentUpon>Group.cs</DependentUpon>
-    </Compile>
     <Compile Include="Comps\ParcourOverview.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -270,9 +264,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\UploadGPS.resx">
       <DependentUpon>UploadGPS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Comps\Group.resx">
-      <DependentUpon>Group.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourOverview.resx">
       <DependentUpon>ParcourOverview.cs</DependentUpon>

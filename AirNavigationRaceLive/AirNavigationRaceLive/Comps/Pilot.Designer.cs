@@ -33,7 +33,6 @@
             this.Namel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Vornamel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.textBoxLastname = new System.Windows.Forms.TextBox();
@@ -61,11 +60,11 @@
             this.listViewPilots.GridLines = true;
             this.listViewPilots.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewPilots.LabelWrap = false;
-            this.listViewPilots.Location = new System.Drawing.Point(6, 20);
+            this.listViewPilots.Location = new System.Drawing.Point(6, 3);
             this.listViewPilots.MultiSelect = false;
             this.listViewPilots.Name = "listViewPilots";
             this.listViewPilots.ShowGroups = false;
-            this.listViewPilots.Size = new System.Drawing.Size(413, 377);
+            this.listViewPilots.Size = new System.Drawing.Size(413, 394);
             this.listViewPilots.TabIndex = 4;
             this.listViewPilots.UseCompatibleStateImageBehavior = false;
             this.listViewPilots.View = System.Windows.Forms.View.Details;
@@ -81,13 +80,13 @@
             // 
             this.Namel.Tag = "Namel";
             this.Namel.Text = "Lastname";
-            this.Namel.Width = 193;
+            this.Namel.Width = 183;
             // 
             // Vornamel
             // 
             this.Vornamel.Tag = "Vornamel";
             this.Vornamel.Text = "Surename";
-            this.Vornamel.Width = 210;
+            this.Vornamel.Width = 172;
             // 
             // btnRefresh
             // 
@@ -98,15 +97,6 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Pilots on Server";
             // 
             // label2
             // 
@@ -230,7 +220,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.listViewPilots);
             this.Name = "Pilot";
@@ -249,7 +238,6 @@
         private System.Windows.Forms.ColumnHeader Namel;
         private System.Windows.Forms.ColumnHeader Vornamel;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.TextBox textBoxLastname;

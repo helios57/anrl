@@ -27,7 +27,6 @@ namespace AirNavigationRaceLive
         ParcourOverview ParcourOverview;
         ParcourEdit ParcourEdit;
         MapLegacy MapLegacy;
-        Group Group;
         UploadGPS UploadGPS;
         ParcourOverviewZoomed ParcourOverviewZoomed;
         Results Results;
@@ -53,7 +52,6 @@ namespace AirNavigationRaceLive
             connectToolStripMenuItem.Enabled = !connected;
             pilotsToolStripMenuItem.Enabled = connected;
             teamsToolStripMenuItem.Enabled = connected;
-            groupsToolStripMenuItem.Enabled = connected;
             competitionToolStripMenuItem.Enabled = connected;
             rulesToolStripMenuItem.Enabled = connected;
             resultsToolStripMenuItem.Enabled = connected;
@@ -131,7 +129,6 @@ namespace AirNavigationRaceLive
             ParcourEdit = null;
             ParcourOverviewZoomed = null;
             MapLegacy = null;
-            Group = null;
             UploadGPS = null;
             Results = null;
             StatusStripLabel.Text = "Disconnected from Server";
@@ -260,15 +257,6 @@ namespace AirNavigationRaceLive
                 MapLegacy = new MapLegacy(Client);
             }
             enableControl(MapLegacy);
-        }
-
-        private void groupsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Group == null)
-            {
-                Group = new Group(Client);
-            }
-            enableControl(Group);
         }
 
         private void uploadTrackerDataToolStripMenuItem_Click(object sender, EventArgs e)

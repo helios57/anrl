@@ -41,8 +41,15 @@
             this.fldVisualPlaySpeed = new System.Windows.Forms.NumericUpDown();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             this.btnShowRanking = new System.Windows.Forms.Button();
+            this.listViewCompetitionTeam = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.fldTrackerHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldPenaltyHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fldVisualLineWidth)).BeginInit();
@@ -52,9 +59,9 @@
             // 
             // lblAdjustTrackerHeight
             // 
-            this.lblAdjustTrackerHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAdjustTrackerHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAdjustTrackerHeight.AutoSize = true;
-            this.lblAdjustTrackerHeight.Location = new System.Drawing.Point(742, 91);
+            this.lblAdjustTrackerHeight.Location = new System.Drawing.Point(3, 425);
             this.lblAdjustTrackerHeight.Name = "lblAdjustTrackerHeight";
             this.lblAdjustTrackerHeight.Size = new System.Drawing.Size(110, 13);
             this.lblAdjustTrackerHeight.TabIndex = 89;
@@ -62,9 +69,9 @@
             // 
             // lblPenaltyZoneHeight
             // 
-            this.lblPenaltyZoneHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPenaltyZoneHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPenaltyZoneHeight.AutoSize = true;
-            this.lblPenaltyZoneHeight.Location = new System.Drawing.Point(773, 65);
+            this.lblPenaltyZoneHeight.Location = new System.Drawing.Point(3, 399);
             this.lblPenaltyZoneHeight.Name = "lblPenaltyZoneHeight";
             this.lblPenaltyZoneHeight.Size = new System.Drawing.Size(79, 13);
             this.lblPenaltyZoneHeight.TabIndex = 88;
@@ -72,9 +79,9 @@
             // 
             // lblVisualLineWidth
             // 
-            this.lblVisualLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVisualLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblVisualLineWidth.AutoSize = true;
-            this.lblVisualLineWidth.Location = new System.Drawing.Point(797, 37);
+            this.lblVisualLineWidth.Location = new System.Drawing.Point(3, 371);
             this.lblVisualLineWidth.Name = "lblVisualLineWidth";
             this.lblVisualLineWidth.Size = new System.Drawing.Size(55, 13);
             this.lblVisualLineWidth.TabIndex = 87;
@@ -82,9 +89,9 @@
             // 
             // lblVisualPlaySpeed
             // 
-            this.lblVisualPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVisualPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblVisualPlaySpeed.AutoSize = true;
-            this.lblVisualPlaySpeed.Location = new System.Drawing.Point(785, 117);
+            this.lblVisualPlaySpeed.Location = new System.Drawing.Point(4, 449);
             this.lblVisualPlaySpeed.Name = "lblVisualPlaySpeed";
             this.lblVisualPlaySpeed.Size = new System.Drawing.Size(58, 13);
             this.lblVisualPlaySpeed.TabIndex = 86;
@@ -92,11 +99,11 @@
             // 
             // VisualChkBoxAlwaysNewest
             // 
-            this.VisualChkBoxAlwaysNewest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.VisualChkBoxAlwaysNewest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.VisualChkBoxAlwaysNewest.AutoSize = true;
             this.VisualChkBoxAlwaysNewest.Checked = true;
             this.VisualChkBoxAlwaysNewest.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.VisualChkBoxAlwaysNewest.Location = new System.Drawing.Point(752, 141);
+            this.VisualChkBoxAlwaysNewest.Location = new System.Drawing.Point(7, 475);
             this.VisualChkBoxAlwaysNewest.Name = "VisualChkBoxAlwaysNewest";
             this.VisualChkBoxAlwaysNewest.Size = new System.Drawing.Size(169, 17);
             this.VisualChkBoxAlwaysNewest.TabIndex = 85;
@@ -115,8 +122,8 @@
             // 
             // btnStartClient
             // 
-            this.btnStartClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStartClient.Location = new System.Drawing.Point(745, 3);
+            this.btnStartClient.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStartClient.Location = new System.Drawing.Point(0, 337);
             this.btnStartClient.Name = "btnStartClient";
             this.btnStartClient.Size = new System.Drawing.Size(176, 28);
             this.btnStartClient.TabIndex = 83;
@@ -126,8 +133,8 @@
             // 
             // fldTrackerHeight
             // 
-            this.fldTrackerHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fldTrackerHeight.Location = new System.Drawing.Point(875, 89);
+            this.fldTrackerHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldTrackerHeight.Location = new System.Drawing.Point(130, 423);
             this.fldTrackerHeight.Maximum = new decimal(new int[] {
             500,
             0,
@@ -141,8 +148,8 @@
             // 
             // fldPenaltyHeight
             // 
-            this.fldPenaltyHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fldPenaltyHeight.Location = new System.Drawing.Point(875, 63);
+            this.fldPenaltyHeight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldPenaltyHeight.Location = new System.Drawing.Point(130, 397);
             this.fldPenaltyHeight.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -161,8 +168,8 @@
             // 
             // fldVisualLineWidth
             // 
-            this.fldVisualLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fldVisualLineWidth.Location = new System.Drawing.Point(875, 37);
+            this.fldVisualLineWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldVisualLineWidth.Location = new System.Drawing.Point(130, 371);
             this.fldVisualLineWidth.Maximum = new decimal(new int[] {
             5,
             0,
@@ -181,8 +188,8 @@
             // 
             // fldVisualPlaySpeed
             // 
-            this.fldVisualPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fldVisualPlaySpeed.Location = new System.Drawing.Point(875, 115);
+            this.fldVisualPlaySpeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.fldVisualPlaySpeed.Location = new System.Drawing.Point(130, 449);
             this.fldVisualPlaySpeed.Maximum = new decimal(new int[] {
             10,
             0,
@@ -201,9 +208,9 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(103, 5);
+            this.comboBox1.Location = new System.Drawing.Point(7, 29);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(238, 21);
+            this.comboBox1.Size = new System.Drawing.Size(169, 21);
             this.comboBox1.TabIndex = 95;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -217,22 +224,10 @@
             this.label1.TabIndex = 96;
             this.label1.Text = "Competition";
             // 
-            // visualisationPictureBox1
-            // 
-            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.visualisationPictureBox1.Location = new System.Drawing.Point(7, 29);
-            this.visualisationPictureBox1.Name = "visualisationPictureBox1";
-            this.visualisationPictureBox1.Size = new System.Drawing.Size(729, 497);
-            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.visualisationPictureBox1.TabIndex = 97;
-            this.visualisationPictureBox1.TabStop = false;
-            // 
             // btnShowRanking
             // 
-            this.btnShowRanking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowRanking.Location = new System.Drawing.Point(745, 164);
+            this.btnShowRanking.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnShowRanking.Location = new System.Drawing.Point(0, 498);
             this.btnShowRanking.Name = "btnShowRanking";
             this.btnShowRanking.Size = new System.Drawing.Size(176, 28);
             this.btnShowRanking.TabIndex = 98;
@@ -240,10 +235,77 @@
             this.btnShowRanking.UseVisualStyleBackColor = true;
             this.btnShowRanking.Click += new System.EventHandler(this.btnShowRanking_Click);
             // 
+            // listViewCompetitionTeam
+            // 
+            this.listViewCompetitionTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewCompetitionTeam.CheckBoxes = true;
+            this.listViewCompetitionTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8,
+            this.columnHeader10});
+            this.listViewCompetitionTeam.FullRowSelect = true;
+            this.listViewCompetitionTeam.GridLines = true;
+            this.listViewCompetitionTeam.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewCompetitionTeam.HideSelection = false;
+            this.listViewCompetitionTeam.Location = new System.Drawing.Point(7, 56);
+            this.listViewCompetitionTeam.MultiSelect = false;
+            this.listViewCompetitionTeam.Name = "listViewCompetitionTeam";
+            this.listViewCompetitionTeam.Size = new System.Drawing.Size(169, 275);
+            this.listViewCompetitionTeam.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listViewCompetitionTeam.TabIndex = 99;
+            this.listViewCompetitionTeam.UseCompatibleStateImageBehavior = false;
+            this.listViewCompetitionTeam.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Start ID";
+            this.columnHeader3.Width = 50;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Team";
+            this.columnHeader5.Width = 207;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Take Off";
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Start";
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "End";
+            this.columnHeader8.Width = 51;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Route";
+            this.columnHeader10.Width = 48;
+            // 
+            // visualisationPictureBox1
+            // 
+            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.visualisationPictureBox1.Location = new System.Drawing.Point(182, 6);
+            this.visualisationPictureBox1.Name = "visualisationPictureBox1";
+            this.visualisationPictureBox1.Size = new System.Drawing.Size(739, 523);
+            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.visualisationPictureBox1.TabIndex = 97;
+            this.visualisationPictureBox1.TabStop = false;
+            // 
             // Visualisation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.listViewCompetitionTeam);
             this.Controls.Add(this.btnShowRanking);
             this.Controls.Add(this.visualisationPictureBox1);
             this.Controls.Add(this.label1);
@@ -290,5 +352,12 @@
         private System.Windows.Forms.Label label1;
         private VisualisationPictureBox visualisationPictureBox1;
         private System.Windows.Forms.Button btnShowRanking;
+        private System.Windows.Forms.ListView listViewCompetitionTeam;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
     }
 }

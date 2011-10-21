@@ -16,6 +16,7 @@ namespace AirNavigationRaceLive.Comps
         private Converter c;
         private List<GPSData> data;
         private List<NetworkObjects.Team> teams;
+        private List<NetworkObjects.CompetitionTeam> competitionTeams;
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
@@ -28,10 +29,11 @@ namespace AirNavigationRaceLive.Comps
         {
             c = iConverter;
         }
-        public void SetData(List<GPSData> data, List<NetworkObjects.Team> teams)
+        public void SetData(List<GPSData> data, List<NetworkObjects.Team> teams, List<NetworkObjects.CompetitionTeam> competitionTeams)
         {
             this.data = data;
             this.teams = teams;
+            this.competitionTeams = competitionTeams;
         }
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -114,7 +116,7 @@ namespace AirNavigationRaceLive.Comps
             }
             #endregion
 
-            if (data != null && teams != null && data.Count > 10 && teams.Count >=1)
+            if (data != null && teams != null && data.Count > 10 && teams.Count >= 1 && competitionTeams != null && competitionTeams.Count >= 1)
             {
                 double widthFactor = (double)Width / Image.Width;
                 double heightFactor = (double)Height / Image.Height;
@@ -132,17 +134,21 @@ namespace AirNavigationRaceLive.Comps
                 }
                 foreach (NetworkObjects.Team Team in teams)
                 {
-                    Color Color = Color.FromName(Team.Color);
-                    List<System.Drawing.Point> points = new List<System.Drawing.Point>();
-                    foreach (GPSData gd in data.Where(p => Team.ID_Tracker.Contains(p.trackerID)))
+                    if (competitionTeams.Count(p => p.ID_Team == Team.ID) == 1)
                     {
-                        int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
-                        int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);
-                        points.Add(new System.Drawing.Point(startXp, startYp));
-                    }
-                    if (points.Count > 2)
-                    {
-                        pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), 2f), points.ToArray());
+                        NetworkObjects.CompetitionTeam ct = competitionTeams.Single(p => p.ID_Team == Team.ID);
+                        Color Color = Color.FromName(Team.Color);
+                        List<System.Drawing.Point> points = new List<System.Drawing.Point>();
+                        foreach (GPSData gd in data.Where(p => ct.ID_TrackerList.Contains(p.trackerID)))
+                        {
+                            int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
+                            int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);
+                            points.Add(new System.Drawing.Point(startXp, startYp));
+                        }
+                        if (points.Count > 2)
+                        {
+                            pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), 2f), points.ToArray());
+                        }
                     }
                 }
             }

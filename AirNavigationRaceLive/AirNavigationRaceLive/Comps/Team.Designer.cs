@@ -50,14 +50,9 @@
             this.btnClearNavigator = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnColorSelect = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.trackerListView = new System.Windows.Forms.ListView();
-            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TrackerName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.IMEI = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.fldAC = new System.Windows.Forms.TextBox();
@@ -270,15 +265,6 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(352, 225);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "Tracker";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -306,38 +292,6 @@
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
             this.label6.Text = "Color";
-            // 
-            // trackerListView
-            // 
-            this.trackerListView.CheckBoxes = true;
-            this.trackerListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ID,
-            this.TrackerName,
-            this.IMEI});
-            this.trackerListView.FullRowSelect = true;
-            this.trackerListView.GridLines = true;
-            this.trackerListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.trackerListView.HideSelection = false;
-            this.trackerListView.Location = new System.Drawing.Point(411, 225);
-            this.trackerListView.Name = "trackerListView";
-            this.trackerListView.Size = new System.Drawing.Size(186, 172);
-            this.trackerListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.trackerListView.TabIndex = 34;
-            this.trackerListView.UseCompatibleStateImageBehavior = false;
-            this.trackerListView.View = System.Windows.Forms.View.Details;
-            // 
-            // ID
-            // 
-            this.ID.Text = "ID";
-            this.ID.Width = 30;
-            // 
-            // TrackerName
-            // 
-            this.TrackerName.Text = "Name";
-            // 
-            // IMEI
-            // 
-            this.IMEI.Text = "IMEI";
             // 
             // textBoxName
             // 
@@ -371,11 +325,9 @@
             this.Controls.Add(this.fldAC);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.trackerListView);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnColorSelect);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnClearNavigator);
@@ -423,14 +375,9 @@
         private System.Windows.Forms.Button btnClearNavigator;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnNew;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnColorSelect;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ListView trackerListView;
-        private System.Windows.Forms.ColumnHeader ID;
-        private System.Windows.Forms.ColumnHeader TrackerName;
-        private System.Windows.Forms.ColumnHeader IMEI;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColumnHeader columnHeader2;

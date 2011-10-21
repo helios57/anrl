@@ -14,14 +14,14 @@ namespace AirNavigationRaceLive.Dialogs
     public partial class RankForm : Form
     {
         private List<NetworkObjects.Penalty> rankinEntries;
-        private List<NetworkObjects.Team> teams;
+        private List<NetworkObjects.CompetitionTeam> teams;
         private Client c;
 
         public RankForm()
         {
             InitializeComponent();
         }
-        public void SetData(List<NetworkObjects.Penalty> rankinEntries, List<NetworkObjects.Team> teams, Client c)
+        public void SetData(List<NetworkObjects.Penalty> rankinEntries, List<NetworkObjects.CompetitionTeam> teams, Client c)
         {
             this.c = c;
             this.rankinEntries = rankinEntries;
@@ -34,14 +34,14 @@ namespace AirNavigationRaceLive.Dialogs
             if (c != null && c.isAuthenticated() && rankinEntries != null && teams != null)
             {
                 List<RankedTeam> rankedTeams = new List<RankedTeam>();
-                foreach (NetworkObjects.Team t in teams)
+                foreach (NetworkObjects.CompetitionTeam t in teams)
                 {
                     int sum = 0;
-                    foreach (NetworkObjects.Penalty p in rankinEntries.Where(p => p.ID_Team == t.ID))
+                    foreach (NetworkObjects.Penalty p in rankinEntries.Where(p => p.ID_Competition_Team == t.ID))
                     {
                         sum += p.Points;
                     }
-                    rankedTeams.Add(new RankedTeam(t, sum));
+                    rankedTeams.Add(new RankedTeam(t,c.getTeam(t.ID_Team),sum));
                 }
                 rankedTeams.Sort();
                 for (int i = 0; i < rankedTeams.Count; i++)
@@ -53,25 +53,25 @@ namespace AirNavigationRaceLive.Dialogs
                         case 0:
                             {
                                 lblPunkte1.Text = rt.points.ToString();
-                                lblName1.Text = rt.t.Name;
+                                lblName1.Text = getTeamDsc(rt.team.ID);
                                 break;
                             }
                         case 1:
                             {
                                 lblPunkte2.Text = rt.points.ToString();
-                                lblName2.Text = rt.t.Name;
+                                lblName2.Text = getTeamDsc(rt.team.ID);
                                 break;
                             }
                         case 2:
                             {
                                 lblPunkte3.Text = rt.points.ToString();
-                                lblName3.Text = rt.t.Name;
+                                lblName3.Text = getTeamDsc(rt.team.ID);
                                 break;
                             }
                         case 3:
                             {
                                 lblPunkte4.Text = rt.points.ToString();
-                                lblName4.Text = rt.t.Name;
+                                lblName4.Text = getTeamDsc(rt.team.ID);
                                 break;
                             }
                     }
@@ -81,7 +81,19 @@ namespace AirNavigationRaceLive.Dialogs
             base.OnPaint(e);
         }
 
-
+        private string getTeamDsc(int ID_Team)
+        {
+            NetworkObjects.Team team = c.getTeam(ID_Team);
+            NetworkObjects.Pilot pilot = c.getPilot(team.ID_Pilot);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
+            if (team.ID_Navigator > 0)
+            {
+                NetworkObjects.Pilot navi = c.getPilot(team.ID_Navigator);
+                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+            }
+            return sb.ToString();
+        }
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
@@ -115,11 +127,13 @@ namespace AirNavigationRaceLive.Dialogs
     }
     class RankedTeam:IComparable<RankedTeam>
     {
-        public NetworkObjects.Team t;
+        public NetworkObjects.CompetitionTeam t;
         public int points;
-        public RankedTeam(NetworkObjects.Team t, int points)
+        public NetworkObjects.Team team;
+        public RankedTeam(NetworkObjects.CompetitionTeam t,NetworkObjects.Team team, int points)
         {
             this.t = t;
+            this.team = team;
             this.points = points;
         }
 

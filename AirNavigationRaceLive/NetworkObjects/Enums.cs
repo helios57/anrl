@@ -24,10 +24,10 @@ namespace NetworkObjects
         Tracker = 4,
         Pilot = 5,
         Team = 6,
-        Group = 7,
         Competition = 8,
         GPSData = 9,
-        Penalty = 10
+        Penalty = 10,
+        CompetitionTeam =11
     }
     public enum LineType : int
     {
@@ -46,7 +46,7 @@ namespace NetworkObjects
         Point = 13,
         TakeOff = 14,
     }
-    public enum GroupPosType : int
+    public enum Route : int
     {
         A = 1,
         B = 2,
