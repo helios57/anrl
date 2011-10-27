@@ -63,6 +63,7 @@
             this.fldServer.FormattingEnabled = true;
             this.fldServer.Items.AddRange(new object[] {
             "127.0.0.1",
+            "46.163.65.74",
             "83.169.11.154"});
             this.fldServer.Location = new System.Drawing.Point(181, 132);
             this.fldServer.Name = "fldServer";

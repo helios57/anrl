@@ -139,7 +139,7 @@ namespace AirNavigationRaceLive.Dialogs
 
         public int CompareTo(RankedTeam obj)
         {
-            return -this.points.CompareTo(obj.points);
+            return this.points.CompareTo(obj.points);
         }
     }
 }

@@ -89,8 +89,9 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 83;
+            this.columnHeader2.DisplayIndex = 3;
+            this.columnHeader2.Text = "Nationality";
+            this.columnHeader2.Width = 64;
             // 
             // Pilot
             // 
@@ -157,7 +158,7 @@
             // textBoxNavigator
             // 
             this.textBoxNavigator.Enabled = false;
-            this.textBoxNavigator.Location = new System.Drawing.Point(411, 142);
+            this.textBoxNavigator.Location = new System.Drawing.Point(411, 112);
             this.textBoxNavigator.Name = "textBoxNavigator";
             this.textBoxNavigator.Size = new System.Drawing.Size(124, 20);
             this.textBoxNavigator.TabIndex = 18;
@@ -165,7 +166,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(350, 145);
+            this.label4.Location = new System.Drawing.Point(350, 115);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 17;
@@ -174,7 +175,7 @@
             // textBoxPilot
             // 
             this.textBoxPilot.Enabled = false;
-            this.textBoxPilot.Location = new System.Drawing.Point(411, 116);
+            this.textBoxPilot.Location = new System.Drawing.Point(411, 86);
             this.textBoxPilot.Name = "textBoxPilot";
             this.textBoxPilot.Size = new System.Drawing.Size(124, 20);
             this.textBoxPilot.TabIndex = 16;
@@ -182,7 +183,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(350, 119);
+            this.label3.Location = new System.Drawing.Point(350, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 15;
@@ -227,7 +228,7 @@
             // 
             // btnClearPilot
             // 
-            this.btnClearPilot.Location = new System.Drawing.Point(541, 114);
+            this.btnClearPilot.Location = new System.Drawing.Point(541, 84);
             this.btnClearPilot.Name = "btnClearPilot";
             this.btnClearPilot.Size = new System.Drawing.Size(56, 23);
             this.btnClearPilot.TabIndex = 20;
@@ -237,7 +238,7 @@
             // 
             // btnClearNavigator
             // 
-            this.btnClearNavigator.Location = new System.Drawing.Point(541, 140);
+            this.btnClearNavigator.Location = new System.Drawing.Point(541, 110);
             this.btnClearNavigator.Name = "btnClearNavigator";
             this.btnClearNavigator.Size = new System.Drawing.Size(56, 23);
             this.btnClearNavigator.TabIndex = 21;
@@ -268,7 +269,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(353, 203);
+            this.label5.Location = new System.Drawing.Point(353, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 30;
@@ -276,7 +277,7 @@
             // 
             // btnColorSelect
             // 
-            this.btnColorSelect.Location = new System.Drawing.Point(411, 168);
+            this.btnColorSelect.Location = new System.Drawing.Point(411, 138);
             this.btnColorSelect.Name = "btnColorSelect";
             this.btnColorSelect.Size = new System.Drawing.Size(121, 23);
             this.btnColorSelect.TabIndex = 31;
@@ -287,7 +288,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(353, 173);
+            this.label6.Location = new System.Drawing.Point(353, 143);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
@@ -296,7 +297,7 @@
             // textBoxName
             // 
             this.textBoxName.Enabled = false;
-            this.textBoxName.Location = new System.Drawing.Point(411, 87);
+            this.textBoxName.Location = new System.Drawing.Point(411, 192);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(124, 20);
             this.textBoxName.TabIndex = 36;
@@ -304,16 +305,16 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(350, 90);
+            this.label7.Location = new System.Drawing.Point(350, 195);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 35;
-            this.label7.Text = "Name";
+            this.label7.Text = "Nationality";
             // 
             // fldAC
             // 
             this.fldAC.Enabled = false;
-            this.fldAC.Location = new System.Drawing.Point(411, 196);
+            this.fldAC.Location = new System.Drawing.Point(411, 166);
             this.fldAC.Name = "fldAC";
             this.fldAC.Size = new System.Drawing.Size(124, 20);
             this.fldAC.TabIndex = 37;

@@ -51,7 +51,7 @@ namespace AirNavigationRaceLive.Comps
             comboBoxTeam.Items.Clear();
             foreach (NetworkObjects.Team t in teams)
             {
-                comboBoxTeam.Items.Add(new ComboTeam(t));
+                comboBoxTeam.Items.Add(new ComboTeam(t, getTeamDsc(t.ID)));
             }
             List<NetworkObjects.Tracker> trackers = Client.getTrackers();
             listViewTrackers.Items.Clear();
@@ -449,14 +449,16 @@ namespace AirNavigationRaceLive.Comps
     class ComboTeam
     {
         public NetworkObjects.Team p;
-        public ComboTeam(NetworkObjects.Team p)
+        private String toString;
+        public ComboTeam(NetworkObjects.Team p, String toString)
         {
             this.p = p;
+            this.toString = toString;
         }
 
         public override string ToString()
         {
-            return p.ID + " " + p.Name;
+            return p.ID + " " + toString;
         }
     }
     class ComboRoute
