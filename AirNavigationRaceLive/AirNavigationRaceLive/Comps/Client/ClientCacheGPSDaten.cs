@@ -58,7 +58,7 @@ namespace AirNavigationRaceLive.Comps.Client
             cache.AddRange(resp.ResponseParameters.GPSDataList);
 
             List<GPSData> result = cache.Where(p => p.timestampGPS >= pc.from && p.timestampGPS <= pc.to && pc.trackersID.Contains(p.trackerID)).ToList();
-            List<GPSData> toDelete = new List<GPSData>();
+            /*List<GPSData> toDelete = new List<GPSData>();
             foreach (GPSData data in result)
             {
                 if (result.Count(p => p.trackerID == data.trackerID && p.timestampGPS == data.timestampGPS)>1)
@@ -69,7 +69,7 @@ namespace AirNavigationRaceLive.Comps.Client
             foreach (GPSData data in toDelete)
             {
                 result.Remove(data);
-            }
+            }*/
             //result.Sort(new DateComparer());
             pc.finished.Invoke(new GPSDataAsyncResult(result));
             requesting = false;
