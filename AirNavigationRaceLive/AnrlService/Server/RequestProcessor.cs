@@ -33,6 +33,8 @@ namespace AnrlService.Server
             processorMap.Add((int)EObjectType.Team, new TeamProcessor());
             processorMap.Add((int)EObjectType.GPSData, new GPSDataProcessor((TrackerProcessor)processorMap[(int)EObjectType.Tracker]));
             processorMap.Add((int)EObjectType.Competition, new CompetitionProcessor());
+            processorMap.Add((int)EObjectType.CompetitionSet, new CompetitionSetProcesor());
+            
         }
         public Root proccess(Root request)
         {
@@ -49,10 +51,21 @@ namespace AnrlService.Server
                 {
                     answer = proccessLogin(request);
                 }
+                else if (request.RequestType == (int)ERequestType.Register)
+                {
+                    answer = proccessRegister(request);
+                }
                 else
                 {
-                    if (processorMap.Keys.Contains(request.ObjectType))
+                    if (request.AuthInfo.Token == null || Int32.Parse(request.AuthInfo.Token) <= 0)
                     {
+                        answer.ResponseParameters = new ResponseParameters();
+                        answer.ResponseParameters.Exception = "Operation " + System.Enum.GetName(ERequestType.Get.GetType(), (ERequestType)(request.RequestType)) + " on ObjectType " +
+                            System.Enum.GetName(EObjectType.Login.GetType(), (EObjectType)(request.ObjectType)) + " not permitted without login";
+                    }
+                    else if (processorMap.Keys.Contains(request.ObjectType))
+                    {
+                        request.AuthInfo.ID_User = Int32.Parse(request.AuthInfo.Token);
                         answer = processorMap[request.ObjectType].proccess(request);
                     }
                 }
@@ -79,7 +92,40 @@ namespace AnrlService.Server
         {
             Root r = new Root();
             r.AuthInfo = new AuthenticationInfo();
-            r.AuthInfo.Token = "Test";
+            r.ResponseParameters = new ResponseParameters();
+            AnrlDataContext db = new AnrlDataContext();
+            if (db.t_Users.Count(p => p.Name == request.AuthInfo.Username && p.Password == request.AuthInfo.Password) == 1)
+            {
+                r.AuthInfo.Token = db.t_Users.Single(p => p.Name == request.AuthInfo.Username && p.Password == request.AuthInfo.Password).ID.ToString();
+            }
+            else
+            {
+                r.ResponseParameters.Exception = "Username / Password wrong";
+            }
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private Root proccessRegister(Root request)
+        {
+            Root r = new Root();
+            r.ResponseParameters = new ResponseParameters();
+
+            AnrlDataContext db = new AnrlDataContext();
+            if (db.t_Users.Count(p => p.Name == request.AuthInfo.Username) == 0)
+            {
+                t_User user = new t_User();
+                user.Name = request.AuthInfo.Username;
+                user.Password = request.AuthInfo.Password;
+                user.ID_Role = 0;
+                db.t_Users.InsertOnSubmit(user);
+                db.SubmitChanges();
+                r.AuthInfo = new AuthenticationInfo();
+            }
+            else
+            {
+                r.ResponseParameters.Exception = "Username already in use";
+            }
             return r;
         }
 

@@ -32,18 +32,28 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.fldServer = new System.Windows.Forms.ComboBox();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.btnConnect = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.fldPassword = new System.Windows.Forms.TextBox();
             this.fldUsername = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textStatus = new System.Windows.Forms.TextBox();
             this.checkBoxClearCache = new System.Windows.Forms.CheckBox();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fldCompetition = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.fldOwner = new System.Windows.Forms.TextBox();
+            this.btnUse = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.fldCompetitionName = new System.Windows.Forms.TextBox();
+            this.btnCreate = new System.Windows.Forms.Button();
+            this.fldPublicRole = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblAnrlServer
             // 
             this.lblAnrlServer.AutoSize = true;
-            this.lblAnrlServer.Location = new System.Drawing.Point(105, 135);
+            this.lblAnrlServer.Location = new System.Drawing.Point(2, 6);
             this.lblAnrlServer.Name = "lblAnrlServer";
             this.lblAnrlServer.Size = new System.Drawing.Size(70, 13);
             this.lblAnrlServer.TabIndex = 8;
@@ -52,7 +62,7 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(105, 188);
+            this.lblPassword.Location = new System.Drawing.Point(2, 59);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(53, 13);
             this.lblPassword.TabIndex = 13;
@@ -62,90 +72,191 @@
             // 
             this.fldServer.FormattingEnabled = true;
             this.fldServer.Items.AddRange(new object[] {
-            "127.0.0.1",
             "46.163.65.74",
+            "127.0.0.1",
             "83.169.11.154"});
-            this.fldServer.Location = new System.Drawing.Point(181, 132);
+            this.fldServer.Location = new System.Drawing.Point(78, 3);
             this.fldServer.Name = "fldServer";
-            this.fldServer.Size = new System.Drawing.Size(210, 21);
+            this.fldServer.Size = new System.Drawing.Size(98, 21);
             this.fldServer.TabIndex = 7;
-            this.fldServer.Text = "127.0.0.1";
+            this.fldServer.Text = "46.163.65.74";
+            this.fldServer.SelectedIndexChanged += new System.EventHandler(this.fldServer_SelectedIndexChanged);
+            this.fldServer.TextChanged += new System.EventHandler(this.fldServer_SelectedIndexChanged);
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(105, 162);
+            this.lblUsername.Location = new System.Drawing.Point(2, 33);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(55, 13);
             this.lblUsername.TabIndex = 12;
             this.lblUsername.Text = "Username";
             // 
-            // btnConnect
+            // btnLogin
             // 
-            this.btnConnect.Location = new System.Drawing.Point(397, 130);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(57, 75);
-            this.btnConnect.TabIndex = 9;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            this.btnLogin.Location = new System.Drawing.Point(182, 28);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(57, 48);
+            this.btnLogin.TabIndex = 9;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // fldPassword
             // 
-            this.fldPassword.Location = new System.Drawing.Point(181, 185);
+            this.fldPassword.Location = new System.Drawing.Point(78, 56);
             this.fldPassword.Name = "fldPassword";
             this.fldPassword.PasswordChar = '*';
-            this.fldPassword.Size = new System.Drawing.Size(210, 20);
+            this.fldPassword.Size = new System.Drawing.Size(98, 20);
             this.fldPassword.TabIndex = 11;
-            this.fldPassword.Text = "anrl";
             this.fldPassword.UseSystemPasswordChar = true;
             // 
             // fldUsername
             // 
-            this.fldUsername.Location = new System.Drawing.Point(181, 159);
+            this.fldUsername.Location = new System.Drawing.Point(78, 30);
             this.fldUsername.Name = "fldUsername";
-            this.fldUsername.Size = new System.Drawing.Size(210, 20);
+            this.fldUsername.Size = new System.Drawing.Size(98, 20);
             this.fldUsername.TabIndex = 10;
-            this.fldUsername.Text = "anrl";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(105, 272);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Status";
-            // 
-            // textStatus
-            // 
-            this.textStatus.Location = new System.Drawing.Point(181, 269);
-            this.textStatus.Name = "textStatus";
-            this.textStatus.Size = new System.Drawing.Size(210, 20);
-            this.textStatus.TabIndex = 15;
             // 
             // checkBoxClearCache
             // 
             this.checkBoxClearCache.AutoSize = true;
-            this.checkBoxClearCache.Location = new System.Drawing.Point(460, 161);
+            this.checkBoxClearCache.Location = new System.Drawing.Point(182, 183);
             this.checkBoxClearCache.Name = "checkBoxClearCache";
             this.checkBoxClearCache.Size = new System.Drawing.Size(84, 17);
             this.checkBoxClearCache.TabIndex = 16;
             this.checkBoxClearCache.Text = "Clear Cache";
             this.checkBoxClearCache.UseVisualStyleBackColor = true;
             // 
+            // btnRegister
+            // 
+            this.btnRegister.Location = new System.Drawing.Point(245, 28);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(57, 48);
+            this.btnRegister.TabIndex = 17;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(2, 128);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Competition";
+            // 
+            // fldCompetition
+            // 
+            this.fldCompetition.FormattingEnabled = true;
+            this.fldCompetition.Location = new System.Drawing.Point(78, 125);
+            this.fldCompetition.Name = "fldCompetition";
+            this.fldCompetition.Size = new System.Drawing.Size(224, 21);
+            this.fldCompetition.TabIndex = 19;
+            this.fldCompetition.SelectedIndexChanged += new System.EventHandler(this.fldCompetition_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(2, 155);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Owner";
+            // 
+            // fldOwner
+            // 
+            this.fldOwner.Location = new System.Drawing.Point(78, 152);
+            this.fldOwner.Name = "fldOwner";
+            this.fldOwner.Size = new System.Drawing.Size(98, 20);
+            this.fldOwner.TabIndex = 20;
+            // 
+            // btnUse
+            // 
+            this.btnUse.Location = new System.Drawing.Point(78, 178);
+            this.btnUse.Name = "btnUse";
+            this.btnUse.Size = new System.Drawing.Size(98, 24);
+            this.btnUse.TabIndex = 22;
+            this.btnUse.Text = "Use";
+            this.btnUse.UseVisualStyleBackColor = true;
+            this.btnUse.Click += new System.EventHandler(this.btnUse_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(2, 230);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(119, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Create new Competition";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(2, 258);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Name";
+            // 
+            // fldCompetitionName
+            // 
+            this.fldCompetitionName.Location = new System.Drawing.Point(78, 255);
+            this.fldCompetitionName.Name = "fldCompetitionName";
+            this.fldCompetitionName.Size = new System.Drawing.Size(224, 20);
+            this.fldCompetitionName.TabIndex = 24;
+            this.fldCompetitionName.TextChanged += new System.EventHandler(this.fldCompetitionName_TextChanged);
+            // 
+            // btnCreate
+            // 
+            this.btnCreate.Location = new System.Drawing.Point(78, 308);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(98, 24);
+            this.btnCreate.TabIndex = 26;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
+            // fldPublicRole
+            // 
+            this.fldPublicRole.FormattingEnabled = true;
+            this.fldPublicRole.Location = new System.Drawing.Point(78, 281);
+            this.fldPublicRole.Name = "fldPublicRole";
+            this.fldPublicRole.Size = new System.Drawing.Size(98, 21);
+            this.fldPublicRole.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(2, 284);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(61, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Public Role";
+            // 
             // Connect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBoxClearCache);
-            this.Controls.Add(this.textStatus);
+            this.Controls.Add(this.fldPublicRole);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnCreate);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.fldCompetitionName);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnUse);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.fldOwner);
+            this.Controls.Add(this.fldCompetition);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.checkBoxClearCache);
             this.Controls.Add(this.lblAnrlServer);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.fldServer);
             this.Controls.Add(this.lblUsername);
-            this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.fldPassword);
             this.Controls.Add(this.fldUsername);
             this.Name = "Connect";
@@ -162,11 +273,21 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.ComboBox fldServer;
         private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.Button btnLogin;
         protected System.Windows.Forms.TextBox fldPassword;
         protected System.Windows.Forms.TextBox fldUsername;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textStatus;
         private System.Windows.Forms.CheckBox checkBoxClearCache;
+        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox fldCompetition;
+        private System.Windows.Forms.Label label2;
+        protected System.Windows.Forms.TextBox fldOwner;
+        private System.Windows.Forms.Button btnUse;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        protected System.Windows.Forms.TextBox fldCompetitionName;
+        private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.ComboBox fldPublicRole;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -13,29 +13,45 @@ namespace AirNavigationRaceLive
 {
     public partial class AirNavigationRaceLiveMain : Form
     {
-        Client Client;
-        Connect Connect;
-        Credits Credits;
-        Tracker Tracker;
-        Pilot Pilot;
-        Team Team;
-        Competition Competition;
-        Map Map;
-        Visualisation Visualisation;
-        ParcourGen ParcourGen;
-        ParcourImport ParcourImport;
-        ParcourOverview ParcourOverview;
-        ParcourEdit ParcourEdit;
-        MapLegacy MapLegacy;
-        UploadGPS UploadGPS;
-        ParcourOverviewZoomed ParcourOverviewZoomed;
-        Results Results;
+        private static AirNavigationRaceLiveMain main;
+        private Client Client;
+        private Connect Connect;
+        private Credits Credits;
+        private Tracker Tracker;
+        private Pilot Pilot;
+        private Team Team;
+        private Competition Competition;
+        private Map Map;
+        private Visualisation Visualisation;
+        private ParcourGen ParcourGen;
+        private ParcourImport ParcourImport;
+        private ParcourOverview ParcourOverview;
+        private ParcourEdit ParcourEdit;
+        private MapLegacy MapLegacy;
+        private UploadGPS UploadGPS;
+        private ParcourOverviewZoomed ParcourOverviewZoomed;
+        private Results Results;
 
+        public static void SetStatusText(String text)
+        {
+            if (main != null)
+            {
+                SetStatusCallback d = new SetStatusCallback(main.SetStatusTextCB);
+                main.Invoke(d, new object[] { text });
+            }
+        }
+
+        delegate void SetStatusCallback(String statusText);
+        public void SetStatusTextCB(String statusText)
+        {
+            StatusStripLabel.Text = statusText;
+        }
 
         public AirNavigationRaceLiveMain()
         {
             Client = null;
             InitializeComponent();
+            main = this;
         }
 
         public void UpdateEnablement()

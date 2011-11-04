@@ -8,11 +8,12 @@ namespace NetworkObjects
     public enum ERequestType : int
     {
         Login = 0,
-        Get = 1,
-        Save = 2,
-        Delete = 3,
-        GetAll = 4,
-        Upload = 5
+        Register = 1,
+        Get = 2,
+        Save = 3,
+        Delete = 4,
+        GetAll = 5,
+        Upload = 6
     }
 
     public enum EObjectType : int
@@ -27,7 +28,8 @@ namespace NetworkObjects
         Competition = 8,
         GPSData = 9,
         Penalty = 10,
-        CompetitionTeam =11
+        CompetitionTeam = 11,
+        CompetitionSet = 12
     }
     public enum LineType : int
     {
@@ -52,5 +54,13 @@ namespace NetworkObjects
         B = 2,
         C = 3,
         D = 4
+    }
+    public enum Access : int
+    {
+        None = 0,
+        Read = 1,
+        Write = 2,
+        Owner = 3,
+        Admin = 4
     }
 }

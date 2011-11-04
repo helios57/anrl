@@ -152,7 +152,7 @@
             // legacyToolStripMenuItem
             // 
             this.legacyToolStripMenuItem.Name = "legacyToolStripMenuItem";
-            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.legacyToolStripMenuItem.Text = "Legacy";
             this.legacyToolStripMenuItem.Click += new System.EventHandler(this.legacyToolStripMenuItem_Click);
             // 
@@ -233,8 +233,8 @@
             // 
             this.competitionToolStripMenuItem.Enabled = false;
             this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem";
-            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
-            this.competitionToolStripMenuItem.Text = "Competitions";
+            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
+            this.competitionToolStripMenuItem.Text = "Qualification Round";
             this.competitionToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
             // 
             // rulesToolStripMenuItem

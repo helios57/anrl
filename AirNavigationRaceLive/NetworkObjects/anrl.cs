@@ -97,6 +97,15 @@ namespace NetworkObjects
       get { return _Token; }
       set { _Token = value; }
     }
+
+    private int _ID_User = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ID_User", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_User
+    {
+      get { return _ID_User; }
+      set { _ID_User = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -218,6 +227,15 @@ namespace NetworkObjects
       get { return _CompetitionTeam; }
       set { _CompetitionTeam = value; }
     }
+
+    private NetworkObjects.CompetitionSet _CompetitionSet = null;
+    [global::ProtoBuf.ProtoMember(15, IsRequired = false, Name=@"CompetitionSet", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue(null)]
+    public NetworkObjects.CompetitionSet CompetitionSet
+    {
+      get { return _CompetitionSet; }
+      set { _CompetitionSet = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
@@ -321,6 +339,13 @@ namespace NetworkObjects
     public global::System.Collections.Generic.List<NetworkObjects.CompetitionTeam> CompetitionTeamList
     {
       get { return _CompetitionTeamList; }
+    }
+  
+    private readonly global::System.Collections.Generic.List<NetworkObjects.CompetitionSet> _CompetitionSetList = new global::System.Collections.Generic.List<NetworkObjects.CompetitionSet>();
+    [global::ProtoBuf.ProtoMember(15, Name=@"CompetitionSetList", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    public global::System.Collections.Generic.List<NetworkObjects.CompetitionSet> CompetitionSetList
+    {
+      get { return _CompetitionSetList; }
     }
   
     private global::ProtoBuf.IExtension extensionObject;
@@ -988,6 +1013,52 @@ namespace NetworkObjects
     {
       get { return _ID_Competition_Team; }
       set { _ID_Competition_Team = value; }
+    }
+    private global::ProtoBuf.IExtension extensionObject;
+    global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+      { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }
+  }
+  
+  [global::System.Serializable, global::ProtoBuf.ProtoContract(Name=@"CompetitionSet")]
+  public partial class CompetitionSet : global::ProtoBuf.IExtensible
+  {
+    public CompetitionSet() {}
+    
+
+    private int _ID = default(int);
+    [global::ProtoBuf.ProtoMember(1, IsRequired = false, Name=@"ID", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID
+    {
+      get { return _ID; }
+      set { _ID = value; }
+    }
+
+    private string _Owner = "";
+    [global::ProtoBuf.ProtoMember(2, IsRequired = false, Name=@"Owner", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Owner
+    {
+      get { return _Owner; }
+      set { _Owner = value; }
+    }
+
+    private int _PublicRole = default(int);
+    [global::ProtoBuf.ProtoMember(3, IsRequired = false, Name=@"PublicRole", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int PublicRole
+    {
+      get { return _PublicRole; }
+      set { _PublicRole = value; }
+    }
+
+    private string _Name = "";
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Name", DataFormat = global::ProtoBuf.DataFormat.Default)]
+    [global::System.ComponentModel.DefaultValue("")]
+    public string Name
+    {
+      get { return _Name; }
+      set { _Name = value; }
     }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)

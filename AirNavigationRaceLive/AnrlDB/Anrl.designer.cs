@@ -33,12 +33,15 @@ namespace AnrlDB
     partial void Insertt_Competition(t_Competition instance);
     partial void Updatet_Competition(t_Competition instance);
     partial void Deletet_Competition(t_Competition instance);
-    partial void Insertt_Tracker(t_Tracker instance);
-    partial void Updatet_Tracker(t_Tracker instance);
-    partial void Deletet_Tracker(t_Tracker instance);
+    partial void Insertt_User_Session(t_User_Session instance);
+    partial void Updatet_User_Session(t_User_Session instance);
+    partial void Deletet_User_Session(t_User_Session instance);
     partial void Insertt_Competition_Team(t_Competition_Team instance);
     partial void Updatet_Competition_Team(t_Competition_Team instance);
     partial void Deletet_Competition_Team(t_Competition_Team instance);
+    partial void Insertt_CompetitionSet(t_CompetitionSet instance);
+    partial void Updatet_CompetitionSet(t_CompetitionSet instance);
+    partial void Deletet_CompetitionSet(t_CompetitionSet instance);
     partial void Insertt_Daten(t_Daten instance);
     partial void Updatet_Daten(t_Daten instance);
     partial void Deletet_Daten(t_Daten instance);
@@ -78,6 +81,15 @@ namespace AnrlDB
     partial void Insertt_Team_Tracker(t_Team_Tracker instance);
     partial void Updatet_Team_Tracker(t_Team_Tracker instance);
     partial void Deletet_Team_Tracker(t_Team_Tracker instance);
+    partial void Insertt_Tracker(t_Tracker instance);
+    partial void Updatet_Tracker(t_Tracker instance);
+    partial void Deletet_Tracker(t_Tracker instance);
+    partial void Insertt_User(t_User instance);
+    partial void Updatet_User(t_User instance);
+    partial void Deletet_User(t_User instance);
+    partial void Insertt_User_CompetitionSet(t_User_CompetitionSet instance);
+    partial void Updatet_User_CompetitionSet(t_User_CompetitionSet instance);
+    partial void Deletet_User_CompetitionSet(t_User_CompetitionSet instance);
     #endregion
 		
 		public AnrlDataContext() : 
@@ -118,11 +130,11 @@ namespace AnrlDB
 			}
 		}
 		
-		public System.Data.Linq.Table<t_Tracker> t_Trackers
+		public System.Data.Linq.Table<t_User_Session> t_User_Sessions
 		{
 			get
 			{
-				return this.GetTable<t_Tracker>();
+				return this.GetTable<t_User_Session>();
 			}
 		}
 		
@@ -131,6 +143,14 @@ namespace AnrlDB
 			get
 			{
 				return this.GetTable<t_Competition_Team>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_CompetitionSet> t_CompetitionSets
+		{
+			get
+			{
+				return this.GetTable<t_CompetitionSet>();
 			}
 		}
 		
@@ -237,6 +257,30 @@ namespace AnrlDB
 				return this.GetTable<t_Team_Tracker>();
 			}
 		}
+		
+		public System.Data.Linq.Table<t_Tracker> t_Trackers
+		{
+			get
+			{
+				return this.GetTable<t_Tracker>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_User> t_Users
+		{
+			get
+			{
+				return this.GetTable<t_User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_User_CompetitionSet> t_User_CompetitionSets
+		{
+			get
+			{
+				return this.GetTable<t_User_CompetitionSet>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Competition")]
@@ -259,7 +303,11 @@ namespace AnrlDB
 		
 		private int _ID_Parcour;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Competition_Team> _t_Competition_Teams;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
 		private EntityRef<t_Line> _t_Line;
 		
@@ -281,11 +329,14 @@ namespace AnrlDB
     partial void OnNameChanged();
     partial void OnID_ParcourChanging(int value);
     partial void OnID_ParcourChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Competition()
 		{
 			this._t_Competition_Teams = new EntitySet<t_Competition_Team>(new Action<t_Competition_Team>(this.attach_t_Competition_Teams), new Action<t_Competition_Team>(this.detach_t_Competition_Teams));
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Line = default(EntityRef<t_Line>);
 			OnCreated();
 		}
@@ -434,6 +485,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Competition_Team", Storage="_t_Competition_Teams", ThisKey="ID", OtherKey="ID_Competition")]
 		public EntitySet<t_Competition_Team> t_Competition_Teams
 		{
@@ -444,6 +519,40 @@ namespace AnrlDB
 			set
 			{
 				this._t_Competition_Teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Competitions.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Competitions.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
 			}
 		}
 		
@@ -514,21 +623,29 @@ namespace AnrlDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Tracker")]
-	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_User_Sessions")]
+	public partial class t_User_Session : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _ID;
 		
-		private string _IMEI;
+		private long _ValidUntil;
 		
-		private string _Name;
+		private string _Token;
 		
-		private EntitySet<t_Daten> _t_Datens;
+		private string _Identification;
 		
-		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
+		private int _ID_User;
+		
+		private System.Data.Linq.Binary _PrivateKey;
+		
+		private System.Data.Linq.Binary _PublicKey;
+		
+		private System.Data.Linq.Binary _SymKey;
+		
+		private EntityRef<t_User> _t_User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -536,16 +653,25 @@ namespace AnrlDB
     partial void OnCreated();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
-    partial void OnIMEIChanging(string value);
-    partial void OnIMEIChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
+    partial void OnValidUntilChanging(long value);
+    partial void OnValidUntilChanged();
+    partial void OnTokenChanging(string value);
+    partial void OnTokenChanged();
+    partial void OnIdentificationChanging(string value);
+    partial void OnIdentificationChanged();
+    partial void OnID_UserChanging(int value);
+    partial void OnID_UserChanged();
+    partial void OnPrivateKeyChanging(System.Data.Linq.Binary value);
+    partial void OnPrivateKeyChanged();
+    partial void OnPublicKeyChanging(System.Data.Linq.Binary value);
+    partial void OnPublicKeyChanged();
+    partial void OnSymKeyChanging(System.Data.Linq.Binary value);
+    partial void OnSymKeyChanged();
     #endregion
 		
-		public t_Tracker()
+		public t_User_Session()
 		{
-			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
-			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
+			this._t_User = default(EntityRef<t_User>);
 			OnCreated();
 		}
 		
@@ -569,69 +695,181 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string IMEI
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ValidUntil", DbType="BigInt NOT NULL")]
+		public long ValidUntil
 		{
 			get
 			{
-				return this._IMEI;
+				return this._ValidUntil;
 			}
 			set
 			{
-				if ((this._IMEI != value))
+				if ((this._ValidUntil != value))
 				{
-					this.OnIMEIChanging(value);
+					this.OnValidUntilChanging(value);
 					this.SendPropertyChanging();
-					this._IMEI = value;
-					this.SendPropertyChanged("IMEI");
-					this.OnIMEIChanged();
+					this._ValidUntil = value;
+					this.SendPropertyChanged("ValidUntil");
+					this.OnValidUntilChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Token", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
+		public string Token
 		{
 			get
 			{
-				return this._Name;
+				return this._Token;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._Token != value))
 				{
-					this.OnNameChanging(value);
+					this.OnTokenChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._Token = value;
+					this.SendPropertyChanged("Token");
+					this.OnTokenChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Daten> t_Datens
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Identification", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
+		public string Identification
 		{
 			get
 			{
-				return this._t_Datens;
+				return this._Identification;
 			}
 			set
 			{
-				this._t_Datens.Assign(value);
+				if ((this._Identification != value))
+				{
+					this.OnIdentificationChanging(value);
+					this.SendPropertyChanging();
+					this._Identification = value;
+					this.SendPropertyChanged("Identification");
+					this.OnIdentificationChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team_Tracker", Storage="_t_Team_Trackers", ThisKey="ID", OtherKey="ID_Tracker")]
-		public EntitySet<t_Team_Tracker> t_Team_Trackers
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int NOT NULL")]
+		public int ID_User
 		{
 			get
 			{
-				return this._t_Team_Trackers;
+				return this._ID_User;
 			}
 			set
 			{
-				this._t_Team_Trackers.Assign(value);
+				if ((this._ID_User != value))
+				{
+					if (this._t_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_UserChanging(value);
+					this.SendPropertyChanging();
+					this._ID_User = value;
+					this.SendPropertyChanged("ID_User");
+					this.OnID_UserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivateKey", DbType="Binary(1024) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary PrivateKey
+		{
+			get
+			{
+				return this._PrivateKey;
+			}
+			set
+			{
+				if ((this._PrivateKey != value))
+				{
+					this.OnPrivateKeyChanging(value);
+					this.SendPropertyChanging();
+					this._PrivateKey = value;
+					this.SendPropertyChanged("PrivateKey");
+					this.OnPrivateKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicKey", DbType="Binary(1024) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary PublicKey
+		{
+			get
+			{
+				return this._PublicKey;
+			}
+			set
+			{
+				if ((this._PublicKey != value))
+				{
+					this.OnPublicKeyChanging(value);
+					this.SendPropertyChanging();
+					this._PublicKey = value;
+					this.SendPropertyChanged("PublicKey");
+					this.OnPublicKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SymKey", DbType="Binary(4096) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary SymKey
+		{
+			get
+			{
+				return this._SymKey;
+			}
+			set
+			{
+				if ((this._SymKey != value))
+				{
+					this.OnSymKeyChanging(value);
+					this.SendPropertyChanging();
+					this._SymKey = value;
+					this.SendPropertyChanged("SymKey");
+					this.OnSymKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true)]
+		public t_User t_User
+		{
+			get
+			{
+				return this._t_User.Entity;
+			}
+			set
+			{
+				t_User previousValue = this._t_User.Entity;
+				if (((previousValue != value) 
+							|| (this._t_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_User.Entity = null;
+						previousValue.t_User_Sessions.Remove(this);
+					}
+					this._t_User.Entity = value;
+					if ((value != null))
+					{
+						value.t_User_Sessions.Add(this);
+						this._ID_User = value.ID;
+					}
+					else
+					{
+						this._ID_User = default(int);
+					}
+					this.SendPropertyChanged("t_User");
+				}
 			}
 		}
 		
@@ -653,30 +891,6 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = this;
-		}
-		
-		private void detach_t_Datens(t_Daten entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = null;
-		}
-		
-		private void attach_t_Team_Trackers(t_Team_Tracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = this;
-		}
-		
-		private void detach_t_Team_Trackers(t_Team_Tracker entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_Tracker = null;
 		}
 	}
 	
@@ -702,11 +916,15 @@ namespace AnrlDB
 		
 		private long _TimeEnd;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Penalty> _t_Penalties;
 		
 		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
 		
 		private EntityRef<t_Competition> _t_Competition;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
 		private EntityRef<t_Team> _t_Team;
 		
@@ -730,6 +948,8 @@ namespace AnrlDB
     partial void OnTimeStartChanged();
     partial void OnTimeEndChanging(long value);
     partial void OnTimeEndChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Competition_Team()
@@ -737,6 +957,7 @@ namespace AnrlDB
 			this._t_Penalties = new EntitySet<t_Penalty>(new Action<t_Penalty>(this.attach_t_Penalties), new Action<t_Penalty>(this.detach_t_Penalties));
 			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
 			this._t_Competition = default(EntityRef<t_Competition>);
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Team = default(EntityRef<t_Team>);
 			OnCreated();
 		}
@@ -909,6 +1130,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_Team_t_Penalty", Storage="_t_Penalties", ThisKey="ID", OtherKey="ID_Competition_Team")]
 		public EntitySet<t_Penalty> t_Penalties
 		{
@@ -965,6 +1210,40 @@ namespace AnrlDB
 						this._ID_Competition = default(int);
 					}
 					this.SendPropertyChanged("t_Competition");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition_Team", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Competition_Teams.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Competition_Teams.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
 				}
 			}
 		}
@@ -1045,6 +1324,405 @@ namespace AnrlDB
 		{
 			this.SendPropertyChanging();
 			entity.t_Competition_Team = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_CompetitionSet")]
+	public partial class t_CompetitionSet : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private int _ID_Owner;
+		
+		private string _Name;
+		
+		private int _PublicRole;
+		
+		private EntitySet<t_Competition> _t_Competitions;
+		
+		private EntitySet<t_Competition_Team> _t_Competition_Teams;
+		
+		private EntitySet<t_Map> _t_Maps;
+		
+		private EntitySet<t_Parcour> _t_Parcours;
+		
+		private EntitySet<t_Penalty> _t_Penalties;
+		
+		private EntitySet<t_Pilot> _t_Pilots;
+		
+		private EntitySet<t_Team> _t_Teams;
+		
+		private EntitySet<t_User_CompetitionSet> _t_User_CompetitionSets;
+		
+		private EntityRef<t_User> _t_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnID_OwnerChanging(int value);
+    partial void OnID_OwnerChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPublicRoleChanging(int value);
+    partial void OnPublicRoleChanged();
+    #endregion
+		
+		public t_CompetitionSet()
+		{
+			this._t_Competitions = new EntitySet<t_Competition>(new Action<t_Competition>(this.attach_t_Competitions), new Action<t_Competition>(this.detach_t_Competitions));
+			this._t_Competition_Teams = new EntitySet<t_Competition_Team>(new Action<t_Competition_Team>(this.attach_t_Competition_Teams), new Action<t_Competition_Team>(this.detach_t_Competition_Teams));
+			this._t_Maps = new EntitySet<t_Map>(new Action<t_Map>(this.attach_t_Maps), new Action<t_Map>(this.detach_t_Maps));
+			this._t_Parcours = new EntitySet<t_Parcour>(new Action<t_Parcour>(this.attach_t_Parcours), new Action<t_Parcour>(this.detach_t_Parcours));
+			this._t_Penalties = new EntitySet<t_Penalty>(new Action<t_Penalty>(this.attach_t_Penalties), new Action<t_Penalty>(this.detach_t_Penalties));
+			this._t_Pilots = new EntitySet<t_Pilot>(new Action<t_Pilot>(this.attach_t_Pilots), new Action<t_Pilot>(this.detach_t_Pilots));
+			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
+			this._t_User_CompetitionSets = new EntitySet<t_User_CompetitionSet>(new Action<t_User_CompetitionSet>(this.attach_t_User_CompetitionSets), new Action<t_User_CompetitionSet>(this.detach_t_User_CompetitionSets));
+			this._t_User = default(EntityRef<t_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Owner", DbType="Int NOT NULL")]
+		public int ID_Owner
+		{
+			get
+			{
+				return this._ID_Owner;
+			}
+			set
+			{
+				if ((this._ID_Owner != value))
+				{
+					if (this._t_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_OwnerChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Owner = value;
+					this.SendPropertyChanged("ID_Owner");
+					this.OnID_OwnerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicRole", DbType="Int NOT NULL")]
+		public int PublicRole
+		{
+			get
+			{
+				return this._PublicRole;
+			}
+			set
+			{
+				if ((this._PublicRole != value))
+				{
+					this.OnPublicRoleChanging(value);
+					this.SendPropertyChanging();
+					this._PublicRole = value;
+					this.SendPropertyChanged("PublicRole");
+					this.OnPublicRoleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition", Storage="_t_Competitions", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Competition> t_Competitions
+		{
+			get
+			{
+				return this._t_Competitions;
+			}
+			set
+			{
+				this._t_Competitions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition_Team", Storage="_t_Competition_Teams", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Competition_Team> t_Competition_Teams
+		{
+			get
+			{
+				return this._t_Competition_Teams;
+			}
+			set
+			{
+				this._t_Competition_Teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Map", Storage="_t_Maps", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Map> t_Maps
+		{
+			get
+			{
+				return this._t_Maps;
+			}
+			set
+			{
+				this._t_Maps.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Parcour", Storage="_t_Parcours", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Parcour> t_Parcours
+		{
+			get
+			{
+				return this._t_Parcours;
+			}
+			set
+			{
+				this._t_Parcours.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Penalty", Storage="_t_Penalties", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Penalty> t_Penalties
+		{
+			get
+			{
+				return this._t_Penalties;
+			}
+			set
+			{
+				this._t_Penalties.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Pilot", Storage="_t_Pilots", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Pilot> t_Pilots
+		{
+			get
+			{
+				return this._t_Pilots;
+			}
+			set
+			{
+				this._t_Pilots.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Team", Storage="_t_Teams", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Team> t_Teams
+		{
+			get
+			{
+				return this._t_Teams;
+			}
+			set
+			{
+				this._t_Teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_User_CompetitionSet", Storage="_t_User_CompetitionSets", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_User_CompetitionSet> t_User_CompetitionSets
+		{
+			get
+			{
+				return this._t_User_CompetitionSets;
+			}
+			set
+			{
+				this._t_User_CompetitionSets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_CompetitionSet", Storage="_t_User", ThisKey="ID_Owner", OtherKey="ID", IsForeignKey=true)]
+		public t_User t_User
+		{
+			get
+			{
+				return this._t_User.Entity;
+			}
+			set
+			{
+				t_User previousValue = this._t_User.Entity;
+				if (((previousValue != value) 
+							|| (this._t_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_User.Entity = null;
+						previousValue.t_CompetitionSets.Remove(this);
+					}
+					this._t_User.Entity = value;
+					if ((value != null))
+					{
+						value.t_CompetitionSets.Add(this);
+						this._ID_Owner = value.ID;
+					}
+					else
+					{
+						this._ID_Owner = default(int);
+					}
+					this.SendPropertyChanged("t_User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Competitions(t_Competition entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Competitions(t_Competition entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Competition_Teams(t_Competition_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Competition_Teams(t_Competition_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Maps(t_Map entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Maps(t_Map entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Parcours(t_Parcour entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Parcours(t_Parcour entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Penalties(t_Penalty entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Penalties(t_Penalty entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Pilots(t_Pilot entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Pilots(t_Pilot entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Teams(t_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Teams(t_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_User_CompetitionSets(t_User_CompetitionSet entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_User_CompetitionSets(t_User_CompetitionSet entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
 		}
 	}
 	
@@ -2454,7 +3132,11 @@ namespace AnrlDB
 		
 		private double _YTopLeft;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Parcour> _t_Parcours;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
 		private EntityRef<t_Picture> _t_Picture;
 		
@@ -2480,11 +3162,14 @@ namespace AnrlDB
     partial void OnXTopLeftChanged();
     partial void OnYTopLeftChanging(double value);
     partial void OnYTopLeftChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Map()
 		{
 			this._t_Parcours = new EntitySet<t_Parcour>(new Action<t_Parcour>(this.attach_t_Parcours), new Action<t_Parcour>(this.detach_t_Parcours));
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Picture = default(EntityRef<t_Picture>);
 			OnCreated();
 		}
@@ -2673,6 +3358,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Map_t_Parcour", Storage="_t_Parcours", ThisKey="ID", OtherKey="ID_Map")]
 		public EntitySet<t_Parcour> t_Parcours
 		{
@@ -2683,6 +3392,40 @@ namespace AnrlDB
 			set
 			{
 				this._t_Parcours.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Map", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Maps.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Maps.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
 			}
 		}
 		
@@ -2765,7 +3508,11 @@ namespace AnrlDB
 		
 		private int _ID_Map;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Parcour_Line> _t_Parcour_Lines;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
 		private EntityRef<t_Map> _t_Map;
 		
@@ -2779,11 +3526,14 @@ namespace AnrlDB
     partial void OnNameChanged();
     partial void OnID_MapChanging(int value);
     partial void OnID_MapChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Parcour()
 		{
 			this._t_Parcour_Lines = new EntitySet<t_Parcour_Line>(new Action<t_Parcour_Line>(this.attach_t_Parcour_Lines), new Action<t_Parcour_Line>(this.detach_t_Parcour_Lines));
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Map = default(EntityRef<t_Map>);
 			OnCreated();
 		}
@@ -2852,6 +3602,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Parcour_Line", Storage="_t_Parcour_Lines", ThisKey="ID", OtherKey="ID_Parcour")]
 		public EntitySet<t_Parcour_Line> t_Parcour_Lines
 		{
@@ -2862,6 +3636,40 @@ namespace AnrlDB
 			set
 			{
 				this._t_Parcour_Lines.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Parcour", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Parcours.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Parcours.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
 			}
 		}
 		
@@ -3114,6 +3922,10 @@ namespace AnrlDB
 		
 		private int _ID_Competition_Team;
 		
+		private int _ID_CompetitionSet;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
+		
 		private EntityRef<t_Competition_Team> _t_Competition_Team;
 		
     #region Extensibility Method Definitions
@@ -3128,10 +3940,13 @@ namespace AnrlDB
     partial void OnReasonChanged();
     partial void OnID_Competition_TeamChanging(int value);
     partial void OnID_Competition_TeamChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Penalty()
 		{
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Competition_Team = default(EntityRef<t_Competition_Team>);
 			OnCreated();
 		}
@@ -3216,6 +4031,64 @@ namespace AnrlDB
 					this._ID_Competition_Team = value;
 					this.SendPropertyChanged("ID_Competition_Team");
 					this.OnID_Competition_TeamChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Penalty", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Penalties.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Penalties.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
 				}
 			}
 		}
@@ -3507,9 +4380,13 @@ namespace AnrlDB
 		
 		private System.Nullable<int> _ID_Picture;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Team> _t_Teams;
 		
 		private EntitySet<t_Team> _t_Teams1;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
 		private EntityRef<t_Picture> _t_Picture;
 		
@@ -3525,12 +4402,15 @@ namespace AnrlDB
     partial void OnSureNameChanged();
     partial void OnID_PictureChanging(System.Nullable<int> value);
     partial void OnID_PictureChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Pilot()
 		{
 			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
 			this._t_Teams1 = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams1), new Action<t_Team>(this.detach_t_Teams1));
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Picture = default(EntityRef<t_Picture>);
 			OnCreated();
 		}
@@ -3619,6 +4499,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Pilot_t_Team", Storage="_t_Teams", ThisKey="ID", OtherKey="ID_Pilot")]
 		public EntitySet<t_Team> t_Teams
 		{
@@ -3642,6 +4546,40 @@ namespace AnrlDB
 			set
 			{
 				this._t_Teams1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Pilot", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Pilots.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Pilots.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
 			}
 		}
 		
@@ -3744,7 +4682,11 @@ namespace AnrlDB
 		
 		private string _Description;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Competition_Team> _t_Competition_Teams;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
 		private EntityRef<t_Picture> _t_Picture;
 		
@@ -3770,11 +4712,14 @@ namespace AnrlDB
     partial void OnID_FlagChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Team()
 		{
 			this._t_Competition_Teams = new EntitySet<t_Competition_Team>(new Action<t_Competition_Team>(this.attach_t_Competition_Teams), new Action<t_Competition_Team>(this.detach_t_Competition_Teams));
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			this._t_Picture = default(EntityRef<t_Picture>);
 			this._t_Pilot = default(EntityRef<t_Pilot>);
 			this._t_Pilot1 = default(EntityRef<t_Pilot>);
@@ -3933,6 +4878,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Team_t_Competition_Team", Storage="_t_Competition_Teams", ThisKey="ID", OtherKey="ID_Team")]
 		public EntitySet<t_Competition_Team> t_Competition_Teams
 		{
@@ -3943,6 +4912,40 @@ namespace AnrlDB
 			set
 			{
 				this._t_Competition_Teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Team", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Teams.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Teams.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
 			}
 		}
 		
@@ -4160,7 +5163,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_Team_t_Team_Tracker", Storage="_t_Competition_Team", ThisKey="ID_Competition_Team", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_Team_t_Team_Tracker", Storage="_t_Competition_Team", ThisKey="ID_Competition_Team", OtherKey="ID", IsForeignKey=true)]
 		public t_Competition_Team t_Competition_Team
 		{
 			get
@@ -4224,6 +5227,606 @@ namespace AnrlDB
 						this._ID_Tracker = default(int);
 					}
 					this.SendPropertyChanged("t_Tracker");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Tracker")]
+	public partial class t_Tracker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _IMEI;
+		
+		private string _Name;
+		
+		private bool _Visible;
+		
+		private EntitySet<t_Daten> _t_Datens;
+		
+		private EntitySet<t_Team_Tracker> _t_Team_Trackers;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnIMEIChanging(string value);
+    partial void OnIMEIChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnVisibleChanging(bool value);
+    partial void OnVisibleChanged();
+    #endregion
+		
+		public t_Tracker()
+		{
+			this._t_Datens = new EntitySet<t_Daten>(new Action<t_Daten>(this.attach_t_Datens), new Action<t_Daten>(this.detach_t_Datens));
+			this._t_Team_Trackers = new EntitySet<t_Team_Tracker>(new Action<t_Team_Tracker>(this.attach_t_Team_Trackers), new Action<t_Team_Tracker>(this.detach_t_Team_Trackers));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IMEI", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string IMEI
+		{
+			get
+			{
+				return this._IMEI;
+			}
+			set
+			{
+				if ((this._IMEI != value))
+				{
+					this.OnIMEIChanging(value);
+					this.SendPropertyChanging();
+					this._IMEI = value;
+					this.SendPropertyChanged("IMEI");
+					this.OnIMEIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Visible", DbType="Bit NOT NULL")]
+		public bool Visible
+		{
+			get
+			{
+				return this._Visible;
+			}
+			set
+			{
+				if ((this._Visible != value))
+				{
+					this.OnVisibleChanging(value);
+					this.SendPropertyChanging();
+					this._Visible = value;
+					this.SendPropertyChanged("Visible");
+					this.OnVisibleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Daten", Storage="_t_Datens", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Daten> t_Datens
+		{
+			get
+			{
+				return this._t_Datens;
+			}
+			set
+			{
+				this._t_Datens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Tracker_t_Team_Tracker", Storage="_t_Team_Trackers", ThisKey="ID", OtherKey="ID_Tracker")]
+		public EntitySet<t_Team_Tracker> t_Team_Trackers
+		{
+			get
+			{
+				return this._t_Team_Trackers;
+			}
+			set
+			{
+				this._t_Team_Trackers.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Datens(t_Daten entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
+		}
+		
+		private void attach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = this;
+		}
+		
+		private void detach_t_Team_Trackers(t_Team_Tracker entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_Tracker = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_User")]
+	public partial class t_User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private string _Password;
+		
+		private int _ID_Role;
+		
+		private EntitySet<t_User_Session> _t_User_Sessions;
+		
+		private EntitySet<t_CompetitionSet> _t_CompetitionSets;
+		
+		private EntitySet<t_User_CompetitionSet> _t_User_CompetitionSets;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnID_RoleChanging(int value);
+    partial void OnID_RoleChanged();
+    #endregion
+		
+		public t_User()
+		{
+			this._t_User_Sessions = new EntitySet<t_User_Session>(new Action<t_User_Session>(this.attach_t_User_Sessions), new Action<t_User_Session>(this.detach_t_User_Sessions));
+			this._t_CompetitionSets = new EntitySet<t_CompetitionSet>(new Action<t_CompetitionSet>(this.attach_t_CompetitionSets), new Action<t_CompetitionSet>(this.detach_t_CompetitionSets));
+			this._t_User_CompetitionSets = new EntitySet<t_User_CompetitionSet>(new Action<t_User_CompetitionSet>(this.attach_t_User_CompetitionSets), new Action<t_User_CompetitionSet>(this.detach_t_User_CompetitionSets));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(265) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Role", DbType="Int NOT NULL")]
+		public int ID_Role
+		{
+			get
+			{
+				return this._ID_Role;
+			}
+			set
+			{
+				if ((this._ID_Role != value))
+				{
+					this.OnID_RoleChanging(value);
+					this.SendPropertyChanging();
+					this._ID_Role = value;
+					this.SendPropertyChanged("ID_Role");
+					this.OnID_RoleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User_Sessions", ThisKey="ID", OtherKey="ID_User")]
+		public EntitySet<t_User_Session> t_User_Sessions
+		{
+			get
+			{
+				return this._t_User_Sessions;
+			}
+			set
+			{
+				this._t_User_Sessions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_CompetitionSet", Storage="_t_CompetitionSets", ThisKey="ID", OtherKey="ID_Owner")]
+		public EntitySet<t_CompetitionSet> t_CompetitionSets
+		{
+			get
+			{
+				return this._t_CompetitionSets;
+			}
+			set
+			{
+				this._t_CompetitionSets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_CompetitionSet", Storage="_t_User_CompetitionSets", ThisKey="ID", OtherKey="ID_User")]
+		public EntitySet<t_User_CompetitionSet> t_User_CompetitionSets
+		{
+			get
+			{
+				return this._t_User_CompetitionSets;
+			}
+			set
+			{
+				this._t_User_CompetitionSets.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_t_User_Sessions(t_User_Session entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = this;
+		}
+		
+		private void detach_t_User_Sessions(t_User_Session entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = null;
+		}
+		
+		private void attach_t_CompetitionSets(t_CompetitionSet entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = this;
+		}
+		
+		private void detach_t_CompetitionSets(t_CompetitionSet entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = null;
+		}
+		
+		private void attach_t_User_CompetitionSets(t_User_CompetitionSet entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = this;
+		}
+		
+		private void detach_t_User_CompetitionSets(t_User_CompetitionSet entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_User_CompetitionSet")]
+	public partial class t_User_CompetitionSet : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID_User;
+		
+		private int _ID_CompetitionSet;
+		
+		private int _Access;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
+		
+		private EntityRef<t_User> _t_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnID_UserChanging(int value);
+    partial void OnID_UserChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
+    partial void OnAccessChanging(int value);
+    partial void OnAccessChanged();
+    #endregion
+		
+		public t_User_CompetitionSet()
+		{
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
+			this._t_User = default(EntityRef<t_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					if (this._t_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_UserChanging(value);
+					this.SendPropertyChanging();
+					this._ID_User = value;
+					this.SendPropertyChanged("ID_User");
+					this.OnID_UserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Access", DbType="Int NOT NULL")]
+		public int Access
+		{
+			get
+			{
+				return this._Access;
+			}
+			set
+			{
+				if ((this._Access != value))
+				{
+					this.OnAccessChanging(value);
+					this.SendPropertyChanging();
+					this._Access = value;
+					this.SendPropertyChanged("Access");
+					this.OnAccessChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_User_CompetitionSet", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_User_CompetitionSets.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_User_CompetitionSets.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_CompetitionSet", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true)]
+		public t_User t_User
+		{
+			get
+			{
+				return this._t_User.Entity;
+			}
+			set
+			{
+				t_User previousValue = this._t_User.Entity;
+				if (((previousValue != value) 
+							|| (this._t_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_User.Entity = null;
+						previousValue.t_User_CompetitionSets.Remove(this);
+					}
+					this._t_User.Entity = value;
+					if ((value != null))
+					{
+						value.t_User_CompetitionSets.Add(this);
+						this._ID_User = value.ID;
+					}
+					else
+					{
+						this._ID_User = default(int);
+					}
+					this.SendPropertyChanged("t_User");
 				}
 			}
 		}

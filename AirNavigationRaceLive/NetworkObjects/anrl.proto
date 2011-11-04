@@ -20,8 +20,11 @@ option optimize_for = SPEED;
         optional string Username =1;
 
         optional string Password =2;
-
+		
         optional string Token =3;
+
+        optional int32 ID_User =4;
+
 	}
 	message RequestParameters
 	{
@@ -50,6 +53,8 @@ option optimize_for = SPEED;
 		repeated Penalty PenaltyList = 13;
 
 		optional CompetitionTeam CompetitionTeam = 14;
+		
+		optional CompetitionSet CompetitionSet = 15;
 	}
 
 	message ResponseParameters
@@ -79,6 +84,8 @@ option optimize_for = SPEED;
 		repeated Penalty PenaltyList = 13;
 
 		repeated CompetitionTeam CompetitionTeamList = 14;
+
+		repeated CompetitionSet CompetitionSetList = 15;
 	}
 	message Picture
 	{
@@ -230,6 +237,18 @@ option optimize_for = SPEED;
 		optional string Reason = 3;
 
 		optional int32 ID_Competition_Team = 4;
+	}
+
+	message CompetitionSet 
+	{
+		optional int32 ID = 1;
+
+		optional string Owner = 2;
+		
+		optional int32 PublicRole = 3;
+
+		optional string Name = 4;
+
 	}
 
 message RootMessage {

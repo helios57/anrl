@@ -102,6 +102,7 @@
     <Compile Include="Server\GPSRequestProcessor.cs" />
     <Compile Include="Server\Processors\AProcessor.cs" />
     <Compile Include="Server\Processors\CompetitionProcessor.cs" />
+    <Compile Include="Server\Processors\CompetitionSetProcessor.cs" />
     <Compile Include="Server\Processors\GPSDataProcessor.cs" />
     <Compile Include="Server\Processors\TeamProcessor.cs" />
     <Compile Include="Server\Processors\TrackerProcessor.cs" />

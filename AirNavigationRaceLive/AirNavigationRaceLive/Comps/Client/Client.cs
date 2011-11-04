@@ -13,69 +13,36 @@ namespace AirNavigationRaceLive.Comps.Client
 {
     public class Client
     {
-        private const int PORT = 1337;
-        private String Token;
-        private string IpAdress;
         private ClientCache cache;
         private ClientCacheGPSDaten cacheGPSData;
+        private ClientNetwork net;
 
-        public Client(string IpAdress)
+        public Client(ClientNetwork net)
         {
-            this.IpAdress = IpAdress;
+            this.net = net;
             cache = new ClientCache(this);
             cacheGPSData = new ClientCacheGPSDaten(this);
         }
         public bool isAuthenticated()
         {
-            return Token != null;
+            return net.isAuthenticated();
         }
-        internal string getIpAdress()
+
+        internal string getServerCompetitionSetIdentifier()
         {
-            return IpAdress;
+            return net.getServerCompetitionSetIdentifier();
         }
-        public void Authenticate(String username, String password)
+
+        public Root process(Root r)
         {
-            Root r = new Root();
-            r.AuthInfo = new AuthenticationInfo();
-            r.AuthInfo.Username = username;
-            r.AuthInfo.Password = password;
-            Token = process(r).AuthInfo.Token;
+            return net.process(r);
         }
+
         public bool IsInitialLoadComplete()
         {
             return cache.initialLoadComplete();
         }
-        internal Root process(Root request)
-        {
-            try
-            {
-                TcpClient client = new TcpClient();
-                client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
-                int wait = 0;
-                while (!client.Connected && wait < 100)
-                {
-                    wait++;
-                    Thread.Sleep(10);
-                }
-                NetworkStream stream = client.GetStream();
-
-                Serializer.SerializeWithLengthPrefix(stream, request, PrefixStyle.Base128);
-                stream.Flush();
-                Root rootAnswer = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
-                if (rootAnswer.ResponseParameters != null && rootAnswer.ResponseParameters.Exception != null && rootAnswer.ResponseParameters.Exception.Length >0)
-                {
-                    MessageBox.Show("Exception on Server: " + rootAnswer.ResponseParameters.Exception);
-                }
-                stream.Close();
-                client.Close();
-                return rootAnswer;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception on Server: " + ex.ToString());
-                return null;
-            }
-        }
+        
         public Picture getPicture(int ID)
         {
             return cache.cachePicture.get(ID);
@@ -202,7 +169,6 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return cache.cachePenalty.getAll();
         }
-
         internal void deletePenalty(int ID)
         {
             cache.cachePenalty.delete(ID);
