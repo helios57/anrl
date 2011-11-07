@@ -89,7 +89,6 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.DisplayIndex = 3;
             this.columnHeader2.Text = "Nationality";
             this.columnHeader2.Width = 64;
             // 
@@ -118,6 +117,8 @@
             // listViewPilots
             // 
             this.listViewPilots.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.listViewPilots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewPilots.AutoArrange = false;
             this.listViewPilots.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,

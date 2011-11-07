@@ -113,7 +113,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                             if (sec > 5)
                             {
                                 NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
-                                penalty.Points = Math.Min(sec * 3, 300);
+                                penalty.Points = Math.Min((sec-5) * 3, 300);
                                 penalty.Reason = "Inside Penaltyzone for " + sec + " from " + new DateTime((Int64)timeSinceInsidePenalty).ToLongTimeString() + " to " + new DateTime((Int64)intersectionPenalty).ToLongTimeString();
                                 result.Add(penalty);
                             }

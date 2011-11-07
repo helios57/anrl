@@ -262,7 +262,7 @@ namespace AirNavigationRaceLive.Comps
 
         private DateTime mergeDateTime(DateTime time, DateTime date)
         {
-            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second, time.Millisecond);
+            return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, 0, 0);
         }
 
 
