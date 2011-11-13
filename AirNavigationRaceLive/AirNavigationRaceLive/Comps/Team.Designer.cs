@@ -56,6 +56,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.fldAC = new System.Windows.Forms.TextBox();
+            this.btnExport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -159,7 +160,7 @@
             // textBoxNavigator
             // 
             this.textBoxNavigator.Enabled = false;
-            this.textBoxNavigator.Location = new System.Drawing.Point(411, 112);
+            this.textBoxNavigator.Location = new System.Drawing.Point(409, 141);
             this.textBoxNavigator.Name = "textBoxNavigator";
             this.textBoxNavigator.Size = new System.Drawing.Size(124, 20);
             this.textBoxNavigator.TabIndex = 18;
@@ -167,7 +168,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(350, 115);
+            this.label4.Location = new System.Drawing.Point(348, 144);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 17;
@@ -176,7 +177,7 @@
             // textBoxPilot
             // 
             this.textBoxPilot.Enabled = false;
-            this.textBoxPilot.Location = new System.Drawing.Point(411, 86);
+            this.textBoxPilot.Location = new System.Drawing.Point(409, 115);
             this.textBoxPilot.Name = "textBoxPilot";
             this.textBoxPilot.Size = new System.Drawing.Size(124, 20);
             this.textBoxPilot.TabIndex = 16;
@@ -184,7 +185,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(350, 89);
+            this.label3.Location = new System.Drawing.Point(348, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 15;
@@ -193,7 +194,7 @@
             // textBoxID
             // 
             this.textBoxID.Enabled = false;
-            this.textBoxID.Location = new System.Drawing.Point(411, 61);
+            this.textBoxID.Location = new System.Drawing.Point(409, 90);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(124, 20);
             this.textBoxID.TabIndex = 14;
@@ -201,7 +202,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(350, 64);
+            this.label2.Location = new System.Drawing.Point(348, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 13);
             this.label2.TabIndex = 13;
@@ -229,7 +230,7 @@
             // 
             // btnClearPilot
             // 
-            this.btnClearPilot.Location = new System.Drawing.Point(541, 84);
+            this.btnClearPilot.Location = new System.Drawing.Point(539, 113);
             this.btnClearPilot.Name = "btnClearPilot";
             this.btnClearPilot.Size = new System.Drawing.Size(56, 23);
             this.btnClearPilot.TabIndex = 20;
@@ -239,7 +240,7 @@
             // 
             // btnClearNavigator
             // 
-            this.btnClearNavigator.Location = new System.Drawing.Point(541, 110);
+            this.btnClearNavigator.Location = new System.Drawing.Point(539, 139);
             this.btnClearNavigator.Name = "btnClearNavigator";
             this.btnClearNavigator.Size = new System.Drawing.Size(56, 23);
             this.btnClearNavigator.TabIndex = 21;
@@ -249,7 +250,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(484, 32);
+            this.btnSave.Location = new System.Drawing.Point(482, 61);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(113, 23);
             this.btnSave.TabIndex = 23;
@@ -259,7 +260,7 @@
             // 
             // btnNew
             // 
-            this.btnNew.Location = new System.Drawing.Point(355, 32);
+            this.btnNew.Location = new System.Drawing.Point(353, 61);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(123, 23);
             this.btnNew.TabIndex = 22;
@@ -270,7 +271,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(353, 173);
+            this.label5.Location = new System.Drawing.Point(351, 210);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 30;
@@ -278,7 +279,7 @@
             // 
             // btnColorSelect
             // 
-            this.btnColorSelect.Location = new System.Drawing.Point(411, 138);
+            this.btnColorSelect.Location = new System.Drawing.Point(409, 167);
             this.btnColorSelect.Name = "btnColorSelect";
             this.btnColorSelect.Size = new System.Drawing.Size(121, 23);
             this.btnColorSelect.TabIndex = 31;
@@ -289,7 +290,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(353, 143);
+            this.label6.Location = new System.Drawing.Point(351, 172);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
@@ -298,7 +299,7 @@
             // textBoxName
             // 
             this.textBoxName.Enabled = false;
-            this.textBoxName.Location = new System.Drawing.Point(411, 192);
+            this.textBoxName.Location = new System.Drawing.Point(409, 221);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(124, 20);
             this.textBoxName.TabIndex = 36;
@@ -306,7 +307,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(350, 195);
+            this.label7.Location = new System.Drawing.Point(348, 224);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 35;
@@ -315,15 +316,25 @@
             // fldAC
             // 
             this.fldAC.Enabled = false;
-            this.fldAC.Location = new System.Drawing.Point(411, 166);
+            this.fldAC.Location = new System.Drawing.Point(409, 195);
             this.fldAC.Name = "fldAC";
             this.fldAC.Size = new System.Drawing.Size(124, 20);
             this.fldAC.TabIndex = 37;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(353, 32);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(244, 23);
+            this.btnExport.TabIndex = 38;
+            this.btnExport.Text = "Export To PDF";
+            this.btnExport.UseVisualStyleBackColor = true;
             // 
             // Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.fldAC);
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.label7);
@@ -384,5 +395,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.TextBox fldAC;
+        private System.Windows.Forms.Button btnExport;
     }
 }

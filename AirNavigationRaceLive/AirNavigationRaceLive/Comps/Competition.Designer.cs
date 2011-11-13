@@ -82,6 +82,7 @@
             this.listViewTrackers = new System.Windows.Forms.ListView();
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnExportToPDF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDeleteCompetitions
@@ -424,7 +425,7 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Location = new System.Drawing.Point(264, 514);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(326, 28);
+            this.btnSave.Size = new System.Drawing.Size(245, 28);
             this.btnSave.TabIndex = 55;
             this.btnSave.Text = "Save Qualification Round";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -609,10 +610,21 @@
             this.columnHeader12.Text = "Name";
             this.columnHeader12.Width = 100;
             // 
+            // btnExportToPDF
+            // 
+            this.btnExportToPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportToPDF.Location = new System.Drawing.Point(515, 514);
+            this.btnExportToPDF.Name = "btnExportToPDF";
+            this.btnExportToPDF.Size = new System.Drawing.Size(222, 28);
+            this.btnExportToPDF.TabIndex = 71;
+            this.btnExportToPDF.Text = "Export To PDF";
+            this.btnExportToPDF.UseVisualStyleBackColor = true;
+            // 
             // Competition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExportToPDF);
             this.Controls.Add(this.listViewTrackers);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.btnSaveCompetitionTeam);
@@ -719,6 +731,7 @@
         private System.Windows.Forms.ListView listViewTrackers;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.Button btnExportToPDF;
 
 
     }

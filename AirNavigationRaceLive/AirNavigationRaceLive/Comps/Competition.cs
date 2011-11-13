@@ -331,7 +331,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void updateList(NetworkObjects.Competition c)
         {
-            
+
             listViewCompetitionTeam.Items.Clear();
             foreach (NetworkObjects.CompetitionTeam ct in c.CompetitionTeamList)
             {
@@ -365,7 +365,14 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnNewCompetitionTeam_Click(object sender, EventArgs e)
         {
-            textBoxStartId.Text = "0";
+            int starID = 0;
+            NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
+            if (c != null && c.CompetitionTeamList.Count > 0)
+            {
+
+            }
+
+            textBoxStartId.Text = "1";
             textBoxStartId.Tag = new NetworkObjects.CompetitionTeam();
             UpdateEnablement();
         }
