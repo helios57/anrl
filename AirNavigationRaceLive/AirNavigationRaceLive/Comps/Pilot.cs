@@ -45,6 +45,8 @@ namespace AirNavigationRaceLive.Comps
         private void UpdateEnablement()
         {
             btnAddPicture.Enabled =((listViewPilots.SelectedItems.Count == 1) || newPilot);
+            textBoxLastname.Enabled = btnAddPicture.Enabled;
+            textBoxSurename.Enabled = btnAddPicture.Enabled;
             btnSave.Enabled = btnAddPicture.Enabled && pictureBox.Image != null;
         }
 
