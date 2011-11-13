@@ -40,7 +40,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxReason = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -55,6 +54,7 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpload = new System.Windows.Forms.Button();
+            this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,18 +166,6 @@
             this.label6.TabIndex = 107;
             this.label6.Text = "Reason";
             // 
-            // visualisationPictureBox1
-            // 
-            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 163);
-            this.visualisationPictureBox1.Name = "visualisationPictureBox1";
-            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 376);
-            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.visualisationPictureBox1.TabIndex = 97;
-            this.visualisationPictureBox1.TabStop = false;
-            // 
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -231,7 +219,6 @@
             this.btnPdf.TabIndex = 113;
             this.btnPdf.Text = "Export as PDF";
             this.btnPdf.UseVisualStyleBackColor = true;
-            this.btnPdf.Visible = false;
             this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
             // listViewCompetitionTeam
@@ -304,6 +291,18 @@
             this.btnUpload.Text = "Upload GAC-File";
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
+            // visualisationPictureBox1
+            // 
+            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 163);
+            this.visualisationPictureBox1.Name = "visualisationPictureBox1";
+            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 376);
+            this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.visualisationPictureBox1.TabIndex = 97;
+            this.visualisationPictureBox1.TabStop = false;
             // 
             // Results
             // 
