@@ -123,6 +123,7 @@ namespace AirNavigationRaceLive.Comps
                     visualisationPictureBox1.Invalidate();
                     visualisationPictureBox1.Refresh();
                     controll.SetParcour(parcour);
+                    listViewCompetitionTeam.Items.Clear();
                     foreach (NetworkObjects.CompetitionTeam ct in comp.CompetitionTeamList)
                     {
                         ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(),getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
