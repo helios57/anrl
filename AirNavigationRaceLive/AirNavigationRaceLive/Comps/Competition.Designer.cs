@@ -128,7 +128,7 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "ID_Competition";
+            this.columnHeader1.Text = "ID";
             this.columnHeader1.Width = 35;
             // 
             // columnHeader2
@@ -144,9 +144,9 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(264, 3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(171, 33);
+            this.label7.Size = new System.Drawing.Size(285, 33);
             this.label7.TabIndex = 26;
-            this.label7.Text = "Competition";
+            this.label7.Text = "Qualification Rounds";
             // 
             // textName
             // 
@@ -254,7 +254,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(203, 25);
             this.btnNew.TabIndex = 41;
-            this.btnNew.Text = "New Competition";
+            this.btnNew.Text = "New Qualification Round";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -426,7 +426,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(326, 28);
             this.btnSave.TabIndex = 55;
-            this.btnSave.Text = "Save Competition";
+            this.btnSave.Text = "Save Qualification Round";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 

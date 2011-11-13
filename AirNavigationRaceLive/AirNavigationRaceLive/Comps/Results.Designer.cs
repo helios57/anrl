@@ -54,6 +54,7 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnUpload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,9 +73,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
+            this.label1.Size = new System.Drawing.Size(74, 20);
             this.label1.TabIndex = 96;
-            this.label1.Text = "Competition";
+            this.label1.Text = "Q-Round";
             // 
             // listViewPenalty
             // 
@@ -252,7 +253,7 @@
             this.listViewCompetitionTeam.Location = new System.Drawing.Point(7, 29);
             this.listViewCompetitionTeam.MultiSelect = false;
             this.listViewCompetitionTeam.Name = "listViewCompetitionTeam";
-            this.listViewCompetitionTeam.Size = new System.Drawing.Size(261, 200);
+            this.listViewCompetitionTeam.Size = new System.Drawing.Size(261, 171);
             this.listViewCompetitionTeam.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewCompetitionTeam.TabIndex = 114;
             this.listViewCompetitionTeam.UseCompatibleStateImageBehavior = false;
@@ -292,10 +293,23 @@
             this.columnHeader10.Text = "Route";
             this.columnHeader10.Width = 48;
             // 
+            // btnUpload
+            // 
+            this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUpload.Enabled = false;
+            this.btnUpload.Location = new System.Drawing.Point(103, 206);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(161, 23);
+            this.btnUpload.TabIndex = 115;
+            this.btnUpload.Text = "Upload GAC-File";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.listViewCompetitionTeam);
             this.Controls.Add(this.btnPdf);
             this.Controls.Add(this.btnSubmit);
@@ -350,5 +364,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.Button btnUpload;
     }
 }

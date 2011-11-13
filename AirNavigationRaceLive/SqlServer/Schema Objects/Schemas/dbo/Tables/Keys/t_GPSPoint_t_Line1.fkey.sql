@@ -1,0 +1,3 @@
+﻿ALTER TABLE [dbo].[t_Line]
+    ADD CONSTRAINT [t_GPSPoint_t_Line1] FOREIGN KEY ([ID_PointB]) REFERENCES [dbo].[t_GPSPoint] ([ID]) ON DELETE NO ACTION ON UPDATE NO ACTION;
+

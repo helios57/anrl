@@ -96,6 +96,7 @@
             this.lblVisualPlaySpeed.Size = new System.Drawing.Size(58, 13);
             this.lblVisualPlaySpeed.TabIndex = 86;
             this.lblVisualPlaySpeed.Text = "PlaySpeed";
+            this.lblVisualPlaySpeed.Visible = false;
             // 
             // VisualChkBoxAlwaysNewest
             // 
@@ -109,6 +110,7 @@
             this.VisualChkBoxAlwaysNewest.TabIndex = 85;
             this.VisualChkBoxAlwaysNewest.Text = "Always show the newest Entry";
             this.VisualChkBoxAlwaysNewest.UseVisualStyleBackColor = true;
+            this.VisualChkBoxAlwaysNewest.Visible = false;
             // 
             // VisualScrollBar
             // 
@@ -119,6 +121,7 @@
             this.VisualScrollBar.Size = new System.Drawing.Size(924, 13);
             this.VisualScrollBar.TabIndex = 84;
             this.VisualScrollBar.Value = 1;
+            this.VisualScrollBar.Visible = false;
             // 
             // btnStartClient
             // 
@@ -204,6 +207,7 @@
             0,
             0,
             0});
+            this.fldVisualPlaySpeed.Visible = false;
             // 
             // comboBox1
             // 
@@ -220,9 +224,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
+            this.label1.Size = new System.Drawing.Size(74, 20);
             this.label1.TabIndex = 96;
-            this.label1.Text = "Competition";
+            this.label1.Text = "Q-Round";
             // 
             // btnShowRanking
             // 
