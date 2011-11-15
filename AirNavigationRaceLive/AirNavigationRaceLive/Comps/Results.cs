@@ -161,16 +161,23 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewCompetitionTeam.SelectedItems.Count == 1 && textBoxPenaltyID.Tag != null)
             {
-                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
-                NetworkObjects.Penalty p = textBoxPenaltyID.Tag as NetworkObjects.Penalty;
-                p.ID_Competition_Team = competitionTeam.competitionTeam.ID;
-                p.Points = Int32.Parse(textBoxPoints.Text);
-                p.Reason = textBoxReason.Text;
-                if (!competitionTeam.penalty.Contains(p))
+                try
                 {
-                    competitionTeam.penalty.Add(p);
+                    ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                    NetworkObjects.Penalty p = textBoxPenaltyID.Tag as NetworkObjects.Penalty;
+                    p.ID_Competition_Team = competitionTeam.competitionTeam.ID;
+                    p.Points = Int32.Parse(textBoxPoints.Text);
+                    p.Reason = textBoxReason.Text;
+                    if (!competitionTeam.penalty.Contains(p))
+                    {
+                        competitionTeam.penalty.Add(p);
+                    }
+                    listViewCompetitionTeam_SelectedIndexChanged(null, null);
                 }
-                listViewCompetitionTeam_SelectedIndexChanged(null, null);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Exception occured, this mostly happen when you typed non-Integer to the Points-Field\n" + ex.ToString());
+                }
             }
         }
 

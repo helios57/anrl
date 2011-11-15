@@ -7,50 +7,14 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class PenaltyProcessor : AnrlService.Server.Processors.AProcessor
+    class PenaltyProcessor : AnrlService.Server.Processors.AProcessor<t_Penalty,Penalty>
     {
-        private readonly List<Penalty> cached = new List<Penalty>();
 
-        protected override void reloadCacheThreated()
+        protected override Func<t_Penalty, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_Penalty p in db.t_Penalties)
-                {
-                    cached.Add(getPenalty(p));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
-
-        public override Root proccess(Root request)
-        {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Save:
-                    {
-                        Save(request,r);
-                        break;
-                    }
-                case ERequestType.Delete:
-                    {
-                        Delete(request);
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-            }
-            return r;
-        }
-
-        private void Save(Root request,Root response)
+        protected override void Save(Root request, Root response)
         {
             AnrlDataContext db = getDB();
             foreach (Penalty p in request.RequestParameters.PenaltyList)
@@ -64,11 +28,12 @@ namespace AnrlService.Server.Processors
                 db_penalty.ID_Competition_Team = p.ID_Competition_Team;
                 db_penalty.Points = p.Points;
                 db_penalty.Reason = p.Reason;
+                db_penalty.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
                 db.t_Penalties.InsertOnSubmit(db_penalty);
                 db.SubmitChanges();
                 lock (cached)
                 {
-                    cached.Add(getPenalty(db_penalty));
+                    cached.Add(getNetworkObject(db_penalty));
                 }
                 if (request.RequestParameters.PenaltyList.Count == 1)
                 {
@@ -78,50 +43,46 @@ namespace AnrlService.Server.Processors
             db.Dispose();
         }
 
-        private void Delete(Root request)
+
+        protected override System.Data.Linq.Table<t_Penalty> getTable(AnrlDataContext db)
         {
-            AnrlDataContext db = getDB();
-            if (db.t_Penalties.Count(p => p.ID == request.RequestParameters.ID) > 0)
-            {
-                db.t_Penalties.DeleteOnSubmit(db.t_Penalties.First(p => p.ID == request.RequestParameters.ID));
-                db.SubmitChanges();
-                lock (cached)
-                {
-                    cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
-                }
-            }
-            db.Dispose();
+            return db.t_Penalties;
         }
 
-
-        private void GetAll(Root request, Root r)
-        {
-            List<int> ids = new List<int>(request.RequestParameters.IDS);
-            lock (cached)
-            {
-                foreach (Penalty p in cached)
-                {
-                    if (!ids.Contains(p.ID))
-                    {
-                        r.ResponseParameters.PenaltyList.Add(p);
-                    }
-                    else
-                    {
-                        ids.Remove(p.ID);
-                    }
-                }
-            }
-            r.ResponseParameters.DeletedIDList.AddRange(ids);
-        }
-
-        private Penalty getPenalty(t_Penalty penalty)
+        protected override Penalty getNetworkObject(t_Penalty input)
         {
             Penalty result = new Penalty();
-            result.ID = penalty.ID;
-            result.ID_Competition_Team = penalty.ID_Competition_Team;
-            result.Reason = penalty.Reason;
-            result.Points = penalty.Points;
+            result.ID_CompetitonSet = input.ID_CompetitionSet;
+            result.ID = input.ID;
+            result.ID_Competition_Team = input.ID_Competition_Team;
+            result.Reason = input.Reason;
+            result.Points = input.Points;
             return result;
+        }
+
+        protected override t_Penalty getDBObject(Penalty input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(Penalty input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Penalty input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Penalty Obj)
+        {
+            return id_competitionSet == Obj.ID;
+        }
+
+        protected override void AddToResponseList(Root response, Penalty obj)
+        {
+            response.ResponseParameters.PenaltyList.Add(obj);
         }
     }
 }

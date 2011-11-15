@@ -7,8 +7,12 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class GPSDataProcessor : AnrlService.Server.Processors.AProcessor
+    class GPSDataProcessor : AnrlService.Server.Processors.AProcessor<t_Daten,GPSData>
     {
+        protected override Func<t_Daten, bool> getSingleSelection(int ID)
+        {
+            return p => p.ID == ID;
+        }
         private TrackerProcessor tp;
         public GPSDataProcessor(TrackerProcessor tp)
         {
@@ -107,6 +111,46 @@ namespace AnrlService.Server.Processors
                     }
             }
             return r;
+        }
+
+        protected override System.Data.Linq.Table<t_Daten> getTable(AnrlDataContext db)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override GPSData getNetworkObject(t_Daten input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override t_Daten getDBObject(GPSData input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Save(Root request, Root r)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(GPSData input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(t_Daten input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, GPSData Obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void AddToResponseList(Root response, GPSData obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

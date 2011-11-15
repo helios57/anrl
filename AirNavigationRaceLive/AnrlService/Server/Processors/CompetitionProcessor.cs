@@ -7,178 +7,26 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class CompetitionProcessor : AnrlService.Server.Processors.AProcessor
+    class CompetitionProcessor : AnrlService.Server.Processors.AProcessor<t_Competition,Competition>
     {
-        private readonly List<Competition> cached = new List<Competition>();
 
-        protected override void reloadCacheThreated()
+        protected override Func<t_Competition, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_Competition t in db.t_Competitions)
-                {
-                    cached.Add(getCompetition(t));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
 
-        public override Root proccess(Root request)
+        protected override System.Data.Linq.Table<t_Competition> getTable(AnrlDataContext db)
         {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Delete:
-                    {
-                        AnrlDataContext db = getDB();
-                        db.t_Competition_Teams.DeleteAllOnSubmit(db.t_Competition_Teams.Where(p => p.ID_Competition == request.RequestParameters.ID));
-                        db.t_Competitions.DeleteAllOnSubmit(db.t_Competitions.Where(p => p.ID == request.RequestParameters.ID));
-                        db.SubmitChanges();
-                        db.Dispose();
-                        lock (cached)
-                        {
-                            cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
-                        }
-                        break;
-                    }
-                case ERequestType.Get:
-                    {
-                        if (request.RequestParameters != null && request.RequestParameters.ID != 0)
-                        {
-                            foreach (Competition t_c in cached.Where(p => p.ID == request.RequestParameters.ID))
-                            {
-                                r.ResponseParameters.CompetitionList.Add(t_c);
-                            }
-                        }
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        List<int> ids = new List<int>(request.RequestParameters.IDS);
-                        lock (cached)
-                        {
-                            foreach (Competition t_c in cached)
-                            {
-                                if (!ids.Contains(t_c.ID))
-                                {
-                                    r.ResponseParameters.CompetitionList.Add(t_c);
-                                }
-                                else
-                                {
-                                    ids.Remove(t_c.ID);
-                                }
-                            }
-                        }
-                        r.ResponseParameters.DeletedIDList.AddRange(ids);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        AnrlDataContext db = getDB();
-                        t_Competition t_c;
-                        t_Line line;
-
-                        t_GPSPoint a;
-                        t_GPSPoint b;
-                        t_GPSPoint o;
-
-                        if (request.RequestParameters.Competition.ID > 0)
-                        {
-                            lock (cached)
-                            {
-                                cached.RemoveAll(p=> p.ID == request.RequestParameters.Competition.ID);
-                            }
-                            t_c = db.t_Competitions.Single(p => p.ID == request.RequestParameters.Competition.ID);
-                            db.t_Competition_Teams.DeleteAllOnSubmit(db.t_Competition_Teams.Where(p => p.ID_Competition == request.RequestParameters.Competition.ID));
-                            db.SubmitChanges();
-                            line = t_c.t_Line;
-                            a = line.t_GPSPoint;
-                            b = line.t_GPSPoint1;
-                            o = line.t_GPSPoint2;
-                        }
-                        else
-                        {
-                            a = new t_GPSPoint();
-                            b = new t_GPSPoint();
-                            o = new t_GPSPoint();
-
-                            db.t_GPSPoints.InsertOnSubmit(a);
-                            db.t_GPSPoints.InsertOnSubmit(b);
-                            db.t_GPSPoints.InsertOnSubmit(o);
-                            db.SubmitChanges();
-
-                            line = new t_Line();
-                            db.t_Lines.InsertOnSubmit(line);
-                            line.ID_PointA = a.ID;
-                            line.ID_PointB = b.ID;
-                            line.ID_PointOrientation = o.ID;
-                            line.Type = (int)LineType.TakeOff;
-                            db.SubmitChanges();
-
-                            t_c = new t_Competition();
-                            db.t_Competitions.InsertOnSubmit(t_c);
-                            t_c.ID_TakeOffLine = line.ID;
-                        }
-                        t_c.Name = request.RequestParameters.Competition.Name;
-                        t_c.ID_Parcour = request.RequestParameters.Competition.ID_Parcour;
-
-                        CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.A, a);
-
-                        CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.B, b);
-
-                        CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.O, o);
-
-
-                        db.SubmitChanges();
-
-                        foreach (CompetitionTeam ct in request.RequestParameters.Competition.CompetitionTeamList)
-                        {
-                            if (db.t_Competition_Teams.Count(p => p.ID_Competition == t_c.ID && p.ID == ct.ID) == 0)
-                            {
-                                t_Competition_Team tcg = new t_Competition_Team();
-                                tcg.ID_Team = ct.ID_Team;
-                                tcg.ID_Competition = t_c.ID;
-                                tcg.Route = ct.Route;
-                                tcg.StartID = ct.StartID;
-                                tcg.TimeEnd = ct.TimeEndLine;
-                                tcg.TimeStart = ct.TimeStartLine;
-                                tcg.TimeTakeOff = ct.TimeTakeOff;
-                                db.t_Competition_Teams.InsertOnSubmit(tcg);
-                                db.SubmitChanges();
-                                foreach (int i in ct.ID_TrackerList)
-                                {
-                                    t_Team_Tracker ttt = new t_Team_Tracker();
-                                    ttt.ID_Competition_Team = tcg.ID;
-                                    ttt.ID_Tracker = i;
-                                    db.t_Team_Trackers.InsertOnSubmit(ttt);
-                                }
-                            }
-                        }
-                        db.SubmitChanges();
-                        lock (cached)
-                        {
-                            cached.Add(getCompetition(t_c));
-                        }
-                        db.Dispose();
-                        r.ResponseParameters = new ResponseParameters();
-                        r.ResponseParameters.ID = t_c.ID;
-                        break;
-                    }
-            }
-            return r;
+            return db.t_Competitions;
         }
 
-
-
-        private Competition getCompetition(t_Competition input)
+        protected override Competition getNetworkObject(t_Competition input)
         {
             Competition result = new Competition();
             result.ID = input.ID;
             result.ID_Parcour = input.ID_Parcour;
             result.Name = input.Name;
+            result.ID_CompetitonSet = input.ID_CompetitionSet;
 
             Line l = new Line();
             l.A = new Point();
@@ -211,6 +59,127 @@ namespace AnrlService.Server.Processors
             return result;
         }
 
+        protected override t_Competition getDBObject(Competition input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Save(Root request, Root r)
+        {
+            AnrlDataContext db = getDB();
+            t_Competition t_c;
+            t_Line line;
+
+            t_GPSPoint a;
+            t_GPSPoint b;
+            t_GPSPoint o;
+
+            if (request.RequestParameters.Competition.ID > 0)
+            {
+                lock (cached)
+                {
+                    cached.RemoveAll(p => p.ID == request.RequestParameters.Competition.ID);
+                }
+                t_c = db.t_Competitions.Single(p => p.ID == request.RequestParameters.Competition.ID);
+                db.t_Competition_Teams.DeleteAllOnSubmit(db.t_Competition_Teams.Where(p => p.ID_Competition == request.RequestParameters.Competition.ID));
+                db.SubmitChanges();
+                line = t_c.t_Line;
+                a = line.t_GPSPoint;
+                b = line.t_GPSPoint1;
+                o = line.t_GPSPoint2;
+            }
+            else
+            {
+                a = new t_GPSPoint();
+                b = new t_GPSPoint();
+                o = new t_GPSPoint();
+
+                db.t_GPSPoints.InsertOnSubmit(a);
+                db.t_GPSPoints.InsertOnSubmit(b);
+                db.t_GPSPoints.InsertOnSubmit(o);
+                db.SubmitChanges();
+
+                line = new t_Line();
+                db.t_Lines.InsertOnSubmit(line);
+                line.ID_PointA = a.ID;
+                line.ID_PointB = b.ID;
+                line.ID_PointOrientation = o.ID;
+                line.Type = (int)LineType.TakeOff;
+                db.SubmitChanges();
+
+                t_c = new t_Competition();
+                db.t_Competitions.InsertOnSubmit(t_c);
+                t_c.ID_TakeOffLine = line.ID;
+            }
+            t_c.Name = request.RequestParameters.Competition.Name;
+            t_c.ID_Parcour = request.RequestParameters.Competition.ID_Parcour;
+            t_c.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
+
+            CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.A, a);
+
+            CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.B, b);
+
+            CopyAttributesWithoutId(request.RequestParameters.Competition.TakeOffLine.O, o);
+
+
+            db.SubmitChanges();
+
+            foreach (CompetitionTeam ct in request.RequestParameters.Competition.CompetitionTeamList)
+            {
+                if (db.t_Competition_Teams.Count(p => p.ID_Competition == t_c.ID && p.ID == ct.ID) == 0)
+                {
+                    t_Competition_Team tcg = new t_Competition_Team();
+                    tcg.ID_Team = ct.ID_Team;
+                    tcg.ID_Competition = t_c.ID;
+                    tcg.Route = ct.Route;
+                    tcg.StartID = ct.StartID;
+                    tcg.TimeEnd = ct.TimeEndLine;
+                    tcg.TimeStart = ct.TimeStartLine;
+                    tcg.TimeTakeOff = ct.TimeTakeOff;
+                    tcg.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
+                    db.t_Competition_Teams.InsertOnSubmit(tcg);
+                    db.SubmitChanges();
+                    foreach (int i in ct.ID_TrackerList)
+                    {
+                        t_Team_Tracker ttt = new t_Team_Tracker();
+                        ttt.ID_Competition_Team = tcg.ID;
+                        ttt.ID_Tracker = i;
+                        db.t_Team_Trackers.InsertOnSubmit(ttt);
+                    }
+                }
+            }
+            db.SubmitChanges();
+            lock (cached)
+            {
+                cached.Add(getNetworkObject(t_c));
+            }
+            db.Dispose();
+            reloadCacheThreated();//Hack to avoid empty competitions
+            r.ResponseParameters = new ResponseParameters();
+            r.ResponseParameters.ID = t_c.ID;
+        }
+
+        protected override int GetID(Competition input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Competition input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Competition Obj)
+        {
+            return id_competitionSet == Obj.ID_CompetitonSet;
+        }
+
+        protected override void AddToResponseList(Root response, Competition obj)
+        {
+            response.ResponseParameters.CompetitionList.Add(obj);
+        }
+
+
         private static void CopyAttributes(t_GPSPoint gp, Point p)
         {
             p.ID = gp.ID;
@@ -237,5 +206,6 @@ namespace AnrlService.Server.Processors
             p.latitude = gp.latitude;
             p.longitude = gp.longitude;
         }
+
     }
 }

@@ -15,19 +15,6 @@
       <Association Name="t_Line_t_Competition" Member="t_Line" ThisKey="ID_TakeOffLine" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.t_User_Sessions" Member="t_User_Sessions">
-    <Type Name="t_User_Session">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ValidUntil" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Token" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
-      <Column Name="Identification" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
-      <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="PrivateKey" Type="System.Data.Linq.Binary" DbType="Binary(1024) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="PublicKey" Type="System.Data.Linq.Binary" DbType="Binary(1024) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="SymKey" Type="System.Data.Linq.Binary" DbType="Binary(4096) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Association Name="t_User_t_User_Session" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.t_Competition_Team" Member="t_Competition_Teams">
     <Type Name="t_Competition_Team">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -41,7 +28,7 @@
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Competition_Team_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Competition_Team" Type="t_Penalty" />
       <Association Name="t_Competition_Team_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Competition_Team" Type="t_Team_Tracker" />
-      <Association Name="t_Competition_t_Competition_Team" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
+      <Association Name="t_Competition_t_Competition_Team" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_CompetitionSet_t_Competition_Team" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
       <Association Name="t_Team_t_Competition_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
@@ -172,8 +159,8 @@
       <Column Name="Reason" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Competition_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_CompetitionSet_t_Penalty" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
       <Association Name="t_Competition_Team_t_Penalty" Member="t_Competition_Team" ThisKey="ID_Competition_Team" OtherKey="ID" Type="t_Competition_Team" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Penalty" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Picture" Member="t_Pictures">
@@ -210,6 +197,7 @@
       <Column Name="ID_Flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="t_Team_t_Competition_Team" Member="t_Competition_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Competition_Team" />
       <Association Name="t_CompetitionSet_t_Team" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
       <Association Name="t_Picture_t_Team" Member="t_Picture" ThisKey="ID_Flag" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
@@ -241,9 +229,9 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Password" Type="System.String" DbType="VarChar(265) NOT NULL" CanBeNull="false" />
       <Column Name="ID_Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_User_t_User_Session" Member="t_User_Sessions" ThisKey="ID" OtherKey="ID_User" Type="t_User_Session" />
       <Association Name="t_User_t_CompetitionSet" Member="t_CompetitionSets" ThisKey="ID" OtherKey="ID_Owner" Type="t_CompetitionSet" />
       <Association Name="t_User_t_User_CompetitionSet" Member="t_User_CompetitionSets" ThisKey="ID" OtherKey="ID_User" Type="t_User_CompetitionSet" />
+      <Association Name="t_User_t_User_Session" Member="t_User_Sessions" ThisKey="ID" OtherKey="ID_User" Type="t_User_Session" />
     </Type>
   </Table>
   <Table Name="dbo.t_User_CompetitionSet" Member="t_User_CompetitionSets">
@@ -253,6 +241,19 @@
       <Column Name="Access" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_CompetitionSet_t_User_CompetitionSet" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
       <Association Name="t_User_t_User_CompetitionSet" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_User_Sessions" Member="t_User_Sessions">
+    <Type Name="t_User_Session">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ValidUntil" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Token" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="Identification" Type="System.String" DbType="VarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PrivateKey" Type="System.Data.Linq.Binary" DbType="Binary(1024) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PublicKey" Type="System.Data.Linq.Binary" DbType="Binary(1024) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SymKey" Type="System.Data.Linq.Binary" DbType="Binary(4096) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="t_User_t_User_Session" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

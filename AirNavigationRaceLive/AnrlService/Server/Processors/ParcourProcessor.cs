@@ -7,94 +7,20 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class ParcourProcessor : AnrlService.Server.Processors.AProcessor
+    class ParcourProcessor : AnrlService.Server.Processors.AProcessor<t_Parcour,Parcour>
     {
-        private readonly List<Parcour> cached = new List<Parcour>();
 
-        protected override void reloadCacheThreated()
+        protected override Func<t_Parcour, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_Parcour m in db.t_Parcours)
-                {
-                    cached.Add(getParcour(m));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
-
-        public override Root proccess(Root request)
-        {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Delete:
-                    {
-                        Delete(request);
-                        break;
-                    }
-                case ERequestType.Get:
-                    {
-                        Get(request, r);
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        Save(request, r);
-                        break;
-                    }
-            }
-            return r;
-        }
-
-        private void Get(Root request, Root r)
-        {
-            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
-            {
-                lock (cached)
-                {
-                    foreach (Parcour parcour in cached.Where(p => p.ID == request.RequestParameters.ID))
-                    {
-                        r.ResponseParameters.ParcourList.Add(parcour);
-                    }
-                }
-            }
-        }
-
-        private void GetAll(Root request, Root r)
-        {
-            List<int> ids = new List<int>(request.RequestParameters.IDS);
-            lock (cached)
-            {
-                foreach (Parcour parcour in cached)
-                {
-                    if (!ids.Contains(parcour.ID))
-                    {
-                        r.ResponseParameters.ParcourList.Add(parcour);
-                    }
-                    else
-                    {
-                        ids.Remove(parcour.ID);
-                    }
-                }
-            }
-            r.ResponseParameters.DeletedIDList.AddRange(ids);
-        }
-
-        private void Save(Root request, Root r)
+        protected override void Save(Root request, Root r)
         {
             Parcour p = request.RequestParameters.Parcour;
             t_Parcour dbParcour = new t_Parcour();
             dbParcour.Name = p.Name;
             dbParcour.ID_Map = p.ID_Map;
+            dbParcour.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
 
             AnrlDataContext db = getDB();
             db.t_Parcours.InsertOnSubmit(dbParcour);
@@ -130,13 +56,13 @@ namespace AnrlService.Server.Processors
             db.Dispose();
             lock (cached)
             {
-                cached.Add(getParcour(dbParcour));
+                cached.Add(getNetworkObject(dbParcour));
             }
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = dbParcour.ID;
         }
 
-        private void Delete(Root request)
+        protected override void Delete(Root request)
         {
             AnrlDataContext db = getDB();
             foreach (t_Parcour dbParcour in db.t_Parcours.Where(p => p.ID == request.RequestParameters.ID))
@@ -158,28 +84,6 @@ namespace AnrlService.Server.Processors
             {
                 cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
             }
-        }
-
-        private Parcour getParcour(t_Parcour input)
-        {
-            Parcour result = new Parcour();
-            result.ID = input.ID;
-            result.Name = input.Name;
-            result.ID_Map = input.ID_Map;
-            foreach (t_Parcour_Line t_p_l in input.t_Parcour_Lines)
-            {
-                t_Line t_l = t_p_l.t_Line;
-                Line l = new Line();
-                l.A = new Point();
-                CopyAttributes(t_l.t_GPSPoint, l.A);
-                l.B = new Point();
-                CopyAttributes(t_l.t_GPSPoint1, l.B);
-                l.O = new Point();
-                CopyAttributes(t_l.t_GPSPoint2, l.O);
-                l.Type = t_l.Type;
-                result.LineList.Add(l);
-            }
-            return result;
         }
 
         private static void CopyAttributes(t_GPSPoint gp, Point p)
@@ -207,6 +111,59 @@ namespace AnrlService.Server.Processors
             p.altitude = gp.altitude;
             p.latitude = gp.latitude;
             p.longitude = gp.longitude;
+        }
+
+        protected override System.Data.Linq.Table<t_Parcour> getTable(AnrlDataContext db)
+        {
+            return db.t_Parcours;
+        }
+
+        protected override Parcour getNetworkObject(t_Parcour input)
+        {
+            Parcour result = new Parcour();
+            result.ID_CompetitonSet = input.ID_CompetitionSet;
+            result.ID = input.ID;
+            result.Name = input.Name;
+            result.ID_Map = input.ID_Map;
+            foreach (t_Parcour_Line t_p_l in input.t_Parcour_Lines)
+            {
+                t_Line t_l = t_p_l.t_Line;
+                Line l = new Line();
+                l.A = new Point();
+                CopyAttributes(t_l.t_GPSPoint, l.A);
+                l.B = new Point();
+                CopyAttributes(t_l.t_GPSPoint1, l.B);
+                l.O = new Point();
+                CopyAttributes(t_l.t_GPSPoint2, l.O);
+                l.Type = t_l.Type;
+                result.LineList.Add(l);
+            }
+            return result;
+        }
+
+        protected override t_Parcour getDBObject(Parcour input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(Parcour input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Parcour input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Parcour Obj)
+        {
+            return id_competitionSet == Obj.ID_CompetitonSet;
+        }
+
+        protected override void AddToResponseList(Root response, Parcour obj)
+        {
+            response.ResponseParameters.ParcourList.Add(obj);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace AirNavigationRaceLive.Comps
                     }
                 }
 
-                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.Name!=null?team.Name:"" ,pilot.Name, (navigator != null) ? navigator.Name : "-" });
+                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.Name!=null?team.Name:"" ,pilot.Name, (navigator != null) ? navigator.Name : "-",team.StartID });
                 lvi.Tag = team;
                 listViewTeam.Items.Add(lvi);
             }
@@ -84,6 +84,7 @@ namespace AirNavigationRaceLive.Comps
             btnColorSelect.Enabled = teamSelected;
             fldAC.Enabled = teamSelected;
             textBoxName.Enabled = teamSelected;
+            textBoxCNumber.Enabled = teamSelected;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -143,6 +144,7 @@ namespace AirNavigationRaceLive.Comps
                 team.ID_Pilot = (textBoxPilot.Tag as NetworkObjects.Pilot).ID;
                 team.Name = textBoxName.Text;
                 team.Description = fldAC.Text;
+                team.StartID = textBoxCNumber.Text;
                 if (textBoxNavigator.Tag != null)
                 {
                     team.ID_Navigator = (textBoxNavigator.Tag as NetworkObjects.Pilot).ID;
@@ -167,6 +169,7 @@ namespace AirNavigationRaceLive.Comps
             btnColorSelect.BackColor = Color.Gray;
             textBoxName.Text = "";
             fldAC.Text = "";
+            textBoxCNumber.Text = "";
         }
 
         private void listViewTeam_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,6 +193,7 @@ namespace AirNavigationRaceLive.Comps
                 textBoxNavigator.Tag = navigator;
                 textBoxNavigator.Text = (navigator != null) ? navigator.Name : "";
                 fldAC.Text = team.Description;
+                textBoxCNumber.Text = team.StartID;
                 btnColorSelect.BackColor = Color.FromName(team.Color.Trim());
             }
             else

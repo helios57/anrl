@@ -7,55 +7,15 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class PictureProcessor : AnrlService.Server.Processors.AProcessor
+    class PictureProcessor : AnrlService.Server.Processors.AProcessor<t_Picture,Picture>
     {
-        private readonly List<Picture> cached = new List<Picture>();
-
-        protected override void reloadCacheThreated()
+        protected override Func<t_Picture, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_Picture p in db.t_Pictures)
-                {
-                    cached.Add(getPicture(p));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
-        public override Root proccess(Root request)
+        protected override void Save(Root request, Root r)
         {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Delete:
-                    {
-                        Delete(request);
-                        break;
-                    }
-                case ERequestType.Get:
-                    {
-                        Get(request, r);
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        Save(request, r); break;
-                    }
-            }
-            return r;
-        }
-
-        private void Save(Root request, Root r)
-        {
-            t_Picture pp = getPicture(request.RequestParameters.Picture);
+            t_Picture pp = getDBObject(request.RequestParameters.Picture);
 
             AnrlDataContext db = getDB();
             db.t_Pictures.InsertOnSubmit(pp);
@@ -64,62 +24,17 @@ namespace AnrlService.Server.Processors
 
             lock (cached)
             {
-                cached.Add(getPicture(pp));
+                cached.Add(getNetworkObject(pp));
             }
             r.ResponseParameters.ID = pp.ID;
         }
 
-        private void GetAll(Root request, Root r)
+        protected override System.Data.Linq.Table<t_Picture> getTable(AnrlDataContext db)
         {
-            List<int> ids = new List<int>(request.RequestParameters.IDS);
-            lock (cached)
-            {
-                foreach (Picture pic in cached)
-                {
-                    if (!ids.Contains(pic.ID))
-                    {
-                        r.ResponseParameters.PictureList.Add(pic);
-                    }
-                    else
-                    {
-                        ids.Remove(pic.ID);
-                    }
-                }
-            }
-            r.ResponseParameters.DeletedIDList.AddRange(ids);
-
+            return db.t_Pictures;
         }
 
-        private void Get(Root request, Root r)
-        {
-
-            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
-            {
-                lock (cached)
-                {
-                    foreach (Picture pic in cached.Where(p => p.ID == request.RequestParameters.ID))
-                    {
-                        r.ResponseParameters.PictureList.Add(pic);
-                    }
-                }
-            }
-        }
-
-        private void Delete(Root request)
-        {
-            AnrlDataContext db = getDB();
-            db.t_Pictures.DeleteOnSubmit(db.t_Pictures.Single(p => p.ID == request.RequestParameters.ID));
-            db.SubmitChanges();
-            db.Dispose();
-
-            lock (cached)
-            {
-                cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
-            }
-        }
-
-
-        private Picture getPicture(t_Picture input)
+        protected override Picture getNetworkObject(t_Picture input)
         {
             Picture result = new Picture();
             result.ID = input.ID;
@@ -128,12 +43,32 @@ namespace AnrlService.Server.Processors
             return result;
         }
 
-        private t_Picture getPicture(Picture input)
+        protected override t_Picture getDBObject(Picture input)
         {
             t_Picture result = new t_Picture();
             result.Data = new System.Data.Linq.Binary(input.Image);
             result.Name = input.Name;
             return result;
+        }
+
+        protected override int GetID(Picture input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Picture input)
+        {
+            return input.ID;
+        }
+
+        protected override void AddToResponseList(Root response, Picture obj)
+        {
+            response.ResponseParameters.PictureList.Add(obj);
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Picture Obj)
+        {
+            return true;
         }
     }
 }

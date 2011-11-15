@@ -7,55 +7,14 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class TrackerProcessor : AnrlService.Server.Processors.AProcessor
+    class TrackerProcessor : AnrlService.Server.Processors.AProcessor<t_Tracker,Tracker>
     {
-        private readonly List<Tracker> cached = new List<Tracker>();
 
-        protected override void reloadCacheThreated()
+        protected override Func<t_Tracker, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_Tracker t in db.t_Trackers)
-                {
-                    cached.Add(getTracker(t));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
-
-        public override Root proccess(Root request)
-        {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Delete:
-                    {
-                        Delete(request);
-                        break;
-                    }
-                case ERequestType.Get:
-                    {
-                        Get(request, r);
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        Save(request, r);
-                        break;
-                    }
-            }
-            return r;
-        }
-
-        private void Save(Root request, Root r)
+        protected override void Save(Root request, Root r)
         {
             AnrlDataContext db = getDB();
             t_Tracker t_d = db.t_Trackers.Single(p => p.ID == request.RequestParameters.Tracker.ID);
@@ -66,66 +25,48 @@ namespace AnrlService.Server.Processors
             lock (cached)
             {
                 cached.RemoveAll(p => p.ID == t_d.ID);
-                cached.Add(getTracker(t_d));
+                cached.Add(getNetworkObject(t_d));
             }
             db.Dispose();
         }
 
-        private void GetAll(Root request, Root r)
+        protected override System.Data.Linq.Table<t_Tracker> getTable(AnrlDataContext db)
         {
-
-            List<int> ids = new List<int>(request.RequestParameters.IDS);
-            lock (cached)
-            {
-                foreach (Tracker t_d in cached)
-                {
-                    if (!ids.Contains(t_d.ID))
-                    {
-                        r.ResponseParameters.TrackerList.Add(t_d);
-                    }
-                    else
-                    {
-                        ids.Remove(t_d.ID);
-                    }
-                }
-            }
-            r.ResponseParameters.DeletedIDList.AddRange(ids);
+            return db.t_Trackers;
         }
 
-        private void Get(Root request, Root r)
-        {
-            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
-            {
-                lock (cached)
-                {
-                    foreach (Tracker t_d in cached.Where(p => p.ID == request.RequestParameters.ID))
-                    {
-                        r.ResponseParameters.TrackerList.Add(t_d);
-                    }
-                }
-            }
-        }
-
-        private void Delete(Root request)
-        {
-            AnrlDataContext db = getDB();
-            db.t_Trackers.DeleteAllOnSubmit(db.t_Trackers.Where(p => p.ID == request.RequestParameters.ID));
-            db.SubmitChanges();
-            db.Dispose();
-
-            lock (cached)
-            {
-                cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
-            }
-        }
-
-        private Tracker getTracker(t_Tracker input)
+        protected override Tracker getNetworkObject(t_Tracker input)
         {
             Tracker result = new Tracker();
             result.ID = input.ID;
             result.IMEI = input.IMEI;
             result.Name = input.Name;
             return result;
+        }
+
+        protected override t_Tracker getDBObject(Tracker input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(Tracker input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Tracker input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Tracker Obj)
+        {
+            return true;
+        }
+
+        protected override void AddToResponseList(Root response, Tracker obj)
+        {
+            response.ResponseParameters.TrackerList.Add(obj);
         }
     }
 }

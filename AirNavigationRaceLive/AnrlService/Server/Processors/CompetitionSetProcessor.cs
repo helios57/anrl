@@ -7,45 +7,14 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class CompetitionSetProcesor : AnrlService.Server.Processors.AProcessor
+    class CompetitionSetProcesor : AnrlService.Server.Processors.AProcessor<t_CompetitionSet,CompetitionSet>
     {
-        private readonly List<CompetitionSet> cached = new List<CompetitionSet>();
-
-        protected override void reloadCacheThreated()
+        protected override Func<t_CompetitionSet, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_CompetitionSet t in db.t_CompetitionSets)
-                {
-                    cached.Add(getCompetitionSet(t));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
 
-        public override Root proccess(Root request)
-        {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        Save(request, r);
-                        break;
-                    }
-            }
-            return r;
-        }
-
-        private void Save(Root request, Root r)
+        protected override void Save(Root request, Root r)
         {
             AnrlDataContext db = getDB();
             t_CompetitionSet t_d = new t_CompetitionSet();
@@ -58,21 +27,17 @@ namespace AnrlService.Server.Processors
             r.ResponseParameters.ID = t_d.ID;
             lock (cached)
             {
-                cached.Add(getCompetitionSet(t_d));
+                cached.Add(getNetworkObject(t_d));
             }
             db.Dispose();
         }
 
-        private void GetAll(Root request, Root r)
+        protected override System.Data.Linq.Table<t_CompetitionSet> getTable(AnrlDataContext db)
         {
-            lock (cached)
-            {
-                r.ResponseParameters.CompetitionSetList.AddRange(cached);
-            }
+            return db.t_CompetitionSets;
         }
 
-
-        private CompetitionSet getCompetitionSet(t_CompetitionSet input)
+        protected override CompetitionSet getNetworkObject(t_CompetitionSet input)
         {
             CompetitionSet result = new CompetitionSet();
             result.ID = input.ID;
@@ -80,6 +45,31 @@ namespace AnrlService.Server.Processors
             result.Owner = input.t_User.Name;
             result.PublicRole = input.PublicRole;
             return result;
+        }
+
+        protected override t_CompetitionSet getDBObject(CompetitionSet input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(CompetitionSet input)
+        {
+           return input.ID;
+        }
+
+        protected override int GetID(t_CompetitionSet input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, CompetitionSet Obj)
+        {
+            return true;
+        }
+
+        protected override void AddToResponseList(Root response, CompetitionSet obj)
+        {
+            response.ResponseParameters.CompetitionSetList.Add(obj);
         }
     }
 }

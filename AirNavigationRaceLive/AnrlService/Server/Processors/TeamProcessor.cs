@@ -7,55 +7,14 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class TeamProcessor : AnrlService.Server.Processors.AProcessor
+    class TeamProcessor : AnrlService.Server.Processors.AProcessor<t_Team,Team>
     {
-        private readonly List<Team> cached = new List<Team>();
 
-        protected override void reloadCacheThreated()
+        protected override Func<t_Team, bool> getSingleSelection(int ID)
         {
-            AnrlDataContext db = getDB();
-            lock (cached)
-            {
-                cached.Clear();
-                foreach (t_Team t in db.t_Teams)
-                {
-                    cached.Add(getTeam(t));
-                }
-            }
-            db.Dispose();
+            return p => p.ID == ID;
         }
-
-        public override Root proccess(Root request)
-        {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Delete:
-                    {
-                        Delete(request);
-                        break;
-                    }
-                case ERequestType.Get:
-                    {
-                        Get(request, r);
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        Save(request, r);
-                        break;
-                    }
-            }
-            return r;
-        }
-
-        private void Save(Root request, Root r)
+        protected override void Save(Root request, Root r)
         {
             AnrlDataContext db = getDB();
             t_Team t_d;
@@ -92,67 +51,30 @@ namespace AnrlService.Server.Processors
             t_d.ID_Pilot = request.RequestParameters.Team.ID_Pilot;
             t_d.Color = request.RequestParameters.Team.Color;
             t_d.Description = request.RequestParameters.Team.Description;
+            t_d.StartID = request.RequestParameters.Team.StartID;
+            t_d.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
             db.SubmitChanges();
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = t_d.ID;
             lock (cached)
             {
                 cached.RemoveAll(p => p.ID == t_d.ID);
-                cached.Add(getTeam(t_d));
+                cached.Add(getNetworkObject(t_d));
             }
             db.Dispose();
         }
 
-        private void GetAll(Root request, Root r)
+
+
+        protected override System.Data.Linq.Table<t_Team> getTable(AnrlDataContext db)
         {
-            List<int> ids = new List<int>(request.RequestParameters.IDS);
-            lock (cached)
-            {
-                foreach (Team t_d in cached)
-                {
-                    if (!ids.Contains(t_d.ID))
-                    {
-                        r.ResponseParameters.TeamList.Add(t_d);
-                    }
-                    else
-                    {
-                        ids.Remove(t_d.ID);
-                    }
-                }
-            }
-            r.ResponseParameters.DeletedIDList.AddRange(ids);
+            return db.t_Teams;
         }
 
-        private void Get(Root request, Root r)
-        {
-            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
-            {
-                lock (cached)
-                {
-                    foreach (Team t_d in cached.Where(p => p.ID == request.RequestParameters.ID))
-                    {
-                        r.ResponseParameters.TeamList.Add(t_d);
-                    }
-                }
-            }
-        }
-
-        private void Delete(Root request)
-        {
-            AnrlDataContext db = getDB();
-            db.t_Teams.DeleteAllOnSubmit(db.t_Teams.Where(p => p.ID == request.RequestParameters.ID));
-            db.SubmitChanges();
-            db.Dispose();
-
-            lock (cached)
-            {
-                cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
-            }
-        }
-
-        private Team getTeam(t_Team input)
+        protected override Team getNetworkObject(t_Team input)
         {
             Team result = new Team();
+            result.ID_CompetitonSet = input.ID_CompetitionSet;
             result.ID = input.ID;
             result.Color = input.Color;
             result.Description = input.Description;
@@ -160,7 +82,33 @@ namespace AnrlService.Server.Processors
             result.ID_Pilot = input.ID_Pilot;
             result.ID_Navigator = input.ID_Navigator.HasValue ? input.ID_Navigator.Value : -1;
             result.Name = input.Name;
+            result.StartID = input.StartID;
             return result;
+        }
+
+        protected override t_Team getDBObject(Team input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(Team input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Team input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Team Obj)
+        {
+            return id_competitionSet == Obj.ID_CompetitonSet;
+        }
+
+        protected override void AddToResponseList(Root response, Team obj)
+        {
+            response.ResponseParameters.TeamList.Add(obj);
         }
     }
 }

@@ -33,6 +33,9 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pilot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Navigator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
             this.listViewPilots = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -59,9 +62,6 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.textBoxCNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -114,6 +114,19 @@
             this.Navigator.Tag = "Navigator";
             this.Navigator.Text = "Navigator";
             this.Navigator.Width = 150;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "CNumber";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "CNumber";
+            this.columnHeader4.Width = 58;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "AC";
             // 
             // btnRefresh
             // 
@@ -293,7 +306,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(444, 237);
+            this.label5.Location = new System.Drawing.Point(441, 225);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 30;
@@ -314,7 +327,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(444, 199);
+            this.label6.Location = new System.Drawing.Point(440, 199);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
@@ -361,7 +374,6 @@
             // textBoxCNumber
             // 
             this.textBoxCNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCNumber.Enabled = false;
             this.textBoxCNumber.Location = new System.Drawing.Point(501, 116);
             this.textBoxCNumber.Name = "textBoxCNumber";
             this.textBoxCNumber.Size = new System.Drawing.Size(124, 20);
@@ -376,22 +388,6 @@
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 39;
             this.label1.Text = "CNumber";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.DisplayIndex = 6;
-            this.columnHeader3.Text = "CNumber";
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.DisplayIndex = 1;
-            this.columnHeader4.Text = "CNumber";
-            this.columnHeader4.Width = 58;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.DisplayIndex = 4;
-            this.columnHeader5.Text = "AC";
             // 
             // Team
             // 

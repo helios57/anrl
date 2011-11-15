@@ -7,55 +7,14 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class PilotProcessor : AnrlService.Server.Processors.AProcessor
+    class PilotProcessor : AnrlService.Server.Processors.AProcessor<t_Pilot,Pilot>
     {
-        private readonly List<Pilot> cached = new List<Pilot>();
 
-        protected override void reloadCacheThreated()
+        protected override Func<t_Pilot, bool> getSingleSelection(int ID)
         {
-            lock (cached)
-            {
-                cached.Clear();
-                AnrlDataContext db = getDB();
-                foreach (t_Pilot p in db.t_Pilots)
-                {
-                    cached.Add(getPilot(p));
-                }
-                db.Dispose();
-            }
+            return p => p.ID == ID;
         }
-
-        public override Root proccess(Root request)
-        {
-            Root r = new Root();
-            r.ResponseParameters = new ResponseParameters();
-            switch ((ERequestType)request.RequestType)
-            {
-                case ERequestType.Delete:
-                    {
-                        Delete(request);
-                        break;
-                    }
-                case ERequestType.Get:
-                    {
-                        Get(request, r);
-                        break;
-                    }
-                case ERequestType.GetAll:
-                    {
-                        GetAll(request, r);
-                        break;
-                    }
-                case ERequestType.Save:
-                    {
-                        Save(request, r);
-                        break;
-                    }
-            }
-            return r;
-        }
-
-        private void Save(Root request, Root r)
+        protected override void Save(Root request, Root r)
         {
             AnrlDataContext db = getDB();
             t_Pilot p_d;
@@ -78,76 +37,59 @@ namespace AnrlService.Server.Processors
             }
             p_d.SureName = request.RequestParameters.Pilot.Surename;
             p_d.LastName = request.RequestParameters.Pilot.Name;
+            p_d.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
             db.SubmitChanges();
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = p_d.ID;
             lock (cached)
             {
                 cached.RemoveAll(p => p.ID == p_d.ID);
-                cached.Add(getPilot(p_d));
+                cached.Add(getNetworkObject(p_d));
             }
             db.Dispose();
         }
 
-        private void GetAll(Root request, Root r)
+      
+
+        protected override System.Data.Linq.Table<t_Pilot> getTable(AnrlDataContext db)
         {
-            List<int> ids = new List<int>(request.RequestParameters.IDS);
-            lock (cached)
-            {
-                foreach (Pilot p_d in cached)
-                {
-                    if (!ids.Contains(p_d.ID))
-                    {
-                        r.ResponseParameters.PilotList.Add(p_d);
-                    }
-                    else
-                    {
-                        ids.Remove(p_d.ID);
-                    }
-                }
-            }
-            r.ResponseParameters.DeletedIDList.AddRange(ids);
+            return db.t_Pilots;
         }
 
-        private void Get(Root request, Root r)
-        {
-            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
-            {
-                lock (cached)
-                {
-                    foreach (Pilot p_d in cached.Where(p => p.ID == request.RequestParameters.ID))
-                    {
-                        r.ResponseParameters.PilotList.Add(p_d);
-                    }
-                }
-            }
-        }
-
-        private void Delete(Root request)
-        {
-            AnrlDataContext db = getDB();
-            if (db.t_Pilots.Count(p => p.ID == request.RequestParameters.ID) == 1)
-            {
-                t_Pilot p_d;
-                p_d = db.t_Pilots.Single(p => p.ID == request.RequestParameters.ID);
-                db.t_Pilots.DeleteOnSubmit(p_d);
-                db.SubmitChanges();
-            }
-            db.Dispose();
-            lock (cached)
-            {
-                cached.RemoveAll(p => p.ID == request.RequestParameters.ID);
-            }
-        }
-
-        private Pilot getPilot(t_Pilot input)
+        protected override Pilot getNetworkObject(t_Pilot input)
         {
             Pilot result = new Pilot();
+            result.ID_CompetitonSet = input.ID_CompetitionSet;
             result.ID = input.ID;
             result.ID_Picture = input.ID_Picture.HasValue ? input.ID_Picture.Value : -1;
             result.Name = input.LastName;
             result.Surename = input.SureName;
             return result;
+        }
+
+        protected override t_Pilot getDBObject(Pilot input)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int GetID(Pilot input)
+        {
+            return input.ID;
+        }
+
+        protected override int GetID(t_Pilot input)
+        {
+            return input.ID;
+        }
+
+        protected override bool CheckCompetitionSet(int id_competitionSet, Pilot Obj)
+        {
+            return id_competitionSet == Obj.ID_CompetitonSet;
+        }
+
+        protected override void AddToResponseList(Root response, Pilot obj)
+        {
+            response.ResponseParameters.PilotList.Add(obj);
         }
     }
 }

@@ -22,8 +22,10 @@ option optimize_for = SPEED;
         optional string Password =2;
 		
         optional string Token =3;
-
+		
         optional int32 ID_User =4;
+
+        optional int32 ID_CompetitionSet =5;
 
 	}
 	message RequestParameters
@@ -114,6 +116,8 @@ option optimize_for = SPEED;
         optional double XTopLeft =8;
 
         optional double YTopLeft =9;
+
+        optional int32 ID_CompetitonSet=10;
 	}
 	message Parcour
 	{
@@ -124,6 +128,8 @@ option optimize_for = SPEED;
         optional string Name =3;
 
         optional int32 ID_Map = 4;
+
+        optional int32 ID_CompetitonSet=5;
 	}
 	message Line
 	{
@@ -156,6 +162,8 @@ option optimize_for = SPEED;
         optional string IMEI =2;
 
         optional string Name =3;
+
+		optional bool visible = 4;
 	}
 	message Pilot
 	{
@@ -166,6 +174,8 @@ option optimize_for = SPEED;
         optional string Surename =3;
 
         optional int32 ID_Picture =4;
+
+        optional int32 ID_CompetitonSet=5;
 	}
 	message Team
 	{
@@ -182,6 +192,10 @@ option optimize_for = SPEED;
 		optional int32 ID_Flag = 6;
 
 		optional string Description = 7;
+		
+        optional int32 ID_CompetitonSet=8;
+
+        optional string StartID=9;
 	}
 
 	message Competition
@@ -190,11 +204,13 @@ option optimize_for = SPEED;
 
 		optional string Name = 2;
 		
-		optional Line TakeOffLine = 6;
+		optional Line TakeOffLine = 3;
 
-		optional int32 ID_Parcour = 7;
+		optional int32 ID_Parcour = 4;
 
-		repeated CompetitionTeam CompetitionTeamList = 8;
+		repeated CompetitionTeam CompetitionTeamList = 5;
+
+        optional int32 ID_CompetitonSet=6;
 	}
 
 	message CompetitionTeam
@@ -237,6 +253,8 @@ option optimize_for = SPEED;
 		optional string Reason = 3;
 
 		optional int32 ID_Competition_Team = 4;
+
+        optional int32 ID_CompetitonSet=5;
 	}
 
 	message CompetitionSet 

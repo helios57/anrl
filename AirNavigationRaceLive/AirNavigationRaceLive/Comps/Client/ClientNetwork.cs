@@ -108,6 +108,10 @@ namespace AirNavigationRaceLive.Comps.Client
                 {
                     request.AuthInfo = new AuthenticationInfo();
                     request.AuthInfo.Token = Token;
+                    if (CompetitionSet != null)
+                    {
+                        request.AuthInfo.ID_CompetitionSet = CompetitionSet.ID;
+                    }
                 }
                 TcpClient client = new TcpClient();
                 client.Connect(new IPEndPoint(IPAddress.Parse(IpAdress), PORT));
