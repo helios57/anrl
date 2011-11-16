@@ -41,6 +41,7 @@ namespace AnrlService.Server.Processors
                 }
             }
             db.Dispose();
+            reloadCacheThreated();//Hack to avoid empty competitions
         }
 
 

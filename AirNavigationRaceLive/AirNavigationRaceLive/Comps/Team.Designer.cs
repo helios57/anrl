@@ -33,7 +33,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pilot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Navigator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -75,7 +74,6 @@
             this.columnHeader2,
             this.Pilot,
             this.Navigator,
-            this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
             this.listViewTeam.FullRowSelect = true;
@@ -114,10 +112,6 @@
             this.Navigator.Tag = "Navigator";
             this.Navigator.Text = "Navigator";
             this.Navigator.Width = 150;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "CNumber";
             // 
             // columnHeader4
             // 
@@ -459,7 +453,6 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.TextBox textBoxCNumber;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
     }

@@ -60,6 +60,7 @@ namespace AnrlService.Server.Processors
             }
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = dbParcour.ID;
+            reloadCacheThreated();//Hack to avoid empty competitions
         }
 
         protected override void Delete(Root request)

@@ -333,6 +333,7 @@ namespace AirNavigationRaceLive.Comps
         {
 
             listViewCompetitionTeam.Items.Clear();
+            c.CompetitionTeamList.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
             foreach (NetworkObjects.CompetitionTeam ct in c.CompetitionTeamList)
             {
                 ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(), ct.ID_Team.ToString(), getTeamAC(ct.ID_Team), getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
@@ -369,10 +370,13 @@ namespace AirNavigationRaceLive.Comps
             NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
             if (c != null && c.CompetitionTeamList.Count > 0)
             {
-
+                foreach (NetworkObjects.CompetitionTeam ct in c.CompetitionTeamList)
+                {
+                    starID = Math.Max(starID, ct.StartID) + 1;
+                }
             }
 
-            textBoxStartId.Text = "1";
+            textBoxStartId.Text = starID.ToString();
             textBoxStartId.Tag = new NetworkObjects.CompetitionTeam();
             UpdateEnablement();
         }

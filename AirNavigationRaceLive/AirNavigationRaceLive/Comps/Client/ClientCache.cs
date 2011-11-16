@@ -105,6 +105,10 @@ namespace AirNavigationRaceLive.Comps.Client
                 bool partial = !first;
                 if (first)
                 {
+                    if (c.isClearCache())
+                    {
+                        clear();
+                    }
                     partial = LoadPersisted();
                 }
                 updateCaches(partial);

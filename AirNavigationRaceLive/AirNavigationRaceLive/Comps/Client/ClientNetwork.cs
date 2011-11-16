@@ -18,6 +18,7 @@ namespace AirNavigationRaceLive.Comps.Client
         private string IpAdress;
         private const int PORT = 1337;
         private CompetitionSet CompetitionSet = null;
+        private bool ClearCache = false;
 
         public ClientNetwork(string ip)
         {
@@ -141,5 +142,15 @@ namespace AirNavigationRaceLive.Comps.Client
             }
         }
 
+
+        internal void SetClearCache(bool p)
+        {
+            ClearCache = p;
+        }
+
+        public bool getClearCache()
+        {
+            return ClearCache;
+        }
     }
 }

@@ -95,9 +95,11 @@ namespace AirNavigationRaceLive.Comps
                 if (csc != null)
                 {
                     c.UseCompetition(csc.cs);
+                    c.SetClearCache(checkBoxClearCache.Checked);
                     UpdateEnablement();
                     Status.SetStatus("Connected to Server, downloading data");
                     Client.Client chachedClient = new Client.Client(c);
+                    
                     while (!chachedClient.IsInitialLoadComplete())
                     {
                         Application.DoEvents();

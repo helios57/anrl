@@ -62,6 +62,7 @@ namespace AnrlService.Server.Processors
                 cached.Add(getNetworkObject(t_d));
             }
             db.Dispose();
+            reloadCacheThreated();//Hack to avoid empty competitions
         }
 
 

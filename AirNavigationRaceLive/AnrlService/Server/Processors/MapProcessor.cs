@@ -28,6 +28,7 @@ namespace AnrlService.Server.Processors
                 r.ResponseParameters.ID = dbMap.ID;
             }
             db.Dispose();
+            reloadCacheThreated();//Hack to avoid empty competitions
         }
 
 

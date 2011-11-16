@@ -28,6 +28,7 @@ namespace AnrlService.Server.Processors
                 cached.Add(getNetworkObject(t_d));
             }
             db.Dispose();
+            reloadCacheThreated();//Hack to avoid empty competitions
         }
 
         protected override System.Data.Linq.Table<t_Tracker> getTable(AnrlDataContext db)

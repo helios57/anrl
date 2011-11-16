@@ -28,6 +28,11 @@ namespace AirNavigationRaceLive.Comps.Client
             return net.isAuthenticated();
         }
 
+        public bool isClearCache()
+        {
+            return net.getClearCache();
+        }
+
         internal string getServerCompetitionSetIdentifier()
         {
             return net.getServerCompetitionSetIdentifier();

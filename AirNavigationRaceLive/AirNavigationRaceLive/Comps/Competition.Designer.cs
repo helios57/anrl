@@ -199,6 +199,7 @@
             // 
             // date
             // 
+            this.date.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.date.Location = new System.Drawing.Point(436, 395);
             this.date.Name = "date";
@@ -218,6 +219,7 @@
             // 
             // timeTakeOff
             // 
+            this.timeTakeOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timeTakeOff.CustomFormat = "HH:mm";
             this.timeTakeOff.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timeTakeOff.Location = new System.Drawing.Point(515, 395);
@@ -377,7 +379,6 @@
             this.listViewCompetitionTeam.MultiSelect = false;
             this.listViewCompetitionTeam.Name = "listViewCompetitionTeam";
             this.listViewCompetitionTeam.Size = new System.Drawing.Size(602, 183);
-            this.listViewCompetitionTeam.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewCompetitionTeam.TabIndex = 52;
             this.listViewCompetitionTeam.UseCompatibleStateImageBehavior = false;
             this.listViewCompetitionTeam.View = System.Windows.Forms.View.Details;
@@ -484,6 +485,8 @@
             // 
             // comboBoxTeam
             // 
+            this.comboBoxTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxTeam.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBoxTeam.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -496,6 +499,7 @@
             // 
             // timeStart
             // 
+            this.timeStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timeStart.CustomFormat = "HH:mm";
             this.timeStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timeStart.Location = new System.Drawing.Point(571, 395);
@@ -517,6 +521,7 @@
             // 
             // timeEnd
             // 
+            this.timeEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timeEnd.CustomFormat = "HH:mm";
             this.timeEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timeEnd.Location = new System.Drawing.Point(627, 395);
@@ -538,6 +543,7 @@
             // 
             // comboBoxRoute
             // 
+            this.comboBoxRoute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxRoute.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.comboBoxRoute.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxRoute.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -582,8 +588,7 @@
             // 
             // listViewTrackers
             // 
-            this.listViewTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
+            this.listViewTrackers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewTrackers.CheckBoxes = true;
             this.listViewTrackers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
