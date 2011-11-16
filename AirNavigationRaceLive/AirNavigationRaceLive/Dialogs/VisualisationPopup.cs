@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using GEPlugin;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
@@ -13,7 +12,7 @@ namespace AirNavigationRaceLive.Dialogs
     [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
     public partial class VisualisationPopup : Form
     {
-        private IGEPlugin plugin = null;
+        private dynamic plugin = null;
 
         public VisualisationPopup()
         {
@@ -24,7 +23,7 @@ namespace AirNavigationRaceLive.Dialogs
 
         public void JSInitSuccessCallback_(object pluginInstance)
         {
-            plugin = (IGEPlugin)pluginInstance;
+            plugin = (dynamic)pluginInstance;
         }
 
         public void JSInitFailureCallback_(string error)
@@ -33,7 +32,7 @@ namespace AirNavigationRaceLive.Dialogs
                 MessageBoxIcon.Exclamation);
         }
 
-        public IGEPlugin getPlugin()
+        public dynamic getPlugin()
         {
             return plugin;
         }

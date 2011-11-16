@@ -71,11 +71,11 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="sharpPDF, Version=1.0.1870.19498, Culture=neutral">
+    <Reference Include="itextsharp, Version=5.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\sharpPDF.dll</HintPath>
+      <HintPath>.\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -113,6 +113,7 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Helper\PDFCreator.cs" />
     <Compile Include="Comps\Helper\Status.cs" />
     <Compile Include="Comps\Results.cs">
       <SubType>UserControl</SubType>
@@ -339,6 +340,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="itextsharp.dll" />
     <Content Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -357,7 +359,6 @@
     <Content Include="Resources\pluginhost.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="sharpPDF.dll" />
     <None Include="Resources\Logo_051.png" />
   </ItemGroup>
   <ItemGroup>

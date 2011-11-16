@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GEPlugin;
 using System.Drawing;
 using System.IO;
 using NetworkObjects;
@@ -11,8 +10,8 @@ namespace AirNavigationRaceLive.Comps.Helper
 {
     class GEControll
     {
-        private IGEPlugin plugin = null;
-        private GEFeatureContainerCoClass Container = null;
+        private dynamic plugin = null;
+        private dynamic Container = null;
         private int TrackerHeightAdjustment = 0;
         private int HeightPenalty = 300;
         private int LineWidth = 2;
@@ -57,7 +56,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 if (Container != null)
                 {
                     Container.replaceChild(plugin.parseKml(GetPolygonKml(parcour)), Container.getLastChild());
-                    KmlLookAtCoClass lookAt = plugin.createLookAt("");
+                    dynamic lookAt = plugin.createLookAt("");
                     lookAt.set(averageLatitude(parcour.LineList), averageLongitude(parcour.LineList), 15000, plugin.ALTITUDE_RELATIVE_TO_GROUND, 0, 0, 10000);
                     plugin.getView().setAbstractView(lookAt);
                 }
@@ -78,7 +77,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             catch { }
         }
 
-        public void SetPlugin(IGEPlugin plugin)
+        public void SetPlugin(dynamic plugin)
         {
             this.plugin = plugin;
             Container = plugin.getFeatures();

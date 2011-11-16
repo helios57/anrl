@@ -238,7 +238,6 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnPdf_Click(object sender, EventArgs e)
         {
-            sharpPDF.pdfDocument d = new sharpPDF.pdfDocument("Test", "SharpSoft");
 
         }
 

@@ -364,6 +364,7 @@
             this.btnExport.TabIndex = 38;
             this.btnExport.Text = "Export To PDF";
             this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // textBoxCNumber
             // 

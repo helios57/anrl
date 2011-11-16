@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AirNavigationRaceLive.Comps.Helper;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -226,6 +227,11 @@ namespace AirNavigationRaceLive.Comps
         private void comboBoxCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateEnablement();
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            PDFCreator.test();
         }
     }
 }
