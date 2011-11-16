@@ -36,6 +36,7 @@ namespace AirNavigationRaceLive.Comps
                     List<int> trackers = new List<int>();
                     long min = long.MaxValue;
                     long max = long.MinValue;
+                    competition.CompetitionTeamList.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
                     foreach (NetworkObjects.CompetitionTeam ct in competition.CompetitionTeamList)
                     {
                         ComboBoxCompetitionTeam lvi2 = new ComboBoxCompetitionTeam(ct, new string[] { ct.StartID.ToString(), "0", getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
@@ -267,7 +268,12 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-
+            if (listViewCompetitionTeam.SelectedItems.Count == 1)
+            {
+                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                UploadGAC upload = new UploadGAC(Client, competitionTeam.competitionTeam);
+                upload.Show();
+            }
         }
     }
     class ComboBoxCompetitionTeam : ListViewItem

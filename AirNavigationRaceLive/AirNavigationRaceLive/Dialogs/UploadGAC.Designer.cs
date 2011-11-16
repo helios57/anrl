@@ -44,6 +44,7 @@
             this.btnUploadData.TabIndex = 22;
             this.btnUploadData.Text = "Upload Positions";
             this.btnUploadData.UseVisualStyleBackColor = true;
+            this.btnUploadData.Click += new System.EventHandler(this.btnUploadData_Click);
             // 
             // label4
             // 
@@ -88,6 +89,7 @@
             this.btnImportGAC.TabIndex = 17;
             this.btnImportGAC.Text = "Import GAC";
             this.btnImportGAC.UseVisualStyleBackColor = true;
+            this.btnImportGAC.Click += new System.EventHandler(this.btnImportGAC_Click);
             // 
             // UploadGAC
             // 

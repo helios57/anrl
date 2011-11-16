@@ -142,14 +142,19 @@ namespace AirNavigationRaceLive.Comps.Client
             cache.cacheCompetition.delete(ID);
         }
 
-        internal void uploadGPSData(List<GPSData> list)
+        /// <summary>
+        /// Returns TrackerID
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        internal int uploadGPSData(List<GPSData> list)
         {
             Root r = new Root();
             r.ObjectType = (int) NetworkObjects.EObjectType.GPSData;
             r.RequestType = (int)ERequestType.Upload;
             r.RequestParameters = new RequestParameters();
             r.RequestParameters.GPSDataList.AddRange(list);
-            process(r);
+            return process(r).ResponseParameters.ID;
         }
 
         internal void clearCache()

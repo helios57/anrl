@@ -121,6 +121,8 @@
             // checkBoxClearCache
             // 
             this.checkBoxClearCache.AutoSize = true;
+            this.checkBoxClearCache.Checked = true;
+            this.checkBoxClearCache.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxClearCache.Location = new System.Drawing.Point(182, 183);
             this.checkBoxClearCache.Name = "checkBoxClearCache";
             this.checkBoxClearCache.Size = new System.Drawing.Size(84, 17);

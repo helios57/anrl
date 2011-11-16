@@ -65,13 +65,13 @@ namespace AirNavigationRaceLive.Comps.Helper
             catch { }
         }
 
-        public void SetDaten(List<NetworkObjects.GPSData> gpsDatenListe, List<NetworkObjects.Team> teams)
+        public void SetDaten(List<NetworkObjects.GPSData> gpsDatenListe, List<NetworkObjects.Team> teams,List<NetworkObjects.CompetitionTeam> CompetitionTeams)
         {
             try
             {
                 if (Container != null)
                 {
-                    Container.replaceChild(plugin.parseKml(GetKml(gpsDatenListe, teams)), Container.getFirstChild());
+                    Container.replaceChild(plugin.parseKml(GetKml(gpsDatenListe, teams, CompetitionTeams)), Container.getFirstChild());
 
                 }
             }
@@ -82,7 +82,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             this.plugin = plugin;
             Container = plugin.getFeatures();
-            Container.appendChild(plugin.parseKml(GetKml(new List<GPSData>(), new List<NetworkObjects.Team>())));
+            Container.appendChild(plugin.parseKml(GetKml(new List<GPSData>(), new List<NetworkObjects.Team>(), new List<NetworkObjects.CompetitionTeam>())));
             Container.appendChild(plugin.parseKml(GetPolygonKml(new NetworkObjects.Parcour())));
         }
 
@@ -104,19 +104,19 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// Generates a KML-File with alle needed Points and Lines to be displayed on the Gui
         /// </summary>
         /// <returns>KML as String</returns>
-        private string GetKml(List<GPSData> gpsList, List<NetworkObjects.Team> teams)
+        private string GetKml(List<GPSData> gpsList, List<NetworkObjects.Team> teams,List<NetworkObjects.CompetitionTeam> competitionTeams)
         {
             string result = "";
             List<Tracker> TrackList = new List<Tracker>();
 
-            foreach (NetworkObjects.Team Team in teams)
+            foreach (NetworkObjects.CompetitionTeam Team in competitionTeams)
             {
                 Tracker t = new Tracker(Team.ID);
-                t.Color = Color.FromName(Team.Color);
-                //TODOforeach (GPSData data in gpsList.Where(p => Team.ID_Tracker.Contains(p.trackerID)))
-                /*{
+                t.Color = Color.FromName(teams.First(p=>p.ID == Team.ID_Team).Color);
+                foreach (GPSData data in gpsList.Where(p => Team.ID_TrackerList.Contains(p.trackerID)))
+                {
                     t.Pointlist.Add(new Points((decimal)data.longitude, (decimal)data.latitude, (decimal)data.altitude));
-                }*/
+                }
                 TrackList.Add(t);
             }
             result += GenerateKMLHeader(TrackList);

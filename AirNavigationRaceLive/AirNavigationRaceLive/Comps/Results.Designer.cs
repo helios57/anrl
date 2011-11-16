@@ -241,7 +241,6 @@
             this.listViewCompetitionTeam.MultiSelect = false;
             this.listViewCompetitionTeam.Name = "listViewCompetitionTeam";
             this.listViewCompetitionTeam.Size = new System.Drawing.Size(261, 171);
-            this.listViewCompetitionTeam.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listViewCompetitionTeam.TabIndex = 114;
             this.listViewCompetitionTeam.UseCompatibleStateImageBehavior = false;
             this.listViewCompetitionTeam.View = System.Windows.Forms.View.Details;

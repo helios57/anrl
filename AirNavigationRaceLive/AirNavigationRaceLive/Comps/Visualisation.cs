@@ -69,7 +69,7 @@ namespace AirNavigationRaceLive.Comps
                 List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
                 if (data != null)
                 {
-                    controll.SetDaten(data, teamlist.ToList());
+                    controll.SetDaten(data, teamlist.ToList(), competitonTeamlist);
                     visualisationPictureBox1.SetData(data, teamlist.ToList(), competitonTeamlist);
                     visualisationPictureBox1.Invalidate();
 
@@ -124,6 +124,8 @@ namespace AirNavigationRaceLive.Comps
                     visualisationPictureBox1.Refresh();
                     controll.SetParcour(parcour);
                     listViewCompetitionTeam.Items.Clear();
+
+                    comp.CompetitionTeamList.Sort((p, q) => p.StartID.CompareTo(q.StartID));
                     foreach (NetworkObjects.CompetitionTeam ct in comp.CompetitionTeamList)
                     {
                         ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(),getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
