@@ -17,7 +17,7 @@ namespace AirNavigationRaceLive.Dialogs
     {
         private Client Client;
         private NetworkObjects.CompetitionTeam ct;
-        private String IMEI = "_GAC_IMPORT_" + (new DateTime()).Ticks;
+        private String IMEI = "_GAC_IMPORT_" + DateTime.Now.Ticks;
 
         public UploadGAC(Client Client, NetworkObjects.CompetitionTeam ct)
         {
