@@ -103,6 +103,15 @@ namespace AirNavigationRaceLive.Dialogs
                 int ID_Tracker = Client.uploadGPSData(subList);
                 NetworkObjects.Competition c = Client.getCompetitions().First(p => p.CompetitionTeamList.Count(pp => pp.ID == ct.ID) == 1);
                 Client.getTracker(ID_Tracker);
+                List<int> toDelete = new List<int>();
+                foreach(int i in c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList)
+                {
+                    if (Client.getTracker(i).Name.StartsWith("_GAC_IMPORT_"))
+                    {
+                        toDelete.Add(i);
+                    }
+                }
+                c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.RemoveAll(p => toDelete.Contains(p));
                 c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.Add(ID_Tracker);
                 Client.saveCompetition(c);
             }
