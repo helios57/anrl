@@ -31,7 +31,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>33</ApplicationRevision>
+    <ApplicationRevision>34</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -340,7 +340,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PdfSharp.dll" />
+    <Content Include="PdfSharp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
