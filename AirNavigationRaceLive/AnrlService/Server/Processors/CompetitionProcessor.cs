@@ -82,6 +82,7 @@ namespace AnrlService.Server.Processors
                 }
                 t_c = db.t_Competitions.Single(p => p.ID == request.RequestParameters.Competition.ID);
                 db.t_Team_Trackers.DeleteAllOnSubmit(db.t_Team_Trackers.Where(p => p.t_Competition_Team.ID_Competition == request.RequestParameters.Competition.ID));
+                db.t_Penalties.DeleteAllOnSubmit(db.t_Penalties.Where(p => p.t_Competition_Team.ID_Competition == request.RequestParameters.Competition.ID));
                 db.t_Competition_Teams.DeleteAllOnSubmit(db.t_Competition_Teams.Where(p => p.ID_Competition == request.RequestParameters.Competition.ID));
                 db.SubmitChanges();
                 line = t_c.t_Line;
