@@ -25,6 +25,7 @@ namespace AnrlService.Server.Processors
             db.SubmitChanges();
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = t_d.ID;
+            r.ResponseParameters.CompetitionSetList.Add(getNetworkObject(t_d));
             lock (cached)
             {
                 cached.Add(getNetworkObject(t_d));

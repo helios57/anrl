@@ -21,6 +21,7 @@ namespace AirNavigationRaceLive.Comps
         private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
         private Point dragPoint = null;
         private readonly List<Point> gluePoints = new List<Point>();
+        private readonly List<Point> connectedPoints = new List<Point>();
         private Point hoverPoint = null;
         private Line selectedLine = null;
         ParcourGenerator pc;
@@ -88,6 +89,8 @@ namespace AirNavigationRaceLive.Comps
                     }
                     double newLatitude = c.YtoLatitude(e.Y);
                     double newLongitude = c.XtoLongitude(e.X);
+                    double oldLat = dragPoint.latitude;
+                    double oldLong = dragPoint.longitude;
                     dragPoint.latitude = newLatitude;
                     dragPoint.longitude = newLongitude;
                     dragPoint.edited = true;
@@ -96,6 +99,18 @@ namespace AirNavigationRaceLive.Comps
                         p.latitude = newLatitude;
                         p.longitude = newLongitude;
                         p.edited = true;
+                    }
+                    if (checkBoxConnected.Checked)
+                    {
+                        foreach (Point p in connectedPoints)
+                        {
+                            if (p != dragPoint)
+                            {
+                                p.latitude = dragPoint.latitude + (p.latitude - oldLat);
+                                p.longitude = dragPoint.longitude + (p.longitude - oldLong);
+                                p.edited = true;
+                            }
+                        }
                     }
                     pictureBox1.Invalidate();
                 }
@@ -121,6 +136,8 @@ namespace AirNavigationRaceLive.Comps
                                 SetHoverPoint(l.A, l);
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.A));
+                                connectedPoints.Clear();
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.A));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -130,6 +147,8 @@ namespace AirNavigationRaceLive.Comps
                                 SetHoverPoint(l.B, l);
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.B));
+                                connectedPoints.Clear();
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.B));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -140,6 +159,8 @@ namespace AirNavigationRaceLive.Comps
                                 SetHoverPoint(l.O, l);
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.O));
+                                connectedPoints.Clear();
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.O));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -163,13 +184,27 @@ namespace AirNavigationRaceLive.Comps
                 if (samePos(l.A, original) && !(original == l.A))
                 {
                     result.Add(l.A);
-                } 
+                }
                 if (samePos(l.B, original) && !(original == l.B))
                 {
                     result.Add(l.B);
-                } 
+                }
                 if (samePos(l.O, original) && !(original == l.O))
                 {
+                    result.Add(l.O);
+                }
+            }
+            return result;
+        }
+        private List<Point> findConnectedPoints(List<Line> linelist, Point original)
+        {
+            List<Point> result = new List<Point>();
+            foreach (Line l in linelist)
+            { 
+                if (l.Type >= 3 && l.Type <= 10 && (l.A == original || l.B == original || l.O == original))
+                {
+                    result.Add(l.A);
+                    result.Add(l.B);
                     result.Add(l.O);
                 }
             }

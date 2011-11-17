@@ -183,5 +183,10 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             cache.cachePenalty.delete(ID);
         }
+
+        internal NetworkObjects.Tracker getTracker(int ID_Tracker)
+        {
+            return cache.cacheTracker.get(ID_Tracker);
+        }
     }
 }

@@ -78,7 +78,7 @@
             this.fldServer.Location = new System.Drawing.Point(78, 3);
             this.fldServer.Name = "fldServer";
             this.fldServer.Size = new System.Drawing.Size(98, 21);
-            this.fldServer.TabIndex = 7;
+            this.fldServer.TabIndex = 1;
             this.fldServer.Text = "46.163.65.74";
             this.fldServer.SelectedIndexChanged += new System.EventHandler(this.fldServer_SelectedIndexChanged);
             this.fldServer.TextChanged += new System.EventHandler(this.fldServer_SelectedIndexChanged);
@@ -97,7 +97,7 @@
             this.btnLogin.Location = new System.Drawing.Point(182, 28);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(57, 48);
-            this.btnLogin.TabIndex = 9;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -108,7 +108,7 @@
             this.fldPassword.Name = "fldPassword";
             this.fldPassword.PasswordChar = '*';
             this.fldPassword.Size = new System.Drawing.Size(98, 20);
-            this.fldPassword.TabIndex = 11;
+            this.fldPassword.TabIndex = 3;
             this.fldPassword.UseSystemPasswordChar = true;
             // 
             // fldUsername
@@ -116,17 +116,17 @@
             this.fldUsername.Location = new System.Drawing.Point(78, 30);
             this.fldUsername.Name = "fldUsername";
             this.fldUsername.Size = new System.Drawing.Size(98, 20);
-            this.fldUsername.TabIndex = 10;
+            this.fldUsername.TabIndex = 2;
             // 
             // checkBoxClearCache
             // 
             this.checkBoxClearCache.AutoSize = true;
             this.checkBoxClearCache.Checked = true;
             this.checkBoxClearCache.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxClearCache.Location = new System.Drawing.Point(182, 183);
+            this.checkBoxClearCache.Location = new System.Drawing.Point(182, 157);
             this.checkBoxClearCache.Name = "checkBoxClearCache";
             this.checkBoxClearCache.Size = new System.Drawing.Size(84, 17);
-            this.checkBoxClearCache.TabIndex = 16;
+            this.checkBoxClearCache.TabIndex = 8;
             this.checkBoxClearCache.Text = "Clear Cache";
             this.checkBoxClearCache.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +135,7 @@
             this.btnRegister.Location = new System.Drawing.Point(245, 28);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(57, 48);
-            this.btnRegister.TabIndex = 17;
+            this.btnRegister.TabIndex = 5;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -155,31 +155,33 @@
             this.fldCompetition.Location = new System.Drawing.Point(78, 125);
             this.fldCompetition.Name = "fldCompetition";
             this.fldCompetition.Size = new System.Drawing.Size(224, 21);
-            this.fldCompetition.TabIndex = 19;
+            this.fldCompetition.TabIndex = 6;
             this.fldCompetition.SelectedIndexChanged += new System.EventHandler(this.fldCompetition_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 155);
+            this.label2.Location = new System.Drawing.Point(307, 128);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 21;
             this.label2.Text = "Owner";
+            this.label2.Visible = false;
             // 
             // fldOwner
             // 
-            this.fldOwner.Location = new System.Drawing.Point(78, 152);
+            this.fldOwner.Location = new System.Drawing.Point(383, 125);
             this.fldOwner.Name = "fldOwner";
             this.fldOwner.Size = new System.Drawing.Size(98, 20);
             this.fldOwner.TabIndex = 20;
+            this.fldOwner.Visible = false;
             // 
             // btnUse
             // 
-            this.btnUse.Location = new System.Drawing.Point(78, 178);
+            this.btnUse.Location = new System.Drawing.Point(78, 152);
             this.btnUse.Name = "btnUse";
             this.btnUse.Size = new System.Drawing.Size(98, 24);
-            this.btnUse.TabIndex = 22;
+            this.btnUse.TabIndex = 7;
             this.btnUse.Text = "Use";
             this.btnUse.UseVisualStyleBackColor = true;
             this.btnUse.Click += new System.EventHandler(this.btnUse_Click);
@@ -207,7 +209,7 @@
             this.fldCompetitionName.Location = new System.Drawing.Point(78, 255);
             this.fldCompetitionName.Name = "fldCompetitionName";
             this.fldCompetitionName.Size = new System.Drawing.Size(224, 20);
-            this.fldCompetitionName.TabIndex = 24;
+            this.fldCompetitionName.TabIndex = 9;
             this.fldCompetitionName.TextChanged += new System.EventHandler(this.fldCompetitionName_TextChanged);
             // 
             // btnCreate
@@ -215,7 +217,7 @@
             this.btnCreate.Location = new System.Drawing.Point(78, 308);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(98, 24);
-            this.btnCreate.TabIndex = 26;
+            this.btnCreate.TabIndex = 11;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
@@ -226,7 +228,7 @@
             this.fldPublicRole.Location = new System.Drawing.Point(78, 281);
             this.fldPublicRole.Name = "fldPublicRole";
             this.fldPublicRole.Size = new System.Drawing.Size(98, 21);
-            this.fldPublicRole.TabIndex = 28;
+            this.fldPublicRole.TabIndex = 10;
             // 
             // label5
             // 

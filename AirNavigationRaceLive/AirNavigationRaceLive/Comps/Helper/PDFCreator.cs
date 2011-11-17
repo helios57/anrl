@@ -5,6 +5,9 @@ using System.Text;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.Drawing;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -12,102 +15,70 @@ namespace AirNavigationRaceLive.Comps.Helper
     {
         public static void test()
         {
-            /*try
-             {
-                 string assyName = Path.GetFileName(Assembly.GetExecutingAssembly().GetName().CodeBase.ToString());
-                 string assyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                 Random rnd = new Random();
+                        // Create a new PDF document
+            PdfDocument document = new PdfDocument();
 
-                 // step 1: create a document
-                 Document document = new Document();
-                 // step 2: we set the ContentType and create an instance of the Writer
-                 int pid = Process.GetCurrentProcess().Id;
-                 string Filename = String.Format(@"C:\temp\pdf\{0}-{1}-{2}.pdf", assyName, pid, rnd.Next(1000));
-                 iTextSharp.text.pdf.PdfWriter.GetInstance(document,
-                                 new FileStream(Filename, FileMode.Create));
+            // Create an empty page
+            PdfPage page = document.AddPage();
 
-                 // step 3:  add metadata (before document.Open())
-                 document.AddTitle("Sample Document");
-                 document.AddSubject("Csharp PDF creation example");
-                 document.AddKeywords("csharp dotnet examples");
-                 document.AddCreator(".NET Assembly: " + assyName);
-                 document.AddAuthor("Dino Chiesa");
-                 document.AddProducer();
+            // Get an XGraphics object for drawing
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            
+            // Create a font
+            XFont font = new XFont("Verdana", 14, XFontStyle.Bold);
+            XFont font2 = new XFont("Verdana", 10, XFontStyle.Regular);
+            XFont font3 = new XFont("Verdana", 10, XFontStyle.Regular);
 
-                 // step 4: open the doc
-                 document.Open();
+            // Draw the text
+            /*string headingText = "Results for " + race.Name + ", " + competition.Date.ToString("dd.MM.yyyy") + " in " + competition.Location;
+            gfx.DrawString(headingText, font, XBrushes.DarkMagenta, new XPoint(50, 50), XStringFormat.TopLeft);
 
-                 // step 5: Add content to the document
-                 Font font24 = FontFactory.GetFont(FontFactory.HELVETICA, 24);
-                 Font font18 = FontFactory.GetFont(FontFactory.HELVETICA, 18);
-                 Font fontAnchor = FontFactory.GetFont(FontFactory.HELVETICA, 10,
-                                                  Font.UNDERLINE,
-                                                  iTextSharp.text.BaseColor.RED);
-                 Chunk bullet = new Chunk("\u2022", font18);
+            string pilotLine = "Pilot: " + competitor.PilotName + ", " + competitor.PilotFirstName;
+            gfx.DrawString(pilotLine, font2, XBrushes.Black, new XPoint(50, 90), XStringFormat.TopLeft);
 
-     
-                 iTextSharp.text.pdf.PdfPTable bigtable = new iTextSharp.text.pdf.PdfPTable(3);
-                 bigtable.WidthPercentage = 60;
-                 int i, j, n, m, x = 0;
-                 for (i = 0; i < 3; i++)
-                 {
-                     for (j = 0; j < 3; j++)
-                     {
-                         iTextSharp.text.pdf.PdfPTable nested = new iTextSharp.text.pdf.PdfPTable(3);
-                         nested.DefaultCell.HorizontalAlignment = Element.ALIGN_CENTER;
-                         nested.DefaultCell.VerticalAlignment = Element.ALIGN_MIDDLE;
-                         nested.DefaultCell.MinimumHeight = 24;
-                         for (n = 0; n < 3; n++)
-                         {
-                             for (m = 0; m < 3; m++)
-                             {
-                                 nested.AddCell(new String((char)(65 + x), 1) + (n + 1) + "," + (m + 1));
-                             }
-                         }
-                         bigtable.AddCell(nested);
-                         x++;
-                     }
-                 }
+            string copilotLine = "Navigator: " + competitor.NavigatorName + ", " + competitor.NavigatorFirstName;
+            gfx.DrawString(copilotLine, font2, XBrushes.Black, new XPoint(50, 110), XStringFormat.TopLeft);
 
-                 document.Add(bigtable);
+            string takeoffTime = "Takeoff time: " + flight.TakeOffTime.ToString("HH.mm.ss");
+            gfx.DrawString(takeoffTime, font2, XBrushes.Black, new XPoint(50, 130), XStringFormat.TopLeft);
 
-                 document.Add(new Paragraph("\n"));
-                 document.Add(new Paragraph("This PDF document was generated dynamically: "));
-                 List list = new List(false, 20);  // true= ordered, false= unordered
-                 list.ListSymbol = bullet;       // use "bullet" as list symbol
-                 list.Add(new ListItem("on " + DateTime.Now.ToString("dddd, MMM d, yyyy")));
-                 list.Add(new ListItem("at " + DateTime.Now.ToString("hh:mm:ss tt zzzz")));
-                 list.Add(new ListItem("on machine " + Environment.MachineName));
-                 list.Add(new ListItem("by .NET assembly: " + assyName + " " + assyVersion));
-                 list.Add(new ListItem("on a machine running " + Environment.OSVersion.ToString()));
-                 list.Add(new ListItem("and .NET CLR " + Environment.Version));
+            string startTime = "Start Time: " + flight.StartGateTime.ToString("HH.mm.ss");
+            gfx.DrawString(startTime, font2, XBrushes.Black, new XPoint(50, 150), XStringFormat.TopLeft);
+            
+            string finishTime = "Finish Time: " + flight.FinishGateTime.ToString("HH.mm.ss");
+            gfx.DrawString(finishTime, font2, XBrushes.Black, new XPoint(250, 150), XStringFormat.TopLeft);
 
-                 string v1 = "(none)";
-                 string v2 = "(none)";
-                 try
-                 {
-                     v1 = list.GetType().Assembly.GetName().Version.ToString();
-                     v2 = list.GetType().Assembly.ImageRuntimeVersion;
-                 }
-                 catch (Exception e1) { v1 = e1.ToString(); }
+            Image image = Common.drawFlight(parcours.ParentMap, parcours, flight);
+            int originalHeight = image.Height;
+            int originalWidth = image.Width;
+            XImage xImage = XImage.FromGdiPlusImage(image);
+            double ratio = (double)image.Height / (double)image.Width;
+            int height = (int)Math.Ceiling((page.Width.Point - 100) * ratio);
+            gfx.DrawImage(xImage, 50, 180, page.Width.Point - 100, height);
 
-                 ListItem li = new ListItem(String.Format("iTextSharp v{0} (compiled with .NET {1}) see ", v1, v2));
-                 Anchor anchor =
-               new Anchor("http://itextsharp.sourceforge.net/", fontAnchor);
-                 anchor.Reference = "http://itextsharp.sourceforge.net";
-                 //anchor.Name = "website"; 
+            gfx.DrawString("Penalties", font2, XBrushes.Black, 50, height + 200);
+            int position = height + 220;
+            int i = 0;
 
-                 li.Add(anchor);
-                 list.Add(li);
-
-                 document.Add(list);
+            foreach (Penalty penalty in flight.AutomaticPenalties)
+            {
+                if ((position + i * 20) <= page.Height.Point - 50)
+                {
+                    gfx.DrawString(penalty.PenaltyPoints.ToString(), font3, XBrushes.Gray, 60, (position + i * 20));
+                    gfx.DrawString(penalty.PenaltyType.ToString() + ", " + penalty.Comment, font2, XBrushes.Gray, 120, (position + i * 20));
+                    i++;
+                }
+                else
+                {
+                    page = document.AddPage();
+                    gfx = XGraphics.FromPdfPage(page);
+                    i = 0;
+                    position = 50;
+                }
+            }
 
 
-                 // step 6: Close document
-                 document.Close();
-
-
-                 Process p = new Process();
+/*                 Process p = new Process();
                  p.StartInfo.FileName = Filename;
                  //p.StartInfo.WindowStyle = Diagnostics.ProcessWindowStyle.Hidden;
                  p.StartInfo.RedirectStandardOutput = false;

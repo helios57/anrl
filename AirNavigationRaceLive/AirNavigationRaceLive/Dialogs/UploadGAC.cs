@@ -74,6 +74,7 @@ namespace AirNavigationRaceLive.Dialogs
         }
         private void upload(object o)
         {
+            CompetitionTeam ct = this.ct;
             List<GPSData> list = o as List<GPSData>;
             int count = 0;
             int length = list.Count;
@@ -101,6 +102,7 @@ namespace AirNavigationRaceLive.Dialogs
                 subList[0].trackerName = list[0].trackerName;
                 int ID_Tracker = Client.uploadGPSData(subList);
                 NetworkObjects.Competition c = Client.getCompetitions().First(p => p.CompetitionTeamList.Count(pp => pp.ID == ct.ID) == 1);
+                Client.getTracker(ID_Tracker);
                 c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.Add(ID_Tracker);
                 Client.saveCompetition(c);
             }

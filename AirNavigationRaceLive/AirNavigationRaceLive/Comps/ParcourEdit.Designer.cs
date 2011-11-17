@@ -73,6 +73,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.checkBoxConnected = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -92,6 +95,7 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,6 +153,7 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
+            this.flowLayoutPanel1.Controls.Add(this.panel7);
             this.flowLayoutPanel1.Controls.Add(this.btnRecalc);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
@@ -560,7 +565,7 @@
             // 
             // btnRecalc
             // 
-            this.btnRecalc.Location = new System.Drawing.Point(3, 354);
+            this.btnRecalc.Location = new System.Drawing.Point(3, 388);
             this.btnRecalc.Name = "btnRecalc";
             this.btnRecalc.Size = new System.Drawing.Size(187, 23);
             this.btnRecalc.TabIndex = 22;
@@ -575,7 +580,7 @@
             this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel4.Controls.Add(this.fldName);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 383);
+            this.panel4.Location = new System.Drawing.Point(3, 417);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(190, 28);
             this.panel4.TabIndex = 20;
@@ -598,7 +603,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 417);
+            this.btnSave.Location = new System.Drawing.Point(3, 451);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -616,6 +621,38 @@
             this.tableLayoutPanel1.SetRowSpan(this.panel6, 2);
             this.panel6.Size = new System.Drawing.Size(904, 574);
             this.panel6.TabIndex = 3;
+            // 
+            // panel7
+            // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel7.Controls.Add(this.checkBoxConnected);
+            this.panel7.Controls.Add(this.label18);
+            this.panel7.Location = new System.Drawing.Point(3, 354);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(190, 28);
+            this.panel7.TabIndex = 22;
+            // 
+            // checkBoxConnected
+            // 
+            this.checkBoxConnected.AutoSize = true;
+            this.checkBoxConnected.Checked = true;
+            this.checkBoxConnected.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxConnected.Location = new System.Drawing.Point(163, 7);
+            this.checkBoxConnected.Name = "checkBoxConnected";
+            this.checkBoxConnected.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxConnected.TabIndex = 2;
+            this.checkBoxConnected.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(3, 7);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(116, 13);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Glue Connected Points";
             // 
             // pictureBox1
             // 
@@ -665,6 +702,8 @@
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -718,5 +757,8 @@
         private System.Windows.Forms.CheckBox chkAutocalc;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button btnRecalc;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.CheckBox checkBoxConnected;
+        private System.Windows.Forms.Label label18;
     }
 }

@@ -99,7 +99,7 @@ namespace AirNavigationRaceLive.Comps
                     UpdateEnablement();
                     Status.SetStatus("Connected to Server, downloading data");
                     Client.Client chachedClient = new Client.Client(c);
-                    
+
                     while (!chachedClient.IsInitialLoadComplete())
                     {
                         Application.DoEvents();
@@ -113,8 +113,28 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            c.CreateCompetition(fldCompetitionName.Text, (int)(fldPublicRole.SelectedItem as RoleCombo).role);
-            reloadCompetitions();
+            if (fldPublicRole.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a Public Role");
+            }
+            else
+            {
+                NetworkObjects.CompetitionSet newComp = c.CreateCompetition(fldCompetitionName.Text, (int)(fldPublicRole.SelectedItem as RoleCombo).role);
+                reloadCompetitions();
+                c.UseCompetition(newComp);
+                c.SetClearCache(checkBoxClearCache.Checked);
+                UpdateEnablement();
+                Status.SetStatus("Connected to Server, downloading data");
+                Client.Client chachedClient = new Client.Client(c);
+
+                while (!chachedClient.IsInitialLoadComplete())
+                {
+                    Application.DoEvents();
+                    System.Threading.Thread.Sleep(100);
+                }
+                Status.SetStatus("Connected to Server, download finished");
+                Connected.Invoke(chachedClient, e);
+            }
             UpdateEnablement();
         }
 

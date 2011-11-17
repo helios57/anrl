@@ -83,7 +83,7 @@ namespace AirNavigationRaceLive.Comps.Client
             return process(r).ResponseParameters.CompetitionSetList;
         }
 
-        public void CreateCompetition(String name, int publicRole)
+        public NetworkObjects.CompetitionSet CreateCompetition(String name, int publicRole)
         {
             Root r = new Root();
             r.ObjectType = (int)EObjectType.CompetitionSet;
@@ -92,7 +92,7 @@ namespace AirNavigationRaceLive.Comps.Client
             r.RequestParameters.CompetitionSet = new CompetitionSet();
             r.RequestParameters.CompetitionSet.Name = name;
             r.RequestParameters.CompetitionSet.PublicRole = publicRole;
-            process(r);
+            return process(r).ResponseParameters.CompetitionSetList.First();
         }
 
         public void UseCompetition(CompetitionSet set)

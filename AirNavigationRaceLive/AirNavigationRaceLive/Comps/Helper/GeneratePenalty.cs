@@ -53,7 +53,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             bool shouldHaveCrossedStart = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeStartLine;
             bool shouldHaveCrossedEnd = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeEndLine;
 
-            bool haveCrossedTakeOff = false;
+            //bool haveCrossedTakeOff = false;
             bool haveCrossedStart = false;
             bool haveCrossedEnd = false;
             bool insidePenalty = false;
@@ -72,11 +72,11 @@ namespace AirNavigationRaceLive.Comps.Helper
                     haveCrossedStart = true;
                     double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
                     double diff = crossTime - competitionTeam.TimeStartLine;
-                    if (Math.Abs(diff) > tickOfSecond)
+                    int seconds = (int)Math.Floor(Math.Abs(diff / tickOfSecond));
+                    if (seconds > 1)
                     {
                         NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
-                        double seconds = Math.Abs(diff / tickOfSecond);
-                        penalty.Points = (int)Math.Min(seconds * 3, 200);
+                        penalty.Points = Math.Min(seconds * 3, 200);
                         penalty.Reason = "Crossed Start-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competitionTeam.TimeStartLine).ToLongTimeString();
                         result.Add(penalty);
                     }
@@ -86,11 +86,11 @@ namespace AirNavigationRaceLive.Comps.Helper
                     haveCrossedEnd = true;
                     double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionEnd);
                     double diff = crossTime - competitionTeam.TimeEndLine;
-                    if (Math.Abs(diff) > tickOfSecond)
+                    int seconds = (int)Math.Floor(Math.Abs(diff / tickOfSecond));
+                    if (seconds>1)
                     {
                         NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
-                        double seconds = Math.Abs(diff / tickOfSecond);
-                        penalty.Points = Math.Min((int)seconds * 3, 200);
+                        penalty.Points = Math.Min(seconds * 3, 200);
                         penalty.Reason = "Crossed End-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competitionTeam.TimeEndLine).ToLongTimeString();
                         result.Add(penalty);
                     }
@@ -109,12 +109,12 @@ namespace AirNavigationRaceLive.Comps.Helper
                         else
                         {
                             insidePenalty = false;
-                            int sec = (int)((intersectionPenalty - timeSinceInsidePenalty) / tickOfSecond);
+                            int sec = (int)Math.Floor(((intersectionPenalty - timeSinceInsidePenalty) / tickOfSecond));
                             if (sec > 5)
                             {
                                 NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
                                 penalty.Points = Math.Min((sec-5) * 3, 300);
-                                penalty.Reason = "Inside Penaltyzone for " + sec + " from " + new DateTime((Int64)timeSinceInsidePenalty).ToLongTimeString() + " to " + new DateTime((Int64)intersectionPenalty).ToLongTimeString();
+                                penalty.Reason = "Inside Penaltyzone for " + sec + " (-5 sec for points) from " + new DateTime((Int64)timeSinceInsidePenalty).ToLongTimeString() + " to " + new DateTime((Int64)intersectionPenalty).ToLongTimeString();
                                 result.Add(penalty);
                             }
                         }
