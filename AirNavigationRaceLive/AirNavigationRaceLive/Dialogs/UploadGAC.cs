@@ -19,6 +19,7 @@ namespace AirNavigationRaceLive.Dialogs
         private NetworkObjects.CompetitionTeam ct;
         private String IMEI = "_GAC_IMPORT_" + DateTime.Now.Ticks;
 
+        public EventHandler OnFinish;
         public UploadGAC(Client Client, NetworkObjects.CompetitionTeam ct)
         {
             this.Client = Client;
@@ -114,6 +115,10 @@ namespace AirNavigationRaceLive.Dialogs
                 c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.RemoveAll(p => toDelete.Contains(p));
                 c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.Add(ID_Tracker);
                 Client.saveCompetition(c);
+                if (OnFinish != null)
+                {
+                    OnFinish.Invoke(null, null);
+                }
             }
 
             MessageBox.Show("Upload Finished! \n Please reload the current form to refresh...");

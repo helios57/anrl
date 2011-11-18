@@ -129,7 +129,9 @@ namespace AirNavigationRaceLive.Comps.Client
 
         internal int saveCompetition(NetworkObjects.Competition competition)
         {
-            return cache.cacheCompetition.add(competition);
+            int id = cache.cacheCompetition.add(competition);
+            cache.cacheCompetition.update(false);
+            return id;
         }
 
         internal List<NetworkObjects.Competition> getCompetitions()

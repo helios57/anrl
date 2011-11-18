@@ -36,7 +36,7 @@ namespace AirNavigationRaceLive.Comps
                     List<int> trackers = new List<int>();
                     long min = long.MaxValue;
                     long max = long.MinValue;
-                    competition.CompetitionTeamList.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
+                    competition.CompetitionTeamList.Sort((p, q) => p.StartID.CompareTo(q.StartID));
                     foreach (NetworkObjects.CompetitionTeam ct in competition.CompetitionTeamList)
                     {
                         ComboBoxCompetitionTeam lvi2 = new ComboBoxCompetitionTeam(ct, new string[] { ct.StartID.ToString(), "0", getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
@@ -271,9 +271,29 @@ namespace AirNavigationRaceLive.Comps
             {
                 ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
                 UploadGAC upload = new UploadGAC(Client, competitionTeam.competitionTeam);
+                upload.OnFinish += new EventHandler(UploadFinished);
                 upload.Show();
             }
         }
+        delegate void OnFinishCallback(IAsyncResult result);
+
+        public void UploadFinished(object o, EventArgs ea)
+        {
+            OnFinishCallback d = new OnFinishCallback(UploadFinished);
+            listViewCompetitionTeam.Invoke(d, new object[] { null });
+        }
+        public void UploadFinished(IAsyncResult ass)
+        {
+            List<NetworkObjects.Competition> comps = Client.getCompetitions();
+            comboBoxCompetition.Items.Clear();
+            listViewCompetitionTeam.Items.Clear();
+            foreach (NetworkObjects.Competition c in comps)
+            {
+                comboBoxCompetition.Items.Add(new CompetitionComboEntry(c));
+            }
+            comboBox1_SelectedIndexChanged(null, null);
+        }
+
     }
     class ComboBoxCompetitionTeam : ListViewItem
     {
