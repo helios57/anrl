@@ -14,7 +14,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Helios\Documents\Visual Studio 2010\Projects\AirNavigationRaceLive\AirNavigationRaceLive\Deployed\</PublishUrl>
+    <PublishUrl>C:\Users\Helios6x\Documents\Visual Studio 2010\Projects\AirNavigationRaceLive-trunk\AirNavigationRaceLive\Deployed\</PublishUrl>
     <Install>false</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -31,7 +31,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationRevision>42</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -358,10 +358,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="dlls\PdfSharp.dll" />
-    <Content Include="dlls\MigraDoc.DocumentObjectModel.dll" />
-    <Content Include="dlls\MigraDoc.Rendering.dll" />
-    <Content Include="dlls\MigraDoc.RtfRendering.dll" />
-    <Content Include="dlls\PdfSharp.Charting.dll" />
+    <None Include="dlls\MigraDoc.DocumentObjectModel.dll" />
+    <None Include="dlls\MigraDoc.Rendering.dll" />
+    <None Include="dlls\MigraDoc.RtfRendering.dll" />
+    <None Include="dlls\PdfSharp.Charting.dll" />
     <Content Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
