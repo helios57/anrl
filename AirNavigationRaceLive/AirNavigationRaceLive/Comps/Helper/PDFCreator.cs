@@ -25,10 +25,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             doc.Info.Subject = "Crewlist";
             doc.Info.Title = "Crewlist";
             doc.UseCmykColor = true;
+            doc.DefaultPageSetup.PageFormat = PageFormat.A4;
             doc.DefaultPageSetup.Orientation = Orientation.Landscape;
 
             Section sec = doc.AddSection();
             Table table = sec.AddTable();
+            table.Borders.Visible = true;
 
             table.AddColumn(Unit.FromCentimeter(0.7));
             table.AddColumn(Unit.FromCentimeter(2.5));
@@ -40,7 +42,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             table.AddColumn();
 
             Row row = table.AddRow();
-            row.Shading.Color = Colors.PaleGoldenrod;
+            row.Shading.Color = Colors.Gray;
             row.Cells[0].AddParagraph("ID");
             row.Cells[1].AddParagraph("Nationality");
             row.Cells[2].AddParagraph("Pilot Lastname");
