@@ -345,8 +345,14 @@ namespace AirNavigationRaceLive.Comps
             ListItem li = listBox1.SelectedItem as ListItem;
             if (li != null && pictureBox1.PrintOutImage!= null)
             {
-                PDFCreator.CreateParcourPDF(pictureBox1, Client, System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments)+
-                    @"\AirNavigationRace\Parcour_"+li.getParcour().ID +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss"));
+                String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
+                DirectoryInfo di = Directory.CreateDirectory(dirPath);
+                if (!di.Exists)
+                {
+                    di.Create();
+                }
+                PDFCreator.CreateParcourPDF(pictureBox1, Client, dirPath + 
+                    @"\Parcour_"+li.getParcour().ID +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss"));
             }
         }
 
