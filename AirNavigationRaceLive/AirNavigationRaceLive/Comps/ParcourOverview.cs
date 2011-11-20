@@ -342,7 +342,12 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-
+            ListItem li = listBox1.SelectedItem as ListItem;
+            if (li != null && pictureBox1.PrintOutImage!= null)
+            {
+                PDFCreator.CreateParcourPDF(pictureBox1, Client, System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments)+
+                    @"\AirNavigationRace\Parcour_"+li.getParcour().ID +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss"));
+            }
         }
 
     }

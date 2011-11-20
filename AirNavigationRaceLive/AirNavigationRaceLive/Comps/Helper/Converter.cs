@@ -20,6 +20,34 @@ namespace AirNavigationRaceLive.Comps.Helper
             sizeLongitude = map.XSize;
             sizeLatitude = map.YSize;
         }
+        public double TopLeftLongitudeX
+        {
+            get
+            {
+                return topLeftLongitude;
+            }
+        }
+        public double TopLeftLatitudeY
+        {
+            get
+            {
+                return topLeftLatitude;
+            }
+        }
+        public double SizeLongitudeX
+        {
+            get
+            {
+                return sizeLongitude;
+            }
+        }
+        public double SizeLatitudeY
+        {
+            get
+            {
+                return sizeLatitude;
+            }
+        }
         public double XtoLongitude(double x)
         {
             return topLeftLongitude + x * sizeLongitude;
