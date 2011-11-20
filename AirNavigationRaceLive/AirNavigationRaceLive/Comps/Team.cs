@@ -231,7 +231,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            PDFCreator.test();
+            PDFCreator.CreateTeamsPDF(Client.getTeams(), Client, @"c:\temp\pdf\HelloMigraDoc.pdf");
         }
     }
 }

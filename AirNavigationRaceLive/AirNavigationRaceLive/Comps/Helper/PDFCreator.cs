@@ -8,91 +8,117 @@ using System.Diagnostics;
 using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using System.Drawing;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
+using MigraDoc.DocumentObjectModel.Tables;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
     public class PDFCreator
     {
-        public static void test()
+        public static void CreateTeamsPDF(List<NetworkObjects.Team> teams, Client.Client c, String pathToPDF)
         {
-                        // Create a new PDF document
-            PdfDocument document = new PdfDocument();
+            Document doc = new Document();
+            doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
+            doc.Info.Comment = "Generated from ANRL Client on " + DateTime.Now.ToString();
+            doc.Info.Keywords = "ANRL Crewlist";
+            doc.Info.Subject = "Crewlist";
+            doc.Info.Title = "Crewlist";
+            doc.UseCmykColor = true;
+            doc.DefaultPageSetup.Orientation = Orientation.Landscape;
 
-            // Create an empty page
-            PdfPage page = document.AddPage();
+            Section sec = doc.AddSection();
+            Table table = sec.AddTable();
 
-            // Get an XGraphics object for drawing
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-            
-            // Create a font
-            XFont font = new XFont("Verdana", 14, XFontStyle.Bold);
-            XFont font2 = new XFont("Verdana", 10, XFontStyle.Regular);
-            XFont font3 = new XFont("Verdana", 10, XFontStyle.Regular);
+            table.AddColumn(Unit.FromCentimeter(0.7));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
 
-            // Draw the text
-            /*string headingText = "Results for " + race.Name + ", " + competition.Date.ToString("dd.MM.yyyy") + " in " + competition.Location;
-            gfx.DrawString(headingText, font, XBrushes.DarkMagenta, new XPoint(50, 50), XStringFormat.TopLeft);
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.PaleGoldenrod;
+            row.Cells[0].AddParagraph("ID");
+            row.Cells[1].AddParagraph("Nationality");
+            row.Cells[2].AddParagraph("Pilot Lastname");
+            row.Cells[3].AddParagraph("Pilot Surename");
+            row.Cells[4].AddParagraph("Navigator Lastname");
+            row.Cells[5].AddParagraph("Navigator Surename");
+            row.Cells[6].AddParagraph("CNumber");
+            row.Cells[7].AddParagraph("AC");
 
-            string pilotLine = "Pilot: " + competitor.PilotName + ", " + competitor.PilotFirstName;
-            gfx.DrawString(pilotLine, font2, XBrushes.Black, new XPoint(50, 90), XStringFormat.TopLeft);
-
-            string copilotLine = "Navigator: " + competitor.NavigatorName + ", " + competitor.NavigatorFirstName;
-            gfx.DrawString(copilotLine, font2, XBrushes.Black, new XPoint(50, 110), XStringFormat.TopLeft);
-
-            string takeoffTime = "Takeoff time: " + flight.TakeOffTime.ToString("HH.mm.ss");
-            gfx.DrawString(takeoffTime, font2, XBrushes.Black, new XPoint(50, 130), XStringFormat.TopLeft);
-
-            string startTime = "Start Time: " + flight.StartGateTime.ToString("HH.mm.ss");
-            gfx.DrawString(startTime, font2, XBrushes.Black, new XPoint(50, 150), XStringFormat.TopLeft);
-            
-            string finishTime = "Finish Time: " + flight.FinishGateTime.ToString("HH.mm.ss");
-            gfx.DrawString(finishTime, font2, XBrushes.Black, new XPoint(250, 150), XStringFormat.TopLeft);
-
-            Image image = Common.drawFlight(parcours.ParentMap, parcours, flight);
-            int originalHeight = image.Height;
-            int originalWidth = image.Width;
-            XImage xImage = XImage.FromGdiPlusImage(image);
-            double ratio = (double)image.Height / (double)image.Width;
-            int height = (int)Math.Ceiling((page.Width.Point - 100) * ratio);
-            gfx.DrawImage(xImage, 50, 180, page.Width.Point - 100, height);
-
-            gfx.DrawString("Penalties", font2, XBrushes.Black, 50, height + 200);
-            int position = height + 220;
-            int i = 0;
-
-            foreach (Penalty penalty in flight.AutomaticPenalties)
+            foreach (NetworkObjects.Team t in teams)
             {
-                if ((position + i * 20) <= page.Height.Point - 50)
+                Row r = table.AddRow();
+                r.Cells[0].AddParagraph(t.ID.ToString());
+                r.Cells[1].AddParagraph(t.Name);
+                NetworkObjects.Pilot pilot = c.getPilot(t.ID_Pilot);
+                r.Cells[2].AddParagraph(pilot.Name);
+                r.Cells[3].AddParagraph(pilot.Surename);
+                if (t.ID_Navigator > 0)
                 {
-                    gfx.DrawString(penalty.PenaltyPoints.ToString(), font3, XBrushes.Gray, 60, (position + i * 20));
-                    gfx.DrawString(penalty.PenaltyType.ToString() + ", " + penalty.Comment, font2, XBrushes.Gray, 120, (position + i * 20));
-                    i++;
+                    NetworkObjects.Pilot navigator = c.getPilot(t.ID_Navigator);
+                    r.Cells[4].AddParagraph(navigator.Name);
+                    r.Cells[5].AddParagraph(navigator.Surename);
                 }
-                else
-                {
-                    page = document.AddPage();
-                    gfx = XGraphics.FromPdfPage(page);
-                    i = 0;
-                    position = 50;
-                }
+                r.Cells[6].AddParagraph(t.StartID);
+                r.Cells[7].AddParagraph(t.Description);
             }
 
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
+            renderer.Document = doc;
+            renderer.RenderDocument();
+            renderer.PdfDocument.Save(pathToPDF);
 
-/*                 Process p = new Process();
-                 p.StartInfo.FileName = Filename;
-                 //p.StartInfo.WindowStyle = Diagnostics.ProcessWindowStyle.Hidden;
-                 p.StartInfo.RedirectStandardOutput = false;
-                 p.StartInfo.UseShellExecute = true;
+            Process.Start(pathToPDF);
+        }
 
-                 p.Start();
+        public static void test()
+        {
+            DateTime now = DateTime.Now;
+            string filename = "MixMigraDocAndPdfSharp.pdf";
+            filename = Guid.NewGuid().ToString("D").ToUpper() + ".pdf";
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "PDFsharp XGraphic Sample";
+            document.Info.Author = "Stefan Lange";
+            document.Info.Subject = "Created with code snippets that show the use of graphical functions";
+            document.Info.Keywords = "PDFsharp, XGraphics";
 
-             }
-             catch (DocumentException ex)
-             {
-                 Console.Error.WriteLine(ex.StackTrace);
-                 Console.Error.WriteLine(ex.Message);
-             }
-                 */
+
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            gfx.MUH = PdfFontEncoding.Unicode;
+            gfx.MFEH = PdfFontEmbedding.Default;
+            XFont font = new XFont("Verdana", 13, XFontStyle.Bold);
+            gfx.DrawString("The following paragraph was rendered using MigraDoc:", font, XBrushes.Black,
+            new XRect(100, 100, page.Width - 200, 300), XStringFormats.Center);
+            Document doc = new Document();
+            Section sec = doc.AddSection();
+            Paragraph para = sec.AddParagraph();
+            para.Format.Alignment = ParagraphAlignment.Justify;
+            para.Format.Font.Name = "Times New Roman";
+            para.Format.Font.Size = 12;
+            para.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
+            para.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
+            para.AddText("Duisism odigna acipsum delesenisl ");
+            para.AddFormattedText("ullum in velenit", TextFormat.Bold);
+            para.AddText(" ipit iurero dolum zzriliquisis nit wis dolore vel et nonsequipit, velendigna " +
+            "auguercilit lor se dipisl duismod tatem zzrit at laore magna feummod oloborting ea con vel " +
+            "essit augiati onsequat luptat nos diatum vel ullum illummy nonsent nit ipis et nonsequis " +
+            "niation utpat. Odolobor augait et non etueril landre min ut ulla feugiam commodo lortie ex " +
+            "essent augait el ing eumsan hendre feugait prat augiatem amconul laoreet. ≤≥≈≠");
+            para.Format.Borders.Distance = "5pt";
+            para.Format.Borders.Color = Colors.Gold;
+            MigraDoc.Rendering.DocumentRenderer docRenderer = new DocumentRenderer(doc);
+            docRenderer.PrepareDocument();
+            docRenderer.RenderObject(gfx, XUnit.FromCentimeter(5), XUnit.FromCentimeter(10), "12cm", para);
+
+            document.Save(filename);
+
+            Process.Start(filename);
         }
     }
 }
