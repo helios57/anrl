@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AirNavigationRaceLive.Comps.Helper;
+using System.IO;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -231,7 +232,15 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            PDFCreator.CreateTeamsPDF(Client.getTeams(), Client, @"c:\temp\pdf\HelloMigraDoc.pdf");
+            String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
+            DirectoryInfo di = Directory.CreateDirectory(dirPath);
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            PDFCreator.CreateTeamsPDF(Client.getTeams(), Client, dirPath +
+                @"\CrewsPrintout_" + DateTime.Now.ToString("yyyyMMddhhmmss"));
+
         }
     }
 }
