@@ -239,7 +239,7 @@ namespace AirNavigationRaceLive.Comps
                 di.Create();
             }
             PDFCreator.CreateTeamsPDF(Client.getTeams(), Client, dirPath +
-                @"\CrewsPrintout_" + DateTime.Now.ToString("yyyyMMddhhmmss"));
+                @"\CrewsPrintout_" + DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf");
 
         }
     }

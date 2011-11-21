@@ -148,5 +148,77 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             Process.Start(filename);
         }
+
+        internal static void CreateStartListPDF(NetworkObjects.Competition competition, Client.Client Client, string pathToPDF)
+        {
+            Document doc = new Document();
+            doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
+            doc.Info.Comment = "Generated from ANRL Client on " + DateTime.Now.ToString();
+            doc.Info.Keywords = "ANRL StartList";
+            doc.Info.Subject = "StartList";
+            doc.Info.Title = "StartList";
+            doc.UseCmykColor = true;
+            doc.DefaultPageSetup.PageFormat = PageFormat.A4;
+            doc.DefaultPageSetup.Orientation = Orientation.Landscape;
+
+            Section sec = doc.AddSection();
+            Table table = sec.AddTable();
+            table.Borders.Visible = true;
+
+            table.AddColumn(Unit.FromCentimeter(0.7));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+            table.AddColumn();
+
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.Gray;
+            row.Cells[0].AddParagraph("Start ID");
+            row.Cells[1].AddParagraph("Crew Number");
+            row.Cells[2].AddParagraph("AC");
+            row.Cells[3].AddParagraph("Pilot Lastname");
+            row.Cells[4].AddParagraph("Pilot Surename");
+            row.Cells[5].AddParagraph("Navigator Lastname");
+            row.Cells[6].AddParagraph("Navigator Surename");
+            row.Cells[7].AddParagraph("Take Off");
+            row.Cells[8].AddParagraph("Start Gate");
+            row.Cells[9].AddParagraph("End Gate");
+            row.Cells[10].AddParagraph("Route");
+
+            foreach (NetworkObjects.CompetitionTeam ct in competition.CompetitionTeamList)
+            {
+                Row r = table.AddRow();
+                r.Cells[0].AddParagraph(ct.StartID.ToString());
+                NetworkObjects.Team teams = Client.getTeam(ct.ID_Team);
+                r.Cells[1].AddParagraph(teams.StartID);
+                r.Cells[2].AddParagraph(teams.Description);
+                NetworkObjects.Pilot pilot = Client.getPilot(teams.ID_Pilot);
+                r.Cells[3].AddParagraph(pilot.Name);
+                r.Cells[4].AddParagraph(pilot.Surename);
+                if (teams.ID_Navigator > 0)
+                {
+                    NetworkObjects.Pilot navigator = Client.getPilot(teams.ID_Navigator);
+                    r.Cells[5].AddParagraph(navigator.Name);
+                    r.Cells[6].AddParagraph(navigator.Surename);
+                }
+                r.Cells[7].AddParagraph(new DateTime(ct.TimeTakeOff).ToString("HH:mm"));
+                r.Cells[8].AddParagraph(new DateTime(ct.TimeStartLine).ToString("HH:mm"));
+                r.Cells[9].AddParagraph(new DateTime(ct.TimeEndLine).ToString("HH:mm"));
+                r.Cells[10].AddParagraph(Enum.GetName(NetworkObjects.Route.A.GetType(),ct.Route));
+            }
+
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
+            renderer.Document = doc;
+            renderer.RenderDocument();
+            renderer.PdfDocument.Save(pathToPDF);
+
+            Process.Start(pathToPDF);
+        }
     }
 }

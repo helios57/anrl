@@ -618,6 +618,7 @@
             this.btnExportToPDF.TabIndex = 71;
             this.btnExportToPDF.Text = "Export To PDF";
             this.btnExportToPDF.UseVisualStyleBackColor = true;
+            this.btnExportToPDF.Click += new System.EventHandler(this.btnExportToPDF_Click);
             // 
             // Competition
             // 

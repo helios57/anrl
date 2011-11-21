@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AirNavigationRaceLive.Dialogs;
 using AirNavigationRaceLive.Comps.Helper;
+using System.IO;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -113,6 +114,7 @@ namespace AirNavigationRaceLive.Comps
             listViewCompetitionTeam.Enabled = Ediable;
             btnDeleteCompetitionTeam.Enabled = Ediable && StartID;
             btnSaveCompetitionTeam.Enabled = StartID && TeamSelected && RouteSelected;
+            btnExportToPDF.Enabled = btnSave.Enabled;
             listViewTrackers.Enabled = StartID;
         }
         private bool isValidDouble(String s)
@@ -442,6 +444,22 @@ namespace AirNavigationRaceLive.Comps
         {
 
             UpdateEnablement();
+        }
+
+        private void btnExportToPDF_Click(object sender, EventArgs e)
+        {
+            NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
+            if (c != null)
+            {
+            String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
+            DirectoryInfo di = Directory.CreateDirectory(dirPath);
+            if (!di.Exists)
+            {
+                di.Create();
+            }
+            PDFCreator.CreateStartListPDF(c, Client, dirPath +
+                @"\StartList_" +  c.ID+"_"+c.Name+"_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+        }
         }
     }
     class ComboParcour
