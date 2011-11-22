@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UploadGAC));
             this.btnUploadData = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxPositions = new System.Windows.Forms.TextBox();
@@ -102,6 +103,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dateGAC);
             this.Controls.Add(this.btnImportGAC);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UploadGAC";
             this.Text = "UploadGAC";
             this.ResumeLayout(false);

@@ -70,6 +70,10 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>Resources\ANR_LOGO.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.31.3066.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
@@ -357,11 +361,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\swiss_made_software-original.gif" />
     <None Include="dlls\PdfSharp.dll" />
     <None Include="dlls\MigraDoc.DocumentObjectModel.dll" />
     <None Include="dlls\MigraDoc.Rendering.dll" />
     <None Include="dlls\MigraDoc.RtfRendering.dll" />
     <None Include="dlls\PdfSharp.Charting.dll" />
+    <Content Include="ANR_LOGO.ico" />
+    <EmbeddedResource Include="Resources\ANR_LOGO.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Resources\ANR_LOGO.jpg" />
+    <Content Include="Resources\FAI_GAC.jpg" />
     <Content Include="Resources\KMLTemplates\footer.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -377,6 +388,7 @@
     <Content Include="Resources\KMLTemplates\headerPolygon.kml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\logoVS1.png" />
     <Content Include="Resources\pluginhost.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
