@@ -137,7 +137,7 @@ namespace AirNavigationRaceLive.Comps
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.A));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.A));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.A,l));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -148,7 +148,7 @@ namespace AirNavigationRaceLive.Comps
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.B));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.B));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.B,l));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -160,7 +160,7 @@ namespace AirNavigationRaceLive.Comps
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.O));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.O));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.O,l));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -196,16 +196,27 @@ namespace AirNavigationRaceLive.Comps
             }
             return result;
         }
-        private List<Point> findConnectedPoints(List<Line> linelist, Point original)
+        private List<Point> findConnectedPoints(List<Line> linelist, Point original, Line originalLine)
         {
             List<Point> result = new List<Point>();
             foreach (Line l in linelist)
-            { 
+            {
                 if (l.Type >= 3 && l.Type <= 10 && (l.A == original || l.B == original || l.O == original))
                 {
                     result.Add(l.A);
                     result.Add(l.B);
                     result.Add(l.O);
+                }
+                else if (l.Type == (int)NetworkObjects.LineType.Point && originalLine.Type >= 3 && originalLine.Type <= 6)
+                {
+                    Vector mid = Vector.Middle(new Vector(originalLine.A.longitude, originalLine.A.latitude, originalLine.A.altitude), new Vector(originalLine.B.longitude, originalLine.B.latitude, originalLine.B.altitude));
+                    if (Vector.Abs(mid - new Vector(l.A.longitude, l.A.latitude, l.A.altitude)) < 0.01)
+                    {
+                        result.Add(l.A);
+                        result.Add(l.B);
+                        result.Add(l.O);
+                        result.AddRange(findGluePoints(linelist, l.O));
+                    }
                 }
             }
             return result;

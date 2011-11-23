@@ -19,6 +19,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         private Converter c;
         private Comparer comparer = new Comparer();
         public volatile bool finished = false;
+        private volatile bool regenerate = false;
 
         public void GenerateParcour(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double lenght, double channel)
         {
@@ -267,8 +268,20 @@ namespace AirNavigationRaceLive.Comps.Helper
         private void ProcessList(object o)
         {
             List<ParcourModel> list = o as List<ParcourModel>;
-            while (best > 2)
+            bool switcher = true;
+            double epsilon = 0.01;
+            double factor = 1f;
+            if (regenerate)
             {
+                factor = 100;
+            }
+            while (best > epsilon && Math.Abs(factor)*10 > epsilon)
+            {
+                if (regenerate)
+                {
+                    switcher = !switcher;
+                    factor = switcher ? factor : -factor;
+                }
                 list.Sort(comparer);
                 ParcourModel first = list[0];
                 double firstWeight = first.Weight();
@@ -282,7 +295,12 @@ namespace AirNavigationRaceLive.Comps.Helper
                 list.Add(first);
                 for (int j = 0; j < 300; j++)
                 {
-                    list.Add(new ParcourModel(first, 0.1));
+                    list.Add(new ParcourModel(first, factor));
+                }
+                epsilon += 0.01;
+                if (regenerate)
+                {
+                    factor = factor - Math.Sign(factor)* ((Math.Abs(Math.Abs(factor) - epsilon))/500);
                 }
             }
             finished = true;
@@ -339,6 +357,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             this.parcour = parcour;
             this.c = c;
+            this.regenerate = true;
             ParcourModel pm = new ParcourModel(parcour, c, EndLineDist, channel,true);
             List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
             //System.Diagnostics.Process.GetCurrentProcess().
@@ -349,7 +368,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 list.Add(pm);
                 for (int j = 0; j < 300; j++)
                 {
-                    list.Add(new ParcourModel(pm, -1));
+                    list.Add(new ParcourModel(pm, 1));
                 }
             }
             best = double.MaxValue;
