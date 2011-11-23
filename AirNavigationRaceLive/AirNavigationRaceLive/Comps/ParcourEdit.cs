@@ -283,23 +283,29 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnRecalc_Click(object sender, EventArgs e)
         {
-            btnRecalc.Enabled = false;
-            try
+            if (btnRecalc.Enabled)
             {
-                double lenght = Decimal.ToDouble(parcourLength.Value);
-                double channel = Decimal.ToDouble(channelWide.Value);
-                t = new Timer();
-                t.Tick += new EventHandler(t_Tick);
-                t.Interval = 100;
-                t.Start();
-                pc = new ParcourGenerator();
-                pc.RecalcParcour(activeParcour, c, lenght, channel);
-                pictureBox1.Invalidate();
-            }
-            catch (Exception ex)
-            {
-                btnRecalc.Enabled = true;
-                MessageBox.Show(ex.Message, "Error while generating Parcour");
+                btnRecalc.Enabled = false;
+                try
+                {
+                    double lenght = Decimal.ToDouble(parcourLength.Value);
+                    double channel = Decimal.ToDouble(channelWide.Value);
+                    t = new Timer();
+                    t.Tick += new EventHandler(t_Tick);
+                    t.Interval = 100;
+                    t.Start();
+                    pc = new ParcourGenerator();
+                    lock (activeParcour)
+                    {
+                        pc.RecalcParcour(activeParcour, c, lenght, channel);
+                    }
+                    pictureBox1.Invalidate();
+                }
+                catch (Exception ex)
+                {
+                    btnRecalc.Enabled = true;
+                    MessageBox.Show(ex.Message, "Error while generating Parcour");
+                }
             }
         }
 
