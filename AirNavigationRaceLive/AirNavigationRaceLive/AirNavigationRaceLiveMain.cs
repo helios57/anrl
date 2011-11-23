@@ -15,12 +15,14 @@ namespace AirNavigationRaceLive
     {
         private static AirNavigationRaceLiveMain main;
         private Client Client;
+        private ClientNetwork ClientNetwork;
         private Connect Connect;
+        private Competition CompetitionO;
         private Credits Credits;
         private Tracker Tracker;
         private Pilot Pilot;
         private Team Team;
-        private Competition Competition;
+        private QualificationRound QualificationRound;
         private Map Map;
         private Visualisation Visualisation;
         private ParcourGen ParcourGen;
@@ -50,6 +52,7 @@ namespace AirNavigationRaceLive
         public AirNavigationRaceLiveMain()
         {
             Client = null;
+            ClientNetwork = null;
             InitializeComponent();
             main = this;
         }
@@ -57,7 +60,7 @@ namespace AirNavigationRaceLive
         public void UpdateEnablement()
         {
             Boolean connected = Client != null;
-            disconnectToolStripMenuItem.Enabled = connected;
+            disconnectToolStripMenuItem.Enabled = ClientNetwork != null;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
             overviewZoomedToolStripMenuItem.Enabled = connected;
@@ -65,10 +68,10 @@ namespace AirNavigationRaceLive
             generateToolStripMenuItem.Enabled = connected;
             importToolStripMenuItem.Enabled = connected;
             trackerToolStripMenuItem.Enabled = connected;
-            connectToolStripMenuItem.Enabled = !connected;
+            connectToolStripMenuItem.Enabled = ClientNetwork == null;
             pilotsToolStripMenuItem.Enabled = connected;
             teamsToolStripMenuItem.Enabled = connected;
-            competitionToolStripMenuItem.Enabled = connected;
+            qualificationRoundsToolStripMenuItem.Enabled = connected;
             rulesToolStripMenuItem.Enabled = connected;
             resultsToolStripMenuItem.Enabled = connected;
             toplistToolStripMenuItem.Enabled = connected;
@@ -80,6 +83,7 @@ namespace AirNavigationRaceLive
             visualisationToolStripMenuItem.Enabled = connected;
             uploadTrackerDataToolStripMenuItem.Enabled = connected;
             editToolStripMenuItem.Enabled = connected;
+            competitionToolStripMenuItem.Enabled = ClientNetwork != null;
         }
 
         private void AirNavigationRaceLive_Load(object sender, EventArgs e)
@@ -120,12 +124,38 @@ namespace AirNavigationRaceLive
 
         private void Connect_Connected(object sender, EventArgs e)
         {
+            ClientNetwork c = sender as ClientNetwork;
+            if (c != null)
+            {
+                ClientNetwork = c;
+                StatusStripLabel.Text = "Connected to Server";
+                MainPanel.Controls.Clear();
+                CompetitionO = new Competition(c);
+                CompetitionO.Connected += new EventHandler(CompetitionO_Connected);
+                enableControl(CompetitionO);
+            }
+        }
+
+        void CompetitionO_Connected(object sender, EventArgs e)
+        {
             Client c = sender as Client;
             if (c != null)
             {
                 Client = c;
-                StatusStripLabel.Text = "Connected to Server";
-                MainPanel.Controls.Clear();
+                Tracker = null;
+                Pilot = null;
+                Team = null;
+                QualificationRound = null;
+                Visualisation = null;
+                Map = null;
+                ParcourGen = null;
+                ParcourImport = null;
+                ParcourEdit = null;
+                ParcourOverviewZoomed = null;
+                MapLegacy = null;
+                UploadGPS = null;
+                Results = null;
+                UpdateEnablement();
             }
             enableControl(Credits);
         }
@@ -137,7 +167,7 @@ namespace AirNavigationRaceLive
             Tracker = null;
             Pilot = null;
             Team = null;
-            Competition = null;
+            QualificationRound = null;
             Visualisation = null;
             Map = null;
             ParcourGen = null;
@@ -147,6 +177,8 @@ namespace AirNavigationRaceLive
             MapLegacy = null;
             UploadGPS = null;
             Results = null;
+            CompetitionO = null;
+            ClientNetwork = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
             enableControl(Credits);
@@ -186,11 +218,11 @@ namespace AirNavigationRaceLive
 
         private void racesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Competition == null)
+            if (QualificationRound == null)
             {
-                Competition = new Competition(Client);
+                QualificationRound = new QualificationRound(Client);
             }
-            enableControl(Competition);
+            enableControl(QualificationRound);
         }
 
         private void visualisationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -311,6 +343,14 @@ namespace AirNavigationRaceLive
             }
             enableControl(Results);
 
+        }
+
+        private void competitionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (CompetitionO != null)
+            {
+                enableControl(CompetitionO);
+            }
         }
     }
 }

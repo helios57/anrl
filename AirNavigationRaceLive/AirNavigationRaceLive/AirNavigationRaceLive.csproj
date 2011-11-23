@@ -134,6 +134,12 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\QualificationRound.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\QualificationRound.Designer.cs">
+      <DependentUpon>QualificationRound.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Helper\PDFCreator.cs" />
     <Compile Include="Comps\Helper\Status.cs" />
     <Compile Include="Comps\Results.cs">
@@ -282,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\QualificationRound.resx">
+      <DependentUpon>QualificationRound.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Results.resx">
       <DependentUpon>Results.cs</DependentUpon>

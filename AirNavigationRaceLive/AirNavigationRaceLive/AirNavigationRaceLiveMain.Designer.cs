@@ -37,6 +37,7 @@
             this.disconnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.competitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.legacyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parcourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,7 @@
             this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.competitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qualificationRoundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toplistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,12 +87,13 @@
             // 
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MenuServer,
+            this.competitionToolStripMenuItem,
             this.mapToolStripMenuItem,
             this.parcourToolStripMenuItem,
             this.trackerToolStripMenuItem,
             this.pilotsToolStripMenuItem,
             this.teamsToolStripMenuItem,
-            this.competitionToolStripMenuItem,
+            this.qualificationRoundsToolStripMenuItem,
             this.rulesToolStripMenuItem,
             this.resultsToolStripMenuItem,
             this.visualisationToolStripMenuItem,
@@ -139,6 +141,13 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // competitionToolStripMenuItem1
+            // 
+            this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem1";
+            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.competitionToolStripMenuItem.Text = "Competition";
+            this.competitionToolStripMenuItem.Click += new System.EventHandler(this.competitionToolStripMenuItem1_Click);
             // 
             // mapToolStripMenuItem
             // 
@@ -230,13 +239,13 @@
             this.teamsToolStripMenuItem.Text = "Crews";
             this.teamsToolStripMenuItem.Click += new System.EventHandler(this.teamsToolStripMenuItem_Click);
             // 
-            // competitionToolStripMenuItem
+            // qualificationRoundsToolStripMenuItem
             // 
-            this.competitionToolStripMenuItem.Enabled = false;
-            this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem";
-            this.competitionToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
-            this.competitionToolStripMenuItem.Text = "Qualification Rounds";
-            this.competitionToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
+            this.qualificationRoundsToolStripMenuItem.Enabled = false;
+            this.qualificationRoundsToolStripMenuItem.Name = "qualificationRoundsToolStripMenuItem";
+            this.qualificationRoundsToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
+            this.qualificationRoundsToolStripMenuItem.Text = "Qualification Rounds";
+            this.qualificationRoundsToolStripMenuItem.Click += new System.EventHandler(this.racesToolStripMenuItem_Click);
             // 
             // rulesToolStripMenuItem
             // 
@@ -383,7 +392,7 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.ToolStripMenuItem trackerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pilotsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem competitionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem qualificationRoundsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualisationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem creditsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem teamsToolStripMenuItem;
@@ -405,6 +414,7 @@
         private System.Windows.Forms.ToolStripMenuItem uploadTrackerDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overviewZoomedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem competitionToolStripMenuItem;
     }
 }
 

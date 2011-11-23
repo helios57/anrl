@@ -349,7 +349,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 list.Add(pm);
                 for (int j = 0; j < 300; j++)
                 {
-                    list.Add(new ParcourModel(pm, 1));
+                    list.Add(new ParcourModel(pm, -1));
                 }
             }
             best = double.MaxValue;
