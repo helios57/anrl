@@ -119,16 +119,48 @@ namespace AirNavigationRaceLive.Comps.Helper
                 double diffSum = 0;
                 double min = Double.MaxValue;
                 double max = Double.MinValue;
+
+                double minDistance = Channels[0].getDistanceStraight() / 20;
+
+                double result = 0;
                 for (int i = 0; i < 4; i++)
                 {
                     lenght[i] = Channels[i].getDistance();
                     min = Math.Min(min, lenght[i]);
                     max = Math.Max(max, lenght[i]);
                     diffSum += Math.Abs(lenght[i] - (Channels[i].getDistanceStraight() / desiredLengthFactor));
+                    for (int j = 0; j < Channels[i].LinearCombinations.Count-1; j++)
+                    {
+                        if (i == 0)
+                        {
+                            if (Vector.Abs(Channels[i].LinearCombinations[j] - Channels[i+1].LinearCombinations[j]) < minDistance)
+                            {
+                                result += 1000;
+                            }
+                        }
+                        else if (i == Channels.Count - 1)
+                        {
+                            if (Vector.Abs(Channels[i].LinearCombinations[j] - Channels[i - 1].LinearCombinations[j]) < minDistance)
+                            {
+                                result += 1000;
+                            }
+                        }
+                        else
+                        {
+                            if (Vector.Abs(Channels[i].LinearCombinations[j] - Channels[i + 1].LinearCombinations[j]) < minDistance)
+                            {
+                                result += 1000;
+                            } 
+                            if (Vector.Abs(Channels[i].LinearCombinations[j] - Channels[i - 1].LinearCombinations[j]) < minDistance)
+                            {
+                                result += 1000;
+                            }
+                        }
+                    }
                 }
-                double result = 0;
                 result += max - min;
                 result += diffSum;
+
                 weight = result;
             }
 
@@ -249,7 +281,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             this.End = pc.End;
             foreach (Vector v in pc.LinearCombinations)
             {
-                LinearCombinations.Add(new Vector(v));
+                Vector vec = new Vector(v);
+                LinearCombinations.Add(vec);
+                if (pc.ImmutablePoints.Contains(v))
+                {
+                    ImmutablePoints.Add(vec);
+                }
             }
         }
 
@@ -258,11 +295,14 @@ namespace AirNavigationRaceLive.Comps.Helper
             for (int i = 2; i < 8; i++)
             {
                 Vector v = LinearCombinations.ElementAt(i);
-                int sign = (i % 2 == 1) ? 1 : -1;
-                Vector orth = Vector.Orthogonal(End - Start);
-                orth = (orth / Vector.Abs(orth)) * (Utils.getNextDouble() * factor * sign);
-                v.X += orth.X;
-                v.Y += orth.Y;
+                if (!ImmutablePoints.Contains(v))
+                {
+                    int sign = (i % 2 == 1) ? 1 : -1;
+                    Vector orth = Vector.Orthogonal(End - Start);
+                    orth = (orth / Vector.Abs(orth)) * (Utils.getNextDouble() * factor * sign);
+                    v.X += orth.X;
+                    v.Y += orth.Y;
+                }
             }
         }
         public double getDistance()

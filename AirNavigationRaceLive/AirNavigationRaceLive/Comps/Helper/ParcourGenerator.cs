@@ -273,7 +273,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             double factor = 1f;
             if (regenerate)
             {
-                factor = 100;
+                factor = list[0].Weight()/10;
             }
             while (best > epsilon && Math.Abs(factor)*10 > epsilon)
             {
@@ -292,7 +292,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     AddBestModel();
                 }
                 list.Clear();
-                list.Add(first);
+                //list.Add(first);
                 for (int j = 0; j < 300; j++)
                 {
                     list.Add(new ParcourModel(first, factor));
@@ -323,7 +323,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                             l.Type = (int)LineType.Point;
                             l.A = NetworkObjects.Helper.Point(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
                             l.B = NetworkObjects.Helper.Point(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
+                            if (pc.ImmutablePoints.Contains(last))
+                            {
+                                l.A.edited = true;
+                                l.B.edited = true;
+                            }
                             l.O = NetworkObjects.Helper.Point(c.XtoLongitude(v.X), c.YtoLatitude(v.Y), 0);
+                            if (pc.ImmutablePoints.Contains(v))
+                            {
+                                l.O.edited = true;
+                            }
                             parcour.LineList.Add(l);
                         }
                         last = v;
