@@ -38,22 +38,33 @@ namespace AirNavigationRaceLive.Comps
         protected override void OnPaint(PaintEventArgs pe)
         {
             base.OnPaint(pe);
+            PaintParcourAndData(pe, true);
+        }
+
+        private void PaintParcourAndData(PaintEventArgs pe, bool rescale)
+        {
+
             #region parcour
             if (Parcour != null && c != null)
             {
-                double widthFactor = (double)Width / Image.Width;
-                double heightFactor = (double)Height / Image.Height;
-                double factor = Math.Min(widthFactor, heightFactor);
-                double factorDiff = Math.Abs(widthFactor - heightFactor);
                 int y0 = 0;
                 int x0 = 0;
-                if (widthFactor < heightFactor)
+                double factor = 1;
+                if (rescale)
                 {
-                    y0 = (int)((Height - (Image.Height * factor)) / 2);
-                }
-                else
-                {
-                    x0 = (int)((Width - (Image.Width * factor)) / 2);
+                    double widthFactor = (double)Width / Image.Width;
+                    double heightFactor = (double)Height / Image.Height;
+                    factor = Math.Min(widthFactor, heightFactor);
+                    double factorDiff = Math.Abs(widthFactor - heightFactor);
+
+                    if (widthFactor < heightFactor)
+                    {
+                        y0 = (int)((Height - (Image.Height * factor)) / 2);
+                    }
+                    else
+                    {
+                        x0 = (int)((Width - (Image.Width * factor)) / 2);
+                    }
                 }
                 lock (Parcour)
                 {
@@ -118,19 +129,24 @@ namespace AirNavigationRaceLive.Comps
 
             if (data != null && teams != null && data.Count > 10 && teams.Count >= 1 && competitionTeams != null && competitionTeams.Count >= 1)
             {
-                double widthFactor = (double)Width / Image.Width;
-                double heightFactor = (double)Height / Image.Height;
-                double factor = Math.Min(widthFactor, heightFactor);
-                double factorDiff = Math.Abs(widthFactor - heightFactor);
                 int y0 = 0;
                 int x0 = 0;
-                if (widthFactor < heightFactor)
+                double factor = 1;
+                if (rescale)
                 {
-                    y0 = (int)((Height - (Image.Height * factor)) / 2);
-                }
-                else
-                {
-                    x0 = (int)((Width - (Image.Width * factor)) / 2);
+                    double widthFactor = (double)Width / Image.Width;
+                    double heightFactor = (double)Height / Image.Height;
+                    factor = Math.Min(widthFactor, heightFactor);
+                    double factorDiff = Math.Abs(widthFactor - heightFactor);
+
+                    if (widthFactor < heightFactor)
+                    {
+                        y0 = (int)((Height - (Image.Height * factor)) / 2);
+                    }
+                    else
+                    {
+                        x0 = (int)((Width - (Image.Width * factor)) / 2);
+                    }
                 }
                 foreach (NetworkObjects.Team Team in teams)
                 {
@@ -164,7 +180,7 @@ namespace AirNavigationRaceLive.Comps
                 Rectangle rc = new Rectangle(0, 0, Image.Width, Image.Height);
                 gr.DrawImage(Image, rc);
                 PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle());
-                OnPaint(pe);
+                PaintParcourAndData(pe,false);
                 return bt;
             }
             return null;

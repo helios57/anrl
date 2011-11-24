@@ -310,7 +310,7 @@ namespace AirNavigationRaceLive.Comps
         }
 
     }
-    class ComboBoxCompetitionTeam : ListViewItem
+    public class ComboBoxCompetitionTeam : ListViewItem
     {
         public readonly NetworkObjects.CompetitionTeam competitionTeam;
         public readonly List<NetworkObjects.Penalty> penalty = new List<NetworkObjects.Penalty>();
