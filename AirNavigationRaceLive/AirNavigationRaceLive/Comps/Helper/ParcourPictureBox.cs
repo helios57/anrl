@@ -112,7 +112,7 @@ namespace AirNavigationRaceLive.Comps
         }
 
         public System.Drawing.Image PrintOutImage { get { return GeneratePrintOut(); } }
-        private Image GeneratePrintOut()
+        protected Image GeneratePrintOut()
         {
             if (Parcour != null && c != null)
             {

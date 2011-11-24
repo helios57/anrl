@@ -96,14 +96,48 @@ namespace AirNavigationRaceLive.Comps.Helper
             XGraphics gfx = XGraphics.FromPdfPage(page);
             XImage image = XImage.FromGdiPlusImage(picBox.PrintOutImage);
 
-            double distX = picBox.GetXDistanceKM()/2;//1:200 000 in cm
-            double distY = picBox.GetYDistanceKM()/2;//1:200 000 in cm
+            double distX = picBox.GetXDistanceKM() / 2;//1:200 000 in cm
+            double distY = picBox.GetYDistanceKM() / 2;//1:200 000 in cm
 
-            gfx.DrawImage(image, 100, 100, page.Width.Point * (distX/page.Width.Centimeter), page.Height.Point*(distY/page.Height.Centimeter));
+            gfx.DrawImage(image, 50, 50, page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
             doc.Save(pathToPDF);
             Process.Start(pathToPDF);
-
         }
+        public static void CreateResultPDF(VisualisationPictureBox picBox, Client.Client c,NetworkObjects.Competition competition,List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
+        {
+            PdfDocument doc = new PdfDocument();
+            doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
+            doc.Info.Keywords = "ANRL Results Printout";
+            doc.Info.Subject = "Results Printout generated from ANRL Client on " + DateTime.Now.ToString();
+            doc.Info.Title = "Results Printout";
+            doc.Options.ColorMode = PdfColorMode.Cmyk;
+            doc.Language = "EN";
+            doc.PageLayout = PdfPageLayout.SinglePage;
+            List<NetworkObjects.CompetitionTeam> tempList = new List<NetworkObjects.CompetitionTeam>();
+            foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
+            {
+                tempList.Clear();
+                tempList.Add(cbct.competitionTeam);
+                picBox.SetData(cbct.data, c.getTeams(), tempList);
+
+                PdfPage page = doc.AddPage();
+                page.Orientation = PdfSharp.PageOrientation.Landscape;
+                page.Size = PdfSharp.PageSize.A4;
+
+                XGraphics gfx = XGraphics.FromPdfPage(page);
+                XImage image = XImage.FromGdiPlusImage(picBox.PrintOutImage);
+
+                double distX = picBox.GetXDistanceKM() / 2;//1:200 000 in cm
+                double distY = picBox.GetYDistanceKM() / 2;//1:200 000 in cm
+
+                gfx.DrawImage(image, 50, 50, page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
+            
+            }
+
+            doc.Save(pathToPDF);
+            Process.Start(pathToPDF);
+        }
+
         public static void test()
         {
             DateTime now = DateTime.Now;

@@ -238,7 +238,22 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnPdf_Click(object sender, EventArgs e)
         {
-
+            if (competition != null && listViewCompetitionTeam.Items.Count > 0)
+            {
+                List<ComboBoxCompetitionTeam> ctl = new List<ComboBoxCompetitionTeam>();
+                foreach (ListViewItem lvi in listViewCompetitionTeam.Items)
+                {
+                    ctl.Add(lvi as ComboBoxCompetitionTeam);
+                }
+                String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
+                DirectoryInfo di = Directory.CreateDirectory(dirPath);
+                if (!di.Exists)
+                {
+                    di.Create();
+                }
+                PDFCreator.CreateResultPDF(visualisationPictureBox1, Client, competition, ctl, dirPath +
+                    @"\Results_" + competition.Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+            }
         }
 
         private void listViewCompetitionTeam_SelectedIndexChanged(object sender, EventArgs e)

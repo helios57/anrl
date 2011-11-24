@@ -153,5 +153,35 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
+
+        public System.Drawing.Image PrintOutImage { get { return GeneratePrintOut(); } }
+        protected Image GeneratePrintOut()
+        {
+            if (Parcour != null && c != null)
+            {
+                Bitmap bt = new Bitmap(Image.Width, Image.Height);
+                Graphics gr = Graphics.FromImage(bt);
+                Rectangle rc = new Rectangle(0, 0, Image.Width, Image.Height);
+                gr.DrawImage(Image, rc);
+                PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle());
+                OnPaint(pe);
+                return bt;
+            }
+            return null;
+        }
+        public double GetXDistanceKM()
+        {
+            double topLat = c.TopLeftLatitudeY;
+            double leftLong = c.TopLeftLongitudeX;
+            double rightLong = c.TopLeftLongitudeX + Image.Width * c.SizeLongitudeX;
+            return Converter.Distance(leftLong, topLat, rightLong, topLat);
+        }
+        public double GetYDistanceKM()
+        {
+            double topLat = c.TopLeftLatitudeY;
+            double leftLong = c.TopLeftLongitudeX;
+            double bottomLat = c.TopLeftLatitudeY + Image.Height * c.SizeLatitudeY;
+            return Converter.Distance(leftLong, topLat, leftLong, bottomLat);
+        }
     }
 }
