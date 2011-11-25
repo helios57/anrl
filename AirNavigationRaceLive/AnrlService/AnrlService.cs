@@ -33,7 +33,6 @@ namespace AnrlService
         {
             InitializeComponent();
             cert = new X509Certificate2("SharpSoft.p12");
-            //cert.Import("test.pvk","12345",X509KeyStorageFlags.
         }
 
         public void start()
