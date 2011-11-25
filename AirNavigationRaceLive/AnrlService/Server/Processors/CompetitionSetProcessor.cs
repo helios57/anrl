@@ -45,6 +45,7 @@ namespace AnrlService.Server.Processors
             result.Name = input.Name;
             result.Owner = input.t_User.Name;
             result.PublicRole = input.PublicRole;
+            result.ID_Owner = input.ID_Owner;
             return result;
         }
 
@@ -63,9 +64,45 @@ namespace AnrlService.Server.Processors
             return input.ID;
         }
 
-        protected override bool CheckCompetitionSet(int id_competitionSet, CompetitionSet Obj)
+        protected override void GetAll(Root request, Root response)
         {
-            return true;
+            List<int> ids = new List<int>(request.RequestParameters != null ? request.RequestParameters.IDS : new List<int>());
+            int id_owner = request.AuthInfo.ID_User;
+            lock (cached)
+            {
+                foreach (CompetitionSet obj in cached.Where(p => CheckCompetitionSet(id_owner, p)))
+                {
+                    if (!ids.Contains(GetID(obj)))
+                    {
+                        AddToResponseList(response, obj);
+                    }
+                    else
+                    {
+                        ids.Remove(GetID(obj));
+                    }
+                }
+            }
+            response.ResponseParameters.DeletedIDList.AddRange(ids);
+        }
+
+        protected override void Get(Root request, Root response)
+        {
+            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
+            {
+                int id_owner = request.AuthInfo.ID_User;
+                lock (cached)
+                {
+                    foreach (CompetitionSet obj in cached.Where(p => GetID(p) == request.RequestParameters.ID && CheckCompetitionSet(id_owner, p)))
+                    {
+                        AddToResponseList(response, obj);
+                    }
+                }
+            }
+        }
+
+        protected override bool CheckCompetitionSet(int id_owner, CompetitionSet Obj)
+        {
+            return Obj.ID_Owner == id_owner;
         }
 
         protected override void AddToResponseList(Root response, CompetitionSet obj)

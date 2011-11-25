@@ -1141,6 +1141,15 @@ namespace NetworkObjects
       get { return _Name; }
       set { _Name = value; }
     }
+
+    private int _ID_Owner = default(int);
+    [global::ProtoBuf.ProtoMember(5, IsRequired = false, Name=@"ID_Owner", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_Owner
+    {
+      get { return _ID_Owner; }
+      set { _ID_Owner = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

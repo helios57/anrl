@@ -267,6 +267,7 @@ option optimize_for = SPEED;
 
 		optional string Name = 4;
 
+		optional int32 ID_Owner = 5;
 	}
 
 message RootMessage {

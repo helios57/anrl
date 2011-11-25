@@ -67,5 +67,11 @@ namespace AirNavigationRaceLive.Comps
             }
             UpdateEnablement();
         }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+
+            c.Register(fldUsername.Text, fldPassword.Text);
+        }
     }
 }

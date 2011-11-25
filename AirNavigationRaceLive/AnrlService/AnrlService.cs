@@ -13,6 +13,8 @@ using ProtoBuf;
 using System.Threading;
 using AnrlService.Server;
 using AnrlDB;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 namespace AnrlService
 {
     public partial class AnrlServiceImpl : ServiceBase
@@ -24,9 +26,14 @@ namespace AnrlService
         private static GPSRequestProcessor GPSprocessor;
         private Socket listener;
         private Socket listenerGPS;
+
+        private X509Certificate cert;
+
         public AnrlServiceImpl()
         {
             InitializeComponent();
+            cert = new X509Certificate2("SharpSoft.p12");
+            //cert.Import("test.pvk","12345",X509KeyStorageFlags.
         }
 
         public void start()
@@ -99,12 +106,18 @@ namespace AnrlService
 #endif
             }
         }
+        public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
 
         private void processConnection(Socket handler)
         {
             try
             {
-                NetworkStream stream = new NetworkStream(handler);
+                SslStream stream = new SslStream(new NetworkStream(handler), false, new RemoteCertificateValidationCallback(certificate));
+                stream.AuthenticateAsServer(cert,false, System.Security.Authentication.SslProtocols.Tls,false);
+                
                 Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
                 if (reqest == null)
                 {
