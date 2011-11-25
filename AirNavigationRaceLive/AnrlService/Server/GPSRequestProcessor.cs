@@ -10,16 +10,18 @@ namespace AnrlService.Server
 {
     public class GPSRequestProcessor
     {
-        AnrlDataContext db;
         public GPSRequestProcessor()
         {
-            db = new AnrlDataContext();
+            AnrlDataContext db = new AnrlDataContext();
             if (!db.DatabaseExists())
             {
                 db.CreateDatabase();
             }
+            db.Dispose();
         }
         public RootMessage proccessRequest(RootMessage request){
+
+            AnrlDataContext db = new AnrlDataContext();
             RootMessage response = new RootMessage();
             response.response = new Response();
             response.response.countAdded = 0;
@@ -60,6 +62,10 @@ namespace AnrlService.Server
             {
                 //EventLog.WriteEntry("Anrl-Service", "Exception in GPSRequestProcessor.proccessRequest" + ex.ToString(), EventLogEntryType.Error, 9);
                 response.exception = ex.ToString();
+            }
+            finally
+            {
+                db.Dispose();
             }
             return response;
         }
