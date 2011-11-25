@@ -142,9 +142,9 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // competitionToolStripMenuItem1
+            // competitionToolStripMenuItem
             // 
-            this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem1";
+            this.competitionToolStripMenuItem.Name = "competitionToolStripMenuItem";
             this.competitionToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.competitionToolStripMenuItem.Text = "Competition";
             this.competitionToolStripMenuItem.Click += new System.EventHandler(this.competitionToolStripMenuItem1_Click);
@@ -368,7 +368,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MainMenu;
             this.Name = "AirNavigationRaceLiveMain";
-            this.Text = "Air Navigation Race Live";
+            this.Text = "Air Navigation Race Scoring & Visualisation";
             this.Load += new System.EventHandler(this.AirNavigationRaceLive_Load);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
