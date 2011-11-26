@@ -96,6 +96,8 @@ option optimize_for = SPEED;
         optional bytes Image =2;
 
         optional string Name =3;
+
+        optional int32 ID_CompetitonSet=4;
 	}
 	message Map
 	{

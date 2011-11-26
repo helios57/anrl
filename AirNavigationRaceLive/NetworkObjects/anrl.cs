@@ -394,6 +394,15 @@ namespace NetworkObjects
       get { return _Name; }
       set { _Name = value; }
     }
+
+    private int _ID_CompetitonSet = default(int);
+    [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"ID_CompetitonSet", DataFormat = global::ProtoBuf.DataFormat.TwosComplement)]
+    [global::System.ComponentModel.DefaultValue(default(int))]
+    public int ID_CompetitonSet
+    {
+      get { return _ID_CompetitonSet; }
+      set { _ID_CompetitonSet = value; }
+    }
     private global::ProtoBuf.IExtension extensionObject;
     global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
       { return global::ProtoBuf.Extensible.GetExtensionObject(ref extensionObject, createIfMissing); }

@@ -33,6 +33,9 @@ namespace AnrlDB
     partial void Insertt_Competition(t_Competition instance);
     partial void Updatet_Competition(t_Competition instance);
     partial void Deletet_Competition(t_Competition instance);
+    partial void Insertt_User_Session(t_User_Session instance);
+    partial void Updatet_User_Session(t_User_Session instance);
+    partial void Deletet_User_Session(t_User_Session instance);
     partial void Insertt_Competition_Team(t_Competition_Team instance);
     partial void Updatet_Competition_Team(t_Competition_Team instance);
     partial void Deletet_Competition_Team(t_Competition_Team instance);
@@ -87,9 +90,6 @@ namespace AnrlDB
     partial void Insertt_User_CompetitionSet(t_User_CompetitionSet instance);
     partial void Updatet_User_CompetitionSet(t_User_CompetitionSet instance);
     partial void Deletet_User_CompetitionSet(t_User_CompetitionSet instance);
-    partial void Insertt_User_Session(t_User_Session instance);
-    partial void Updatet_User_Session(t_User_Session instance);
-    partial void Deletet_User_Session(t_User_Session instance);
     #endregion
 		
 		public AnrlDataContext() : 
@@ -127,6 +127,14 @@ namespace AnrlDB
 			get
 			{
 				return this.GetTable<t_Competition>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_User_Session> t_User_Sessions
+		{
+			get
+			{
+				return this.GetTable<t_User_Session>();
 			}
 		}
 		
@@ -271,14 +279,6 @@ namespace AnrlDB
 			get
 			{
 				return this.GetTable<t_User_CompetitionSet>();
-			}
-		}
-		
-		public System.Data.Linq.Table<t_User_Session> t_User_Sessions
-		{
-			get
-			{
-				return this.GetTable<t_User_Session>();
 			}
 		}
 	}
@@ -623,6 +623,277 @@ namespace AnrlDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_User_Sessions")]
+	public partial class t_User_Session : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private long _ValidUntil;
+		
+		private string _Token;
+		
+		private string _Identification;
+		
+		private int _ID_User;
+		
+		private System.Data.Linq.Binary _PrivateKey;
+		
+		private System.Data.Linq.Binary _PublicKey;
+		
+		private System.Data.Linq.Binary _SymKey;
+		
+		private EntityRef<t_User> _t_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnValidUntilChanging(long value);
+    partial void OnValidUntilChanged();
+    partial void OnTokenChanging(string value);
+    partial void OnTokenChanged();
+    partial void OnIdentificationChanging(string value);
+    partial void OnIdentificationChanged();
+    partial void OnID_UserChanging(int value);
+    partial void OnID_UserChanged();
+    partial void OnPrivateKeyChanging(System.Data.Linq.Binary value);
+    partial void OnPrivateKeyChanged();
+    partial void OnPublicKeyChanging(System.Data.Linq.Binary value);
+    partial void OnPublicKeyChanged();
+    partial void OnSymKeyChanging(System.Data.Linq.Binary value);
+    partial void OnSymKeyChanged();
+    #endregion
+		
+		public t_User_Session()
+		{
+			this._t_User = default(EntityRef<t_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ValidUntil", DbType="BigInt NOT NULL")]
+		public long ValidUntil
+		{
+			get
+			{
+				return this._ValidUntil;
+			}
+			set
+			{
+				if ((this._ValidUntil != value))
+				{
+					this.OnValidUntilChanging(value);
+					this.SendPropertyChanging();
+					this._ValidUntil = value;
+					this.SendPropertyChanged("ValidUntil");
+					this.OnValidUntilChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Token", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
+		public string Token
+		{
+			get
+			{
+				return this._Token;
+			}
+			set
+			{
+				if ((this._Token != value))
+				{
+					this.OnTokenChanging(value);
+					this.SendPropertyChanging();
+					this._Token = value;
+					this.SendPropertyChanged("Token");
+					this.OnTokenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Identification", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
+		public string Identification
+		{
+			get
+			{
+				return this._Identification;
+			}
+			set
+			{
+				if ((this._Identification != value))
+				{
+					this.OnIdentificationChanging(value);
+					this.SendPropertyChanging();
+					this._Identification = value;
+					this.SendPropertyChanged("Identification");
+					this.OnIdentificationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int NOT NULL")]
+		public int ID_User
+		{
+			get
+			{
+				return this._ID_User;
+			}
+			set
+			{
+				if ((this._ID_User != value))
+				{
+					if (this._t_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_UserChanging(value);
+					this.SendPropertyChanging();
+					this._ID_User = value;
+					this.SendPropertyChanged("ID_User");
+					this.OnID_UserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivateKey", DbType="Binary(1024) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary PrivateKey
+		{
+			get
+			{
+				return this._PrivateKey;
+			}
+			set
+			{
+				if ((this._PrivateKey != value))
+				{
+					this.OnPrivateKeyChanging(value);
+					this.SendPropertyChanging();
+					this._PrivateKey = value;
+					this.SendPropertyChanged("PrivateKey");
+					this.OnPrivateKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicKey", DbType="Binary(1024) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary PublicKey
+		{
+			get
+			{
+				return this._PublicKey;
+			}
+			set
+			{
+				if ((this._PublicKey != value))
+				{
+					this.OnPublicKeyChanging(value);
+					this.SendPropertyChanging();
+					this._PublicKey = value;
+					this.SendPropertyChanged("PublicKey");
+					this.OnPublicKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SymKey", DbType="Binary(4096) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary SymKey
+		{
+			get
+			{
+				return this._SymKey;
+			}
+			set
+			{
+				if ((this._SymKey != value))
+				{
+					this.OnSymKeyChanging(value);
+					this.SendPropertyChanging();
+					this._SymKey = value;
+					this.SendPropertyChanged("SymKey");
+					this.OnSymKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true)]
+		public t_User t_User
+		{
+			get
+			{
+				return this._t_User.Entity;
+			}
+			set
+			{
+				t_User previousValue = this._t_User.Entity;
+				if (((previousValue != value) 
+							|| (this._t_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_User.Entity = null;
+						previousValue.t_User_Sessions.Remove(this);
+					}
+					this._t_User.Entity = value;
+					if ((value != null))
+					{
+						value.t_User_Sessions.Add(this);
+						this._ID_User = value.ID;
+					}
+					else
+					{
+						this._ID_User = default(int);
+					}
+					this.SendPropertyChanged("t_User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_Competition_Team")]
 	public partial class t_Competition_Team : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -909,7 +1180,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Competition_Team", Storage="_t_Competition", ThisKey="ID_Competition", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_t_Competition_Team", Storage="_t_Competition", ThisKey="ID_Competition", OtherKey="ID", IsForeignKey=true)]
 		public t_Competition t_Competition
 		{
 			get
@@ -1080,6 +1351,8 @@ namespace AnrlDB
 		
 		private EntitySet<t_Penalty> _t_Penalties;
 		
+		private EntitySet<t_Picture> _t_Pictures;
+		
 		private EntitySet<t_Pilot> _t_Pilots;
 		
 		private EntitySet<t_Team> _t_Teams;
@@ -1109,6 +1382,7 @@ namespace AnrlDB
 			this._t_Maps = new EntitySet<t_Map>(new Action<t_Map>(this.attach_t_Maps), new Action<t_Map>(this.detach_t_Maps));
 			this._t_Parcours = new EntitySet<t_Parcour>(new Action<t_Parcour>(this.attach_t_Parcours), new Action<t_Parcour>(this.detach_t_Parcours));
 			this._t_Penalties = new EntitySet<t_Penalty>(new Action<t_Penalty>(this.attach_t_Penalties), new Action<t_Penalty>(this.detach_t_Penalties));
+			this._t_Pictures = new EntitySet<t_Picture>(new Action<t_Picture>(this.attach_t_Pictures), new Action<t_Picture>(this.detach_t_Pictures));
 			this._t_Pilots = new EntitySet<t_Pilot>(new Action<t_Pilot>(this.attach_t_Pilots), new Action<t_Pilot>(this.detach_t_Pilots));
 			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
 			this._t_User_CompetitionSets = new EntitySet<t_User_CompetitionSet>(new Action<t_User_CompetitionSet>(this.attach_t_User_CompetitionSets), new Action<t_User_CompetitionSet>(this.detach_t_User_CompetitionSets));
@@ -1265,6 +1539,19 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Picture", Storage="_t_Pictures", ThisKey="ID", OtherKey="ID_CompetitionSet")]
+		public EntitySet<t_Picture> t_Pictures
+		{
+			get
+			{
+				return this._t_Pictures;
+			}
+			set
+			{
+				this._t_Pictures.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Pilot", Storage="_t_Pilots", ThisKey="ID", OtherKey="ID_CompetitionSet")]
 		public EntitySet<t_Pilot> t_Pilots
 		{
@@ -1413,6 +1700,18 @@ namespace AnrlDB
 		}
 		
 		private void detach_t_Penalties(t_Penalty entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = null;
+		}
+		
+		private void attach_t_Pictures(t_Picture entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_CompetitionSet = this;
+		}
+		
+		private void detach_t_Pictures(t_Picture entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_CompetitionSet = null;
@@ -3891,11 +4190,15 @@ namespace AnrlDB
 		
 		private bool _isFlag;
 		
+		private int _ID_CompetitionSet;
+		
 		private EntitySet<t_Map> _t_Maps;
 		
 		private EntitySet<t_Pilot> _t_Pilots;
 		
 		private EntitySet<t_Team> _t_Teams;
+		
+		private EntityRef<t_CompetitionSet> _t_CompetitionSet;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3909,6 +4212,8 @@ namespace AnrlDB
     partial void OnNameChanged();
     partial void OnisFlagChanging(bool value);
     partial void OnisFlagChanged();
+    partial void OnID_CompetitionSetChanging(int value);
+    partial void OnID_CompetitionSetChanged();
     #endregion
 		
 		public t_Picture()
@@ -3916,6 +4221,7 @@ namespace AnrlDB
 			this._t_Maps = new EntitySet<t_Map>(new Action<t_Map>(this.attach_t_Maps), new Action<t_Map>(this.detach_t_Maps));
 			this._t_Pilots = new EntitySet<t_Pilot>(new Action<t_Pilot>(this.attach_t_Pilots), new Action<t_Pilot>(this.detach_t_Pilots));
 			this._t_Teams = new EntitySet<t_Team>(new Action<t_Team>(this.attach_t_Teams), new Action<t_Team>(this.detach_t_Teams));
+			this._t_CompetitionSet = default(EntityRef<t_CompetitionSet>);
 			OnCreated();
 		}
 		
@@ -3999,6 +4305,30 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_CompetitionSet", DbType="Int NOT NULL")]
+		public int ID_CompetitionSet
+		{
+			get
+			{
+				return this._ID_CompetitionSet;
+			}
+			set
+			{
+				if ((this._ID_CompetitionSet != value))
+				{
+					if (this._t_CompetitionSet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnID_CompetitionSetChanging(value);
+					this.SendPropertyChanging();
+					this._ID_CompetitionSet = value;
+					this.SendPropertyChanged("ID_CompetitionSet");
+					this.OnID_CompetitionSetChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Picture_t_Map", Storage="_t_Maps", ThisKey="ID", OtherKey="ID_Picture")]
 		public EntitySet<t_Map> t_Maps
 		{
@@ -4035,6 +4365,40 @@ namespace AnrlDB
 			set
 			{
 				this._t_Teams.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Picture", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		public t_CompetitionSet t_CompetitionSet
+		{
+			get
+			{
+				return this._t_CompetitionSet.Entity;
+			}
+			set
+			{
+				t_CompetitionSet previousValue = this._t_CompetitionSet.Entity;
+				if (((previousValue != value) 
+							|| (this._t_CompetitionSet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._t_CompetitionSet.Entity = null;
+						previousValue.t_Pictures.Remove(this);
+					}
+					this._t_CompetitionSet.Entity = value;
+					if ((value != null))
+					{
+						value.t_Pictures.Add(this);
+						this._ID_CompetitionSet = value.ID;
+					}
+					else
+					{
+						this._ID_CompetitionSet = default(int);
+					}
+					this.SendPropertyChanged("t_CompetitionSet");
+				}
 			}
 		}
 		
@@ -5209,11 +5573,11 @@ namespace AnrlDB
 		
 		private int _ID_Role;
 		
+		private EntitySet<t_User_Session> _t_User_Sessions;
+		
 		private EntitySet<t_CompetitionSet> _t_CompetitionSets;
 		
 		private EntitySet<t_User_CompetitionSet> _t_User_CompetitionSets;
-		
-		private EntitySet<t_User_Session> _t_User_Sessions;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -5231,9 +5595,9 @@ namespace AnrlDB
 		
 		public t_User()
 		{
+			this._t_User_Sessions = new EntitySet<t_User_Session>(new Action<t_User_Session>(this.attach_t_User_Sessions), new Action<t_User_Session>(this.detach_t_User_Sessions));
 			this._t_CompetitionSets = new EntitySet<t_CompetitionSet>(new Action<t_CompetitionSet>(this.attach_t_CompetitionSets), new Action<t_CompetitionSet>(this.detach_t_CompetitionSets));
 			this._t_User_CompetitionSets = new EntitySet<t_User_CompetitionSet>(new Action<t_User_CompetitionSet>(this.attach_t_User_CompetitionSets), new Action<t_User_CompetitionSet>(this.detach_t_User_CompetitionSets));
-			this._t_User_Sessions = new EntitySet<t_User_Session>(new Action<t_User_Session>(this.attach_t_User_Sessions), new Action<t_User_Session>(this.detach_t_User_Sessions));
 			OnCreated();
 		}
 		
@@ -5317,6 +5681,19 @@ namespace AnrlDB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User_Sessions", ThisKey="ID", OtherKey="ID_User")]
+		public EntitySet<t_User_Session> t_User_Sessions
+		{
+			get
+			{
+				return this._t_User_Sessions;
+			}
+			set
+			{
+				this._t_User_Sessions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_CompetitionSet", Storage="_t_CompetitionSets", ThisKey="ID", OtherKey="ID_Owner")]
 		public EntitySet<t_CompetitionSet> t_CompetitionSets
 		{
@@ -5343,19 +5720,6 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User_Sessions", ThisKey="ID", OtherKey="ID_User")]
-		public EntitySet<t_User_Session> t_User_Sessions
-		{
-			get
-			{
-				return this._t_User_Sessions;
-			}
-			set
-			{
-				this._t_User_Sessions.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -5374,6 +5738,18 @@ namespace AnrlDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_t_User_Sessions(t_User_Session entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = this;
+		}
+		
+		private void detach_t_User_Sessions(t_User_Session entity)
+		{
+			this.SendPropertyChanging();
+			entity.t_User = null;
 		}
 		
 		private void attach_t_CompetitionSets(t_CompetitionSet entity)
@@ -5395,18 +5771,6 @@ namespace AnrlDB
 		}
 		
 		private void detach_t_User_CompetitionSets(t_User_CompetitionSet entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_User = null;
-		}
-		
-		private void attach_t_User_Sessions(t_User_Session entity)
-		{
-			this.SendPropertyChanging();
-			entity.t_User = this;
-		}
-		
-		private void detach_t_User_Sessions(t_User_Session entity)
 		{
 			this.SendPropertyChanging();
 			entity.t_User = null;
@@ -5573,277 +5937,6 @@ namespace AnrlDB
 					if ((value != null))
 					{
 						value.t_User_CompetitionSets.Add(this);
-						this._ID_User = value.ID;
-					}
-					else
-					{
-						this._ID_User = default(int);
-					}
-					this.SendPropertyChanged("t_User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_User_Sessions")]
-	public partial class t_User_Session : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private long _ValidUntil;
-		
-		private string _Token;
-		
-		private string _Identification;
-		
-		private int _ID_User;
-		
-		private System.Data.Linq.Binary _PrivateKey;
-		
-		private System.Data.Linq.Binary _PublicKey;
-		
-		private System.Data.Linq.Binary _SymKey;
-		
-		private EntityRef<t_User> _t_User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnValidUntilChanging(long value);
-    partial void OnValidUntilChanged();
-    partial void OnTokenChanging(string value);
-    partial void OnTokenChanged();
-    partial void OnIdentificationChanging(string value);
-    partial void OnIdentificationChanged();
-    partial void OnID_UserChanging(int value);
-    partial void OnID_UserChanged();
-    partial void OnPrivateKeyChanging(System.Data.Linq.Binary value);
-    partial void OnPrivateKeyChanged();
-    partial void OnPublicKeyChanging(System.Data.Linq.Binary value);
-    partial void OnPublicKeyChanged();
-    partial void OnSymKeyChanging(System.Data.Linq.Binary value);
-    partial void OnSymKeyChanged();
-    #endregion
-		
-		public t_User_Session()
-		{
-			this._t_User = default(EntityRef<t_User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ValidUntil", DbType="BigInt NOT NULL")]
-		public long ValidUntil
-		{
-			get
-			{
-				return this._ValidUntil;
-			}
-			set
-			{
-				if ((this._ValidUntil != value))
-				{
-					this.OnValidUntilChanging(value);
-					this.SendPropertyChanging();
-					this._ValidUntil = value;
-					this.SendPropertyChanged("ValidUntil");
-					this.OnValidUntilChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Token", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
-		public string Token
-		{
-			get
-			{
-				return this._Token;
-			}
-			set
-			{
-				if ((this._Token != value))
-				{
-					this.OnTokenChanging(value);
-					this.SendPropertyChanging();
-					this._Token = value;
-					this.SendPropertyChanged("Token");
-					this.OnTokenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Identification", DbType="VarChar(512) NOT NULL", CanBeNull=false)]
-		public string Identification
-		{
-			get
-			{
-				return this._Identification;
-			}
-			set
-			{
-				if ((this._Identification != value))
-				{
-					this.OnIdentificationChanging(value);
-					this.SendPropertyChanging();
-					this._Identification = value;
-					this.SendPropertyChanged("Identification");
-					this.OnIdentificationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_User", DbType="Int NOT NULL")]
-		public int ID_User
-		{
-			get
-			{
-				return this._ID_User;
-			}
-			set
-			{
-				if ((this._ID_User != value))
-				{
-					if (this._t_User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnID_UserChanging(value);
-					this.SendPropertyChanging();
-					this._ID_User = value;
-					this.SendPropertyChanged("ID_User");
-					this.OnID_UserChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrivateKey", DbType="Binary(1024) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary PrivateKey
-		{
-			get
-			{
-				return this._PrivateKey;
-			}
-			set
-			{
-				if ((this._PrivateKey != value))
-				{
-					this.OnPrivateKeyChanging(value);
-					this.SendPropertyChanging();
-					this._PrivateKey = value;
-					this.SendPropertyChanged("PrivateKey");
-					this.OnPrivateKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PublicKey", DbType="Binary(1024) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary PublicKey
-		{
-			get
-			{
-				return this._PublicKey;
-			}
-			set
-			{
-				if ((this._PublicKey != value))
-				{
-					this.OnPublicKeyChanging(value);
-					this.SendPropertyChanging();
-					this._PublicKey = value;
-					this.SendPropertyChanged("PublicKey");
-					this.OnPublicKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SymKey", DbType="Binary(4096) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary SymKey
-		{
-			get
-			{
-				return this._SymKey;
-			}
-			set
-			{
-				if ((this._SymKey != value))
-				{
-					this.OnSymKeyChanging(value);
-					this.SendPropertyChanging();
-					this._SymKey = value;
-					this.SendPropertyChanged("SymKey");
-					this.OnSymKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true)]
-		public t_User t_User
-		{
-			get
-			{
-				return this._t_User.Entity;
-			}
-			set
-			{
-				t_User previousValue = this._t_User.Entity;
-				if (((previousValue != value) 
-							|| (this._t_User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._t_User.Entity = null;
-						previousValue.t_User_Sessions.Remove(this);
-					}
-					this._t_User.Entity = value;
-					if ((value != null))
-					{
-						value.t_User_Sessions.Add(this);
 						this._ID_User = value.ID;
 					}
 					else

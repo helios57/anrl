@@ -16,6 +16,7 @@ namespace AnrlService.Server.Processors
         protected override void Save(Root request, Root r)
         {
             t_Picture pp = getDBObject(request.RequestParameters.Picture);
+            pp.ID_CompetitionSet = request.AuthInfo.ID_CompetitionSet;
 
             AnrlDataContext db = getDB();
             db.t_Pictures.InsertOnSubmit(pp);
@@ -40,6 +41,7 @@ namespace AnrlService.Server.Processors
             result.ID = input.ID;
             result.Image = input.Data.ToArray();
             result.Name = input.Name;
+            result.ID_CompetitonSet = input.ID_CompetitionSet;
             return result;
         }
 
@@ -48,6 +50,7 @@ namespace AnrlService.Server.Processors
             t_Picture result = new t_Picture();
             result.Data = new System.Data.Linq.Binary(input.Image);
             result.Name = input.Name;
+            result.ID_CompetitionSet = input.ID_CompetitonSet;
             return result;
         }
 
@@ -68,7 +71,7 @@ namespace AnrlService.Server.Processors
 
         protected override bool CheckCompetitionSet(int id_competitionSet, Picture Obj)
         {
-            return true;
+            return Obj.ID_CompetitonSet == id_competitionSet;
         }
     }
 }
