@@ -78,8 +78,7 @@ namespace AnrlService.Server
                 }
                 answer.ResponseParameters.Exception = ex.ToString();
 #if !DEBUG
-
-                //Logger.Log(db, "Exception in RequestProcessor.proccessRequest" + ex.ToString(), 0);
+                Logger.Log("Exception in RequestProcessor.proccessRequest" + ex.ToString(), 0);
 #else
                 //System.Console.WriteLine("Exception in RequestProcessor.proccessRequest " + ex.ToString());
 #endif

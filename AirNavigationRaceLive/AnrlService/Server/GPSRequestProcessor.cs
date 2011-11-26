@@ -19,7 +19,8 @@ namespace AnrlService.Server
             }
             db.Dispose();
         }
-        public RootMessage proccessRequest(RootMessage request){
+        public RootMessage proccessRequest(RootMessage request)
+        {
 
             AnrlDataContext db = new AnrlDataContext();
             RootMessage response = new RootMessage();
@@ -60,7 +61,11 @@ namespace AnrlService.Server
             }
             catch (Exception ex)
             {
-                //EventLog.WriteEntry("Anrl-Service", "Exception in GPSRequestProcessor.proccessRequest" + ex.ToString(), EventLogEntryType.Error, 9);
+#if !DEBUG
+                Logger.Log("Exception in GPSRequestProcessor.proccessRequest" + ex.ToString(), 9);
+#else
+                //System.Console.WriteLine("Exception in GPSRequestProcessor.proccessRequest " + ex.ToString());
+#endif
                 response.exception = ex.ToString();
             }
             finally
@@ -68,11 +73,6 @@ namespace AnrlService.Server
                 db.Dispose();
             }
             return response;
-        }
-
-        public bool isUseable()
-        {
-            return db.Connection.State == System.Data.ConnectionState.Open;
         }
     }
 }

@@ -154,7 +154,7 @@ namespace AnrlService
                     NetworkStream stream = new NetworkStream(handler);
                     RootMessage reqest = Serializer.DeserializeWithLengthPrefix<RootMessage>(stream, PrefixStyle.Fixed32BigEndian);
 
-                    if (GPSprocessor == null || !GPSprocessor.isUseable())
+                    if (GPSprocessor == null)
                     {
                         GPSprocessor = new GPSRequestProcessor();
                     }
