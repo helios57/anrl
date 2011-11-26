@@ -9,7 +9,6 @@ using System.Threading;
 using ProtoBuf;
 using System.Windows.Forms;
 using AirNavigationRaceLive.Comps.Helper;
-using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 
 namespace AirNavigationRaceLive.Comps.Client
@@ -103,10 +102,10 @@ namespace AirNavigationRaceLive.Comps.Client
             Status.SetStatus("Competition selected, Ready to go!");
         }
 
-        public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+       /* public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;
-        }
+        }*/
 
         internal Root process(Root request)
         {
@@ -129,8 +128,9 @@ namespace AirNavigationRaceLive.Comps.Client
                     wait++;
                     Thread.Sleep(10);
                 }
-                SslStream stream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(certificate));
-                stream.AuthenticateAsClient(IpAdress);
+                NetworkStream stream = client.GetStream();
+                //SslStream stream = new SslStream(client.GetStream(), false, new RemoteCertificateValidationCallback(certificate));
+                //stream.AuthenticateAsClient(IpAdress);
 
                 Serializer.SerializeWithLengthPrefix(stream, request, PrefixStyle.Base128);
                 stream.Flush();

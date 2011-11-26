@@ -13,7 +13,6 @@ using ProtoBuf;
 using System.Threading;
 using AnrlService.Server;
 using AnrlDB;
-using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 namespace AnrlService
 {
@@ -27,12 +26,12 @@ namespace AnrlService
         private Socket listener;
         private Socket listenerGPS;
 
-        private X509Certificate cert;
+        //private X509Certificate cert;
 
         public AnrlServiceImpl()
         {
             InitializeComponent();
-            cert = new X509Certificate2("SharpSoft.p12");
+            //cert = new X509Certificate2("SharpSoft.p12");
         }
 
         public void start()
@@ -105,17 +104,18 @@ namespace AnrlService
 #endif
             }
         }
-        public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+       /* public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;
-        }
+        }*/
 
         private void processConnection(Socket handler)
         {
             try
             {
-                SslStream stream = new SslStream(new NetworkStream(handler), false, new RemoteCertificateValidationCallback(certificate));
-                stream.AuthenticateAsServer(cert,false, System.Security.Authentication.SslProtocols.Tls,false);
+                //SslStream stream = new SslStream(new NetworkStream(handler), false, new RemoteCertificateValidationCallback(certificate));
+                NetworkStream stream = new NetworkStream(handler);
+                //stream.AuthenticateAsServer(cert,false, System.Security.Authentication.SslProtocols.Tls,false);
                 
                 Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
                 if (reqest == null)
