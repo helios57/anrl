@@ -21,7 +21,6 @@ namespace AirNavigationRaceLive.Comps.Client
         private const int PORT = 1337;
         private CompetitionSet CompetitionSet = null;
         private bool ClearCache = false;
-        private X509Certificate cert;
 
         public ClientNetwork(string ip)
         {
