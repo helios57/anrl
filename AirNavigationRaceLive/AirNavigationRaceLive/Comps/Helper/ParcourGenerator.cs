@@ -362,7 +362,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
         }
 
-        internal void RecalcParcour(Model.Parcour parcour, Converter c, double lenght, double channel)
+        internal void RecalcParcour(Model.Parcour parcour, Converter c,double channel)
         {
             this.parcour = parcour;
             this.c = c;

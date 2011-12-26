@@ -33,12 +33,6 @@
             this.comboBoxParcours = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.parcourLength = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.channelWide = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fldLongitude = new System.Windows.Forms.TextBox();
             this.fldLatitude = new System.Windows.Forms.TextBox();
@@ -48,18 +42,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.fldCursorX = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.channelWide = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.lineBox = new System.Windows.Forms.GroupBox();
-            this.fldLineTyp = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.numLongO = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.numLatO = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
-            this.numLongB = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.numLatB = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
             this.numLongA = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.numLatA = new System.Windows.Forms.NumericUpDown();
@@ -67,35 +53,29 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.chkAutocalc = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.checkBoxConnected = new System.Windows.Forms.CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.btnRecalc = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.fldName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.checkBoxConnected = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.channelWide)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.channelWide)).BeginInit();
             this.lineBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatO)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
             this.panel5.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,9 +128,8 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.panel2);
-            this.flowLayoutPanel1.Controls.Add(this.panel3);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.panel7);
@@ -163,102 +142,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(194, 553);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel2.Controls.Add(this.parcourLength);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(190, 28);
-            this.panel2.TabIndex = 12;
-            // 
-            // parcourLength
-            // 
-            this.parcourLength.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.parcourLength.Location = new System.Drawing.Point(125, 5);
-            this.parcourLength.Maximum = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            this.parcourLength.Minimum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.parcourLength.Name = "parcourLength";
-            this.parcourLength.Size = new System.Drawing.Size(62, 20);
-            this.parcourLength.TabIndex = 1;
-            this.parcourLength.Value = new decimal(new int[] {
-            15,
-            0,
-            0,
-            0});
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(105, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Parcour lenght (NM):";
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel3.Controls.Add(this.channelWide);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(3, 37);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(190, 28);
-            this.panel3.TabIndex = 13;
-            // 
-            // channelWide
-            // 
-            this.channelWide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.channelWide.DecimalPlaces = 4;
-            this.channelWide.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.channelWide.Location = new System.Drawing.Point(125, 5);
-            this.channelWide.Maximum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.channelWide.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.channelWide.Name = "channelWide";
-            this.channelWide.Size = new System.Drawing.Size(62, 20);
-            this.channelWide.TabIndex = 1;
-            this.channelWide.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            65536});
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Corridor width (NM):";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.fldLongitude);
@@ -269,7 +152,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 71);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -344,148 +227,70 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "X:";
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel2.Controls.Add(this.channelWide);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Location = new System.Drawing.Point(3, 70);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(190, 28);
+            this.panel2.TabIndex = 21;
+            // 
+            // channelWide
+            // 
+            this.channelWide.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.channelWide.DecimalPlaces = 4;
+            this.channelWide.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.channelWide.Location = new System.Drawing.Point(125, 5);
+            this.channelWide.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.channelWide.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.channelWide.Name = "channelWide";
+            this.channelWide.Size = new System.Drawing.Size(62, 20);
+            this.channelWide.TabIndex = 2;
+            this.channelWide.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            this.channelWide.ValueChanged += new System.EventHandler(this.channelWide_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Corridor width (NM):";
+            // 
             // lineBox
             // 
-            this.lineBox.Controls.Add(this.fldLineTyp);
-            this.lineBox.Controls.Add(this.label16);
-            this.lineBox.Controls.Add(this.label15);
-            this.lineBox.Controls.Add(this.numLongO);
-            this.lineBox.Controls.Add(this.label13);
-            this.lineBox.Controls.Add(this.numLatO);
-            this.lineBox.Controls.Add(this.label14);
-            this.lineBox.Controls.Add(this.numLongB);
-            this.lineBox.Controls.Add(this.label11);
-            this.lineBox.Controls.Add(this.numLatB);
-            this.lineBox.Controls.Add(this.label12);
             this.lineBox.Controls.Add(this.numLongA);
             this.lineBox.Controls.Add(this.label10);
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
-            this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 138);
+            this.lineBox.Location = new System.Drawing.Point(3, 104);
             this.lineBox.Name = "lineBox";
-            this.lineBox.Size = new System.Drawing.Size(187, 176);
+            this.lineBox.Size = new System.Drawing.Size(187, 68);
             this.lineBox.TabIndex = 18;
             this.lineBox.TabStop = false;
-            this.lineBox.Text = "Line";
-            // 
-            // fldLineTyp
-            // 
-            this.fldLineTyp.Location = new System.Drawing.Point(78, 13);
-            this.fldLineTyp.Name = "fldLineTyp";
-            this.fldLineTyp.ReadOnly = true;
-            this.fldLineTyp.Size = new System.Drawing.Size(100, 20);
-            this.fldLineTyp.TabIndex = 14;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 16);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(48, 13);
-            this.label16.TabIndex = 13;
-            this.label16.Text = "Line Typ";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 118);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(165, 13);
-            this.label15.TabIndex = 12;
-            this.label15.Text = "Point O is used for the Orientation";
-            // 
-            // numLongO
-            // 
-            this.numLongO.DecimalPlaces = 12;
-            this.numLongO.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            262144});
-            this.numLongO.Location = new System.Drawing.Point(79, 152);
-            this.numLongO.Name = "numLongO";
-            this.numLongO.Size = new System.Drawing.Size(100, 20);
-            this.numLongO.TabIndex = 11;
-            this.numLongO.ValueChanged += new System.EventHandler(this.numLongO_ValueChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 154);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 13);
-            this.label13.TabIndex = 10;
-            this.label13.Text = "Longitude O:";
-            // 
-            // numLatO
-            // 
-            this.numLatO.DecimalPlaces = 12;
-            this.numLatO.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            262144});
-            this.numLatO.Location = new System.Drawing.Point(79, 133);
-            this.numLatO.Name = "numLatO";
-            this.numLatO.Size = new System.Drawing.Size(100, 20);
-            this.numLatO.TabIndex = 9;
-            this.numLatO.ValueChanged += new System.EventHandler(this.numLatO_ValueChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 135);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(59, 13);
-            this.label14.TabIndex = 8;
-            this.label14.Text = "Latitude O:";
-            // 
-            // numLongB
-            // 
-            this.numLongB.DecimalPlaces = 12;
-            this.numLongB.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            262144});
-            this.numLongB.Location = new System.Drawing.Point(78, 97);
-            this.numLongB.Name = "numLongB";
-            this.numLongB.Size = new System.Drawing.Size(100, 20);
-            this.numLongB.TabIndex = 7;
-            this.numLongB.ValueChanged += new System.EventHandler(this.numLongB_ValueChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 99);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 13);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Longitude B:";
-            // 
-            // numLatB
-            // 
-            this.numLatB.DecimalPlaces = 12;
-            this.numLatB.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            262144});
-            this.numLatB.Location = new System.Drawing.Point(78, 78);
-            this.numLatB.Name = "numLatB";
-            this.numLatB.Size = new System.Drawing.Size(100, 20);
-            this.numLatB.TabIndex = 5;
-            this.numLatB.ValueChanged += new System.EventHandler(this.numLatB_ValueChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 80);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(58, 13);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Latitude B:";
+            this.lineBox.Text = "Point";
             // 
             // numLongA
             // 
@@ -495,7 +300,7 @@
             0,
             0,
             262144});
-            this.numLongA.Location = new System.Drawing.Point(79, 55);
+            this.numLongA.Location = new System.Drawing.Point(78, 38);
             this.numLongA.Name = "numLongA";
             this.numLongA.Size = new System.Drawing.Size(100, 20);
             this.numLongA.TabIndex = 3;
@@ -504,11 +309,11 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 57);
+            this.label10.Location = new System.Drawing.Point(5, 40);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.Size = new System.Drawing.Size(57, 13);
             this.label10.TabIndex = 2;
-            this.label10.Text = "Longitude A:";
+            this.label10.Text = "Longitude:";
             // 
             // numLatA
             // 
@@ -518,7 +323,7 @@
             0,
             0,
             262144});
-            this.numLatA.Location = new System.Drawing.Point(79, 36);
+            this.numLatA.Location = new System.Drawing.Point(78, 19);
             this.numLatA.Name = "numLatA";
             this.numLatA.Size = new System.Drawing.Size(100, 20);
             this.numLatA.TabIndex = 1;
@@ -527,11 +332,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 38);
+            this.label9.Location = new System.Drawing.Point(5, 21);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 13);
+            this.label9.Size = new System.Drawing.Size(48, 13);
             this.label9.TabIndex = 0;
-            this.label9.Text = "Latitude A:";
+            this.label9.Text = "Latitude:";
             // 
             // panel5
             // 
@@ -540,7 +345,7 @@
             this.panel5.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel5.Controls.Add(this.chkAutocalc);
             this.panel5.Controls.Add(this.label17);
-            this.panel5.Location = new System.Drawing.Point(3, 320);
+            this.panel5.Location = new System.Drawing.Point(3, 178);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(190, 28);
             this.panel5.TabIndex = 21;
@@ -563,65 +368,6 @@
             this.label17.TabIndex = 0;
             this.label17.Text = "Autocalculate:";
             // 
-            // btnRecalc
-            // 
-            this.btnRecalc.Location = new System.Drawing.Point(3, 388);
-            this.btnRecalc.Name = "btnRecalc";
-            this.btnRecalc.Size = new System.Drawing.Size(187, 23);
-            this.btnRecalc.TabIndex = 22;
-            this.btnRecalc.Text = "Recalculate";
-            this.btnRecalc.UseVisualStyleBackColor = true;
-            this.btnRecalc.Click += new System.EventHandler(this.btnRecalc_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panel4.Controls.Add(this.fldName);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 417);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 28);
-            this.panel4.TabIndex = 20;
-            // 
-            // fldName
-            // 
-            this.fldName.Location = new System.Drawing.Point(78, 3);
-            this.fldName.Name = "fldName";
-            this.fldName.Size = new System.Drawing.Size(100, 20);
-            this.fldName.TabIndex = 1;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Name:";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(3, 451);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(187, 23);
-            this.btnSave.TabIndex = 19;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // panel6
-            // 
-            this.panel6.AutoScroll = true;
-            this.panel6.Controls.Add(this.pictureBox1);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(203, 3);
-            this.panel6.Name = "panel6";
-            this.tableLayoutPanel1.SetRowSpan(this.panel6, 2);
-            this.panel6.Size = new System.Drawing.Size(904, 574);
-            this.panel6.TabIndex = 3;
-            // 
             // panel7
             // 
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -629,7 +375,7 @@
             this.panel7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel7.Controls.Add(this.checkBoxConnected);
             this.panel7.Controls.Add(this.label18);
-            this.panel7.Location = new System.Drawing.Point(3, 354);
+            this.panel7.Location = new System.Drawing.Point(3, 212);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(190, 28);
             this.panel7.TabIndex = 22;
@@ -653,6 +399,65 @@
             this.label18.Size = new System.Drawing.Size(116, 13);
             this.label18.TabIndex = 0;
             this.label18.Text = "Glue Connected Points";
+            // 
+            // btnRecalc
+            // 
+            this.btnRecalc.Location = new System.Drawing.Point(3, 246);
+            this.btnRecalc.Name = "btnRecalc";
+            this.btnRecalc.Size = new System.Drawing.Size(187, 23);
+            this.btnRecalc.TabIndex = 22;
+            this.btnRecalc.Text = "Recalculate";
+            this.btnRecalc.UseVisualStyleBackColor = true;
+            this.btnRecalc.Click += new System.EventHandler(this.btnRecalc_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel4.Controls.Add(this.fldName);
+            this.panel4.Controls.Add(this.label5);
+            this.panel4.Location = new System.Drawing.Point(3, 275);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(190, 28);
+            this.panel4.TabIndex = 20;
+            // 
+            // fldName
+            // 
+            this.fldName.Location = new System.Drawing.Point(78, 3);
+            this.fldName.Name = "fldName";
+            this.fldName.Size = new System.Drawing.Size(100, 20);
+            this.fldName.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Name:";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(3, 309);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(187, 23);
+            this.btnSave.TabIndex = 19;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // panel6
+            // 
+            this.panel6.AutoScroll = true;
+            this.panel6.Controls.Add(this.pictureBox1);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(203, 3);
+            this.panel6.Name = "panel6";
+            this.tableLayoutPanel1.SetRowSpan(this.panel6, 2);
+            this.panel6.Size = new System.Drawing.Size(904, 574);
+            this.panel6.TabIndex = 3;
             // 
             // pictureBox1
             // 
@@ -680,30 +485,23 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.parcourLength)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.channelWide)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.channelWide)).EndInit();
             this.lineBox.ResumeLayout(false);
             this.lineBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatO)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -716,12 +514,6 @@
         private System.Windows.Forms.ComboBox comboBoxParcours;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.NumericUpDown parcourLength;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.NumericUpDown channelWide;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox fldCursorY;
         private System.Windows.Forms.Label label6;
@@ -734,21 +526,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox lineBox;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.NumericUpDown numLongO;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.NumericUpDown numLatO;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.NumericUpDown numLongB;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.NumericUpDown numLatB;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.NumericUpDown numLongA;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown numLatA;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox fldLineTyp;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox fldName;
@@ -760,5 +541,8 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.CheckBox checkBoxConnected;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown channelWide;
     }
 }

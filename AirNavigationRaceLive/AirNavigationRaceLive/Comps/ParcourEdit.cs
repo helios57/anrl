@@ -23,7 +23,7 @@ namespace AirNavigationRaceLive.Comps
         private readonly List<Point> gluePoints = new List<Point>();
         private readonly List<Point> connectedPoints = new List<Point>();
         private Point hoverPoint = null;
-        private Line selectedLine = null;
+        private Point selectedPoint = null;
         ParcourGenerator pc;
         Timer t;
         private NetworkObjects.Map CurrentMap = null;
@@ -83,7 +83,7 @@ namespace AirNavigationRaceLive.Comps
                 fldLongitude.Text = longitude.ToString();
                 if (drag && (hoverPoint != null || dragPoint != null))
                 {
-                    if (dragPoint == null )
+                    if (dragPoint == null)
                     {
                         dragPoint = hoverPoint;
                     }
@@ -137,7 +137,7 @@ namespace AirNavigationRaceLive.Comps
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.A));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.A,l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.A, l));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -148,7 +148,7 @@ namespace AirNavigationRaceLive.Comps
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.B));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.B,l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.B, l));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -160,7 +160,7 @@ namespace AirNavigationRaceLive.Comps
                                 gluePoints.Clear();
                                 gluePoints.AddRange(findGluePoints(activeParcour.LineList, l.O));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.O,l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.LineList, l.O, l));
                                 pointSet = true;
                                 pictureBox1.Cursor = move;
                                 break;
@@ -223,41 +223,16 @@ namespace AirNavigationRaceLive.Comps
         }
         private bool samePos(Point a, Point b)
         {
-            return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) ==0;
+            return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) == 0;
         }
         private void SetHoverPoint(Point p, Line l)
         {
             bool change = hoverPoint != p;
             if (change)
             {
-                selectedLine = l;
                 hoverPoint = p;
                 pictureBox1.SetHoverLine(l);
                 pictureBox1.Invalidate();
-                if (hoverPoint == null)
-                {
-                    lineBox.Enabled = l != null;
-                    if (l != null)
-                    {
-                        numLatA.Value = (decimal)l.A.latitude;
-                        numLatB.Value = (decimal)l.B.latitude;
-                        numLatO.Value = (decimal)l.O.latitude;
-                        numLongA.Value = (decimal)l.A.longitude;
-                        numLongB.Value = (decimal)l.B.longitude;
-                        numLongO.Value = (decimal)l.O.longitude;
-                        fldLineTyp.Text = ((LineType)l.Type).ToString();
-                    }
-                    else
-                    {
-                        numLatA.Value = 0;
-                        numLatB.Value = 0;
-                        numLatO.Value = 0;
-                        numLongA.Value = 0;
-                        numLongB.Value = 0;
-                        numLongO.Value = 0;
-                        fldLineTyp.Text = "";
-                    }
-                }
             }
         }
         private void comboBoxParcours_SelectedIndexChanged(object sender, EventArgs e)
@@ -272,9 +247,10 @@ namespace AirNavigationRaceLive.Comps
                 c = new Converter(m);
                 pictureBox1.SetConverter(c);
                 CurrentMap = m;
+                p.LineList.RemoveAll(pp => pp.Type == (int)LineType.START || pp.Type == (int)LineType.END);
                 activeParcour = new Model.Parcour(p);
                 pictureBox1.SetParcour(activeParcour);
-                bool generatedParcour = activeParcour.LineList.Count(pp=>pp.Type == (int)LineType.Point) > 0;
+                bool generatedParcour = activeParcour.LineList.Count(pp => pp.Type == (int)LineType.Point) > 0;
                 btnRecalc.Enabled = generatedParcour;
                 chkAutocalc.Enabled = generatedParcour;
                 chkAutocalc.Checked = generatedParcour;
@@ -288,7 +264,6 @@ namespace AirNavigationRaceLive.Comps
                 btnRecalc.Enabled = false;
                 try
                 {
-                    double lenght = Decimal.ToDouble(parcourLength.Value);
                     double channel = Decimal.ToDouble(channelWide.Value);
                     t = new Timer();
                     t.Tick += new EventHandler(t_Tick);
@@ -297,7 +272,7 @@ namespace AirNavigationRaceLive.Comps
                     pc = new ParcourGenerator();
                     lock (activeParcour)
                     {
-                        pc.RecalcParcour(activeParcour, c, lenght, channel);
+                        pc.RecalcParcour(activeParcour, c, channel);
                     }
                     pictureBox1.Invalidate();
                 }
@@ -351,59 +326,20 @@ namespace AirNavigationRaceLive.Comps
         #region NumUpDown
         private void numLatA_ValueChanged(object sender, EventArgs e)
         {
-            if (selectedLine != null)
+            if (selectedPoint != null)
             {
-                (selectedLine.A as Point).latitude = Decimal.ToDouble(numLatA.Value);
+                selectedPoint.latitude = Decimal.ToDouble(numLatA.Value);
                 pictureBox1.Invalidate();
             }
         }
 
         private void numLongA_ValueChanged(object sender, EventArgs e)
         {
-            if (selectedLine != null)
+            if (selectedPoint != null)
             {
-                (selectedLine.A as Point).longitude = Decimal.ToDouble(numLongA.Value);
+                selectedPoint.longitude = Decimal.ToDouble(numLongA.Value);
                 pictureBox1.Invalidate();
             }
-        }
-
-        private void numLatB_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.B as Point).latitude = Decimal.ToDouble(numLatB.Value);
-                pictureBox1.Invalidate();
-            }
-        }
-
-        private void numLongB_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.B as Point).longitude = Decimal.ToDouble(numLongB.Value);
-                pictureBox1.Invalidate();
-            }
-
-        }
-
-        private void numLatO_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.O as Point).latitude = Decimal.ToDouble(numLatO.Value);
-                pictureBox1.Invalidate();
-            }
-
-        }
-
-        private void numLongO_ValueChanged(object sender, EventArgs e)
-        {
-            if (selectedLine != null)
-            {
-                (selectedLine.O as Point).longitude = Decimal.ToDouble(numLongO.Value);
-                pictureBox1.Invalidate();
-            }
-
         }
         #endregion
 
@@ -419,6 +355,13 @@ namespace AirNavigationRaceLive.Comps
             {
                 btnRecalc_Click(null, null);
             }
+            pictureBox1_MouseMove(pictureBox1, e);
+            if (hoverPoint != null)
+            {
+                selectedPoint = hoverPoint;
+                numLatA.Value = (decimal)selectedPoint.latitude;
+                numLongA.Value = (decimal)selectedPoint.longitude;
+            }
         }
 
         private void pictureBox1_MouseLeave(object sender, EventArgs e)
@@ -426,6 +369,9 @@ namespace AirNavigationRaceLive.Comps
             drag = false;
         }
 
-
+        private void channelWide_ValueChanged(object sender, EventArgs e)
+        {
+            btnRecalc_Click(null, null);
+        }
     }
 }
