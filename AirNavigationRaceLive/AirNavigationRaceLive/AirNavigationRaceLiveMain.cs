@@ -352,5 +352,15 @@ namespace AirNavigationRaceLive
                 enableControl(CompetitionO);
             }
         }
+
+        private void resultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Results == null)
+            {
+                Results = new Results(Client);
+            }
+            enableControl(Results);
+
+        }
     }
 }

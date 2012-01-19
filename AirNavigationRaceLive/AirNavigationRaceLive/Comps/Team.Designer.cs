@@ -30,10 +30,10 @@
         {
             this.listViewTeam = new System.Windows.Forms.ListView();
             this.IDl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pilot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Navigator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
             this.listViewPilots = new System.Windows.Forms.ListView();
@@ -71,10 +71,10 @@
             this.listViewTeam.AutoArrange = false;
             this.listViewTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.IDl,
+            this.columnHeader4,
             this.columnHeader2,
             this.Pilot,
             this.Navigator,
-            this.columnHeader4,
             this.columnHeader5});
             this.listViewTeam.FullRowSelect = true;
             this.listViewTeam.GridLines = true;
@@ -96,27 +96,31 @@
             this.IDl.Text = "ID";
             this.IDl.Width = 40;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.DisplayIndex = 4;
+            this.columnHeader4.Text = "CNumber";
+            this.columnHeader4.Width = 58;
+            // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Nationality";
             this.columnHeader2.Width = 64;
             // 
             // Pilot
             // 
+            this.Pilot.DisplayIndex = 2;
             this.Pilot.Tag = "Pilot";
             this.Pilot.Text = "Pilot";
             this.Pilot.Width = 131;
             // 
             // Navigator
             // 
+            this.Navigator.DisplayIndex = 3;
             this.Navigator.Tag = "Navigator";
             this.Navigator.Text = "Navigator";
             this.Navigator.Width = 150;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "CNumber";
-            this.columnHeader4.Width = 58;
             // 
             // columnHeader5
             // 
@@ -362,7 +366,7 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(244, 23);
             this.btnExport.TabIndex = 38;
-            this.btnExport.Text = "Export To PDF";
+            this.btnExport.Text = "Export Participants To PDF";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 

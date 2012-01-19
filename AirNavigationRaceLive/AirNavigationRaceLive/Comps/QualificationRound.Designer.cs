@@ -192,9 +192,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(433, 379);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 31;
-            this.label3.Text = "Date";
+            this.label3.Text = "Date (all UTC)";
             // 
             // date
             // 
@@ -616,11 +616,11 @@
             this.btnExportToPDF.Name = "btnExportToPDF";
             this.btnExportToPDF.Size = new System.Drawing.Size(222, 28);
             this.btnExportToPDF.TabIndex = 71;
-            this.btnExportToPDF.Text = "Export To PDF";
+            this.btnExportToPDF.Text = "Export Startlist To PDF";
             this.btnExportToPDF.UseVisualStyleBackColor = true;
             this.btnExportToPDF.Click += new System.EventHandler(this.btnExportToPDF_Click);
             // 
-            // Competition
+            // QualificationRound
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -667,7 +667,7 @@
             this.Controls.Add(this.btnDeleteCompetitions);
             this.Controls.Add(this.btnRefreshCompetitions);
             this.Controls.Add(this.listViewCompetition);
-            this.Name = "Competition";
+            this.Name = "QualificationRound";
             this.Size = new System.Drawing.Size(869, 548);
             this.Load += new System.EventHandler(this.Competition_Load);
             this.ResumeLayout(false);

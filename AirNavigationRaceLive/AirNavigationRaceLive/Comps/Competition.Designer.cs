@@ -38,9 +38,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.fldCompetitionName = new System.Windows.Forms.TextBox();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.fldPublicRole = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkBoxClearCache
@@ -127,30 +126,13 @@
             // 
             // btnCreate
             // 
-            this.btnCreate.Location = new System.Drawing.Point(80, 208);
+            this.btnCreate.Location = new System.Drawing.Point(80, 181);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(98, 24);
             this.btnCreate.TabIndex = 11;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // fldPublicRole
-            // 
-            this.fldPublicRole.FormattingEnabled = true;
-            this.fldPublicRole.Location = new System.Drawing.Point(80, 181);
-            this.fldPublicRole.Name = "fldPublicRole";
-            this.fldPublicRole.Size = new System.Drawing.Size(98, 21);
-            this.fldPublicRole.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 184);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(61, 13);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Public Role";
             // 
             // btnRefresh
             // 
@@ -162,13 +144,22 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // btnDel
+            // 
+            this.btnDel.Location = new System.Drawing.Point(80, 60);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(98, 24);
+            this.btnDel.TabIndex = 29;
+            this.btnDel.Text = "Delete";
+            this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
             // Competition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDel);
             this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.fldPublicRole);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.fldCompetitionName);
@@ -198,8 +189,7 @@
         private System.Windows.Forms.Label label4;
         protected System.Windows.Forms.TextBox fldCompetitionName;
         private System.Windows.Forms.Button btnCreate;
-        private System.Windows.Forms.ComboBox fldPublicRole;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnDel;
     }
 }

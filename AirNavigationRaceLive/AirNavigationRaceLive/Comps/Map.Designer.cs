@@ -167,9 +167,10 @@
             // 
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(3, 333);
+            this.btnSave.Location = new System.Drawing.Point(3, 311);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(224, 20);
+            this.tableLayoutPanel2.SetRowSpan(this.btnSave, 2);
+            this.btnSave.Size = new System.Drawing.Size(224, 42);
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -183,11 +184,11 @@
             this.tableLayoutPanel8.Controls.Add(this.fldY, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 273);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 255);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel8.TabIndex = 10;
             // 
             // fldY
@@ -204,7 +205,7 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 24);
+            this.label6.Size = new System.Drawing.Size(106, 22);
             this.label6.TabIndex = 1;
             this.label6.Text = "y-coordinate topleft:";
             // 
@@ -216,11 +217,11 @@
             this.tableLayoutPanel7.Controls.Add(this.fldX, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 243);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 227);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel7.TabIndex = 9;
             // 
             // fldX
@@ -237,7 +238,7 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 24);
+            this.label5.Size = new System.Drawing.Size(106, 22);
             this.label5.TabIndex = 1;
             this.label5.Text = "x-coordinate topleft:";
             // 
@@ -249,11 +250,11 @@
             this.tableLayoutPanel6.Controls.Add(this.fldSizeY, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label4, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 213);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 199);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel6.TabIndex = 8;
             // 
             // fldSizeY
@@ -270,7 +271,7 @@
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 24);
+            this.label4.Size = new System.Drawing.Size(106, 22);
             this.label4.TabIndex = 1;
             this.label4.Text = "pixel size y-direction:";
             // 
@@ -282,11 +283,11 @@
             this.tableLayoutPanel5.Controls.Add(this.fldRotationX, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 183);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 171);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel5.TabIndex = 7;
             // 
             // fldRotationX
@@ -303,7 +304,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 24);
+            this.label3.Size = new System.Drawing.Size(106, 22);
             this.label3.TabIndex = 1;
             this.label3.Text = "rotation about x-axis";
             // 
@@ -315,11 +316,11 @@
             this.tableLayoutPanel4.Controls.Add(this.fldRotationY, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 153);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 143);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
             // fldRotationY
@@ -336,7 +337,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 24);
+            this.label2.Size = new System.Drawing.Size(106, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "rotation about y-axis:";
             // 
@@ -344,9 +345,9 @@
             // 
             this.btnSelectWorldFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSelectWorldFile.Enabled = false;
-            this.btnSelectWorldFile.Location = new System.Drawing.Point(3, 93);
+            this.btnSelectWorldFile.Location = new System.Drawing.Point(3, 87);
             this.btnSelectWorldFile.Name = "btnSelectWorldFile";
-            this.btnSelectWorldFile.Size = new System.Drawing.Size(224, 24);
+            this.btnSelectWorldFile.Size = new System.Drawing.Size(224, 22);
             this.btnSelectWorldFile.TabIndex = 3;
             this.btnSelectWorldFile.Text = "Select World File ( in WGS84 )";
             this.btnSelectWorldFile.UseVisualStyleBackColor = true;
@@ -358,7 +359,7 @@
             this.btnDelete.Enabled = false;
             this.btnDelete.Location = new System.Drawing.Point(3, 3);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(224, 24);
+            this.btnDelete.Size = new System.Drawing.Size(224, 22);
             this.btnDelete.TabIndex = 0;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -367,9 +368,9 @@
             // btnNew
             // 
             this.btnNew.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnNew.Location = new System.Drawing.Point(3, 33);
+            this.btnNew.Location = new System.Drawing.Point(3, 31);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(224, 24);
+            this.btnNew.Size = new System.Drawing.Size(224, 22);
             this.btnNew.TabIndex = 1;
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -379,9 +380,9 @@
             // 
             this.btnSelectMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSelectMap.Enabled = false;
-            this.btnSelectMap.Location = new System.Drawing.Point(3, 63);
+            this.btnSelectMap.Location = new System.Drawing.Point(3, 59);
             this.btnSelectMap.Name = "btnSelectMap";
-            this.btnSelectMap.Size = new System.Drawing.Size(224, 24);
+            this.btnSelectMap.Size = new System.Drawing.Size(224, 22);
             this.btnSelectMap.TabIndex = 2;
             this.btnSelectMap.Text = "Select Map";
             this.btnSelectMap.UseVisualStyleBackColor = true;
@@ -395,12 +396,12 @@
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.fldSizeX, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 123);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 115);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
             // label1
@@ -409,7 +410,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 24);
+            this.label1.Size = new System.Drawing.Size(106, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "pixel size x-direction:";
             // 
@@ -429,11 +430,11 @@
             this.tableLayoutPanel9.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.fldName, 1, 0);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 303);
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 283);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(224, 24);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(224, 22);
             this.tableLayoutPanel9.TabIndex = 12;
             // 
             // label7
@@ -442,7 +443,7 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Location = new System.Drawing.Point(3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 24);
+            this.label7.Size = new System.Drawing.Size(106, 22);
             this.label7.TabIndex = 0;
             this.label7.Text = "name:";
             // 

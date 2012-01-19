@@ -90,12 +90,12 @@
             this.competitionToolStripMenuItem,
             this.mapToolStripMenuItem,
             this.parcourToolStripMenuItem,
-            this.trackerToolStripMenuItem,
             this.pilotsToolStripMenuItem,
             this.teamsToolStripMenuItem,
             this.qualificationRoundsToolStripMenuItem,
             this.rulesToolStripMenuItem,
             this.resultsToolStripMenuItem,
+            this.trackerToolStripMenuItem,
             this.visualisationToolStripMenuItem,
             this.creditsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
@@ -270,6 +270,7 @@
             this.resultsToolStripMenuItem.Name = "resultsToolStripMenuItem";
             this.resultsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.resultsToolStripMenuItem.Text = "Results";
+            this.resultsToolStripMenuItem.Click += new System.EventHandler(this.resultsToolStripMenuItem_Click);
             // 
             // toplistToolStripMenuItem
             // 
@@ -323,6 +324,7 @@
             this.adjustResultsToolStripMenuItem.Name = "adjustResultsToolStripMenuItem";
             this.adjustResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.adjustResultsToolStripMenuItem.Text = "Adjust Results";
+            this.adjustResultsToolStripMenuItem.Visible = false;
             this.adjustResultsToolStripMenuItem.Click += new System.EventHandler(this.adjustResultsToolStripMenuItem_Click);
             // 
             // uploadTrackerDataToolStripMenuItem
@@ -331,6 +333,7 @@
             this.uploadTrackerDataToolStripMenuItem.Name = "uploadTrackerDataToolStripMenuItem";
             this.uploadTrackerDataToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.uploadTrackerDataToolStripMenuItem.Text = "Upload Tracker Data";
+            this.uploadTrackerDataToolStripMenuItem.Visible = false;
             this.uploadTrackerDataToolStripMenuItem.Click += new System.EventHandler(this.uploadTrackerDataToolStripMenuItem_Click);
             // 
             // visualisationToolStripMenuItem

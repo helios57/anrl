@@ -24,9 +24,6 @@ namespace AirNavigationRaceLive.Comps
         {
             InitializeComponent();
             c = client;
-            fldPublicRole.Items.Add(new RoleCombo(Access.None));
-            fldPublicRole.Items.Add(new RoleCombo(Access.Read));
-            fldPublicRole.Items.Add(new RoleCombo(Access.Write));
             reloadCompetitions();
             UpdateEnablement();
         }
@@ -38,7 +35,6 @@ namespace AirNavigationRaceLive.Comps
             fldOwner.Enabled = loggedIn;
             btnUse.Enabled = loggedIn && fldCompetition.SelectedItem != null;
             fldCompetitionName.Enabled = loggedIn;
-            fldPublicRole.Enabled = loggedIn;
             btnCreate.Enabled = loggedIn && fldCompetitionName.Text.Length > 3;
         }
 
@@ -93,13 +89,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 active = true;
                 UpdateEnablement();
-                if (fldPublicRole.SelectedItem == null)
-                {
-                    MessageBox.Show("Please select a Public Role");
-                }
-                else
-                {
-                    NetworkObjects.CompetitionSet newComp = c.CreateCompetition(fldCompetitionName.Text, (int)(fldPublicRole.SelectedItem as RoleCombo).role);
+                    NetworkObjects.CompetitionSet newComp = c.CreateCompetition(fldCompetitionName.Text, (int)(Access.None));
                     reloadCompetitions();
                     c.UseCompetition(newComp);
                     c.SetClearCache(checkBoxClearCache.Checked);
@@ -114,7 +104,7 @@ namespace AirNavigationRaceLive.Comps
                     }
                     Status.SetStatus("Connected to Server, download finished");
                     Connected.Invoke(chachedClient, e);
-                }
+                
                 UpdateEnablement();
             }
             finally
@@ -138,6 +128,11 @@ namespace AirNavigationRaceLive.Comps
         {
             reloadCompetitions();
             UpdateEnablement();
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+
         }
     }
     class CompetitionSetCombo

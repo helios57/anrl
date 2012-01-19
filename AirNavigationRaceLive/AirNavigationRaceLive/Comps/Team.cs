@@ -58,7 +58,7 @@ namespace AirNavigationRaceLive.Comps
                     }
                 }
 
-                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.Name!=null?team.Name:"" ,pilot.Name, (navigator != null) ? navigator.Name : "-",team.StartID, team.Description});
+                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.StartID, team.Name != null ? team.Name : "", pilot.Name, (navigator != null) ? navigator.Name : "-", team.Description });
                 lvi.Tag = team;
                 listViewTeam.Items.Add(lvi);
             }

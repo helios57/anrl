@@ -217,7 +217,7 @@
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.Size = new System.Drawing.Size(161, 23);
             this.btnPdf.TabIndex = 113;
-            this.btnPdf.Text = "Export as PDF";
+            this.btnPdf.Text = "Export Results to PDF";
             this.btnPdf.UseVisualStyleBackColor = true;
             this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
