@@ -368,6 +368,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\PDFTemplates\Competition_Map.pdf" />
+    <None Include="Resources\PDFTemplates\Competition_Map.xls" />
+    <None Include="Resources\PDFTemplates\Competitor_list.doc" />
+    <None Include="Resources\PDFTemplates\Competitor_list.pdf" />
+    <None Include="Resources\PDFTemplates\Start_list.doc" />
+    <None Include="Resources\PDFTemplates\Start_list.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\swiss_made_software-original.gif" />
@@ -443,6 +449,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
