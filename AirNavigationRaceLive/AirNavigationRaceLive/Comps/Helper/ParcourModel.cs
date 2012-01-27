@@ -66,37 +66,60 @@ namespace AirNavigationRaceLive.Comps.Helper
             double origDist = Converter.Distance(Ende, Start);
             ChannelRadius = (ChannelRadius / origDist) * (channel * (-1.0 / 2.0));
             Vector ortho = Vector.Orthogonal(ChannelRadius) / 10.0;
-            double factorLengthSides = 20.0;
+            double factorLengthSides = 10.0;
+            double distChannelRadius = -Vector.Abs(ChannelRadius);
+            double orthoLengthFactor = 1.0;
 
             for (int i = 1; i < 8; i += 1)
             {
-                Vector a1 = Channels[0].LinearCombinations[i] + ChannelRadius + ortho;
-                Vector a2 = Channels[0].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector localChannelRadius;
+                localChannelRadius = Vector.Orthogonal(Channels[0].LinearCombinations[i+1] - Channels[0].LinearCombinations[i]);
+                localChannelRadius = (localChannelRadius / Vector.Abs(localChannelRadius)) * distChannelRadius;
+                ortho = Vector.Orthogonal(localChannelRadius) / orthoLengthFactor;
+
+                Vector a1 = Channels[0].LinearCombinations[i] + localChannelRadius + ortho;
+                Vector a2 = Channels[0].LinearCombinations[i + 1] + localChannelRadius - ortho;
                 Vector a3 = a1 + ChannelRadius * factorLengthSides + ortho;
                 Vector a4 = a2 + ChannelRadius * factorLengthSides - ortho;
                 Polygons.Add(new ParcourPolygon(a1, a2, a4, a3));
 
-                Vector b1 = Channels[0].LinearCombinations[i] - ChannelRadius + ortho;
-                Vector b2 = Channels[0].LinearCombinations[i + 1] - ChannelRadius - ortho;
-                Vector b3 = Channels[1].LinearCombinations[i] + ChannelRadius + ortho;
-                Vector b4 = Channels[1].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector b1 = Channels[0].LinearCombinations[i] - localChannelRadius + ortho;
+                Vector b2 = Channels[0].LinearCombinations[i + 1] - localChannelRadius - ortho;
+
+                localChannelRadius = Vector.Orthogonal(Channels[1].LinearCombinations[i + 1] - Channels[1].LinearCombinations[i]);
+                localChannelRadius = (localChannelRadius / Vector.Abs(localChannelRadius)) * distChannelRadius;
+                ortho = Vector.Orthogonal(localChannelRadius) / orthoLengthFactor;
+
+                Vector b3 = Channels[1].LinearCombinations[i] + localChannelRadius + ortho;
+                Vector b4 = Channels[1].LinearCombinations[i + 1] + localChannelRadius - ortho;
                 Polygons.Add(new ParcourPolygon(b1, b2, b4, b3));
 
-                Vector c1 = Channels[1].LinearCombinations[i] - ChannelRadius + ortho;
-                Vector c2 = Channels[1].LinearCombinations[i + 1] - ChannelRadius - ortho;
-                Vector c3 = Channels[2].LinearCombinations[i] + ChannelRadius + ortho;
-                Vector c4 = Channels[2].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector c1 = Channels[1].LinearCombinations[i] - localChannelRadius + ortho;
+                Vector c2 = Channels[1].LinearCombinations[i + 1] - localChannelRadius - ortho;
+
+                localChannelRadius = Vector.Orthogonal(Channels[2].LinearCombinations[i + 1] - Channels[2].LinearCombinations[i]);
+                localChannelRadius = (localChannelRadius / Vector.Abs(localChannelRadius)) * distChannelRadius;
+                ortho = Vector.Orthogonal(localChannelRadius) / orthoLengthFactor;
+
+                Vector c3 = Channels[2].LinearCombinations[i] + localChannelRadius + ortho;
+                Vector c4 = Channels[2].LinearCombinations[i + 1] + localChannelRadius - ortho;
                 Polygons.Add(new ParcourPolygon(c1, c2, c4, c3));
 
-                Vector d1 = Channels[2].LinearCombinations[i] - ChannelRadius + ortho;
-                Vector d2 = Channels[2].LinearCombinations[i + 1] - ChannelRadius - ortho;
-                Vector d3 = Channels[3].LinearCombinations[i] + ChannelRadius + ortho;
-                Vector d4 = Channels[3].LinearCombinations[i + 1] + ChannelRadius - ortho;
+                Vector d1 = Channels[2].LinearCombinations[i] - localChannelRadius + ortho;
+                Vector d2 = Channels[2].LinearCombinations[i + 1] - localChannelRadius - ortho;
+
+
+                localChannelRadius = Vector.Orthogonal(Channels[3].LinearCombinations[i + 1] - Channels[3].LinearCombinations[i]);
+                localChannelRadius = (localChannelRadius / Vector.Abs(localChannelRadius)) * distChannelRadius;
+                ortho = Vector.Orthogonal(localChannelRadius) / orthoLengthFactor;
+
+                Vector d3 = Channels[3].LinearCombinations[i] + localChannelRadius + ortho;
+                Vector d4 = Channels[3].LinearCombinations[i + 1] + localChannelRadius - ortho;
                 Polygons.Add(new ParcourPolygon(d1, d2, d4, d3));
 
 
-                Vector e1 = Channels[3].LinearCombinations[i] - ChannelRadius + ortho;
-                Vector e2 = Channels[3].LinearCombinations[i + 1] - ChannelRadius - ortho;
+                Vector e1 = Channels[3].LinearCombinations[i] - localChannelRadius + ortho;
+                Vector e2 = Channels[3].LinearCombinations[i + 1] - localChannelRadius - ortho;
                 Vector e3 = e1 - ChannelRadius * factorLengthSides + ortho;
                 Vector e4 = e2 - ChannelRadius * factorLengthSides - ortho;
                 Polygons.Add(new ParcourPolygon(e1, e2, e4, e3));

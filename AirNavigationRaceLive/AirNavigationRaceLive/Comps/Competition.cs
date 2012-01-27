@@ -36,6 +36,7 @@ namespace AirNavigationRaceLive.Comps
             btnUse.Enabled = loggedIn && fldCompetition.SelectedItem != null;
             fldCompetitionName.Enabled = loggedIn;
             btnCreate.Enabled = loggedIn && fldCompetitionName.Text.Length > 3;
+            btnDel.Enabled = btnUse.Enabled;
         }
 
         private void reloadCompetitions()
@@ -89,22 +90,22 @@ namespace AirNavigationRaceLive.Comps
             {
                 active = true;
                 UpdateEnablement();
-                    NetworkObjects.CompetitionSet newComp = c.CreateCompetition(fldCompetitionName.Text, (int)(Access.None));
-                    reloadCompetitions();
-                    c.UseCompetition(newComp);
-                    c.SetClearCache(checkBoxClearCache.Checked);
-                    UpdateEnablement();
-                    Status.SetStatus("Connected to Server, downloading data");
-                    Client.Client chachedClient = new Client.Client(c);
+                NetworkObjects.CompetitionSet newComp = c.CreateCompetition(fldCompetitionName.Text, (int)(Access.None));
+                reloadCompetitions();
+                c.UseCompetition(newComp);
+                c.SetClearCache(checkBoxClearCache.Checked);
+                UpdateEnablement();
+                Status.SetStatus("Connected to Server, downloading data");
+                Client.Client chachedClient = new Client.Client(c);
 
-                    while (!chachedClient.IsInitialLoadComplete())
-                    {
-                        Application.DoEvents();
-                        System.Threading.Thread.Sleep(100);
-                    }
-                    Status.SetStatus("Connected to Server, download finished");
-                    Connected.Invoke(chachedClient, e);
-                
+                while (!chachedClient.IsInitialLoadComplete())
+                {
+                    Application.DoEvents();
+                    System.Threading.Thread.Sleep(100);
+                }
+                Status.SetStatus("Connected to Server, download finished");
+                Connected.Invoke(chachedClient, e);
+
                 UpdateEnablement();
             }
             finally
@@ -132,7 +133,35 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                active = true;
+                UpdateEnablement();
+                if (fldCompetition.SelectedItem != null)
+                {
+                    CompetitionSetCombo csc = fldCompetition.SelectedItem as CompetitionSetCombo;
+                    if (csc != null)
+                    {
+                        fldCompetition.SelectedItem = null;
+                        fldCompetition.Text = "";
+                        UpdateEnablement();
+                        Status.SetStatus("Connected to Server, deleting Competition");
+                        Root r = new Root();
+                        r.ObjectType = (int)EObjectType.CompetitionSet;
+                        r.RequestType = (int)ERequestType.Delete;
+                        r.RequestParameters = new RequestParameters();
+                        r.RequestParameters.ID = csc.cs.ID;
+                        c.process(r);
+                        reloadCompetitions();
+                        Status.SetStatus("");
+                    }
+                }
+            }
+            finally
+            {
+                active = false;
+                UpdateEnablement();
+            }
         }
     }
     class CompetitionSetCombo

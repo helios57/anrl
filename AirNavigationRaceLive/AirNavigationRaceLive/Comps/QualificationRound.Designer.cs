@@ -33,7 +33,7 @@
             this.listViewCompetition = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblTitel = new System.Windows.Forms.Label();
             this.textName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textID = new System.Windows.Forms.TextBox();
@@ -137,17 +137,17 @@
             this.columnHeader2.Text = "Name";
             this.columnHeader2.Width = 210;
             // 
-            // label7
+            // lblTitel
             // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblTitel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(264, 3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(285, 33);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Qualification Rounds";
+            this.lblTitel.AutoSize = true;
+            this.lblTitel.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitel.Location = new System.Drawing.Point(264, 3);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(343, 33);
+            this.lblTitel.TabIndex = 26;
+            this.lblTitel.Text = "Qualification Rounds for: ";
             // 
             // textName
             // 
@@ -663,7 +663,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textID);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblTitel);
             this.Controls.Add(this.btnDeleteCompetitions);
             this.Controls.Add(this.btnRefreshCompetitions);
             this.Controls.Add(this.listViewCompetition);
@@ -682,7 +682,7 @@
         private System.Windows.Forms.ListView listViewCompetition;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblTitel;
         private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textID;

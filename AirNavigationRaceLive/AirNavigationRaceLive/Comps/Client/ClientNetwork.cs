@@ -102,6 +102,11 @@ namespace AirNavigationRaceLive.Comps.Client
             Status.SetStatus("Competition selected, Ready to go!");
         }
 
+        public CompetitionSet getCompetitionSet()
+        {
+            return CompetitionSet;
+        }
+
        /* public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;

@@ -55,6 +55,7 @@
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnUpload = new System.Windows.Forms.Button();
             this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,9 +89,9 @@
             this.listViewPenalty.FullRowSelect = true;
             this.listViewPenalty.GridLines = true;
             this.listViewPenalty.HideSelection = false;
-            this.listViewPenalty.Location = new System.Drawing.Point(270, 3);
+            this.listViewPenalty.Location = new System.Drawing.Point(270, 29);
             this.listViewPenalty.Name = "listViewPenalty";
-            this.listViewPenalty.Size = new System.Drawing.Size(651, 154);
+            this.listViewPenalty.Size = new System.Drawing.Size(651, 171);
             this.listViewPenalty.TabIndex = 100;
             this.listViewPenalty.UseCompatibleStateImageBehavior = false;
             this.listViewPenalty.View = System.Windows.Forms.View.Details;
@@ -99,7 +100,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "ID";
-            this.columnHeader1.Width = 30;
+            this.columnHeader1.Width = 31;
             // 
             // columnHeader2
             // 
@@ -296,17 +297,28 @@
             this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 163);
+            this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 206);
             this.visualisationPictureBox1.Name = "visualisationPictureBox1";
-            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 376);
+            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 333);
             this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.visualisationPictureBox1.TabIndex = 97;
             this.visualisationPictureBox1.TabStop = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(270, 3);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(161, 23);
+            this.btnRefresh.TabIndex = 116;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.listViewCompetitionTeam);
             this.Controls.Add(this.btnPdf);
@@ -363,5 +375,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

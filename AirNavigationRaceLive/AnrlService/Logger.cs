@@ -15,7 +15,7 @@ namespace AnrlService
                 AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
                 t_Log l = new t_Log();
                 l.level = level;
-                l.timestamp = new DateTime();
+                l.timestamp = DateTime.Now;
                 l.Text = text;
                 db.t_Logs.InsertOnSubmit(l);
                 db.SubmitChanges();
@@ -33,7 +33,7 @@ namespace AnrlService
             {
                 t_Log l = new t_Log();
                 l.level = level;
-                l.timestamp = new DateTime();
+                l.timestamp = DateTime.Now;
                 l.Text = text;
                 db.t_Logs.InsertOnSubmit(l);
                 db.SubmitChanges();

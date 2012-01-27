@@ -26,6 +26,7 @@ namespace AirNavigationRaceLive.Comps
                 NetworkObjects.Route r = (NetworkObjects.Route)i;
                 comboBoxRoute.Items.Add(new ComboRoute(r));
             }
+            lblTitel.Text = lblTitel.Text + iClient.getCompetitionSet().Name;
         }
 
         private void btnCalc_Click(object sender, EventArgs e)

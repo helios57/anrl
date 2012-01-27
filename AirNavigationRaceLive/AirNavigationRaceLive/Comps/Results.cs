@@ -61,11 +61,15 @@ namespace AirNavigationRaceLive.Comps
                 else
                 {
                     listViewCompetitionTeam.Enabled = false;
+                    listViewCompetitionTeam.Items.Clear();
+                    listViewPenalty.Items.Clear();
                 }
             }
             else
             {
                 listViewCompetitionTeam.Enabled = false;
+                listViewCompetitionTeam.Items.Clear();
+                listViewPenalty.Items.Clear();
             }
         }
         private string getTeamDsc(int ID_Team)
@@ -302,6 +306,19 @@ namespace AirNavigationRaceLive.Comps
             List<NetworkObjects.Competition> comps = Client.getCompetitions();
             comboBoxCompetition.Items.Clear();
             listViewCompetitionTeam.Items.Clear();
+            foreach (NetworkObjects.Competition c in comps)
+            {
+                comboBoxCompetition.Items.Add(new CompetitionComboEntry(c));
+            }
+            comboBox1_SelectedIndexChanged(null, null);
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            List<NetworkObjects.Competition> comps = Client.getCompetitions();
+            comboBoxCompetition.Items.Clear();
+            comboBoxCompetition.SelectedItem = null;
+            comboBoxCompetition.Text = "";
             foreach (NetworkObjects.Competition c in comps)
             {
                 comboBoxCompetition.Items.Add(new CompetitionComboEntry(c));

@@ -11,7 +11,7 @@
       <Column Name="ID_Parcour" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Competition_t_Competition_Team" Member="t_Competition_Teams" ThisKey="ID" OtherKey="ID_Competition" Type="t_Competition_Team" />
-      <Association Name="t_CompetitionSet_t_Competition" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Competition" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Line_t_Competition" Member="t_Line" ThisKey="ID_TakeOffLine" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
     </Type>
   </Table>
@@ -25,7 +25,7 @@
       <Column Name="PrivateKey" Type="System.Data.Linq.Binary" DbType="Binary(1024) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="PublicKey" Type="System.Data.Linq.Binary" DbType="Binary(1024) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="SymKey" Type="System.Data.Linq.Binary" DbType="Binary(4096) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Association Name="t_User_t_User_Session" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" />
+      <Association Name="t_User_t_User_Session" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Competition_Team" Member="t_Competition_Teams">
@@ -42,7 +42,7 @@
       <Association Name="t_Competition_Team_t_Penalty" Member="t_Penalties" ThisKey="ID" OtherKey="ID_Competition_Team" Type="t_Penalty" />
       <Association Name="t_Competition_Team_t_Team_Tracker" Member="t_Team_Trackers" ThisKey="ID" OtherKey="ID_Competition_Team" Type="t_Team_Tracker" />
       <Association Name="t_Competition_t_Competition_Team" Member="t_Competition" ThisKey="ID_Competition" OtherKey="ID" Type="t_Competition" IsForeignKey="true" />
-      <Association Name="t_CompetitionSet_t_Competition_Team" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Competition_Team" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Team_t_Competition_Team" Member="t_Team" ThisKey="ID_Team" OtherKey="ID" Type="t_Team" IsForeignKey="true" />
     </Type>
   </Table>
@@ -143,7 +143,7 @@
       <Column Name="YTopLeft" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Map_t_Parcour" Member="t_Parcours" ThisKey="ID" OtherKey="ID_Map" Type="t_Parcour" />
-      <Association Name="t_CompetitionSet_t_Map" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Map" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Picture_t_Map" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
     </Type>
   </Table>
@@ -154,7 +154,7 @@
       <Column Name="ID_Map" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Parcour_t_Parcour_Line" Member="t_Parcour_Lines" ThisKey="ID" OtherKey="ID_Parcour" Type="t_Parcour_Line" />
-      <Association Name="t_CompetitionSet_t_Parcour" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Parcour" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Map_t_Parcour" Member="t_Map" ThisKey="ID_Map" OtherKey="ID" Type="t_Map" IsForeignKey="true" />
     </Type>
   </Table>
@@ -163,7 +163,7 @@
       <Column Name="ID_Parcour" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ID_Line" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="t_Line_t_Parcour_Line" Member="t_Line" ThisKey="ID_Line" OtherKey="ID" Type="t_Line" IsForeignKey="true" />
-      <Association Name="t_Parcour_t_Parcour_Line" Member="t_Parcour" ThisKey="ID_Parcour" OtherKey="ID" Type="t_Parcour" IsForeignKey="true" />
+      <Association Name="t_Parcour_t_Parcour_Line" Member="t_Parcour" ThisKey="ID_Parcour" OtherKey="ID" Type="t_Parcour" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Penalty" Member="t_Penalties">
@@ -174,7 +174,7 @@
       <Column Name="ID_Competition_Team" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Competition_Team_t_Penalty" Member="t_Competition_Team" ThisKey="ID_Competition_Team" OtherKey="ID" Type="t_Competition_Team" IsForeignKey="true" />
-      <Association Name="t_CompetitionSet_t_Penalty" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Penalty" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Picture" Member="t_Pictures">
@@ -187,7 +187,7 @@
       <Association Name="t_Picture_t_Map" Member="t_Maps" ThisKey="ID" OtherKey="ID_Picture" Type="t_Map" />
       <Association Name="t_Picture_t_Pilot" Member="t_Pilots" ThisKey="ID" OtherKey="ID_Picture" Type="t_Pilot" />
       <Association Name="t_Picture_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Flag" Type="t_Team" />
-      <Association Name="t_CompetitionSet_t_Picture" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Picture" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.t_Pilot" Member="t_Pilots">
@@ -199,7 +199,7 @@
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="t_Pilot_t_Team" Member="t_Teams" ThisKey="ID" OtherKey="ID_Pilot" Type="t_Team" />
       <Association Name="t_Pilot_t_Team1" Member="t_Teams1" ThisKey="ID" OtherKey="ID_Navigator" Type="t_Team" />
-      <Association Name="t_CompetitionSet_t_Pilot" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Pilot" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Picture_t_Pilot" Member="t_Picture" ThisKey="ID_Picture" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
     </Type>
   </Table>
@@ -215,7 +215,7 @@
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="StartID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="t_Team_t_Competition_Team" Member="t_Competition_Teams" ThisKey="ID" OtherKey="ID_Team" Type="t_Competition_Team" />
-      <Association Name="t_CompetitionSet_t_Team" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_Team" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Picture_t_Team" Member="t_Picture" ThisKey="ID_Flag" OtherKey="ID" Type="t_Picture" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team" Member="t_Pilot" ThisKey="ID_Pilot" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
       <Association Name="t_Pilot_t_Team1" Member="t_Pilot1" ThisKey="ID_Navigator" OtherKey="ID" Type="t_Pilot" IsForeignKey="true" />
@@ -225,7 +225,7 @@
     <Type Name="t_Team_Tracker">
       <Column Name="ID_Competition_Team" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ID_Tracker" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="t_Competition_Team_t_Team_Tracker" Member="t_Competition_Team" ThisKey="ID_Competition_Team" OtherKey="ID" Type="t_Competition_Team" IsForeignKey="true" />
+      <Association Name="t_Competition_Team_t_Team_Tracker" Member="t_Competition_Team" ThisKey="ID_Competition_Team" OtherKey="ID" Type="t_Competition_Team" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="t_Tracker_t_Team_Tracker" Member="t_Tracker" ThisKey="ID_Tracker" OtherKey="ID" Type="t_Tracker" IsForeignKey="true" />
     </Type>
   </Table>
@@ -255,8 +255,8 @@
       <Column Name="ID_User" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="ID_CompetitionSet" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Access" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="t_CompetitionSet_t_User_CompetitionSet" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" />
-      <Association Name="t_User_t_User_CompetitionSet" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" />
+      <Association Name="t_CompetitionSet_t_User_CompetitionSet" Member="t_CompetitionSet" ThisKey="ID_CompetitionSet" OtherKey="ID" Type="t_CompetitionSet" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="t_User_t_User_CompetitionSet" Member="t_User" ThisKey="ID_User" OtherKey="ID" Type="t_User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>

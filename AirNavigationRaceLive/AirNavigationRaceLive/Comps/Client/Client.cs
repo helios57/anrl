@@ -106,7 +106,10 @@ namespace AirNavigationRaceLive.Comps.Client
         {
             return cache.cachePilot.add(p);
         }
-
+        public CompetitionSet getCompetitionSet()
+        {
+            return net.getCompetitionSet();
+        }
         internal List<NetworkObjects.Team> getTeams()
         {
             return cache.cacheTeam.getAll();

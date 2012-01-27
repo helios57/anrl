@@ -522,7 +522,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -839,7 +839,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_Session", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_User t_User
 		{
 			get
@@ -1214,7 +1214,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition_Team", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Competition_Team", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -3423,7 +3423,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Map", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Map", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -3667,7 +3667,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Parcour", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Parcour", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -3881,7 +3881,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Parcour_Line", Storage="_t_Parcour", ThisKey="ID_Parcour", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Parcour_t_Parcour_Line", Storage="_t_Parcour", ThisKey="ID_Parcour", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_Parcour t_Parcour
 		{
 			get
@@ -4121,7 +4121,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Penalty", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Penalty", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -4368,7 +4368,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Picture", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Picture", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -4642,7 +4642,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Pilot", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Pilot", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -5032,7 +5032,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Team", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_Team", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -5280,7 +5280,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_Team_t_Team_Tracker", Storage="_t_Competition_Team", ThisKey="ID_Competition_Team", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_Competition_Team_t_Team_Tracker", Storage="_t_Competition_Team", ThisKey="ID_Competition_Team", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_Competition_Team t_Competition_Team
 		{
 			get
@@ -5880,7 +5880,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_User_CompetitionSet", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_CompetitionSet_t_User_CompetitionSet", Storage="_t_CompetitionSet", ThisKey="ID_CompetitionSet", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_CompetitionSet t_CompetitionSet
 		{
 			get
@@ -5914,7 +5914,7 @@ namespace AnrlDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_CompetitionSet", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="t_User_t_User_CompetitionSet", Storage="_t_User", ThisKey="ID_User", OtherKey="ID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public t_User t_User
 		{
 			get

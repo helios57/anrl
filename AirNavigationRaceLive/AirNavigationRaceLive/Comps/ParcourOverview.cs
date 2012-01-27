@@ -351,7 +351,7 @@ namespace AirNavigationRaceLive.Comps
                 {
                     di.Create();
                 }
-                PDFCreator.CreateParcourPDF(pictureBox1, Client, dirPath + 
+                PDFCreator.CreateParcourPDF(pictureBox1, Client,li.getParcour().Name, dirPath + 
                     @"\Parcour_"+li.getParcour().ID +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf");
             }
         }
