@@ -114,7 +114,8 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         public static void CreateParcourPDF(ParcourPictureBox picBox, Client.Client c, String parcourName, String pathToPDF)
         {
-            PdfDocument doc = new PdfDocument(@"Resources\PDFTemplates\Competition_Map.pdf");
+            //PdfDocument doc = new PdfDocument(@"Resources\PDFTemplates\Competition_Map.pdf");
+            PdfDocument doc = new PdfDocument();
             doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
             doc.Info.Keywords = "ANRL Parcour Printout";
             doc.Info.Subject = "Parcour Printout generated from ANRL Client on " + DateTime.Now.ToString();
