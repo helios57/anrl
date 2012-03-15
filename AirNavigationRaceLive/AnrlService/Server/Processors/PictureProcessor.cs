@@ -7,7 +7,7 @@ using AnrlDB;
 
 namespace AnrlService.Server.Processors
 {
-    class PictureProcessor : AnrlService.Server.Processors.AProcessor<t_Picture,Picture>
+    class PictureProcessor : AnrlService.Server.Processors.AProcessor<t_Picture, Picture>
     {
         protected override Func<t_Picture, bool> getSingleSelection(int ID)
         {
@@ -23,11 +23,12 @@ namespace AnrlService.Server.Processors
             db.SubmitChanges();
             db.Dispose();
 
-            lock (cached)
-            {
-                cached.Add(getNetworkObject(pp));
-            }
             r.ResponseParameters.ID = pp.ID;
+        }
+
+        protected virtual void reloadCacheThreated()
+        {
+            //No cache
         }
 
         protected override System.Data.Linq.Table<t_Picture> getTable(AnrlDataContext db)
@@ -72,6 +73,48 @@ namespace AnrlService.Server.Processors
         protected override bool CheckCompetitionSet(int id_competitionSet, Picture Obj)
         {
             return Obj.ID_CompetitonSet == id_competitionSet;
+        }
+
+        protected override void Delete(Root request)
+        {
+            AnrlDataContext db = getDB();
+            getTable(db).DeleteOnSubmit(getTable(db).Single(getSingleSelection(request.RequestParameters.ID)));
+            db.SubmitChanges();
+            db.Dispose();
+        }
+
+        protected override void GetAll(Root request, Root response)
+        {
+            AnrlDataContext db = getDB();
+            List<int> ids = new List<int>(request.RequestParameters != null ? request.RequestParameters.IDS : new List<int>());
+            int competitionSet = request.AuthInfo.ID_CompetitionSet;
+            foreach (t_Picture obj in getTable(db).Where(p => p.ID_CompetitionSet == competitionSet))
+            {
+                if (!ids.Contains(GetID(obj)))
+                {
+                    AddToResponseList(response, getNetworkObject(obj));
+                }
+                else
+                {
+                    ids.Remove(GetID(obj));
+                }
+            }
+            db.Dispose();
+            response.ResponseParameters.DeletedIDList.AddRange(ids);
+        }
+
+        protected override void Get(Root request, Root response)
+        {
+            AnrlDataContext db = getDB();
+            if (request.RequestParameters != null && request.RequestParameters.ID != 0)
+            {
+                int competitionSet = request.AuthInfo.ID_CompetitionSet;
+                foreach (t_Picture obj in getTable(db).Where(p => p.ID == request.RequestParameters.ID && p.ID_CompetitionSet == competitionSet))
+                {
+                    AddToResponseList(response, getNetworkObject(obj));
+                }
+            }
+            db.Dispose();
         }
     }
 }
