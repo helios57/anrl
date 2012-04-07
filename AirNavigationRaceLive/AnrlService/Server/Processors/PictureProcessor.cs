@@ -26,7 +26,7 @@ namespace AnrlService.Server.Processors
             r.ResponseParameters.ID = pp.ID;
         }
 
-        protected virtual void reloadCacheThreated()
+        protected override void reloadCacheThreated()
         {
             //No cache
         }
