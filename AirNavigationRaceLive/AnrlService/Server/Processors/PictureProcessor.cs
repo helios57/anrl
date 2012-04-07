@@ -85,21 +85,23 @@ namespace AnrlService.Server.Processors
 
         protected override void GetAll(Root request, Root response)
         {
-            AnrlDataContext db = getDB();
             List<int> ids = new List<int>(request.RequestParameters != null ? request.RequestParameters.IDS : new List<int>());
-            int competitionSet = request.AuthInfo.ID_CompetitionSet;
-            foreach (t_Picture obj in getTable(db).Where(p => p.ID_CompetitionSet == competitionSet))
+            using (AnrlDataContext db = getDB())
             {
-                if (!ids.Contains(GetID(obj)))
+                int competitionSet = request.AuthInfo.ID_CompetitionSet;
+                foreach (t_Picture obj in getTable(db).Where(p => p.ID_CompetitionSet == competitionSet))
                 {
-                    AddToResponseList(response, getNetworkObject(obj));
+                    if (!ids.Contains(GetID(obj)))
+                    {
+                        AddToResponseList(response, getNetworkObject(obj));
+                    }
+                    else
+                    {
+                        ids.Remove(GetID(obj));
+                    }
                 }
-                else
-                {
-                    ids.Remove(GetID(obj));
-                }
+                db.Dispose();
             }
-            db.Dispose();
             response.ResponseParameters.DeletedIDList.AddRange(ids);
         }
 

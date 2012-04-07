@@ -25,6 +25,7 @@ namespace AnrlService
         private static GPSRequestProcessor GPSprocessor;
         private Socket listener;
         private Socket listenerGPS;
+        private static long lastGC = DateTime.Now.Ticks;
 
         //private X509Certificate cert;
 
@@ -139,6 +140,12 @@ namespace AnrlService
             catch (Exception ex)
             {
                 System.Console.WriteLine("Error " + ex.ToString());
+            }
+            //Force GC at least all 5 sec because Huge Picture-Data isn't removed properly
+            if (lastGC < DateTime.Now.AddSeconds(-5).Ticks)
+            {
+                GC.Collect();
+                lastGC = DateTime.Now.Ticks;
             }
         }
 
