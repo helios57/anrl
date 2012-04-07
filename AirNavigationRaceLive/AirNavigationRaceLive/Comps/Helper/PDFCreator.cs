@@ -11,6 +11,7 @@ using MigraDoc.DocumentObjectModel;
 using MigraDoc.Rendering;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.DocumentObjectModel.Shapes;
+using NetworkObjects;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -225,7 +226,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             for (int i = 3; i < 13; i++)
             {
-                gfx.DrawString("TP"+(i-3),
+                gfx.DrawString("TP" + (i - 3),
                     new XFont("Verdana", 14, XFontStyle.Bold), XBrushes.Black,
                     new XPoint(Unit.FromMillimeter(startX + 1), Unit.FromMillimeter(startY + rowHeight * i + 7)));
             }
@@ -234,7 +235,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 new XPoint(Unit.FromMillimeter(startX + 1), Unit.FromMillimeter(startY + rowHeight * 13 + 7)));
 
             gfx.DrawImage(XImage.FromFile(@"Resources\Summe.png"),
-                new XPoint(Unit.FromMillimeter(startX + 1), Unit.FromMillimeter(startY + rowHeight * 14 +2)));
+                new XPoint(Unit.FromMillimeter(startX + 1), Unit.FromMillimeter(startY + rowHeight * 14 + 2)));
 
             doc.Save(pathToPDF);
             doc.Close();
@@ -263,19 +264,108 @@ namespace AirNavigationRaceLive.Comps.Helper
                 page.Size = PdfSharp.PageSize.A4;
 
                 XGraphics gfx = XGraphics.FromPdfPage(page);
+
+
                 XImage image = XImage.FromGdiPlusImage(picBox.PrintOutImage);
 
                 double distX = picBox.GetXDistanceKM() / 2;//1:200 000 in cm
                 double distY = picBox.GetYDistanceKM() / 2;//1:200 000 in cm
 
-                gfx.DrawImage(image, 50, 50, page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
+                gfx.DrawImage(image, XUnit.FromCentimeter(2).Point, XUnit.FromCentimeter(3).Point, page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
+
+
+                XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
+                XRect rect = new XRect(XUnit.FromCentimeter(25), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
+                gfx.DrawImage(logo, rect);
+
+                gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
+                    new XFont("Verdana", 13, XFontStyle.Bold), XBrushes.Black,
+                    new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(1.5)));
+
+                gfx.DrawString("Q-Round: " + competition.Name,
+                    new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black,
+                    new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2.1)));
+
+                gfx.DrawString("Team: " + getTeamDsc(c, cbct.competitionTeam.ID_Team),
+                    new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black,
+                    new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2.7)));
+
+                int sum = 0;
+                int line = 0;
+
+                gfx.DrawString("ID", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3)));
+                gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3)));
+                gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3)));
+
+                foreach (Penalty penalty in cbct.penalty)
+                {
+                    sum += penalty.Points;
+                    line++;
+                    gfx.DrawString(penalty.ID.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
+                    gfx.DrawString(penalty.Points.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
+
+                    List<String> reason = getWrapped(penalty.Reason);
+                    bool loop = false;
+                    foreach (String s in reason)
+                    {
+                        gfx.DrawString(s, new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
+                        line++;
+                        loop = true;
+                    }
+                    if (loop)
+                    {
+                        line--;
+                    }
+                }
+                line++;
+                gfx.DrawString("-", new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
+                gfx.DrawString(sum.ToString(), new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
+                gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
 
             }
 
             doc.Save(pathToPDF);
             Process.Start(pathToPDF);
         }
+        private static List<String> getWrapped(String s)
+        {
+            List<String> result = new List<String>();
+            string[] splitted = s.Split(new char[] { ' ' });
+            int currentLenght = 0;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < splitted.Length; i++)
+            {
+                if (currentLenght + splitted[i].Length < 45)
+                {
+                    currentLenght += splitted.Length;
+                    sb.Append(splitted[i]);
+                    sb.Append(" ");
+                }
+                else
+                {
+                    currentLenght = 0;
+                    result.Add(sb.ToString());
+                    sb = new StringBuilder();
+                    i--;
+                }
+            }
+            result.Add(sb.ToString());
+            return result;
+        }
 
+        private static string getTeamDsc(Client.Client c, int ID_Team)
+        {
+            NetworkObjects.Team team = c.getTeam(ID_Team);
+            NetworkObjects.Pilot pilot = c.getPilot(team.ID_Pilot);
+            StringBuilder sb = new StringBuilder();
+            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
+            if (team.ID_Navigator > 0)
+            {
+                NetworkObjects.Pilot navi = c.getPilot(team.ID_Navigator);
+                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+            }
+            return sb.ToString();
+        }
         public static void test()
         {
             DateTime now = DateTime.Now;
