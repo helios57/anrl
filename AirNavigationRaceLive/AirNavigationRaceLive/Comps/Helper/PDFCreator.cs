@@ -286,14 +286,14 @@ namespace AirNavigationRaceLive.Comps.Helper
                     new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black,
                     new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2.1)));
 
-                gfx.DrawString("Team: " + getTeamDsc(c, cbct.competitionTeam.ID_Team),
+                gfx.DrawString("Crew: "  + getTeamDsc(c, cbct.competitionTeam.ID_Team),
                     new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black,
                     new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2.7)));
 
                 int sum = 0;
                 int line = 0;
 
-                gfx.DrawString("ID", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3)));
+                //gfx.DrawString("ID", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3)));
                 gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3)));
                 gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3)));
 
@@ -301,7 +301,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     sum += penalty.Points;
                     line++;
-                    gfx.DrawString(penalty.ID.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
+                    //gfx.DrawString(penalty.ID.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
                     gfx.DrawString(penalty.Points.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
 
                     List<String> reason = getWrapped(penalty.Reason);
@@ -318,7 +318,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                 }
                 line++;
-                gfx.DrawString("-", new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
+                //gfx.DrawString("-", new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
                 gfx.DrawString(sum.ToString(), new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
                 gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
 
@@ -358,6 +358,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             NetworkObjects.Team team = c.getTeam(ID_Team);
             NetworkObjects.Pilot pilot = c.getPilot(team.ID_Pilot);
             StringBuilder sb = new StringBuilder();
+            sb.Append(team.StartID).Append(" ");
             sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
             if (team.ID_Navigator > 0)
             {
