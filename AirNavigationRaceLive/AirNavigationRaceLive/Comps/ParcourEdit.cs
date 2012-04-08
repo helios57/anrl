@@ -351,6 +351,16 @@ namespace AirNavigationRaceLive.Comps
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             drag = true;
+            if (activeParcour != null && hoverPoint != null)
+            {
+                foreach (Line l in activeParcour.LineList)
+                {
+                    if (l.Type <= 10 && l.Type >= 3 && (l.O == hoverPoint || l.A == hoverPoint || l.B == hoverPoint))
+                    {
+                        comboBoxPoint.SelectedItem = (LineType)l.Type;
+                    }
+                }
+            }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -381,7 +391,25 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-
+            if (activeParcour != null && comboBoxPoint.SelectedItem != null)
+            {
+                if (activeParcour.LineList.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
+                {
+                    Line l = activeParcour.LineList.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
+                    Vector a = new Vector(l.A.longitude, l.A.latitude, 0);
+                    Vector b = new Vector(l.B.longitude, l.B.latitude, 0);
+                    Vector m = Vector.Middle(a, b);
+                    Vector neu = new Vector((double)manualPointLongitude.Value, (double)manualPointLatitude.Value, 0);
+                    Vector diff = neu-m;
+                    l.A.longitude += diff.X;
+                    l.A.latitude += diff.Y;
+                    l.O.longitude += diff.X;
+                    l.O.latitude += diff.Y;
+                    l.B.longitude += diff.X;
+                    l.B.latitude += diff.Y;
+                    pictureBox1.Invalidate();
+                }
+            }
         }
 
         private void comboBoxPoint_SelectedIndexChanged(object sender, EventArgs e)
