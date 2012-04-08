@@ -57,6 +57,14 @@
             this.checkBoxConnected = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.btnRecalc = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxPoint = new System.Windows.Forms.ComboBox();
+            this.manualPointLongitude = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.manualPointLatitude = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.fldName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -74,6 +82,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.manualPointLongitude)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.manualPointLatitude)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -134,6 +145,7 @@
             this.flowLayoutPanel1.Controls.Add(this.panel5);
             this.flowLayoutPanel1.Controls.Add(this.panel7);
             this.flowLayoutPanel1.Controls.Add(this.btnRecalc);
+            this.flowLayoutPanel1.Controls.Add(this.groupBox2);
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -410,6 +422,94 @@
             this.btnRecalc.UseVisualStyleBackColor = true;
             this.btnRecalc.Click += new System.EventHandler(this.btnRecalc_Click);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnApply);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.comboBoxPoint);
+            this.groupBox2.Controls.Add(this.manualPointLongitude);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.manualPointLatitude);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Location = new System.Drawing.Point(3, 275);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(187, 125);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Manual Point Adjustment";
+            // 
+            // btnApply
+            // 
+            this.btnApply.Location = new System.Drawing.Point(78, 91);
+            this.btnApply.Name = "btnApply";
+            this.btnApply.Size = new System.Drawing.Size(99, 23);
+            this.btnApply.TabIndex = 6;
+            this.btnApply.Text = "Apply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(5, 22);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(34, 13);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "Point:";
+            // 
+            // comboBoxPoint
+            // 
+            this.comboBoxPoint.FormattingEnabled = true;
+            this.comboBoxPoint.Location = new System.Drawing.Point(78, 19);
+            this.comboBoxPoint.Name = "comboBoxPoint";
+            this.comboBoxPoint.Size = new System.Drawing.Size(99, 21);
+            this.comboBoxPoint.TabIndex = 4;
+            this.comboBoxPoint.SelectedIndexChanged += new System.EventHandler(this.comboBoxPoint_SelectedIndexChanged);
+            // 
+            // manualPointLongitude
+            // 
+            this.manualPointLongitude.DecimalPlaces = 12;
+            this.manualPointLongitude.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            262144});
+            this.manualPointLongitude.Location = new System.Drawing.Point(78, 65);
+            this.manualPointLongitude.Name = "manualPointLongitude";
+            this.manualPointLongitude.Size = new System.Drawing.Size(100, 20);
+            this.manualPointLongitude.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Longitude:";
+            // 
+            // manualPointLatitude
+            // 
+            this.manualPointLatitude.DecimalPlaces = 12;
+            this.manualPointLatitude.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            262144});
+            this.manualPointLatitude.Location = new System.Drawing.Point(78, 46);
+            this.manualPointLatitude.Name = "manualPointLatitude";
+            this.manualPointLatitude.Size = new System.Drawing.Size(100, 20);
+            this.manualPointLatitude.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(48, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Latitude:";
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -417,7 +517,7 @@
             this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel4.Controls.Add(this.fldName);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 275);
+            this.panel4.Location = new System.Drawing.Point(3, 406);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(190, 28);
             this.panel4.TabIndex = 20;
@@ -440,7 +540,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 309);
+            this.btnSave.Location = new System.Drawing.Point(3, 440);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -498,6 +598,10 @@
             this.panel5.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.manualPointLongitude)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.manualPointLatitude)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
@@ -544,5 +648,13 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown channelWide;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox comboBoxPoint;
+        private System.Windows.Forms.NumericUpDown manualPointLongitude;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown manualPointLatitude;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnApply;
     }
 }

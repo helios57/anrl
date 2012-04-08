@@ -41,6 +41,11 @@ namespace AirNavigationRaceLive.Comps
         private void ParcourGen_Load(object sender, EventArgs e)
         {
             loadMaps();
+            comboBoxPoint.Items.Clear();
+            foreach (int i in new int[]{3,4,5,6,7,8,9,10,14})
+            {
+                comboBoxPoint.Items.Add((LineType)i);
+            }
         }
         private void loadMaps()
         {
@@ -372,6 +377,32 @@ namespace AirNavigationRaceLive.Comps
         private void channelWide_ValueChanged(object sender, EventArgs e)
         {
             btnRecalc_Click(null, null);
+        }
+
+        private void btnApply_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxPoint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (activeParcour != null && comboBoxPoint.SelectedItem != null)
+            {
+                if (activeParcour.LineList.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
+                {
+                    Line l = activeParcour.LineList.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
+                    Vector a = new Vector(l.A.longitude, l.A.latitude, 0);
+                    Vector b = new Vector(l.B.longitude, l.B.latitude, 0);
+                    Vector m = Vector.Middle(a, b);
+                    manualPointLatitude.Value = (decimal)m.Y;
+                    manualPointLongitude.Value = (decimal)m.X;
+                }
+                else
+                {
+                    manualPointLatitude.Value = 0;
+                    manualPointLongitude.Value = 0;
+                }
+            }
         }
     }
 }
