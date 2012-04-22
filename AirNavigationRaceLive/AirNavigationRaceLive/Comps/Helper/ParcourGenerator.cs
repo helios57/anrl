@@ -20,11 +20,13 @@ namespace AirNavigationRaceLive.Comps.Helper
         private Comparer comparer = new Comparer();
         public volatile bool finished = false;
         private volatile bool regenerate = false;
+        private int count;
 
-        public void GenerateParcour(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double lenght, double channel)
+        public void GenerateParcour(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double lenght, double channel, int count)
         {
             this.parcour = parcour;
             this.c = c;
+            this.count = count;
             NetworkObjects.Line Start = parcour.LineList.Single(p => p.Type == (int)NetworkObjects.LineType.START) as NetworkObjects.Line;
             if (Start == null) return;
             #region StartVektoren

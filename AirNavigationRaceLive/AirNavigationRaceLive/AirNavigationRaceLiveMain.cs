@@ -327,11 +327,11 @@ namespace AirNavigationRaceLive
 
         private void overviewZoomedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (ParcourOverviewZoomed == null)
-            {
+            //Avoid null-pointer exception
+            //if (ParcourOverviewZoomed == null)
+           // {
                 ParcourOverviewZoomed = new ParcourOverviewZoomed(Client);
-            }
+            //}
             enableControl(ParcourOverviewZoomed);
         }
 

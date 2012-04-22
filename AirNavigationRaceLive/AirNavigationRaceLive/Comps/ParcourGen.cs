@@ -239,12 +239,13 @@ namespace AirNavigationRaceLive.Comps
             {
                 double lenght = Decimal.ToDouble(parcourLength.Value);
                 double channel = Decimal.ToDouble(channelWide.Value);
+                int count = Decimal.ToInt32(corridorCount.Value);
                 t = new Timer();
                 t.Tick += new EventHandler(t_Tick);
                 t.Interval = 100;
                 t.Start();
                 pc = new ParcourGenerator();
-                pc.GenerateParcour(activeParcour, c, lenght, channel);
+                pc.GenerateParcour(activeParcour, c, lenght, channel, count);
                 pictureBox1.Invalidate();
             }
             catch (Exception ex)

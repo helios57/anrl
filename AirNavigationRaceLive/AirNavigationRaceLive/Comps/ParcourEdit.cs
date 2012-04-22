@@ -407,6 +407,15 @@ namespace AirNavigationRaceLive.Comps
                     l.O.latitude += diff.Y;
                     l.B.longitude += diff.X;
                     l.B.latitude += diff.Y;
+                    List<Point> connectedPoints = findConnectedPoints(activeParcour.LineList, l.A, l);
+                    foreach (Point p in connectedPoints)
+                    {
+                        if (p != l.A && p != l.B && p != l.O)
+                        {
+                            p.longitude += diff.X;
+                            p.latitude += diff.Y;
+                        }
+                    }
                     pictureBox1.Invalidate();
                 }
             }
