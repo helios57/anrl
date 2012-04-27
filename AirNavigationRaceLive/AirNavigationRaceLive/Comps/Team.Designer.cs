@@ -61,13 +61,14 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.textBoxCNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ColumnColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewTeam
             // 
             this.listViewTeam.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listViewTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewTeam.AutoArrange = false;
             this.listViewTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.IDl,
@@ -75,7 +76,8 @@
             this.columnHeader2,
             this.Pilot,
             this.Navigator,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.ColumnColor});
             this.listViewTeam.FullRowSelect = true;
             this.listViewTeam.GridLines = true;
             this.listViewTeam.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -84,7 +86,7 @@
             this.listViewTeam.MultiSelect = false;
             this.listViewTeam.Name = "listViewTeam";
             this.listViewTeam.ShowGroups = false;
-            this.listViewTeam.Size = new System.Drawing.Size(431, 281);
+            this.listViewTeam.Size = new System.Drawing.Size(663, 281);
             this.listViewTeam.TabIndex = 5;
             this.listViewTeam.UseCompatibleStateImageBehavior = false;
             this.listViewTeam.View = System.Windows.Forms.View.Details;
@@ -129,7 +131,7 @@
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(446, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(678, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(244, 23);
             this.btnRefresh.TabIndex = 6;
@@ -140,8 +142,8 @@
             // listViewPilots
             // 
             this.listViewPilots.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listViewPilots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewPilots.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewPilots.AutoArrange = false;
             this.listViewPilots.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -183,7 +185,7 @@
             // 
             this.textBoxNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNavigator.Enabled = false;
-            this.textBoxNavigator.Location = new System.Drawing.Point(502, 168);
+            this.textBoxNavigator.Location = new System.Drawing.Point(734, 168);
             this.textBoxNavigator.Name = "textBoxNavigator";
             this.textBoxNavigator.Size = new System.Drawing.Size(124, 20);
             this.textBoxNavigator.TabIndex = 18;
@@ -192,7 +194,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(441, 171);
+            this.label4.Location = new System.Drawing.Point(673, 171);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 17;
@@ -202,7 +204,7 @@
             // 
             this.textBoxPilot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPilot.Enabled = false;
-            this.textBoxPilot.Location = new System.Drawing.Point(502, 142);
+            this.textBoxPilot.Location = new System.Drawing.Point(734, 142);
             this.textBoxPilot.Name = "textBoxPilot";
             this.textBoxPilot.Size = new System.Drawing.Size(124, 20);
             this.textBoxPilot.TabIndex = 16;
@@ -211,7 +213,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(441, 145);
+            this.label3.Location = new System.Drawing.Point(673, 145);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 15;
@@ -221,7 +223,7 @@
             // 
             this.textBoxID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxID.Enabled = false;
-            this.textBoxID.Location = new System.Drawing.Point(502, 90);
+            this.textBoxID.Location = new System.Drawing.Point(734, 90);
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(124, 20);
             this.textBoxID.TabIndex = 14;
@@ -230,7 +232,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(441, 93);
+            this.label2.Location = new System.Drawing.Point(673, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 13);
             this.label2.TabIndex = 13;
@@ -259,7 +261,7 @@
             // btnClearPilot
             // 
             this.btnClearPilot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearPilot.Location = new System.Drawing.Point(632, 140);
+            this.btnClearPilot.Location = new System.Drawing.Point(864, 140);
             this.btnClearPilot.Name = "btnClearPilot";
             this.btnClearPilot.Size = new System.Drawing.Size(56, 23);
             this.btnClearPilot.TabIndex = 20;
@@ -270,7 +272,7 @@
             // btnClearNavigator
             // 
             this.btnClearNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearNavigator.Location = new System.Drawing.Point(632, 166);
+            this.btnClearNavigator.Location = new System.Drawing.Point(864, 166);
             this.btnClearNavigator.Name = "btnClearNavigator";
             this.btnClearNavigator.Size = new System.Drawing.Size(56, 23);
             this.btnClearNavigator.TabIndex = 21;
@@ -281,7 +283,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(575, 61);
+            this.btnSave.Location = new System.Drawing.Point(807, 61);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(113, 23);
             this.btnSave.TabIndex = 23;
@@ -292,7 +294,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(446, 61);
+            this.btnNew.Location = new System.Drawing.Point(678, 61);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(123, 23);
             this.btnNew.TabIndex = 22;
@@ -304,7 +306,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(441, 225);
+            this.label5.Location = new System.Drawing.Point(673, 225);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 30;
@@ -313,7 +315,7 @@
             // btnColorSelect
             // 
             this.btnColorSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnColorSelect.Location = new System.Drawing.Point(502, 194);
+            this.btnColorSelect.Location = new System.Drawing.Point(734, 194);
             this.btnColorSelect.Name = "btnColorSelect";
             this.btnColorSelect.Size = new System.Drawing.Size(121, 23);
             this.btnColorSelect.TabIndex = 31;
@@ -325,7 +327,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(440, 199);
+            this.label6.Location = new System.Drawing.Point(672, 199);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 32;
@@ -335,7 +337,7 @@
             // 
             this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Enabled = false;
-            this.textBoxName.Location = new System.Drawing.Point(502, 248);
+            this.textBoxName.Location = new System.Drawing.Point(734, 248);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(124, 20);
             this.textBoxName.TabIndex = 36;
@@ -344,7 +346,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(441, 251);
+            this.label7.Location = new System.Drawing.Point(673, 251);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 35;
@@ -354,7 +356,7 @@
             // 
             this.fldAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fldAC.Enabled = false;
-            this.fldAC.Location = new System.Drawing.Point(502, 222);
+            this.fldAC.Location = new System.Drawing.Point(734, 222);
             this.fldAC.Name = "fldAC";
             this.fldAC.Size = new System.Drawing.Size(124, 20);
             this.fldAC.TabIndex = 37;
@@ -362,7 +364,7 @@
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(446, 32);
+            this.btnExport.Location = new System.Drawing.Point(678, 32);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(244, 23);
             this.btnExport.TabIndex = 38;
@@ -373,7 +375,7 @@
             // textBoxCNumber
             // 
             this.textBoxCNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCNumber.Location = new System.Drawing.Point(501, 116);
+            this.textBoxCNumber.Location = new System.Drawing.Point(733, 116);
             this.textBoxCNumber.Name = "textBoxCNumber";
             this.textBoxCNumber.Size = new System.Drawing.Size(124, 20);
             this.textBoxCNumber.TabIndex = 40;
@@ -382,11 +384,15 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(440, 119);
+            this.label1.Location = new System.Drawing.Point(672, 119);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 39;
             this.label1.Text = "CNumber";
+            // 
+            // ColumnColor
+            // 
+            this.ColumnColor.Text = "Color";
             // 
             // Team
             // 
@@ -417,7 +423,7 @@
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.listViewTeam);
             this.Name = "Team";
-            this.Size = new System.Drawing.Size(693, 400);
+            this.Size = new System.Drawing.Size(925, 400);
             this.Load += new System.EventHandler(this.Team_Load);
             this.VisibleChanged += new System.EventHandler(this.Team_Load);
             this.ResumeLayout(false);
@@ -460,5 +466,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader ColumnColor;
     }
 }

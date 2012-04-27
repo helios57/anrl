@@ -57,7 +57,7 @@ namespace AirNavigationRaceLive.Comps
             }
             List<NetworkObjects.Tracker> trackers = Client.getTrackers();
             listViewTrackers.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers)
+            foreach (NetworkObjects.Tracker t in trackers.Where(p=> !p.IMEI.StartsWith("_")))
             {
                 ListViewItem lvi = new ListViewItem(new string[] { t.ID.ToString(), t.Name, t.IMEI });
                 lvi.Tag = t;

@@ -58,11 +58,19 @@ namespace AirNavigationRaceLive.Comps
                     }
                 }
 
-                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.StartID, team.Name != null ? team.Name : "", pilot.Name, (navigator != null) ? navigator.Name : "-", team.Description });
+                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.StartID, team.Name != null ? team.Name : "", pilot.Name, (navigator != null) ? navigator.Name : "-", team.Description, team.Color });
+                lvi.UseItemStyleForSubItems = false;
                 lvi.Tag = team;
+                Color c =Color.FromName(team.Color);
+                lvi.SubItems[6].BackColor = c;
+               
+                if (c.A == 0 && c.B == 0 && c.G == 0 && c.R == 0)
+                {
+                    ColorConverter cc = new ColorConverter();
+                    lvi.SubItems[6].BackColor = (Color)cc.ConvertFromString("#"+team.Color);
+                }
                 listViewTeam.Items.Add(lvi);
             }
-
             listViewPilots.Items.Clear();
             foreach (NetworkObjects.Pilot p in pilots)
             {
@@ -239,7 +247,7 @@ namespace AirNavigationRaceLive.Comps
                 di.Create();
             }
             PDFCreator.CreateTeamsPDF(Client.getTeams(), Client, dirPath +
-                @"\CrewsPrintout_" + DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf");
+                @"\CrewsPrintout_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
 
         }
     }

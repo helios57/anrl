@@ -53,7 +53,7 @@ namespace AirNavigationRaceLive.Comps
         {
             List<NetworkObjects.Tracker> trackers = Client.getTrackers();
             listViewTracker.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers)
+            foreach (NetworkObjects.Tracker t in trackers.Where(p=> !p.IMEI.StartsWith("_")))
             {
                 listViewTracker.Items.Add(new TrackerEntry(t));
             }

@@ -31,44 +31,45 @@ namespace AirNavigationRaceLive.Comps.Helper
             doc.DefaultPageSetup.Orientation = Orientation.Landscape;
             doc.DefaultPageSetup.BottomMargin = Unit.FromCentimeter(1);
             doc.DefaultPageSetup.TopMargin = Unit.FromCentimeter(1);
-            doc.DefaultPageSetup.LeftMargin = Unit.FromCentimeter(1);
+            doc.DefaultPageSetup.LeftMargin = Unit.FromCentimeter(1.5);
             doc.DefaultPageSetup.RightMargin = Unit.FromCentimeter(1);
 
 
             Section sec = doc.AddSection();
 
             AddCompetitionAndLogo(c, sec);
-
+            sec.AddParagraph("");
             sec.AddParagraph("Participants list");
 
             Table table = sec.AddTable();
             table.Borders.Visible = true;
 
-            table.AddColumn(Unit.FromCentimeter(0.7));
+            //table.AddColumn(Unit.FromCentimeter(0.7));
             table.AddColumn(Unit.FromCentimeter(2.5));
             table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
             table.AddColumn();
 
             Row row = table.AddRow();
             row.Shading.Color = Colors.Gray;
-            row.Cells[0].AddParagraph("ID");
-            row.Cells[1].AddParagraph("CNumber");
-            row.Cells[2].AddParagraph("Nationality");
-            row.Cells[3].AddParagraph("Pilot Lastname");
-            row.Cells[4].AddParagraph("Pilot Surename");
-            row.Cells[5].AddParagraph("Navigator Lastname");
-            row.Cells[6].AddParagraph("Navigator Surename");
-            row.Cells[7].AddParagraph("AC");
+            //row.Cells[0].AddParagraph("ID");
+            row.Cells[0].AddParagraph("CNumber");
+            row.Cells[1].AddParagraph("Nationality");
+            row.Cells[2].AddParagraph("Pilot Lastname");
+            row.Cells[3].AddParagraph("Pilot Surename");
+            row.Cells[4].AddParagraph("Navigator Lastname");
+            row.Cells[5].AddParagraph("Navigator Surename");
+            row.Cells[6].AddParagraph("AC");
 
             foreach (NetworkObjects.Team t in teams)
             {
                 Row r = table.AddRow();
-                r.Cells[0].AddParagraph(t.ID.ToString());
-                r.Cells[1].AddParagraph(t.StartID);
+                //r.Cells[0].AddParagraph(t.ID.ToString());
+                r.Cells[0].AddParagraph(t.StartID);
+                r.Cells[1].AddParagraph(t.Name);
                 NetworkObjects.Pilot pilot = c.getPilot(t.ID_Pilot);
                 r.Cells[2].AddParagraph(pilot.Name);
                 r.Cells[3].AddParagraph(pilot.Surename);
@@ -78,8 +79,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     r.Cells[4].AddParagraph(navigator.Name);
                     r.Cells[5].AddParagraph(navigator.Surename);
                 }
-                r.Cells[6].AddParagraph(t.Name);
-                r.Cells[7].AddParagraph(t.Description);
+                r.Cells[6].AddParagraph(t.Description);
             }
 
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
@@ -109,7 +109,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             logo.Height = Unit.FromCentimeter(2);
             logo.Width = Unit.FromCentimeter(2);
             logo.LockAspectRatio = true;
-            logo.Left = Unit.FromCentimeter(24);
+            logo.Left = Unit.FromCentimeter(23);
             logo.Top = Unit.FromCentimeter(0);
         }
 
@@ -286,7 +286,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black,
                     new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2.1)));
 
-                gfx.DrawString("Crew: "  + getTeamDsc(c, cbct.competitionTeam.ID_Team),
+                gfx.DrawString("Crew: " + getTeamDsc(c, cbct.competitionTeam.ID_Team),
                     new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black,
                     new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2.7)));
 
@@ -434,7 +434,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             Table table = sec.AddTable();
             table.Borders.Visible = true;
 
-            table.AddColumn(Unit.FromCentimeter(0.7));
+            table.AddColumn(Unit.FromCentimeter(1.5));
             table.AddColumn(Unit.FromCentimeter(2.5));
             table.AddColumn();
             table.AddColumn();
@@ -455,9 +455,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             row.Cells[4].AddParagraph("Pilot Surename");
             row.Cells[5].AddParagraph("Navigator Lastname");
             row.Cells[6].AddParagraph("Navigator Surename");
-            row.Cells[7].AddParagraph("Take Off");
-            row.Cells[8].AddParagraph("Start Gate");
-            row.Cells[9].AddParagraph("End Gate");
+            row.Cells[7].AddParagraph("Take Off (UTC)");
+            row.Cells[8].AddParagraph("Start Gate (UTC)");
+            row.Cells[9].AddParagraph("End Gate (UTC)");
             row.Cells[10].AddParagraph("Route");
 
             foreach (NetworkObjects.CompetitionTeam ct in competition.CompetitionTeamList)
