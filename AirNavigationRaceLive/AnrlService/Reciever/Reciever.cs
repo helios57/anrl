@@ -305,7 +305,7 @@ namespace TCPReciever
                 {
                     try
                     {
-                        List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI == tr.IMEI).OrderBy(a => a.TimestampTracker).ToList();
+                        List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI.Trim() == tr.IMEI.Trim()).OrderBy(a => a.TimestampTracker).ToList();
                         foreach (t_GPS_IN GPS_IN in Positions_Tracker)
                         {
                             try
