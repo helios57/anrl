@@ -47,13 +47,13 @@ namespace AnrlService
                 SocketType.Stream, ProtocolType.Tcp);
             listener.Bind(localEP);
             listener.Listen(100);
-            
+
             IPEndPoint localEPGPS = new IPEndPoint(IPAddress.Any, PORTGPS);
             listenerGPS = new Socket(localEP.Address.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
             listenerGPS.Bind(localEPGPS);
             listenerGPS.Listen(100);
-            
+
             try
             {
                 listener.BeginAccept(new AsyncCallback(ClientConnected), listener);
@@ -105,10 +105,10 @@ namespace AnrlService
 #endif
             }
         }
-       /* public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
-        {
-            return true;
-        }*/
+        /* public bool certificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+         {
+             return true;
+         }*/
 
         private void processConnection(Socket handler)
         {
@@ -117,7 +117,7 @@ namespace AnrlService
                 //SslStream stream = new SslStream(new NetworkStream(handler), false, new RemoteCertificateValidationCallback(certificate));
                 NetworkStream stream = new NetworkStream(handler);
                 //stream.AuthenticateAsServer(cert,false, System.Security.Authentication.SslProtocols.Tls,false);
-                
+
                 Root reqest = Serializer.DeserializeWithLengthPrefix<Root>(stream, PrefixStyle.Base128);
                 if (reqest == null)
                 {

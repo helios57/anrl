@@ -40,7 +40,7 @@ namespace TCPReciever
                     db.CreateDatabase();
                 }
 
-                CalculateTabels = new System.Timers.Timer(1000);
+                CalculateTabels = new System.Timers.Timer(20000);
                 CalculateTabels.Elapsed += new ElapsedEventHandler(CalculateTabels_Elapsed);
                 CalculateTabels.Start();
 
