@@ -22,13 +22,7 @@ namespace AnrlService.Server.Processors
             db.SubmitChanges();
             r.ResponseParameters = new ResponseParameters();
             r.ResponseParameters.ID = t_d.ID;
-            lock (cached)
-            {
-                cached.RemoveAll(p => p.ID == t_d.ID);
-                cached.Add(getNetworkObject(t_d));
-            }
             db.Dispose();
-            reloadCacheThreated();//Hack to avoid empty competitions
         }
 
         protected override void reloadCacheThreated()
