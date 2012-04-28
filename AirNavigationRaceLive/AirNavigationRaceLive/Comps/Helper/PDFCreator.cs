@@ -244,17 +244,19 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         public static void CreateResultPDF(VisualisationPictureBox picBox, Client.Client c, NetworkObjects.Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
         {
-            PdfDocument doc = new PdfDocument();
-            doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
-            doc.Info.Keywords = "ANRL Results Printout";
-            doc.Info.Subject = "Results Printout generated from ANRL Client on " + DateTime.Now.ToString();
-            doc.Info.Title = "Results Printout";
-            doc.Options.ColorMode = PdfColorMode.Cmyk;
-            doc.Language = "EN";
-            doc.PageLayout = PdfPageLayout.SinglePage;
+
             List<NetworkObjects.CompetitionTeam> tempList = new List<NetworkObjects.CompetitionTeam>();
             foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
             {
+                PdfDocument doc = new PdfDocument();
+                doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
+                doc.Info.Keywords = "ANRL Results Printout";
+                doc.Info.Subject = "Results Printout generated from ANRL Client on " + DateTime.Now.ToString();
+                doc.Info.Title = "Results Printout";
+                doc.Options.ColorMode = PdfColorMode.Cmyk;
+                doc.Language = "EN";
+                doc.PageLayout = PdfPageLayout.SinglePage;
+
                 tempList.Clear();
                 tempList.Add(cbct.competitionTeam);
                 picBox.SetData(cbct.data, c.getTeams(), tempList);
@@ -275,7 +277,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
 
                 XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
-                XRect rect = new XRect(XUnit.FromCentimeter(25), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
+                XRect rect = new XRect(XUnit.FromCentimeter(23), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
                 gfx.DrawImage(logo, rect);
 
                 gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
@@ -322,11 +324,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 gfx.DrawString(sum.ToString(), new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
                 gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
 
-            }
 
-            doc.Save(pathToPDF);
-            Process.Start(pathToPDF);
+                String path = pathToPDF.Replace(".pdf",(getTeamDsc(c, cbct.competitionTeam.ID_Team)+".pdf"));
+                doc.Save(path);
+                Process.Start(path);
+            }    
         }
+
         private static List<String> getWrapped(String s)
         {
             List<String> result = new List<String>();

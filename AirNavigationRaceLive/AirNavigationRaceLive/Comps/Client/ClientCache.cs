@@ -118,17 +118,23 @@ namespace AirNavigationRaceLive.Comps.Client
 
         private void updateCaches(bool partial)
         {
-            updating = true;
-            cacheTracker.update(partial);
-            cacheMap.update(partial);
-            cachePilot.update(partial);
-            cachePicture.update(partial);
-            cacheParcour.update(partial);
-            cacheTeam.update(partial);
-            cacheCompetition.update(partial);
-            cachePenalty.update(partial);
-            Persist();
-            updating = false;
+            updating = true; try
+            {
+                cacheTracker.update(partial);
+                cacheMap.update(partial);
+                cachePilot.update(partial);
+                cachePicture.update(partial);
+                cacheParcour.update(partial);
+                cacheTeam.update(partial);
+                cacheCompetition.update(partial);
+                cachePenalty.update(partial);
+                Persist();
+            }
+            catch { }
+            finally
+            {
+                updating = false;
+            }
         }
         public bool initialLoadComplete()
         {
