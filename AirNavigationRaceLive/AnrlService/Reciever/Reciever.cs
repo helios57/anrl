@@ -317,12 +317,12 @@ namespace TCPReciever
                                 InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
                                 InsertData.Altitude = double.Parse(GPS_IN.altitude);
                                 db.t_Datens.InsertOnSubmit(InsertData);
-                                GPS_IN.Processed = true;
                             }
                             catch (Exception ex)
                             {
                                 Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.ToString(), 18);
                             }
+                            GPS_IN.Processed = true;
                         }
                     }
                     catch (Exception ex)
