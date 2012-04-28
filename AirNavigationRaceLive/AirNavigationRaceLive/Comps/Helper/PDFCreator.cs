@@ -244,7 +244,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         public static void CreateResultPDF(VisualisationPictureBox picBox, Client.Client c, NetworkObjects.Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
         {
-
+            int counter = 0;
             List<NetworkObjects.CompetitionTeam> tempList = new List<NetworkObjects.CompetitionTeam>();
             foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
             {
@@ -325,8 +325,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
 
 
-                String path = pathToPDF.Replace(".pdf",(getTeamDsc(c, cbct.competitionTeam.ID_Team)+".pdf"));
+                String path = pathToPDF.Replace(".pdf",(counter++ + "_"+ getTeamDsc(c, cbct.competitionTeam.ID_Team)+".pdf"));
                 doc.Save(path);
+                doc.Close();
                 Process.Start(path);
             }    
         }
