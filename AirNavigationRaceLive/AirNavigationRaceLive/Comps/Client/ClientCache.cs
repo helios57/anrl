@@ -118,7 +118,8 @@ namespace AirNavigationRaceLive.Comps.Client
 
         private void updateCaches(bool partial)
         {
-            updating = true; try
+            updating = true;
+            try
             {
                 cacheTracker.update(partial);
                 cacheMap.update(partial);
