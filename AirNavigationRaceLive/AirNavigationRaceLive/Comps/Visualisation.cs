@@ -59,7 +59,7 @@ namespace AirNavigationRaceLive.Comps
                         maxtime = Math.Max(maxtime, ct.TimeEndLine);
                     }
                 }
-                Client.getGPSDatenCache().requestGPSData(trackerlist, mintime - 1000000000, maxtime + 10000000000, new AsyncCallback(recieveData));
+                Client.getGPSDatenCache().requestGPSData(trackerlist, mintime - 10000000000, maxtime + 100000000000, new AsyncCallback(recieveData));
             }
         }
         public void recieveData(IAsyncResult result)

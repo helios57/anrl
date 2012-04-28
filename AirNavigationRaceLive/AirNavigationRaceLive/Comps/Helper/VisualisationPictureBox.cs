@@ -43,7 +43,12 @@ namespace AirNavigationRaceLive.Comps
 
         private void PaintParcourAndData(PaintEventArgs pe, bool rescale)
         {
-
+            float lineThickness = 2f;
+            if (pe != null && pe.ClipRectangle.Bottom == -4)
+            {
+                lineThickness = 14f;
+            }
+            Pen.Width = lineThickness;
             #region parcour
             if (Parcour != null && c != null)
             {
@@ -132,6 +137,8 @@ namespace AirNavigationRaceLive.Comps
                 int y0 = 0;
                 int x0 = 0;
                 double factor = 1;
+  
+
                 if (rescale)
                 {
                     double widthFactor = (double)Width / Image.Width;
@@ -163,7 +170,8 @@ namespace AirNavigationRaceLive.Comps
                         }
                         if (points.Count > 2)
                         {
-                            pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), 2f), points.ToArray());
+                         
+                            pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), lineThickness), points.ToArray());
                         }
                     }
                 }
@@ -179,7 +187,7 @@ namespace AirNavigationRaceLive.Comps
                 Graphics gr = Graphics.FromImage(bt);
                 Rectangle rc = new Rectangle(0, 0, Image.Width, Image.Height);
                 gr.DrawImage(Image, rc);
-                PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle());
+                PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle(-2,-2,-2,-2));
                 PaintParcourAndData(pe,false);
                 return bt;
             }
