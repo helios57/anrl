@@ -25,7 +25,6 @@ namespace TCPReciever
         private bool running;
         private List<Thread> ThreadList = new List<Thread>();
         private System.Timers.Timer CalculateTabels;
-        private AnrlDB.AnrlDataContext db;
 
         #endregion
         /// <summary>
@@ -35,7 +34,7 @@ namespace TCPReciever
         {
             try
             {
-                db = new AnrlDB.AnrlDataContext();
+                AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
                 if (!db.DatabaseExists())
                 {
                     db.CreateDatabase();
@@ -49,6 +48,7 @@ namespace TCPReciever
                 this.tcpListener = new TcpListener(IPAddress.Any, 5000);
                 this.listenThread = new Thread(new ThreadStart(ListenForClients));
                 this.listenThread.Start();
+                db.Dispose();
             }
             catch (Exception ex)
             {
@@ -82,6 +82,7 @@ namespace TCPReciever
                 String incomingData = GPSData as String;
                 if (incomingData != null)
                 {
+                    AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
                     try
                     {
                         String trimedGPSData = incomingData.Trim(new char[] { '!', '$' });
@@ -126,7 +127,11 @@ namespace TCPReciever
                     }
                     catch (Exception ex)
                     {
-                        Logger.Log("Exception in Server.ProcessRecievedGPSData" + ex.ToString(), 12);
+                        Logger.Log("Exception in Server.ProcessRecievedGPSData incomming:"+incomingData + " " + ex.ToString(), 12);
+                    }
+                    finally
+                    {
+                        db.Dispose();
                     }
                 }
             }
@@ -290,6 +295,7 @@ namespace TCPReciever
         /// <param name="e"></param>
         private void CalculateTabels_Elapsed(object sender, ElapsedEventArgs e)
         {
+            AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
             try
             {
                 List<t_GPS_IN> Positions = db.t_GPS_INs.Where(a => !a.Processed).OrderBy(t => t.TimestampTracker).ToList();
@@ -329,6 +335,10 @@ namespace TCPReciever
             catch (Exception ex)
             {
                 Logger.Log("Exception in Server.CalculateTabels_Elapsed" + ex.ToString(), 20);
+            }
+            finally
+            {
+                db.Dispose();
             }
         }
     }
