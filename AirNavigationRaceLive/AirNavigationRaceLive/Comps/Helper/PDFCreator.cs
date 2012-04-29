@@ -294,23 +294,23 @@ namespace AirNavigationRaceLive.Comps.Helper
 
                 int sum = 0;
                 int line = 0;
-
+                int offsetLine = 20;
                 //gfx.DrawString("ID", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3)));
-                gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3)));
-                gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3)));
+                gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3)));
+                gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine+2), XUnit.FromCentimeter(3)));
 
                 foreach (Penalty penalty in cbct.penalty)
                 {
                     sum += penalty.Points;
                     line++;
                     //gfx.DrawString(penalty.ID.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
-                    gfx.DrawString(penalty.Points.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
+                    gfx.DrawString(penalty.Points.ToString(), new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3 + line * 0.4)));
 
                     List<String> reason = getWrapped(penalty.Reason);
                     bool loop = false;
                     foreach (String s in reason)
                     {
-                        gfx.DrawString(s, new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
+                        gfx.DrawString(s, new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine+2), XUnit.FromCentimeter(3 + line * 0.4)));
                         line++;
                         loop = true;
                     }
@@ -321,8 +321,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                 }
                 line++;
                 //gfx.DrawString("-", new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
-                gfx.DrawString(sum.ToString(), new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(19), XUnit.FromCentimeter(3 + line * 0.4)));
-                gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(21), XUnit.FromCentimeter(3 + line * 0.4)));
+                gfx.DrawString(sum.ToString(), new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3 + line * 0.4)));
+                gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine+2), XUnit.FromCentimeter(3 + line * 0.4)));
 
 
                 String path = pathToPDF.Replace(".pdf",(counter++ + "_"+ getTeamDsc(c, cbct.competitionTeam.ID_Team)+".pdf"));
