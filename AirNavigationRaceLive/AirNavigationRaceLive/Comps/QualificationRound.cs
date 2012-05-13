@@ -26,7 +26,9 @@ namespace AirNavigationRaceLive.Comps
                 NetworkObjects.Route r = (NetworkObjects.Route)i;
                 comboBoxRoute.Items.Add(new ComboRoute(r));
             }
+            comboBoxRoute.SelectedIndex = 0;
             lblTitel.Text = lblTitel.Text + iClient.getCompetitionSet().Name;
+
         }
 
         private void btnCalc_Click(object sender, EventArgs e)
@@ -57,12 +59,13 @@ namespace AirNavigationRaceLive.Comps
             }
             List<NetworkObjects.Tracker> trackers = Client.getTrackers();
             listViewTrackers.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers.Where(p=> !p.IMEI.StartsWith("_")))
+            foreach (NetworkObjects.Tracker t in trackers)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { t.ID.ToString(), t.Name, t.IMEI });
                 lvi.Tag = t;
                 listViewTrackers.Items.Add(lvi);
             }
+            comboBoxTeam.SelectedIndex = 0;
             UpdateEnablement();
         }
         private void LoadParcours()
@@ -74,6 +77,7 @@ namespace AirNavigationRaceLive.Comps
                 ComboParcour cp = new ComboParcour(c);
                 parcours.Items.Add(cp);
             }
+            parcours.SelectedIndex = 0;
             UpdateEnablement();
         }
 
@@ -159,6 +163,19 @@ namespace AirNavigationRaceLive.Comps
             LoadParcours();
             LoadCompetition();
             LoadTeams();
+            SetTimes();
+        }
+
+        private void SetTimes()
+        {
+            DateTime time = DateTime.Now;
+            timeTakeOffIntervall.Value = new DateTime(time.Year,time.Month,time.Day,time.Hour,1,0);
+            timeParcourLength.Value = new DateTime(time.Year, time.Month, time.Day, time.Hour, 12, 0);
+            timeParcourIntervall.Value = new DateTime(time.Year,time.Month,time.Day,time.Hour,20,0);
+            timeTakeOffStartgate.Value = new DateTime(time.Year, time.Month, time.Day, time.Hour, 12, 0);
+            timeTakeOff.Value = time;
+            timeStart.Value = timeTakeOff.Value.AddMinutes(timeTakeOffStartgate.Value.Minute+((comboBoxRoute.Items.Count-1)*timeTakeOffIntervall.Value.Minute));
+            timeEnd.Value = timeStart.Value.AddMinutes(timeParcourLength.Value.Minute);
         }
 
         private void btnRefreshCompetitions_Click(object sender, EventArgs e)
@@ -381,6 +398,8 @@ namespace AirNavigationRaceLive.Comps
 
             textBoxStartId.Text = starID.ToString();
             textBoxStartId.Tag = new NetworkObjects.CompetitionTeam();
+            comboBoxRoute.SelectedIndex = 0;
+            comboBoxTeam.SelectedIndex = 0;
             UpdateEnablement();
         }
 
@@ -424,7 +443,10 @@ namespace AirNavigationRaceLive.Comps
                     }
                 }
                 c.CompetitionTeamList.Add(ct);
+
                 updateList(c);
+                
+               
             }
             UpdateEnablement();
         }
@@ -462,6 +484,36 @@ namespace AirNavigationRaceLive.Comps
                 @"\StartList_" +  c.ID+"_"+c.Name+"_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
         }
         }
+
+        private void btnAddCompetitionTeam_Click(object sender, EventArgs e)
+        {
+            btnSaveCompetitionTeam_Click(sender, e);
+            int startid = int.Parse(textBoxStartId.Text.ToString());
+            startid++;
+            textBoxStartId.Text = startid.ToString();
+            //Route um eins erhöhen
+            if (comboBoxRoute.SelectedIndex == comboBoxRoute.Items.Count - 1)
+            {
+                comboBoxRoute.SelectedIndex = 0;
+                timeStart.Value = timeStart.Value.AddMinutes(timeParcourIntervall.Value.Minute);
+                timeEnd.Value = timeStart.Value.AddMinutes(timeParcourLength.Value.Minute);
+                timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeParcourIntervall.Value.Minute - ((comboBoxRoute.Items.Count-1) * timeTakeOffIntervall.Value.Minute));
+                //timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeStart.Value.Minute + timeParcourIntervall.Value.Minute - timeTakeOffStartgate.Value.Minute - (comboBoxRoute.Items.Count - 1) * timeTakeOffIntervall.Value.Minute);
+            }
+            else
+            {
+                comboBoxRoute.SelectedIndex += 1;
+                timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeTakeOffIntervall.Value.Minute);
+            }
+            if (comboBoxTeam.SelectedIndex != comboBoxTeam.Items.Count - 1)
+            {
+                comboBoxTeam.SelectedIndex += 1;
+            }
+            btnNewCompetitionTeam_Click(sender, e);
+
+        }
+
+        
     }
     class ComboParcour
     {

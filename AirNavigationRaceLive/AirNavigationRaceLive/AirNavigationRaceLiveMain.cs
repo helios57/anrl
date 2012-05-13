@@ -33,6 +33,8 @@ namespace AirNavigationRaceLive
         private UploadGPS UploadGPS;
         private ParcourOverviewZoomed ParcourOverviewZoomed;
         private Results Results;
+        private MapSelection MapSelection;
+        private MapImportFromMaps MapImportFromMaps;
 
         public static void SetStatusText(String text)
         {
@@ -327,11 +329,11 @@ namespace AirNavigationRaceLive
 
         private void overviewZoomedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Avoid null-pointer exception
-            //if (ParcourOverviewZoomed == null)
-           // {
+
+            if (ParcourOverviewZoomed == null)
+            {
                 ParcourOverviewZoomed = new ParcourOverviewZoomed(Client);
-            //}
+            }
             enableControl(ParcourOverviewZoomed);
         }
 
@@ -360,6 +362,30 @@ namespace AirNavigationRaceLive
                 Results = new Results(Client);
             }
             enableControl(Results);
+
+        }
+
+        private void addLandingResultsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mapImportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MapSelection == null)
+            {
+                MapSelection = new MapSelection();
+            }
+            enableControl(MapSelection);
+        }
+
+        private void importFromMapsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MapImportFromMaps == null)
+            {
+                MapImportFromMaps = new MapImportFromMaps(Client);
+            }
+            enableControl(MapImportFromMaps);
 
         }
     }

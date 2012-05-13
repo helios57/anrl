@@ -40,13 +40,14 @@
             this.competitionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.legacyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importFromWorldfileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importFromMapsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parcourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overviewZoomedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qualificationRoundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +61,7 @@
             this.addLandingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adjustResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uploadTrackerDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -71,9 +73,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusStripLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 626);
+            this.statusStrip.Location = new System.Drawing.Point(0, 691);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(928, 22);
+            this.statusStrip.Size = new System.Drawing.Size(956, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -100,7 +102,7 @@
             this.creditsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(928, 24);
+            this.MainMenu.Size = new System.Drawing.Size(956, 24);
             this.MainMenu.TabIndex = 1;
             this.MainMenu.Text = "Menu";
             // 
@@ -118,7 +120,7 @@
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.connectToolStripMenuItem.Text = "Connect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
@@ -126,19 +128,19 @@
             // 
             this.disconnectToolStripMenuItem.Enabled = false;
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -152,19 +154,33 @@
             // mapToolStripMenuItem
             // 
             this.mapToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.legacyToolStripMenuItem});
-            this.mapToolStripMenuItem.Enabled = false;
+            this.legacyToolStripMenuItem,
+            this.importFromWorldfileToolStripMenuItem,
+            this.importFromMapsToolStripMenuItem});
             this.mapToolStripMenuItem.Name = "mapToolStripMenuItem";
             this.mapToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.mapToolStripMenuItem.Text = "Maps";
-            this.mapToolStripMenuItem.Click += new System.EventHandler(this.mapToolStripMenuItem_Click);
             // 
             // legacyToolStripMenuItem
             // 
             this.legacyToolStripMenuItem.Name = "legacyToolStripMenuItem";
-            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.legacyToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.legacyToolStripMenuItem.Text = "Legacy";
             this.legacyToolStripMenuItem.Click += new System.EventHandler(this.legacyToolStripMenuItem_Click);
+            // 
+            // importFromWorldfileToolStripMenuItem
+            // 
+            this.importFromWorldfileToolStripMenuItem.Name = "importFromWorldfileToolStripMenuItem";
+            this.importFromWorldfileToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.importFromWorldfileToolStripMenuItem.Text = "Import from Worldfile";
+            this.importFromWorldfileToolStripMenuItem.Click += new System.EventHandler(this.mapToolStripMenuItem_Click);
+            // 
+            // importFromMapsToolStripMenuItem
+            // 
+            this.importFromMapsToolStripMenuItem.Name = "importFromMapsToolStripMenuItem";
+            this.importFromMapsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.importFromMapsToolStripMenuItem.Text = "Import from Maps";
+            this.importFromMapsToolStripMenuItem.Click += new System.EventHandler(this.importFromMapsToolStripMenuItem_Click);
             // 
             // parcourToolStripMenuItem
             // 
@@ -214,14 +230,6 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
-            // 
-            // trackerToolStripMenuItem
-            // 
-            this.trackerToolStripMenuItem.Enabled = false;
-            this.trackerToolStripMenuItem.Name = "trackerToolStripMenuItem";
-            this.trackerToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.trackerToolStripMenuItem.Text = "Trackers";
-            this.trackerToolStripMenuItem.Click += new System.EventHandler(this.trackerToolStripMenuItem_Click);
             // 
             // pilotsToolStripMenuItem
             // 
@@ -317,6 +325,7 @@
             this.addLandingResultsToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.addLandingResultsToolStripMenuItem.Text = "Add Landing Results";
             this.addLandingResultsToolStripMenuItem.Visible = false;
+            this.addLandingResultsToolStripMenuItem.Click += new System.EventHandler(this.addLandingResultsToolStripMenuItem_Click);
             // 
             // adjustResultsToolStripMenuItem
             // 
@@ -335,6 +344,14 @@
             this.uploadTrackerDataToolStripMenuItem.Text = "Upload Tracker Data";
             this.uploadTrackerDataToolStripMenuItem.Visible = false;
             this.uploadTrackerDataToolStripMenuItem.Click += new System.EventHandler(this.uploadTrackerDataToolStripMenuItem_Click);
+            // 
+            // trackerToolStripMenuItem
+            // 
+            this.trackerToolStripMenuItem.Enabled = false;
+            this.trackerToolStripMenuItem.Name = "trackerToolStripMenuItem";
+            this.trackerToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.trackerToolStripMenuItem.Text = "Trackers";
+            this.trackerToolStripMenuItem.Click += new System.EventHandler(this.trackerToolStripMenuItem_Click);
             // 
             // visualisationToolStripMenuItem
             // 
@@ -356,7 +373,7 @@
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(928, 602);
+            this.MainPanel.Size = new System.Drawing.Size(956, 667);
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
@@ -364,7 +381,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 648);
+            this.ClientSize = new System.Drawing.Size(956, 713);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.MainMenu);
@@ -418,6 +435,8 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overviewZoomedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem competitionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importFromWorldfileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importFromMapsToolStripMenuItem;
     }
 }
 

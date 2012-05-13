@@ -75,6 +75,12 @@
     <ApplicationIcon>Resources\ANR_LOGO.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>dlls\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>dlls\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.31.3066.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -133,6 +139,18 @@
     </Compile>
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comps\MapImportFromMaps.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\MapImportFromMaps.designer.cs">
+      <DependentUpon>MapImportFromMaps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Comps\MapSelection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\MapSelection.designer.cs">
+      <DependentUpon>MapSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\QualificationRound.cs">
       <SubType>UserControl</SubType>
@@ -288,6 +306,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\MapImportFromMaps.resx">
+      <DependentUpon>MapImportFromMaps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\MapSelection.resx">
+      <DependentUpon>MapSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\QualificationRound.resx">
       <DependentUpon>QualificationRound.cs</DependentUpon>

@@ -83,6 +83,19 @@
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnExportToPDF = new System.Windows.Forms.Button();
+            this.timeTakeOffIntervall = new System.Windows.Forms.DateTimePicker();
+            this.timeParcourIntervall = new System.Windows.Forms.DateTimePicker();
+            this.timeParcourLength = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.timeTakeOffStartgate = new System.Windows.Forms.DateTimePicker();
+            this.btnAddCompetitionTeam = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDeleteCompetitions
@@ -564,9 +577,9 @@
             // 
             this.btnSaveCompetitionTeam.Location = new System.Drawing.Point(362, 420);
             this.btnSaveCompetitionTeam.Name = "btnSaveCompetitionTeam";
-            this.btnSaveCompetitionTeam.Size = new System.Drawing.Size(73, 28);
+            this.btnSaveCompetitionTeam.Size = new System.Drawing.Size(49, 28);
             this.btnSaveCompetitionTeam.TabIndex = 68;
-            this.btnSaveCompetitionTeam.Text = "Add / Save";
+            this.btnSaveCompetitionTeam.Text = "Modify";
             this.btnSaveCompetitionTeam.UseVisualStyleBackColor = true;
             this.btnSaveCompetitionTeam.Click += new System.EventHandler(this.btnSaveCompetitionTeam_Click);
             // 
@@ -620,10 +633,139 @@
             this.btnExportToPDF.UseVisualStyleBackColor = true;
             this.btnExportToPDF.Click += new System.EventHandler(this.btnExportToPDF_Click);
             // 
+            // timeTakeOffIntervall
+            // 
+            this.timeTakeOffIntervall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeTakeOffIntervall.CustomFormat = "mm";
+            this.timeTakeOffIntervall.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeTakeOffIntervall.Location = new System.Drawing.Point(151, 3);
+            this.timeTakeOffIntervall.Name = "timeTakeOffIntervall";
+            this.timeTakeOffIntervall.ShowUpDown = true;
+            this.timeTakeOffIntervall.Size = new System.Drawing.Size(49, 20);
+            this.timeTakeOffIntervall.TabIndex = 72;
+            // 
+            // timeParcourIntervall
+            // 
+            this.timeParcourIntervall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeParcourIntervall.CustomFormat = "mm";
+            this.timeParcourIntervall.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeParcourIntervall.Location = new System.Drawing.Point(151, 27);
+            this.timeParcourIntervall.Name = "timeParcourIntervall";
+            this.timeParcourIntervall.ShowUpDown = true;
+            this.timeParcourIntervall.Size = new System.Drawing.Size(49, 20);
+            this.timeParcourIntervall.TabIndex = 73;
+            // 
+            // timeParcourLength
+            // 
+            this.timeParcourLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeParcourLength.CustomFormat = "mm";
+            this.timeParcourLength.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeParcourLength.Location = new System.Drawing.Point(150, 3);
+            this.timeParcourLength.Name = "timeParcourLength";
+            this.timeParcourLength.ShowUpDown = true;
+            this.timeParcourLength.Size = new System.Drawing.Size(50, 20);
+            this.timeParcourLength.TabIndex = 74;
+            this.timeParcourLength.Value = new System.DateTime(2012, 4, 5, 13, 13, 48, 0);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 13);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "Take Off Intervall";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(132, 13);
+            this.label6.TabIndex = 76;
+            this.label6.Text = "Intervall between Starttime";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 13);
+            this.label7.TabIndex = 77;
+            this.label7.Text = "Parcour duration";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(3, 22);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(118, 13);
+            this.label20.TabIndex = 79;
+            this.label20.Text = "TakeOff-Startgate-Time";
+            // 
+            // timeTakeOffStartgate
+            // 
+            this.timeTakeOffStartgate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.timeTakeOffStartgate.CustomFormat = "mm";
+            this.timeTakeOffStartgate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timeTakeOffStartgate.Location = new System.Drawing.Point(150, 25);
+            this.timeTakeOffStartgate.Name = "timeTakeOffStartgate";
+            this.timeTakeOffStartgate.ShowUpDown = true;
+            this.timeTakeOffStartgate.Size = new System.Drawing.Size(50, 20);
+            this.timeTakeOffStartgate.TabIndex = 78;
+            this.timeTakeOffStartgate.Value = new System.DateTime(2012, 4, 5, 13, 13, 48, 0);
+            // 
+            // btnAddCompetitionTeam
+            // 
+            this.btnAddCompetitionTeam.Location = new System.Drawing.Point(417, 420);
+            this.btnAddCompetitionTeam.Name = "btnAddCompetitionTeam";
+            this.btnAddCompetitionTeam.Size = new System.Drawing.Size(65, 27);
+            this.btnAddCompetitionTeam.TabIndex = 80;
+            this.btnAddCompetitionTeam.Text = "Add";
+            this.btnAddCompetitionTeam.UseVisualStyleBackColor = true;
+            this.btnAddCompetitionTeam.Click += new System.EventHandler(this.btnAddCompetitionTeam_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.93578F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.06422F));
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.timeTakeOffIntervall, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.timeParcourIntervall, 1, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(264, 458);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(203, 44);
+            this.tableLayoutPanel1.TabIndex = 81;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70.35573F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.64427F));
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.timeParcourLength, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label20, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.timeTakeOffStartgate, 1, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(478, 458);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(203, 44);
+            this.tableLayoutPanel2.TabIndex = 82;
+            // 
             // QualificationRound
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.btnAddCompetitionTeam);
             this.Controls.Add(this.btnExportToPDF);
             this.Controls.Add(this.listViewTrackers);
             this.Controls.Add(this.label19);
@@ -670,6 +812,10 @@
             this.Name = "QualificationRound";
             this.Size = new System.Drawing.Size(869, 548);
             this.Load += new System.EventHandler(this.Competition_Load);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -732,6 +878,17 @@
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.Button btnExportToPDF;
+        private System.Windows.Forms.DateTimePicker timeTakeOffIntervall;
+        private System.Windows.Forms.DateTimePicker timeParcourIntervall;
+        private System.Windows.Forms.DateTimePicker timeParcourLength;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.DateTimePicker timeTakeOffStartgate;
+        private System.Windows.Forms.Button btnAddCompetitionTeam;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 
 
     }
