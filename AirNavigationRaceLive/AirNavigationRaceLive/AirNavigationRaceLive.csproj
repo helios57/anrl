@@ -400,6 +400,8 @@
     <None Include="Resources\PDFTemplates\Start_list.pdf" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dlls\GMap.NET.Core.dll" />
+    <Content Include="dlls\GMap.NET.WindowsForms.dll" />
     <Content Include="Resources\Summe.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
