@@ -21,32 +21,26 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A1AE09B51A432670CEFECF54B48D536F"
-        "OwnerKey" = "8:_B871A194DD81C1A5105C1CE86F436CD3"
+        "MsmKey" = "8:_6516E033277CB3C77BBBB14884EAB3C8"
+        "OwnerKey" = "8:_D07B5BF79909489FF020A178816F4509"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A1AE09B51A432670CEFECF54B48D536F"
+        "MsmKey" = "8:_6516E033277CB3C77BBBB14884EAB3C8"
         "OwnerKey" = "8:_353597CAB22D4E64A44E2111EFCB8CA9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B871A194DD81C1A5105C1CE86F436CD3"
+        "MsmKey" = "8:_D07B5BF79909489FF020A178816F4509"
         "OwnerKey" = "8:_353597CAB22D4E64A44E2111EFCB8CA9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BF629C2D336096C29DB53469EAF6A8F6"
+        "MsmKey" = "8:_F5EE8BAD825F45EFC9D9DA6AB9348F59"
         "OwnerKey" = "8:_353597CAB22D4E64A44E2111EFCB8CA9"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BF629C2D336096C29DB53469EAF6A8F6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -58,13 +52,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B871A194DD81C1A5105C1CE86F436CD3"
+        "OwnerKey" = "8:_D07B5BF79909489FF020A178816F4509"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A1AE09B51A432670CEFECF54B48D536F"
+        "OwnerKey" = "8:_6516E033277CB3C77BBBB14884EAB3C8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F5EE8BAD825F45EFC9D9DA6AB9348F59"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -85,6 +85,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -101,6 +109,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -158,14 +174,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A1AE09B51A432670CEFECF54B48D536F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6516E033277CB3C77BBBB14884EAB3C8"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:protobuf-net, Version=2.0.0.431, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A1AE09B51A432670CEFECF54B48D536F"
+                    "_6516E033277CB3C77BBBB14884EAB3C8"
                     {
                     "Name" = "8:protobuf-net.dll"
                     "Attributes" = "3:512"
@@ -189,14 +205,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B871A194DD81C1A5105C1CE86F436CD3"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D07B5BF79909489FF020A178816F4509"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:NetworkObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B871A194DD81C1A5105C1CE86F436CD3"
+                    "_D07B5BF79909489FF020A178816F4509"
                     {
                     "Name" = "8:NetworkObjects.dll"
                     "Attributes" = "3:512"
@@ -220,14 +236,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BF629C2D336096C29DB53469EAF6A8F6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F5EE8BAD825F45EFC9D9DA6AB9348F59"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:AnrlDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BF629C2D336096C29DB53469EAF6A8F6"
+                    "_F5EE8BAD825F45EFC9D9DA6AB9348F59"
                     {
                     "Name" = "8:AnrlDB.dll"
                     "Attributes" = "3:512"

@@ -11,7 +11,8 @@
     <RootNamespace>AnrlService</RootNamespace>
     <AssemblyName>AnrlService</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>C:\temp\anrl\</PublishUrl>
@@ -31,7 +32,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -74,6 +75,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -123,6 +126,10 @@
     <ProjectReference Include="..\AnrlDB\AnrlDB.csproj">
       <Project>{30DE453C-A020-480F-85DB-50EF7B364167}</Project>
       <Name>AnrlDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveInputService\LiveInputService.csproj">
+      <Project>{00C04F35-D21B-40FC-AF79-7058C2B351D0}</Project>
+      <Name>LiveInputService</Name>
     </ProjectReference>
     <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
       <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>

@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Net;
 using ProtoBuf;
 using System.Threading;
+using System.ServiceModel;
 
 namespace TestApplikation
 {
@@ -16,8 +17,11 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
-            AnrlService.AnrlServiceImpl service = new AnrlService.AnrlServiceImpl();
-            service.start();
+            Type serviceType = typeof(LiveInputService.LiveInputServiceImpl);
+            ServiceHost host = new ServiceHost(serviceType,new Uri[]{new Uri("gps")});
+            host.Open();
+           // AnrlService.AnrlServiceImpl service = new AnrlService.AnrlServiceImpl();
+           // service.start();
             Thread.Sleep(Int32.MaxValue);
             /*int PORT = 1337;
             TcpListener server;

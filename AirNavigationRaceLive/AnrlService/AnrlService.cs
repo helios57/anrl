@@ -14,6 +14,7 @@ using System.Threading;
 using AnrlService.Server;
 using AnrlDB;
 using System.Net.Security;
+using System.ServiceModel;
 namespace AnrlService
 {
     public partial class AnrlServiceImpl : ServiceBase
@@ -26,6 +27,7 @@ namespace AnrlService
         private Socket listener;
         private Socket listenerGPS;
         private static long lastGC = DateTime.Now.Ticks;
+        private ServiceHost host;
 
         //private X509Certificate cert;
 
@@ -42,6 +44,24 @@ namespace AnrlService
 
         protected override void OnStart(string[] args)
         {
+            try
+            {
+
+                Type serviceType = typeof(LiveInputService.LiveInputServiceImpl);
+                host = new ServiceHost(serviceType, new Uri[] { new Uri("http://localhost/gps") });
+                host.AddServiceEndpoint(typeof(LiveInputService.ILiveInputService), new WebHttpBinding(), "");
+                host.Description.Endpoints[0].Behaviors.Add(new System.ServiceModel.Description.WebHttpBehavior());
+                host.Open();
+            }
+            catch (Exception ex)
+            {
+#if !DEBUG
+                Logger.Log("Unable to start Webservice for GPS " + ex.ToString(), 0);
+#else
+                System.Console.WriteLine("Unable to start Service " + ex.ToString());
+#endif
+            }
+
             IPEndPoint localEP = new IPEndPoint(IPAddress.Any, PORT);
             listener = new Socket(localEP.Address.AddressFamily,
                 SocketType.Stream, ProtocolType.Tcp);
@@ -76,6 +96,7 @@ namespace AnrlService
             {
                 Logger.Log("Unable to start Service " + ex.ToString(), 0);
             }
+
         }
         private void ClientConnected(IAsyncResult result)
         {
@@ -209,6 +230,10 @@ namespace AnrlService
                 {
                     Logger.Log("Unable to stop Service " + ex.ToString(), 0);
                 }
+            }
+            if (host != null)
+            {
+                host.Close();
             }
         }
     }

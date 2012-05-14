@@ -11,7 +11,8 @@
     <RootNamespace>AirNavigationRaceLive</RootNamespace>
     <AssemblyName>AirNavigationRaceLive</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>C:\Users\Helios\Documents\Visual Studio 2010\Projects\AirNavigationRaceLive\AirNavigationRaceLive\Deployed\</PublishUrl>
@@ -75,11 +76,15 @@
     <ApplicationIcon>Resources\ANR_LOGO.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GMap.NET.Core">
+    <Reference Include="GMap.NET.Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <HintPath>dlls\GMap.NET.Core.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="GMap.NET.WindowsForms">
+    <Reference Include="GMap.NET.WindowsForms, Version=1.6.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>dlls\GMap.NET.WindowsForms.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.31.3066.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
@@ -400,8 +405,12 @@
     <None Include="Resources\PDFTemplates\Start_list.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dlls\GMap.NET.Core.dll" />
-    <Content Include="dlls\GMap.NET.WindowsForms.dll" />
+    <Content Include="dlls\GMap.NET.Core.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\GMap.NET.WindowsForms.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Summe.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
