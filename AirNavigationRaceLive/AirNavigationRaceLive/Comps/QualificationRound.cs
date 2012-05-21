@@ -398,8 +398,11 @@ namespace AirNavigationRaceLive.Comps
 
             textBoxStartId.Text = starID.ToString();
             textBoxStartId.Tag = new NetworkObjects.CompetitionTeam();
-            //comboBoxRoute.SelectedIndex = 0;
-            //comboBoxTeam.SelectedIndex = 0;
+            if (comboBoxTeam.SelectedIndex == -1)
+            {
+                comboBoxRoute.SelectedIndex = 0;
+                comboBoxTeam.SelectedIndex = 0;
+            }
             UpdateEnablement();
         }
 
