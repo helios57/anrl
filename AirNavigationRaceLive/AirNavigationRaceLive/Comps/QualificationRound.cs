@@ -398,8 +398,8 @@ namespace AirNavigationRaceLive.Comps
 
             textBoxStartId.Text = starID.ToString();
             textBoxStartId.Tag = new NetworkObjects.CompetitionTeam();
-            comboBoxRoute.SelectedIndex = 0;
-            comboBoxTeam.SelectedIndex = 0;
+            //comboBoxRoute.SelectedIndex = 0;
+            //comboBoxTeam.SelectedIndex = 0;
             UpdateEnablement();
         }
 
@@ -498,7 +498,6 @@ namespace AirNavigationRaceLive.Comps
                 timeStart.Value = timeStart.Value.AddMinutes(timeParcourIntervall.Value.Minute);
                 timeEnd.Value = timeStart.Value.AddMinutes(timeParcourLength.Value.Minute);
                 timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeParcourIntervall.Value.Minute - ((comboBoxRoute.Items.Count-1) * timeTakeOffIntervall.Value.Minute));
-                //timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeStart.Value.Minute + timeParcourIntervall.Value.Minute - timeTakeOffStartgate.Value.Minute - (comboBoxRoute.Items.Count - 1) * timeTakeOffIntervall.Value.Minute);
             }
             else
             {
