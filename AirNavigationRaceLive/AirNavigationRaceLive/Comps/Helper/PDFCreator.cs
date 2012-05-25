@@ -248,6 +248,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             List<NetworkObjects.CompetitionTeam> tempList = new List<NetworkObjects.CompetitionTeam>();
             foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
             {
+                GC.Collect();
                 PdfDocument doc = new PdfDocument();
                 doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
                 doc.Info.Keywords = "ANRL Results Printout";
