@@ -17,12 +17,17 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
-            Type serviceType = typeof(LiveInputService.LiveInputServiceImpl);
-            ServiceHost host = new ServiceHost(serviceType,new Uri[]{new Uri("gps")});
-            host.Open();
+          
+            double Latitude = ConvertCoordinates("N4753.0418");
+            double Longitude = ConvertCoordinates("E00820.8429");
+            double Altitude = double.Parse("1015.4");
+
+           // Type serviceType = typeof(LiveInputService.LiveInputServiceImpl);
+           // ServiceHost host = new ServiceHost(serviceType,new Uri[]{new Uri("gps")});
+            //host.Open();
            // AnrlService.AnrlServiceImpl service = new AnrlService.AnrlServiceImpl();
            // service.start();
-            Thread.Sleep(Int32.MaxValue);
+           Thread.Sleep(Int32.MaxValue);
             /*int PORT = 1337;
             TcpListener server;
             server = new TcpListener(IPAddress.Any, PORT);
@@ -52,6 +57,99 @@ namespace TestApplikation
             }
             db.SubmitChanges();*/
         }
+
+        /// <summary>
+        /// Converting the Coordinates from String wsg84 to Decimal
+        /// </summary>
+        /// <param name="wsg84Coords"></param>
+        /// <returns></returns>
+        private static double ConvertCoordinates(string wsg84Coords)
+        {
+            try
+            {
+                double result = 0;
+                string SingChar = wsg84Coords.Substring(0, 1);
+                if (SingChar == "E" || SingChar == "W")
+                {
+                    double sign = SingChar == "E" ? 1.0 : -1.0;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 3));
+                    degree += double.Parse(wsg84Coords.Substring(4, 6)) / 60;
+                    degree *= (double)sign;
+                    result = degree;
+                }
+                else if (SingChar == "N" || SingChar == "S")
+                {
+                    double sign = SingChar == "N" ? 1.0 : -1.0;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 2));
+                    degree += double.Parse(wsg84Coords.Substring(3, 6)) / 60;
+                    degree *= (double)sign;
+                    result = degree;
+                }
+                else
+                {
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+            }
+            return 0;
+        }
+
+
+
+        /// <summary>
+        /// Calculate the Tables of t_Data and Insert all needed Entries
+        /// Will be trigered form a 1 sec-Timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculateTabels_Elapsed(object sender)
+        {
+            AnrlDB.AnrlDataContext db = new AnrlDB.AnrlDataContext();
+            try
+            {
+                List<t_GPS_IN> Positions = db.t_GPS_INs.Where(a => !a.Processed).OrderBy(t => t.TimestampTracker).ToList();
+                List<t_Tracker> Trackers = db.t_Trackers.ToList();
+
+                foreach (t_Tracker tr in Trackers)
+                {
+                    try
+                    {
+                        List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI.Trim() == tr.IMEI.Trim()).OrderBy(a => a.TimestampTracker).ToList();
+                        foreach (t_GPS_IN GPS_IN in Positions_Tracker)
+                        {
+                            try
+                            {
+                                t_Daten InsertData = new t_Daten();
+                                InsertData.t_Tracker = tr;
+                                InsertData.Timestamp = GPS_IN.TimestampTracker.Ticks;
+                                InsertData.Latitude = ConvertCoordinates(GPS_IN.latitude);
+                                InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
+                                InsertData.Altitude = double.Parse(GPS_IN.altitude);
+                                db.t_Datens.InsertOnSubmit(InsertData);
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+                            GPS_IN.Processed = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+                db.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
         /*static void ClientConnected(IAsyncResult result)
         {
             try
