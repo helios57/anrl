@@ -93,8 +93,8 @@ namespace AirNavigationRaceLive.Comps
         {
             fldX.Text = gMapControl1.CurrentViewArea.LocationTopLeft.Lng.ToString();
             fldY.Text = gMapControl1.CurrentViewArea.LocationTopLeft.Lat.ToString();
-            fldSizeY.Text = (Math.Abs(gMapControl1.CurrentViewArea.LocationRightBottom.Lat - gMapControl1.CurrentViewArea.LocationTopLeft.Lat) / gMapControl1.Size.Height).ToString();
-            fldSizeX.Text = (Math.Abs(gMapControl1.CurrentViewArea.LocationRightBottom.Lng - gMapControl1.CurrentViewArea.LocationTopLeft.Lng) / gMapControl1.Size.Width).ToString();
+            fldSizeY.Text = ((gMapControl1.CurrentViewArea.LocationRightBottom.Lat - gMapControl1.CurrentViewArea.LocationTopLeft.Lat) / gMapControl1.Size.Height).ToString();
+            fldSizeX.Text = ((gMapControl1.CurrentViewArea.LocationRightBottom.Lng - gMapControl1.CurrentViewArea.LocationTopLeft.Lng) / gMapControl1.Size.Width).ToString();
         }
 
         private void fldX_TextChanged(object sender, EventArgs e)
@@ -152,11 +152,6 @@ namespace AirNavigationRaceLive.Comps
             {
                 gMapControl1.MapProvider = GMapProviders.GoogleMap;
             }
-        }
-
-        private void trackBarZoomlevel_Scroll()
-        {
-
         }
 
     }
