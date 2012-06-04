@@ -19,7 +19,9 @@ namespace AirNavigationRaceLive.Comps
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
-        private SolidBrush Brush = new SolidBrush(Color.FromArgb(100,255,0,0));
+        private SolidBrush Brush = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
+        private volatile bool pdf = false;
+
         public void SetParcour(NetworkObjects.Parcour iParcour)
         {
             Parcour = iParcour;
@@ -57,8 +59,9 @@ namespace AirNavigationRaceLive.Comps
                         {
                             pe.Graphics.FillPolygon(Brush, new System.Drawing.Point[] { new System.Drawing.Point(startXp, startYp), new System.Drawing.Point(endXp, endYp), new System.Drawing.Point(orientationXp, orientationYp) });
                         }
-                        catch { 
-                        //TODO
+                        catch
+                        {
+                            //TODO
                         }
                     }
                     foreach (Line l in lines)
@@ -81,29 +84,39 @@ namespace AirNavigationRaceLive.Comps
                                 if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE)
                                 {
                                     //Start_X/End_X
-                                    if (((int)l.Type) >= 3 && ((int)l.Type) <= 10)
+                                    if (((int)l.Type) >= 3 && ((int)l.Type) <= 10 && !pdf)
                                     {
                                         pe.Graphics.DrawEllipse(Pen, midX - radius, midY - radius, radius * 2, radius * 2);
                                     }
                                     if (selectedLine == l)
                                     {
                                         pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
-                                        pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
-                                        pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
+                                        if (!pdf)
+                                        {
+                                            pe.Graphics.DrawLine(PenSelected, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
+                                            pe.Graphics.DrawEllipse(PenSelected, orientationX - 3, orientationY - 3, 6, 6);
+                                        }
                                     }
                                     if (hoverLine == l)
                                     {
                                         pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
-                                        pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
-                                        pe.Graphics.DrawEllipse(PenHover, orientationX - 2, orientationY - 2, 4, 4);
+                                        if (!pdf)
+                                        {
+                                            pe.Graphics.DrawLine(PenHover, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
+                                            pe.Graphics.DrawEllipse(PenHover, orientationX - 2, orientationY - 2, 4, 4);
+                                        }
                                     }
                                     pe.Graphics.DrawLine(Pen, new System.Drawing.Point(startX, startY), new System.Drawing.Point(endX, endY));
-                                    pe.Graphics.DrawLine(Pen, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
-                                    pe.Graphics.DrawEllipse(Pen, orientationX - 1, orientationY - 1, 2, 2);
+                                    if (!pdf)
+                                    {
+                                        pe.Graphics.DrawLine(Pen, new System.Drawing.Point(midX, midY), new System.Drawing.Point(orientationX, orientationY));
+                                        pe.Graphics.DrawEllipse(Pen, orientationX - 1, orientationY - 1, 2, 2);
+                                    }
                                 }
                             }
-                            catch {
-                            //TODO
+                            catch
+                            {
+                                //TODO
                             }
                         }
                     }
@@ -120,8 +133,10 @@ namespace AirNavigationRaceLive.Comps
                 Graphics gr = Graphics.FromImage(bt);
                 Rectangle rc = new Rectangle(0, 0, Image.Width, Image.Height);
                 gr.DrawImage(Image, rc);
-                PaintEventArgs pe = new PaintEventArgs(gr,new Rectangle());
+                PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle());
+                pdf = true;
                 OnPaint(pe);
+                pdf = false;
                 return bt;
             }
             return null;
