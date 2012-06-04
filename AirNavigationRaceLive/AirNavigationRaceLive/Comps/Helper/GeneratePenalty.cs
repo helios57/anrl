@@ -53,7 +53,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             bool shouldHaveCrossedStart = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeStartLine;
             bool shouldHaveCrossedEnd = (maxTimestamp - 2 * tickOfMinute) > competitionTeam.TimeEndLine;
 
-            //bool haveCrossedTakeOff = false;
+            bool haveCrossedTakeOff = false;
             bool haveCrossedStart = false;
             bool haveCrossedEnd = false;
             bool insidePenalty = false;
@@ -65,7 +65,17 @@ namespace AirNavigationRaceLive.Comps.Helper
                 double intersectionEnd = getIntersection(l, endLine);
                 if (intersectionTakeOff != -1)
                 {
-                    //TODO
+                    haveCrossedTakeOff = true;
+                    double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
+                    double diff = crossTime - competitionTeam.TimeTakeOff;
+                    int seconds = (int)Math.Floor(diff / tickOfSecond);
+                    if (seconds > 60 || seconds < 0)
+                    {
+                        NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
+                        penalty.Points = 200;
+                        penalty.Reason = "Crossed Takeoff-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)competitionTeam.TimeTakeOff).ToLongTimeString();
+                        result.Add(penalty);
+                    }
                 }
                 if (intersectionStart != -1)
                 {
@@ -121,7 +131,14 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                 }
             }
-            //bool haveCrossedTakeOff = false;
+            if (shouldHaveCrossedTakeOff && !haveCrossedTakeOff)
+            {
+                NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();
+                penalty.Points = 200;
+                penalty.Reason = "Takeoff not passed";
+                result.Add(penalty);
+
+            }; 
             if (shouldHaveCrossedStart && !haveCrossedStart)
             {
                 NetworkObjects.Penalty penalty = new NetworkObjects.Penalty();

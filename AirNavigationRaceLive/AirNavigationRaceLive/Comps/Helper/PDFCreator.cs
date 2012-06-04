@@ -59,9 +59,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             row.Cells[0].AddParagraph("CNumber");
             row.Cells[1].AddParagraph("Nationality");
             row.Cells[2].AddParagraph("Pilot Lastname");
-            row.Cells[3].AddParagraph("Pilot Surename");
+            row.Cells[3].AddParagraph("Pilot Firstname");
             row.Cells[4].AddParagraph("Navigator Lastname");
-            row.Cells[5].AddParagraph("Navigator Surename");
+            row.Cells[5].AddParagraph("Navigator Firstname");
             row.Cells[6].AddParagraph("AC");
 
             foreach (NetworkObjects.Team t in teams)
@@ -458,9 +458,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             row.Cells[1].AddParagraph("Crew Number");
             row.Cells[2].AddParagraph("AC");
             row.Cells[3].AddParagraph("Pilot Lastname");
-            row.Cells[4].AddParagraph("Pilot Surename");
+            row.Cells[4].AddParagraph("Pilot Firstname");
             row.Cells[5].AddParagraph("Navigator Lastname");
-            row.Cells[6].AddParagraph("Navigator Surename");
+            row.Cells[6].AddParagraph("Navigator Firstname");
             row.Cells[7].AddParagraph("Take Off (UTC)");
             row.Cells[8].AddParagraph("Start Gate (UTC)");
             row.Cells[9].AddParagraph("End Gate (UTC)");

@@ -85,7 +85,7 @@
             // Vornamel
             // 
             this.Vornamel.Tag = "Vornamel";
-            this.Vornamel.Text = "Surename";
+            this.Vornamel.Text = "Firstname";
             this.Vornamel.Width = 172;
             // 
             // btnRefresh
@@ -145,7 +145,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 11;
-            this.label4.Text = "Surename";
+            this.label4.Text = "Firstname";
             // 
             // pictureBox
             // 

@@ -178,7 +178,7 @@
             // Vornamel
             // 
             this.Vornamel.Tag = "Vornamel";
-            this.Vornamel.Text = "Surename";
+            this.Vornamel.Text = "Firstname";
             this.Vornamel.Width = 108;
             // 
             // textBoxNavigator
