@@ -10,6 +10,7 @@ namespace AnrlService.Server
 {
     public class GPSRequestProcessor
     {
+        private static DateTime UTCBaseTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public GPSRequestProcessor()
         {
             AnrlDataContext db = new AnrlDataContext();
@@ -51,7 +52,8 @@ namespace AnrlService.Server
                         t_d.Latitude = data.latitude;
                         t_d.Longitude = data.longitude;
                         t_d.Speed = data.speed;
-                        t_d.Timestamp = data.timestampGPS;
+                        //Convert Javas millis to C#'s nano- Ticks
+                        t_d.Timestamp = UTCBaseTime.Add(new TimeSpan(data.timestampGPS * TimeSpan.TicksPerMillisecond)).Ticks;
                         t_d.ID_Tracker = tracker.ID;
                         db.t_Datens.InsertOnSubmit(t_d);
                         response.response.countAdded++;
