@@ -60,9 +60,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.numLatA = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
+            this.btnExport = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
-            this.btnExport = new System.Windows.Forms.Button();
+            this.btnExport100k = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -100,6 +101,7 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
             this.flowLayoutPanel1.Controls.Add(this.btnExport);
+            this.flowLayoutPanel1.Controls.Add(this.btnExport100k);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -112,7 +114,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(191, 264);
+            this.listBox1.Size = new System.Drawing.Size(191, 225);
             this.listBox1.TabIndex = 19;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -148,7 +150,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 273);
+            this.groupBox1.Location = new System.Drawing.Point(3, 234);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -241,7 +243,7 @@
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 340);
+            this.lineBox.Location = new System.Drawing.Point(3, 301);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -406,6 +408,16 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Latitude A:";
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(3, 483);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(187, 23);
+            this.btnExport.TabIndex = 20;
+            this.btnExport.Text = "Export Competition Map 1:200\'000";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // panel6
             // 
             this.panel6.AutoScroll = true;
@@ -428,15 +440,15 @@
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
-            // btnExport
+            // btnExport100k
             // 
-            this.btnExport.Location = new System.Drawing.Point(3, 522);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(187, 23);
-            this.btnExport.TabIndex = 20;
-            this.btnExport.Text = "Export Competition Map 1:200\'000";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            this.btnExport100k.Location = new System.Drawing.Point(3, 512);
+            this.btnExport100k.Name = "btnExport100k";
+            this.btnExport100k.Size = new System.Drawing.Size(187, 23);
+            this.btnExport100k.TabIndex = 21;
+            this.btnExport100k.Text = "Export Competition Map 1:100\'000";
+            this.btnExport100k.UseVisualStyleBackColor = true;
+            this.btnExport100k.Click += new System.EventHandler(this.btnExport100k_Click);
             // 
             // ParcourOverview
             // 
@@ -503,5 +515,6 @@
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnExport100k;
     }
 }

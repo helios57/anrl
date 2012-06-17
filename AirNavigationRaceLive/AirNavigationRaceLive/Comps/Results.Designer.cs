@@ -56,6 +56,7 @@
             this.btnUpload = new System.Windows.Forms.Button();
             this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnExportToplist = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,8 +81,8 @@
             // 
             // listViewPenalty
             // 
-            this.listViewPenalty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewPenalty.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewPenalty.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -115,7 +116,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 268);
+            this.label4.Location = new System.Drawing.Point(4, 238);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 13);
             this.label4.TabIndex = 103;
@@ -124,7 +125,7 @@
             // textBoxPenaltyID
             // 
             this.textBoxPenaltyID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxPenaltyID.Location = new System.Drawing.Point(103, 265);
+            this.textBoxPenaltyID.Location = new System.Drawing.Point(103, 235);
             this.textBoxPenaltyID.Name = "textBoxPenaltyID";
             this.textBoxPenaltyID.ReadOnly = true;
             this.textBoxPenaltyID.Size = new System.Drawing.Size(161, 20);
@@ -133,7 +134,7 @@
             // textBoxPoints
             // 
             this.textBoxPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxPoints.Location = new System.Drawing.Point(103, 291);
+            this.textBoxPoints.Location = new System.Drawing.Point(103, 261);
             this.textBoxPoints.Name = "textBoxPoints";
             this.textBoxPoints.Size = new System.Drawing.Size(161, 20);
             this.textBoxPoints.TabIndex = 106;
@@ -142,7 +143,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 294);
+            this.label5.Location = new System.Drawing.Point(4, 264);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 105;
@@ -151,7 +152,7 @@
             // textBoxReason
             // 
             this.textBoxReason.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxReason.Location = new System.Drawing.Point(103, 317);
+            this.textBoxReason.Location = new System.Drawing.Point(103, 287);
             this.textBoxReason.Multiline = true;
             this.textBoxReason.Name = "textBoxReason";
             this.textBoxReason.Size = new System.Drawing.Size(161, 103);
@@ -161,7 +162,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(4, 320);
+            this.label6.Location = new System.Drawing.Point(4, 290);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 107;
@@ -170,7 +171,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNew.Location = new System.Drawing.Point(103, 236);
+            this.btnNew.Location = new System.Drawing.Point(103, 206);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(161, 23);
             this.btnNew.TabIndex = 109;
@@ -181,7 +182,7 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAdd.Location = new System.Drawing.Point(103, 426);
+            this.btnAdd.Location = new System.Drawing.Point(103, 396);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(161, 23);
             this.btnAdd.TabIndex = 110;
@@ -192,7 +193,7 @@
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDelete.Location = new System.Drawing.Point(103, 455);
+            this.btnDelete.Location = new System.Drawing.Point(103, 425);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(161, 23);
             this.btnDelete.TabIndex = 111;
@@ -203,7 +204,7 @@
             // btnSubmit
             // 
             this.btnSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSubmit.Location = new System.Drawing.Point(103, 484);
+            this.btnSubmit.Location = new System.Drawing.Point(103, 454);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(161, 23);
             this.btnSubmit.TabIndex = 112;
@@ -214,7 +215,7 @@
             // btnPdf
             // 
             this.btnPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnPdf.Location = new System.Drawing.Point(103, 513);
+            this.btnPdf.Location = new System.Drawing.Point(103, 483);
             this.btnPdf.Name = "btnPdf";
             this.btnPdf.Size = new System.Drawing.Size(161, 23);
             this.btnPdf.TabIndex = 113;
@@ -224,8 +225,8 @@
             // 
             // listViewCompetitionTeam
             // 
-            this.listViewCompetitionTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewCompetitionTeam.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewCompetitionTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader9,
@@ -241,7 +242,7 @@
             this.listViewCompetitionTeam.Location = new System.Drawing.Point(7, 29);
             this.listViewCompetitionTeam.MultiSelect = false;
             this.listViewCompetitionTeam.Name = "listViewCompetitionTeam";
-            this.listViewCompetitionTeam.Size = new System.Drawing.Size(261, 171);
+            this.listViewCompetitionTeam.Size = new System.Drawing.Size(261, 141);
             this.listViewCompetitionTeam.TabIndex = 114;
             this.listViewCompetitionTeam.UseCompatibleStateImageBehavior = false;
             this.listViewCompetitionTeam.View = System.Windows.Forms.View.Details;
@@ -284,7 +285,7 @@
             // 
             this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnUpload.Enabled = false;
-            this.btnUpload.Location = new System.Drawing.Point(103, 206);
+            this.btnUpload.Location = new System.Drawing.Point(103, 176);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(161, 23);
             this.btnUpload.TabIndex = 115;
@@ -294,12 +295,12 @@
             // 
             // visualisationPictureBox1
             // 
-            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.visualisationPictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.visualisationPictureBox1.Location = new System.Drawing.Point(270, 206);
             this.visualisationPictureBox1.Name = "visualisationPictureBox1";
-            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 333);
+            this.visualisationPictureBox1.Size = new System.Drawing.Size(651, 328);
             this.visualisationPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.visualisationPictureBox1.TabIndex = 97;
             this.visualisationPictureBox1.TabStop = false;
@@ -314,10 +315,22 @@
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
+            // btnExportToplist
+            // 
+            this.btnExportToplist.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportToplist.Location = new System.Drawing.Point(103, 511);
+            this.btnExportToplist.Name = "btnExportToplist";
+            this.btnExportToplist.Size = new System.Drawing.Size(161, 23);
+            this.btnExportToplist.TabIndex = 117;
+            this.btnExportToplist.Text = "Export Toplist to PDF";
+            this.btnExportToplist.UseVisualStyleBackColor = true;
+            this.btnExportToplist.Click += new System.EventHandler(this.btnExportToplist_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExportToplist);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.listViewCompetitionTeam);
@@ -337,7 +350,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxCompetition);
             this.Name = "Results";
-            this.Size = new System.Drawing.Size(924, 542);
+            this.Size = new System.Drawing.Size(924, 537);
             this.Load += new System.EventHandler(this.Visualisation_Load);
             this.VisibleChanged += new System.EventHandler(this.Visualisation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).EndInit();
@@ -376,5 +389,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnExportToplist;
     }
 }

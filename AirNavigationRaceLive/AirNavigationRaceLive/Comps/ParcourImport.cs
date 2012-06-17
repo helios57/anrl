@@ -425,5 +425,33 @@ namespace AirNavigationRaceLive.Comps
             }
         }
 
+        private void btnImportSwitched_Click(object sender, EventArgs e)
+        {
+
+            OpenFileDialog ofd = new OpenFileDialog();
+            string FileFilter = "DXF  (*.dxf)|*.dxf";
+            ofd.Title = "DXF Import (WGS84) Switched !";
+            ofd.RestoreDirectory = true;
+            ofd.Multiselect = false;
+            ofd.Filter = FileFilter;
+            ofd.FileOk += new CancelEventHandler(ofd_FileOkWGSSwitched);
+            ofd.ShowDialog();
+        }
+        void ofd_FileOkWGSSwitched(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog ofd = sender as OpenFileDialog;
+            try
+            {
+                activeParcour = Importer.importFromDxfWGSSwitched(ofd.FileName);
+                pictureBox1.SetParcour(activeParcour);
+                pictureBox1.Invalidate();
+                pictureBox1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error while Parsing File");
+            }
+        }
+
     }
 }

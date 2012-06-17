@@ -47,10 +47,10 @@ namespace AirNavigationRaceLive.Comps.Helper
             //table.AddColumn(Unit.FromCentimeter(0.7));
             table.AddColumn(Unit.FromCentimeter(2.5));
             table.AddColumn();
-            table.AddColumn(Unit.FromCentimeter(4));
-            table.AddColumn(Unit.FromCentimeter(4));
-            table.AddColumn(Unit.FromCentimeter(4));
-            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
             table.AddColumn();
 
             Row row = table.AddRow();
@@ -129,13 +129,8 @@ namespace AirNavigationRaceLive.Comps.Helper
             page.Orientation = PdfSharp.PageOrientation.Landscape;
             page.Size = PdfSharp.PageSize.A4;
 
-
-
-
             XGraphics gfx = XGraphics.FromPdfPage(page);
-            XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
-            XRect rect = new XRect(XUnit.FromCentimeter(25), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
-            gfx.DrawImage(logo, rect);
+            AddLogo(gfx, page);
 
             gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
                 new XFont("Verdana", 16, XFontStyle.Bold), XBrushes.Black,
@@ -242,6 +237,147 @@ namespace AirNavigationRaceLive.Comps.Helper
             Process.Start(pathToPDF);
         }
 
+        private static void AddLogo(XGraphics gfx, PdfPage page)
+        {
+            XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
+            XRect rect = new XRect(page.Width - XUnit.FromCentimeter(3), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
+            gfx.DrawImage(logo, rect);
+        }
+
+        public static void CreateParcourPDF100k(ParcourPictureBox picBox, Client.Client c, String parcourName, String pathToPDF)
+        {
+            PdfDocument doc = new PdfDocument();
+            doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
+            doc.Info.Keywords = "ANRL Parcour Printout";
+            doc.Info.Subject = "Parcour Printout generated from ANRL Client on " + DateTime.Now.ToString();
+            doc.Info.Title = "Parcour Printout";
+            doc.Options.ColorMode = PdfColorMode.Cmyk;
+            doc.Language = "EN";
+            doc.PageLayout = PdfPageLayout.SinglePage;
+
+            PdfPage page = doc.AddPage();
+            page.Orientation = PdfSharp.PageOrientation.Landscape;
+            page.Size = PdfSharp.PageSize.A3;
+
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            AddLogo(gfx, page);
+
+            gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
+                new XFont("Verdana", 16, XFontStyle.Bold), XBrushes.Black,
+                new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2)));
+
+            gfx.DrawString("Parcour: " + parcourName,
+                new XFont("Verdana", 14, XFontStyle.Bold), XBrushes.Black,
+                new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(3)));
+
+            XImage image = XImage.FromGdiPlusImage(picBox.PrintOutImage);
+
+            double distX = picBox.GetXDistanceKM();//1:100 000 in cm
+            double distY = picBox.GetYDistanceKM();//1:100 000 in cm
+
+            gfx.DrawImage(image, XUnit.FromCentimeter(1), XUnit.FromCentimeter(4), page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
+
+
+            doc.Save(pathToPDF);
+            doc.Close();
+            Process.Start(pathToPDF);
+        }
+        public static void CreateToplistResultPDF(Client.Client c, NetworkObjects.Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
+        {
+            List<Toplist> toplist = new List<Toplist>();
+            foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
+            {
+                int sum = 0;
+                foreach (Penalty penalty in cbct.penalty)
+                {
+                    sum += penalty.Points;
+                }
+                toplist.Add(new Toplist(cbct.competitionTeam, sum));
+            }
+            toplist.Sort();
+
+            Document doc = new Document();
+            doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
+            doc.Info.Comment = "Generated from ANRL Client on " + DateTime.Now.ToString();
+            doc.Info.Keywords = "ANRL Crewlist";
+            doc.Info.Subject = "Crewlist";
+            doc.Info.Title = "Crewlist";
+            doc.UseCmykColor = true;
+            doc.DefaultPageSetup.PageFormat = PageFormat.A4;
+            doc.DefaultPageSetup.Orientation = Orientation.Landscape;
+            doc.DefaultPageSetup.BottomMargin = Unit.FromCentimeter(1);
+            doc.DefaultPageSetup.TopMargin = Unit.FromCentimeter(1);
+            doc.DefaultPageSetup.LeftMargin = Unit.FromCentimeter(1.5);
+            doc.DefaultPageSetup.RightMargin = Unit.FromCentimeter(1);
+
+
+            Section sec = doc.AddSection();
+
+            AddCompetitionAndLogo(c, sec);
+            sec.AddParagraph("");
+            sec.AddParagraph("Participants list");
+
+            Table table = sec.AddTable();
+            table.Borders.Visible = true;
+
+            table.AddColumn(Unit.FromCentimeter(2));
+            table.AddColumn(Unit.FromCentimeter(2.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4.5));
+
+            Row row = table.AddRow();
+            row.Shading.Color = Colors.Gray;
+            row.Cells[0].AddParagraph("Points");
+            row.Cells[1].AddParagraph("Nationality");
+            row.Cells[2].AddParagraph("Pilot Lastname");
+            row.Cells[3].AddParagraph("Pilot Firstname");
+            row.Cells[4].AddParagraph("Navigator Lastname");
+            row.Cells[5].AddParagraph("Navigator Firstname");
+
+            foreach (Toplist top in toplist)
+            {
+                NetworkObjects.Team t = c.getTeam(top.ct.ID_Team);
+                Row r = table.AddRow();
+                r.Cells[0].AddParagraph(top.sum.ToString());
+                r.Cells[1].AddParagraph(t.Name);
+                NetworkObjects.Pilot pilot = c.getPilot(t.ID_Pilot);
+                r.Cells[2].AddParagraph(pilot.Name);
+                r.Cells[3].AddParagraph(pilot.Surename);
+                if (t.ID_Navigator > 0)
+                {
+                    NetworkObjects.Pilot navigator = c.getPilot(t.ID_Navigator);
+                    r.Cells[4].AddParagraph(navigator.Name);
+                    r.Cells[5].AddParagraph(navigator.Surename);
+                }
+            }
+
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.Always);
+            renderer.Document = doc;
+            renderer.RenderDocument();
+            renderer.PdfDocument.Save(pathToPDF);
+
+            Process.Start(pathToPDF);
+        }
+        class Toplist :IComparable
+        {
+            public Toplist(NetworkObjects.CompetitionTeam ct,
+            int sum)
+            {
+
+                this.ct = ct;
+                this.sum = sum;
+            }
+            public NetworkObjects.CompetitionTeam ct = null;
+            public int sum = 0;
+
+            public int CompareTo(object obj)
+            {
+                return sum.CompareTo((obj as Toplist).sum);
+            }
+        }
+
         public static void CreateResultPDF(VisualisationPictureBox picBox, Client.Client c, NetworkObjects.Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
         {
             int counter = 0;
@@ -267,7 +403,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 page.Size = PdfSharp.PageSize.A4;
 
                 XGraphics gfx = XGraphics.FromPdfPage(page);
-
+                AddLogo(gfx, page);
 
                 XImage image = XImage.FromGdiPlusImage(picBox.PrintOutImage);
 
@@ -275,11 +411,6 @@ namespace AirNavigationRaceLive.Comps.Helper
                 double distY = picBox.GetYDistanceKM() / 2;//1:200 000 in cm
 
                 gfx.DrawImage(image, XUnit.FromCentimeter(2).Point, XUnit.FromCentimeter(3).Point, page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
-
-
-                XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
-                XRect rect = new XRect(XUnit.FromCentimeter(23), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
-                gfx.DrawImage(logo, rect);
 
                 gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
                     new XFont("Verdana", 13, XFontStyle.Bold), XBrushes.Black,
@@ -298,7 +429,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 int offsetLine = 20;
                 //gfx.DrawString("ID", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3)));
                 gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3)));
-                gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine+2), XUnit.FromCentimeter(3)));
+                gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine + 2), XUnit.FromCentimeter(3)));
 
                 foreach (Penalty penalty in cbct.penalty)
                 {
@@ -311,7 +442,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     bool loop = false;
                     foreach (String s in reason)
                     {
-                        gfx.DrawString(s, new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine+2), XUnit.FromCentimeter(3 + line * 0.4)));
+                        gfx.DrawString(s, new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine + 2), XUnit.FromCentimeter(3 + line * 0.4)));
                         line++;
                         loop = true;
                     }
@@ -323,14 +454,14 @@ namespace AirNavigationRaceLive.Comps.Helper
                 line++;
                 //gfx.DrawString("-", new XFont("Verdana", 9, XFontStyle.Regular), XBrushes.Black, new XPoint(XUnit.FromCentimeter(18), XUnit.FromCentimeter(3 + line * 0.4)));
                 gfx.DrawString(sum.ToString(), new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3 + line * 0.4)));
-                gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine+2), XUnit.FromCentimeter(3 + line * 0.4)));
+                gfx.DrawString("Total Points", new XFont("Verdana", 10, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine + 2), XUnit.FromCentimeter(3 + line * 0.4)));
 
 
-                String path = pathToPDF.Replace(".pdf",(counter++ + "_"+ getTeamDsc(c, cbct.competitionTeam.ID_Team)+".pdf"));
+                String path = pathToPDF.Replace(".pdf", (counter++ + "_" + getTeamDsc(c, cbct.competitionTeam.ID_Team) + ".pdf"));
                 doc.Save(path);
                 doc.Close();
                 Process.Start(path);
-            }    
+            }
         }
 
         private static List<String> getWrapped(String s)

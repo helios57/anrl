@@ -65,7 +65,11 @@ namespace AirNavigationRaceLive.Comps
                 lvi.Tag = t;
                 listViewTrackers.Items.Add(lvi);
             }
-            comboBoxTeam.SelectedIndex = 0;
+
+            if (comboBoxTeam.Items.Count > 0)
+            {
+                comboBoxTeam.SelectedIndex = 0;
+            }
             UpdateEnablement();
         }
         private void LoadParcours()

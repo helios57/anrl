@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnImportDxfWGS = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.fldLongitude = new System.Windows.Forms.TextBox();
@@ -70,7 +71,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.channelWide = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnImportDxfWGS = new System.Windows.Forms.Button();
+            this.btnImportSwitched = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -118,8 +119,8 @@
             // 
             // comboBoxMaps
             // 
-            this.comboBoxMaps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxMaps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxMaps.FormattingEnabled = true;
             this.comboBoxMaps.Location = new System.Drawing.Point(40, -3);
             this.comboBoxMaps.Name = "comboBoxMaps";
@@ -139,6 +140,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnClear);
+            this.flowLayoutPanel1.Controls.Add(this.btnImportSwitched);
             this.flowLayoutPanel1.Controls.Add(this.btnImportDxfWGS);
             this.flowLayoutPanel1.Controls.Add(this.btnImport);
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
@@ -153,8 +155,8 @@
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnClear.Location = new System.Drawing.Point(3, 3);
             this.btnClear.Name = "btnClear";
@@ -164,12 +166,25 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnImportDxfWGS
+            // 
+            this.btnImportDxfWGS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportDxfWGS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImportDxfWGS.Location = new System.Drawing.Point(3, 61);
+            this.btnImportDxfWGS.Name = "btnImportDxfWGS";
+            this.btnImportDxfWGS.Size = new System.Drawing.Size(190, 23);
+            this.btnImportDxfWGS.TabIndex = 22;
+            this.btnImportDxfWGS.Text = "Import DXF (WGS84)";
+            this.btnImportDxfWGS.UseVisualStyleBackColor = true;
+            this.btnImportDxfWGS.Click += new System.EventHandler(this.btnImportDxfWGS_Click);
+            // 
             // btnImport
             // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnImport.Location = new System.Drawing.Point(3, 61);
+            this.btnImport.Location = new System.Drawing.Point(3, 90);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(190, 23);
             this.btnImport.TabIndex = 0;
@@ -187,7 +202,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 90);
+            this.groupBox1.Location = new System.Drawing.Point(3, 119);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(187, 61);
             this.groupBox1.TabIndex = 17;
@@ -280,7 +295,7 @@
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 157);
+            this.lineBox.Location = new System.Drawing.Point(3, 186);
             this.lineBox.Name = "lineBox";
             this.lineBox.Size = new System.Drawing.Size(187, 176);
             this.lineBox.TabIndex = 18;
@@ -459,12 +474,12 @@
             // 
             // panel4
             // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel4.Controls.Add(this.fldName);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 339);
+            this.panel4.Location = new System.Drawing.Point(3, 368);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(190, 28);
             this.panel4.TabIndex = 21;
@@ -487,7 +502,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 373);
+            this.btnSave.Location = new System.Drawing.Point(3, 402);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 23);
             this.btnSave.TabIndex = 19;
@@ -548,18 +563,18 @@
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 0;
             // 
-            // btnImportDxfWGS
+            // btnImportSwitched
             // 
-            this.btnImportDxfWGS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportDxfWGS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnImportDxfWGS.Location = new System.Drawing.Point(3, 32);
-            this.btnImportDxfWGS.Name = "btnImportDxfWGS";
-            this.btnImportDxfWGS.Size = new System.Drawing.Size(190, 23);
-            this.btnImportDxfWGS.TabIndex = 22;
-            this.btnImportDxfWGS.Text = "Import DXF (WGS84)";
-            this.btnImportDxfWGS.UseVisualStyleBackColor = true;
-            this.btnImportDxfWGS.Click += new System.EventHandler(this.btnImportDxfWGS_Click);
+            this.btnImportSwitched.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportSwitched.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImportSwitched.Location = new System.Drawing.Point(3, 32);
+            this.btnImportSwitched.Name = "btnImportSwitched";
+            this.btnImportSwitched.Size = new System.Drawing.Size(190, 23);
+            this.btnImportSwitched.TabIndex = 23;
+            this.btnImportSwitched.Text = "Import DXF (WGS84 Switched)";
+            this.btnImportSwitched.UseVisualStyleBackColor = true;
+            this.btnImportSwitched.Click += new System.EventHandler(this.btnImportSwitched_Click);
             // 
             // ParcourImport
             // 
@@ -640,5 +655,6 @@
         private System.Windows.Forms.TextBox fldName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnImportDxfWGS;
+        private System.Windows.Forms.Button btnImportSwitched;
     }
 }

@@ -53,7 +53,19 @@ namespace AnrlService.Server
                         t_d.Longitude = data.longitude;
                         t_d.Speed = data.speed;
                         //Convert Javas millis to C#'s nano- Ticks
-                        t_d.Timestamp = UTCBaseTime.Add(new TimeSpan(data.timestampGPS * TimeSpan.TicksPerMillisecond)).Ticks;
+
+                        //Hack to fix the Bug from Android (One day in future)
+                        long day = TimeSpan.TicksPerDay;
+                        long hours = TimeSpan.TicksPerHour;
+                        long timestampGPS = UTCBaseTime.Add(new TimeSpan(data.timestampGPS * TimeSpan.TicksPerMillisecond)).Ticks;
+                        long timestampSender = UTCBaseTime.Add(new TimeSpan(data.timestampSender * TimeSpan.TicksPerMillisecond)).Ticks;
+
+                        if ((timestampGPS - day + hours) > timestampSender)
+                        {
+                            timestampGPS -= day;
+                        }
+
+                        t_d.Timestamp = timestampGPS;
                         t_d.ID_Tracker = tracker.ID;
                         db.t_Datens.InsertOnSubmit(t_d);
                         response.response.countAdded++;

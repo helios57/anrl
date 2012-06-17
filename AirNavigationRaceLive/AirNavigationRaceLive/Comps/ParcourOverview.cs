@@ -356,5 +356,21 @@ namespace AirNavigationRaceLive.Comps
             }
         }
 
+        private void btnExport100k_Click(object sender, EventArgs e)
+        {
+            ListItem li = listBox1.SelectedItem as ListItem;
+            if (li != null && pictureBox1.PrintOutImage != null)
+            {
+                String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
+                DirectoryInfo di = Directory.CreateDirectory(dirPath);
+                if (!di.Exists)
+                {
+                    di.Create();
+                }
+                PDFCreator.CreateParcourPDF100k(pictureBox1, Client, li.getParcour().Name, dirPath +
+                    @"\Parcour_" + li.getParcour().ID + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+            }
+        }
+
     }
 }

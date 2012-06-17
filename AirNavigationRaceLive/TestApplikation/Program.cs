@@ -17,17 +17,33 @@ namespace TestApplikation
     {
         static void Main(string[] args)
         {
-          
+            long javams = 1339714653449L;
+            DateTime UTCBaseTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            DateTime dt = UTCBaseTime.Add(new TimeSpan(javams * TimeSpan.TicksPerMillisecond)).ToLocalTime();
+
+            System.Console.Out.WriteLine(dt.Ticks);
+            System.Console.Out.WriteLine(DateTime.Now.Ticks);
+
+
+            System.Console.Out.WriteLine(DateTime.Parse("2012.06.14 02:57:23"));
+            System.Console.Out.WriteLine(new DateTime(dt.Ticks));
+            System.Console.Out.WriteLine(new DateTime(DateTime.Now.Ticks));
+
             double Latitude = ConvertCoordinates("N4753.0418");
             double Longitude = ConvertCoordinates("E00820.8429");
             double Altitude = double.Parse("1015.4");
+            
+            System.Console.Out.WriteLine(new DateTime(634755390850000000).AddDays(-1));
+            System.Console.Out.WriteLine(new DateTime(UTCBaseTime.Add(new TimeSpan(1339942290000L * TimeSpan.TicksPerMillisecond)).Ticks));
+            
+            
 
-           // Type serviceType = typeof(LiveInputService.LiveInputServiceImpl);
-           // ServiceHost host = new ServiceHost(serviceType,new Uri[]{new Uri("gps")});
+            // Type serviceType = typeof(LiveInputService.LiveInputServiceImpl);
+            // ServiceHost host = new ServiceHost(serviceType,new Uri[]{new Uri("gps")});
             //host.Open();
-           // AnrlService.AnrlServiceImpl service = new AnrlService.AnrlServiceImpl();
-           // service.start();
-           Thread.Sleep(Int32.MaxValue);
+            // AnrlService.AnrlServiceImpl service = new AnrlService.AnrlServiceImpl();
+            // service.start();
+            Thread.Sleep(Int32.MaxValue);
             /*int PORT = 1337;
             TcpListener server;
             server = new TcpListener(IPAddress.Any, PORT);
