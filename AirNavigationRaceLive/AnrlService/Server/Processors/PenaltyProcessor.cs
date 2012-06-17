@@ -78,7 +78,7 @@ namespace AnrlService.Server.Processors
 
         protected override bool CheckCompetitionSet(int id_competitionSet, Penalty Obj)
         {
-            return id_competitionSet == Obj.ID;
+            return id_competitionSet == Obj.ID_CompetitonSet;
         }
 
         protected override void AddToResponseList(Root response, Penalty obj)
