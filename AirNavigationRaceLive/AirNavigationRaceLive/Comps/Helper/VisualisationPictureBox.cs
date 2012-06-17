@@ -179,6 +179,7 @@ namespace AirNavigationRaceLive.Comps
         }
 
         public System.Drawing.Image PrintOutImage { get { return GeneratePrintOut(); } }
+
         protected Image GeneratePrintOut()
         {
             if (Parcour != null && c != null)
@@ -193,6 +194,7 @@ namespace AirNavigationRaceLive.Comps
             }
             return null;
         }
+
         public double GetXDistanceKM()
         {
             double topLat = c.TopLeftLatitudeY;

@@ -47,10 +47,10 @@ namespace AirNavigationRaceLive.Comps.Helper
             //table.AddColumn(Unit.FromCentimeter(0.7));
             table.AddColumn(Unit.FromCentimeter(2.5));
             table.AddColumn();
-            table.AddColumn(Unit.FromCentimeter(4.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
             table.AddColumn();
 
             Row row = table.AddRow();
@@ -97,7 +97,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             pg.Format.Alignment = ParagraphAlignment.Left;
             pg.Format.KeepTogether = false;
             pg.Format.KeepWithNext = false;
-            pg.Format.AddTabStop(Unit.FromCentimeter(24));
+            pg.Format.AddTabStop(Unit.FromCentimeter(22));
 
             FormattedText ft = pg.AddFormattedText(competitionName);
             ft.Bold = true;
@@ -109,7 +109,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             logo.Height = Unit.FromCentimeter(2);
             logo.Width = Unit.FromCentimeter(2);
             logo.LockAspectRatio = true;
-            logo.Left = Unit.FromCentimeter(23);
+            logo.Left = Unit.FromCentimeter(22);
             logo.Top = Unit.FromCentimeter(0);
         }
 
@@ -322,10 +322,10 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             table.AddColumn(Unit.FromCentimeter(2));
             table.AddColumn(Unit.FromCentimeter(2.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
-            table.AddColumn(Unit.FromCentimeter(4.5));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
+            table.AddColumn(Unit.FromCentimeter(4));
 
             Row row = table.AddRow();
             row.Shading.Color = Colors.Gray;
@@ -504,50 +504,6 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             return sb.ToString();
         }
-        public static void test()
-        {
-            DateTime now = DateTime.Now;
-            string filename = "MixMigraDocAndPdfSharp.pdf";
-            filename = Guid.NewGuid().ToString("D").ToUpper() + ".pdf";
-            PdfDocument document = new PdfDocument();
-            document.Info.Title = "PDFsharp XGraphic Sample";
-            document.Info.Author = "Stefan Lange";
-            document.Info.Subject = "Created with code snippets that show the use of graphical functions";
-            document.Info.Keywords = "PDFsharp, XGraphics";
-
-
-            PdfPage page = document.AddPage();
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-            gfx.MUH = PdfFontEncoding.Unicode;
-            gfx.MFEH = PdfFontEmbedding.Default;
-            XFont font = new XFont("Verdana", 13, XFontStyle.Bold);
-            gfx.DrawString("The following paragraph was rendered using MigraDoc:", font, XBrushes.Black,
-            new XRect(100, 100, page.Width - 200, 300), XStringFormats.Center);
-            Document doc = new Document();
-            Section sec = doc.AddSection();
-            Paragraph para = sec.AddParagraph();
-            para.Format.Alignment = ParagraphAlignment.Justify;
-            para.Format.Font.Name = "Times New Roman";
-            para.Format.Font.Size = 12;
-            para.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
-            para.Format.Font.Color = MigraDoc.DocumentObjectModel.Colors.DarkGray;
-            para.AddText("Duisism odigna acipsum delesenisl ");
-            para.AddFormattedText("ullum in velenit", TextFormat.Bold);
-            para.AddText(" ipit iurero dolum zzriliquisis nit wis dolore vel et nonsequipit, velendigna " +
-            "auguercilit lor se dipisl duismod tatem zzrit at laore magna feummod oloborting ea con vel " +
-            "essit augiati onsequat luptat nos diatum vel ullum illummy nonsent nit ipis et nonsequis " +
-            "niation utpat. Odolobor augait et non etueril landre min ut ulla feugiam commodo lortie ex " +
-            "essent augait el ing eumsan hendre feugait prat augiatem amconul laoreet. ≤≥≈≠");
-            para.Format.Borders.Distance = "5pt";
-            para.Format.Borders.Color = Colors.Gold;
-            MigraDoc.Rendering.DocumentRenderer docRenderer = new DocumentRenderer(doc);
-            docRenderer.PrepareDocument();
-            docRenderer.RenderObject(gfx, XUnit.FromCentimeter(5), XUnit.FromCentimeter(10), "12cm", para);
-
-            document.Save(filename);
-
-            Process.Start(filename);
-        }
 
         internal static void CreateStartListPDF(NetworkObjects.Competition competition, Client.Client Client, string pathToPDF)
         {
@@ -571,17 +527,17 @@ namespace AirNavigationRaceLive.Comps.Helper
             Table table = sec.AddTable();
             table.Borders.Visible = true;
 
+            table.AddColumn(Unit.FromCentimeter(1.2));
+            table.AddColumn(Unit.FromCentimeter(2));
+            table.AddColumn(Unit.FromCentimeter(2));
+            table.AddColumn(Unit.FromCentimeter(3));
+            table.AddColumn(Unit.FromCentimeter(3));
+            table.AddColumn(Unit.FromCentimeter(3));
+            table.AddColumn(Unit.FromCentimeter(3));
+            table.AddColumn(Unit.FromCentimeter(2));
+            table.AddColumn(Unit.FromCentimeter(2));
+            table.AddColumn(Unit.FromCentimeter(2));
             table.AddColumn(Unit.FromCentimeter(1.5));
-            table.AddColumn(Unit.FromCentimeter(2.5));
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
-            table.AddColumn();
 
             Row row = table.AddRow();
             row.Shading.Color = Colors.Gray;
@@ -623,7 +579,6 @@ namespace AirNavigationRaceLive.Comps.Helper
             renderer.Document = doc;
             renderer.RenderDocument();
             renderer.PdfDocument.Save(pathToPDF);
-
             Process.Start(pathToPDF);
         }
     }
