@@ -110,7 +110,7 @@ namespace AirNavigationRaceLive.Comps
                             float radius = (float)Vector.Abs(midv - start);
                             try
                             {
-                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE && l.Type != (int)NetworkObjects.LineType.Point)
+                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE && l.Type != (int)NetworkObjects.LineType.Point && l.Type != (int)NetworkObjects.LineType.LINEOFNORETURN)
                                 {
                                     //Start_X/End_X
                                     if (((int)l.Type) >= 3 && ((int)l.Type) <= 10)
@@ -137,7 +137,7 @@ namespace AirNavigationRaceLive.Comps
                 int y0 = 0;
                 int x0 = 0;
                 double factor = 1;
-  
+
 
                 if (rescale)
                 {
@@ -170,7 +170,7 @@ namespace AirNavigationRaceLive.Comps
                         }
                         if (points.Count > 2)
                         {
-                         
+
                             pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), lineThickness), points.ToArray());
                         }
                     }
@@ -188,8 +188,8 @@ namespace AirNavigationRaceLive.Comps
                 Graphics gr = Graphics.FromImage(bt);
                 Rectangle rc = new Rectangle(0, 0, Image.Width, Image.Height);
                 gr.DrawImage(Image, rc);
-                PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle(-2,-2,-2,-2));
-                PaintParcourAndData(pe,false);
+                PaintEventArgs pe = new PaintEventArgs(gr, new Rectangle(-2, -2, -2, -2));
+                PaintParcourAndData(pe, false);
                 return bt;
             }
             return null;
