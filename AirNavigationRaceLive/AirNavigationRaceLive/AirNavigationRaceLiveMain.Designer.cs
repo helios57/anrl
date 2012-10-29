@@ -65,6 +65,7 @@
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.generateSingleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -120,7 +121,7 @@
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.connectToolStripMenuItem.Text = "Connect";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
@@ -128,19 +129,19 @@
             // 
             this.disconnectToolStripMenuItem.Enabled = false;
             this.disconnectToolStripMenuItem.Name = "disconnectToolStripMenuItem";
-            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.disconnectToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.disconnectToolStripMenuItem.Text = "Disconnect";
             this.disconnectToolStripMenuItem.Click += new System.EventHandler(this.disconnectToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(130, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -189,7 +190,8 @@
             this.overviewZoomedToolStripMenuItem,
             this.generateToolStripMenuItem,
             this.importToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.generateSingleToolStripMenuItem});
             this.parcourToolStripMenuItem.Enabled = false;
             this.parcourToolStripMenuItem.Name = "parcourToolStripMenuItem";
             this.parcourToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
@@ -377,6 +379,13 @@
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
+            // generateSingleToolStripMenuItem
+            // 
+            this.generateSingleToolStripMenuItem.Name = "generateSingleToolStripMenuItem";
+            this.generateSingleToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.generateSingleToolStripMenuItem.Text = "Generate Single";
+            this.generateSingleToolStripMenuItem.Click += new System.EventHandler(this.generateSingleToolStripMenuItem_Click);
+            // 
             // AirNavigationRaceLiveMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +446,7 @@
         private System.Windows.Forms.ToolStripMenuItem competitionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importFromWorldfileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importFromMapsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateSingleToolStripMenuItem;
     }
 }
 

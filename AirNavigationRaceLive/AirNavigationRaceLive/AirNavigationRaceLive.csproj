@@ -144,6 +144,14 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Helper\ParcourGeneratorSingle.cs" />
+    <Compile Include="Comps\Helper\ParcourModelSingle.cs" />
+    <Compile Include="Comps\ParcourEditSingle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\ParcourEditSingle.Designer.cs">
+      <DependentUpon>ParcourEditSingle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\MapImportFromMaps.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -310,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Competition.resx">
       <DependentUpon>Competition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\ParcourEditSingle.resx">
+      <DependentUpon>ParcourEditSingle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\MapImportFromMaps.resx">
       <DependentUpon>MapImportFromMaps.cs</DependentUpon>

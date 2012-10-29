@@ -26,6 +26,7 @@ namespace AirNavigationRaceLive
         private Map Map;
         private Visualisation Visualisation;
         private ParcourGen ParcourGen;
+        private ParcourEditSingle ParcourEditSingle;
         private ParcourImport ParcourImport;
         private ParcourOverview ParcourOverview;
         private ParcourEdit ParcourEdit;
@@ -387,6 +388,15 @@ namespace AirNavigationRaceLive
             }
             enableControl(MapImportFromMaps);
 
+        }
+
+        private void generateSingleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ParcourEditSingle == null)
+            {
+                ParcourEditSingle = new ParcourEditSingle(Client);
+            }
+            enableControl(ParcourEditSingle);
         }
     }
 }

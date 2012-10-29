@@ -482,8 +482,8 @@
             this.label9.Size = new System.Drawing.Size(524, 26);
             this.label9.TabIndex = 4;
             this.label9.Text = "The width of the map is exactly 25 nm on zoomlevel 11. Zoomlevel 11 is the only z" +
-                "oomlevel accepted to save.\r\nDo first expand the size of the window and then sele" +
-                "ct your part!";
+    "oomlevel accepted to save.\r\nDo first expand the size of the window and then sele" +
+    "ct your part!";
             // 
             // gMapControl1
             // 
@@ -509,7 +509,6 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
             this.gMapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseMove);
-            this.gMapControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseUp);
             // 
             // MapImportFromMaps
             // 

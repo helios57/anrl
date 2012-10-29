@@ -28,6 +28,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_C), lines.Single(p => p.Type == (int)LineType.END_C));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_D), lines.Single(p => p.Type == (int)LineType.END_D));
         }
+
         public ParcourModel(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double desiredLengthFactor, double channel, bool regenerate)
         {
             this.desiredLengthFactor = desiredLengthFactor;

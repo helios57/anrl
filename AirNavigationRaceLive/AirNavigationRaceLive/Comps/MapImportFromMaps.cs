@@ -16,7 +16,7 @@ namespace AirNavigationRaceLive.Comps
 {
     public partial class MapImportFromMaps : UserControl
     {
-        
+
 
         private Client.Client Client;
         private ToolTip Tooltip;
@@ -41,8 +41,8 @@ namespace AirNavigationRaceLive.Comps
             Tooltip.SetToolTip(fldX, "x-coordinate of the center of the upper left pixel; unit is degree! Example: 8.491");
             Tooltip.SetToolTip(fldY, "y-coordinate of the center of the upper left pixel; unit is degree! Example: 50.058");
         }
-        
-        
+
+
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -87,9 +87,10 @@ namespace AirNavigationRaceLive.Comps
             gMapControl1.Overlays.Add(overlayOne);
             trackBarZoomlevel.Maximum = gMapControl1.MaxZoom;
             trackBarZoomlevel.Minimum = gMapControl1.MinZoom;
+            gMapControl1.OnMapZoomChanged += new MapZoomChanged(gMapControl1_OnMapZoomChanged);
         }
 
-        private void gMapControl1_MouseUp(object sender, MouseEventArgs e)
+        void gMapControl1_OnMapZoomChanged()
         {
             fldX.Text = gMapControl1.CurrentViewArea.LocationTopLeft.Lng.ToString();
             fldY.Text = gMapControl1.CurrentViewArea.LocationTopLeft.Lat.ToString();

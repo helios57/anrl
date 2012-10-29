@@ -97,6 +97,7 @@
             this.fldPassword.PasswordChar = '*';
             this.fldPassword.Size = new System.Drawing.Size(98, 20);
             this.fldPassword.TabIndex = 3;
+            this.fldPassword.Text = "test";
             this.fldPassword.UseSystemPasswordChar = true;
             // 
             // fldUsername
@@ -105,6 +106,7 @@
             this.fldUsername.Name = "fldUsername";
             this.fldUsername.Size = new System.Drawing.Size(98, 20);
             this.fldUsername.TabIndex = 2;
+            this.fldUsername.Text = "test";
             // 
             // btnRegister
             // 
