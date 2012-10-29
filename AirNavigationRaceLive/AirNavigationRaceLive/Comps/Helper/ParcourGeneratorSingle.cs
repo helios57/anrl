@@ -21,7 +21,6 @@ namespace AirNavigationRaceLive.Comps.Helper
         public double bestStraightLength = 0;
         public double bestLegLength = 0;
         private volatile bool regenerate = false;
-        private int count;
 
         private void ProcessList(object o)
         {
