@@ -78,7 +78,7 @@ namespace AirNavigationRaceLive.Comps
         private void gMapControl1_Load(object sender, EventArgs e)
         {
             GMapOverlay overlayOne;
-            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            gMapControl1.MapProvider = GMapProviders.OpenStreetMap;
             gMapControl1.MaxZoom = 20;
             gMapControl1.MinZoom = 3;
             gMapControl1.Zoom = 3;
@@ -87,15 +87,14 @@ namespace AirNavigationRaceLive.Comps
             gMapControl1.Overlays.Add(overlayOne);
             trackBarZoomlevel.Maximum = gMapControl1.MaxZoom;
             trackBarZoomlevel.Minimum = gMapControl1.MinZoom;
-            gMapControl1.OnMapZoomChanged += new MapZoomChanged(gMapControl1_OnMapZoomChanged);
         }
 
-        void gMapControl1_OnMapZoomChanged()
+        private void gMapControl1_MouseUp(object sender, MouseEventArgs e)
         {
             fldX.Text = gMapControl1.CurrentViewArea.LocationTopLeft.Lng.ToString();
             fldY.Text = gMapControl1.CurrentViewArea.LocationTopLeft.Lat.ToString();
-            fldSizeY.Text = ((gMapControl1.CurrentViewArea.LocationRightBottom.Lat - gMapControl1.CurrentViewArea.LocationTopLeft.Lat) / gMapControl1.Size.Height).ToString();
-            fldSizeX.Text = ((gMapControl1.CurrentViewArea.LocationRightBottom.Lng - gMapControl1.CurrentViewArea.LocationTopLeft.Lng) / gMapControl1.Size.Width).ToString();
+            fldSizeY.Text = (Math.Abs(gMapControl1.CurrentViewArea.LocationRightBottom.Lat - gMapControl1.CurrentViewArea.LocationTopLeft.Lat) / gMapControl1.Size.Height).ToString();
+            fldSizeX.Text = (Math.Abs(gMapControl1.CurrentViewArea.LocationRightBottom.Lng - gMapControl1.CurrentViewArea.LocationTopLeft.Lng) / gMapControl1.Size.Width).ToString();
         }
 
         private void fldX_TextChanged(object sender, EventArgs e)
@@ -113,6 +112,9 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
+
+
+
 
         private void gMapControl1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -154,6 +156,5 @@ namespace AirNavigationRaceLive.Comps
                 gMapControl1.MapProvider = GMapProviders.GoogleMap;
             }
         }
-
     }
 }
