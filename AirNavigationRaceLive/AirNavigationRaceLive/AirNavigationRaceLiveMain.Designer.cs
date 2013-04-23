@@ -48,6 +48,7 @@
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateSingleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pilotsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.teamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qualificationRoundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +66,8 @@
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.generateSingleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -100,6 +102,7 @@
             this.resultsToolStripMenuItem,
             this.trackerToolStripMenuItem,
             this.visualisationToolStripMenuItem,
+            this.exportToolStripMenuItem,
             this.creditsToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
@@ -232,6 +235,13 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // generateSingleToolStripMenuItem
+            // 
+            this.generateSingleToolStripMenuItem.Name = "generateSingleToolStripMenuItem";
+            this.generateSingleToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.generateSingleToolStripMenuItem.Text = "Generate Single";
+            this.generateSingleToolStripMenuItem.Click += new System.EventHandler(this.generateSingleToolStripMenuItem_Click);
             // 
             // pilotsToolStripMenuItem
             // 
@@ -379,12 +389,20 @@
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
             // 
-            // generateSingleToolStripMenuItem
+            // exportToolStripMenuItem
             // 
-            this.generateSingleToolStripMenuItem.Name = "generateSingleToolStripMenuItem";
-            this.generateSingleToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.generateSingleToolStripMenuItem.Text = "Generate Single";
-            this.generateSingleToolStripMenuItem.Click += new System.EventHandler(this.generateSingleToolStripMenuItem_Click);
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportKMLToolStripMenuItem});
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.exportToolStripMenuItem.Text = "Export";
+            // 
+            // exportKMLToolStripMenuItem
+            // 
+            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportKMLToolStripMenuItem.Text = "Export KML";
+            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
             // AirNavigationRaceLiveMain
             // 
@@ -447,6 +465,8 @@
         private System.Windows.Forms.ToolStripMenuItem importFromWorldfileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importFromMapsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateSingleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
     }
 }
 

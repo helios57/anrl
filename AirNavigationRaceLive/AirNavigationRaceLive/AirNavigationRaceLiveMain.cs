@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AirNavigationRaceLive.Comps;
 using AirNavigationRaceLive.Comps.Client;
+using AirNavigationRaceLive.Dialogs;
 
 namespace AirNavigationRaceLive
 {
@@ -86,6 +87,8 @@ namespace AirNavigationRaceLive
             visualisationToolStripMenuItem.Enabled = connected;
             uploadTrackerDataToolStripMenuItem.Enabled = connected;
             editToolStripMenuItem.Enabled = connected;
+            exportToolStripMenuItem.Enabled = connected;
+            exportKMLToolStripMenuItem.Enabled = connected;
             competitionToolStripMenuItem.Enabled = ClientNetwork != null;
         }
 
@@ -397,6 +400,11 @@ namespace AirNavigationRaceLive
                 ParcourEditSingle = new ParcourEditSingle(Client);
             }
             enableControl(ParcourEditSingle);
+        }
+
+        private void exportKMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ExportKML(Client).Show();
         }
     }
 }

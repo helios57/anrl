@@ -291,6 +291,12 @@
     <Compile Include="Comps\Visualisation.Designer.cs">
       <DependentUpon>Visualisation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ExportKML.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ExportKML.Designer.cs">
+      <DependentUpon>ExportKML.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\RankForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Visualisation.resx">
       <DependentUpon>Visualisation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialogs\ExportKML.resx">
+      <DependentUpon>ExportKML.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialogs\RankForm.resx">
       <DependentUpon>RankForm.cs</DependentUpon>
