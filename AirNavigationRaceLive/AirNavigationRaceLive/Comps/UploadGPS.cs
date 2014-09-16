@@ -200,6 +200,34 @@ namespace AirNavigationRaceLive.Comps
         private void textBoxIMEI_TextChanged(object sender, EventArgs e)
         {
             UpdateEnablement();
+        }    
+
+        private void btnImportGPX_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            string FileFilter = "GPX  (*.gpx)|*.gpx";
+            ofd.Title = "GPX Import";
+            ofd.RestoreDirectory = true;
+            ofd.Multiselect = false;
+            ofd.Filter = FileFilter;
+            ofd.FileOk += new CancelEventHandler(ofd_FileOkGPX);
+            ofd.ShowDialog();
+        }
+
+        void ofd_FileOkGPX(object sender, CancelEventArgs e)
+        {
+            OpenFileDialog ofd = sender as OpenFileDialog;
+            try
+            {
+                List<GPSData> list = Importer.GPSdataFromGPX(textBoxIMEI.Text, ofd.FileName);
+                textBoxPositions.Text = list.Count.ToString();
+                textBoxPositions.Tag = list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Error while Parsing File");
+            }
+            UpdateEnablement();
         }
     }
 }

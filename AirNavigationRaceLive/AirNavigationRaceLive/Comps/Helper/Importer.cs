@@ -6,6 +6,7 @@ using System.IO;
 using AirNavigationRaceLive.Comps.Model;
 using Facet.Combinatorics;
 using NetworkObjects;
+using System.Xml.Linq;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -715,6 +716,46 @@ namespace AirNavigationRaceLive.Comps.Helper
                         data.timestampSender = new DateTime().Ticks;
                         result.Add(data);
                     }
+                }
+            }
+            return result;
+        }
+
+        internal static List<GPSData> GPSdataFromGPX(string imei, string filename)
+        {
+            List<GPSData> result = new List<GPSData>();
+            XNamespace gpx = XNamespace.Get("http://www.topografix.com/GPX/1/1");
+            XDocument gpxDoc = XDocument.Load(filename);
+            var tracks = from track in gpxDoc.Descendants(gpx + "trk")
+                         select new
+                         {
+                             Name = track.Element(gpx + "name") != null ?
+                                 track.Element(gpx + "name").Value : null,
+                             Segs = (
+                                  from trackpoint in track.Descendants(gpx + "trkpt")
+                                  select new
+                                  {
+                                      Latitude = trackpoint.Attribute("lat").Value,
+                                      Longitude = trackpoint.Attribute("lon").Value,
+                                      Elevation = trackpoint.Element(gpx + "ele") != null ?
+                                        trackpoint.Element(gpx + "ele").Value : null,
+                                      Time = trackpoint.Element(gpx + "time") != null ?
+                                        trackpoint.Element(gpx + "time").Value : null
+                                  }
+                                )
+                         };
+            foreach (var trk in tracks)
+            {
+                foreach (var trkSeg in trk.Segs)
+                {
+                    GPSData data = new GPSData();
+                    data.timestampGPS = DateTime.Parse(trkSeg.Time).Ticks;
+                    data.latitude = Double.Parse(trkSeg.Latitude);
+                    data.longitude = Double.Parse(trkSeg.Longitude);
+                    data.altitude = Double.Parse(trkSeg.Elevation);
+                    data.identifier = imei;
+                    data.timestampSender = DateTime.Now.Ticks;
+                    result.Add(data);
                 }
             }
             return result;

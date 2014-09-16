@@ -57,6 +57,7 @@
             this.visualisationPictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnExportToplist = new System.Windows.Forms.Button();
+            this.btnUploadGPX = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -287,7 +288,7 @@
             this.btnUpload.Enabled = false;
             this.btnUpload.Location = new System.Drawing.Point(103, 176);
             this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(161, 23);
+            this.btnUpload.Size = new System.Drawing.Size(113, 23);
             this.btnUpload.TabIndex = 115;
             this.btnUpload.Text = "Upload GAC-File";
             this.btnUpload.UseVisualStyleBackColor = true;
@@ -326,10 +327,23 @@
             this.btnExportToplist.UseVisualStyleBackColor = true;
             this.btnExportToplist.Click += new System.EventHandler(this.btnExportToplist_Click);
             // 
+            // btnUploadGPX
+            // 
+            this.btnUploadGPX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnUploadGPX.Enabled = false;
+            this.btnUploadGPX.Location = new System.Drawing.Point(222, 176);
+            this.btnUploadGPX.Name = "btnUploadGPX";
+            this.btnUploadGPX.Size = new System.Drawing.Size(42, 23);
+            this.btnUploadGPX.TabIndex = 118;
+            this.btnUploadGPX.Text = "GPX";
+            this.btnUploadGPX.UseVisualStyleBackColor = true;
+            this.btnUploadGPX.Click += new System.EventHandler(this.btnUploadGPX_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUploadGPX);
             this.Controls.Add(this.btnExportToplist);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnUpload);
@@ -390,5 +404,6 @@
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExportToplist;
+        private System.Windows.Forms.Button btnUploadGPX;
     }
 }

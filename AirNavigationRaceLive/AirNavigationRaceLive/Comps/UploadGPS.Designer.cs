@@ -47,6 +47,7 @@
             this.textBoxPositions = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnUploadData = new System.Windows.Forms.Button();
+            this.btnImportGPX = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTrackers
@@ -193,7 +194,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(223, 259);
+            this.label3.Location = new System.Drawing.Point(223, 287);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 13;
@@ -202,7 +203,7 @@
             // textBoxPositions
             // 
             this.textBoxPositions.Enabled = false;
-            this.textBoxPositions.Location = new System.Drawing.Point(322, 255);
+            this.textBoxPositions.Location = new System.Drawing.Point(322, 283);
             this.textBoxPositions.Name = "textBoxPositions";
             this.textBoxPositions.ReadOnly = true;
             this.textBoxPositions.Size = new System.Drawing.Size(149, 20);
@@ -219,7 +220,7 @@
             // 
             // btnUploadData
             // 
-            this.btnUploadData.Location = new System.Drawing.Point(322, 281);
+            this.btnUploadData.Location = new System.Drawing.Point(322, 309);
             this.btnUploadData.Name = "btnUploadData";
             this.btnUploadData.Size = new System.Drawing.Size(149, 23);
             this.btnUploadData.TabIndex = 16;
@@ -227,10 +228,21 @@
             this.btnUploadData.UseVisualStyleBackColor = true;
             this.btnUploadData.Click += new System.EventHandler(this.btnUploadData_Click);
             // 
+            // btnImportGPX
+            // 
+            this.btnImportGPX.Location = new System.Drawing.Point(322, 254);
+            this.btnImportGPX.Name = "btnImportGPX";
+            this.btnImportGPX.Size = new System.Drawing.Size(149, 23);
+            this.btnImportGPX.TabIndex = 17;
+            this.btnImportGPX.Text = "Import GPX";
+            this.btnImportGPX.UseVisualStyleBackColor = true;
+            this.btnImportGPX.Click += new System.EventHandler(this.btnImportGPX_Click);
+            // 
             // UploadGPS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnImportGPX);
             this.Controls.Add(this.btnUploadData);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxPositions);
@@ -276,5 +288,6 @@
         private System.Windows.Forms.TextBox textBoxPositions;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnUploadData;
+        private System.Windows.Forms.Button btnImportGPX;
     }
 }

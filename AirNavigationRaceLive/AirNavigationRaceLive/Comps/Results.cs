@@ -266,6 +266,7 @@ namespace AirNavigationRaceLive.Comps
             if (listViewCompetitionTeam.SelectedItems.Count == 1)
             {
                 btnUpload.Enabled = true;
+                btnUploadGPX.Enabled = true;
                 ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
                 visualisationPictureBox1.SetData(competitionTeam.data, new List<NetworkObjects.Team>(new NetworkObjects.Team[] { Client.getTeam(competitionTeam.competitionTeam.ID_Team) }), new List<NetworkObjects.CompetitionTeam>(new NetworkObjects.CompetitionTeam[] { competitionTeam.competitionTeam }));
                 visualisationPictureBox1.Invalidate();
@@ -281,6 +282,7 @@ namespace AirNavigationRaceLive.Comps
             else
             {
                 btnUpload.Enabled = false;
+                btnUploadGPX.Enabled = false;
             }
         }
 
@@ -343,6 +345,17 @@ namespace AirNavigationRaceLive.Comps
                 }
                 PDFCreator.CreateToplistResultPDF(Client, competition, ctl, dirPath +
                     @"\Results_" + competition.Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+            }
+        }
+
+        private void btnUploadGPX_Click(object sender, EventArgs e)
+        {
+            if (listViewCompetitionTeam.SelectedItems.Count == 1)
+            {
+                ComboBoxCompetitionTeam competitionTeam = listViewCompetitionTeam.SelectedItems[0] as ComboBoxCompetitionTeam;
+                UploadGPX upload = new UploadGPX(Client, competitionTeam.competitionTeam);
+                upload.OnFinish += new EventHandler(UploadFinished);
+                upload.Show();
             }
         }
 
