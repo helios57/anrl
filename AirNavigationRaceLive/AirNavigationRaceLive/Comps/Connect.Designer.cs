@@ -67,7 +67,7 @@
             this.fldServer.Name = "fldServer";
             this.fldServer.Size = new System.Drawing.Size(98, 21);
             this.fldServer.TabIndex = 1;
-            this.fldServer.Text = "46.163.65.74";
+            this.fldServer.Text = "178.77.71.105";
             this.fldServer.SelectedIndexChanged += new System.EventHandler(this.fldServer_SelectedIndexChanged);
             this.fldServer.TextChanged += new System.EventHandler(this.fldServer_SelectedIndexChanged);
             // 
