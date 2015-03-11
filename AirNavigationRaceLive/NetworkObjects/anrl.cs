@@ -805,6 +805,9 @@ namespace NetworkObjects
       set { _ID_Navigator = value; }
     }
 
+    /// <summary>
+    /// Name = Nationalität
+    /// </summary>
     private string _Name = "";
     [global::ProtoBuf.ProtoMember(4, IsRequired = false, Name=@"Name", DataFormat = global::ProtoBuf.DataFormat.Default)]
     [global::System.ComponentModel.DefaultValue("")]

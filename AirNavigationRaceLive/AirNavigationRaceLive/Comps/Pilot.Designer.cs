@@ -74,19 +74,19 @@
             // 
             this.IDl.Tag = "IDl";
             this.IDl.Text = "ID";
-            this.IDl.Width = 53;
+            this.IDl.Width = 0;
             // 
             // Namel
             // 
             this.Namel.Tag = "Namel";
             this.Namel.Text = "Lastname";
-            this.Namel.Width = 183;
+            this.Namel.Width = 205;
             // 
             // Vornamel
             // 
             this.Vornamel.Tag = "Vornamel";
             this.Vornamel.Text = "Firstname";
-            this.Vornamel.Width = 172;
+            this.Vornamel.Width = 204;
             // 
             // btnRefresh
             // 
@@ -143,7 +143,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(422, 131);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 13);
+            this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Firstname";
             // 

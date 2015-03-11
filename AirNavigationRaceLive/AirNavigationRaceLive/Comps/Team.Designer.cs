@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.listViewTeam = new System.Windows.Forms.ListView();
-            this.IDl = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Nationality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pilot = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Navigator = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ColumnColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnRefresh = new System.Windows.Forms.Button();
             this.listViewPilots = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Namel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Vornamel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxNavigator = new System.Windows.Forms.TextBox();
@@ -61,7 +60,6 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.textBoxCNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ColumnColor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewTeam
@@ -71,12 +69,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewTeam.AutoArrange = false;
             this.listViewTeam.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.IDl,
-            this.columnHeader4,
-            this.columnHeader2,
+            this.CNumber,
+            this.Nationality,
             this.Pilot,
             this.Navigator,
-            this.columnHeader5,
+            this.AC,
             this.ColumnColor});
             this.listViewTeam.FullRowSelect = true;
             this.listViewTeam.GridLines = true;
@@ -92,41 +89,35 @@
             this.listViewTeam.View = System.Windows.Forms.View.Details;
             this.listViewTeam.SelectedIndexChanged += new System.EventHandler(this.listViewTeam_SelectedIndexChanged);
             // 
-            // IDl
+            // CNumber
             // 
-            this.IDl.Tag = "IDl";
-            this.IDl.Text = "ID";
-            this.IDl.Width = 40;
+            this.CNumber.Text = "CNumber";
+            this.CNumber.Width = 58;
             // 
-            // columnHeader4
+            // Nationality
             // 
-            this.columnHeader4.DisplayIndex = 4;
-            this.columnHeader4.Text = "CNumber";
-            this.columnHeader4.Width = 58;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.DisplayIndex = 1;
-            this.columnHeader2.Text = "Nationality";
-            this.columnHeader2.Width = 64;
+            this.Nationality.Text = "Nationality";
+            this.Nationality.Width = 64;
             // 
             // Pilot
             // 
-            this.Pilot.DisplayIndex = 2;
             this.Pilot.Tag = "Pilot";
             this.Pilot.Text = "Pilot";
             this.Pilot.Width = 131;
             // 
             // Navigator
             // 
-            this.Navigator.DisplayIndex = 3;
             this.Navigator.Tag = "Navigator";
             this.Navigator.Text = "Navigator";
             this.Navigator.Width = 150;
             // 
-            // columnHeader5
+            // AC
             // 
-            this.columnHeader5.Text = "AC";
+            this.AC.Text = "AC";
+            // 
+            // ColumnColor
+            // 
+            this.ColumnColor.Text = "Color";
             // 
             // btnRefresh
             // 
@@ -146,7 +137,6 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listViewPilots.AutoArrange = false;
             this.listViewPilots.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
             this.Namel,
             this.Vornamel});
             this.listViewPilots.FullRowSelect = true;
@@ -162,12 +152,6 @@
             this.listViewPilots.UseCompatibleStateImageBehavior = false;
             this.listViewPilots.View = System.Windows.Forms.View.Details;
             this.listViewPilots.SelectedIndexChanged += new System.EventHandler(this.listViewPilots_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Tag = "IDl";
-            this.columnHeader1.Text = "ID";
-            this.columnHeader1.Width = 42;
             // 
             // Namel
             // 
@@ -390,10 +374,6 @@
             this.label1.TabIndex = 39;
             this.label1.Text = "CNumber";
             // 
-            // ColumnColor
-            // 
-            this.ColumnColor.Text = "Color";
-            // 
             // Team
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,12 +414,10 @@
         #endregion
 
         private System.Windows.Forms.ListView listViewTeam;
-        private System.Windows.Forms.ColumnHeader IDl;
         private System.Windows.Forms.ColumnHeader Pilot;
         private System.Windows.Forms.ColumnHeader Navigator;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ListView listViewPilots;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader Namel;
         private System.Windows.Forms.ColumnHeader Vornamel;
         private System.Windows.Forms.TextBox textBoxNavigator;
@@ -459,13 +437,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader Nationality;
         private System.Windows.Forms.TextBox fldAC;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.TextBox textBoxCNumber;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader CNumber;
+        private System.Windows.Forms.ColumnHeader AC;
         private System.Windows.Forms.ColumnHeader ColumnColor;
     }
 }

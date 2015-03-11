@@ -58,23 +58,23 @@ namespace AirNavigationRaceLive.Comps
                     }
                 }
 
-                ListViewItem lvi = new ListViewItem(new string[] { team.ID.ToString(), team.StartID, team.Name != null ? team.Name : "", pilot.Name, (navigator != null) ? navigator.Name : "-", team.Description, team.Color });
+                ListViewItem lvi = new ListViewItem(new string[] {team.StartID, team.Name != null ? team.Name : "", pilot.Name, (navigator != null) ? navigator.Name : "-", team.Description, team.Color });
                 lvi.UseItemStyleForSubItems = false;
                 lvi.Tag = team;
                 Color c =Color.FromName(team.Color);
-                lvi.SubItems[6].BackColor = c;
+                lvi.SubItems[5].BackColor = c;
                
                 if (c.A == 0 && c.B == 0 && c.G == 0 && c.R == 0)
                 {
                     ColorConverter cc = new ColorConverter();
-                    lvi.SubItems[6].BackColor = (Color)cc.ConvertFromString("#"+team.Color);
+                    lvi.SubItems[5].BackColor = (Color)cc.ConvertFromString("#"+team.Color);
                 }
                 listViewTeam.Items.Add(lvi);
             }
             listViewPilots.Items.Clear();
             foreach (NetworkObjects.Pilot p in pilots)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.Name, p.Surename });
+                ListViewItem lvi = new ListViewItem(new string[] { p.Name, p.Surename });
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
@@ -142,6 +142,7 @@ namespace AirNavigationRaceLive.Comps
             resetFields();
             newTeam = true;
             textBoxID.Text = "-1";
+            textBoxCNumber.Text = "1";
             UpdateEnablement();
         }
 
@@ -184,8 +185,6 @@ namespace AirNavigationRaceLive.Comps
 
         private void listViewTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
             if (listViewTeam.SelectedItems.Count == 1)
             {
                 NetworkObjects.Team team = listViewTeam.SelectedItems[0].Tag as NetworkObjects.Team;

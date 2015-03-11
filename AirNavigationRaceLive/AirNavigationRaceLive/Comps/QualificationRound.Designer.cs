@@ -144,12 +144,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "ID";
-            this.columnHeader1.Width = 35;
+            this.columnHeader1.Width = 0;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 210;
+            this.columnHeader2.Width = 251;
             // 
             // lblTitel
             // 
