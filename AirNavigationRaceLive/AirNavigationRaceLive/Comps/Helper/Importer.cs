@@ -7,6 +7,7 @@ using AirNavigationRaceLive.Comps.Model;
 using Facet.Combinatorics;
 using NetworkObjects;
 using System.Xml.Linq;
+using System.Globalization;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -43,8 +44,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
 
-                                double Longitude = Converter.CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16 + correctur]) * 1000, double.Parse(lines[i + (j * 4) + 18 + correctur]) * 1000);
-                                double Latitude = Converter.CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16 + correctur]) * 1000, double.Parse(lines[i + (j * 4) + 18 + correctur]) * 1000);
+                                double Longitude = Converter.CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + (j * 4) + 18 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
+                                double Latitude = Converter.CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + (j * 4) + 18 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
                                 Vector v = new Vector(Longitude, Latitude, 0);
                                 input.Add(v);
 
@@ -90,7 +91,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             try
                             {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                                 int dummy;
                                 if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                                 {
@@ -149,7 +150,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             try
                             {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                                 int dummy;
                                 if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                                 {
@@ -201,16 +202,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
                     {
-                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10]) == 2)
+                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
                             Line l = new Line();
-                            double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 16 + correctur]) * 1000, double.Parse(lines[i + 18 + correctur]) * 1000);
-                            double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16 + correctur]) * 1000, double.Parse(lines[i + 18 + correctur]) * 1000);
+                            double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
+                            double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
                             l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
-                            double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 20 + correctur]) * 1000, double.Parse(lines[i + 22 + correctur]) * 1000);
-                            double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20 + correctur]) * 1000, double.Parse(lines[i + 22 + correctur]) * 1000);
+                            double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
+                            double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
                             l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
@@ -254,8 +255,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
 
-                                double Longitude = double.Parse(lines[i + (j * 4) + 18 + correctur]);
-                                double Latitude = double.Parse(lines[i + (j * 4) + 16 + correctur]);
+                                double Longitude = double.Parse(lines[i + (j * 4) + 18 + correctur], NumberFormatInfo.InvariantInfo);
+                                double Latitude = double.Parse(lines[i + (j * 4) + 16 + correctur], NumberFormatInfo.InvariantInfo);
                                 Vector v = new Vector(Longitude, Latitude, 0);
                                 input.Add(v);
 
@@ -301,7 +302,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             try
                             {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                                 int dummy;
                                 if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                                 {
@@ -360,7 +361,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             try
                             {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                                 int dummy;
                                 if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                                 {
@@ -412,16 +413,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
                     {
-                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10]) == 2)
+                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
                             Line l = new Line();
-                            double Longitude1 = double.Parse(lines[i + 18 + correctur]);
-                            double Latitude1 = double.Parse(lines[i + 16 + correctur]);
+                            double Longitude1 = double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo);
+                            double Latitude1 = double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo);
                             l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
-                            double Longitude2 = double.Parse(lines[i + 22 + correctur]);
-                            double Latitude2 = double.Parse(lines[i + 20 + correctur]);
+                            double Longitude2 = double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo);
+                            double Latitude2 = double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo);
                             l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
@@ -466,8 +467,8 @@ namespace AirNavigationRaceLive.Comps.Helper
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
 
-                                double Latitude = double.Parse(lines[i + (j * 4) + 18 + correctur]);
-                                double Longitude = double.Parse(lines[i + (j * 4) + 16 + correctur]);
+                                double Latitude = double.Parse(lines[i + (j * 4) + 18 + correctur], NumberFormatInfo.InvariantInfo);
+                                double Longitude = double.Parse(lines[i + (j * 4) + 16 + correctur], NumberFormatInfo.InvariantInfo);
                                 Vector v = new Vector(Longitude, Latitude, 0);
                                 input.Add(v);
 
@@ -513,7 +514,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             try
                             {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                                 int dummy;
                                 if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                                 {
@@ -572,7 +573,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         {
                             try
                             {
-                                double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                                double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                                 int dummy;
                                 if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                                 {
@@ -624,16 +625,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
                     {
-                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10]) == 2)
+                        if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
                             Line l = new Line();
-                            double Latitude1 = double.Parse(lines[i + 18 + correctur]);
-                            double Longitude1 = double.Parse(lines[i + 16 + correctur]);
+                            double Latitude1 = double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo);
+                            double Longitude1 = double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo);
                             l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
 
-                            double Latitude2 = double.Parse(lines[i + 22 + correctur]);
-                            double Longitude2 = double.Parse(lines[i + 20 + correctur]);
+                            double Latitude2 = double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo);
+                            double Longitude2 = double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo);
                             l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
@@ -699,10 +700,10 @@ namespace AirNavigationRaceLive.Comps.Helper
                                 // ToDo: Error
                                 break;
                         }
-                        double altitude = double.Parse(line.Substring(30, 5)) * 0.3048f; //Feet to Meter
-                        double speed = (double.Parse(line.Substring(35, 4)) / 10) / 0.514444444f; //Knot to m/s
-                        double bearing = double.Parse(line.Substring(39, 3));
-                        double acc = double.Parse(line.Substring(42, 4));
+                        double altitude = double.Parse(line.Substring(30, 5), NumberFormatInfo.InvariantInfo) * 0.3048f; //Feet to Meter
+                        double speed = (double.Parse(line.Substring(35, 4), NumberFormatInfo.InvariantInfo) / 10) / 0.514444444f; //Knot to m/s
+                        double bearing = double.Parse(line.Substring(39, 3), NumberFormatInfo.InvariantInfo);
+                        double acc = double.Parse(line.Substring(42, 4), NumberFormatInfo.InvariantInfo);
 
                         GPSData data = new GPSData();
                         data.timestampGPS = newPointTimeStamp.Ticks;
@@ -750,9 +751,9 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     GPSData data = new GPSData();
                     data.timestampGPS = DateTime.Parse(trkSeg.Time).Ticks;
-                    data.latitude = Double.Parse(trkSeg.Latitude);
-                    data.longitude = Double.Parse(trkSeg.Longitude);
-                    data.altitude = Double.Parse(trkSeg.Elevation);
+                    data.latitude = Double.Parse(trkSeg.Latitude, NumberFormatInfo.InvariantInfo);
+                    data.longitude = Double.Parse(trkSeg.Longitude, NumberFormatInfo.InvariantInfo);
+                    data.altitude = Double.Parse(trkSeg.Elevation, NumberFormatInfo.InvariantInfo);
                     data.identifier = imei;
                     data.timestampSender = DateTime.Now.Ticks;
                     result.Add(data);

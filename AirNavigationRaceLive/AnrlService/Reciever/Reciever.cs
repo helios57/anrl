@@ -11,6 +11,7 @@ using System.Timers;
 using AnrlDB;
 using System.Diagnostics;
 using AnrlService;
+using System.Globalization;
 
 namespace TCPReciever
 {
@@ -259,16 +260,16 @@ namespace TCPReciever
                 if (SingChar == "E" || SingChar == "W")
                 {
                     double sign = SingChar == "E" ? 1.0 : -1.0;
-                    double degree = double.Parse(wsg84Coords.Substring(1, 3));
-                    degree += double.Parse(wsg84Coords.Substring(4, 6)) / 60;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 3), NumberFormatInfo.InvariantInfo);
+                    degree += double.Parse(wsg84Coords.Substring(4, 6), NumberFormatInfo.InvariantInfo) / 60;
                     degree *= (double)sign;
                     result = degree;
                 }
                 else if (SingChar == "N" || SingChar == "S")
                 {
                     double sign = SingChar == "N" ? 1.0 : -1.0;
-                    double degree = double.Parse(wsg84Coords.Substring(1, 2));
-                    degree += double.Parse(wsg84Coords.Substring(3, 6)) / 60;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 2), NumberFormatInfo.InvariantInfo);
+                    degree += double.Parse(wsg84Coords.Substring(3, 6), NumberFormatInfo.InvariantInfo) / 60;
                     degree *= (double)sign;
                     result = degree;
                 }
@@ -315,7 +316,7 @@ namespace TCPReciever
                                 InsertData.Timestamp = GPS_IN.TimestampTracker.Ticks;
                                 InsertData.Latitude = ConvertCoordinates(GPS_IN.latitude);
                                 InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
-                                InsertData.Altitude = double.Parse(GPS_IN.altitude);
+                                InsertData.Altitude = double.Parse(GPS_IN.altitude, NumberFormatInfo.InvariantInfo);
                                 db.t_Datens.InsertOnSubmit(InsertData);
                             }
                             catch (Exception ex)

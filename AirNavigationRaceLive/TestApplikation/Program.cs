@@ -10,6 +10,7 @@ using System.Net;
 using ProtoBuf;
 using System.Threading;
 using System.ServiceModel;
+using System.Globalization;
 
 namespace TestApplikation
 {
@@ -31,7 +32,7 @@ namespace TestApplikation
 
             double Latitude = ConvertCoordinates("N4753.0418");
             double Longitude = ConvertCoordinates("E00820.8429");
-            double Altitude = double.Parse("1015.4");
+            double Altitude = double.Parse("1015.4", NumberFormatInfo.InvariantInfo);
             
             System.Console.Out.WriteLine(new DateTime(634755390850000000).AddDays(-1));
             System.Console.Out.WriteLine(new DateTime(UTCBaseTime.Add(new TimeSpan(1339942290000L * TimeSpan.TicksPerMillisecond)).Ticks));
@@ -88,16 +89,16 @@ namespace TestApplikation
                 if (SingChar == "E" || SingChar == "W")
                 {
                     double sign = SingChar == "E" ? 1.0 : -1.0;
-                    double degree = double.Parse(wsg84Coords.Substring(1, 3));
-                    degree += double.Parse(wsg84Coords.Substring(4, 6)) / 60;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 3), NumberFormatInfo.InvariantInfo);
+                    degree += double.Parse(wsg84Coords.Substring(4, 6), NumberFormatInfo.InvariantInfo) / 60;
                     degree *= (double)sign;
                     result = degree;
                 }
                 else if (SingChar == "N" || SingChar == "S")
                 {
                     double sign = SingChar == "N" ? 1.0 : -1.0;
-                    double degree = double.Parse(wsg84Coords.Substring(1, 2));
-                    degree += double.Parse(wsg84Coords.Substring(3, 6)) / 60;
+                    double degree = double.Parse(wsg84Coords.Substring(1, 2), NumberFormatInfo.InvariantInfo);
+                    degree += double.Parse(wsg84Coords.Substring(3, 6), NumberFormatInfo.InvariantInfo) / 60;
                     degree *= (double)sign;
                     result = degree;
                 }
@@ -142,7 +143,7 @@ namespace TestApplikation
                                 InsertData.Timestamp = GPS_IN.TimestampTracker.Ticks;
                                 InsertData.Latitude = ConvertCoordinates(GPS_IN.latitude);
                                 InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
-                                InsertData.Altitude = double.Parse(GPS_IN.altitude);
+                                InsertData.Altitude = double.Parse(GPS_IN.altitude, NumberFormatInfo.InvariantInfo);
                                 db.t_Datens.InsertOnSubmit(InsertData);
                             }
                             catch (Exception ex)

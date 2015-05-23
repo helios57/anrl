@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using AirNavigationRaceLive.Comps.Model;
 using NetworkObjects;
+using System.Globalization;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -175,12 +176,12 @@ namespace AirNavigationRaceLive.Comps
             try
             {
                 string[] world = File.ReadAllLines(ofd.FileName);
-                fldSizeX.Text = Double.Parse(world[0]).ToString();
-                fldSizeY.Text = Double.Parse(world[3]).ToString();
-                fldRotationX.Text = Double.Parse(world[2]).ToString();
-                fldRotationY.Text = Double.Parse(world[1]).ToString();
-                fldX.Text = Double.Parse(world[4]).ToString();
-                fldY.Text = Double.Parse(world[5]).ToString();
+                fldSizeX.Text = Double.Parse(world[0], NumberFormatInfo.InvariantInfo).ToString();
+                fldSizeY.Text = Double.Parse(world[3], NumberFormatInfo.InvariantInfo).ToString();
+                fldRotationX.Text = Double.Parse(world[2], NumberFormatInfo.InvariantInfo).ToString();
+                fldRotationY.Text = Double.Parse(world[1], NumberFormatInfo.InvariantInfo).ToString();
+                fldX.Text = Double.Parse(world[4], NumberFormatInfo.InvariantInfo).ToString();
+                fldY.Text = Double.Parse(world[5], NumberFormatInfo.InvariantInfo).ToString();
             }
             catch (Exception ex)
             {
@@ -199,12 +200,12 @@ namespace AirNavigationRaceLive.Comps
                 fldName.Enabled = false;
                 NetworkObjects.Map m = new NetworkObjects.Map();
                 m.Name = fldName.Text;
-                m.XSize = Double.Parse(fldSizeX.Text);
-                m.YSize = Double.Parse(fldSizeY.Text);
-                m.XRot = Double.Parse(fldRotationX.Text);
-                m.YRot = Double.Parse(fldRotationY.Text);
-                m.XTopLeft = Double.Parse(fldX.Text);
-                m.YTopLeft = Double.Parse(fldY.Text);
+                m.XSize = Double.Parse(fldSizeX.Text, NumberFormatInfo.InvariantInfo);
+                m.YSize = Double.Parse(fldSizeY.Text, NumberFormatInfo.InvariantInfo);
+                m.XRot = Double.Parse(fldRotationX.Text, NumberFormatInfo.InvariantInfo);
+                m.YRot = Double.Parse(fldRotationY.Text, NumberFormatInfo.InvariantInfo);
+                m.XTopLeft = Double.Parse(fldX.Text, NumberFormatInfo.InvariantInfo);
+                m.YTopLeft = Double.Parse(fldY.Text, NumberFormatInfo.InvariantInfo);
                 MemoryStream ms = new MemoryStream();
                 pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Picture picture = new Picture();

@@ -11,6 +11,7 @@ using GMap.NET.WindowsForms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using NetworkObjects;
+using System.Globalization;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -52,12 +53,12 @@ namespace AirNavigationRaceLive.Comps
                 fldName.Enabled = false;
                 NetworkObjects.Map m = new NetworkObjects.Map();
                 m.Name = fldName.Text;
-                m.XSize = Double.Parse(fldSizeX.Text);
-                m.YSize = Double.Parse(fldSizeY.Text);
+                m.XSize = Double.Parse(fldSizeX.Text, NumberFormatInfo.InvariantInfo);
+                m.YSize = Double.Parse(fldSizeY.Text, NumberFormatInfo.InvariantInfo);
                 m.XRot = 0;
                 m.YRot = 0;
-                m.XTopLeft = Double.Parse(fldX.Text);
-                m.YTopLeft = Double.Parse(fldY.Text);
+                m.XTopLeft = Double.Parse(fldX.Text, NumberFormatInfo.InvariantInfo);
+                m.YTopLeft = Double.Parse(fldY.Text, NumberFormatInfo.InvariantInfo);
                 MemoryStream ms = new MemoryStream();
                 gMapControl1.ToImage().Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 Picture picture = new Picture();
@@ -103,8 +104,8 @@ namespace AirNavigationRaceLive.Comps
             {
                 try
                 {
-                    gMapControl1.Position = new PointLatLng(((gMapControl1.CurrentViewArea.LocationRightBottom.Lat - gMapControl1.CurrentViewArea.LocationTopLeft.Lat) / 2) + Double.Parse(fldY.Text),
-                    ((gMapControl1.CurrentViewArea.LocationRightBottom.Lng - gMapControl1.CurrentViewArea.LocationTopLeft.Lng) / 2) + Double.Parse(fldX.Text));
+                    gMapControl1.Position = new PointLatLng(((gMapControl1.CurrentViewArea.LocationRightBottom.Lat - gMapControl1.CurrentViewArea.LocationTopLeft.Lat) / 2) + Double.Parse(fldY.Text, NumberFormatInfo.InvariantInfo),
+                    ((gMapControl1.CurrentViewArea.LocationRightBottom.Lng - gMapControl1.CurrentViewArea.LocationTopLeft.Lng) / 2) + Double.Parse(fldX.Text, NumberFormatInfo.InvariantInfo));
                 }
                 catch (Exception ex)
                 {

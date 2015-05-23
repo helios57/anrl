@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Globalization;
 
 namespace UTM
 {
@@ -57,7 +58,7 @@ namespace UTM
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].ToUpper().Contains("NBLINE"))
                     {
-                        if (lines[i + 9] == " 90" && double.Parse(lines[10]) == 2)
+                        if (lines[i + 9] == " 90" && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             transform(zone, southhemi, lines, linesCH, linesWGS, i + 16, i + 18);
                             transform(zone, southhemi, lines, linesCH, linesWGS, i + 20, i + 22);
@@ -99,7 +100,7 @@ namespace UTM
             {
                 try
                 {
-                    double parsed = double.Parse(lines[i + 6 + 8 + j]);
+                    double parsed = double.Parse(lines[i + 6 + 8 + j], NumberFormatInfo.InvariantInfo);
                     int dummy;
                     if (parsed != 0.0f && !Int32.TryParse(lines[i + 6 + 8 + j], out dummy))
                     {
@@ -115,7 +116,7 @@ namespace UTM
         {
             String x = lines[i_x];
             String y = lines[i_y];
-            double[] latlon = UTMtoWGS.UTMConverter.getLatLon(zone, double.Parse(y), double.Parse(x), southhemi);
+            double[] latlon = UTMtoWGS.UTMConverter.getLatLon(zone, double.Parse(y, NumberFormatInfo.InvariantInfo), double.Parse(x, NumberFormatInfo.InvariantInfo), southhemi);
             linesWGS[i_x] = latlon[0].ToString();
             linesWGS[i_y] = latlon[1].ToString();
             linesCH[i_x] = (Converter.WGStoChEastY(latlon[1], latlon[0])/1000).ToString();

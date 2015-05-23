@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using AirNavigationRaceLive.Dialogs;
 using AirNavigationRaceLive.Comps.Helper;
 using System.IO;
+using System.Globalization;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -131,7 +132,7 @@ namespace AirNavigationRaceLive.Comps
             bool result = true;
             try
             {
-                double.Parse(s);
+                double.Parse(s, NumberFormatInfo.InvariantInfo);
             }
             catch
             {
@@ -264,8 +265,8 @@ namespace AirNavigationRaceLive.Comps
                 c.Name = textName.Text;
 
 
-                Vector start = new Vector(double.Parse(takeOffLeftLongitude.Text), double.Parse(takeOffLeftLatitude.Text), 0);
-                Vector end = new Vector(double.Parse(takeOffRightLongitude.Text), double.Parse(takeOffRightLatitude.Text), 0);
+                Vector start = new Vector(double.Parse(takeOffLeftLongitude.Text, NumberFormatInfo.InvariantInfo), double.Parse(takeOffLeftLatitude.Text, NumberFormatInfo.InvariantInfo), 0);
+                Vector end = new Vector(double.Parse(takeOffRightLongitude.Text, NumberFormatInfo.InvariantInfo), double.Parse(takeOffRightLatitude.Text, NumberFormatInfo.InvariantInfo), 0);
                 Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
                 NetworkObjects.Line line = new NetworkObjects.Line();
                 line.A = NetworkObjects.Helper.Point(start.X, start.Y, start.Z);

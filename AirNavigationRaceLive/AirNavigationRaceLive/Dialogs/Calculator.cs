@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using AirNavigationRaceLive.Comps.Helper;
+using System.Globalization;
 
 namespace AirNavigationRaceLive.Dialogs
 {
@@ -21,8 +22,8 @@ namespace AirNavigationRaceLive.Dialogs
         {
             try
             {
-                double east = double.Parse(textEast.Text);
-                double north = double.Parse(textNorth.Text);
+                double east = double.Parse(textEast.Text, NumberFormatInfo.InvariantInfo);
+                double north = double.Parse(textNorth.Text, NumberFormatInfo.InvariantInfo);
                 textLatitude.Text = Converter.CHtoWGSlat(east, north).ToString();
                 textLongitude.Text = Converter.CHtoWGSlng(east, north).ToString();
             }
@@ -36,8 +37,8 @@ namespace AirNavigationRaceLive.Dialogs
         {
             try
             {
-                double latitude = double.Parse(textLatitude.Text);
-                double longitude = double.Parse(textLongitude.Text);
+                double latitude = double.Parse(textLatitude.Text, NumberFormatInfo.InvariantInfo);
+                double longitude = double.Parse(textLongitude.Text, NumberFormatInfo.InvariantInfo);
                 textEast.Text = Converter.WGStoChEastY(longitude, latitude).ToString();
                 textNorth.Text = Converter.WGStoChNorthX(longitude, latitude).ToString();
             }

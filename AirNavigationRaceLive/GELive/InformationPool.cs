@@ -6,6 +6,7 @@ using GEPlugin;
 using System.IO;
 using System.Threading;
 using ANRL.ANRLDataService;
+using System.Globalization;
 
 namespace ANRLClient
 {
@@ -138,8 +139,8 @@ namespace ANRLClient
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
                                 PolygonPoint point = new PolygonPoint();
-                                point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16]) * 1000, double.Parse(lines[i + (j * 4) + 18]) * 1000);
-                                point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16]) * 1000, double.Parse(lines[i + (j * 4) + 18]) * 1000);
+                                point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + (j * 4) + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + (j * 4) + 18], NumberFormatInfo.InvariantInfo) * 1000);
+                                point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + (j * 4) + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + (j * 4) + 18], NumberFormatInfo.InvariantInfo) * 1000);
                                 point.ID = p.ID;
                                 p.Points.Add(point);
                             }
@@ -154,14 +155,14 @@ namespace ANRLClient
 
                         PolygonPoint point = new PolygonPoint();
                         PolygonPoint point2 = new PolygonPoint();
-                      
-                        point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
-                        point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+
+                        point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18], NumberFormatInfo.InvariantInfo) * 1000);
+                        point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18], NumberFormatInfo.InvariantInfo) * 1000);
                         point.ID = p.ID;
                         p.Points.Add(point);
 
-                        point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                        point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22], NumberFormatInfo.InvariantInfo) * 1000);
+                        point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22], NumberFormatInfo.InvariantInfo) * 1000);
                         point2.ID = p.ID;
                         p.Points.Add(point2);
 
@@ -177,13 +178,13 @@ namespace ANRLClient
                         PolygonPoint point = new PolygonPoint();
                         PolygonPoint point2 = new PolygonPoint();
 
-                        point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
-                        point.Latitude =  (decimal)CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                        point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18], NumberFormatInfo.InvariantInfo) * 1000);
+                        point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18], NumberFormatInfo.InvariantInfo) * 1000);
                         point.ID = p.ID;
                         p.Points.Add(point);
 
-                        point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                        point2.Latitude =  (decimal)CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                        point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22], NumberFormatInfo.InvariantInfo) * 1000);
+                        point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22], NumberFormatInfo.InvariantInfo) * 1000);
                         point2.ID = p.ID;
                         p.Points.Add(point2);
 
@@ -192,7 +193,7 @@ namespace ANRLClient
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
                     {
-                        if (lines[i + 9] == " 90" && double.Parse(lines[10]) == 2)
+                        if (lines[i + 9] == " 90" && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             Polygon p = new Polygon();
                             p.ID = g.PolygonIdGen++;
@@ -201,13 +202,13 @@ namespace ANRLClient
                             PolygonPoint point = new PolygonPoint();
                             PolygonPoint point2 = new PolygonPoint();
 
-                            point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
-                            point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16]) * 1000, double.Parse(lines[i + 18]) * 1000);
+                            point.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18], NumberFormatInfo.InvariantInfo) * 1000);
+                            point.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 16], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18], NumberFormatInfo.InvariantInfo) * 1000);
                             point.ID = p.ID;
                             p.Points.Add(point);
 
-                            point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
-                            point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20]) * 1000, double.Parse(lines[i + 22]) * 1000);
+                            point2.Longitude = (decimal)CHtoWGSlng(double.Parse(lines[i + 20], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22], NumberFormatInfo.InvariantInfo) * 1000);
+                            point2.Latitude = (decimal)CHtoWGSlat(double.Parse(lines[i + 20], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22], NumberFormatInfo.InvariantInfo) * 1000);
                             point2.ID = p.ID;
                             p.Points.Add(point2);
 

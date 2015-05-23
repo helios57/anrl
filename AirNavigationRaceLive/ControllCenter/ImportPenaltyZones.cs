@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using DataService;
+using System.Globalization;
 
 namespace ControllCenter
 {
@@ -52,7 +53,7 @@ namespace ControllCenter
                             for (int j = 0; j < numberOfVertexes; j++)
                             {
                                 t_PolygonPoint point = new t_PolygonPoint();
-                                GpsPoint gp = new GpsPoint(double.Parse(lines[i + (j * 4) + 18]) * 1000, double.Parse(lines[i + (j * 4) + 16]) * 1000, GpsPointFormatImport.Swiss);
+                                GpsPoint gp = new GpsPoint(double.Parse(lines[i + (j * 4) + 18], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + (j * 4) + 16], NumberFormatInfo.InvariantInfo) * 1000, GpsPointFormatImport.Swiss);
                                 point.longitude = (decimal)gp.Longitude;
                                 point.latitude = (decimal)gp.Latitude;
                                 point.ID_Polygon = p.ID;
