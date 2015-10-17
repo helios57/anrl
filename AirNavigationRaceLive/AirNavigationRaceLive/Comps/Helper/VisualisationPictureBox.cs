@@ -43,6 +43,10 @@ namespace AirNavigationRaceLive.Comps
 
         private void PaintParcourAndData(PaintEventArgs pe, bool rescale)
         {
+            if (Image == null)
+            {
+                return;
+            }
             float lineThickness = 2f;
             if (pe != null && pe.ClipRectangle.Bottom == -4)
             {
