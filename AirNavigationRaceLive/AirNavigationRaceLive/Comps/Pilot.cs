@@ -56,7 +56,6 @@ namespace AirNavigationRaceLive.Comps
             {
                 ListViewItem lvi = listViewPilots.SelectedItems[0];
                 NetworkObjects.Pilot pilot = lvi.Tag as NetworkObjects.Pilot;
-                textBoxID.Text = pilot.ID.ToString();
                 textBoxLastname.Text = pilot.Name;
                 textBoxSurename.Text = pilot.Surename;
                 newPilot = false;
@@ -96,17 +95,16 @@ namespace AirNavigationRaceLive.Comps
         private void ResetFields()
         {
                 newPilot = false;
-                textBoxID.Text = "0";
                 textBoxLastname.Text = "";
                 textBoxSurename.Text = "";
-                pictureBox.Image = null;
+                pictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
                 textBoxPictureId.Text = "0"; 
                 UpdateEnablement();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int id=Int32.Parse(textBoxID.Text);
+            int id = 0;
             int picId = Int32.Parse(textBoxPictureId.Text);
             if (picId == -1)
             {
