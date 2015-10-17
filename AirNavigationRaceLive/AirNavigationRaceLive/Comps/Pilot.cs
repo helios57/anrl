@@ -15,6 +15,7 @@ namespace AirNavigationRaceLive.Comps
     public partial class Pilot : UserControl
     {
         private Client.Client Client;
+        private int selectedId=0;
         private bool newPilot;
 
         public Pilot(Client.Client iClient)
@@ -58,6 +59,7 @@ namespace AirNavigationRaceLive.Comps
                 NetworkObjects.Pilot pilot = lvi.Tag as NetworkObjects.Pilot;
                 textBoxLastname.Text = pilot.Name;
                 textBoxSurename.Text = pilot.Surename;
+                selectedId = pilot.ID;
                 newPilot = false;
                 if (pilot.ID_Picture > 0)
                 {
@@ -67,7 +69,7 @@ namespace AirNavigationRaceLive.Comps
                 }
                 else
                 {
-                    pictureBox.Image = null;
+                    pictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
                     textBoxPictureId.Text ="0";
                 }
             }
@@ -97,6 +99,7 @@ namespace AirNavigationRaceLive.Comps
                 newPilot = false;
                 textBoxLastname.Text = "";
                 textBoxSurename.Text = "";
+                selectedId = 0;
                 pictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
                 textBoxPictureId.Text = "0"; 
                 UpdateEnablement();
@@ -104,7 +107,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int id = 0;
+            int id = selectedId;
             int picId = Int32.Parse(textBoxPictureId.Text);
             if (picId == -1)
             {

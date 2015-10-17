@@ -44,7 +44,6 @@
             this.textBoxPilot = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnAddPilot = new System.Windows.Forms.Button();
             this.btnAddNavigator = new System.Windows.Forms.Button();
             this.btnClearPilot = new System.Windows.Forms.Button();
@@ -79,11 +78,12 @@
             this.listViewTeam.GridLines = true;
             this.listViewTeam.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewTeam.LabelWrap = false;
-            this.listViewTeam.Location = new System.Drawing.Point(3, 3);
+            this.listViewTeam.Location = new System.Drawing.Point(8, 7);
+            this.listViewTeam.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listViewTeam.MultiSelect = false;
             this.listViewTeam.Name = "listViewTeam";
             this.listViewTeam.ShowGroups = false;
-            this.listViewTeam.Size = new System.Drawing.Size(663, 281);
+            this.listViewTeam.Size = new System.Drawing.Size(1761, 665);
             this.listViewTeam.TabIndex = 5;
             this.listViewTeam.UseCompatibleStateImageBehavior = false;
             this.listViewTeam.View = System.Windows.Forms.View.Details;
@@ -122,9 +122,10 @@
             // btnRefresh
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRefresh.Location = new System.Drawing.Point(678, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(1808, 7);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(244, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(651, 55);
             this.btnRefresh.TabIndex = 6;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -143,11 +144,12 @@
             this.listViewPilots.GridLines = true;
             this.listViewPilots.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listViewPilots.LabelWrap = false;
-            this.listViewPilots.Location = new System.Drawing.Point(3, 290);
+            this.listViewPilots.Location = new System.Drawing.Point(8, 692);
+            this.listViewPilots.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listViewPilots.MultiSelect = false;
             this.listViewPilots.Name = "listViewPilots";
             this.listViewPilots.ShowGroups = false;
-            this.listViewPilots.Size = new System.Drawing.Size(244, 107);
+            this.listViewPilots.Size = new System.Drawing.Size(644, 250);
             this.listViewPilots.TabIndex = 7;
             this.listViewPilots.UseCompatibleStateImageBehavior = false;
             this.listViewPilots.View = System.Windows.Forms.View.Details;
@@ -169,18 +171,20 @@
             // 
             this.textBoxNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNavigator.Enabled = false;
-            this.textBoxNavigator.Location = new System.Drawing.Point(734, 168);
+            this.textBoxNavigator.Location = new System.Drawing.Point(1953, 338);
+            this.textBoxNavigator.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBoxNavigator.Name = "textBoxNavigator";
-            this.textBoxNavigator.Size = new System.Drawing.Size(124, 20);
+            this.textBoxNavigator.Size = new System.Drawing.Size(324, 38);
             this.textBoxNavigator.TabIndex = 18;
             // 
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(673, 171);
+            this.label4.Location = new System.Drawing.Point(1791, 345);
+            this.label4.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.Size = new System.Drawing.Size(137, 32);
             this.label4.TabIndex = 17;
             this.label4.Text = "Navigator";
             // 
@@ -188,18 +192,20 @@
             // 
             this.textBoxPilot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxPilot.Enabled = false;
-            this.textBoxPilot.Location = new System.Drawing.Point(734, 142);
+            this.textBoxPilot.Location = new System.Drawing.Point(1953, 276);
+            this.textBoxPilot.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBoxPilot.Name = "textBoxPilot";
-            this.textBoxPilot.Size = new System.Drawing.Size(124, 20);
+            this.textBoxPilot.Size = new System.Drawing.Size(324, 38);
             this.textBoxPilot.TabIndex = 16;
             // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(673, 145);
+            this.label3.Location = new System.Drawing.Point(1791, 283);
+            this.label3.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.Size = new System.Drawing.Size(72, 32);
             this.label3.TabIndex = 15;
             this.label3.Text = "Pilot";
             // 
@@ -207,26 +213,19 @@
             // 
             this.textBoxID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxID.Enabled = false;
-            this.textBoxID.Location = new System.Drawing.Point(734, 90);
+            this.textBoxID.Location = new System.Drawing.Point(1951, 580);
+            this.textBoxID.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBoxID.Name = "textBoxID";
-            this.textBoxID.Size = new System.Drawing.Size(124, 20);
+            this.textBoxID.Size = new System.Drawing.Size(324, 38);
             this.textBoxID.TabIndex = 14;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(673, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "ID";
+            this.textBoxID.Visible = false;
             // 
             // btnAddPilot
             // 
-            this.btnAddPilot.Location = new System.Drawing.Point(253, 290);
+            this.btnAddPilot.Location = new System.Drawing.Point(675, 692);
+            this.btnAddPilot.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAddPilot.Name = "btnAddPilot";
-            this.btnAddPilot.Size = new System.Drawing.Size(94, 23);
+            this.btnAddPilot.Size = new System.Drawing.Size(251, 55);
             this.btnAddPilot.TabIndex = 19;
             this.btnAddPilot.Text = "Add Pilot";
             this.btnAddPilot.UseVisualStyleBackColor = true;
@@ -234,9 +233,10 @@
             // 
             // btnAddNavigator
             // 
-            this.btnAddNavigator.Location = new System.Drawing.Point(253, 319);
+            this.btnAddNavigator.Location = new System.Drawing.Point(675, 761);
+            this.btnAddNavigator.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAddNavigator.Name = "btnAddNavigator";
-            this.btnAddNavigator.Size = new System.Drawing.Size(94, 23);
+            this.btnAddNavigator.Size = new System.Drawing.Size(251, 55);
             this.btnAddNavigator.TabIndex = 19;
             this.btnAddNavigator.Text = "Add Navigator";
             this.btnAddNavigator.UseVisualStyleBackColor = true;
@@ -245,9 +245,10 @@
             // btnClearPilot
             // 
             this.btnClearPilot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearPilot.Location = new System.Drawing.Point(864, 140);
+            this.btnClearPilot.Location = new System.Drawing.Point(2300, 271);
+            this.btnClearPilot.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnClearPilot.Name = "btnClearPilot";
-            this.btnClearPilot.Size = new System.Drawing.Size(56, 23);
+            this.btnClearPilot.Size = new System.Drawing.Size(149, 55);
             this.btnClearPilot.TabIndex = 20;
             this.btnClearPilot.Text = "Clear";
             this.btnClearPilot.UseVisualStyleBackColor = true;
@@ -256,9 +257,10 @@
             // btnClearNavigator
             // 
             this.btnClearNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearNavigator.Location = new System.Drawing.Point(864, 166);
+            this.btnClearNavigator.Location = new System.Drawing.Point(2300, 333);
+            this.btnClearNavigator.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnClearNavigator.Name = "btnClearNavigator";
-            this.btnClearNavigator.Size = new System.Drawing.Size(56, 23);
+            this.btnClearNavigator.Size = new System.Drawing.Size(149, 55);
             this.btnClearNavigator.TabIndex = 21;
             this.btnClearNavigator.Text = "Clear";
             this.btnClearNavigator.UseVisualStyleBackColor = true;
@@ -267,9 +269,10 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(807, 61);
+            this.btnSave.Location = new System.Drawing.Point(2152, 145);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(113, 23);
+            this.btnSave.Size = new System.Drawing.Size(301, 55);
             this.btnSave.TabIndex = 23;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -278,9 +281,10 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(678, 61);
+            this.btnNew.Location = new System.Drawing.Point(1808, 145);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(123, 23);
+            this.btnNew.Size = new System.Drawing.Size(328, 55);
             this.btnNew.TabIndex = 22;
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -290,18 +294,20 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(673, 225);
+            this.label5.Location = new System.Drawing.Point(1791, 474);
+            this.label5.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 13);
+            this.label5.Size = new System.Drawing.Size(54, 32);
             this.label5.TabIndex = 30;
             this.label5.Text = "AC";
             // 
             // btnColorSelect
             // 
             this.btnColorSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnColorSelect.Location = new System.Drawing.Point(734, 194);
+            this.btnColorSelect.Location = new System.Drawing.Point(1953, 400);
+            this.btnColorSelect.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnColorSelect.Name = "btnColorSelect";
-            this.btnColorSelect.Size = new System.Drawing.Size(121, 23);
+            this.btnColorSelect.Size = new System.Drawing.Size(323, 55);
             this.btnColorSelect.TabIndex = 31;
             this.btnColorSelect.Text = "Color Select";
             this.btnColorSelect.UseVisualStyleBackColor = true;
@@ -311,9 +317,10 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(672, 199);
+            this.label6.Location = new System.Drawing.Point(1788, 412);
+            this.label6.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.Size = new System.Drawing.Size(83, 32);
             this.label6.TabIndex = 32;
             this.label6.Text = "Color";
             // 
@@ -321,18 +328,20 @@
             // 
             this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Enabled = false;
-            this.textBoxName.Location = new System.Drawing.Point(734, 248);
+            this.textBoxName.Location = new System.Drawing.Point(1953, 528);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(124, 20);
+            this.textBoxName.Size = new System.Drawing.Size(324, 38);
             this.textBoxName.TabIndex = 36;
             // 
             // label7
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(673, 251);
+            this.label7.Location = new System.Drawing.Point(1791, 536);
+            this.label7.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.Size = new System.Drawing.Size(150, 32);
             this.label7.TabIndex = 35;
             this.label7.Text = "Nationality";
             // 
@@ -340,17 +349,19 @@
             // 
             this.fldAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fldAC.Enabled = false;
-            this.fldAC.Location = new System.Drawing.Point(734, 222);
+            this.fldAC.Location = new System.Drawing.Point(1953, 466);
+            this.fldAC.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldAC.Name = "fldAC";
-            this.fldAC.Size = new System.Drawing.Size(124, 20);
+            this.fldAC.Size = new System.Drawing.Size(324, 38);
             this.fldAC.TabIndex = 37;
             // 
             // btnExport
             // 
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(678, 32);
+            this.btnExport.Location = new System.Drawing.Point(1808, 76);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(244, 23);
+            this.btnExport.Size = new System.Drawing.Size(651, 55);
             this.btnExport.TabIndex = 38;
             this.btnExport.Text = "Export Participants To PDF";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -359,24 +370,26 @@
             // textBoxCNumber
             // 
             this.textBoxCNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCNumber.Location = new System.Drawing.Point(733, 116);
+            this.textBoxCNumber.Location = new System.Drawing.Point(1951, 214);
+            this.textBoxCNumber.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBoxCNumber.Name = "textBoxCNumber";
-            this.textBoxCNumber.Size = new System.Drawing.Size(124, 20);
+            this.textBoxCNumber.Size = new System.Drawing.Size(324, 38);
             this.textBoxCNumber.TabIndex = 40;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(672, 119);
+            this.label1.Location = new System.Drawing.Point(1788, 221);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 13);
+            this.label1.Size = new System.Drawing.Size(135, 32);
             this.label1.TabIndex = 39;
             this.label1.Text = "CNumber";
             // 
             // Team
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBoxCNumber);
             this.Controls.Add(this.label1);
@@ -398,12 +411,12 @@
             this.Controls.Add(this.textBoxPilot);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxID);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.listViewPilots);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.listViewTeam);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "Team";
-            this.Size = new System.Drawing.Size(925, 400);
+            this.Size = new System.Drawing.Size(2467, 954);
             this.Load += new System.EventHandler(this.Team_Load);
             this.VisibleChanged += new System.EventHandler(this.Team_Load);
             this.ResumeLayout(false);
@@ -425,7 +438,6 @@
         private System.Windows.Forms.TextBox textBoxPilot;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxID;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddPilot;
         private System.Windows.Forms.Button btnAddNavigator;
         private System.Windows.Forms.Button btnClearPilot;
