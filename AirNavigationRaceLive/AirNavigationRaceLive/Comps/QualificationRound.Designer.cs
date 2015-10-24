@@ -431,7 +431,7 @@
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "ID_Crew";
+            this.columnHeader4.Text = "CNumber";
             this.columnHeader4.Width = 58;
             // 
             // columnHeader9

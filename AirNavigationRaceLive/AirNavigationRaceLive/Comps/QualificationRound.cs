@@ -361,11 +361,15 @@ namespace AirNavigationRaceLive.Comps
             c.CompetitionTeamList.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
             foreach (NetworkObjects.CompetitionTeam ct in c.CompetitionTeamList)
             {
-                ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(), ct.ID_Team.ToString(), getTeamAC(ct.ID_Team), getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
+                ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(), getTeamCNumber(ct.ID_Team), getTeamAC(ct.ID_Team), getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
                 lvi2.Tag = ct;
                 listViewCompetitionTeam.Items.Add(lvi2);
             }
             listViewCompetitionTeam.Sort();
+        }
+        private string getTeamCNumber(int ID_Team)
+        {
+            return Client.getTeam(ID_Team).StartID;
         }
         private string getTeamAC(int ID_Team)
         {
@@ -391,7 +395,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnNewCompetitionTeam_Click(object sender, EventArgs e)
         {
-            int starID = 0;
+            int starID = 1;
             NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
             if (c != null && c.CompetitionTeamList.Count > 0)
             {
