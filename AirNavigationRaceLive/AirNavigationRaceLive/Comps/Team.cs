@@ -142,7 +142,20 @@ namespace AirNavigationRaceLive.Comps
             resetFields();
             newTeam = true;
             textBoxID.Text = "-1";
-            textBoxCNumber.Text = "1";
+            int id = 1;
+            foreach (ListViewItem lvi in listViewTeam.Items)
+            {
+                NetworkObjects.Team team = lvi.Tag as NetworkObjects.Team;
+                try {
+                    int startId = int.Parse(team.StartID);
+                    id = Math.Max(id, startId);
+                }catch(Exception ex)
+                {
+                    //ignore
+                }
+            }
+
+            textBoxCNumber.Text = ""+ (id+1);
             UpdateEnablement();
         }
 
