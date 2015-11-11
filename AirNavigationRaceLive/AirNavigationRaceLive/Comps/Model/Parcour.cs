@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NetworkObjects;
+using AirNavigationRaceLive.Comps.Helper;
 
 namespace AirNavigationRaceLive.Comps.Model
 {
-    public class Parcour : NetworkObjects.Parcour
+    public class Parcour : t_Parcour
     {
         public Parcour()
         {
         }
-        public Parcour(NetworkObjects.Parcour p)
+        public Parcour(t_Parcour p)
         {
             this.ID = p.ID;
             this.ID_Map = p.ID_Map;
-            foreach (Line l in p.LineList)
+            foreach (t_Line l in p.t_Line)
             {
-                this.LineList.Add(NetworkObjects.Helper.Line(l));
+                this.t_Line.Add(Factory.t_Line(l));
             }
             this.Name = p.Name;
         }
         public volatile bool finished;
         public double best;
-        private readonly List<NetworkObjects.Line> Modified = new List<NetworkObjects.Line>();
-        public void addModifiedLine(NetworkObjects.Line l)
+        private readonly List<t_Line> Modified = new List<t_Line>();
+        public void addModifiedLine(t_Line l)
         {
             if (!Modified.Contains(l))
             {
                 Modified.Add(l);
             }
         }
-        public List<NetworkObjects.Line> getModifiedLines()
+        public List<t_Line> getModifiedLines()
         {
             return Modified.ToList();
         }

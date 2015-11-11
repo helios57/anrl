@@ -16,7 +16,7 @@ namespace AirNavigationRaceLive.Comps
     {
         private Client.Client Client;
         Converter c = null;
-        private NetworkObjects.Parcour activeParcour = new NetworkObjects.Parcour();
+        private t_Parcour activeParcour = new t_Parcour();
 
         private enum ActivePoint
         {
@@ -27,14 +27,14 @@ namespace AirNavigationRaceLive.Comps
         {
             Client = iClient;
             InitializeComponent();
-            pictureBox1.Cursor = new Cursor(@"Resources\GPSCursor.cur");
+            PictureBox1.Cursor = new Cursor(@"Resources\GPSCursor.cur");
         }
         #region load
 
         class ListItem
         {
-            private NetworkObjects.Parcour parcour;
-            public ListItem(NetworkObjects.Parcour iParcour)
+            private t_Parcour parcour;
+            public ListItem(t_Parcour iParcour)
             {
                 parcour = iParcour;
             }
@@ -43,7 +43,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return parcour.Name;
             }
-            public NetworkObjects.Parcour getParcour()
+            public t_Parcour getParcour()
             {
                 return parcour;
             }
@@ -52,15 +52,15 @@ namespace AirNavigationRaceLive.Comps
         private void loadParcours()
         {
             deleteToolStripMenuItem.Enabled = false;
-            pictureBox1.SetConverter(c);
-            pictureBox1.Image = null;
-            activeParcour = new NetworkObjects.Parcour();
-            pictureBox1.SetParcour(activeParcour);
-            pictureBox1.Invalidate();
+            PictureBox1.SetConverter(c);
+            PictureBox1.Image = null;
+            activeParcour = new t_Parcour();
+            PictureBox1.SetParcour(activeParcour);
+            PictureBox1.Invalidate();
 
             listBox1.Items.Clear();
-            List<NetworkObjects.Parcour> parcours = Client.getParcours();
-            foreach (NetworkObjects.Parcour p in parcours)
+            List<t_Parcour> parcours = Client.getParcours();
+            foreach (t_Parcour p in parcours)
             {
                 listBox1.Items.Add(new ListItem(p));
             }
@@ -92,22 +92,22 @@ namespace AirNavigationRaceLive.Comps
             if (li != null)
             {
                 deleteToolStripMenuItem.Enabled = true;
-                NetworkObjects.Map map = Client.getMap(li.getParcour().ID_Map);
+                t_Map map = Client.getMap(li.getParcour().ID_Map);
 
-                MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
-                pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+                MemoryStream ms = new MemoryStream(Client.gett_Picture(map.ID_Picture).Data);
+                PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 c = new Converter(map);
-                pictureBox1.SetConverter(c);
+                PictureBox1.SetConverter(c);
 
-                pictureBox1.SetParcour(li.getParcour());
+                PictureBox1.SetParcour(li.getParcour());
                 activeParcour = li.getParcour();
-                pictureBox1.Invalidate();
+                PictureBox1.Invalidate();
             }
         }
 
-        private void pictureBox1_Resize(object sender, EventArgs e)
+        private void PictureBox1_Resize(object sender, EventArgs e)
         {
-            pictureBox1.Invalidate();
+            PictureBox1.Invalidate();
         }
     }
 }

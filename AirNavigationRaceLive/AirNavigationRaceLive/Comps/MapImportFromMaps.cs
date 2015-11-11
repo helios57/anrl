@@ -51,7 +51,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 btnSave.Enabled = false;
                 fldName.Enabled = false;
-                NetworkObjects.Map m = new NetworkObjects.Map();
+                t_Map m = new t_Map();
                 m.Name = fldName.Text;
                 m.XSize = Double.Parse(fldSizeX.Text, NumberFormatInfo.InvariantInfo);
                 m.YSize = Double.Parse(fldSizeY.Text, NumberFormatInfo.InvariantInfo);
@@ -61,10 +61,10 @@ namespace AirNavigationRaceLive.Comps
                 m.YTopLeft = Double.Parse(fldY.Text, NumberFormatInfo.InvariantInfo);
                 MemoryStream ms = new MemoryStream();
                 gMapControl1.ToImage().Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                Picture picture = new Picture();
-                picture.Image = ms.ToArray();
-                picture.Name = m.Name;
-                m.ID_Picture = Client.savePicture(picture);
+                t_Picture Picture = new t_Picture();
+                Picture.Data = ms.ToArray();
+                Picture.Name = m.Name;
+                m.ID_Picture = Client.savePicture(Picture);
                 Client.saveMap(m);
                 MessageBox.Show("Map saved successfull!");
                 btnSave.Enabled = true;

@@ -21,7 +21,7 @@ namespace AirNavigationRaceLive.Comps
             System.Diagnostics.Process.Start(@"https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6861542");
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void PictureBox1_Click(object sender, EventArgs e)
         {
             OpenSharpSoft();
         }

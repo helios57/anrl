@@ -31,13 +31,13 @@ namespace AirNavigationRaceLive.Comps
         private void UpdateListe()
         {
             resetFields();
-            List<NetworkObjects.Pilot> pilots = Client.getPilots();
-            List<NetworkObjects.Team> teams = Client.getTeams();
+            List<t_Pilot> pilots = Client.getPilots();
+            List<t_Team> teams = Client.getTeams();
             listViewTeam.Items.Clear();
-            foreach (NetworkObjects.Team team in teams)
+            foreach (t_Team team in teams)
             {
-                NetworkObjects.Pilot pilot;
-                NetworkObjects.Pilot navigator = null;
+                t_Pilot pilot;
+                t_Pilot navigator = null;
                 if (pilots.Count(p => p.ID == team.ID_Pilot) == 1)
                 {
                     pilot = pilots.Single(p => p.ID == team.ID_Pilot);
@@ -46,7 +46,7 @@ namespace AirNavigationRaceLive.Comps
                 {
                     pilot = Client.getPilot(team.ID_Pilot);
                 }
-                if (team.ID_Navigator > 0)
+                if (team.ID_Navigator.HasValue)
                 {
                     if (pilots.Count(p => p.ID == team.ID_Navigator) == 1)
                     {
@@ -54,11 +54,11 @@ namespace AirNavigationRaceLive.Comps
                     }
                     else
                     {
-                        navigator = Client.getPilot(team.ID_Navigator);
+                        navigator = Client.getPilot(team.ID_Navigator.Value);
                     }
                 }
 
-                ListViewItem lvi = new ListViewItem(new string[] {team.StartID, team.Name != null ? team.Name : "", pilot.Name, (navigator != null) ? navigator.Name : "-", team.Description, team.Color });
+                ListViewItem lvi = new ListViewItem(new string[] {team.StartID, team.Name != null ? team.Name : "", pilot.LastName, (navigator != null) ? navigator.LastName : "-", team.Description, team.Color });
                 lvi.UseItemStyleForSubItems = false;
                 lvi.Tag = team;
                 Color c =Color.FromName(team.Color);
@@ -72,13 +72,13 @@ namespace AirNavigationRaceLive.Comps
                 listViewTeam.Items.Add(lvi);
             }
             listViewPilots.Items.Clear();
-            foreach (NetworkObjects.Pilot p in pilots)
+            foreach (t_Pilot p in pilots)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { p.Name, p.Surename });
+                ListViewItem lvi = new ListViewItem(new string[] { p.LastName, p.SureName });
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
-            List<NetworkObjects.Tracker> trackers = Client.getTrackers();
+            List<t_Tracker> trackers = Client.getTrackers();
         }
 
         private void UpdateEnablement()
@@ -122,7 +122,7 @@ namespace AirNavigationRaceLive.Comps
             if (listViewPilots.SelectedItems.Count == 1)
             {
                 textBoxPilot.Tag = listViewPilots.SelectedItems[0].Tag;
-                textBoxPilot.Text = ((NetworkObjects.Pilot)listViewPilots.SelectedItems[0].Tag).Name;
+                textBoxPilot.Text = ((t_Pilot)listViewPilots.SelectedItems[0].Tag).LastName;
             }
             UpdateEnablement();
         }
@@ -132,7 +132,7 @@ namespace AirNavigationRaceLive.Comps
             if (listViewPilots.SelectedItems.Count == 1)
             {
                 textBoxNavigator.Tag = listViewPilots.SelectedItems[0].Tag;
-                textBoxNavigator.Text = ((NetworkObjects.Pilot)listViewPilots.SelectedItems[0].Tag).Name;
+                textBoxNavigator.Text = ((t_Pilot)listViewPilots.SelectedItems[0].Tag).LastName;
             }
             UpdateEnablement();
         }
@@ -145,7 +145,7 @@ namespace AirNavigationRaceLive.Comps
             int id = 1;
             foreach (ListViewItem lvi in listViewTeam.Items)
             {
-                NetworkObjects.Team team = lvi.Tag as NetworkObjects.Team;
+                t_Team team = lvi.Tag as t_Team;
                 try {
                     int startId = int.Parse(team.StartID);
                     id = Math.Max(id, startId);
@@ -163,15 +163,15 @@ namespace AirNavigationRaceLive.Comps
         {
             if ((textBoxID.Tag != null || newTeam) && textBoxPilot.Tag != null)
             {
-                NetworkObjects.Team team = new NetworkObjects.Team();
+                t_Team team = new t_Team();
                 team.ID = Math.Max(Int32.Parse(textBoxID.Text), 0);
-                team.ID_Pilot = (textBoxPilot.Tag as NetworkObjects.Pilot).ID;
+                team.ID_Pilot = (textBoxPilot.Tag as t_Pilot).ID;
                 team.Name = textBoxName.Text;
                 team.Description = fldAC.Text;
                 team.StartID = textBoxCNumber.Text;
                 if (textBoxNavigator.Tag != null)
                 {
-                    team.ID_Navigator = (textBoxNavigator.Tag as NetworkObjects.Pilot).ID;
+                    team.ID_Navigator = (textBoxNavigator.Tag as t_Pilot).ID;
                 }
                 team.Color = btnColorSelect.BackColor.Name;
                 int id = Client.saveTeam(team);
@@ -200,20 +200,20 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewTeam.SelectedItems.Count == 1)
             {
-                NetworkObjects.Team team = listViewTeam.SelectedItems[0].Tag as NetworkObjects.Team;
+                t_Team team = listViewTeam.SelectedItems[0].Tag as t_Team;
                 textBoxID.Tag = team;
                 textBoxID.Text = team.ID.ToString();
                 textBoxName.Text = team.Name;
-                NetworkObjects.Pilot pilot = Client.getPilot(team.ID_Pilot);
-                NetworkObjects.Pilot navigator = null;
-                if (team.ID_Navigator > 0)
+                t_Pilot pilot = Client.getPilot(team.ID_Pilot);
+                t_Pilot navigator = null;
+                if (team.ID_Navigator.HasValue)
                 {
-                    navigator = Client.getPilot(team.ID_Navigator);
+                    navigator = Client.getPilot(team.ID_Navigator.Value);
                 }
                 textBoxPilot.Tag = pilot;
-                textBoxPilot.Text = pilot.Name;
+                textBoxPilot.Text = pilot.LastName;
                 textBoxNavigator.Tag = navigator;
-                textBoxNavigator.Text = (navigator != null) ? navigator.Name : "";
+                textBoxNavigator.Text = (navigator != null) ? navigator.LastName : "";
                 fldAC.Text = team.Description;
                 textBoxCNumber.Text = team.StartID;
                 btnColorSelect.BackColor = Color.FromName(team.Color.Trim());

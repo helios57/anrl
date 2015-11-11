@@ -54,7 +54,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>
     </DefineConstants>
@@ -85,6 +85,18 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.0.4.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="GMap.NET.Core, Version=1.6.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
       <HintPath>dlls\GMap.NET.Core.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -118,7 +130,12 @@
       <HintPath>dlls\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -134,14 +151,22 @@
     <Compile Include="AirNavigationRaceLiveMain.Designer.cs">
       <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnrlModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnrlModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnrlModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnrlModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnrlModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Client\Client.cs" />
-    <Compile Include="Comps\Client\ClientCache.cs" />
-    <Compile Include="Comps\Client\ClientCacheDirtyEvent.cs" />
-    <Compile Include="Comps\Client\ClientCacheEntry.cs" />
-    <Compile Include="Comps\Client\ClientCacheList.cs" />
-    <Compile Include="Comps\Client\ClientCacheLoader.cs" />
-    <Compile Include="Comps\Client\ClientCacheGPSDaten.cs" />
-    <Compile Include="Comps\Client\ClientNetwork.cs" />
     <Compile Include="Comps\Connect.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,6 +179,8 @@
     <Compile Include="Comps\Competition.Designer.cs">
       <DependentUpon>Competition.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comps\Helper\Enums.cs" />
+    <Compile Include="Comps\Helper\Factory.cs" />
     <Compile Include="Comps\Helper\ParcourGeneratorSingle.cs" />
     <Compile Include="Comps\Helper\ParcourModelSingle.cs" />
     <Compile Include="Comps\ParcourEditSingle.cs">
@@ -332,6 +359,51 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="t_Competition.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_CompetitionSet.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Competition_Team.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Daten.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_GPSPoint.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_GPS_IN.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Line.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Log.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Map.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Parcour.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Penalty.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Picture.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Pilot.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Team.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="t_Tracker.cs">
+      <DependentUpon>AnrlModel.tt</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AirNavigationRaceLiveMain.resx">
       <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -426,7 +498,15 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="AirNavigationRaceLive_TemporaryKey.pfx" />
+    <EntityDeploy Include="AnrlModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AnrlModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="AnrlModel.edmx.diagram">
+      <DependentUpon>AnrlModel.edmx</DependentUpon>
+    </None>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -451,6 +531,30 @@
     <None Include="dlls\GMap.NET.WindowsForms.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="dlls\EPPlus.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="dlls\EPPlus.XML">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="anrl.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="AnrlModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AnrlModel.edmx</DependentUpon>
+      <LastGenOutput>AnrlModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AnrlModel.edmx.sql" />
+    <Content Include="AnrlModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AnrlModel.edmx</DependentUpon>
+      <LastGenOutput>AnrlModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="anrl_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>anrl.mdf</DependentUpon>
+    </Content>
     <Content Include="Resources\default.png" />
     <Content Include="Resources\Summe.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -491,16 +595,6 @@
     <None Include="Resources\Logo_051.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NetworkObjects\NetworkObjects.csproj">
-      <Project>{AAB6683E-EE14-4F1F-922A-979FAE5F22AE}</Project>
-      <Name>NetworkObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Protobuf-net\protobuf-net.csproj">
-      <Project>{8374E4D7-2A91-48F1-9360-09B09CF27C3F}</Project>
-      <Name>protobuf-net</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\GPSCursorModify.cur">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -530,7 +624,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -17,7 +17,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 {
     public class PDFCreator
     {
-        public static void CreateTeamsPDF(List<NetworkObjects.Team> teams, Client.Client c, String pathToPDF)
+        public static void CreateTeamsPDF(List<t_Team> teams, Client.Client c, String pathToPDF)
         {
 
             Document doc = new Document();
@@ -64,20 +64,20 @@ namespace AirNavigationRaceLive.Comps.Helper
             row.Cells[5].AddParagraph("Navigator Firstname");
             row.Cells[6].AddParagraph("AC");
 
-            foreach (NetworkObjects.Team t in teams)
+            foreach (t_Team t in teams)
             {
                 Row r = table.AddRow();
                 //r.Cells[0].AddParagraph(t.ID.ToString());
                 r.Cells[0].AddParagraph(t.StartID);
                 r.Cells[1].AddParagraph(t.Name);
-                NetworkObjects.Pilot pilot = c.getPilot(t.ID_Pilot);
-                r.Cells[2].AddParagraph(pilot.Name);
-                r.Cells[3].AddParagraph(pilot.Surename);
-                if (t.ID_Navigator > 0)
+                t_Pilot pilot = c.getPilot(t.ID_Pilot);
+                r.Cells[2].AddParagraph(pilot.LastName);
+                r.Cells[3].AddParagraph(pilot.SureName);
+                if (t.ID_Navigator.HasValue)
                 {
-                    NetworkObjects.Pilot navigator = c.getPilot(t.ID_Navigator);
-                    r.Cells[4].AddParagraph(navigator.Name);
-                    r.Cells[5].AddParagraph(navigator.Surename);
+                    t_Pilot navigator = c.getPilot(t.ID_Navigator.Value);
+                    r.Cells[4].AddParagraph(navigator.LastName);
+                    r.Cells[5].AddParagraph(navigator.SureName);
                 }
                 r.Cells[6].AddParagraph(t.Description);
             }
@@ -92,7 +92,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         private static void AddCompetitionAndLogo(Client.Client c, Section sec)
         {
-            String competitionName = "Competition: " + c.getCompetitionSet().Name;
+            String competitionName = "Competition: " + c.getSelectedCompetitionSet().Name;
             Paragraph pg = sec.AddParagraph();
             pg.Format.Alignment = ParagraphAlignment.Left;
             pg.Format.KeepTogether = false;
@@ -132,7 +132,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             XGraphics gfx = XGraphics.FromPdfPage(page);
             AddLogo(gfx, page);
 
-            gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
+            gfx.DrawString("Competition: " + c.getSelectedCompetitionSet().Name,
                 new XFont("Verdana", 16, XFontStyle.Bold), XBrushes.Black,
                 new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2)));
 
@@ -262,7 +262,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             XGraphics gfx = XGraphics.FromPdfPage(page);
             AddLogo(gfx, page);
 
-            gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
+            gfx.DrawString("Competition: " + c.getSelectedCompetitionSet().Name,
                 new XFont("Verdana", 16, XFontStyle.Bold), XBrushes.Black,
                 new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(2)));
 
@@ -282,13 +282,13 @@ namespace AirNavigationRaceLive.Comps.Helper
             doc.Close();
             Process.Start(pathToPDF);
         }
-        public static void CreateToplistResultPDF(Client.Client c, NetworkObjects.Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
+        public static void CreateToplistResultPDF(Client.Client c, t_Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
         {
             List<Toplist> toplist = new List<Toplist>();
             foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
             {
                 int sum = 0;
-                foreach (Penalty penalty in cbct.penalty)
+                foreach (t_Penalty penalty in cbct.penalty)
                 {
                     sum += penalty.Points;
                 }
@@ -338,18 +338,18 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             foreach (Toplist top in toplist)
             {
-                NetworkObjects.Team t = c.getTeam(top.ct.ID_Team);
+                t_Team t = c.getTeam(top.ct.ID_Team);
                 Row r = table.AddRow();
                 r.Cells[0].AddParagraph(top.sum.ToString());
                 r.Cells[1].AddParagraph(t.Name);
-                NetworkObjects.Pilot pilot = c.getPilot(t.ID_Pilot);
-                r.Cells[2].AddParagraph(pilot.Name);
-                r.Cells[3].AddParagraph(pilot.Surename);
-                if (t.ID_Navigator > 0)
+                t_Pilot pilot = c.getPilot(t.ID_Pilot);
+                r.Cells[2].AddParagraph(pilot.LastName);
+                r.Cells[3].AddParagraph(pilot.SureName);
+                if (t.ID_Navigator.HasValue)
                 {
-                    NetworkObjects.Pilot navigator = c.getPilot(t.ID_Navigator);
-                    r.Cells[4].AddParagraph(navigator.Name);
-                    r.Cells[5].AddParagraph(navigator.Surename);
+                    t_Pilot navigator = c.getPilot(t.ID_Navigator.Value);
+                    r.Cells[4].AddParagraph(navigator.LastName);
+                    r.Cells[5].AddParagraph(navigator.SureName);
                 }
             }
 
@@ -362,14 +362,14 @@ namespace AirNavigationRaceLive.Comps.Helper
         }
         class Toplist :IComparable
         {
-            public Toplist(NetworkObjects.CompetitionTeam ct,
+            public Toplist(t_Competition_Team ct,
             int sum)
             {
 
                 this.ct = ct;
                 this.sum = sum;
             }
-            public NetworkObjects.CompetitionTeam ct = null;
+            public t_Competition_Team ct = null;
             public int sum = 0;
 
             public int CompareTo(object obj)
@@ -378,10 +378,10 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
         }
 
-        public static void CreateResultPDF(VisualisationPictureBox picBox, Client.Client c, NetworkObjects.Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
+        public static void CreateResultPDF(VisualisationPictureBox picBox, Client.Client c, t_Competition competition, List<ComboBoxCompetitionTeam> competitionTeam, String pathToPDF)
         {
             int counter = 0;
-            List<NetworkObjects.CompetitionTeam> tempList = new List<NetworkObjects.CompetitionTeam>();
+            List<t_Competition_Team> tempList = new List<t_Competition_Team>();
             foreach (ComboBoxCompetitionTeam cbct in competitionTeam)
             {
                 GC.Collect();
@@ -412,7 +412,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
                 gfx.DrawImage(image, XUnit.FromCentimeter(2).Point, XUnit.FromCentimeter(3).Point, page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
 
-                gfx.DrawString("Competition: " + c.getCompetitionSet().Name,
+                gfx.DrawString("Competition: " + c.getSelectedCompetitionSet().Name,
                     new XFont("Verdana", 13, XFontStyle.Bold), XBrushes.Black,
                     new XPoint(XUnit.FromCentimeter(2), XUnit.FromCentimeter(1.5)));
 
@@ -431,7 +431,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3)));
                 gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine + 2), XUnit.FromCentimeter(3)));
 
-                foreach (Penalty penalty in cbct.penalty)
+                foreach (t_Penalty penalty in cbct.penalty)
                 {
                     sum += penalty.Points;
                     line++;
@@ -492,20 +492,20 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         private static string getTeamDsc(Client.Client c, int ID_Team)
         {
-            NetworkObjects.Team team = c.getTeam(ID_Team);
-            NetworkObjects.Pilot pilot = c.getPilot(team.ID_Pilot);
+            t_Team team = c.getTeam(ID_Team);
+            t_Pilot pilot = c.getPilot(team.ID_Pilot);
             StringBuilder sb = new StringBuilder();
             sb.Append(team.StartID).Append(" ");
-            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
-            if (team.ID_Navigator > 0)
+            sb.Append(pilot.LastName).Append(" ").Append(pilot.SureName);
+            if (team.ID_Navigator.HasValue)
             {
-                NetworkObjects.Pilot navi = c.getPilot(team.ID_Navigator);
-                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+                t_Pilot navi = c.getPilot(team.ID_Navigator.Value);
+                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.SureName);
             }
             return sb.ToString();
         }
 
-        internal static void CreateStartListPDF(NetworkObjects.Competition competition, Client.Client Client, string pathToPDF)
+        internal static void CreateStartListPDF(t_Competition competition, Client.Client Client, string pathToPDF)
         {
             Document doc = new Document();
             doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
@@ -553,25 +553,25 @@ namespace AirNavigationRaceLive.Comps.Helper
             row.Cells[9].AddParagraph("End Gate (UTC)");
             row.Cells[10].AddParagraph("Route");
 
-            foreach (NetworkObjects.CompetitionTeam ct in competition.CompetitionTeamList)
+            foreach (t_Competition_Team ct in competition.t_Competition_Team)
             {
                 Row r = table.AddRow();
                 r.Cells[0].AddParagraph(ct.StartID.ToString());
-                NetworkObjects.Team teams = Client.getTeam(ct.ID_Team);
+                t_Team teams = Client.getTeam(ct.ID_Team);
                 r.Cells[1].AddParagraph(teams.StartID);
                 r.Cells[2].AddParagraph(teams.Description);
-                NetworkObjects.Pilot pilot = Client.getPilot(teams.ID_Pilot);
-                r.Cells[3].AddParagraph(pilot.Name);
-                r.Cells[4].AddParagraph(pilot.Surename);
-                if (teams.ID_Navigator > 0)
+                t_Pilot pilot = Client.getPilot(teams.ID_Pilot);
+                r.Cells[3].AddParagraph(pilot.LastName);
+                r.Cells[4].AddParagraph(pilot.SureName);
+                if (teams.ID_Navigator.HasValue)
                 {
-                    NetworkObjects.Pilot navigator = Client.getPilot(teams.ID_Navigator);
-                    r.Cells[5].AddParagraph(navigator.Name);
-                    r.Cells[6].AddParagraph(navigator.Surename);
+                    t_Pilot navigator = Client.getPilot(teams.ID_Navigator.Value);
+                    r.Cells[5].AddParagraph(navigator.LastName);
+                    r.Cells[6].AddParagraph(navigator.SureName);
                 }
                 r.Cells[7].AddParagraph(new DateTime(ct.TimeTakeOff).ToString("HH:mm"));
-                r.Cells[8].AddParagraph(new DateTime(ct.TimeStartLine).ToString("HH:mm"));
-                r.Cells[9].AddParagraph(new DateTime(ct.TimeEndLine).ToString("HH:mm"));
+                r.Cells[8].AddParagraph(new DateTime(ct.TimeStart).ToString("HH:mm"));
+                r.Cells[9].AddParagraph(new DateTime(ct.TimeEnd).ToString("HH:mm"));
                 r.Cells[10].AddParagraph(Enum.GetName(NetworkObjects.Route.A.GetType(), ct.Route));
             }
 

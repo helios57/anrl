@@ -18,14 +18,13 @@ namespace AirNavigationRaceLive.Comps
         private VisualisationPopup vp;
         private GEControll controll = new GEControll();
         private Timer t;
-        private NetworkObjects.Competition comp;
-        private List<int> trackerlist = new List<int>();
-        private List<NetworkObjects.Team> teamlist = new List<NetworkObjects.Team>();
-        private List<NetworkObjects.CompetitionTeam> competitonTeamlist = new List<NetworkObjects.CompetitionTeam>();
+        private t_Competition comp;
+        private List<t_Team> teamlist = new List<t_Team>();
+        private List<t_Competition_Team> competitonTeamlist = new List<t_Competition_Team>();
         private volatile bool updating = false;
-        private NetworkObjects.Parcour parcour;
+        private t_Parcour parcour;
         private RankForm rankForm;
-        private List<NetworkObjects.Penalty> penaltyPoints = new List<NetworkObjects.Penalty>();
+        private List<t_Penalty> penaltyPoints = new List<t_Penalty>();
         public Visualisation(Client.Client iClient)
         {
             Client = iClient;
@@ -43,30 +42,32 @@ namespace AirNavigationRaceLive.Comps
                 updating = true;
                 long mintime = long.MaxValue;
                 long maxtime = long.MinValue;
-                trackerlist.Clear();
+                List<t_GPSPoint> points = new List<t_GPSPoint>();
                 teamlist.Clear();
                 competitonTeamlist.Clear();
                 foreach (ListViewItem lvi in listViewCompetitionTeam.Items)
                 {
                     if (lvi.Checked && lvi.Tag != null)
                     {
-                        NetworkObjects.CompetitionTeam ct = lvi.Tag as NetworkObjects.CompetitionTeam;
+                        t_Competition_Team ct = lvi.Tag as t_Competition_Team;
                         competitonTeamlist.Add(ct);
-                        NetworkObjects.Team t = Client.getTeam(ct.ID_Team);
+                        t_Team t = Client.getTeam(ct.ID_Team);
                         teamlist.Add(t);
-                        trackerlist.AddRange(ct.ID_TrackerList);
+                        foreach(t_Tracker tracker in ct.t_Tracker)
+                        {
+                            points.AddRange(tracker.t_GPSPoint);
+                        }
                         mintime = Math.Min(mintime, ct.TimeTakeOff);
-                        maxtime = Math.Max(maxtime, ct.TimeEndLine);
+                        maxtime = Math.Max(maxtime, ct.TimeEnd);
                     }
                 }
-                Client.getGPSDatenCache().requestGPSData(trackerlist, mintime - 10000000000, maxtime + 100000000000, new AsyncCallback(recieveData));
+                recieveData(points);
             }
         }
-        public void recieveData(IAsyncResult result)
+        public void recieveData(List<t_GPSPoint> data)
         {
             try
             {
-                List<NetworkObjects.GPSData> data = result.AsyncState as List<NetworkObjects.GPSData>;
                 if (data != null)
                 {
                     controll.SetDaten(data, teamlist.ToList(), competitonTeamlist);
@@ -76,16 +77,15 @@ namespace AirNavigationRaceLive.Comps
                     if (comp != null)
                     {
                         penaltyPoints.Clear();
-                        foreach (NetworkObjects.CompetitionTeam g in competitonTeamlist)
+                        foreach (t_Competition_Team g in competitonTeamlist)
                         {
-                            trackerlist.Clear();
                             teamlist.Clear();
-                            NetworkObjects.Team t = Client.getTeam(g.ID_Team);
-                            if (g.ID_TrackerList.Count > 0)
+                            t_Team t = Client.getTeam(g.ID_Team);
+                            if (g.t_Tracker.Count > 0)
                             {
                                 teamlist.Add(t);
-                                List<NetworkObjects.Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, g,Client.getParcour(comp.ID_Parcour), data.Where(p => g.ID_TrackerList.Contains(p.trackerID)).ToList(), (NetworkObjects.Route)g.Route);
-                                foreach (NetworkObjects.Penalty p in penalties)
+                                List<t_Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, g,Client.getParcour(comp.ID_Parcour), data.Where(p => g.t_Tracker.Any(tr=>tr.ID==p.t_Tracker.ID)).ToList(), (NetworkObjects.Route)g.Route);
+                                foreach (t_Penalty p in penalties)
                                 {
                                     p.ID_Competition_Team = g.ID;
                                 }
@@ -115,8 +115,8 @@ namespace AirNavigationRaceLive.Comps
                     comp = cce.comp;
 
                     parcour = Client.getParcour(comp.ID_Parcour);
-                    NetworkObjects.Map map = Client.getMap(parcour.ID_Map);
-                    MemoryStream ms = new MemoryStream(Client.getPicture(map.ID_Picture).Image);
+                    t_Map map = Client.getMap(parcour.ID_Map);
+                    MemoryStream ms = new MemoryStream(Client.gett_Picture(map.ID_Picture).Data);
                     visualisationPictureBox1.Image = System.Drawing.Image.FromStream(ms);
                     visualisationPictureBox1.SetConverter(new Converter(map));
                     visualisationPictureBox1.SetParcour(parcour);
@@ -124,11 +124,11 @@ namespace AirNavigationRaceLive.Comps
                     visualisationPictureBox1.Refresh();
                     controll.SetParcour(parcour);
                     listViewCompetitionTeam.Items.Clear();
-
-                    comp.CompetitionTeamList.Sort((p, q) => p.StartID.CompareTo(q.StartID));
-                    foreach (NetworkObjects.CompetitionTeam ct in comp.CompetitionTeamList)
+                    List<t_Competition_Team> CompetitionTeamList = comp.t_Competition_Team.ToList();
+                    CompetitionTeamList.Sort((p, q) => p.StartID.CompareTo(q.StartID));
+                    foreach (t_Competition_Team ct in CompetitionTeamList)
                     {
-                        ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(),getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
+                        ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(),getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStart).ToShortTimeString(), new DateTime(ct.TimeEnd).ToShortTimeString(), getRouteText(ct.Route) });
                         lvi2.Tag = ct;
                         listViewCompetitionTeam.Items.Add(lvi2);
                     }
@@ -137,14 +137,14 @@ namespace AirNavigationRaceLive.Comps
         }
         private string getTeamDsc(int ID_Team)
         {
-            NetworkObjects.Team team = Client.getTeam(ID_Team);
-            NetworkObjects.Pilot pilot = Client.getPilot(team.ID_Pilot);
+            t_Team team = Client.getTeam(ID_Team);
+            t_Pilot pilot = Client.getPilot(team.ID_Pilot);
             StringBuilder sb = new StringBuilder();
-            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
-            if (team.ID_Navigator > 0)
+            sb.Append(pilot.LastName).Append(" ").Append(pilot.SureName);
+            if (team.ID_Navigator.HasValue)
             {
-                NetworkObjects.Pilot navi = Client.getPilot(team.ID_Navigator);
-                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+                t_Pilot navi = Client.getPilot(team.ID_Navigator.Value);
+                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.SureName);
             }
             return sb.ToString();
         }
@@ -171,9 +171,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void Visualisation_Load(object sender, EventArgs e)
         {
-            List<NetworkObjects.Competition> comps = Client.getCompetitions();
+            List<t_Competition> comps = Client.getCompetitions();
             comboBox1.Items.Clear();
-            foreach (NetworkObjects.Competition c in comps)
+            foreach (t_Competition c in comps)
             {
                 comboBox1.Items.Add(new CompetitionComboEntry(c));
             }
@@ -210,8 +210,8 @@ namespace AirNavigationRaceLive.Comps
     }
     class CompetitionComboEntry
     {
-        public readonly NetworkObjects.Competition comp;
-        public CompetitionComboEntry(NetworkObjects.Competition comp)
+        public readonly t_Competition comp;
+        public CompetitionComboEntry(t_Competition comp)
         {
             this.comp = comp;
         }

@@ -16,17 +16,17 @@ namespace AirNavigationRaceLive.Comps
     {
         public event EventHandler Connected;
 
-        private Client.ClientNetwork c;
+        private Client.Client c;
 
         public Connect()
         {
             InitializeComponent();
-            c = new Client.ClientNetwork(fldServer.Text);
+            c = Client.Client.getClient();
             UpdateEnablement();
         }
         private void UpdateEnablement()
         {
-            bool loggedIn = c.isLoggedIn();
+            bool loggedIn = c!=null;
             btnLogin.Enabled = !loggedIn;
             btnRegister.Enabled = !loggedIn;
             fldServer.Enabled = !loggedIn;
@@ -38,11 +38,12 @@ namespace AirNavigationRaceLive.Comps
         {
             AirNavigationRaceLiveMain.SetStatusText("");
             UpdateEnablement();
+            Connected.Invoke(Client.Client.getClient(), e);
         }
 
         private void fldServer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            c = new Client.ClientNetwork(fldServer.Text);
+            c = Client.Client.getClient();
             UpdateEnablement();
         }
 
@@ -50,8 +51,8 @@ namespace AirNavigationRaceLive.Comps
         {
             try
             {
-                c.Authenticate(fldUsername.Text, fldPassword.Text);
-                if (c.isLoggedIn())
+                //c.Authenticate(fldUsername.Text, fldPassword.Text);
+                if (c!= null)// c.isLoggedIn())
                 {
                     Status.SetStatus("Logged in, please choose a Competition");
                     Connected.Invoke(c, e);
@@ -70,8 +71,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-
-            c.Register(fldUsername.Text, fldPassword.Text);
+            //c.Register(fldUsername.Text, fldPassword.Text);
         }
     }
 }

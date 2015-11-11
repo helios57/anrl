@@ -36,7 +36,7 @@ namespace AirNavigationRaceLive.Comps
                     + "Gif Dateien (*.gif)|*.gif|"
                     + "Png Dateien (*.png)|*.png";
             string GraphicFileFilter = "Alle Bilddateien|*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.gif;*.png";
-            ofd.Title = "Picture";
+            ofd.Title = "t_Picture";
             ofd.RestoreDirectory = true;
             ofd.Multiselect = false;
             ofd.Filter = FileFilter + "|" + GraphicFileFilter;
@@ -50,7 +50,7 @@ namespace AirNavigationRaceLive.Comps
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox p = new PictureBox();
             p.Image = Image.FromFile(ofd.FileName);
-            NetworkObjects.Map m = new NetworkObjects.Map();
+            t_Map m = new t_Map();
             m.Name = fldName.Text;
             string[] coordinatesFromPath = ofd.FileName.Remove(ofd.FileName.LastIndexOf(".")).Substring(ofd.FileName.LastIndexOf(@"\") + 1).Split("_".ToCharArray());
             foreach (string coordinate in coordinatesFromPath)
@@ -74,10 +74,10 @@ namespace AirNavigationRaceLive.Comps
             m.YTopLeft = topLeftLatitude;
             MemoryStream ms = new MemoryStream();
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            Picture picture = new Picture();
-            picture.Image = ms.ToArray();
-            picture.Name = m.Name;
-            m.ID_Picture = Client.savePicture(picture);
+            t_Picture t_Picture = new t_Picture();
+            t_Picture.Data = ms.ToArray();
+            t_Picture.Name = m.Name;
+            m.ID_Picture = Client.savePicture(t_Picture);
             Client.saveMap(m);
             btnImportANR.Enabled = true;
         }
@@ -91,7 +91,7 @@ namespace AirNavigationRaceLive.Comps
                     + "Gif Dateien (*.gif)|*.gif|"
                     + "Png Dateien (*.png)|*.png";
             string GraphicFileFilter = "Alle Bilddateien|*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.gif;*.png";
-            ofd.Title = "Picture";
+            ofd.Title = "t_Picture";
             ofd.RestoreDirectory = true;
             ofd.Multiselect = false;
             ofd.Filter = FileFilter + "|" + GraphicFileFilter;
@@ -105,7 +105,7 @@ namespace AirNavigationRaceLive.Comps
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox p = new PictureBox();
             p.Image = Image.FromFile(ofd.FileName);
-            NetworkObjects.Map m = new NetworkObjects.Map();
+            t_Map m = new t_Map();
             m.Name = fldName.Text;
             double topLeftLatitude;
             double topLeftLongitude;
@@ -125,10 +125,10 @@ namespace AirNavigationRaceLive.Comps
             m.YTopLeft = topLeftLatitude;
             MemoryStream ms = new MemoryStream();
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            Picture picture = new Picture();
-            picture.Image = ms.ToArray();
-            picture.Name = m.Name;
-            m.ID_Picture = Client.savePicture(picture);
+            t_Picture t_Picture = new t_Picture();
+            t_Picture.Data = ms.ToArray();
+            t_Picture.Name = m.Name;
+            m.ID_Picture = Client.savePicture(t_Picture);
             Client.saveMap(m);
             button1.Enabled = true;
         }

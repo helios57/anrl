@@ -2,196 +2,215 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ProtoBuf;
 using NetworkObjects;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
+using AirNavigationRaceLive.Comps.Helper;
 
 namespace AirNavigationRaceLive.Comps.Client
 {
     public class Client
     {
-        private ClientCache cache;
-        private ClientCacheGPSDaten cacheGPSData;
-        private ClientNetwork net;
+        private Client()
+        {
 
-        public Client(ClientNetwork net)
-        {
-            this.net = net;
-            cache = new ClientCache(this);
-            cacheGPSData = new ClientCacheGPSDaten(this);
-        }
-        public bool isAuthenticated()
-        {
-            return net.isAuthenticated();
         }
 
-        public bool isClearCache()
+        private static Client client = new Client();
+        private anrlEntities entities = new anrlEntities();
+        private t_CompetitionSet CompetitionSet = null;
+
+        public static Client getClient()
         {
-            return net.getClearCache();
+            return client;
+        }
+        public t_Picture gett_Picture(int ID)
+        {
+            return entities.t_Picture.First(p=>p.ID==ID);
         }
 
-        internal string getServerCompetitionSetIdentifier()
+        public int savePicture(t_Picture t_Picture)
         {
-            return net.getServerCompetitionSetIdentifier();
+            var iD = entities.t_Picture.Add(t_Picture).ID;
+            entities.SaveChanges();
+            return iD;
         }
-
-        public Root process(Root r)
+        public List<t_Map> getMaps()
         {
-            return net.process(r);
+            return entities.t_Map.ToList();
         }
-
-        public bool IsInitialLoadComplete()
+        public t_Map getMap(int ID)
         {
-            return cache.initialLoadComplete();
+            return entities.t_Map.First(p => p.ID == ID);
         }
-        
-        public Picture getPicture(int ID)
+        public List<t_Parcour> getParcours()
         {
-            return cache.cachePicture.get(ID);
-        }
-        public int savePicture(Picture picture)
-        {
-            return cache.cachePicture.add(picture);
-        }
-        public List<NetworkObjects.Map> getMaps()
-        {
-            return cache.cacheMap.getAll();
-        }
-        public NetworkObjects.Map getMap(int ID)
-        {
-            return cache.cacheMap.get(ID);
-        }
-        public List<NetworkObjects.Parcour> getParcours()
-        {
-            return cache.cacheParcour.getAll();
+            return entities.t_Parcour.ToList();
         }
         public void deleteMap(int ID)
         {
-            cache.cacheMap.delete(ID);
+            entities.t_Map.Remove(entities.t_Map.First(p => p.ID == ID));
+            entities.SaveChanges();
         }
+
+        internal List<t_CompetitionSet> GetCompetitionSets()
+        {
+            return entities.t_CompetitionSet.ToList();
+        }
+
         public void deleteParcour(int ID)
         {
-            cache.cacheParcour.delete(ID);
+            entities.t_Parcour.Remove(entities.t_Parcour.First(p => p.ID == ID));
+            entities.SaveChanges();
         }
-        public int saveMap(NetworkObjects.Map m)
+        public int saveMap(t_Map map)
         {
-            return cache.cacheMap.add(m);
+            var iD = entities.t_Map.Add(map).ID;
+            entities.SaveChanges();
+            return iD;
         }
-        public int saveParcour(Parcour p)
+        public int saveParcour(t_Parcour p)
         {
-            return cache.cacheParcour.add(p);
+            var iD = entities.t_Parcour.Add(p).ID;
+            entities.SaveChanges();
+            return iD;
+        }
+        public List<t_Tracker> getTrackers()
+        {
+            return entities.t_Tracker.ToList();
         }
 
-        public List<NetworkObjects.Tracker> getTrackers()
+        public int saveTracker(t_Tracker t)
         {
-            return cache.cacheTracker.getAll();
-        }
-
-        public int saveTracker(NetworkObjects.Tracker t)
-        {
-            return cache.cacheTracker.add(t);
+            var iD = entities.t_Tracker.Add(t).ID;
+            entities.SaveChanges();
+            return iD;
         }
         public void deletePilot(int ID)
         {
-            cache.cachePilot.delete(ID);
+            entities.t_Pilot.Remove(entities.t_Pilot.First(p => p.ID == ID));
+            entities.SaveChanges();
         }
-        public List<NetworkObjects.Pilot> getPilots()
+        public List<t_Pilot> getPilots()
         {
-            return cache.cachePilot.getAll();
+            return entities.t_Pilot.ToList();
         }
-        public int savePilot(NetworkObjects.Pilot p)
+        public int savePilot(t_Pilot p)
         {
-            return cache.cachePilot.add(p);
+            var iD = entities.t_Pilot.Add(p).ID;
+            entities.SaveChanges();
+            return iD;
         }
-        public CompetitionSet getCompetitionSet()
+        public t_CompetitionSet getSelectedCompetitionSet()
         {
-            return net.getCompetitionSet();
+            return CompetitionSet;
         }
-        internal List<NetworkObjects.Team> getTeams()
+        public void UseCompetition(t_CompetitionSet set)
         {
-            return cache.cacheTeam.getAll();
+            CompetitionSet = set;
+            Status.SetStatus("Competition selected, Ready to go!");
         }
-
-        internal NetworkObjects.Pilot getPilot(int ID)
+        internal List<t_Team> getTeams()
         {
-            return cache.cachePilot.get(ID);
-        }
-
-        internal int saveTeam(NetworkObjects.Team team)
-        {
-            return cache.cacheTeam.add(team);
+            return entities.t_Team.ToList();
         }
 
-        internal NetworkObjects.Team getTeam(int ID)
+        internal t_CompetitionSet CreateCompetitionSet(string text)
         {
-            return cache.cacheTeam.get(ID);
+            t_CompetitionSet result = new t_CompetitionSet();
+            result.Name = text;
+            entities.t_CompetitionSet.Add(result);
+            entities.SaveChanges();
+            return result;
         }
 
-        internal int saveCompetition(NetworkObjects.Competition competition)
+        internal t_Pilot getPilot(int ID)
         {
-            int id = cache.cacheCompetition.add(competition);
-            cache.cacheCompetition.update(false);
-            return id;
+            return entities.t_Pilot.First(p => p.ID == ID);
         }
 
-        internal List<NetworkObjects.Competition> getCompetitions()
+        internal int saveTeam(t_Team team)
         {
-            return cache.cacheCompetition.getAll();
+            var iD = entities.t_Team.Add(team).ID;
+            entities.SaveChanges();
+            return iD;
+        }
+
+        internal t_Team getTeam(int ID)
+        {
+            return entities.t_Team.First(p => p.ID == ID);
+        }
+
+        internal int saveCompetition(t_Competition competition)
+        {
+            var iD = entities.t_Competition.Add(competition).ID;
+            entities.SaveChanges();
+            return iD;
+        }
+
+        internal List<t_Competition> getCompetitions()
+        {
+            return entities.t_Competition.ToList();
         }
 
         internal void deleteCompetition(int ID)
         {
-            cache.cacheCompetition.delete(ID);
+            entities.t_Competition.Remove(entities.t_Competition.First(p => p.ID == ID));
+            entities.SaveChanges();
         }
 
-        /// <summary>
-        /// Returns TrackerID
-        /// </summary>
-        /// <param name="list"></param>
-        /// <returns></returns>
-        internal int uploadGPSData(List<GPSData> list)
+        internal t_Parcour getParcour(int ID)
         {
-            Root r = new Root();
-            r.ObjectType = (int) NetworkObjects.EObjectType.GPSData;
-            r.RequestType = (int)ERequestType.Upload;
-            r.RequestParameters = new RequestParameters();
-            r.RequestParameters.GPSDataList.AddRange(list);
-            return process(r).ResponseParameters.ID;
+            return entities.t_Parcour.First(p => p.ID == ID);
         }
 
-        internal void clearCache()
+        internal int savePenalty(t_Penalty penalty)
         {
-            cache.clear();
+            var iD = entities.t_Penalty.Add(penalty).ID;
+            entities.SaveChanges();
+            return iD;
         }
-        internal ClientCacheGPSDaten getGPSDatenCache()
+        internal List<t_Penalty> getPenalties()
         {
-            return cacheGPSData;
-        }
-
-        internal NetworkObjects.Parcour getParcour(int p)
-        {
-            return cache.cacheParcour.get(p);
-        }
-
-        internal void savePenalty(Penalty penalty)
-        {
-            cache.cachePenalty.add(penalty);
-        }
-        internal List<Penalty> getPenalties()
-        {
-            return cache.cachePenalty.getAll();
+            return entities.t_Penalty.ToList();
         }
         internal void deletePenalty(int ID)
         {
-            cache.cachePenalty.delete(ID);
+            entities.t_Penalty.Remove(entities.t_Penalty.First(p => p.ID == ID));
+            entities.SaveChanges();
         }
 
-        internal NetworkObjects.Tracker getTracker(int ID_Tracker)
+        internal t_Tracker getTracker(int ID)
         {
-            return cache.cacheTracker.get(ID_Tracker);
+            return entities.t_Tracker.First(p => p.ID == ID);
+        }
+
+        internal void deleteCompetitionSet(t_CompetitionSet cs)
+        {
+            entities.t_CompetitionSet.Remove(cs);
+            entities.SaveChanges();
+        }
+
+        internal int uploadGPSData(List<t_GPSPoint> subList)
+        {
+            int trackerid = 0;
+            foreach(t_GPSPoint p in subList)
+            {
+                t_Tracker tracker=  entities.t_Tracker.First(t => t.Name == p.identifier);
+                if (tracker== null)
+                {
+                    tracker = new t_Tracker();
+                    tracker.Name = p.identifier;
+                    saveTracker(tracker);
+                    p.t_Tracker = tracker;
+                }
+                entities.t_GPSPoint.Add(p);
+                trackerid = tracker.ID;
+            }
+            entities.SaveChanges();
+            return trackerid;
         }
     }
 }

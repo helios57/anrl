@@ -13,15 +13,15 @@ namespace AirNavigationRaceLive.Dialogs
 {
     public partial class RankForm : Form
     {
-        private List<NetworkObjects.Penalty> rankinEntries;
-        private List<NetworkObjects.CompetitionTeam> teams;
+        private List<t_Penalty> rankinEntries;
+        private List<t_Competition_Team> teams;
         private Client c;
 
         public RankForm()
         {
             InitializeComponent();
         }
-        public void SetData(List<NetworkObjects.Penalty> rankinEntries, List<NetworkObjects.CompetitionTeam> teams, Client c)
+        public void SetData(List<t_Penalty> rankinEntries, List<t_Competition_Team> teams, Client c)
         {
             this.c = c;
             this.rankinEntries = rankinEntries;
@@ -31,13 +31,13 @@ namespace AirNavigationRaceLive.Dialogs
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (c != null && c.isAuthenticated() && rankinEntries != null && teams != null)
+            if (c != null && rankinEntries != null && teams != null)
             {
                 List<RankedTeam> rankedTeams = new List<RankedTeam>();
-                foreach (NetworkObjects.CompetitionTeam t in teams)
+                foreach (t_Competition_Team t in teams)
                 {
                     int sum = 0;
-                    foreach (NetworkObjects.Penalty p in rankinEntries.Where(p => p.ID_Competition_Team == t.ID))
+                    foreach (t_Penalty p in rankinEntries.Where(p => p.ID_Competition_Team == t.ID))
                     {
                         sum += p.Points;
                     }
@@ -83,14 +83,14 @@ namespace AirNavigationRaceLive.Dialogs
 
         private string getTeamDsc(int ID_Team)
         {
-            NetworkObjects.Team team = c.getTeam(ID_Team);
-            NetworkObjects.Pilot pilot = c.getPilot(team.ID_Pilot);
+            t_Team team = c.getTeam(ID_Team);
+            t_Pilot pilot = c.getPilot(team.ID_Pilot);
             StringBuilder sb = new StringBuilder();
-            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
-            if (team.ID_Navigator > 0)
+            sb.Append(pilot.LastName).Append(" ").Append(pilot.SureName);
+            if (team.ID_Navigator.HasValue)
             {
-                NetworkObjects.Pilot navi = c.getPilot(team.ID_Navigator);
-                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+                t_Pilot navi = c.getPilot(team.ID_Navigator.Value);
+                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.SureName);
             }
             return sb.ToString();
         }
@@ -127,10 +127,10 @@ namespace AirNavigationRaceLive.Dialogs
     }
     class RankedTeam:IComparable<RankedTeam>
     {
-        public NetworkObjects.CompetitionTeam t;
+        public t_Competition_Team t;
         public int points;
-        public NetworkObjects.Team team;
-        public RankedTeam(NetworkObjects.CompetitionTeam t,NetworkObjects.Team team, int points)
+        public t_Team team;
+        public RankedTeam(t_Competition_Team t,t_Team team, int points)
         {
             this.t = t;
             this.team = team;

@@ -36,12 +36,12 @@
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
+            this.PictureBox1 = new AirNavigationRaceLive.Comps.VisualisationPictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -104,7 +104,7 @@
             // panel6
             // 
             this.panel6.AutoScroll = true;
-            this.panel6.Controls.Add(this.pictureBox1);
+            this.panel6.Controls.Add(this.PictureBox1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(203, 3);
             this.panel6.Name = "panel6";
@@ -112,16 +112,16 @@
             this.panel6.Size = new System.Drawing.Size(904, 574);
             this.panel6.TabIndex = 3;
             // 
-            // pictureBox1
+            // PictureBox1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(904, 574);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
+            this.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(904, 574);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox1.TabIndex = 1;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.Resize += new System.EventHandler(this.PictureBox1_Resize);
             // 
             // ParcourOverviewZoomed
             // 
@@ -136,7 +136,7 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -146,7 +146,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel6;
-        private VisualisationPictureBox pictureBox1;
+        private VisualisationPictureBox PictureBox1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;

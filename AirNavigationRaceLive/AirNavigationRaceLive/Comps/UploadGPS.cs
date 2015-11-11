@@ -52,9 +52,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateTrackerList()
         {
-            List<NetworkObjects.Tracker> trackers = Client.getTrackers();
+            List<t_Tracker> trackers = Client.getTrackers();
             listViewTracker.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers)
+            foreach (t_Tracker t in trackers)
             {
                 listViewTracker.Items.Add(new TrackerEntry(t));
             }
@@ -89,15 +89,15 @@ namespace AirNavigationRaceLive.Comps
 
         partial class TrackerEntry : ListViewItem
         {
-            private NetworkObjects.Tracker Tracker;
+            private t_Tracker Tracker;
 
-            public TrackerEntry(NetworkObjects.Tracker iTracker)
+            public TrackerEntry(t_Tracker iTracker)
                 : base(new String[] { iTracker.ID.ToString().Trim(), iTracker.Name != null ? iTracker.Name.Trim() : "", iTracker.IMEI.Trim() })
             {
                 Tracker = iTracker;
             }
 
-            public NetworkObjects.Tracker getTracker()
+            public t_Tracker getTracker()
             {
                 return Tracker;
             }
@@ -121,7 +121,7 @@ namespace AirNavigationRaceLive.Comps
             try
             {
                 DateTime dt = dateGAC.Value;
-                List<GPSData> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, textBoxIMEI.Text, ofd.FileName);
+                List<t_GPSPoint> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, textBoxIMEI.Text, ofd.FileName);
                 textBoxPositions.Text = list.Count.ToString();
                 textBoxPositions.Tag = list;
             }
@@ -137,10 +137,10 @@ namespace AirNavigationRaceLive.Comps
         {
             if (textBoxPositions.Tag != null)
             {
-                List<GPSData> list = textBoxPositions.Tag as List<GPSData>;
+                List<t_GPSPoint> list = textBoxPositions.Tag as List<t_GPSPoint>;
                 string trackername = textBoxName.Text;
 
-                list[0].trackerName = trackername;
+                list[0].identifier = trackername;
                 Thread thread = new Thread(new ParameterizedThreadStart(upload));
                 thread.Start(list);
                 //upload(list);
@@ -152,24 +152,24 @@ namespace AirNavigationRaceLive.Comps
 
         private void upload(object o)
         {
-            List<GPSData> list = o as List<GPSData>;
+            List<t_GPSPoint> list = o as List<t_GPSPoint>;
             int count = 0;
             int length = list.Count;
-            List<GPSData> subList = null;
+            List<t_GPSPoint> subList = null;
             while (count < length)
             {
                 if (count % 1000 == 0)
                 {
                     if (subList == null)
                     {
-                        subList = new List<GPSData>();
+                        subList = new List<t_GPSPoint>();
                     }
                     else
                     {
-                        subList[0].trackerName = list[0].trackerName;
+                        subList[0].identifier = list[0].identifier;
                         Client.uploadGPSData(subList);
                         Application.DoEvents();
-                        subList = new List<GPSData>();
+                        subList = new List<t_GPSPoint>();
                     }
                 }
                 subList.Add(list[count++]);
@@ -177,7 +177,7 @@ namespace AirNavigationRaceLive.Comps
             if (subList != null && subList.Count > 0)
             {
 
-                subList[0].trackerName = list[0].trackerName;
+                subList[0].identifier = list[0].identifier;
                 Client.uploadGPSData(subList);
             }
 
@@ -219,7 +219,7 @@ namespace AirNavigationRaceLive.Comps
             OpenFileDialog ofd = sender as OpenFileDialog;
             try
             {
-                List<GPSData> list = Importer.GPSdataFromGPX(textBoxIMEI.Text, ofd.FileName);
+                List<t_GPSPoint> list = Importer.GPSdataFromGPX(textBoxIMEI.Text, ofd.FileName);
                 textBoxPositions.Text = list.Count.ToString();
                 textBoxPositions.Tag = list;
             }

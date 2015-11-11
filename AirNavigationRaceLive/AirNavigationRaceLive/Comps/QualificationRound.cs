@@ -28,7 +28,7 @@ namespace AirNavigationRaceLive.Comps
                 comboBoxRoute.Items.Add(new ComboRoute(r));
             }
             comboBoxRoute.SelectedIndex = 0;
-            lblTitel.Text = lblTitel.Text + iClient.getCompetitionSet().Name;
+            lblTitel.Text = lblTitel.Text + iClient.getSelectedCompetitionSet().Name;
 
         }
 
@@ -40,9 +40,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void LoadCompetition()
         {
-            List<NetworkObjects.Competition> comps = Client.getCompetitions();
+            List<t_Competition> comps = Client.getCompetitions();
             listViewCompetition.Items.Clear();
-            foreach (NetworkObjects.Competition c in comps)
+            foreach (t_Competition c in comps)
             {
                 ListViewItem lvi = new ListViewItem(new String[] { c.ID.ToString(), c.Name });
                 lvi.Tag = c;
@@ -52,15 +52,15 @@ namespace AirNavigationRaceLive.Comps
         }
         private void LoadTeams()
         {
-            List<NetworkObjects.Team> teams = Client.getTeams();
+            List<t_Team> teams = Client.getTeams();
             comboBoxTeam.Items.Clear();
-            foreach (NetworkObjects.Team t in teams)
+            foreach (t_Team t in teams)
             {
                 comboBoxTeam.Items.Add(new ComboTeam(t, getTeamDsc(t.ID)));
             }
-            List<NetworkObjects.Tracker> trackers = Client.getTrackers();
+            List<t_Tracker> trackers = Client.getTrackers();
             listViewTrackers.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers)
+            foreach (t_Tracker t in trackers)
             {
                 ListViewItem lvi = new ListViewItem(new string[] { t.ID.ToString(), t.Name, t.IMEI });
                 lvi.Tag = t;
@@ -75,14 +75,16 @@ namespace AirNavigationRaceLive.Comps
         }
         private void LoadParcours()
         {
-            List<NetworkObjects.Parcour> parcour = Client.getParcours();
+            List<t_Parcour> parcour = Client.getParcours();
             parcours.Items.Clear();
-            foreach (NetworkObjects.Parcour c in parcour)
+            foreach (t_Parcour c in parcour)
             {
                 ComboParcour cp = new ComboParcour(c);
                 parcours.Items.Add(cp);
             }
-            parcours.SelectedIndex = 0;
+            if (parcours.Items.Count > 0) {
+                parcours.SelectedIndex = 0;
+            }
             UpdateEnablement();
         }
 
@@ -195,7 +197,7 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewCompetition.SelectedItems.Count == 1)
             {
-                NetworkObjects.Competition c = listViewCompetition.SelectedItems[0].Tag as NetworkObjects.Competition;
+                t_Competition c = listViewCompetition.SelectedItems[0].Tag as t_Competition;
                 Client.deleteCompetition(c.ID);
                 LoadCompetition();
             }
@@ -206,7 +208,7 @@ namespace AirNavigationRaceLive.Comps
             LoadParcours();
             Reset();
             textID.Text = "0";
-            textID.Tag = new NetworkObjects.Competition();
+            textID.Tag = new t_Competition();
             UpdateEnablement();
         }
 
@@ -214,12 +216,12 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewCompetitionTeam.SelectedItems.Count == 1)
             {
-                NetworkObjects.CompetitionTeam ct = listViewCompetitionTeam.SelectedItems[0].Tag as NetworkObjects.CompetitionTeam;
+                t_Competition_Team ct = listViewCompetitionTeam.SelectedItems[0].Tag as t_Competition_Team;
                 DateTime takeOff = new DateTime(ct.TimeTakeOff);
                 date.Value = takeOff;
                 timeTakeOff.Value = takeOff;
-                timeStart.Value = new DateTime(ct.TimeStartLine);
-                timeEnd.Value = new DateTime(ct.TimeEndLine);
+                timeStart.Value = new DateTime(ct.TimeStart);
+                timeEnd.Value = new DateTime(ct.TimeEnd);
                 textBoxStartId.Tag = ct;
                 textBoxStartId.Text = ct.StartID.ToString();
 
@@ -247,8 +249,8 @@ namespace AirNavigationRaceLive.Comps
                 comboBoxRoute.SelectedItem = route;
                 foreach (ListViewItem lvi in listViewTrackers.Items)
                 {
-                    NetworkObjects.Tracker tracker = lvi.Tag as NetworkObjects.Tracker;
-                    lvi.Checked = ct.ID_TrackerList.Contains(tracker.ID);
+                    t_Tracker tracker = lvi.Tag as t_Tracker;
+                    lvi.Checked = ct.t_Tracker.Any(p=>p.ID==tracker.ID);
                 }
             }
             UpdateEnablement();
@@ -259,7 +261,7 @@ namespace AirNavigationRaceLive.Comps
             UpdateEnablement();
             if (btnSave.Enabled)
             {
-                NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
+                t_Competition c = textID.Tag as t_Competition;
                 c.ID = int.Parse(textID.Text);
                 c.ID_Parcour = (parcours.SelectedItem as ComboParcour).p.ID;
                 c.Name = textName.Text;
@@ -268,15 +270,15 @@ namespace AirNavigationRaceLive.Comps
                 Vector start = new Vector(double.Parse(takeOffLeftLongitude.Text, NumberFormatInfo.InvariantInfo), double.Parse(takeOffLeftLatitude.Text, NumberFormatInfo.InvariantInfo), 0);
                 Vector end = new Vector(double.Parse(takeOffRightLongitude.Text, NumberFormatInfo.InvariantInfo), double.Parse(takeOffRightLatitude.Text, NumberFormatInfo.InvariantInfo), 0);
                 Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                NetworkObjects.Line line = new NetworkObjects.Line();
-                line.A = NetworkObjects.Helper.Point(start.X, start.Y, start.Z);
-                line.B = NetworkObjects.Helper.Point(end.X, end.Y, end.Z);
-                line.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                t_Line line = new t_Line();
+                line.A = Factory.newGPSPoint(start.X, start.Y, start.Z);
+                line.B = Factory.newGPSPoint(end.X, end.Y, end.Z);
+                line.O = Factory.newGPSPoint(o.X, o.Y, o.Z);
                 c.TakeOffLine = line;
 
                 /*foreach (ListViewItem lvi in listViewCompetitionTeam.Items)
                 {
-                    c.CompetitionTeamList.Add(lvi.Tag as NetworkObjects.CompetitionTeam);
+                    c.CompetitionTeamList.Add(lvi.Tag as t_Competition_Team);
                 }*/
                 Client.saveCompetition(c);
                 Reset();
@@ -327,7 +329,7 @@ namespace AirNavigationRaceLive.Comps
             if (listViewCompetition.SelectedItems.Count == 1)
             {
                 ListViewItem lvi = listViewCompetition.SelectedItems[0];
-                NetworkObjects.Competition c = lvi.Tag as NetworkObjects.Competition;
+                t_Competition c = lvi.Tag as t_Competition;
                 textID.Text = c.ID.ToString();
                 textID.Tag = c;
                 textName.Text = c.Name;
@@ -354,14 +356,15 @@ namespace AirNavigationRaceLive.Comps
             UpdateEnablement();
         }
 
-        private void updateList(NetworkObjects.Competition c)
+        private void updateList(t_Competition c)
         {
 
             listViewCompetitionTeam.Items.Clear();
-            c.CompetitionTeamList.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
-            foreach (NetworkObjects.CompetitionTeam ct in c.CompetitionTeamList)
+            List<t_Competition_Team> teams = new List<t_Competition_Team>(c.t_Competition_Team);
+            teams.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
+            foreach (t_Competition_Team ct in teams)
             {
-                ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(), getTeamCNumber(ct.ID_Team), getTeamAC(ct.ID_Team), getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
+                ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(), getTeamCNumber(ct.ID_Team), getTeamAC(ct.ID_Team), getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStart).ToShortTimeString(), new DateTime(ct.TimeEnd).ToShortTimeString(), getRouteText(ct.Route) });
                 lvi2.Tag = ct;
                 listViewCompetitionTeam.Items.Add(lvi2);
             }
@@ -377,14 +380,14 @@ namespace AirNavigationRaceLive.Comps
         }
         private string getTeamDsc(int ID_Team)
         {
-            NetworkObjects.Team team = Client.getTeam(ID_Team);
-            NetworkObjects.Pilot pilot = Client.getPilot(team.ID_Pilot);
+            t_Team team = Client.getTeam(ID_Team);
+            t_Pilot pilot = Client.getPilot(team.ID_Pilot);
             StringBuilder sb = new StringBuilder();
-            sb.Append(pilot.Name).Append(" ").Append(pilot.Surename);
-            if (team.ID_Navigator > 0)
+            sb.Append(pilot.LastName).Append(" ").Append(pilot.SureName);
+            if (team.ID_Navigator.HasValue)
             {
-                NetworkObjects.Pilot navi = Client.getPilot(team.ID_Navigator);
-                sb.Append(" - ").Append(navi.Name).Append(" ").Append(navi.Surename);
+                t_Pilot navi = Client.getPilot(team.ID_Navigator.Value);
+                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.SureName);
             }
             return sb.ToString();
         }
@@ -396,17 +399,17 @@ namespace AirNavigationRaceLive.Comps
         private void btnNewCompetitionTeam_Click(object sender, EventArgs e)
         {
             int starID = 1;
-            NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
-            if (c != null && c.CompetitionTeamList.Count > 0)
+            t_Competition c = textID.Tag as t_Competition;
+            if (c != null && c.t_Competition_Team.Count > 0)
             {
-                foreach (NetworkObjects.CompetitionTeam ct in c.CompetitionTeamList)
+                foreach (t_Competition_Team ct in c.t_Competition_Team)
                 {
                     starID = Math.Max(starID, ct.StartID) + 1;
                 }
             }
 
             textBoxStartId.Text = starID.ToString();
-            textBoxStartId.Tag = new NetworkObjects.CompetitionTeam();
+            textBoxStartId.Tag = new t_Competition_Team();
             if (comboBoxTeam.SelectedIndex == -1)
             {
                 comboBoxRoute.SelectedIndex = 0;
@@ -419,9 +422,13 @@ namespace AirNavigationRaceLive.Comps
         {
             if (listViewCompetitionTeam.SelectedItems.Count == 1 && listViewCompetition.SelectedItems.Count == 1)
             {
-                NetworkObjects.CompetitionTeam ct = listViewCompetitionTeam.SelectedItems[0].Tag as NetworkObjects.CompetitionTeam;
-                NetworkObjects.Competition c = listViewCompetition.SelectedItems[0].Tag as NetworkObjects.Competition;
-                c.CompetitionTeamList.RemoveAll(p => p == ct);
+                t_Competition_Team ct = listViewCompetitionTeam.SelectedItems[0].Tag as t_Competition_Team;
+                t_Competition c = listViewCompetition.SelectedItems[0].Tag as t_Competition;
+                List<t_Competition_Team> toDelete= c.t_Competition_Team.Where(p => p == ct).ToList();
+                foreach(t_Competition_Team t in toDelete)
+                {
+                    c.t_Competition_Team.Remove(t);
+                }
                 listViewCompetition_SelectedIndexChanged(null, null);
             }
             UpdateEnablement();
@@ -429,32 +436,36 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSaveCompetitionTeam_Click(object sender, EventArgs e)
         {
-            NetworkObjects.CompetitionTeam ct = textBoxStartId.Tag as NetworkObjects.CompetitionTeam;
-            NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
+            t_Competition_Team ct = textBoxStartId.Tag as t_Competition_Team;
+            t_Competition c = textID.Tag as t_Competition;
             if (c != null && ct != null)
             {
-                c.CompetitionTeamList.RemoveAll(p => p == ct);
+                List<t_Competition_Team> toDelete = c.t_Competition_Team.Where(p => p == ct).ToList();
+                foreach (t_Competition_Team t in toDelete)
+                {
+                    c.t_Competition_Team.Remove(t);
+                }
                 ct.StartID = Int32.Parse(textBoxStartId.Text);
                 DateTime TakeOff = mergeDateTime(timeTakeOff.Value, date.Value);
                 DateTime Start = mergeDateTime(timeStart.Value, date.Value);
                 DateTime End = mergeDateTime(timeEnd.Value, date.Value);
                 ct.TimeTakeOff = TakeOff.Ticks;
-                ct.TimeStartLine = Start.Ticks;
-                ct.TimeEndLine = End.Ticks;
+                ct.TimeStart = Start.Ticks;
+                ct.TimeEnd = End.Ticks;
                 ComboTeam comboTeam = comboBoxTeam.SelectedItem as ComboTeam;
                 ct.ID_Team = comboTeam.p.ID;
                 ComboRoute route = comboBoxRoute.SelectedItem as ComboRoute;
                 ct.Route = (int)(route.p);
-                ct.ID_TrackerList.Clear();
+                ct.t_Tracker.Clear();
                 foreach (ListViewItem lvi in listViewTrackers.Items)
                 {
                     if (lvi.Checked)
                     {
-                        NetworkObjects.Tracker tracker = lvi.Tag as NetworkObjects.Tracker;
-                        ct.ID_TrackerList.Add(tracker.ID);
+                        t_Tracker tracker = lvi.Tag as t_Tracker;
+                        ct.t_Tracker.Add(tracker);
                     }
                 }
-                c.CompetitionTeamList.Add(ct);
+                c.t_Competition_Team.Add(ct);
 
                 updateList(c);
                 
@@ -483,7 +494,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExportToPDF_Click(object sender, EventArgs e)
         {
-            NetworkObjects.Competition c = textID.Tag as NetworkObjects.Competition;
+            t_Competition c = textID.Tag as t_Competition;
             if (c != null)
             {
             String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
@@ -528,8 +539,8 @@ namespace AirNavigationRaceLive.Comps
     }
     class ComboParcour
     {
-        public NetworkObjects.Parcour p;
-        public ComboParcour(NetworkObjects.Parcour p)
+        public t_Parcour p;
+        public ComboParcour(t_Parcour p)
         {
             this.p = p;
         }
@@ -541,9 +552,9 @@ namespace AirNavigationRaceLive.Comps
     }
     class ComboTeam
     {
-        public NetworkObjects.Team p;
+        public t_Team p;
         private String toString;
-        public ComboTeam(NetworkObjects.Team p, String toString)
+        public ComboTeam(t_Team p, String toString)
         {
             this.p = p;
             this.toString = toString;

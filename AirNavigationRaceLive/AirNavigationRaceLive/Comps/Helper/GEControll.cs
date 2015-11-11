@@ -16,7 +16,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         private int HeightPenalty = 300;
         private int LineWidth = 2;
 
-        private static double averageLongitude(List<NetworkObjects.Line> lines)
+        private static double averageLongitude(ICollection<t_Line> lines)
         {
             if (lines.Count == 0)
             {
@@ -24,7 +24,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             double sum = 0;
             int counter = 0;
-            foreach (Line l in lines)
+            foreach (t_Line l in lines)
             {
                 sum += l.A.longitude;
                 counter++;
@@ -32,7 +32,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             return sum / counter;
         }
-        private static double averageLatitude(List<NetworkObjects.Line> lines)
+        private static double averageLatitude(ICollection<t_Line> lines)
         {
             if (lines.Count == 0)
             {
@@ -40,7 +40,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             double sum = 0;
             int counter = 0;
-            foreach (Line l in lines)
+            foreach (t_Line l in lines)
             {
                 sum += l.A.latitude;
                 counter++;
@@ -49,7 +49,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             return sum / counter;
         }
 
-        public void SetParcour(NetworkObjects.Parcour parcour)
+        public void SetParcour(t_Parcour parcour)
         {
             try
             {
@@ -57,14 +57,14 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     Container.replaceChild(plugin.parseKml(GetPolygonKml(parcour)), Container.getLastChild());
                     dynamic lookAt = plugin.createLookAt("");
-                    lookAt.set(averageLatitude(parcour.LineList), averageLongitude(parcour.LineList), 15000, plugin.ALTITUDE_RELATIVE_TO_GROUND, 0, 0, 10000);
+                    lookAt.set(averageLatitude(parcour.t_Line), averageLongitude(parcour.t_Line), 15000, plugin.ALTITUDE_RELATIVE_TO_GROUND, 0, 0, 10000);
                     plugin.getView().setAbstractView(lookAt);
                 }
             }
             catch { }
         }
 
-        public void SetDaten(List<NetworkObjects.GPSData> gpsDatenListe, List<NetworkObjects.Team> teams,List<NetworkObjects.CompetitionTeam> CompetitionTeams)
+        public void SetDaten(List<t_GPSPoint> gpsDatenListe, List<t_Team> teams,List<t_Competition_Team> CompetitionTeams)
         {
             try
             {
@@ -81,8 +81,8 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             this.plugin = plugin;
             Container = plugin.getFeatures();
-            Container.appendChild(plugin.parseKml(GetKml(new List<GPSData>(), new List<NetworkObjects.Team>(), new List<NetworkObjects.CompetitionTeam>())));
-            Container.appendChild(plugin.parseKml(GetPolygonKml(new NetworkObjects.Parcour())));
+            Container.appendChild(plugin.parseKml(GetKml(new List<t_GPSPoint>(), new List<t_Team>(), new List<t_Competition_Team>())));
+            Container.appendChild(plugin.parseKml(GetPolygonKml(new t_Parcour())));
         }
 
         public void SetTrackerHeightAdjustment(int i)
@@ -103,16 +103,16 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// Generates a KML-File with alle needed Points and Lines to be displayed on the Gui
         /// </summary>
         /// <returns>KML as String</returns>
-        private string GetKml(List<GPSData> gpsList, List<NetworkObjects.Team> teams,List<NetworkObjects.CompetitionTeam> competitionTeams)
+        private string GetKml(List<t_GPSPoint> gpsList, List<t_Team> teams,List<t_Competition_Team> competitionTeams)
         {
             string result = "";
             List<Tracker> TrackList = new List<Tracker>();
 
-            foreach (NetworkObjects.CompetitionTeam Team in competitionTeams)
+            foreach (t_Competition_Team Team in competitionTeams)
             {
                 Tracker t = new Tracker(Team.ID);
                 t.Color = Color.FromName(teams.First(p=>p.ID == Team.ID_Team).Color);
-                foreach (GPSData data in gpsList.Where(p => Team.ID_TrackerList.Contains(p.trackerID)))
+                foreach (t_GPSPoint data in gpsList.Where(p => p.t_Tracker != null && Team.t_Tracker.Any(i=>i.ID==p.t_Tracker.ID)))
                 {
                     t.Pointlist.Add(new Points((decimal)data.longitude, (decimal)data.latitude, (decimal)data.altitude));
                 }
@@ -153,12 +153,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             return result;
         }
 
-        private string GetPolygonKml(NetworkObjects.Parcour parcour)
+        private string GetPolygonKml(t_Parcour parcour)
         {
             String result = "";
             result += GetKMLTemplateContent("headerPolygon");
             int i = 0;
-            foreach (Line n in parcour.LineList.Where(p => p.Type == (int)LineType.PENALTYZONE))
+            foreach (t_Line n in parcour.t_Line.Where(p => p.Type == (int)LineType.PENALTYZONE))
             {
                 result += @"<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
@@ -167,7 +167,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
-            foreach (Line n in parcour.LineList.Where(p => p.Type >= 3 && p.Type <= 10))
+            foreach (t_Line n in parcour.t_Line.Where(p => p.Type >= 3 && p.Type <= 10))
             {
                 result += @"<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 result += n.B.longitude + "," + n.B.latitude + "," + HeightPenalty + " ";

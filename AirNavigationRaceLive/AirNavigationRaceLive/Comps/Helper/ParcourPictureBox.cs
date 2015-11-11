@@ -12,17 +12,17 @@ namespace AirNavigationRaceLive.Comps
 {
     public class ParcourPictureBox : PictureBox
     {
-        private NetworkObjects.Parcour Parcour;
+        private t_Parcour Parcour;
         private Converter c;
-        private Line selectedLine;
-        private Line hoverLine;
+        private t_Line selectedLine;
+        private t_Line hoverLine;
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
         private SolidBrush Brush = new SolidBrush(Color.FromArgb(40, 255, 0, 0));
         private volatile bool pdf = false;
 
-        public void SetParcour(NetworkObjects.Parcour iParcour)
+        public void SetParcour(t_Parcour iParcour)
         {
             Parcour = iParcour;
         }
@@ -30,11 +30,11 @@ namespace AirNavigationRaceLive.Comps
         {
             c = iConverter;
         }
-        public void SetSelectedLine(Line iLine)
+        public void SetSelectedLine(t_Line iLine)
         {
             selectedLine = iLine;
         }
-        public void SetHoverLine(Line iLine)
+        public void SetHoverLine(t_Line iLine)
         {
             hoverLine = iLine;
         }
@@ -45,9 +45,9 @@ namespace AirNavigationRaceLive.Comps
             {
                 lock (Parcour)
                 {
-                    List<Line> lines = Parcour.LineList;
-                    List<Line> linespenalty = lines.Where(p => p.Type == (int)NetworkObjects.LineType.PENALTYZONE).ToList();
-                    foreach (Line l in linespenalty)
+                    ICollection<t_Line> lines = Parcour.t_Line;
+                    List<t_Line> linespenalty = lines.Where(p => p.Type == (int)LineType.PENALTYZONE).ToList();
+                    foreach (t_Line l in linespenalty)
                     {
                         int startXp = c.getStartX(l);
                         int startYp = c.getStartY(l);
@@ -64,7 +64,7 @@ namespace AirNavigationRaceLive.Comps
                             //TODO
                         }
                     }
-                    foreach (Line l in lines)
+                    foreach (t_Line l in lines)
                     {
                         if (l.A != null && l.B != null & l.O != null)
                         {
@@ -81,7 +81,7 @@ namespace AirNavigationRaceLive.Comps
                             float radius = (float)Vector.Abs(midv - start);
                             try
                             {
-                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE)
+                                if (l.Type != (int)LineType.PENALTYZONE)
                                 {
                                     //Start_X/End_X
                                     if (((int)l.Type) >= 3 && ((int)l.Type) <= 10 && !pdf)

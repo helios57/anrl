@@ -62,7 +62,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
+            this.PictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
             this.btnExport100k = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -76,7 +76,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLongA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
             this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -421,7 +421,7 @@
             // panel6
             // 
             this.panel6.AutoScroll = true;
-            this.panel6.Controls.Add(this.pictureBox1);
+            this.panel6.Controls.Add(this.PictureBox1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(203, 3);
             this.panel6.Name = "panel6";
@@ -429,16 +429,16 @@
             this.panel6.Size = new System.Drawing.Size(904, 574);
             this.panel6.TabIndex = 3;
             // 
-            // pictureBox1
+            // PictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(500, 500);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_Click);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.PictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(500, 500);
+            this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.PictureBox1.TabIndex = 1;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_Click);
+            this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
             // 
             // btnExport100k
             // 
@@ -474,7 +474,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -489,7 +489,7 @@
         private System.Windows.Forms.TextBox fldCursorX;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel6;
-        private ParcourPictureBox pictureBox1;
+        private ParcourPictureBox PictureBox1;
         private System.Windows.Forms.TextBox fldLongitude;
         private System.Windows.Forms.TextBox fldLatitude;
         private System.Windows.Forms.Label label8;

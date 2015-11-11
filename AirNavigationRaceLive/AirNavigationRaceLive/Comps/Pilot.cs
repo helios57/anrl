@@ -32,11 +32,11 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateListe()
         {
-            List<NetworkObjects.Pilot> pilots =Client.getPilots();
+            List<t_Pilot> pilots =Client.getPilots();
             listViewPilots.Items.Clear();
-            foreach (NetworkObjects.Pilot p in pilots)
+            foreach (t_Pilot p in pilots)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.Name, p.Surename });
+                ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.LastName, p.SureName });
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
@@ -45,10 +45,10 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateEnablement()
         {
-            btnAddPicture.Enabled =((listViewPilots.SelectedItems.Count == 1) || newPilot);
-            textBoxLastname.Enabled = btnAddPicture.Enabled;
-            textBoxSurename.Enabled = btnAddPicture.Enabled;
-            btnSave.Enabled = btnAddPicture.Enabled && pictureBox.Image != null;
+            btnAddt_Picture.Enabled =((listViewPilots.SelectedItems.Count == 1) || newPilot);
+            textBoxLastname.Enabled = btnAddt_Picture.Enabled;
+            textBoxSurename.Enabled = btnAddt_Picture.Enabled;
+            btnSave.Enabled = btnAddt_Picture.Enabled && PictureBox.Image != null;
         }
 
         private void listViewPilots_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,21 +56,21 @@ namespace AirNavigationRaceLive.Comps
             if (listViewPilots.SelectedItems.Count == 1)
             {
                 ListViewItem lvi = listViewPilots.SelectedItems[0];
-                NetworkObjects.Pilot pilot = lvi.Tag as NetworkObjects.Pilot;
-                textBoxLastname.Text = pilot.Name;
-                textBoxSurename.Text = pilot.Surename;
+                t_Pilot pilot = lvi.Tag as t_Pilot;
+                textBoxLastname.Text = pilot.LastName;
+                textBoxSurename.Text = pilot.SureName;
                 selectedId = pilot.ID;
                 newPilot = false;
                 if (pilot.ID_Picture > 0)
                 {
-                    MemoryStream ms = new MemoryStream(Client.getPicture(pilot.ID_Picture).Image);
-                    pictureBox.Image = System.Drawing.Image.FromStream(ms);
-                    textBoxPictureId.Text = Client.getPicture(pilot.ID_Picture).ID.ToString(); 
+                    MemoryStream ms = new MemoryStream(pilot.t_Picture.Data);
+                    PictureBox.Image = System.Drawing.Image.FromStream(ms);
+                    textBoxt_PictureId.Text = pilot.t_Picture.ID.ToString(); 
                 }
                 else
                 {
-                    pictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
-                    textBoxPictureId.Text ="0";
+                    PictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
+                    textBoxt_PictureId.Text ="0";
                 }
             }
             else
@@ -100,29 +100,30 @@ namespace AirNavigationRaceLive.Comps
                 textBoxLastname.Text = "";
                 textBoxSurename.Text = "";
                 selectedId = 0;
-                pictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
-                textBoxPictureId.Text = "0"; 
+                PictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
+                textBoxt_PictureId.Text = "0"; 
                 UpdateEnablement();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             int id = selectedId;
-            int picId = Int32.Parse(textBoxPictureId.Text);
+            int picId = Int32.Parse(textBoxt_PictureId.Text);
             if (picId == -1)
             {
                 MemoryStream ms = new MemoryStream();
-                pictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                Picture picture = new Picture();
-                picture.Image = ms.ToArray();
-                picture.Name = textBoxLastname.Text + textBoxSurename.Text;
-                picId = Client.savePicture(picture);
+                PictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                t_Picture t_Picture = new t_Picture();
+                t_Picture.Data = ms.ToArray();
+                t_Picture.Name = textBoxLastname.Text + textBoxSurename.Text;
+                picId = Client.savePicture(t_Picture);
             }
-            NetworkObjects.Pilot pilot = new NetworkObjects.Pilot();
+            t_Pilot pilot = new t_Pilot();
             pilot.ID = id;
-            pilot.Name = textBoxLastname.Text;
-            pilot.Surename =  textBoxSurename.Text;
+            pilot.LastName = textBoxLastname.Text;
+            pilot.SureName =  textBoxSurename.Text;
             pilot.ID_Picture = picId;
+            pilot.t_CompetitionSet = Client.getSelectedCompetitionSet();
             Client.savePilot(pilot);
             newPilot = false;
             ResetFields();
@@ -132,7 +133,7 @@ namespace AirNavigationRaceLive.Comps
 
         
 
-        private void btnAddPicture_Click(object sender, EventArgs e)
+        private void btnAddt_Picture_Click(object sender, EventArgs e)
         {
             string FileFilter = "JPG Dateien (*.jpg, *.jpeg, *.jpe, *.jfif)|*.jpg;*.jpeg;*.jpe;*.jfif|" 
             + "Bitmap Dateien (*.bmp)|*.bmp|"
@@ -140,7 +141,7 @@ namespace AirNavigationRaceLive.Comps
             + "Png Dateien (*.png)|*.png";
             string GraphicFileFilter = "Alle Bilddateien|*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.gif;*.png";
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Picture";
+            ofd.Title = "t_Picture";
             ofd.RestoreDirectory = true;
             ofd.Multiselect = false;
             ofd.Filter = FileFilter + "|" + GraphicFileFilter;
@@ -152,8 +153,8 @@ namespace AirNavigationRaceLive.Comps
         void ofd_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
-            pictureBox.Image = Image.FromFile(ofd.FileName);
-            textBoxPictureId.Text = "-1";
+            PictureBox.Image = Image.FromFile(ofd.FileName);
+            textBoxt_PictureId.Text = "-1";
             UpdateEnablement();
         }
     }

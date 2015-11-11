@@ -12,16 +12,16 @@ namespace AirNavigationRaceLive.Comps
 {
     public class VisualisationPictureBox : PictureBox
     {
-        private NetworkObjects.Parcour Parcour;
+        private t_Parcour Parcour;
         private Converter c;
-        private List<GPSData> data;
-        private List<NetworkObjects.Team> teams;
-        private List<NetworkObjects.CompetitionTeam> competitionTeams;
+        private List<t_GPSPoint> data;
+        private List<t_Team> teams;
+        private List<t_Competition_Team> competitionTeams;
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
         private SolidBrush Brush = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
-        public void SetParcour(NetworkObjects.Parcour iParcour)
+        public void SetParcour(t_Parcour iParcour)
         {
             Parcour = iParcour;
         }
@@ -29,7 +29,7 @@ namespace AirNavigationRaceLive.Comps
         {
             c = iConverter;
         }
-        public void SetData(List<GPSData> data, List<NetworkObjects.Team> teams, List<NetworkObjects.CompetitionTeam> competitionTeams)
+        public void SetData(List<t_GPSPoint> data, List<t_Team> teams, List<t_Competition_Team> competitionTeams)
         {
             this.data = data;
             this.teams = teams;
@@ -77,9 +77,9 @@ namespace AirNavigationRaceLive.Comps
                 }
                 lock (Parcour)
                 {
-                    List<Line> lines = Parcour.LineList;
-                    List<Line> linespenalty = lines.Where(p => p.Type == (int)NetworkObjects.LineType.PENALTYZONE).ToList();
-                    foreach (Line l in linespenalty)
+                    ICollection<t_Line> lines = Parcour.t_Line;
+                    List<t_Line> linespenalty = lines.Where(p => p.Type == (int)LineType.PENALTYZONE).ToList();
+                    foreach (t_Line l in linespenalty)
                     {
                         int startXp = x0 + (int)(c.getStartX(l) * factor);
                         int startYp = y0 + (int)(c.getStartY(l) * factor);
@@ -96,7 +96,7 @@ namespace AirNavigationRaceLive.Comps
                             //TODO
                         }
                     }
-                    foreach (Line l in lines)
+                    foreach (t_Line l in lines)
                     {
                         if (l.A != null && l.B != null & l.O != null)
                         {
@@ -114,7 +114,7 @@ namespace AirNavigationRaceLive.Comps
                             float radius = (float)Vector.Abs(midv - start);
                             try
                             {
-                                if (l.Type != (int)NetworkObjects.LineType.PENALTYZONE && l.Type != (int)NetworkObjects.LineType.Point && l.Type != (int)NetworkObjects.LineType.LINEOFNORETURN)
+                                if (l.Type != (int)LineType.PENALTYZONE && l.Type != (int)LineType.Point && l.Type != (int)LineType.LINEOFNORETURN)
                                 {
                                     //Start_X/End_X
                                     if (((int)l.Type) >= 3 && ((int)l.Type) <= 10)
@@ -159,14 +159,14 @@ namespace AirNavigationRaceLive.Comps
                         x0 = (int)((Width - (Image.Width * factor)) / 2);
                     }
                 }
-                foreach (NetworkObjects.Team Team in teams)
+                foreach (t_Team Team in teams)
                 {
                     if (competitionTeams.Count(p => p.ID_Team == Team.ID) == 1)
                     {
-                        NetworkObjects.CompetitionTeam ct = competitionTeams.Single(p => p.ID_Team == Team.ID);
+                        t_Competition_Team ct = competitionTeams.Single(p => p.ID_Team == Team.ID);
                         Color Color = Color.FromName(Team.Color);
                         List<System.Drawing.Point> points = new List<System.Drawing.Point>();
-                        foreach (GPSData gd in data.Where(p => ct.ID_TrackerList.Contains(p.trackerID)))
+                        foreach (t_GPSPoint gd in data.Where(p => ct.t_Tracker.Contains(p.t_Tracker)))
                         {
                             int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
                             int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);

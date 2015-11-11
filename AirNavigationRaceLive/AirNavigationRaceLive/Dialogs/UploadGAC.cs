@@ -16,11 +16,11 @@ namespace AirNavigationRaceLive.Dialogs
     public partial class UploadGAC : Form
     {
         private Client Client;
-        private NetworkObjects.CompetitionTeam ct;
+        private t_Competition_Team ct;
         private String IMEI = "_GAC_IMPORT_" + DateTime.Now.Ticks;
 
         public EventHandler OnFinish;
-        public UploadGAC(Client Client, NetworkObjects.CompetitionTeam ct)
+        public UploadGAC(Client Client, t_Competition_Team ct)
         {
             this.Client = Client;
             this.ct = ct;
@@ -45,7 +45,7 @@ namespace AirNavigationRaceLive.Dialogs
             try
             {
                 DateTime dt = dateGAC.Value;
-                List<GPSData> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, IMEI, ofd.FileName);
+                List<t_GPSPoint> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, IMEI, ofd.FileName);
                 textBoxPositions.Text = list.Count.ToString();
                 textBoxPositions.Tag = list;
             }
@@ -64,8 +64,8 @@ namespace AirNavigationRaceLive.Dialogs
         {
             if (textBoxPositions.Tag != null)
             {
-                List<GPSData> list = textBoxPositions.Tag as List<GPSData>;
-                list[0].trackerName = IMEI;
+                List<t_GPSPoint> list = textBoxPositions.Tag as List<t_GPSPoint>;
+                list[0].identifier = IMEI;
                 Thread thread = new Thread(new ParameterizedThreadStart(upload));
                 thread.Start(list);
 
@@ -75,45 +75,48 @@ namespace AirNavigationRaceLive.Dialogs
         }
         private void upload(object o)
         {
-            CompetitionTeam ct = this.ct;
-            List<GPSData> list = o as List<GPSData>;
+            t_Competition_Team ct = this.ct;
+            List<t_GPSPoint> list = o as List<t_GPSPoint>;
             int count = 0;
             int length = list.Count;
-            List<GPSData> subList = null;
+            List<t_GPSPoint> subList = null;
             while (count < length)
             {
                 if (count % 1000 == 0)
                 {
                     if (subList == null)
                     {
-                        subList = new List<GPSData>();
+                        subList = new List<t_GPSPoint>();
                     }
                     else
                     {
-                        subList[0].trackerName = list[0].trackerName;
+                        subList[0].identifier = list[0].identifier;
                         Client.uploadGPSData(subList);
                         Application.DoEvents();
-                        subList = new List<GPSData>();
+                        subList = new List<t_GPSPoint>();
                     }
                 }
                 subList.Add(list[count++]);
             }
             if (subList != null && subList.Count > 0)
             {
-                subList[0].trackerName = list[0].trackerName;
+                subList[0].identifier = list[0].identifier;
                 int ID_Tracker = Client.uploadGPSData(subList);
-                NetworkObjects.Competition c = Client.getCompetitions().First(p => p.CompetitionTeamList.Count(pp => pp.ID == ct.ID) == 1);
+                t_Competition c = Client.getCompetitions().First(p => p.t_Competition_Team.Count(pp => pp.ID == ct.ID) == 1);
                 Client.getTracker(ID_Tracker);
-                List<int> toDelete = new List<int>();
-                foreach(int i in c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList)
+                List<t_Tracker> toDelete = new List<t_Tracker>();
+                foreach(t_Tracker i in c.t_Competition_Team.First(p => p.ID == ct.ID).t_Tracker)
                 {
-                    if (Client.getTracker(i).Name.StartsWith("_GAC_IMPORT_"))
+                    if (i.Name.StartsWith("_GAC_IMPORT_"))
                     {
                         toDelete.Add(i);
                     }
                 }
-                c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.RemoveAll(p => toDelete.Contains(p));
-                c.CompetitionTeamList.First(p => p.ID == ct.ID).ID_TrackerList.Add(ID_Tracker);
+                foreach(t_Tracker t in toDelete)
+                {
+                    c.t_Competition_Team.First(p => p.ID == ct.ID).t_Tracker.Remove(t);
+                    c.t_Competition_Team.First(p => p.ID == ct.ID).t_Tracker.Add(t);
+                }
                 Client.saveCompetition(c);
                 if (OnFinish != null)
                 {

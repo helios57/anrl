@@ -70,8 +70,11 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 bestLegLength = Converter.MtoNM(bestModel.lenght);
                 bestStraightLength = Converter.MtoNM(bestModel.straightLength);
-
-                parcour.LineList.RemoveAll(p => p.Type == (int)LineType.Point);
+                
+                foreach (t_Line line in parcour.t_Line.Where(p => p.Type == (int)LineType.Point))
+                {
+                    parcour.t_Line.Remove(line);
+                }
                 ParcourChannelSingle pc = bestModel.getChannel();
 
                 Vector last = null;
@@ -79,26 +82,29 @@ namespace AirNavigationRaceLive.Comps.Helper
                 {
                     if (last != null)
                     {
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         l.Type = (int)LineType.Point;
-                        l.A = NetworkObjects.Helper.Point(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
-                        l.B = NetworkObjects.Helper.Point(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
+                        l.A = Factory.newGPSPoint(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
+                        l.B = Factory.newGPSPoint(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
                         if (pc.ImmutablePoints.Contains(last))
                         {
                             l.A.edited = true;
                             l.B.edited = true;
                         }
-                        l.O = NetworkObjects.Helper.Point(c.XtoLongitude(v.X), c.YtoLatitude(v.Y), 0);
+                        l.O = Factory.newGPSPoint(c.XtoLongitude(v.X), c.YtoLatitude(v.Y), 0);
                         if (pc.ImmutablePoints.Contains(v))
                         {
                             l.O.edited = true;
                         }
-                        parcour.LineList.Add(l);
+                        parcour.t_Line.Add(l);
                     }
                     last = v;
                 }
-
-                parcour.LineList.RemoveAll(p => p.Type == (int)LineType.PENALTYZONE);
+                
+                foreach (t_Line line in parcour.t_Line.Where(p => p.Type == (int)LineType.PENALTYZONE))
+                {
+                    parcour.t_Line.Remove(line);
+                }
                 foreach (ParcourPolygon pg in bestModel.getPolygons())
                 {
                     Vector mid = new Vector(0, 0, 0);
@@ -111,12 +117,12 @@ namespace AirNavigationRaceLive.Comps.Helper
 
                     for (int i = 0; i < count; i++)
                     {
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         l.Type = (int)LineType.PENALTYZONE;
-                        l.A = NetworkObjects.Helper.Point(c.XtoLongitude(pg.getEdges()[i].X), c.YtoLatitude(pg.getEdges()[i].Y), 0);
-                        l.B = NetworkObjects.Helper.Point(c.XtoLongitude(pg.getEdges()[(i + 1) % count].X), c.YtoLatitude(pg.getEdges()[(i + 1) % count].Y), 0);
-                        l.O = NetworkObjects.Helper.Point(c.XtoLongitude(mid.X), c.YtoLatitude(mid.Y), 0);
-                        parcour.LineList.Add(l);
+                        l.A = Factory.newGPSPoint(c.XtoLongitude(pg.getEdges()[i].X), c.YtoLatitude(pg.getEdges()[i].Y), 0);
+                        l.B = Factory.newGPSPoint(c.XtoLongitude(pg.getEdges()[(i + 1) % count].X), c.YtoLatitude(pg.getEdges()[(i + 1) % count].Y), 0);
+                        l.O = Factory.newGPSPoint(c.XtoLongitude(mid.X), c.YtoLatitude(mid.Y), 0);
+                        parcour.t_Line.Add(l);
                     }
                 }
             }
@@ -131,7 +137,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             comparer = new ComparerSingle(c);
             this.regenerate = true;
             ParcourModelSingle pm;
-            if (parcour.LineList.Count > 2)
+            if (parcour.t_Line.Count > 2)
             {
                 pm = new ParcourModelSingle(parcour, c, channel, channelLength, true);
             }

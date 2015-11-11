@@ -32,17 +32,17 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBox5 = new System.Windows.Forms.PictureBox();
+            this.PictureBox4 = new System.Windows.Forms.PictureBox();
+            this.PictureBox3 = new System.Windows.Forms.PictureBox();
+            this.PictureBox2 = new System.Windows.Forms.PictureBox();
+            this.PictureBox1 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDonations
@@ -96,61 +96,61 @@
             this.label2.TabIndex = 53;
             this.label2.Text = "Luc@SharpSoft.ch";
             // 
-            // pictureBox5
+            // PictureBox5
             // 
-            this.pictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox5.Image = global::AirNavigationRaceLive.Properties.Resources.swiss_made_software_original;
-            this.pictureBox5.Location = new System.Drawing.Point(730, 139);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(179, 130);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 59;
-            this.pictureBox5.TabStop = false;
+            this.PictureBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PictureBox5.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PictureBox5.Image = global::AirNavigationRaceLive.Properties.Resources.swiss_made_software_original;
+            this.PictureBox5.Location = new System.Drawing.Point(730, 139);
+            this.PictureBox5.Name = "PictureBox5";
+            this.PictureBox5.Size = new System.Drawing.Size(179, 130);
+            this.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox5.TabIndex = 59;
+            this.PictureBox5.TabStop = false;
             // 
-            // pictureBox4
+            // PictureBox4
             // 
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox4.Image = global::AirNavigationRaceLive.Properties.Resources.FAI_GAC;
-            this.pictureBox4.Location = new System.Drawing.Point(58, 400);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(200, 118);
-            this.pictureBox4.TabIndex = 58;
-            this.pictureBox4.TabStop = false;
+            this.PictureBox4.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PictureBox4.Image = global::AirNavigationRaceLive.Properties.Resources.FAI_GAC;
+            this.PictureBox4.Location = new System.Drawing.Point(58, 400);
+            this.PictureBox4.Name = "PictureBox4";
+            this.PictureBox4.Size = new System.Drawing.Size(200, 118);
+            this.PictureBox4.TabIndex = 58;
+            this.PictureBox4.TabStop = false;
             // 
-            // pictureBox3
+            // PictureBox3
             // 
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox3.Image = global::AirNavigationRaceLive.Properties.Resources.ANR_LOGO;
-            this.pictureBox3.Location = new System.Drawing.Point(264, 400);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(181, 118);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 56;
-            this.pictureBox3.TabStop = false;
+            this.PictureBox3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PictureBox3.Image = global::AirNavigationRaceLive.Properties.Resources.ANR_LOGO;
+            this.PictureBox3.Location = new System.Drawing.Point(264, 400);
+            this.PictureBox3.Name = "PictureBox3";
+            this.PictureBox3.Size = new System.Drawing.Size(181, 118);
+            this.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox3.TabIndex = 56;
+            this.PictureBox3.TabStop = false;
             // 
-            // pictureBox2
+            // PictureBox2
             // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox2.Image = global::AirNavigationRaceLive.Properties.Resources.logoVS1;
-            this.pictureBox2.Location = new System.Drawing.Point(730, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(57, 47);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 54;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Visible = false;
+            this.PictureBox2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PictureBox2.Image = global::AirNavigationRaceLive.Properties.Resources.logoVS1;
+            this.PictureBox2.Location = new System.Drawing.Point(730, 3);
+            this.PictureBox2.Name = "PictureBox2";
+            this.PictureBox2.Size = new System.Drawing.Size(57, 47);
+            this.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox2.TabIndex = 54;
+            this.PictureBox2.TabStop = false;
+            this.PictureBox2.Visible = false;
             // 
-            // pictureBox1
+            // PictureBox1
             // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.pictureBox1.Image = global::AirNavigationRaceLive.Properties.Resources.Logo_05;
-            this.pictureBox1.Location = new System.Drawing.Point(58, 62);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(324, 130);
-            this.pictureBox1.TabIndex = 48;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.PictureBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.PictureBox1.Image = global::AirNavigationRaceLive.Properties.Resources.Logo_05;
+            this.PictureBox1.Location = new System.Drawing.Point(58, 62);
+            this.PictureBox1.Name = "PictureBox1";
+            this.PictureBox1.Size = new System.Drawing.Size(324, 130);
+            this.PictureBox1.TabIndex = 48;
+            this.PictureBox1.TabStop = false;
+            this.PictureBox1.Click += new System.EventHandler(this.PictureBox1_Click);
             // 
             // label5
             // 
@@ -168,22 +168,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.PictureBox5);
+            this.Controls.Add(this.PictureBox4);
+            this.Controls.Add(this.PictureBox3);
+            this.Controls.Add(this.PictureBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.btnDonations);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PictureBox1);
             this.Name = "Credits";
             this.Size = new System.Drawing.Size(912, 557);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,14 +192,14 @@
         #endregion
 
         private System.Windows.Forms.Button btnDonations;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.PictureBox PictureBox2;
+        private System.Windows.Forms.PictureBox PictureBox3;
+        private System.Windows.Forms.PictureBox PictureBox4;
+        private System.Windows.Forms.PictureBox PictureBox5;
         private System.Windows.Forms.Label label5;
     }
 }

@@ -22,12 +22,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             AirNavigationRaceLive.Comps.Model.Parcour result = new AirNavigationRaceLive.Comps.Model.Parcour();
 
             StreamReader sr = new StreamReader(filepath);
-            List<string> lineList = new List<string>();
+            List<string> t_Line = new List<string>();
             while (!sr.EndOfStream)
             {
-                lineList.Add(sr.ReadLine());
+                t_Line.Add(sr.ReadLine());
             }
-            string[] lines = lineList.ToArray();
+            string[] lines = t_Line.ToArray();
             for (int i = 1; i < lines.Length; i++) //Looping through Array, starting with 1 (lines[0] is "0")
             {
                 //Find Lines Containing a new Element Definition
@@ -67,16 +67,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     Vector o = new Vector(sumX / count, sumY / count, 0);
                                     for (int j = 0; j < list.Count; j++)
                                     {
-                                        Line l = new Line();
+                                        t_Line l = new t_Line();
                                         l.Type = (int)LineType.PENALTYZONE;
                                         int i_a = j % list.Count;
                                         int i_b = (j + 1) % list.Count;
                                         Vector a = list[i_a];
                                         Vector b = list[i_b];
-                                        l.A = NetworkObjects.Helper.Point(a.X, a.Y, a.Z);
-                                        l.B = NetworkObjects.Helper.Point(b.X, b.Y, b.Z);
-                                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
-                                        result.LineList.Add(l);
+                                        l.A = a.toGPSPoint();
+                                        l.B = b.toGPSPoint();
+                                        l.O = o.toGPSPoint();
+                                        result.t_Line.Add(l);
                                     }
                                 }
                             }
@@ -101,19 +101,23 @@ namespace AirNavigationRaceLive.Comps.Helper
                             catch { }
                         }
 
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         double Longitude1 = Converter.CHtoWGSlng(res[0] * 1000, res[1] * 1000);
                         double Latitude1 = Converter.CHtoWGSlat(res[0] * 1000, res[1] * 1000);
-                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                        l.A = new t_GPSPoint();
+                        l.A.longitude = Longitude1;
+                        l.A.latitude = Latitude1;
 
                         double Longitude2 = Converter.CHtoWGSlng(res[2] * 1000, res[3] * 1000);
                         double Latitude2 = Converter.CHtoWGSlat(res[2] * 1000, res[3] * 1000);
-                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                        l.B = new t_GPSPoint();
+                        l.B.longitude = Longitude2;
+                        l.B.latitude = Latitude2;
 
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                        l.O = o.toGPSPoint();
 
                         string gatename = lines[i + 6].Substring(11, 1);
                         switch (gatename)
@@ -139,7 +143,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.LineList.Add(l);
+                        result.t_Line.Add(l);
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("ENDPOINT-"))
                     {
@@ -160,18 +164,23 @@ namespace AirNavigationRaceLive.Comps.Helper
                             catch { }
                         }
 
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         double Longitude1 = Converter.CHtoWGSlng(res[0] * 1000, res[1] * 1000);
                         double Latitude1 = Converter.CHtoWGSlat(res[0] * 1000, res[1] * 1000);
-                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                        l.A = new t_GPSPoint();
+                        l.A.longitude = Longitude1;
+                        l.A.latitude = Latitude1;
 
                         double Longitude2 = Converter.CHtoWGSlng(res[2] * 1000, res[3] * 1000);
                         double Latitude2 = Converter.CHtoWGSlat(res[2] * 1000, res[3] * 1000);
-                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                        l.B = new t_GPSPoint();
+                        l.B.longitude = Longitude2;
+                        l.B.latitude = Latitude2;
+
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                        l.O = o.toGPSPoint();
 
                         string gatename = lines[i + 6].Substring(9, 1);
                         switch (gatename)
@@ -197,7 +206,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.LineList.Add(l);
+                        result.t_Line.Add(l);
 
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
@@ -205,20 +214,26 @@ namespace AirNavigationRaceLive.Comps.Helper
                         if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
-                            Line l = new Line();
+                            t_Line l = new t_Line();
                             double Longitude1 = Converter.CHtoWGSlng(double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
                             double Latitude1 = Converter.CHtoWGSlat(double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
-                            l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                            l.A = new t_GPSPoint();
+                            l.A.longitude = Longitude1;
+                            l.A.latitude = Latitude1;
 
                             double Longitude2 = Converter.CHtoWGSlng(double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
                             double Latitude2 = Converter.CHtoWGSlat(double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo) * 1000, double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo) * 1000);
-                            l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                            l.B = new t_GPSPoint();
+                            l.B.longitude = Longitude2;
+                            l.B.latitude = Latitude2;
+
+
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
                             Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                            l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                            l.O = o.toGPSPoint();
                             l.Type = (int)LineType.LINEOFNORETURN;
-                            result.LineList.Add(l);
+                            result.t_Line.Add(l);
                         }
                     }
                 }
@@ -233,12 +248,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             AirNavigationRaceLive.Comps.Model.Parcour result = new AirNavigationRaceLive.Comps.Model.Parcour();
 
             StreamReader sr = new StreamReader(filepath);
-            List<string> lineList = new List<string>();
+            List<string> t_Line = new List<string>();
             while (!sr.EndOfStream)
             {
-                lineList.Add(sr.ReadLine());
+                t_Line.Add(sr.ReadLine());
             }
-            string[] lines = lineList.ToArray();
+            string[] lines = t_Line.ToArray();
             for (int i = 1; i < lines.Length; i++) //Looping through Array, starting with 1 (lines[0] is "0")
             {
                 //Find Lines Containing a new Element Definition
@@ -278,16 +293,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     Vector o = new Vector(sumX / count, sumY / count, 0);
                                     for (int j = 0; j < list.Count; j++)
                                     {
-                                        Line l = new Line();
+                                        t_Line l = new t_Line();
                                         l.Type = (int)LineType.PENALTYZONE;
                                         int i_a = j % list.Count;
                                         int i_b = (j + 1) % list.Count;
                                         Vector a = list[i_a];
                                         Vector b = list[i_b];
-                                        l.A = NetworkObjects.Helper.Point(a.X, a.Y, a.Z);
-                                        l.B = NetworkObjects.Helper.Point(b.X, b.Y, b.Z);
-                                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
-                                        result.LineList.Add(l);
+                                        l.A = a.toGPSPoint();
+                                        l.B = b.toGPSPoint();
+                                        l.O = o.toGPSPoint();
+                                        result.t_Line.Add(l);
                                     }
                                 }
                             }
@@ -312,19 +327,23 @@ namespace AirNavigationRaceLive.Comps.Helper
                             catch { }
                         }
 
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         double Longitude1 = res[1];
                         double Latitude1 = res[0];
-                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                        l.A = new t_GPSPoint();
+                        l.A.longitude = Longitude1;
+                        l.A.latitude = Latitude1;
 
                         double Longitude2 = res[3];
                         double Latitude2 = res[2];
-                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                        l.B = new t_GPSPoint();
+                        l.B.longitude = Longitude2;
+                        l.B.latitude = Latitude2;
 
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                        l.O = o.toGPSPoint();
 
                         string gatename = lines[i + 6].Substring(11, 1);
                         switch (gatename)
@@ -350,7 +369,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.LineList.Add(l);
+                        result.t_Line.Add(l);
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("ENDPOINT-"))
                     {
@@ -371,18 +390,23 @@ namespace AirNavigationRaceLive.Comps.Helper
                             catch { }
                         }
 
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         double Longitude1 = res[1];
                         double Latitude1 = res[0];
-                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                        l.A = new t_GPSPoint();
+                        l.A.longitude = Longitude1;
+                        l.A.latitude = Latitude1;
 
                         double Longitude2 = res[3];
                         double Latitude2 = res[2];
-                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                        l.B = new t_GPSPoint();
+                        l.B.longitude = Longitude2;
+                        l.B.latitude = Latitude2;
+
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                        l.O = o.toGPSPoint();
 
                         string gatename = lines[i + 6].Substring(9, 1);
                         switch (gatename)
@@ -408,7 +432,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.LineList.Add(l);
+                        result.t_Line.Add(l);
 
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
@@ -416,20 +440,25 @@ namespace AirNavigationRaceLive.Comps.Helper
                         if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
-                            Line l = new Line();
+                            t_Line l = new t_Line();
                             double Longitude1 = double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo);
                             double Latitude1 = double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo);
-                            l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                            l.A = new t_GPSPoint();
+                            l.A.longitude = Longitude1;
+                            l.A.latitude = Latitude1;
 
                             double Longitude2 = double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo);
                             double Latitude2 = double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo);
-                            l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                            l.B = new t_GPSPoint();
+                            l.B.longitude = Longitude2;
+                            l.B.latitude = Latitude2;
+
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
                             Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                            l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                            l.O = o.toGPSPoint();
                             l.Type = (int)LineType.LINEOFNORETURN;
-                            result.LineList.Add(l);
+                            result.t_Line.Add(l);
                         }
                     }
                 }
@@ -445,12 +474,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             AirNavigationRaceLive.Comps.Model.Parcour result = new AirNavigationRaceLive.Comps.Model.Parcour();
 
             StreamReader sr = new StreamReader(filepath);
-            List<string> lineList = new List<string>();
+            List<string> t_Line = new List<string>();
             while (!sr.EndOfStream)
             {
-                lineList.Add(sr.ReadLine());
+                t_Line.Add(sr.ReadLine());
             }
-            string[] lines = lineList.ToArray();
+            string[] lines = t_Line.ToArray();
             for (int i = 1; i < lines.Length; i++) //Looping through Array, starting with 1 (lines[0] is "0")
             {
                 //Find Lines Containing a new Element Definition
@@ -490,16 +519,16 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     Vector o = new Vector(sumX / count, sumY / count, 0);
                                     for (int j = 0; j < list.Count; j++)
                                     {
-                                        Line l = new Line();
+                                        t_Line l = new t_Line();
                                         l.Type = (int)LineType.PENALTYZONE;
                                         int i_a = j % list.Count;
                                         int i_b = (j + 1) % list.Count;
                                         Vector a = list[i_a];
                                         Vector b = list[i_b];
-                                        l.A = NetworkObjects.Helper.Point(a.X, a.Y, a.Z);
-                                        l.B = NetworkObjects.Helper.Point(b.X, b.Y, b.Z);
-                                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
-                                        result.LineList.Add(l);
+                                        l.A = a.toGPSPoint();
+                                        l.B = b.toGPSPoint();
+                                        l.O = o.toGPSPoint();
+                                        result.t_Line.Add(l);
                                     }
                                 }
                             }
@@ -524,19 +553,23 @@ namespace AirNavigationRaceLive.Comps.Helper
                             catch { }
                         }
 
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         double Latitude1 = res[1];
                         double Longitude1 = res[0];
-                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                        l.A = new t_GPSPoint();
+                        l.A.longitude = Longitude1;
+                        l.A.latitude = Latitude1;
 
                         double Latitude2 = res[3];
                         double Longitude2 = res[2];
-                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                        l.B = new t_GPSPoint();
+                        l.B.longitude = Longitude2;
+                        l.B.latitude = Latitude2;
 
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                        l.O = o.toGPSPoint();
 
                         string gatename = lines[i + 6].Substring(11, 1);
                         switch (gatename)
@@ -562,7 +595,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.LineList.Add(l);
+                        result.t_Line.Add(l);
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("ENDPOINT-"))
                     {
@@ -583,18 +616,23 @@ namespace AirNavigationRaceLive.Comps.Helper
                             catch { }
                         }
 
-                        Line l = new Line();
+                        t_Line l = new t_Line();
                         double Latitude1 = res[1];
                         double Longitude1 = res[0];
-                        l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                        l.A = new t_GPSPoint();
+                        l.A.longitude = Longitude1;
+                        l.A.latitude = Latitude1;
 
                         double Latitude2 = res[3];
                         double Longitude2 = res[2];
-                        l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                        l.B = new t_GPSPoint();
+                        l.B.longitude = Longitude2;
+                        l.B.latitude = Latitude2;
+
                         Vector start = new Vector(Longitude1, Latitude1, 0);
                         Vector end = new Vector(Longitude2, Latitude2, 0);
                         Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                        l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                        l.O = o.toGPSPoint();
 
                         string gatename = lines[i + 6].Substring(9, 1);
                         switch (gatename)
@@ -620,7 +658,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                                     break;
                                 }
                         }
-                        result.LineList.Add(l);
+                        result.t_Line.Add(l);
 
                     }
                     else if (lines[i + 5] == "  8" && lines[i + 6].Contains("NBLINE"))
@@ -628,20 +666,25 @@ namespace AirNavigationRaceLive.Comps.Helper
                         if ((lines[i + 9 + 4] == " 90" || lines[i + 9] == " 90") && double.Parse(lines[10], NumberFormatInfo.InvariantInfo) == 2)
                         {
                             int correctur = lines[i + 9 + 4] == " 90" ? 4 : 0;
-                            Line l = new Line();
+                            t_Line l = new t_Line();
                             double Latitude1 = double.Parse(lines[i + 18 + correctur], NumberFormatInfo.InvariantInfo);
                             double Longitude1 = double.Parse(lines[i + 16 + correctur], NumberFormatInfo.InvariantInfo);
-                            l.A = NetworkObjects.Helper.Point(Longitude1, Latitude1, 0);
+                            l.A = new t_GPSPoint();
+                            l.A.longitude = Longitude1;
+                            l.A.latitude = Latitude1;
 
                             double Latitude2 = double.Parse(lines[i + 22 + correctur], NumberFormatInfo.InvariantInfo);
                             double Longitude2 = double.Parse(lines[i + 20 + correctur], NumberFormatInfo.InvariantInfo);
-                            l.B = NetworkObjects.Helper.Point(Longitude2, Latitude2, 0);
+                            l.B = new t_GPSPoint();
+                            l.B.longitude = Longitude2;
+                            l.B.latitude = Latitude2;
+
                             Vector start = new Vector(Longitude1, Latitude1, 0);
                             Vector end = new Vector(Longitude2, Latitude2, 0);
                             Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
-                            l.O = NetworkObjects.Helper.Point(o.X, o.Y, o.Z);
+                            l.O = o.toGPSPoint();
                             l.Type = (int)LineType.LINEOFNORETURN;
-                            result.LineList.Add(l);
+                            result.t_Line.Add(l);
                         }
                     }
                 }
@@ -654,9 +697,9 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// </summary>
         /// <param name="filepath"></param>
         /// <returns>The created Flight object</returns>
-        public static List<GPSData> GPSdataFromGAC(int year, int month, int day, string IdentifierTracker, string filename)
+        public static List<t_GPSPoint> GPSdataFromGAC(int year, int month, int day, string IdentifierTracker, string filename)
         {
-            List<GPSData> result = new List<GPSData>();
+            List<t_GPSPoint> result = new List<t_GPSPoint>();
             StreamReader gacFileStreamReader = new StreamReader(filename);
             string line = string.Empty;
             line = gacFileStreamReader.ReadLine();
@@ -705,7 +748,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         double bearing = double.Parse(line.Substring(39, 3), NumberFormatInfo.InvariantInfo);
                         double acc = double.Parse(line.Substring(42, 4), NumberFormatInfo.InvariantInfo);
 
-                        GPSData data = new GPSData();
+                        t_GPSPoint data = new t_GPSPoint();
                         data.timestampGPS = newPointTimeStamp.Ticks;
                         data.latitude = newPointLatitude;
                         data.longitude = newPointLongitude;
@@ -722,9 +765,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             return result;
         }
 
-        internal static List<GPSData> GPSdataFromGPX(string imei, string filename)
+        internal static List<t_GPSPoint> GPSdataFromGPX(string imei, string filename)
         {
-            List<GPSData> result = new List<GPSData>();
+            List<t_GPSPoint> result = new List<t_GPSPoint>();
             XNamespace gpx = XNamespace.Get("http://www.topografix.com/GPX/1/1");
             XDocument gpxDoc = XDocument.Load(filename);
             var tracks = from track in gpxDoc.Descendants(gpx + "trk")
@@ -749,7 +792,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 foreach (var trkSeg in trk.Segs)
                 {
-                    GPSData data = new GPSData();
+                    t_GPSPoint data = new t_GPSPoint();
                     data.timestampGPS = DateTime.Parse(trkSeg.Time).Ticks;
                     data.latitude = Double.Parse(trkSeg.Latitude, NumberFormatInfo.InvariantInfo);
                     data.longitude = Double.Parse(trkSeg.Longitude, NumberFormatInfo.InvariantInfo);

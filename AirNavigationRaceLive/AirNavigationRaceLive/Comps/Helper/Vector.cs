@@ -324,5 +324,14 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             return result;
         }
+
+        public t_GPSPoint toGPSPoint()
+        {
+            t_GPSPoint result = new t_GPSPoint();
+            result.longitude = X;
+            result.latitude = Y;
+            result.altitude = Z;
+            return result;
+        }
     }
 }

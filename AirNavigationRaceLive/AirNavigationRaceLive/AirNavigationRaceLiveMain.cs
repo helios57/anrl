@@ -16,7 +16,6 @@ namespace AirNavigationRaceLive
     {
         private static AirNavigationRaceLiveMain main;
         private Client Client;
-        private ClientNetwork ClientNetwork;
         private Connect Connect;
         private Competition CompetitionO;
         private Credits Credits;
@@ -56,7 +55,6 @@ namespace AirNavigationRaceLive
         public AirNavigationRaceLiveMain()
         {
             Client = null;
-            ClientNetwork = null;
             InitializeComponent();
             main = this;
         }
@@ -64,7 +62,7 @@ namespace AirNavigationRaceLive
         public void UpdateEnablement()
         {
             Boolean connected = Client != null;
-            disconnectToolStripMenuItem.Enabled = ClientNetwork != null;
+            disconnectToolStripMenuItem.Enabled = Client != null;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
             overviewZoomedToolStripMenuItem.Enabled = connected;
@@ -72,7 +70,7 @@ namespace AirNavigationRaceLive
             generateToolStripMenuItem.Enabled = connected;
             importToolStripMenuItem.Enabled = connected;
             trackerToolStripMenuItem.Enabled = connected;
-            connectToolStripMenuItem.Enabled = ClientNetwork == null;
+            connectToolStripMenuItem.Enabled = Client == null;
             pilotsToolStripMenuItem.Enabled = connected;
             teamsToolStripMenuItem.Enabled = connected;
             qualificationRoundsToolStripMenuItem.Enabled = connected;
@@ -89,7 +87,7 @@ namespace AirNavigationRaceLive
             editToolStripMenuItem.Enabled = connected;
             exportToolStripMenuItem.Enabled = connected;
             exportKMLToolStripMenuItem.Enabled = connected;
-            competitionToolStripMenuItem.Enabled = ClientNetwork != null;
+            competitionToolStripMenuItem.Enabled = Client != null;
         }
 
         private void AirNavigationRaceLive_Load(object sender, EventArgs e)
@@ -130,16 +128,11 @@ namespace AirNavigationRaceLive
 
         private void Connect_Connected(object sender, EventArgs e)
         {
-            ClientNetwork c = sender as ClientNetwork;
-            if (c != null)
-            {
-                ClientNetwork = c;
                 StatusStripLabel.Text = "Connected to Server";
                 MainPanel.Controls.Clear();
-                CompetitionO = new Competition(c);
+                CompetitionO = new Competition(Client.getClient());
                 CompetitionO.Connected += new EventHandler(CompetitionO_Connected);
-                enableControl(CompetitionO);
-            }
+                enableControl(CompetitionO);   
         }
 
         void CompetitionO_Connected(object sender, EventArgs e)
@@ -184,7 +177,6 @@ namespace AirNavigationRaceLive
             UploadGPS = null;
             Results = null;
             CompetitionO = null;
-            ClientNetwork = null;
             StatusStripLabel.Text = "Disconnected from Server";
             UpdateEnablement();
             enableControl(Credits);

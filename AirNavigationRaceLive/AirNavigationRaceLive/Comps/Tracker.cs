@@ -51,9 +51,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateTrackerList()
         {
-            List<NetworkObjects.Tracker> trackers = Client.getTrackers();
+            List<t_Tracker> trackers = Client.getTrackers();
             listViewTracker.Items.Clear();
-            foreach (NetworkObjects.Tracker t in trackers.Where(p=> !p.IMEI.StartsWith("_")))
+            foreach (t_Tracker t in trackers.Where(p=> !p.IMEI.StartsWith("_")))
             {
                 listViewTracker.Items.Add(new TrackerEntry(t));
             }
@@ -68,7 +68,7 @@ namespace AirNavigationRaceLive.Comps
             TrackerEntry t = listViewTracker.SelectedItems[0] as TrackerEntry;
             if (t != null)
             {
-                NetworkObjects.Tracker tracker = t.getTracker();
+                t_Tracker tracker = t.getTracker();
                 tracker.Name = textBoxName.Text;
                 Client.saveTracker(tracker);
             }
@@ -82,15 +82,15 @@ namespace AirNavigationRaceLive.Comps
 
         partial class TrackerEntry : ListViewItem
         {
-            private NetworkObjects.Tracker Tracker;
+            private t_Tracker Tracker;
 
-            public TrackerEntry(NetworkObjects.Tracker iTracker)
+            public TrackerEntry(t_Tracker iTracker)
                 : base(new String[] { iTracker.ID.ToString().Trim(),iTracker.Name!=null?iTracker.Name.Trim():"", iTracker.IMEI.Trim() })
             {
                 Tracker = iTracker;
             }
 
-            public NetworkObjects.Tracker getTracker()
+            public t_Tracker getTracker()
             {
                 return Tracker;
             }

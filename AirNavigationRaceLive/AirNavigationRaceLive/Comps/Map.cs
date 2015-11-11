@@ -42,8 +42,8 @@ namespace AirNavigationRaceLive.Comps
         private void loadMaps()
         {
             listBox1.Items.Clear();
-            List<NetworkObjects.Map> maps = Client.getMaps();
-            foreach (NetworkObjects.Map m in maps)
+            List<t_Map> maps = Client.getMaps();
+            foreach (t_Map m in maps)
             {
                 listBox1.Items.Add(new ListItem(m));
             }
@@ -51,8 +51,8 @@ namespace AirNavigationRaceLive.Comps
 
         class ListItem
         {
-            private NetworkObjects.Map map;
-            public ListItem(NetworkObjects.Map imap)
+            private t_Map map;
+            public ListItem(t_Map imap)
             {
                 map = imap;
             }
@@ -61,7 +61,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return map.Name;
             }
-            public NetworkObjects.Map getMap()
+            public t_Map getMap()
             {
                 return map;
             }
@@ -101,8 +101,8 @@ namespace AirNavigationRaceLive.Comps
                 fldX.Text = li.getMap().XTopLeft.ToString();
                 fldY.Text = li.getMap().YTopLeft.ToString();
 
-                MemoryStream ms = new MemoryStream(Client.getPicture(li.getMap().ID_Picture).Image);
-                pictureBox1.Image = System.Drawing.Image.FromStream(ms);
+                MemoryStream ms = new MemoryStream(Client.gett_Picture(li.getMap().ID_Picture).Data);
+                PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 btnDelete.Enabled = true;
             }
         }
@@ -126,7 +126,7 @@ namespace AirNavigationRaceLive.Comps
             fldRotationY.Text = "";
             fldX.Text = "";
             fldY.Text = "";
-            pictureBox1.Image = null;
+            PictureBox1.Image = null;
             btnSelectMap.Enabled = true;
             btnSelectWorldFile.Enabled = true;
             fldName.Enabled = true;
@@ -140,7 +140,7 @@ namespace AirNavigationRaceLive.Comps
                                 + "Png Dateien (*.png)|*.png";
             string GraphicFileFilter = "Alle Bilddateien|*.jpg;*.jpeg;*.jpe;*.jfif;*.bmp;*.gif;*.png";
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Picture";
+            ofd.Title = "t_Picture";
             ofd.RestoreDirectory = true;
             ofd.Multiselect = false;
             ofd.Filter = FileFilter + "|" + GraphicFileFilter;
@@ -153,7 +153,7 @@ namespace AirNavigationRaceLive.Comps
         void ofd_FileOk(object sender, CancelEventArgs e)
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
-            pictureBox1.Image = Image.FromFile(ofd.FileName);
+            PictureBox1.Image = Image.FromFile(ofd.FileName);
             btnSave.Enabled = true;
         }
 
@@ -161,7 +161,7 @@ namespace AirNavigationRaceLive.Comps
         {
             string FileFilter = "World file (*.jgw, *.pgw, *.gfw, *.tfw)|*.jgw;*.pgw;*.gfw;*.tfw";
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Picture";
+            ofd.Title = "t_Picture";
             ofd.RestoreDirectory = true;
             ofd.Multiselect = false;
             ofd.Filter = FileFilter;
@@ -198,7 +198,7 @@ namespace AirNavigationRaceLive.Comps
                 btnSelectWorldFile.Enabled = false;
                 btnSave.Enabled = false;
                 fldName.Enabled = false;
-                NetworkObjects.Map m = new NetworkObjects.Map();
+                t_Map m = new t_Map();
                 m.Name = fldName.Text;
                 m.XSize = Double.Parse(fldSizeX.Text, NumberFormatInfo.InvariantInfo);
                 m.YSize = Double.Parse(fldSizeY.Text, NumberFormatInfo.InvariantInfo);
@@ -207,11 +207,11 @@ namespace AirNavigationRaceLive.Comps
                 m.XTopLeft = Double.Parse(fldX.Text, NumberFormatInfo.InvariantInfo);
                 m.YTopLeft = Double.Parse(fldY.Text, NumberFormatInfo.InvariantInfo);
                 MemoryStream ms = new MemoryStream();
-                pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                Picture picture = new Picture();
-                picture.Image = ms.ToArray();
-                picture.Name = m.Name;
-                m.ID_Picture = Client.savePicture(picture);
+                PictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                t_Picture t_Picture = new t_Picture();
+                t_Picture.Data = ms.ToArray();
+                t_Picture.Name = m.Name;
+                m.ID_Picture = Client.savePicture(t_Picture);
                 Client.saveMap(m);
                 loadMaps();
             }

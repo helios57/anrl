@@ -40,10 +40,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnAddPicture = new System.Windows.Forms.Button();
-            this.textBoxPictureId = new System.Windows.Forms.TextBox();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.btnAddt_Picture = new System.Windows.Forms.Button();
+            this.textBoxt_PictureId = new System.Windows.Forms.TextBox();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewPilots
@@ -142,7 +142,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(104, 32);
             this.label5.TabIndex = 14;
-            this.label5.Text = "Picture";
+            this.label5.Text = "t_Picture";
             // 
             // btnNew
             // 
@@ -166,48 +166,48 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // btnAddPicture
+            // btnAddt_Picture
             // 
-            this.btnAddPicture.Location = new System.Drawing.Point(1295, 578);
-            this.btnAddPicture.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnAddPicture.Name = "btnAddPicture";
-            this.btnAddPicture.Size = new System.Drawing.Size(267, 55);
-            this.btnAddPicture.TabIndex = 17;
-            this.btnAddPicture.Text = "Add Picture";
-            this.btnAddPicture.UseVisualStyleBackColor = true;
-            this.btnAddPicture.Click += new System.EventHandler(this.btnAddPicture_Click);
+            this.btnAddt_Picture.Location = new System.Drawing.Point(1295, 578);
+            this.btnAddt_Picture.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnAddt_Picture.Name = "btnAddt_Picture";
+            this.btnAddt_Picture.Size = new System.Drawing.Size(267, 55);
+            this.btnAddt_Picture.TabIndex = 17;
+            this.btnAddt_Picture.Text = "Add t_Picture";
+            this.btnAddt_Picture.UseVisualStyleBackColor = true;
+            this.btnAddt_Picture.Click += new System.EventHandler(this.btnAddt_Picture_Click);
             // 
-            // textBoxPictureId
+            // textBoxt_PictureId
             // 
-            this.textBoxPictureId.Enabled = false;
-            this.textBoxPictureId.Location = new System.Drawing.Point(1295, 648);
-            this.textBoxPictureId.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.textBoxPictureId.Name = "textBoxPictureId";
-            this.textBoxPictureId.Size = new System.Drawing.Size(260, 38);
-            this.textBoxPictureId.TabIndex = 18;
-            this.textBoxPictureId.Visible = false;
+            this.textBoxt_PictureId.Enabled = false;
+            this.textBoxt_PictureId.Location = new System.Drawing.Point(1295, 648);
+            this.textBoxt_PictureId.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxt_PictureId.Name = "textBoxt_PictureId";
+            this.textBoxt_PictureId.Size = new System.Drawing.Size(260, 38);
+            this.textBoxt_PictureId.TabIndex = 18;
+            this.textBoxt_PictureId.Visible = false;
             // 
-            // pictureBox
+            // PictureBox
             // 
-            this.pictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
-            this.pictureBox.Location = new System.Drawing.Point(1295, 326);
-            this.pictureBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(267, 238);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox.TabIndex = 13;
-            this.pictureBox.TabStop = false;
+            this.PictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
+            this.PictureBox.Location = new System.Drawing.Point(1295, 326);
+            this.PictureBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(267, 238);
+            this.PictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PictureBox.TabIndex = 13;
+            this.PictureBox.TabStop = false;
             // 
             // Pilot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBoxPictureId);
-            this.Controls.Add(this.btnAddPicture);
+            this.Controls.Add(this.textBoxt_PictureId);
+            this.Controls.Add(this.btnAddt_Picture);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.pictureBox);
+            this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.textBoxSurename);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxLastname);
@@ -218,7 +218,7 @@
             this.Name = "Pilot";
             this.Size = new System.Drawing.Size(1600, 954);
             this.Load += new System.EventHandler(this.Pilot_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,11 +235,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxSurename;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.PictureBox pictureBox;
+        private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnAddPicture;
-        private System.Windows.Forms.TextBox textBoxPictureId;
+        private System.Windows.Forms.Button btnAddt_Picture;
+        private System.Windows.Forms.TextBox textBoxt_PictureId;
     }
 }
