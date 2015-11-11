@@ -16,7 +16,6 @@ namespace AirNavigationRaceLive
     {
         private static AirNavigationRaceLiveMain main;
         private Client Client;
-        private Connect Connect;
         private Competition CompetitionO;
         private Credits Credits;
         private Tracker Tracker;
@@ -54,7 +53,7 @@ namespace AirNavigationRaceLive
 
         public AirNavigationRaceLiveMain()
         {
-            Client = null;
+            Client = Client.getClient();
             InitializeComponent();
             main = this;
         }
@@ -62,7 +61,6 @@ namespace AirNavigationRaceLive
         public void UpdateEnablement()
         {
             Boolean connected = Client != null;
-            disconnectToolStripMenuItem.Enabled = Client != null;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
             overviewZoomedToolStripMenuItem.Enabled = connected;
@@ -70,7 +68,6 @@ namespace AirNavigationRaceLive
             generateToolStripMenuItem.Enabled = connected;
             importToolStripMenuItem.Enabled = connected;
             trackerToolStripMenuItem.Enabled = connected;
-            connectToolStripMenuItem.Enabled = Client == null;
             pilotsToolStripMenuItem.Enabled = connected;
             teamsToolStripMenuItem.Enabled = connected;
             qualificationRoundsToolStripMenuItem.Enabled = connected;
@@ -99,40 +96,15 @@ namespace AirNavigationRaceLive
             }
             enableControl(Credits);
             StatusStripLabel.Text = "Ready";
+            MainPanel.Controls.Clear();
+            CompetitionO = new Competition(Client.getClient());
+            CompetitionO.Connected += new EventHandler(CompetitionO_Connected);
+            enableControl(CompetitionO);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Client == null)
-            {
-                MainPanel.Controls.Clear();
-                if (Connect == null)
-                {
-                    Connect = new Comps.Connect();
-                    Connect.Connected += new EventHandler(Connect_Connected);
-                }
-                enableControl(Connect);
-                StatusStripLabel.Text = "Ready to Connect to Server";
-            }
-            else
-            {
-                StatusStripLabel.Text = "Already connected to Server";
-            }
-            UpdateEnablement();
-        }
-
-        private void Connect_Connected(object sender, EventArgs e)
-        {
-                StatusStripLabel.Text = "Connected to Server";
-                MainPanel.Controls.Clear();
-                CompetitionO = new Competition(Client.getClient());
-                CompetitionO.Connected += new EventHandler(CompetitionO_Connected);
-                enableControl(CompetitionO);   
         }
 
         void CompetitionO_Connected(object sender, EventArgs e)
@@ -162,7 +134,6 @@ namespace AirNavigationRaceLive
         private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Client = null;
-            Connect = null;
             Tracker = null;
             Pilot = null;
             Team = null;
