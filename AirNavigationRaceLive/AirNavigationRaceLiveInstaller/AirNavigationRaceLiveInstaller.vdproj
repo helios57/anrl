@@ -684,7 +684,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AirNavigationRace"
         "ProductCode" = "8:{E3E1B141-1A26-4213-B728-E9260C2710A6}"
-        "PackageCode" = "8:{CB65AD72-6AB0-4AAF-AA97-18C60C0EA942}"
+        "PackageCode" = "8:{F8A6FACE-877D-46CE-9894-2CD1E13BB394}"
         "UpgradeCode" = "8:{7CC2B53C-D5A1-482F-8B00-18B38ECBFFDF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -804,7 +804,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2C1CF400B92C4EEAA81B8BFD4D3B905E"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8CD5C9835DE04F6F800B40FE6F3AD571"
             {
             "Name" = "8:AirNavigationRace"
             "Arguments" = "8:"
@@ -812,13 +812,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_3A5DB726206A48E4A06288A8286AFF15"
+            "Target" = "8:_789B61605B5D49EEA5246D18AA5611CA"
             "Folder" = "8:_3A5DB726206A48E4A06288A8286AFF15"
-            "WorkingFolder" = "8:_3A5DB726206A48E4A06288A8286AFF15"
+            "WorkingFolder" = "8:_591FD7206AD24FD39F1681DA4C4B2366"
             "Icon" = "8:_8BAFD6E5AE7049158E0BFC42389EE90F"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A2698105F693491FAF77C639A5C477D7"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_960B5CB977924DBEA4262C8A8E536335"
             {
             "Name" = "8:AirNavigationRace"
             "Arguments" = "8:"
@@ -826,9 +826,9 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_5A0393D7C29D4065AB9AE5747235C031"
+            "Target" = "8:_789B61605B5D49EEA5246D18AA5611CA"
             "Folder" = "8:_5A0393D7C29D4065AB9AE5747235C031"
-            "WorkingFolder" = "8:_5A0393D7C29D4065AB9AE5747235C031"
+            "WorkingFolder" = "8:_591FD7206AD24FD39F1681DA4C4B2366"
             "Icon" = "8:_8BAFD6E5AE7049158E0BFC42389EE90F"
             "Feature" = "8:"
             }
