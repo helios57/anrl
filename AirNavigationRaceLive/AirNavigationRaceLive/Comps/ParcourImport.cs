@@ -254,6 +254,7 @@ namespace AirNavigationRaceLive.Comps
                 p.Competition = Client.SelectedCompetition;
                 Client.DBContext.ParcourSet.Add(p);
                 Client.DBContext.SaveChanges();
+                btnClear_Click(null, null);
                 MessageBox.Show("Successfully saved");
             }
         }
@@ -297,6 +298,7 @@ namespace AirNavigationRaceLive.Comps
             PictureBox1.SetParcour(activeParcour);
             SetHoverLine(null);
             SetSelectedLine(null);
+            fldName.Text = "";
             PictureBox1.Invalidate();
         }
 

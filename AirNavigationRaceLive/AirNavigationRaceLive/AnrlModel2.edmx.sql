@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/14/2015 18:02:51
+-- Date Created: 11/14/2015 19:29:26
 -- Generated from EDMX file: C:\workspace\VS2015\Anrl\anrl\AirNavigationRaceLive\AirNavigationRaceLive\AnrlModel2.edmx
 -- --------------------------------------------------
 
@@ -454,7 +454,7 @@ ADD CONSTRAINT [FK_PointLine1]
     FOREIGN KEY ([B_Id])
     REFERENCES [dbo].[PointSet]
         ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PointLine1'
@@ -589,7 +589,7 @@ ADD CONSTRAINT [FK_FlightPoint4D]
     FOREIGN KEY ([Flight_Id])
     REFERENCES [dbo].[FlightSet]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_FlightPoint4D'

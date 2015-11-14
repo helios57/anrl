@@ -334,9 +334,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="PointLine1">
-    <End Role="Point" Type="AnrlModel2.Store.PointSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
+    <End Role="Point" Type="AnrlModel2.Store.PointSet" Multiplicity="1" />
     <End Role="Line" Type="AnrlModel2.Store.LineSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Point">
@@ -450,7 +448,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FlightPoint4D">
-    <End Role="Flight" Type="AnrlModel2.Store.FlightSet" Multiplicity="1" />
+    <End Role="Flight" Type="AnrlModel2.Store.FlightSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Point4D" Type="AnrlModel2.Store.PointSet_Point4D" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Flight">
@@ -741,7 +741,6 @@
         </Association>
         <Association Name="PointLine1">
           <End Type="AnrlModel2.Point" Role="Point" Multiplicity="1" >
-            <OnDelete Action="Cascade" />
           </End>
           <End Type="AnrlModel2.Line" Role="Line" Multiplicity="*" >
           </End>
@@ -830,6 +829,7 @@
         </EntityType>
         <Association Name="FlightPoint4D">
           <End Type="AnrlModel2.Flight" Role="Flight" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
           </End>
           <End Type="AnrlModel2.Point4D" Role="Point4D" Multiplicity="*" />
         </Association>

@@ -480,6 +480,10 @@ namespace AirNavigationRaceLive.Comps
         private void btnAddCompetitionTeam_Click(object sender, EventArgs e)
         {
             btnSaveCompetitionTeam_Click(sender, e);
+            if (textBoxStartId.Text == "")
+            {
+                return;
+            }
             int startid = int.Parse(textBoxStartId.Text.ToString());
             startid++;
             textBoxStartId.Text = startid.ToString();
