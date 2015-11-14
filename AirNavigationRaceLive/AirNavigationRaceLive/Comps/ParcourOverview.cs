@@ -14,20 +14,20 @@ namespace AirNavigationRaceLive.Comps
 {
     public partial class ParcourOverview : UserControl
     {
-        private Client.Client Client;
+        private Client.DataAccess Client;
         Converter c = null;
-        private t_Line activeLine;
+        private Line activeLine;
         private ActivePoint ap = ActivePoint.NONE;
-        private t_Line selectedLine = null;
-        private t_Line hoverLine = null;
-        private t_Parcour activeParcour = new t_Parcour();
+        private Line selectedLine = null;
+        private Line hoverLine = null;
+        private Parcour activeParcour = new Parcour();
 
         private enum ActivePoint
         {
             A, B, O, NONE
         }
 
-        public ParcourOverview(Client.Client iClient)
+        public ParcourOverview(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -37,8 +37,8 @@ namespace AirNavigationRaceLive.Comps
 
         class ListItem
         {
-            private t_Parcour parcour;
-            public ListItem(t_Parcour iParcour)
+            private Parcour parcour;
+            public ListItem(Parcour iParcour)
             {
                 parcour = iParcour;
             }
@@ -47,7 +47,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return parcour.Name;
             }
-            public t_Parcour getParcour()
+            public Parcour getParcour()
             {
                 return parcour;
             }
@@ -58,15 +58,15 @@ namespace AirNavigationRaceLive.Comps
             deleteToolStripMenuItem.Enabled = false;
             PictureBox1.SetConverter(c);
             PictureBox1.Image = null;
-            activeParcour = new t_Parcour();
+            activeParcour = new Parcour();
             PictureBox1.SetParcour(activeParcour);
             SetHoverLine(null);
             SetSelectedLine(null);
             PictureBox1.Invalidate();
 
             listBox1.Items.Clear();
-            List<t_Parcour> parcours = Client.getParcours();
-            foreach (t_Parcour p in parcours)
+            List<Parcour> parcours = Client.SelectedCompetition.Parcour.ToList();
+            foreach (Parcour p in parcours)
             {
                 listBox1.Items.Add(new ListItem(p));
             }
@@ -87,7 +87,12 @@ namespace AirNavigationRaceLive.Comps
             ListItem li = listBox1.SelectedItem as ListItem;
             if (li != null)
             {
-                Client.deleteParcour(li.getParcour().ID);
+                Parcour parcour = li.getParcour();
+                if (parcour.Id!=0)
+                {
+                    Client.DBContext.ParcourSet.Remove(parcour);
+                }
+                Client.DBContext.SaveChanges();
                 loadParcours();
             }
         }
@@ -98,9 +103,9 @@ namespace AirNavigationRaceLive.Comps
             if (li != null)
             {
                 deleteToolStripMenuItem.Enabled = true;
-                t_Map map = Client.getMap(li.getParcour().ID_Map);
+                Map map = li.getParcour().Map;
 
-                MemoryStream ms = new MemoryStream(Client.gett_Picture(map.ID_Picture).Data);
+                MemoryStream ms = new MemoryStream(map.Picture.Data);
                 PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 c = new Converter(map);
                 PictureBox1.SetConverter(c);
@@ -131,9 +136,9 @@ namespace AirNavigationRaceLive.Comps
                     {
                         case ActivePoint.A:
                             {
-                                t_GPSPoint a = Factory.newGPSPoint(longitude, latitude, 0);
-                                t_GPSPoint b = Factory.newGPSPoint(a.longitude, a.latitude, a.altitude);
-                                t_GPSPoint o = Factory.newGPSPoint(a.longitude, a.latitude, a.altitude);
+                                Point a = Factory.newGPSPoint(longitude, latitude, 0);
+                                Point b = Factory.newGPSPoint(a.longitude, a.latitude, a.altitude);
+                                Point o = Factory.newGPSPoint(a.longitude, a.latitude, a.altitude);
                                 activeLine.A = a;
                                 activeLine.B = b;
                                 activeLine.O = o;
@@ -142,8 +147,8 @@ namespace AirNavigationRaceLive.Comps
                             }
                         case ActivePoint.B:
                             {
-                                t_GPSPoint b = Factory.newGPSPoint(longitude, latitude, 0);
-                                t_GPSPoint o = Factory.newGPSPoint(b.longitude, b.latitude, b.altitude);
+                                Point b = Factory.newGPSPoint(longitude, latitude, 0);
+                                Point o = Factory.newGPSPoint(b.longitude, b.latitude, b.altitude);
                                 activeLine.B = b;
                                 activeLine.O = o;
                                 PictureBox1.Invalidate();
@@ -151,7 +156,7 @@ namespace AirNavigationRaceLive.Comps
                             }
                         case ActivePoint.O:
                             {
-                                t_GPSPoint o = Factory.newGPSPoint(longitude, latitude, 0);
+                                Point o = Factory.newGPSPoint(longitude, latitude, 0);
                                 activeLine.O = o;
                                 PictureBox1.Invalidate();
                                 break;
@@ -169,7 +174,7 @@ namespace AirNavigationRaceLive.Comps
                     bool lineSet = false;
                     lock (activeParcour)
                     {
-                        foreach (t_Line l in activeParcour.t_Line)
+                        foreach (Line l in activeParcour.Line)
                         {
                             int startX = c.getStartX(l);
                             int startY = c.getStartY(l);
@@ -196,7 +201,7 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        private void SetSelectedLine(t_Line l)
+        private void SetSelectedLine(Line l)
         {
             bool change = selectedLine != l;
             if (change)
@@ -227,7 +232,7 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        private void SetHoverLine(t_Line l)
+        private void SetHoverLine(Line l)
         {
             bool change = hoverLine != l;
             if (change)
@@ -266,45 +271,45 @@ namespace AirNavigationRaceLive.Comps
         private void btnAddStartLine_Click(object sender, EventArgs e)
         {
             SetSelectedLine(null);
-            if (activeParcour.t_Line.Any(p => p.Type == (int)LineType.START))
+            if (activeParcour.Line.Any(p => p.Type == (int)LineType.START))
             {
-                activeLine = activeParcour.t_Line.Single(p => p.Type == (int)LineType.START);
+                activeLine = activeParcour.Line.Single(p => p.Type == (int)LineType.START);
             }
             else
             {
-                activeLine = new t_Line();
+                activeLine = new Line();
                 activeLine.Type = (int)LineType.START;
-                activeParcour.t_Line.Add(activeLine);
+                activeParcour.Line.Add(activeLine);
             }
             ap = ActivePoint.A;
         }
         private void btnAddEnd_Click(object sender, EventArgs e)
         {
             SetSelectedLine(null);
-            if (activeParcour.t_Line.Any(p => p.Type == (int)LineType.END))
+            if (activeParcour.Line.Any(p => p.Type == (int)LineType.END))
             {
-                activeLine = activeParcour.t_Line.Single(p => p.Type == (int)LineType.END);
+                activeLine = activeParcour.Line.Single(p => p.Type == (int)LineType.END);
             }
             else
             {
-                activeLine = new t_Line();
+                activeLine = new Line();
                 activeLine.Type = (int)LineType.END;
-                activeParcour.t_Line.Add(activeLine);
+                activeParcour.Line.Add(activeLine);
             }
             ap = ActivePoint.A;
         }
         private void btnAddLineOfNoReturn_Click(object sender, EventArgs e)
         {
             SetSelectedLine(null);
-            if (activeParcour.t_Line.Any(p => p.Type == (int)LineType.LINEOFNORETURN))
+            if (activeParcour.Line.Any(p => p.Type == (int)LineType.LINEOFNORETURN))
             {
-                activeLine = activeParcour.t_Line.Single(p => p.Type == (int)LineType.LINEOFNORETURN);
+                activeLine = activeParcour.Line.Single(p => p.Type == (int)LineType.LINEOFNORETURN);
             }
             else
             {
-                activeLine = new t_Line();
+                activeLine = new Line();
                 activeLine.Type = (int)LineType.LINEOFNORETURN;
-                activeParcour.t_Line.Add(activeLine);
+                activeParcour.Line.Add(activeLine);
             }
             ap = ActivePoint.A;
 
@@ -352,7 +357,7 @@ namespace AirNavigationRaceLive.Comps
                     di.Create();
                 }
                 PDFCreator.CreateParcourPDF(PictureBox1, Client,li.getParcour().Name, dirPath + 
-                    @"\Parcour_"+li.getParcour().ID +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf");
+                    @"\Parcour_"+li.getParcour().Id +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf");
             }
         }
 
@@ -368,7 +373,7 @@ namespace AirNavigationRaceLive.Comps
                     di.Create();
                 }
                 PDFCreator.CreateParcourPDF100k(PictureBox1, Client, li.getParcour().Name, dirPath +
-                    @"\Parcour_" + li.getParcour().ID + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+                    @"\Parcour_" + li.getParcour().Id + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
             }
         }
 

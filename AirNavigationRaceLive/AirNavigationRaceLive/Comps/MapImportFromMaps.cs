@@ -19,10 +19,10 @@ namespace AirNavigationRaceLive.Comps
     {
 
 
-        private Client.Client Client;
+        private Client.DataAccess Client;
         private ToolTip Tooltip;
 
-        public MapImportFromMaps(Client.Client iClient)
+        public MapImportFromMaps(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -47,11 +47,11 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 btnSave.Enabled = false;
                 fldName.Enabled = false;
-                t_Map m = new t_Map();
+                Map m = new Map();
                 m.Name = fldName.Text;
                 m.XSize = Double.Parse(fldSizeX.Text, NumberFormatInfo.InvariantInfo);
                 m.YSize = Double.Parse(fldSizeY.Text, NumberFormatInfo.InvariantInfo);
@@ -61,19 +61,19 @@ namespace AirNavigationRaceLive.Comps
                 m.YTopLeft = Double.Parse(fldY.Text, NumberFormatInfo.InvariantInfo);
                 MemoryStream ms = new MemoryStream();
                 gMapControl1.ToImage().Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                t_Picture Picture = new t_Picture();
-                Picture.Data = ms.ToArray();
-                Picture.Name = m.Name;
-                m.ID_Picture = Client.savePicture(Picture);
-                Client.saveMap(m);
+                m.Picture = new Picture();
+                m.Picture.Data = ms.ToArray();
+                m.Competition = Client.SelectedCompetition;
+                Client.DBContext.MapSet.Add(m);
+                Client.DBContext.SaveChanges();
                 MessageBox.Show("Map saved successfull!");
                 btnSave.Enabled = true;
                 fldName.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error while Saving");
-            }
+          //  }
+           // catch (Exception ex)
+           // {
+             //   MessageBox.Show(ex.Message, "Error while Saving");
+           // }
         }
 
         private void gMapControl1_Load(object sender, EventArgs e)

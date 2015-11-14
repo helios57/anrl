@@ -15,19 +15,19 @@ namespace AirNavigationRaceLive.Comps.Helper
         private const double LineOfNoReturnDist = 1.5;
         private double best = double.MaxValue;
         private volatile ParcourModel bestModel = null;
-        private AirNavigationRaceLive.Comps.Model.Parcour parcour;
+        private Parcour parcour;
         private Converter c;
         private Comparer comparer = new Comparer();
         public volatile bool finished = false;
         private volatile bool regenerate = false;
         private int count;
 
-        public void GenerateParcour(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double lenght, double channel, int count)
+        public void GenerateParcour(Parcour parcour, Converter c, double lenght, double channel, int count)
         {
             this.parcour = parcour;
             this.c = c;
             this.count = count;
-            t_Line Start = parcour.t_Line.Single(p => p.Type == (int)LineType.START) as t_Line;
+            Line Start = parcour.Line.Single(p => p.Type == (int)LineType.START) as Line;
             if (Start == null) return;
             #region StartVektoren
             Vector StartAV = new Vector(c.LongitudeToX(Start.A.longitude), c.LatitudeToY(Start.A.latitude), 0);
@@ -50,16 +50,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Start_A_B = Start_A_M + (StartAB1KM * GateRadiusKm);
             Vector Start_A_O = Start_A_M + StartLotOrientation;
 
-            t_Line Start_A;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.START_A))
+            Line Start_A;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.START_A))
             {
-                Start_A = parcour.t_Line.Single(p => p.Type == (int)LineType.START_A);
+                Start_A = parcour.Line.Single(p => p.Type == (int)LineType.START_A);
             }
             else
             {
-                Start_A = new t_Line();
+                Start_A = new Line();
                 Start_A.Type = (int)LineType.START_A;
-                parcour.t_Line.Add(Start_A);
+                parcour.Line.Add(Start_A);
             }
             Start_A.A = Factory.newGPSPoint(c.XtoLongitude(Start_A_A.X), c.YtoLatitude(Start_A_A.Y), 0);
             Start_A.B = Factory.newGPSPoint(c.XtoLongitude(Start_A_B.X), c.YtoLatitude(Start_A_B.Y), 0);
@@ -69,16 +69,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Start_D_B = StartBV;
             Vector Start_D_A = Start_D_M - (StartAB1KM * GateRadiusKm);
             Vector Start_D_O = Start_D_M + StartLotOrientation;
-            t_Line Start_D;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.START_D))
+            Line Start_D;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.START_D))
             {
-                Start_D = parcour.t_Line.Single(p => p.Type == (int)LineType.START_D);
+                Start_D = parcour.Line.Single(p => p.Type == (int)LineType.START_D);
             }
             else
             {
-                Start_D = new t_Line();
+                Start_D = new Line();
                 Start_D.Type = (int)LineType.START_D;
-                parcour.t_Line.Add(Start_D);
+                parcour.Line.Add(Start_D);
             }
             Start_D.A = Factory.newGPSPoint(c.XtoLongitude(Start_D_A.X), c.YtoLatitude(Start_D_A.Y), 0);
             Start_D.B = Factory.newGPSPoint(c.XtoLongitude(Start_D_B.X), c.YtoLatitude(Start_D_B.Y), 0);
@@ -90,16 +90,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Start_B_B = Start_B_M + (StartAB1KM * GateRadiusKm);
             Vector Start_B_O = Start_B_M + StartLotOrientation;
 
-            t_Line Start_B;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.START_B))
+            Line Start_B;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.START_B))
             {
-                Start_B = parcour.t_Line.Single(p => p.Type == (int)LineType.START_B);
+                Start_B = parcour.Line.Single(p => p.Type == (int)LineType.START_B);
             }
             else
             {
-                Start_B = new t_Line();
+                Start_B = new Line();
                 Start_B.Type = (int)LineType.START_B;
-                parcour.t_Line.Add(Start_B);
+                parcour.Line.Add(Start_B);
             }
             Start_B.A = Factory.newGPSPoint(c.XtoLongitude(Start_B_A.X), c.YtoLatitude(Start_B_A.Y), 0);
             Start_B.B = Factory.newGPSPoint(c.XtoLongitude(Start_B_B.X), c.YtoLatitude(Start_B_B.Y), 0);
@@ -109,16 +109,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Start_C_B = Start_C_M - (StartAB1KM * GateRadiusKm);
             Vector Start_C_A = Start_C_M + (StartAB1KM * GateRadiusKm);
             Vector Start_C_O = Start_C_M + StartLotOrientation;
-            t_Line Start_C;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.START_C))
+            Line Start_C;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.START_C))
             {
-                Start_C = parcour.t_Line.Single(p => p.Type == (int)LineType.START_C);
+                Start_C = parcour.Line.Single(p => p.Type == (int)LineType.START_C);
             }
             else
             {
-                Start_C = new t_Line();
+                Start_C = new Line();
                 Start_C.Type = (int)LineType.START_C;
-                parcour.t_Line.Add(Start_C);
+                parcour.Line.Add(Start_C);
             }
             Start_C.A = Factory.newGPSPoint(c.XtoLongitude(Start_C_A.X), c.YtoLatitude(Start_C_A.Y), 0);
             Start_C.B = Factory.newGPSPoint(c.XtoLongitude(Start_C_B.X), c.YtoLatitude(Start_C_B.Y), 0);
@@ -142,16 +142,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Ende_A_M = Start_A_M + StartEnd;
             Vector Ende_A_O = Start_A_O + StartEnd;
 
-            t_Line END_A;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.END_A))
+            Line END_A;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.END_A))
             {
-                END_A = parcour.t_Line.Single(p => p.Type == (int)LineType.END_A);
+                END_A = parcour.Line.Single(p => p.Type == (int)LineType.END_A);
             }
             else
             {
-                END_A = new t_Line();
+                END_A = new Line();
                 END_A.Type = (int)LineType.END_A;
-                parcour.t_Line.Add(END_A);
+                parcour.Line.Add(END_A);
             }
             END_A.A = Factory.newGPSPoint(c.XtoLongitude(Ende_A_A.X), c.YtoLatitude(Ende_A_A.Y), 0);
             END_A.B = Factory.newGPSPoint(c.XtoLongitude(Ende_A_B.X), c.YtoLatitude(Ende_A_B.Y), 0);
@@ -162,16 +162,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Ende_B_M = Start_B_M + StartEnd;
             Vector Ende_B_O = Start_B_O + StartEnd;
 
-            t_Line END_B;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.END_B))
+            Line END_B;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.END_B))
             {
-                END_B = parcour.t_Line.Single(p => p.Type == (int)LineType.END_B);
+                END_B = parcour.Line.Single(p => p.Type == (int)LineType.END_B);
             }
             else
             {
-                END_B = new t_Line();
+                END_B = new Line();
                 END_B.Type = (int)LineType.END_B;
-                parcour.t_Line.Add(END_B);
+                parcour.Line.Add(END_B);
             }
             END_B.A = Factory.newGPSPoint(c.XtoLongitude(Ende_B_A.X), c.YtoLatitude(Ende_B_A.Y), 0);
             END_B.B = Factory.newGPSPoint(c.XtoLongitude(Ende_B_B.X), c.YtoLatitude(Ende_B_B.Y), 0);
@@ -181,16 +181,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Ende_C_B = Start_C_B + StartEnd;
             Vector Ende_C_M = Start_C_M + StartEnd;
             Vector Ende_C_O = Start_C_O + StartEnd;
-            t_Line END_C;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.END_C))
+            Line END_C;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.END_C))
             {
-                END_C = parcour.t_Line.Single(p => p.Type == (int)LineType.END_C);
+                END_C = parcour.Line.Single(p => p.Type == (int)LineType.END_C);
             }
             else
             {
-                END_C = new t_Line();
+                END_C = new Line();
                 END_C.Type = (int)LineType.END_C;
-                parcour.t_Line.Add(END_C);
+                parcour.Line.Add(END_C);
             }
             END_C.A = Factory.newGPSPoint(c.XtoLongitude(Ende_C_A.X), c.YtoLatitude(Ende_C_A.Y), 0);
             END_C.B = Factory.newGPSPoint(c.XtoLongitude(Ende_C_B.X), c.YtoLatitude(Ende_C_B.Y), 0);
@@ -200,16 +200,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector Ende_D_B = Start_D_B + StartEnd;
             Vector Ende_D_M = Start_D_M + StartEnd;
             Vector Ende_D_O = Start_D_O + StartEnd;
-            t_Line END_D;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.END_D))
+            Line END_D;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.END_D))
             {
-                END_D = parcour.t_Line.Single(p => p.Type == (int)LineType.END_D);
+                END_D = parcour.Line.Single(p => p.Type == (int)LineType.END_D);
             }
             else
             {
-                END_D = new t_Line();
+                END_D = new Line();
                 END_D.Type = (int)LineType.END_D;
-                parcour.t_Line.Add(END_D);
+                parcour.Line.Add(END_D);
             }
             END_D.A = Factory.newGPSPoint(c.XtoLongitude(Ende_D_A.X), c.YtoLatitude(Ende_D_A.Y), 0);
             END_D.B = Factory.newGPSPoint(c.XtoLongitude(Ende_D_B.X), c.YtoLatitude(Ende_D_B.Y), 0);
@@ -223,16 +223,16 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector LONR_A = StartAV + StartToLONR;
             Vector LONR_B = StartBV + StartToLONR;
             Vector LONR_O = StartOV + StartToLONR;
-            t_Line LONR;
-            if (parcour.t_Line.Any(p => p.Type == (int)LineType.LINEOFNORETURN))
+            Line LONR;
+            if (parcour.Line.Any(p => p.Type == (int)LineType.LINEOFNORETURN))
             {
-                LONR = parcour.t_Line.Single(p => p.Type == (int)LineType.LINEOFNORETURN);
+                LONR = parcour.Line.Single(p => p.Type == (int)LineType.LINEOFNORETURN);
             }
             else
             {
-                LONR = new t_Line();
+                LONR = new Line();
                 LONR.Type = (int)LineType.LINEOFNORETURN;
-                parcour.t_Line.Add(LONR);
+                parcour.Line.Add(LONR);
             }
             LONR.A = Factory.newGPSPoint(c.XtoLongitude(LONR_A.X), c.YtoLatitude(LONR_A.Y), 0);
             LONR.B = Factory.newGPSPoint(c.XtoLongitude(LONR_B.X), c.YtoLatitude(LONR_B.Y), 0);
@@ -242,7 +242,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         }
 
-        private void CalculateParcour(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double channel)
+        private void CalculateParcour(Parcour parcour, Converter c, double channel)
         {
             ParcourModel pm = new ParcourModel(parcour, c, EndLineDist, channel);
             List<List<ParcourModel>> modelList = new List<List<ParcourModel>>();
@@ -313,9 +313,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             bestModel.addPolygons();
             lock (parcour)
             {
-                foreach( t_Line line in parcour.t_Line.Where(p => p.Type == (int)LineType.Point))
+                foreach( Line line in parcour.Line.Where(p => p.Type == (int)LineType.Point))
                 {
-                    parcour.t_Line.Remove(line);
+                    parcour.Line.Remove(line);
                 }
                 foreach (ParcourChannel pc in bestModel.getChannels())
                 {
@@ -324,28 +324,28 @@ namespace AirNavigationRaceLive.Comps.Helper
                     {
                         if (last != null)
                         {
-                            t_Line l = new t_Line();
+                            Line l = new Line();
                             l.Type = (int)LineType.Point;
                             l.A = Factory.newGPSPoint(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
                             l.B = Factory.newGPSPoint(c.XtoLongitude(last.X), c.YtoLatitude(last.Y), 0);
                             if (pc.ImmutablePoints.Contains(last))
                             {
-                                l.A.edited = true;
-                                l.B.edited = true;
+                                //TODO l.A.edited = true;
+                                //TODO l.B.edited = true;
                             }
                             l.O = Factory.newGPSPoint(c.XtoLongitude(v.X), c.YtoLatitude(v.Y), 0);
                             if (pc.ImmutablePoints.Contains(v))
                             {
-                                l.O.edited = true;
+                                //TODO l.O.edited = true;
                             }
-                            parcour.t_Line.Add(l);
+                            parcour.Line.Add(l);
                         }
                         last = v;
                     }
                 }
-                foreach (t_Line line in parcour.t_Line.Where(p => p.Type == (int)LineType.PENALTYZONE))
+                foreach (Line line in parcour.Line.Where(p => p.Type == (int)LineType.PENALTYZONE))
                 {
-                    parcour.t_Line.Remove(line);
+                    parcour.Line.Remove(line);
                 }
                 foreach (ParcourPolygon pg in bestModel.getPolygons())
                 {
@@ -359,18 +359,18 @@ namespace AirNavigationRaceLive.Comps.Helper
 
                     for (int i = 0; i < count; i++)
                     {
-                        t_Line l = new t_Line();
+                        Line l = new Line();
                         l.Type = (int)LineType.PENALTYZONE;
                         l.A = Factory.newGPSPoint(c.XtoLongitude(pg.getEdges()[i].X), c.YtoLatitude(pg.getEdges()[i].Y), 0);
                         l.B = Factory.newGPSPoint(c.XtoLongitude(pg.getEdges()[(i + 1) % count].X), c.YtoLatitude(pg.getEdges()[(i + 1) % count].Y), 0);
                         l.O = Factory.newGPSPoint(c.XtoLongitude(mid.X), c.YtoLatitude(mid.Y), 0);
-                        parcour.t_Line.Add(l);
+                        parcour.Line.Add(l);
                     }
                 }
             }
         }
 
-        internal void RecalcParcour(Model.Parcour parcour, Converter c,double channel)
+        internal void RecalcParcour(Parcour parcour, Converter c,double channel)
         {
             this.parcour = parcour;
             this.c = c;

@@ -14,18 +14,17 @@ namespace AirNavigationRaceLive.Comps
 {
     public partial class Visualisation : UserControl
     {
-        private Client.Client Client;
+        private Client.DataAccess Client;
         private VisualisationPopup vp;
         private GEControll controll = new GEControll();
         private Timer t;
-        private t_Competition comp;
-        private List<t_Team> teamlist = new List<t_Team>();
-        private List<t_Competition_Team> competitonTeamlist = new List<t_Competition_Team>();
+        private QualificationRound comp;
+        private List<Flight> flights = new List<Flight>();
         private volatile bool updating = false;
-        private t_Parcour parcour;
+        private Parcour parcour;
         private RankForm rankForm;
-        private List<t_Penalty> penaltyPoints = new List<t_Penalty>();
-        public Visualisation(Client.Client iClient)
+        private List<Penalty> penaltyPoints = new List<Penalty>();
+        public Visualisation(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -42,60 +41,44 @@ namespace AirNavigationRaceLive.Comps
                 updating = true;
                 long mintime = long.MaxValue;
                 long maxtime = long.MinValue;
-                List<t_GPSPoint> points = new List<t_GPSPoint>();
-                teamlist.Clear();
-                competitonTeamlist.Clear();
+                flights.Clear();
                 foreach (ListViewItem lvi in listViewCompetitionTeam.Items)
                 {
                     if (lvi.Checked && lvi.Tag != null)
                     {
-                        t_Competition_Team ct = lvi.Tag as t_Competition_Team;
-                        competitonTeamlist.Add(ct);
-                        t_Team t = Client.getTeam(ct.ID_Team);
-                        teamlist.Add(t);
-                        foreach(t_Tracker tracker in ct.t_Tracker)
-                        {
-                            points.AddRange(tracker.t_GPSPoint);
-                        }
+                        Flight ct = lvi.Tag as Flight;
+                        flights.Add(ct);
                         mintime = Math.Min(mintime, ct.TimeTakeOff);
-                        maxtime = Math.Max(maxtime, ct.TimeEnd);
+                        maxtime = Math.Max(maxtime, ct.TimeEndLine);
                     }
                 }
-                recieveData(points);
+                recieveData();
             }
         }
-        public void recieveData(List<t_GPSPoint> data)
+        public void recieveData()
         {
             try
             {
-                if (data != null)
+                if (flights.Count>0)
                 {
-                    controll.SetDaten(data, teamlist.ToList(), competitonTeamlist);
-                    visualisationPictureBox1.SetData(data, teamlist.ToList(), competitonTeamlist);
+                    controll.SetDaten(flights);
+                    visualisationPictureBox1.SetData(flights);
                     visualisationPictureBox1.Invalidate();
-
                     if (comp != null)
                     {
                         penaltyPoints.Clear();
-                        foreach (t_Competition_Team g in competitonTeamlist)
+                        foreach (Flight flight in flights)
                         {
-                            teamlist.Clear();
-                            t_Team t = Client.getTeam(g.ID_Team);
-                            if (g.t_Tracker.Count > 0)
+                            Team t = flight.Team;
+                            if (flight.Point4D.Count>0)
                             {
-                                teamlist.Add(t);
-                                List<t_Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(comp, g,Client.getParcour(comp.ID_Parcour), data.Where(p => g.t_Tracker.Any(tr=>tr.ID==p.t_Tracker.ID)).ToList(), (NetworkObjects.Route)g.Route);
-                                foreach (t_Penalty p in penalties)
-                                {
-                                    p.ID_Competition_Team = g.ID;
-                                }
+                                List<Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(flight);
                                 penaltyPoints.AddRange(penalties);
-
                             }
                         }
                         if (rankForm != null && !rankForm.IsDisposed)
                         {
-                            rankForm.SetData(penaltyPoints, competitonTeamlist.ToList(), Client);
+                            rankForm.SetData(penaltyPoints, flights.ToList(), Client);
                         }
                     }
                 }
@@ -114,9 +97,9 @@ namespace AirNavigationRaceLive.Comps
                 {
                     comp = cce.comp;
 
-                    parcour = Client.getParcour(comp.ID_Parcour);
-                    t_Map map = Client.getMap(parcour.ID_Map);
-                    MemoryStream ms = new MemoryStream(Client.gett_Picture(map.ID_Picture).Data);
+                    parcour = comp.Parcour;
+                    Map map = parcour.Map;
+                    MemoryStream ms = new MemoryStream(map.Picture.Data);
                     visualisationPictureBox1.Image = System.Drawing.Image.FromStream(ms);
                     visualisationPictureBox1.SetConverter(new Converter(map));
                     visualisationPictureBox1.SetParcour(parcour);
@@ -124,27 +107,26 @@ namespace AirNavigationRaceLive.Comps
                     visualisationPictureBox1.Refresh();
                     controll.SetParcour(parcour);
                     listViewCompetitionTeam.Items.Clear();
-                    List<t_Competition_Team> CompetitionTeamList = comp.t_Competition_Team.ToList();
+                    List<Flight> CompetitionTeamList = comp.Flight.ToList();
                     CompetitionTeamList.Sort((p, q) => p.StartID.CompareTo(q.StartID));
-                    foreach (t_Competition_Team ct in CompetitionTeamList)
+                    foreach (Flight ct in CompetitionTeamList)
                     {
-                        ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(),getTeamDsc(ct.ID_Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStart).ToShortTimeString(), new DateTime(ct.TimeEnd).ToShortTimeString(), getRouteText(ct.Route) });
+                        ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(),getTeamDsc(ct.Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
                         lvi2.Tag = ct;
                         listViewCompetitionTeam.Items.Add(lvi2);
                     }
                 }
             }
         }
-        private string getTeamDsc(int ID_Team)
+        private string getTeamDsc(Team team)
         {
-            t_Team team = Client.getTeam(ID_Team);
-            t_Pilot pilot = Client.getPilot(team.ID_Pilot);
+            Subscriber pilot = team.Pilot;
             StringBuilder sb = new StringBuilder();
-            sb.Append(pilot.LastName).Append(" ").Append(pilot.SureName);
-            if (team.ID_Navigator.HasValue)
+            sb.Append(pilot.LastName).Append(" ").Append(pilot.FirstName);
+            if (team.Navigator!=null)
             {
-                t_Pilot navi = Client.getPilot(team.ID_Navigator.Value);
-                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.SureName);
+                Subscriber navi = team.Navigator;
+                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.FirstName);
             }
             return sb.ToString();
         }
@@ -171,9 +153,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void Visualisation_Load(object sender, EventArgs e)
         {
-            List<t_Competition> comps = Client.getCompetitions();
+            List<QualificationRound> comps = Client.DBContext.QualificationRoundSet.ToList();
             comboBox1.Items.Clear();
-            foreach (t_Competition c in comps)
+            foreach (QualificationRound c in comps)
             {
                 comboBox1.Items.Add(new CompetitionComboEntry(c));
             }
@@ -210,14 +192,14 @@ namespace AirNavigationRaceLive.Comps
     }
     class CompetitionComboEntry
     {
-        public readonly t_Competition comp;
-        public CompetitionComboEntry(t_Competition comp)
+        public readonly QualificationRound comp;
+        public CompetitionComboEntry(QualificationRound comp)
         {
             this.comp = comp;
         }
         public override string ToString()
         {
-            return comp.ID + " " + comp.Name;
+            return comp.Name;
         }
     }
 }

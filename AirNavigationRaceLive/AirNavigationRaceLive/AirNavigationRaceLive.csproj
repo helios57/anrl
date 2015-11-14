@@ -151,32 +151,36 @@
     <Compile Include="AirNavigationRaceLiveMain.Designer.cs">
       <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="AnrlModel.Context.cs">
+    <Compile Include="AnrlModel2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AnrlModel.Context.tt</DependentUpon>
+      <DependentUpon>AnrlModel2.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="AnrlModel.cs">
+    <Compile Include="AnrlModel2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AnrlModel.tt</DependentUpon>
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
     </Compile>
-    <Compile Include="AnrlModel.Designer.cs">
+    <Compile Include="AnrlModel2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AnrlModel.edmx</DependentUpon>
+      <DependentUpon>AnrlModel2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Competition.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
     </Compile>
     <Compile Include="Comps\Client\Client.cs" />
-    <Compile Include="Comps\Competition.cs">
+    <Compile Include="Comps\CompetitionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Comps\Competition.Designer.cs">
-      <DependentUpon>Competition.cs</DependentUpon>
+    <Compile Include="Comps\CompetitionControl.Designer.cs">
+      <DependentUpon>CompetitionControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\Helper\Enums.cs" />
     <Compile Include="Comps\Helper\Factory.cs" />
     <Compile Include="Comps\Helper\ParcourGeneratorSingle.cs" />
     <Compile Include="Comps\Helper\ParcourModelSingle.cs" />
+    <Compile Include="Comps\Model\PointTemporaer.cs" />
     <Compile Include="Comps\ParcourEditSingle.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,11 +199,11 @@
     <Compile Include="Comps\MapSelection.designer.cs">
       <DependentUpon>MapSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comps\QualificationRound.cs">
+    <Compile Include="Comps\QualificationRoundControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Comps\QualificationRound.Designer.cs">
-      <DependentUpon>QualificationRound.cs</DependentUpon>
+    <Compile Include="Comps\QualificationRoundControl.Designer.cs">
+      <DependentUpon>QualificationRoundControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\Helper\PDFCreator.cs" />
     <Compile Include="Comps\Helper\Status.cs" />
@@ -225,12 +229,6 @@
     </Compile>
     <Compile Include="Comps\ParcourEdit.Designer.cs">
       <DependentUpon>ParcourEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Comps\UploadGPS.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Comps\UploadGPS.Designer.cs">
-      <DependentUpon>UploadGPS.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\ParcourOverview.cs">
       <SubType>UserControl</SubType>
@@ -266,7 +264,7 @@
     <Compile Include="Comps\Helper\Utils.cs" />
     <Compile Include="Comps\Helper\Vector.cs" />
     <Compile Include="Comps\Helper\wgs84_ch1903.cs" />
-    <Compile Include="Comps\Model\Parcour.cs" />
+    <Compile Include="Comps\Model\ParcourModel.cs" />
     <Compile Include="Comps\ParcourGen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -279,11 +277,11 @@
     <Compile Include="Comps\MapLegacy.Designer.cs">
       <DependentUpon>MapLegacy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comps\Map.cs">
+    <Compile Include="Comps\MapControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Comps\Map.Designer.cs">
-      <DependentUpon>Map.cs</DependentUpon>
+    <Compile Include="Comps\MapControl.Designer.cs">
+      <DependentUpon>MapControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\Credits.cs">
       <SubType>UserControl</SubType>
@@ -297,17 +295,11 @@
     <Compile Include="Comps\Pilot.Designer.cs">
       <DependentUpon>Pilot.cs</DependentUpon>
     </Compile>
-    <Compile Include="Comps\Team.cs">
+    <Compile Include="Comps\TeamControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Comps\Team.Designer.cs">
-      <DependentUpon>Team.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Comps\Tracker.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Comps\Tracker.Designer.cs">
-      <DependentUpon>Tracker.cs</DependentUpon>
+    <Compile Include="Comps\TeamControl.Designer.cs">
+      <DependentUpon>TeamControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Comps\Visualisation.cs">
       <SubType>UserControl</SubType>
@@ -351,59 +343,48 @@
     <Compile Include="Dialogs\Calculator.Designer.cs">
       <DependentUpon>Calculator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Flight.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Line.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Map.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parcour.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Penalty.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Picture.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Point.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Point4D.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="t_Competition.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
+    <Compile Include="QualificationRound.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
     </Compile>
-    <Compile Include="t_CompetitionSet.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
+    <Compile Include="Subscriber.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
     </Compile>
-    <Compile Include="t_Competition_Team.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Daten.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_GPSPoint.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_GPS_IN.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Line.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Log.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Map.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Parcour.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Penalty.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Picture.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Pilot.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Team.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="t_Tracker.cs">
-      <DependentUpon>AnrlModel.tt</DependentUpon>
+    <Compile Include="Team.cs">
+      <DependentUpon>AnrlModel2.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AirNavigationRaceLiveMain.resx">
       <DependentUpon>AirNavigationRaceLiveMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comps\Competition.resx">
-      <DependentUpon>Competition.cs</DependentUpon>
+    <EmbeddedResource Include="Comps\CompetitionControl.resx">
+      <DependentUpon>CompetitionControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourEditSingle.resx">
       <DependentUpon>ParcourEditSingle.cs</DependentUpon>
@@ -414,8 +395,8 @@
     <EmbeddedResource Include="Comps\MapSelection.resx">
       <DependentUpon>MapSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comps\QualificationRound.resx">
-      <DependentUpon>QualificationRound.cs</DependentUpon>
+    <EmbeddedResource Include="Comps\QualificationRoundControl.resx">
+      <DependentUpon>QualificationRoundControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Results.resx">
       <DependentUpon>Results.cs</DependentUpon>
@@ -425,9 +406,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourEdit.resx">
       <DependentUpon>ParcourEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Comps\UploadGPS.resx">
-      <DependentUpon>UploadGPS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourOverview.resx">
       <DependentUpon>ParcourOverview.cs</DependentUpon>
@@ -441,20 +419,18 @@
     <EmbeddedResource Include="Comps\MapLegacy.resx">
       <DependentUpon>MapLegacy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comps\Map.resx">
-      <DependentUpon>Map.cs</DependentUpon>
+    <EmbeddedResource Include="Comps\MapControl.resx">
+      <DependentUpon>MapControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Credits.resx">
       <DependentUpon>Credits.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Pilot.resx">
       <DependentUpon>Pilot.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Comps\Team.resx">
-      <DependentUpon>Team.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Comps\Tracker.resx">
-      <DependentUpon>Tracker.cs</DependentUpon>
+    <EmbeddedResource Include="Comps\TeamControl.resx">
+      <DependentUpon>TeamControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\Visualisation.resx">
       <DependentUpon>Visualisation.cs</DependentUpon>
@@ -489,12 +465,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="AirNavigationRaceLive_TemporaryKey.pfx" />
-    <EntityDeploy Include="AnrlModel.edmx">
+    <EntityDeploy Include="AnrlModel2.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AnrlModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>AnrlModel2.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AnrlModel.edmx.diagram">
-      <DependentUpon>AnrlModel.edmx</DependentUpon>
+    <None Include="AnrlModel2.edmx.diagram">
+      <DependentUpon>AnrlModel2.edmx</DependentUpon>
     </None>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -531,16 +507,16 @@
     <Content Include="anrl.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="AnrlModel.Context.tt">
+    <Content Include="AnrlModel2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AnrlModel.edmx</DependentUpon>
-      <LastGenOutput>AnrlModel.Context.cs</LastGenOutput>
+      <LastGenOutput>AnrlModel2.Context.cs</LastGenOutput>
+      <DependentUpon>AnrlModel2.edmx</DependentUpon>
     </Content>
-    <Content Include="AnrlModel.edmx.sql" />
-    <Content Include="AnrlModel.tt">
+    <Content Include="AnrlModel2.edmx.sql" />
+    <Content Include="AnrlModel2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AnrlModel.edmx</DependentUpon>
-      <LastGenOutput>AnrlModel.cs</LastGenOutput>
+      <LastGenOutput>AnrlModel2.cs</LastGenOutput>
+      <DependentUpon>AnrlModel2.edmx</DependentUpon>
     </Content>
     <Content Include="anrl_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -16,28 +16,28 @@ namespace AirNavigationRaceLive.Comps
     {
         Cursor select = new Cursor(@"Resources\GPSCursor.cur");
         Cursor move = new Cursor(@"Resources\GPSCursorModify.cur");
-        private Client.Client Client;
+        private Client.DataAccess Client;
         Converter c = null;
-        private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
-        private t_GPSPoint dragPoint = null;
-        private readonly List<t_GPSPoint> gluePoints = new List<t_GPSPoint>();
-        private readonly List<t_GPSPoint> connectedPoints = new List<t_GPSPoint>();
-        private t_GPSPoint hoverPoint = null;
-        private t_GPSPoint selectedPoint = null;
+        private Parcour activeParcour;
+        private Point dragPoint = null;
+        private readonly List<Point> gluePoints = new List<Point>();
+        private readonly List<Point> connectedPoints = new List<Point>();
+        private Point hoverPoint = null;
+        private Point selectedPoint = null;
         ParcourGeneratorSingle pc;
         Timer t;
-        private t_Map CurrentMap = null;
+        private Map CurrentMap = null;
         private volatile bool drag = false;
         private volatile bool setStartPoint = false;
         private volatile bool setEndPoint = false;
         private volatile bool generatedParcour;
 
-        public ParcourEditSingle(Client.Client iClient)
+        public ParcourEditSingle(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();
             PictureBox1.Cursor = select;
-            activeParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
+            activeParcour = new Parcour();
             PictureBox1.SetParcour(activeParcour);
         }
         #region load
@@ -53,22 +53,22 @@ namespace AirNavigationRaceLive.Comps
         private void loadMaps()
         {
             comboBoxParcours.Items.Clear();
-            List<t_Parcour> parcours = Client.getParcours();
-            AirNavigationRaceLive.Comps.Model.Parcour newParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
+            List<Parcour> parcours = Client.SelectedCompetition.Parcour.ToList();
+            Parcour newParcour = new Parcour();
             newParcour.Name = "New Parcour";
-            newParcour.t_Line.Clear();
-            newParcour.t_Line.Add(new t_Line());
+            newParcour.Line.Clear();
+            newParcour.Line.Add(new Line());
             comboBoxParcours.Items.Add(new ListItem(newParcour));
-            foreach (t_Parcour p in parcours)
+            foreach (Parcour p in parcours)
             {
-                if (p.t_Line.Count(pp => pp.Type == (int)LineType.START_B || pp.Type == (int)LineType.START_C || pp.Type == (int)LineType.START_D) == 0)
+                if (p.Line.Count(pp => pp.Type == (int)LineType.START_B || pp.Type == (int)LineType.START_C || pp.Type == (int)LineType.START_D) == 0)
                 {
                     comboBoxParcours.Items.Add(new ListItem(p));
                 }
             }
             comboBoxMaps.Items.Clear();
-            List<t_Map> maps = Client.getMaps();
-            foreach (t_Map m in maps)
+            List<Map> maps = Client.SelectedCompetition.Map.ToList();
+            foreach (Map m in maps)
             {
                 comboBoxMaps.Items.Add(new ListItemMap(m));
             }
@@ -76,8 +76,8 @@ namespace AirNavigationRaceLive.Comps
 
         class ListItemMap
         {
-            private t_Map map;
-            public ListItemMap(t_Map imap)
+            private Map map;
+            public ListItemMap(Map imap)
             {
                 map = imap;
             }
@@ -86,7 +86,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return map.Name;
             }
-            public t_Map getMap()
+            public Map getMap()
             {
                 return map;
             }
@@ -94,8 +94,8 @@ namespace AirNavigationRaceLive.Comps
 
         class ListItem
         {
-            private t_Parcour parcour;
-            public ListItem(t_Parcour iparcour)
+            private Parcour parcour;
+            public ListItem(Parcour iparcour)
             {
                 parcour = iparcour;
             }
@@ -104,7 +104,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return parcour.Name;
             }
-            public t_Parcour getParcour()
+            public Parcour getParcour()
             {
                 return parcour;
             }
@@ -133,20 +133,20 @@ namespace AirNavigationRaceLive.Comps
                     double oldLong = dragPoint.longitude;
                     dragPoint.latitude = newLatitude;
                     dragPoint.longitude = newLongitude;
-                    dragPoint.edited = true;
-                    foreach (t_GPSPoint p in gluePoints)
+                    //TODO dragPoint.edited = true;
+                    foreach (Point p in gluePoints)
                     {
                         p.latitude = newLatitude;
                         p.longitude = newLongitude;
-                        p.edited = true;
+                        //TODO     p.edited = true;
                     }
-                    foreach (t_GPSPoint p in connectedPoints)
+                    foreach (Point p in connectedPoints)
                     {
                         if (p != dragPoint)
                         {
                             p.latitude = dragPoint.latitude + (p.latitude - oldLat);
                             p.longitude = dragPoint.longitude + (p.longitude - oldLong);
-                            p.edited = true;
+                            //TODO p.edited = true;
                         }
                     }
                     PictureBox1.Invalidate();
@@ -157,7 +157,7 @@ namespace AirNavigationRaceLive.Comps
                     bool pointSet = false;
                     lock (activeParcour)
                     {
-                        foreach (t_Line l in activeParcour.t_Line)
+                        foreach (Line l in activeParcour.Line)
                         {
                             int startX = c.getStartX(l);
                             int startY = c.getStartY(l);
@@ -172,9 +172,9 @@ namespace AirNavigationRaceLive.Comps
                             {
                                 SetHoverPoint(l.A, l);
                                 gluePoints.Clear();
-                                gluePoints.AddRange(findGluePoints(activeParcour.t_Line, l.A));
+                                gluePoints.AddRange(findGluePoints(activeParcour.Line, l.A));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.t_Line, l.A, l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.Line, l.A, l));
                                 pointSet = true;
                                 PictureBox1.Cursor = move;
                                 break;
@@ -183,9 +183,9 @@ namespace AirNavigationRaceLive.Comps
                             {
                                 SetHoverPoint(l.B, l);
                                 gluePoints.Clear();
-                                gluePoints.AddRange(findGluePoints(activeParcour.t_Line, l.B));
+                                gluePoints.AddRange(findGluePoints(activeParcour.Line, l.B));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.t_Line, l.B, l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.Line, l.B, l));
                                 pointSet = true;
                                 PictureBox1.Cursor = move;
                                 break;
@@ -195,9 +195,9 @@ namespace AirNavigationRaceLive.Comps
                             {
                                 SetHoverPoint(l.O, l);
                                 gluePoints.Clear();
-                                gluePoints.AddRange(findGluePoints(activeParcour.t_Line, l.O));
+                                gluePoints.AddRange(findGluePoints(activeParcour.Line, l.O));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.t_Line, l.O, l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.Line, l.O, l));
                                 pointSet = true;
                                 PictureBox1.Cursor = move;
                                 break;
@@ -213,10 +213,10 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        private List<t_GPSPoint> findGluePoints(ICollection<t_Line> t_Line, t_GPSPoint original)
+        private List<Point> findGluePoints(ICollection<Line> Line, Point original)
         {
-            List<t_GPSPoint> result = new List<t_GPSPoint>();
-            foreach (t_Line l in t_Line)
+            List<Point> result = new List<Point>();
+            foreach (Line l in Line)
             {
                 if (samePos(l.A, original) && !(original == l.A))
                 {
@@ -233,10 +233,10 @@ namespace AirNavigationRaceLive.Comps
             }
             return result;
         }
-        private List<t_GPSPoint> findConnectedPoints(ICollection<t_Line> t_Line, t_GPSPoint original, t_Line originalLine)
+        private List<Point> findConnectedPoints(ICollection<Line> Line, Point original, Line originalLine)
         {
-            List<t_GPSPoint> result = new List<t_GPSPoint>();
-            foreach (t_Line l in t_Line)
+            List<Point> result = new List<Point>();
+            foreach (Line l in Line)
             {
                 if (l.Type >= 3 && l.Type <= 10 && (l.A == original || l.B == original || l.O == original))
                 {
@@ -252,17 +252,17 @@ namespace AirNavigationRaceLive.Comps
                         result.Add(l.A);
                         result.Add(l.B);
                         result.Add(l.O);
-                        result.AddRange(findGluePoints(t_Line, l.O));
+                        result.AddRange(findGluePoints(Line, l.O));
                     }
                 }
             }
             return result;
         }
-        private bool samePos(t_GPSPoint a, t_GPSPoint b)
+        private bool samePos(Point a, Point b)
         {
             return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) == 0;
         }
-        private void SetHoverPoint(t_GPSPoint p, t_Line l)
+        private void SetHoverPoint(Point p, Line l)
         {
             bool change = hoverPoint != p;
             if (change)
@@ -277,13 +277,13 @@ namespace AirNavigationRaceLive.Comps
             ListItem li = comboBoxParcours.SelectedItem as ListItem;
             if (li != null)
             {
-                t_Parcour p = li.getParcour();
-                t_Map m = null;
+                Parcour p = li.getParcour();
+                Map m = null;
                 comboBoxMaps.SelectedItem = null;
-                if (p.ID_Map > 0)
+                if (p.Map!=null)
                 {
-                    m = Client.getMap(p.ID_Map);
-                    MemoryStream ms = new MemoryStream(Client.gett_Picture(m.ID_Picture).Data);
+                    m = p.Map;
+                    MemoryStream ms = new MemoryStream(m.Picture.Data);
                     PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                     c = new Converter(m);
                     PictureBox1.SetConverter(c);
@@ -300,17 +300,17 @@ namespace AirNavigationRaceLive.Comps
                 }
                 else
                 {
-                    p = new t_Parcour();
+                    p = new Parcour();
                 }
 
-                List<t_Line> toDelete = p.t_Line.Where(pp => pp.Type == (int)LineType.START || pp.Type == (int)LineType.END).ToList();
-                foreach (t_Line l in toDelete)
+                List<Line> toDelete = p.Line.Where(pp => pp.Type == (int)LineType.START || pp.Type == (int)LineType.END).ToList();
+                foreach (Line l in toDelete)
                 {
-                    p.t_Line.Remove(l);
+                    p.Line.Remove(l);
                 }
-                activeParcour = new Model.Parcour(p);
+                activeParcour = p;
                 PictureBox1.SetParcour(activeParcour);
-                generatedParcour = activeParcour.t_Line.Count(pp => pp.Type == (int)LineType.Point) > 0;
+                generatedParcour = activeParcour.Line.Count(pp => pp.Type == (int)LineType.Point) > 0;
             }
         }
 
@@ -320,9 +320,9 @@ namespace AirNavigationRaceLive.Comps
             ListItemMap limm = comboBoxMaps.SelectedItem as ListItemMap;
             if (limm != null)
             {
-                activeParcour = new Model.Parcour(new t_Parcour());
+                activeParcour = new Parcour();
                 CurrentMap = limm.getMap();
-                MemoryStream ms = new MemoryStream(Client.gett_Picture(CurrentMap.ID_Picture).Data);
+                MemoryStream ms = new MemoryStream(CurrentMap.Picture.Data);
                 PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 c = new Converter(CurrentMap);
                 PictureBox1.SetParcour(activeParcour);
@@ -333,7 +333,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnRecalc_Click(object sender, EventArgs e)
         {
-            if (!(activeParcour.t_Line.Count(p => p.Type == (int)LineType.START_A) == 1 && activeParcour.t_Line.Count(p => p.Type == (int)LineType.END_A) == 1))
+            if (!(activeParcour.Line.Count(p => p.Type == (int)LineType.START_A) == 1 && activeParcour.Line.Count(p => p.Type == (int)LineType.END_A) == 1))
             {
                 return;
             }
@@ -378,14 +378,16 @@ namespace AirNavigationRaceLive.Comps
             }
             else
             {
-                t_Parcour p = new t_Parcour();
+                Parcour p = new Parcour();
                 p.Name = fldName.Text;
-                foreach(t_Line l in activeParcour.t_Line)
+                foreach(Line l in activeParcour.Line)
                 {
-                    p.t_Line.Add(l);
+                    p.Line.Add(l);
                 }
-                p.ID_Map = CurrentMap.ID;
-                Client.saveParcour(p);
+                p.Map = CurrentMap;
+                p.Competition = Client.SelectedCompetition;
+                Client.DBContext.ParcourSet.Add(p);
+                Client.DBContext.SaveChanges();
                 MessageBox.Show("Successfully saved");
             }
         }
@@ -405,7 +407,7 @@ namespace AirNavigationRaceLive.Comps
             drag = true;
             if (activeParcour != null && hoverPoint != null)
             {
-                foreach (t_Line l in activeParcour.t_Line)
+                foreach (Line l in activeParcour.Line)
                 {
                     if (l.Type <= 10 && l.Type >= 3 && (l.O == hoverPoint || l.A == hoverPoint || l.B == hoverPoint))
                     {
@@ -438,34 +440,34 @@ namespace AirNavigationRaceLive.Comps
 
                 if (setStartPoint)
                 {
-                    List<t_Line> toDelete = activeParcour.t_Line.Where(pp => pp.Type == (int)LineType.START_A).ToList();
-                    foreach (t_Line ll in toDelete)
+                    List<Line> toDelete = activeParcour.Line.Where(pp => pp.Type == (int)LineType.START_A).ToList();
+                    foreach (Line ll in toDelete)
                     {
-                        activeParcour.t_Line.Remove(ll);
+                        activeParcour.Line.Remove(ll);
                     }
-                    t_Line l = new t_Line();
+                    Line l = new Line();
                     l.Type = (int)LineType.START_A;
 
                     l.A = Factory.newGPSPoint(longitude, latitude - channelLatitude, 0);
                     l.B = Factory.newGPSPoint(longitude, latitude + channelLatitude, 0);
                     l.O = Factory.newGPSPoint(longitude + channelLongitude, latitude, 0);
-                    activeParcour.t_Line.Add(l);
+                    activeParcour.Line.Add(l);
                 }
                 if (setEndPoint)
                 {
-                    List<t_Line> toDelete = activeParcour.t_Line.Where(pp => pp.Type == (int)LineType.END_A).ToList();
-                    foreach (t_Line ll in toDelete)
+                    List<Line> toDelete = activeParcour.Line.Where(pp => pp.Type == (int)LineType.END_A).ToList();
+                    foreach (Line ll in toDelete)
                     {
-                        activeParcour.t_Line.Remove(ll);
+                        activeParcour.Line.Remove(ll);
                     }
-                    t_Line l = new t_Line();
+                    Line l = new Line();
                     l.Type = (int)LineType.END_A;
 
                     l.A = Factory.newGPSPoint(longitude, latitude - channelLatitude, 0);
                     l.B = Factory.newGPSPoint(longitude, latitude + channelLatitude, 0);
                     l.O = Factory.newGPSPoint(longitude + channelLongitude, latitude, 0);
 
-                    activeParcour.t_Line.Add(l);
+                    activeParcour.Line.Add(l);
                 }
 
                 PictureBox1.Invalidate();
@@ -498,9 +500,9 @@ namespace AirNavigationRaceLive.Comps
         {
             if (activeParcour != null && comboBoxPoint.SelectedItem != null)
             {
-                if (activeParcour.t_Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
+                if (activeParcour.Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
                 {
-                    t_Line l = activeParcour.t_Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
+                    Line l = activeParcour.Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
                     Vector a = new Vector(l.A.longitude, l.A.latitude, 0);
                     Vector b = new Vector(l.B.longitude, l.B.latitude, 0);
                     Vector m = Vector.Middle(a, b);
@@ -512,8 +514,8 @@ namespace AirNavigationRaceLive.Comps
                     l.O.latitude += diff.Y;
                     l.B.longitude += diff.X;
                     l.B.latitude += diff.Y;
-                    List<t_GPSPoint> connectedPoints = findConnectedPoints(activeParcour.t_Line, l.A, l);
-                    foreach (t_GPSPoint p in connectedPoints)
+                    List<Point> connectedPoints = findConnectedPoints(activeParcour.Line, l.A, l);
+                    foreach (Point p in connectedPoints)
                     {
                         if (p != l.A && p != l.B && p != l.O)
                         {
@@ -531,9 +533,9 @@ namespace AirNavigationRaceLive.Comps
         {
             if (activeParcour != null && comboBoxPoint.SelectedItem != null)
             {
-                if (activeParcour.t_Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
+                if (activeParcour.Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
                 {
-                    t_Line l = activeParcour.t_Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
+                    Line l = activeParcour.Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
                     Vector a = new Vector(l.A.longitude, l.A.latitude, 0);
                     Vector b = new Vector(l.B.longitude, l.B.latitude, 0);
                     Vector m = Vector.Middle(a, b);

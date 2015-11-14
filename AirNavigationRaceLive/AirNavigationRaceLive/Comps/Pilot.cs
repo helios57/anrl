@@ -14,14 +14,12 @@ namespace AirNavigationRaceLive.Comps
 {
     public partial class Pilot : UserControl
     {
-        private Client.Client Client;
-        private int selectedId=0;
-        private bool newPilot;
+        private Client.DataAccess Client;
+        private Subscriber selectedSubscriber=null;
 
-        public Pilot(Client.Client iClient)
+        public Pilot(Client.DataAccess iClient)
         {
             Client = iClient;
-            newPilot = false;
             InitializeComponent();
         }
 
@@ -32,11 +30,11 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateListe()
         {
-            List<t_Pilot> pilots =Client.getPilots();
+            List<Subscriber> pilots =Client.SelectedCompetition.Subscriber.ToList();
             listViewPilots.Items.Clear();
-            foreach (t_Pilot p in pilots)
+            foreach (Subscriber p in pilots)
             {
-                ListViewItem lvi = new ListViewItem(new string[] { p.ID.ToString(), p.LastName, p.SureName });
+                ListViewItem lvi = new ListViewItem(new string[] { p.Id.ToString(), p.LastName, p.FirstName });
                 lvi.Tag = p;
                 listViewPilots.Items.Add(lvi);
             }
@@ -45,9 +43,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void UpdateEnablement()
         {
-            btnAddt_Picture.Enabled =((listViewPilots.SelectedItems.Count == 1) || newPilot);
+            btnAddt_Picture.Enabled =selectedSubscriber!=null;
             textBoxLastname.Enabled = btnAddt_Picture.Enabled;
-            textBoxSurename.Enabled = btnAddt_Picture.Enabled;
+            textBoxFirstName.Enabled = btnAddt_Picture.Enabled;
             btnSave.Enabled = btnAddt_Picture.Enabled && PictureBox.Image != null;
         }
 
@@ -56,21 +54,18 @@ namespace AirNavigationRaceLive.Comps
             if (listViewPilots.SelectedItems.Count == 1)
             {
                 ListViewItem lvi = listViewPilots.SelectedItems[0];
-                t_Pilot pilot = lvi.Tag as t_Pilot;
+                Subscriber pilot = lvi.Tag as Subscriber;
                 textBoxLastname.Text = pilot.LastName;
-                textBoxSurename.Text = pilot.SureName;
-                selectedId = pilot.ID;
-                newPilot = false;
-                if (pilot.ID_Picture > 0)
+                textBoxFirstName.Text = pilot.FirstName;
+                selectedSubscriber = pilot;
+                if (pilot.Picture!=null)
                 {
-                    MemoryStream ms = new MemoryStream(pilot.t_Picture.Data);
+                    MemoryStream ms = new MemoryStream(pilot.Picture.Data);
                     PictureBox.Image = System.Drawing.Image.FromStream(ms);
-                    textBoxt_PictureId.Text = pilot.t_Picture.ID.ToString(); 
                 }
                 else
                 {
                     PictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
-                    textBoxt_PictureId.Text ="0";
                 }
             }
             else
@@ -90,42 +85,41 @@ namespace AirNavigationRaceLive.Comps
         private void btnNew_Click(object sender, EventArgs e)
         {
             ResetFields();
-            newPilot = true;
+            selectedSubscriber = new Subscriber();
             UpdateEnablement();
         }
 
         private void ResetFields()
         {
-                newPilot = false;
                 textBoxLastname.Text = "";
-                textBoxSurename.Text = "";
-                selectedId = 0;
+                textBoxFirstName.Text = "";
+                selectedSubscriber = null;
                 PictureBox.Image = global::AirNavigationRaceLive.Properties.Resources._default;
-                textBoxt_PictureId.Text = "0"; 
                 UpdateEnablement();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int id = selectedId;
-            int picId = Int32.Parse(textBoxt_PictureId.Text);
-            if (picId == -1)
+            Subscriber pilot = selectedSubscriber;
+            if (pilot == null)
+            {
+                return;
+            }
+            pilot.LastName = textBoxLastname.Text;
+            pilot.FirstName =  textBoxFirstName.Text;
+            pilot.Competition = Client.SelectedCompetition;
+            if (PictureBox.Tag == null)
             {
                 MemoryStream ms = new MemoryStream();
                 PictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                t_Picture t_Picture = new t_Picture();
-                t_Picture.Data = ms.ToArray();
-                t_Picture.Name = textBoxLastname.Text + textBoxSurename.Text;
-                picId = Client.savePicture(t_Picture);
+                Picture pic = new Picture();
+                pic.Data = ms.ToArray();
+                pilot.Picture = pic;
             }
-            t_Pilot pilot = new t_Pilot();
-            pilot.ID = id;
-            pilot.LastName = textBoxLastname.Text;
-            pilot.SureName =  textBoxSurename.Text;
-            pilot.ID_Picture = picId;
-            pilot.t_CompetitionSet = Client.getSelectedCompetitionSet();
-            Client.savePilot(pilot);
-            newPilot = false;
+            if(pilot.Id == 0){
+                Client.DBContext.SubscriberSet.Add(pilot);
+            }
+            Client.DBContext.SaveChanges();
             ResetFields();
             UpdateListe();
             UpdateEnablement();
@@ -154,7 +148,7 @@ namespace AirNavigationRaceLive.Comps
         {
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox.Image = Image.FromFile(ofd.FileName);
-            textBoxt_PictureId.Text = "-1";
+            PictureBox.Tag = null;
             UpdateEnablement();
         }
     }

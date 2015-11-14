@@ -19,21 +19,21 @@ namespace AirNavigationRaceLive.Comps.Helper
         public double straightLength = 0;
         public double lenght = 0;
 
-        public ParcourModelSingle(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double channel, double channelLength)
+        public ParcourModelSingle(Parcour parcour, Converter c, double channel, double channelLength)
         {
             this.desiredLength = Converter.NMtoM(channelLength);
             this.channelWidth = Converter.NMtoM(channel);
             this.c = c;
-            List<t_Line> lines = new List<t_Line>(parcour.t_Line);
+            List<Line> lines = new List<Line>(parcour.Line);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_A), lines.Single(p => p.Type == (int)LineType.END_A));
         }
 
-        public ParcourModelSingle(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double channel, double channelLength, bool regenerate)
+        public ParcourModelSingle(Parcour parcour, Converter c, double channel, double channelLength, bool regenerate)
         {
             this.desiredLength = Converter.NMtoM(channelLength);
             this.channelWidth = Converter.NMtoM(channel);
             this.c = c;
-            List<t_Line> lines = new List<t_Line>(parcour.t_Line);
+            List<Line> lines = new List<Line>(parcour.Line);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_A), lines.Single(p => p.Type == (int)LineType.END_A), lines, LineType.START_A);
         }
 
@@ -49,7 +49,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         public void addPolygons()
         {
-            t_GPSPoint Start = new t_GPSPoint();
+            Point Start = new Point();
             Start.longitude = c.XtoLongitude(Channel.Start.X);
             Start.latitude = c.YtoLatitude(Channel.Start.Y);
             //TODO
@@ -168,14 +168,14 @@ namespace AirNavigationRaceLive.Comps.Helper
             Channel.Randomize(factor);
         }
 
-        private void AddLineAsCorridor(Converter c, t_Line start, t_Line end)
+        private void AddLineAsCorridor(Converter c, Line start, Line end)
         {
             Vector MiddleStart = Vector.Middle(getVector(c, start.A), getVector(c, start.B));
             Vector MiddleEnd = Vector.Middle(getVector(c, end.A), getVector(c, end.B));
             Channel = new ParcourChannelSingle(MiddleStart, MiddleEnd, c);
         }
 
-        private void AddLineAsCorridor(Converter c, t_Line start, t_Line end, List<t_Line> lines, LineType lineType)
+        private void AddLineAsCorridor(Converter c, Line start, Line end, List<Line> lines, LineType lineType)
         {
             Vector MiddleStart = Vector.Middle(getVector(c, start.A), getVector(c, start.B));
             Vector MiddleEnd = Vector.Middle(getVector(c, end.A), getVector(c, end.B));
@@ -187,7 +187,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             Channel = new ParcourChannelSingle(c);
         }
 
-        public static Vector getVector(Converter c, t_GPSPoint point)
+        public static Vector getVector(Converter c, Point point)
         {
             return new Vector(c.LongitudeToX(point.longitude), c.LatitudeToY(point.latitude), 0);
         }
@@ -223,18 +223,18 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
         }
 
-        public ParcourChannelSingle(Vector Start, Vector End, LineType type, List<t_Line> lines, Converter c)
+        public ParcourChannelSingle(Vector Start, Vector End, LineType type, List<Line> lines, Converter c)
         {
             this.Start = Start;
             this.End = End;
-            List<t_Line> pointLine = lines.Where(p => p.Type == (int)LineType.Point).ToList();
+            List<Line> pointLine = lines.Where(p => p.Type == (int)LineType.Point).ToList();
             int i = 0;
-            List<t_Line> corridorPoints = new List<t_Line>();
+            List<Line> corridorPoints = new List<Line>();
             for (int j = 0; j < 9; j++)
             {
                 corridorPoints.Add(pointLine[i + j]);
             }
-            foreach (t_Line l in corridorPoints)
+            foreach (Line l in corridorPoints)
             {
                 Vector v = ParcourModel.getVector(c, l.A);
 
@@ -246,11 +246,11 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             LinearCombinations.Add(End);
         }
-        private bool isEdited(t_Line l)
+        private bool isEdited(Line l)
         {
-            return l.A.edited || l.B.edited;
+            return false;//TODO l.A.edited || l.B.edited;
         }
-        private bool samePos(t_GPSPoint a, t_GPSPoint b)
+        private bool samePos(Point a, Point b)
         {
             return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) < 0.00001;
         }
@@ -291,10 +291,10 @@ namespace AirNavigationRaceLive.Comps.Helper
             Vector last = Start;
             foreach (Vector v in LinearCombinations)
             {
-                t_GPSPoint Ende = new t_GPSPoint();
+                Point Ende = new Point();
                 Ende.longitude = c.XtoLongitude(last.X);
                 Ende.latitude = c.YtoLatitude(last.Y);
-                t_GPSPoint ss = new t_GPSPoint();
+                Point ss = new Point();
                 ss.longitude = c.XtoLongitude(v.X);
                 ss.latitude = c.YtoLatitude(v.Y);
                 double dist = Converter.Distance(Ende, ss);
@@ -307,10 +307,10 @@ namespace AirNavigationRaceLive.Comps.Helper
 
         public double getDistanceStraight(Converter c)
         {
-            t_GPSPoint Ende = new t_GPSPoint();
+            Point Ende = new Point();
             Ende.longitude = c.XtoLongitude(Start.X);
             Ende.latitude = c.YtoLatitude(Start.Y);
-            t_GPSPoint ss = new t_GPSPoint();
+            Point ss = new Point();
             ss.longitude = c.XtoLongitude(End.X);
             ss.latitude = c.YtoLatitude(End.Y);
             double dist = Converter.Distance(Ende, ss);

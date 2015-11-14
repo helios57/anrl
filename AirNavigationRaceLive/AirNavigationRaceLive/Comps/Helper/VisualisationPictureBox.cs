@@ -12,16 +12,14 @@ namespace AirNavigationRaceLive.Comps
 {
     public class VisualisationPictureBox : PictureBox
     {
-        private t_Parcour Parcour;
+        private Parcour Parcour;
         private Converter c;
-        private List<t_GPSPoint> data;
-        private List<t_Team> teams;
-        private List<t_Competition_Team> competitionTeams;
+        private List<Flight> flights;
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
         private SolidBrush Brush = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
-        public void SetParcour(t_Parcour iParcour)
+        public void SetParcour(Parcour iParcour)
         {
             Parcour = iParcour;
         }
@@ -29,11 +27,9 @@ namespace AirNavigationRaceLive.Comps
         {
             c = iConverter;
         }
-        public void SetData(List<t_GPSPoint> data, List<t_Team> teams, List<t_Competition_Team> competitionTeams)
+        public void SetData(List<Flight> flights)
         {
-            this.data = data;
-            this.teams = teams;
-            this.competitionTeams = competitionTeams;
+            this.flights = flights;
         }
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -77,9 +73,9 @@ namespace AirNavigationRaceLive.Comps
                 }
                 lock (Parcour)
                 {
-                    ICollection<t_Line> lines = Parcour.t_Line;
-                    List<t_Line> linespenalty = lines.Where(p => p.Type == (int)LineType.PENALTYZONE).ToList();
-                    foreach (t_Line l in linespenalty)
+                    ICollection<Line> lines = Parcour.Line;
+                    List<Line> linespenalty = lines.Where(p => p.Type == (int)LineType.PENALTYZONE).ToList();
+                    foreach (Line l in linespenalty)
                     {
                         int startXp = x0 + (int)(c.getStartX(l) * factor);
                         int startYp = y0 + (int)(c.getStartY(l) * factor);
@@ -96,7 +92,7 @@ namespace AirNavigationRaceLive.Comps
                             //TODO
                         }
                     }
-                    foreach (t_Line l in lines)
+                    foreach (Line l in lines)
                     {
                         if (l.A != null && l.B != null & l.O != null)
                         {
@@ -136,7 +132,7 @@ namespace AirNavigationRaceLive.Comps
             }
             #endregion
 
-            if (data != null && teams != null && data.Count > 10 && teams.Count >= 1 && competitionTeams != null && competitionTeams.Count >= 1)
+            if (flights != null)
             {
                 int y0 = 0;
                 int x0 = 0;
@@ -159,26 +155,23 @@ namespace AirNavigationRaceLive.Comps
                         x0 = (int)((Width - (Image.Width * factor)) / 2);
                     }
                 }
-                foreach (t_Team Team in teams)
-                {
-                    if (competitionTeams.Count(p => p.ID_Team == Team.ID) == 1)
-                    {
-                        t_Competition_Team ct = competitionTeams.Single(p => p.ID_Team == Team.ID);
-                        Color Color = Color.FromName(Team.Color);
-                        List<System.Drawing.Point> points = new List<System.Drawing.Point>();
-                        foreach (t_GPSPoint gd in data.Where(p => ct.t_Tracker.Contains(p.t_Tracker)))
-                        {
-                            int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
-                            int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);
-                            points.Add(new System.Drawing.Point(startXp, startYp));
-                        }
-                        if (points.Count > 2)
-                        {
 
-                            pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), lineThickness), points.ToArray());
-                        }
+                foreach (Flight flight in flights)
+                {
+                    Color Color = Color.FromName(flight.Team.Color);
+                    List<System.Drawing.Point> points = new List<System.Drawing.Point>();
+                    foreach (Point gd in flight.Point4D)
+                    {
+                        int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
+                        int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);
+                        points.Add(new System.Drawing.Point(startXp, startYp));
+                    }
+                    if (points.Count > 2)
+                    {
+                        pe.Graphics.DrawLines(new Pen(new SolidBrush(Color), lineThickness), points.ToArray());
                     }
                 }
+         
             }
         }
 

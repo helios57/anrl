@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/10/2015 23:45:26
+-- Date Created: 11/12/2015 00:43:48
 -- Generated from EDMX file: C:\workspace\VS2015\Anrl\anrl\AirNavigationRaceLive\AirNavigationRaceLive\AnrlModel.edmx
 -- --------------------------------------------------
 

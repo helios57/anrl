@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="anrlModel.t_Daten" Width="1.5" PointX="13.75" PointY="2" />
         <EntityTypeShape EntityType="anrlModel.t_GPS_IN" Width="1.5" PointX="7.75" PointY="12.75" />
         <EntityTypeShape EntityType="anrlModel.t_GPSPoint" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="anrlModel.t_Line" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="anrlModel.t_Line" Width="1.5" PointX="2.875" PointY="0.75" />
         <EntityTypeShape EntityType="anrlModel.t_Log" Width="1.5" PointX="9.75" PointY="13.75" />
         <EntityTypeShape EntityType="anrlModel.t_Map" Width="1.5" PointX="8.25" PointY="8.375" />
         <EntityTypeShape EntityType="anrlModel.t_Parcour" Width="1.5" PointX="10.5" PointY="10" />

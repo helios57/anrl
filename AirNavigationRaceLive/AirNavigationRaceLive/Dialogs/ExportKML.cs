@@ -14,8 +14,8 @@ namespace AirNavigationRaceLive.Dialogs
 {
     public partial class ExportKML : Form
     {
-        private Client Client;
-        public ExportKML(Client Client)
+        private DataAccess Client;
+        public ExportKML(DataAccess Client)
         {
             this.Client = Client;
             InitializeComponent();
@@ -51,34 +51,33 @@ namespace AirNavigationRaceLive.Dialogs
         private void ExportKML_Load(object sender, EventArgs e)
         {
             parcour.Items.Clear();
-            foreach (t_Parcour p in Client.getParcours())
+            foreach (Parcour p in Client.DBContext.ParcourSet)
             {
-
                 parcour.Items.Add(new Item(p));
             }
         }
 
         private class Item
         {
-            public t_Parcour p;
-            public Item(t_Parcour p)
+            public Parcour p;
+            public Item(Parcour p)
             {
                 this.p = p;
             }
 
             public override string ToString()
             {
-                return "ID:" + p.ID + " Name: " + p.Name;
+                return "ID:" + p.Id + " Name: " + p.Name;
             }
         }
 
-        private string GetPolygonKml(t_Parcour parcour)
+        private string GetPolygonKml(Parcour parcour)
         {
             int HeightPenalty = (int)height.Value;
             String result = "";
             result += GetKMLTemplateContent("headerPolygon");
             int i = 0;
-            foreach (t_Line n in parcour.t_Line.Where(p => p.Type == (int)LineType.PENALTYZONE))
+            foreach (Line n in parcour.Line.Where(p => p.Type == (int)LineType.PENALTYZONE))
             {
                 result += @"<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
@@ -87,7 +86,7 @@ namespace AirNavigationRaceLive.Dialogs
                 result += n.A.longitude + "," + n.A.latitude + "," + HeightPenalty + " ";
                 result += @"</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
             }
-            foreach (t_Line n in parcour.t_Line.Where(p => p.Type >= 3 && p.Type <= 10))
+            foreach (Line n in parcour.Line.Where(p => p.Type >= 3 && p.Type <= 10))
             {
                 result += @"<Placemark><name>Polygon" + i++ + @"</name><styleUrl>#sn_ylw-pushpin</styleUrl><Polygon><extrude>1</extrude><altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>";
                 result += n.B.longitude + "," + n.B.latitude + "," + HeightPenalty + " ";

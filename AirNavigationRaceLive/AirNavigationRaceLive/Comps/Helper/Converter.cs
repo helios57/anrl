@@ -13,7 +13,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         private double topLeftLatitude;
         double sizeLongitude;
         double sizeLatitude;
-        public Converter(t_Map map)
+        public Converter(Map map)
         {
             topLeftLongitude = map.XTopLeft;
             topLeftLatitude = map.YTopLeft;
@@ -64,31 +64,31 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             return (int)((latitdude - topLeftLatitude) / sizeLatitude);
         }
-        public int getStartX(t_Line l)
+        public int getStartX(Line l)
         {
             return LongitudeToX(l.A.longitude);
         }
-        public int getStartY(t_Line l)
+        public int getStartY(Line l)
         {
             return LatitudeToY(l.A.latitude);
         }
-        public int getEndX(t_Line l)
+        public int getEndX(Line l)
         {
             return LongitudeToX(l.B.longitude);
         }
-        public int getEndY(t_Line l)
+        public int getEndY(Line l)
         {
             return LatitudeToY(l.B.latitude);
         }
-        public int getOrientationX(t_Line l)
+        public int getOrientationX(Line l)
         {
             return LongitudeToX(l.O.longitude);
         }
-        public int getOrientationY(t_Line l)
+        public int getOrientationY(Line l)
         {
             return LatitudeToY(l.O.latitude);
         }
-        public static double Distance(t_GPSPoint point1, t_GPSPoint point2)
+        public static double Distance(Point point1, Point point2)
         {
             return Distance(point1.longitude, point1.latitude, point2.longitude, point2.latitude);
         }

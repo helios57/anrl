@@ -56,8 +56,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.addLandingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adjustResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uploadTrackerDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -94,7 +92,6 @@
             this.qualificationRoundsToolStripMenuItem,
             this.rulesToolStripMenuItem,
             this.resultsToolStripMenuItem,
-            this.trackerToolStripMenuItem,
             this.visualisationToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.creditsToolStripMenuItem});
@@ -240,8 +237,7 @@
             this.individualToplistToolStripMenuItem,
             this.toolStripSeparator2,
             this.addLandingResultsToolStripMenuItem,
-            this.adjustResultsToolStripMenuItem,
-            this.uploadTrackerDataToolStripMenuItem});
+            this.adjustResultsToolStripMenuItem});
             this.resultsToolStripMenuItem.Enabled = false;
             this.resultsToolStripMenuItem.Name = "resultsToolStripMenuItem";
             this.resultsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
@@ -303,23 +299,6 @@
             this.adjustResultsToolStripMenuItem.Text = "Adjust Results";
             this.adjustResultsToolStripMenuItem.Visible = false;
             this.adjustResultsToolStripMenuItem.Click += new System.EventHandler(this.adjustResultsToolStripMenuItem_Click);
-            // 
-            // uploadTrackerDataToolStripMenuItem
-            // 
-            this.uploadTrackerDataToolStripMenuItem.Enabled = false;
-            this.uploadTrackerDataToolStripMenuItem.Name = "uploadTrackerDataToolStripMenuItem";
-            this.uploadTrackerDataToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.uploadTrackerDataToolStripMenuItem.Text = "Upload Tracker Data";
-            this.uploadTrackerDataToolStripMenuItem.Visible = false;
-            this.uploadTrackerDataToolStripMenuItem.Click += new System.EventHandler(this.uploadTrackerDataToolStripMenuItem_Click);
-            // 
-            // trackerToolStripMenuItem
-            // 
-            this.trackerToolStripMenuItem.Enabled = false;
-            this.trackerToolStripMenuItem.Name = "trackerToolStripMenuItem";
-            this.trackerToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.trackerToolStripMenuItem.Text = "Trackers";
-            this.trackerToolStripMenuItem.Click += new System.EventHandler(this.trackerToolStripMenuItem_Click);
             // 
             // visualisationToolStripMenuItem
             // 
@@ -388,7 +367,6 @@
         private System.Windows.Forms.ToolStripStatusLabel StatusStripLabel;
         private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.Panel MainPanel;
-        private System.Windows.Forms.ToolStripMenuItem trackerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pilotsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem qualificationRoundsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem visualisationToolStripMenuItem;
@@ -409,7 +387,6 @@
         private System.Windows.Forms.ToolStripMenuItem overviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uploadTrackerDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overviewZoomedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem competitionToolStripMenuItem;

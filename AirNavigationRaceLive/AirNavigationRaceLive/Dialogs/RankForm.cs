@@ -13,15 +13,15 @@ namespace AirNavigationRaceLive.Dialogs
 {
     public partial class RankForm : Form
     {
-        private List<t_Penalty> rankinEntries;
-        private List<t_Competition_Team> teams;
-        private Client c;
+        private List<Penalty> rankinEntries;
+        private List<Flight> teams;
+        private DataAccess c;
 
         public RankForm()
         {
             InitializeComponent();
         }
-        public void SetData(List<t_Penalty> rankinEntries, List<t_Competition_Team> teams, Client c)
+        public void SetData(List<Penalty> rankinEntries, List<Flight> teams, DataAccess c)
         {
             this.c = c;
             this.rankinEntries = rankinEntries;
@@ -34,14 +34,14 @@ namespace AirNavigationRaceLive.Dialogs
             if (c != null && rankinEntries != null && teams != null)
             {
                 List<RankedTeam> rankedTeams = new List<RankedTeam>();
-                foreach (t_Competition_Team t in teams)
+                foreach (Flight t in teams)
                 {
                     int sum = 0;
-                    foreach (t_Penalty p in rankinEntries.Where(p => p.ID_Competition_Team == t.ID))
+                    foreach (Penalty p in t.Penalty)
                     {
                         sum += p.Points;
                     }
-                    rankedTeams.Add(new RankedTeam(t,c.getTeam(t.ID_Team),sum));
+                    rankedTeams.Add(new RankedTeam(t,t.Team,sum));
                 }
                 rankedTeams.Sort();
                 for (int i = 0; i < rankedTeams.Count; i++)
@@ -53,25 +53,25 @@ namespace AirNavigationRaceLive.Dialogs
                         case 0:
                             {
                                 lblPunkte1.Text = rt.points.ToString();
-                                lblName1.Text = getTeamDsc(rt.team.ID);
+                                lblName1.Text = getTeamDsc(rt.team);
                                 break;
                             }
                         case 1:
                             {
                                 lblPunkte2.Text = rt.points.ToString();
-                                lblName2.Text = getTeamDsc(rt.team.ID);
+                                lblName2.Text = getTeamDsc(rt.team);
                                 break;
                             }
                         case 2:
                             {
                                 lblPunkte3.Text = rt.points.ToString();
-                                lblName3.Text = getTeamDsc(rt.team.ID);
+                                lblName3.Text = getTeamDsc(rt.team);
                                 break;
                             }
                         case 3:
                             {
                                 lblPunkte4.Text = rt.points.ToString();
-                                lblName4.Text = getTeamDsc(rt.team.ID);
+                                lblName4.Text = getTeamDsc(rt.team);
                                 break;
                             }
                     }
@@ -81,16 +81,15 @@ namespace AirNavigationRaceLive.Dialogs
             base.OnPaint(e);
         }
 
-        private string getTeamDsc(int ID_Team)
+        private string getTeamDsc(Team team)
         {
-            t_Team team = c.getTeam(ID_Team);
-            t_Pilot pilot = c.getPilot(team.ID_Pilot);
+            Subscriber pilot = team.Pilot;
             StringBuilder sb = new StringBuilder();
-            sb.Append(pilot.LastName).Append(" ").Append(pilot.SureName);
-            if (team.ID_Navigator.HasValue)
+            sb.Append(pilot.LastName).Append(" ").Append(pilot.FirstName);
+            if (team.Navigator!= null)
             {
-                t_Pilot navi = c.getPilot(team.ID_Navigator.Value);
-                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.SureName);
+                Subscriber navi = team.Navigator;
+                sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.FirstName);
             }
             return sb.ToString();
         }
@@ -127,10 +126,10 @@ namespace AirNavigationRaceLive.Dialogs
     }
     class RankedTeam:IComparable<RankedTeam>
     {
-        public t_Competition_Team t;
+        public Flight t;
         public int points;
-        public t_Team team;
-        public RankedTeam(t_Competition_Team t,t_Team team, int points)
+        public Team team;
+        public RankedTeam(Flight t,Team team, int points)
         {
             this.t = t;
             this.team = team;

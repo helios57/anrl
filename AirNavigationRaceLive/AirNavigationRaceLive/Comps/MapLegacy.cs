@@ -16,9 +16,9 @@ namespace AirNavigationRaceLive.Comps
 {
     public partial class MapLegacy : UserControl
     {
-        private Client.Client Client;
+        private Client.DataAccess Client;
 
-        public MapLegacy(Client.Client iClient)
+        public MapLegacy(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();   
@@ -50,7 +50,7 @@ namespace AirNavigationRaceLive.Comps
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox p = new PictureBox();
             p.Image = Image.FromFile(ofd.FileName);
-            t_Map m = new t_Map();
+            Map m = new Map();
             m.Name = fldName.Text;
             string[] coordinatesFromPath = ofd.FileName.Remove(ofd.FileName.LastIndexOf(".")).Substring(ofd.FileName.LastIndexOf(@"\") + 1).Split("_".ToCharArray());
             foreach (string coordinate in coordinatesFromPath)
@@ -74,11 +74,11 @@ namespace AirNavigationRaceLive.Comps
             m.YTopLeft = topLeftLatitude;
             MemoryStream ms = new MemoryStream();
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            t_Picture t_Picture = new t_Picture();
-            t_Picture.Data = ms.ToArray();
-            t_Picture.Name = m.Name;
-            m.ID_Picture = Client.savePicture(t_Picture);
-            Client.saveMap(m);
+            m.Picture = new Picture();
+            m.Picture.Data = ms.ToArray();
+            m.Competition = Client.SelectedCompetition;
+            Client.DBContext.MapSet.Add(m);
+            Client.DBContext.SaveChanges();
             btnImportANR.Enabled = true;
         }
 
@@ -105,7 +105,7 @@ namespace AirNavigationRaceLive.Comps
             OpenFileDialog ofd = sender as OpenFileDialog;
             PictureBox p = new PictureBox();
             p.Image = Image.FromFile(ofd.FileName);
-            t_Map m = new t_Map();
+            Map m = new Map();
             m.Name = fldName.Text;
             double topLeftLatitude;
             double topLeftLongitude;
@@ -125,11 +125,11 @@ namespace AirNavigationRaceLive.Comps
             m.YTopLeft = topLeftLatitude;
             MemoryStream ms = new MemoryStream();
             p.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            t_Picture t_Picture = new t_Picture();
-            t_Picture.Data = ms.ToArray();
-            t_Picture.Name = m.Name;
-            m.ID_Picture = Client.savePicture(t_Picture);
-            Client.saveMap(m);
+            m.Picture = new Picture();
+            m.Picture.Data = ms.ToArray();
+            m.Competition = Client.SelectedCompetition;
+            Client.DBContext.MapSet.Add(m);
+            Client.DBContext.SaveChanges();
             button1.Enabled = true;
         }
     }

@@ -15,14 +15,13 @@ namespace AirNavigationRaceLive
     public partial class AirNavigationRaceLiveMain : Form
     {
         private static AirNavigationRaceLiveMain main;
-        private Client Client;
-        private Competition CompetitionO;
+        private DataAccess Client;
+        private CompetitionControl CompetitionO;
         private Credits Credits;
-        private Tracker Tracker;
         private Pilot Pilot;
-        private Team Team;
-        private QualificationRound QualificationRound;
-        private Map Map;
+        private TeamControl Team;
+        private QualificationRoundControl QualificationRound;
+        private MapControl Map;
         private Visualisation Visualisation;
         private ParcourGen ParcourGen;
         private ParcourEditSingle ParcourEditSingle;
@@ -30,7 +29,6 @@ namespace AirNavigationRaceLive
         private ParcourOverview ParcourOverview;
         private ParcourEdit ParcourEdit;
         private MapLegacy MapLegacy;
-        private UploadGPS UploadGPS;
         private ParcourOverviewZoomed ParcourOverviewZoomed;
         private Results Results;
         private MapSelection MapSelection;
@@ -53,21 +51,20 @@ namespace AirNavigationRaceLive
 
         public AirNavigationRaceLiveMain()
         {
-            Client = Client.getClient();
+            Client = DataAccess.Instance;
             InitializeComponent();
             main = this;
         }
 
         public void UpdateEnablement()
         {
-            Boolean connected = Client != null;
+            Boolean connected = Client.SelectedCompetition != null;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
             overviewZoomedToolStripMenuItem.Enabled = connected;
             overviewToolStripMenuItem.Enabled = connected;
             generateToolStripMenuItem.Enabled = connected;
             importToolStripMenuItem.Enabled = connected;
-            trackerToolStripMenuItem.Enabled = connected;
             pilotsToolStripMenuItem.Enabled = connected;
             teamsToolStripMenuItem.Enabled = connected;
             qualificationRoundsToolStripMenuItem.Enabled = connected;
@@ -80,7 +77,6 @@ namespace AirNavigationRaceLive
             addLandingResultsToolStripMenuItem.Enabled = connected;
             adjustResultsToolStripMenuItem.Enabled = connected;
             visualisationToolStripMenuItem.Enabled = connected;
-            uploadTrackerDataToolStripMenuItem.Enabled = connected;
             editToolStripMenuItem.Enabled = connected;
             exportToolStripMenuItem.Enabled = connected;
             exportKMLToolStripMenuItem.Enabled = connected;
@@ -97,7 +93,7 @@ namespace AirNavigationRaceLive
             enableControl(Credits);
             StatusStripLabel.Text = "Ready";
             MainPanel.Controls.Clear();
-            CompetitionO = new Competition(Client.getClient());
+            CompetitionO = new CompetitionControl(Client);
             CompetitionO.Connected += new EventHandler(CompetitionO_Connected);
             enableControl(CompetitionO);
         }
@@ -109,11 +105,10 @@ namespace AirNavigationRaceLive
 
         void CompetitionO_Connected(object sender, EventArgs e)
         {
-            Client c = sender as Client;
+            DataAccess c = sender as DataAccess;
             if (c != null)
             {
                 Client = c;
-                Tracker = null;
                 Pilot = null;
                 Team = null;
                 QualificationRound = null;
@@ -124,7 +119,6 @@ namespace AirNavigationRaceLive
                 ParcourEdit = null;
                 ParcourOverviewZoomed = null;
                 MapLegacy = null;
-                UploadGPS = null;
                 Results = null;
                 UpdateEnablement();
             }
@@ -134,7 +128,6 @@ namespace AirNavigationRaceLive
         private void disconnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Client = null;
-            Tracker = null;
             Pilot = null;
             Team = null;
             QualificationRound = null;
@@ -145,7 +138,6 @@ namespace AirNavigationRaceLive
             ParcourEdit = null;
             ParcourOverviewZoomed = null;
             MapLegacy = null;
-            UploadGPS = null;
             Results = null;
             CompetitionO = null;
             StatusStripLabel.Text = "Disconnected from Server";
@@ -156,15 +148,6 @@ namespace AirNavigationRaceLive
         private void creditsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             enableControl(Credits);
-        }
-
-        private void trackerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Tracker == null)
-            {
-                Tracker = new Tracker(Client);
-            }
-            enableControl(Tracker);
         }
 
         private void pilotsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -180,7 +163,7 @@ namespace AirNavigationRaceLive
         {
             if (Team == null)
             {
-                Team = new Team(Client);
+                Team = new TeamControl(Client);
             }
             enableControl(Team);
         }
@@ -189,7 +172,7 @@ namespace AirNavigationRaceLive
         {
             if (QualificationRound == null)
             {
-                QualificationRound = new QualificationRound(Client);
+                QualificationRound = new QualificationRoundControl(Client);
             }
             enableControl(QualificationRound);
         }
@@ -229,7 +212,7 @@ namespace AirNavigationRaceLive
         {
             if (Visualisation == null)
             {
-                Map = new Map(Client);
+                Map = new MapControl(Client);
             }
             enableControl(Map);
         }
@@ -274,15 +257,6 @@ namespace AirNavigationRaceLive
                 MapLegacy = new MapLegacy(Client);
             }
             enableControl(MapLegacy);
-        }
-
-        private void uploadTrackerDataToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (UploadGPS == null)
-            {
-                UploadGPS = new UploadGPS(Client);
-            }
-            enableControl(UploadGPS);
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)

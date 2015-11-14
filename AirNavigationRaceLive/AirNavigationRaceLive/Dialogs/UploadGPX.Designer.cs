@@ -37,37 +37,41 @@
             // 
             // btnUploadData
             // 
-            this.btnUploadData.Location = new System.Drawing.Point(113, 58);
+            this.btnUploadData.Location = new System.Drawing.Point(301, 138);
+            this.btnUploadData.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnUploadData.Name = "btnUploadData";
-            this.btnUploadData.Size = new System.Drawing.Size(149, 23);
+            this.btnUploadData.Size = new System.Drawing.Size(397, 55);
             this.btnUploadData.TabIndex = 22;
-            this.btnUploadData.Text = "Upload Positions";
+            this.btnUploadData.Text = "Save";
             this.btnUploadData.UseVisualStyleBackColor = true;
             this.btnUploadData.Click += new System.EventHandler(this.btnUploadData_Click);
             // 
             // textBoxPositions
             // 
             this.textBoxPositions.Enabled = false;
-            this.textBoxPositions.Location = new System.Drawing.Point(113, 32);
+            this.textBoxPositions.Location = new System.Drawing.Point(301, 76);
+            this.textBoxPositions.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.textBoxPositions.Name = "textBoxPositions";
             this.textBoxPositions.ReadOnly = true;
-            this.textBoxPositions.Size = new System.Drawing.Size(149, 20);
+            this.textBoxPositions.Size = new System.Drawing.Size(391, 38);
             this.textBoxPositions.TabIndex = 20;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 36);
+            this.label3.Location = new System.Drawing.Point(37, 86);
+            this.label3.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 13);
+            this.label3.Size = new System.Drawing.Size(250, 32);
             this.label3.TabIndex = 19;
             this.label3.Text = "Imported Positions";
             // 
             // btnImportGPX
             // 
-            this.btnImportGPX.Location = new System.Drawing.Point(113, 3);
+            this.btnImportGPX.Location = new System.Drawing.Point(301, 7);
+            this.btnImportGPX.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnImportGPX.Name = "btnImportGPX";
-            this.btnImportGPX.Size = new System.Drawing.Size(149, 23);
+            this.btnImportGPX.Size = new System.Drawing.Size(397, 55);
             this.btnImportGPX.TabIndex = 17;
             this.btnImportGPX.Text = "Import GPX";
             this.btnImportGPX.UseVisualStyleBackColor = true;
@@ -75,14 +79,15 @@
             // 
             // UploadGPX
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(268, 87);
+            this.ClientSize = new System.Drawing.Size(779, 207);
             this.Controls.Add(this.btnUploadData);
             this.Controls.Add(this.textBoxPositions);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnImportGPX);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "UploadGPX";
             this.Text = "UploadGPX";
             this.ResumeLayout(false);

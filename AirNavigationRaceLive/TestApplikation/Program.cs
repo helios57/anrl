@@ -82,8 +82,6 @@ namespace TestApplikation
         /// <returns></returns>
         private static double ConvertCoordinates(string wsg84Coords)
         {
-            try
-            {
                 double result = 0;
                 string SingChar = wsg84Coords.Substring(0, 1);
                 if (SingChar == "E" || SingChar == "W")
@@ -106,11 +104,6 @@ namespace TestApplikation
                 {
                 }
                 return result;
-            }
-            catch (Exception ex)
-            {
-            }
-            return 0;
         }
 
 
@@ -131,13 +124,9 @@ namespace TestApplikation
 
                 foreach (t_Tracker tr in Trackers)
                 {
-                    try
-                    {
                         List<t_GPS_IN> Positions_Tracker = Positions.Where(a => a.IMEI.Trim() == tr.IMEI.Trim()).OrderBy(a => a.TimestampTracker).ToList();
                         foreach (t_GPS_IN GPS_IN in Positions_Tracker)
                         {
-                            try
-                            {
                                 t_Daten InsertData = new t_Daten();
                                 InsertData.t_Tracker = tr;
                                 InsertData.Timestamp = GPS_IN.TimestampTracker.Ticks;
@@ -145,21 +134,14 @@ namespace TestApplikation
                                 InsertData.Longitude = ConvertCoordinates(GPS_IN.longitude);
                                 InsertData.Altitude = double.Parse(GPS_IN.altitude, NumberFormatInfo.InvariantInfo);
                                 db.t_Datens.InsertOnSubmit(InsertData);
-                            }
-                            catch (Exception ex)
-                            {
-                            }
                             GPS_IN.Processed = true;
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                    }
                 }
                 db.SubmitChanges();
             }
             catch (Exception ex)
             {
+                ex.ToString();
             }
             finally
             {

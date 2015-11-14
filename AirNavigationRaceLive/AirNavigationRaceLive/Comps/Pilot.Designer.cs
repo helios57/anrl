@@ -35,13 +35,12 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.textBoxLastname = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxSurename = new System.Windows.Forms.TextBox();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnAddt_Picture = new System.Windows.Forms.Button();
-            this.textBoxt_PictureId = new System.Windows.Forms.TextBox();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
@@ -116,13 +115,13 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Lastname";
             // 
-            // textBoxSurename
+            // textBoxFirstName
             // 
-            this.textBoxSurename.Location = new System.Drawing.Point(1295, 261);
-            this.textBoxSurename.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.textBoxSurename.Name = "textBoxSurename";
-            this.textBoxSurename.Size = new System.Drawing.Size(260, 38);
-            this.textBoxSurename.TabIndex = 12;
+            this.textBoxFirstName.Location = new System.Drawing.Point(1295, 261);
+            this.textBoxFirstName.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.textBoxFirstName.Name = "textBoxFirstName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(260, 38);
+            this.textBoxFirstName.TabIndex = 12;
             // 
             // label4
             // 
@@ -140,7 +139,7 @@
             this.label5.Location = new System.Drawing.Point(1132, 326);
             this.label5.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 32);
+            this.label5.Size = new System.Drawing.Size(127, 32);
             this.label5.TabIndex = 14;
             this.label5.Text = "t_Picture";
             // 
@@ -173,19 +172,9 @@
             this.btnAddt_Picture.Name = "btnAddt_Picture";
             this.btnAddt_Picture.Size = new System.Drawing.Size(267, 55);
             this.btnAddt_Picture.TabIndex = 17;
-            this.btnAddt_Picture.Text = "Add t_Picture";
+            this.btnAddt_Picture.Text = "Add Picture";
             this.btnAddt_Picture.UseVisualStyleBackColor = true;
             this.btnAddt_Picture.Click += new System.EventHandler(this.btnAddt_Picture_Click);
-            // 
-            // textBoxt_PictureId
-            // 
-            this.textBoxt_PictureId.Enabled = false;
-            this.textBoxt_PictureId.Location = new System.Drawing.Point(1295, 648);
-            this.textBoxt_PictureId.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.textBoxt_PictureId.Name = "textBoxt_PictureId";
-            this.textBoxt_PictureId.Size = new System.Drawing.Size(260, 38);
-            this.textBoxt_PictureId.TabIndex = 18;
-            this.textBoxt_PictureId.Visible = false;
             // 
             // PictureBox
             // 
@@ -202,13 +191,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBoxt_PictureId);
             this.Controls.Add(this.btnAddt_Picture);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PictureBox);
-            this.Controls.Add(this.textBoxSurename);
+            this.Controls.Add(this.textBoxFirstName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxLastname);
             this.Controls.Add(this.label3);
@@ -233,13 +221,12 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TextBox textBoxLastname;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxSurename;
+        private System.Windows.Forms.TextBox textBoxFirstName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnAddt_Picture;
-        private System.Windows.Forms.TextBox textBoxt_PictureId;
     }
 }

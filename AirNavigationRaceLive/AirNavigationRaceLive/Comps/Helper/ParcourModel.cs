@@ -17,24 +17,24 @@ namespace AirNavigationRaceLive.Comps.Helper
         private double channel;
         private Converter c;
 
-        public ParcourModel(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double desiredLengthFactor, double channel)
+        public ParcourModel(Parcour parcour, Converter c, double desiredLengthFactor, double channel)
         {
             this.desiredLengthFactor = desiredLengthFactor;
             this.channel = Converter.NMtoM(channel);
             this.c = c;
-            List<t_Line> lines = new List<t_Line>(parcour.t_Line);
+            List<Line> lines = new List<Line>(parcour.Line);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_A), lines.Single(p => p.Type == (int)LineType.END_A));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_B), lines.Single(p => p.Type == (int)LineType.END_B));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_C), lines.Single(p => p.Type == (int)LineType.END_C));
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_D), lines.Single(p => p.Type == (int)LineType.END_D));
         }
 
-        public ParcourModel(AirNavigationRaceLive.Comps.Model.Parcour parcour, Converter c, double desiredLengthFactor, double channel, bool regenerate)
+        public ParcourModel(Parcour parcour, Converter c, double desiredLengthFactor, double channel, bool regenerate)
         {
             this.desiredLengthFactor = desiredLengthFactor;
             this.channel = Converter.NMtoM(channel);
             this.c = c;
-            List<t_Line> lines = new List<t_Line>(parcour.t_Line);
+            List<Line> lines = new List<Line>(parcour.Line);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_A), lines.Single(p => p.Type == (int)LineType.END_A), lines, LineType.START_A);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_B), lines.Single(p => p.Type == (int)LineType.END_B), lines, LineType.START_B);
             AddLineAsCorridor(c, lines.Single(p => p.Type == (int)LineType.START_C), lines.Single(p => p.Type == (int)LineType.END_C), lines, LineType.START_C);
@@ -58,10 +58,10 @@ namespace AirNavigationRaceLive.Comps.Helper
         {
             Vector ChannelRadius = Channels[3].Start - Channels[0].Start;
 
-            t_GPSPoint Ende = new t_GPSPoint();
+            Point Ende = new Point();
             Ende.longitude = c.XtoLongitude(Channels[3].Start.X);
             Ende.latitude = c.YtoLatitude(Channels[3].Start.Y);
-            t_GPSPoint Start = new t_GPSPoint();
+            Point Start = new Point();
             Start.longitude = c.XtoLongitude(Channels[0].Start.X);
             Start.latitude = c.YtoLatitude(Channels[0].Start.Y);
             double origDist = Converter.Distance(Ende, Start);
@@ -199,14 +199,14 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
         }
 
-        private void AddLineAsCorridor(Converter c, t_Line start, t_Line end)
+        private void AddLineAsCorridor(Converter c, Line start, Line end)
         {
             Vector MiddleStart = Vector.Middle(getVector(c, start.A), getVector(c, start.B));
             Vector MiddleEnd = Vector.Middle(getVector(c, end.A), getVector(c, end.B));
             Channels.Add(new ParcourChannel(MiddleStart, MiddleEnd));
         }
 
-        private void AddLineAsCorridor(Converter c, t_Line start, t_Line end, List<t_Line> lines, LineType lineType)
+        private void AddLineAsCorridor(Converter c, Line start, Line end, List<Line> lines, LineType lineType)
         {
             Vector MiddleStart = Vector.Middle(getVector(c, start.A), getVector(c, start.B));
             Vector MiddleEnd = Vector.Middle(getVector(c, end.A), getVector(c, end.B));
@@ -218,7 +218,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             Channels.Add(new ParcourChannel(c));
         }
 
-        public static Vector getVector(Converter c, t_GPSPoint point)
+        public static Vector getVector(Converter c, Point point)
         {
 
             Vector startA = new Vector(c.LongitudeToX(point.longitude), c.LatitudeToY(point.latitude), 0);
@@ -255,11 +255,11 @@ namespace AirNavigationRaceLive.Comps.Helper
                 System.Console.Out.WriteLine("ERROR");
             }
         }
-        public ParcourChannel(Vector Start, Vector End, LineType type, List<t_Line> lines, Converter c)
+        public ParcourChannel(Vector Start, Vector End, LineType type, List<Line> lines, Converter c)
         {
             this.Start = Start;
             this.End = End;
-            List<t_Line> pointLine = lines.Where(p => p.Type == (int)LineType.Point).ToList();
+            List<Line> pointLine = lines.Where(p => p.Type == (int)LineType.Point).ToList();
             int i = 0;
             if (type == LineType.START_B)
             {
@@ -273,12 +273,12 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 i = 27;
             }
-            List<t_Line> corridorPoints = new List<t_Line>();
+            List<Line> corridorPoints = new List<Line>();
             for (int j = 0; j < 9; j++)
             {
                 corridorPoints.Add(pointLine[i + j]);
             }
-            foreach (t_Line l in corridorPoints)
+            foreach (Line l in corridorPoints)
             {
                 Vector v = ParcourModel.getVector(c, l.A);
 
@@ -290,11 +290,11 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
             LinearCombinations.Add(End);
         }
-        private bool isEdited(t_Line l)
+        private bool isEdited(Line l)
         {
-            return l.A.edited || l.B.edited;
+            return false;// TODO l.A.edited || l.B.edited;
         }
-        private bool samePos(t_GPSPoint a, t_GPSPoint b)
+        private bool samePos(Point a, Point b)
         {
             return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) < 0.00001;
         }

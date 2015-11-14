@@ -14,16 +14,16 @@ namespace AirNavigationRaceLive.Comps
 {
     public partial class ParcourOverviewZoomed : UserControl
     {
-        private Client.Client Client;
+        private Client.DataAccess Client;
         Converter c = null;
-        private t_Parcour activeParcour = new t_Parcour();
+        private Parcour activeParcour = new Parcour();
 
         private enum ActivePoint
         {
             A, B, O, NONE
         }
 
-        public ParcourOverviewZoomed(Client.Client iClient)
+        public ParcourOverviewZoomed(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();
@@ -33,8 +33,8 @@ namespace AirNavigationRaceLive.Comps
 
         class ListItem
         {
-            private t_Parcour parcour;
-            public ListItem(t_Parcour iParcour)
+            private Parcour parcour;
+            public ListItem(Parcour iParcour)
             {
                 parcour = iParcour;
             }
@@ -43,7 +43,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return parcour.Name;
             }
-            public t_Parcour getParcour()
+            public Parcour getParcour()
             {
                 return parcour;
             }
@@ -54,13 +54,13 @@ namespace AirNavigationRaceLive.Comps
             deleteToolStripMenuItem.Enabled = false;
             PictureBox1.SetConverter(c);
             PictureBox1.Image = null;
-            activeParcour = new t_Parcour();
+            activeParcour = new Parcour();
             PictureBox1.SetParcour(activeParcour);
             PictureBox1.Invalidate();
 
             listBox1.Items.Clear();
-            List<t_Parcour> parcours = Client.getParcours();
-            foreach (t_Parcour p in parcours)
+            List<Parcour> parcours = Client.SelectedCompetition.Parcour.ToList();
+            foreach (Parcour p in parcours)
             {
                 listBox1.Items.Add(new ListItem(p));
             }
@@ -81,7 +81,12 @@ namespace AirNavigationRaceLive.Comps
             ListItem li = listBox1.SelectedItem as ListItem;
             if (li != null)
             {
-                Client.deleteParcour(li.getParcour().ID);
+                Parcour p = li.getParcour();
+                if (p.Id!=0)
+                {
+                    Client.DBContext.ParcourSet.Remove(p);
+                }
+                Client.DBContext.SaveChanges();
                 loadParcours();
             }
         }
@@ -92,9 +97,9 @@ namespace AirNavigationRaceLive.Comps
             if (li != null)
             {
                 deleteToolStripMenuItem.Enabled = true;
-                t_Map map = Client.getMap(li.getParcour().ID_Map);
+                Map map = li.getParcour().Map;
 
-                MemoryStream ms = new MemoryStream(Client.gett_Picture(map.ID_Picture).Data);
+                MemoryStream ms = new MemoryStream(map.Picture.Data);
                 PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 c = new Converter(map);
                 PictureBox1.SetConverter(c);

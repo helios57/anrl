@@ -16,25 +16,25 @@ namespace AirNavigationRaceLive.Comps
     {
         Cursor select = new Cursor(@"Resources\GPSCursor.cur");
         Cursor move = new Cursor(@"Resources\GPSCursorModify.cur");
-        private Client.Client Client;
+        private Client.DataAccess Client;
         Converter c = null;
-        private AirNavigationRaceLive.Comps.Model.Parcour activeParcour;
-        private t_GPSPoint dragPoint = null;
-        private readonly List<t_GPSPoint> gluePoints = new List<t_GPSPoint>();
-        private readonly List<t_GPSPoint> connectedPoints = new List<t_GPSPoint>();
-        private t_GPSPoint hoverPoint = null;
-        private t_GPSPoint selectedPoint = null;
+        private Parcour activeParcour;
+        private PointTemporaer dragPoint = null;
+        private readonly List<PointTemporaer> gluePoints = new List<PointTemporaer>();
+        private readonly List<PointTemporaer> connectedPoints = new List<PointTemporaer>();
+        private PointTemporaer hoverPoint = null;
+        private PointTemporaer selectedPoint = null;
         ParcourGenerator pc;
         Timer t;
-        private t_Map CurrentMap = null;
+        private Map CurrentMap = null;
         private volatile bool drag = false;
 
-        public ParcourEdit(Client.Client iClient)
+        public ParcourEdit(Client.DataAccess iClient)
         {
             Client = iClient;
             InitializeComponent();
             PictureBox1.Cursor = select;
-            activeParcour = new AirNavigationRaceLive.Comps.Model.Parcour();
+            activeParcour = new Parcour();
             PictureBox1.SetParcour(activeParcour);
         }
         #region load
@@ -50,8 +50,8 @@ namespace AirNavigationRaceLive.Comps
         private void loadMaps()
         {
             comboBoxParcours.Items.Clear();
-            List<t_Parcour> parcours = Client.getParcours();
-            foreach (t_Parcour p in parcours)
+            List<Parcour> parcours = Client.DBContext.ParcourSet.ToList();
+            foreach (Parcour p in parcours)
             {
                 comboBoxParcours.Items.Add(new ListItem(p));
             }
@@ -59,8 +59,8 @@ namespace AirNavigationRaceLive.Comps
 
         class ListItem
         {
-            private t_Parcour parcour;
-            public ListItem(t_Parcour iparcour)
+            private Parcour parcour;
+            public ListItem(Parcour iparcour)
             {
                 parcour = iparcour;
             }
@@ -69,7 +69,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 return parcour.Name;
             }
-            public t_Parcour getParcour()
+            public Parcour getParcour()
             {
                 return parcour;
             }
@@ -99,7 +99,7 @@ namespace AirNavigationRaceLive.Comps
                     dragPoint.latitude = newLatitude;
                     dragPoint.longitude = newLongitude;
                     dragPoint.edited = true;
-                    foreach (t_GPSPoint p in gluePoints)
+                    foreach (PointTemporaer p in gluePoints)
                     {
                         p.latitude = newLatitude;
                         p.longitude = newLongitude;
@@ -107,7 +107,7 @@ namespace AirNavigationRaceLive.Comps
                     }
                     if (checkBoxConnected.Checked)
                     {
-                        foreach (t_GPSPoint p in connectedPoints)
+                        foreach (PointTemporaer p in connectedPoints)
                         {
                             if (p != dragPoint)
                             {
@@ -125,7 +125,7 @@ namespace AirNavigationRaceLive.Comps
                     bool pointSet = false;
                     lock (activeParcour)
                     {
-                        foreach (t_Line l in activeParcour.t_Line)
+                        foreach (Line l in activeParcour.Line)
                         {
                             int startX = c.getStartX(l);
                             int startY = c.getStartY(l);
@@ -138,22 +138,22 @@ namespace AirNavigationRaceLive.Comps
                             Vector mousePos = new Vector(e.X, e.Y, 0);
                             if (Vector.Abs(mousePos - new Vector(startX, startY, 0)) < 3)
                             {
-                                SetHoverPoint(l.A, l);
+                                SetHoverPoint(new PointTemporaer(l.A), l);
                                 gluePoints.Clear();
-                                gluePoints.AddRange(findGluePoints(activeParcour.t_Line, l.A));
+                                gluePoints.AddRange(findGluePoints(activeParcour.Line, new PointTemporaer(l.A)));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.t_Line, l.A, l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.Line, new PointTemporaer(l.A), l));
                                 pointSet = true;
                                 PictureBox1.Cursor = move;
                                 break;
                             }
                             else if (Vector.Abs(mousePos - new Vector(endX, endY, 0)) < 3)
                             {
-                                SetHoverPoint(l.B, l);
+                                SetHoverPoint(new PointTemporaer(l.B), l);
                                 gluePoints.Clear();
-                                gluePoints.AddRange(findGluePoints(activeParcour.t_Line, l.B));
+                                gluePoints.AddRange(findGluePoints(activeParcour.Line, new PointTemporaer(l.B)));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.t_Line, l.B, l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.Line,new PointTemporaer(l.B), l));
                                 pointSet = true;
                                 PictureBox1.Cursor = move;
                                 break;
@@ -161,11 +161,11 @@ namespace AirNavigationRaceLive.Comps
                             }
                             else if (Vector.Abs(mousePos - new Vector(orientationX, orientationY, 0)) < 3)
                             {
-                                SetHoverPoint(l.O, l);
+                                SetHoverPoint(new PointTemporaer(l.O), l);
                                 gluePoints.Clear();
-                                gluePoints.AddRange(findGluePoints(activeParcour.t_Line, l.O));
+                                gluePoints.AddRange(findGluePoints(activeParcour.Line, new PointTemporaer(l.O)));
                                 connectedPoints.Clear();
-                                connectedPoints.AddRange(findConnectedPoints(activeParcour.t_Line, l.O, l));
+                                connectedPoints.AddRange(findConnectedPoints(activeParcour.Line, new PointTemporaer(l.O), l));
                                 pointSet = true;
                                 PictureBox1.Cursor = move;
                                 break;
@@ -181,56 +181,56 @@ namespace AirNavigationRaceLive.Comps
                 }
             }
         }
-        private List<t_GPSPoint> findGluePoints(ICollection<t_Line> t_Line, t_GPSPoint original)
+        private List<PointTemporaer> findGluePoints(ICollection<Line> Line, PointTemporaer original)
         {
-            List<t_GPSPoint> result = new List<t_GPSPoint>();
-            foreach (t_Line l in t_Line)
+            List<PointTemporaer> result = new List<PointTemporaer>();
+            foreach (Line l in Line)
             {
-                if (samePos(l.A, original) && !(original == l.A))
+                if (samePos(l.A, original) && !(original.Id == l.A.Id))
                 {
-                    result.Add(l.A);
+                    result.Add(new PointTemporaer(l.A));
                 }
-                if (samePos(l.B, original) && !(original == l.B))
+                if (samePos(l.B, original) && !(original.Id == l.B.Id))
                 {
-                    result.Add(l.B);
+                    result.Add(new PointTemporaer(l.B));
                 }
-                if (samePos(l.O, original) && !(original == l.O))
+                if (samePos(l.O, original) && !(original.Id == l.O.Id))
                 {
-                    result.Add(l.O);
+                    result.Add(new PointTemporaer(l.O));
                 }
             }
             return result;
         }
-        private List<t_GPSPoint> findConnectedPoints(ICollection<t_Line> t_Line, t_GPSPoint original, t_Line originalLine)
+        private List<PointTemporaer> findConnectedPoints(ICollection<Line> Line, Point original, Line originalLine)
         {
-            List<t_GPSPoint> result = new List<t_GPSPoint>();
-            foreach (t_Line l in t_Line)
+            List<PointTemporaer> result = new List<PointTemporaer>();
+            foreach (Line l in Line)
             {
-                if (l.Type >= 3 && l.Type <= 10 && (l.A == original || l.B == original || l.O == original))
+                if (l.Type >= 3 && l.Type <= 10 && (l.A.Id == original.Id || l.B.Id == original.Id || l.O.Id == original.Id))
                 {
-                    result.Add(l.A);
-                    result.Add(l.B);
-                    result.Add(l.O);
+                    result.Add(new PointTemporaer(l.A));
+                    result.Add(new PointTemporaer(l.B));
+                    result.Add(new PointTemporaer(l.O));
                 }
                 else if (l.Type == (int)LineType.Point && originalLine.Type >= 3 && originalLine.Type <= 6)
                 {
                     Vector mid = Vector.Middle(new Vector(originalLine.A.longitude, originalLine.A.latitude, originalLine.A.altitude), new Vector(originalLine.B.longitude, originalLine.B.latitude, originalLine.B.altitude));
                     if (Vector.Abs(mid - new Vector(l.A.longitude, l.A.latitude, l.A.altitude)) < 0.01)
                     {
-                        result.Add(l.A);
-                        result.Add(l.B);
-                        result.Add(l.O);
-                        result.AddRange(findGluePoints(t_Line, l.O));
+                        result.Add(new PointTemporaer(l.A));
+                        result.Add(new PointTemporaer(l.B));
+                        result.Add(new PointTemporaer(l.O));
+                        result.AddRange(findGluePoints(Line, new PointTemporaer(l.O)));
                     }
                 }
             }
             return result;
         }
-        private bool samePos(t_GPSPoint a, t_GPSPoint b)
+        private bool samePos(Point a, Point b)
         {
             return Vector.Abs(new Vector(a.longitude, a.latitude, a.altitude) - new Vector(b.longitude, b.latitude, b.altitude)) == 0;
         }
-        private void SetHoverPoint(t_GPSPoint p, t_Line l)
+        private void SetHoverPoint(PointTemporaer p, Line l)
         {
             bool change = hoverPoint != p;
             if (change)
@@ -245,21 +245,21 @@ namespace AirNavigationRaceLive.Comps
             ListItem li = comboBoxParcours.SelectedItem as ListItem;
             if (li != null)
             {
-                t_Parcour p = li.getParcour();
-                t_Map m = Client.getMap(p.ID_Map);
-                MemoryStream ms = new MemoryStream(Client.gett_Picture(m.ID_Picture).Data);
+                Parcour p = li.getParcour();
+                Map m = p.Map;
+                MemoryStream ms = new MemoryStream(m.Picture.Data);
                 PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 c = new Converter(m);
                 PictureBox1.SetConverter(c);
                 CurrentMap = m;
-                List<t_Line> toDelete =  p.t_Line.Where(pp=> pp.Type == (int)LineType.START || pp.Type == (int)LineType.END).ToList();
-                foreach(t_Line l in toDelete)
+                List<Line> toDelete =  p.Line.Where(pp=> pp.Type == (int)LineType.START || pp.Type == (int)LineType.END).ToList();
+                foreach(Line l in toDelete)
                 {
-                    p.t_Line.Remove(l);
+                    p.Line.Remove(l);
                 }
-                activeParcour = new Model.Parcour(p);
+                activeParcour = p;
                 PictureBox1.SetParcour(activeParcour);
-                bool generatedParcour = activeParcour.t_Line.Count(pp => pp.Type == (int)LineType.Point) > 0;
+                bool generatedParcour = activeParcour.Line.Count(pp => pp.Type == (int)LineType.Point) > 0;
                 btnRecalc.Enabled = generatedParcour;
                 chkAutocalc.Enabled = generatedParcour;
                 chkAutocalc.Checked = generatedParcour;
@@ -319,14 +319,15 @@ namespace AirNavigationRaceLive.Comps
             }
             else
             {
-                t_Parcour p = new t_Parcour();
+                Parcour p = new Parcour();
                 p.Name = fldName.Text;
-                foreach(t_Line l in activeParcour.t_Line)
+                foreach(Line l in activeParcour.Line)
                 {
-                p.t_Line.Add(l);
+                    p.Line.Add(l);
                 }
-                p.ID_Map = CurrentMap.ID;
-                Client.saveParcour(p);
+                p.Map = CurrentMap;
+                Client.DBContext.ParcourSet.Add(p);
+                Client.DBContext.SaveChanges();
                 MessageBox.Show("Successfully saved");
             }
         }
@@ -360,7 +361,7 @@ namespace AirNavigationRaceLive.Comps
             drag = true;
             if (activeParcour != null && hoverPoint != null)
             {
-                foreach (t_Line l in activeParcour.t_Line)
+                foreach (Line l in activeParcour.Line)
                 {
                     if (l.Type <= 10 && l.Type >= 3 && (l.O == hoverPoint || l.A == hoverPoint || l.B == hoverPoint))
                     {
@@ -400,9 +401,9 @@ namespace AirNavigationRaceLive.Comps
         {
             if (activeParcour != null && comboBoxPoint.SelectedItem != null)
             {
-                if (activeParcour.t_Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
+                if (activeParcour.Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
                 {
-                    t_Line l = activeParcour.t_Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
+                    Line l = activeParcour.Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
                     Vector a = new Vector(l.A.longitude, l.A.latitude, 0);
                     Vector b = new Vector(l.B.longitude, l.B.latitude, 0);
                     Vector m = Vector.Middle(a, b);
@@ -414,8 +415,8 @@ namespace AirNavigationRaceLive.Comps
                     l.O.latitude += diff.Y;
                     l.B.longitude += diff.X;
                     l.B.latitude += diff.Y;
-                    List<t_GPSPoint> connectedPoints = findConnectedPoints(activeParcour.t_Line, l.A, l);
-                    foreach (t_GPSPoint p in connectedPoints)
+                    List<PointTemporaer> connectedPoints = findConnectedPoints(activeParcour.Line, l.A, l);
+                    foreach (Point p in connectedPoints)
                     {
                         if (p != l.A && p != l.B && p != l.O)
                         {
@@ -432,9 +433,9 @@ namespace AirNavigationRaceLive.Comps
         {
             if (activeParcour != null && comboBoxPoint.SelectedItem != null)
             {
-                if (activeParcour.t_Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
+                if (activeParcour.Line.Count(p => p.Type == (int)comboBoxPoint.SelectedItem) == 1)
                 {
-                    t_Line l = activeParcour.t_Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
+                    Line l = activeParcour.Line.First(p => p.Type == (int)comboBoxPoint.SelectedItem);
                     Vector a = new Vector(l.A.longitude, l.A.latitude, 0);
                     Vector b = new Vector(l.B.longitude, l.B.latitude, 0);
                     Vector m = Vector.Middle(a, b);
