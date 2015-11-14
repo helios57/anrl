@@ -43,7 +43,7 @@ namespace AirNavigationRaceLive.Comps
                         ComboBoxFlights lvi2 = new ComboBoxFlights(ct, new string[] { ct.StartID.ToString(), "0", getTeamDsc(ct), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
                         lvi2.Tag = ct;
                         listViewFlights.Items.Add(lvi2);
-                        points.AddRange(ct.Point4D);
+                        points.AddRange(ct.Point);
                         min = Math.Min(ct.TimeTakeOff, min);
                         max = Math.Max(ct.TimeEndLine, max);
                     }
@@ -56,7 +56,7 @@ namespace AirNavigationRaceLive.Comps
                     visualisationPictureBox1.SetParcour(parcour);
                     visualisationPictureBox1.Invalidate();
                     visualisationPictureBox1.Refresh();
-                    recieveData(points);
+                    updatePoints();
                 }
                 else
                 {
@@ -89,10 +89,10 @@ namespace AirNavigationRaceLive.Comps
         {
             return ((NetworkObjects.Route)id).ToString();
         }
-        
-        public void recieveData(List<Point> data)
+
+        public void updatePoints()
         {
-            if (data != null && competition != null && parcour != null)
+            if (competition != null && parcour != null)
             {
                 foreach (ListViewItem lvi in listViewFlights.Items)
                 {
@@ -293,14 +293,10 @@ namespace AirNavigationRaceLive.Comps
         }
         public void UploadFinished(IAsyncResult ass)
         {
-            List<QualificationRound> comps = Client.SelectedCompetition.QualificationRound.ToList();
-            comboBoxCompetition.Items.Clear();
-            listViewFlights.Items.Clear();
-            foreach (QualificationRound c in comps)
-            {
-                comboBoxCompetition.Items.Add(new CompetitionComboEntry(c));
-            }
-            comboBox1_SelectedIndexChanged(null, null);
+            updatePoints();
+
+            listViewCompetitionTeam_SelectedIndexChanged(null, null);
+
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

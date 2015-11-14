@@ -364,9 +364,6 @@
     <Compile Include="Point.cs">
       <DependentUpon>AnrlModel2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Point4D.cs">
-      <DependentUpon>AnrlModel2.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QualificationRound.cs">
@@ -504,23 +501,15 @@
     <None Include="dlls\EPPlus.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="anrl.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="AnrlModel2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AnrlModel2.Context.cs</LastGenOutput>
       <DependentUpon>AnrlModel2.edmx</DependentUpon>
     </Content>
-    <Content Include="AnrlModel2.edmx.sql" />
     <Content Include="AnrlModel2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AnrlModel2.cs</LastGenOutput>
       <DependentUpon>AnrlModel2.edmx</DependentUpon>
-    </Content>
-    <Content Include="anrl_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>anrl.mdf</DependentUpon>
     </Content>
     <Content Include="Resources\default.png" />
     <Content Include="Resources\Summe.png">

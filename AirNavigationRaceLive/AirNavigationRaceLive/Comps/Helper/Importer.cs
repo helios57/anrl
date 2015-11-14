@@ -697,9 +697,9 @@ namespace AirNavigationRaceLive.Comps.Helper
         /// </summary>
         /// <param name="filepath"></param>
         /// <returns>The created Flight object</returns>
-        public static List<Point4D> GPSdataFromGAC(int year, int month, int day, string filename)
+        public static List<Point> GPSdataFromGAC(int year, int month, int day, string filename)
         {
-            List<Point4D> result = new List<Point4D>();
+            List<Point> result = new List<Point>();
             StreamReader gacFileStreamReader = new StreamReader(filename);
             string line = string.Empty;
             line = gacFileStreamReader.ReadLine();
@@ -748,7 +748,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                         double bearing = double.Parse(line.Substring(39, 3), NumberFormatInfo.InvariantInfo);
                         double acc = double.Parse(line.Substring(42, 4), NumberFormatInfo.InvariantInfo);
 
-                        Point4D data = new Point4D();
+                        Point data = new Point();
                         data.Timestamp = newPointTimeStamp.Ticks;
                         data.latitude = newPointLatitude;
                         data.longitude = newPointLongitude;
@@ -760,9 +760,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             return result;
         }
 
-        internal static List<Point4D> GPSdataFromGPX(string filename)
+        internal static List<Point> GPSdataFromGPX(string filename)
         {
-            List<Point4D> result = new List<Point4D>();
+            List<Point> result = new List<Point>();
             XNamespace gpx = XNamespace.Get("http://www.topografix.com/GPX/1/1");
             XDocument gpxDoc = XDocument.Load(filename);
             var tracks = from track in gpxDoc.Descendants(gpx + "trk")
@@ -787,7 +787,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 foreach (var trkSeg in trk.Segs)
                 {
-                    Point4D data = new Point4D();
+                    Point data = new Point();
                     data.Timestamp = DateTime.Parse(trkSeg.Time).Ticks;
                     data.latitude = Double.Parse(trkSeg.Latitude, NumberFormatInfo.InvariantInfo);
                     data.longitude = Double.Parse(trkSeg.Longitude, NumberFormatInfo.InvariantInfo);

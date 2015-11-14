@@ -14,8 +14,9 @@ namespace AirNavigationRaceLive.Comps.Helper
         public static void CalculateAndPersistPenaltyPoints(Client.DataAccess c, Flight f)
         {
             List<Penalty> penalties = CalculatePenaltyPoints(f);
+            c.DBContext.PenaltySet.RemoveRange(f.Penalty);
             f.Penalty.Clear();
-            foreach(Penalty p in penalties)
+            foreach (Penalty p in penalties)
             {
                 f.Penalty.Add(p);
             }
@@ -25,7 +26,7 @@ namespace AirNavigationRaceLive.Comps.Helper
         public static List<Penalty> CalculatePenaltyPoints(Flight flight)
         {
             List<Penalty> result = new List<Penalty>();
-            Point4D last = null;
+            Point last = null;
             List<LineP> PenaltyZoneLines = new List<LineP>();
             QualificationRound qr = flight.QualificationRound;
             Parcour parcour = flight.QualificationRound.Parcour;
@@ -35,7 +36,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             }
 
             List<LineP> dataLines = new List<LineP>();
-            foreach (Point4D g in flight.Point4D)
+            foreach (Point g in flight.Point)
             {
                 if (last != null)
                 {
@@ -60,7 +61,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             takeOffLine.orientation = Vector.Orthogonal(takeOffLine.end - takeOffLine.start);
 
             long maxTimestamp = 0;
-            foreach (Point4D d in flight.Point4D)
+            foreach (Point d in flight.Point)
             {
                 maxTimestamp = Math.Max(d.Timestamp, maxTimestamp);
             }

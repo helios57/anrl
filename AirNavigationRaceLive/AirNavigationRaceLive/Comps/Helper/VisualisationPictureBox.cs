@@ -160,7 +160,7 @@ namespace AirNavigationRaceLive.Comps
                 {
                     Color Color = Color.FromName(flight.Team.Color);
                     List<System.Drawing.Point> points = new List<System.Drawing.Point>();
-                    foreach (Point gd in flight.Point4D)
+                    foreach (Point gd in flight.Point)
                     {
                         int startXp = x0 + (int)(c.LongitudeToX(gd.longitude) * factor);
                         int startYp = y0 + (int)(c.LatitudeToY(gd.latitude) * factor);

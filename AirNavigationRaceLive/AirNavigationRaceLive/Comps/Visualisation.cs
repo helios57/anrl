@@ -70,7 +70,7 @@ namespace AirNavigationRaceLive.Comps
                         foreach (Flight flight in flights)
                         {
                             Team t = flight.Team;
-                            if (flight.Point4D.Count>0)
+                            if (flight.Point.Count>0)
                             {
                                 List<Penalty> penalties = GeneratePenalty.CalculatePenaltyPoints(flight);
                                 penaltyPoints.AddRange(penalties);

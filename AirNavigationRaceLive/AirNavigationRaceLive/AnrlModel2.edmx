@@ -17,7 +17,6 @@
     <EntitySet Name="FlightSet" EntityType="AnrlModel2.Store.FlightSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PenaltySet" EntityType="AnrlModel2.Store.PenaltySet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="PointSet" EntityType="AnrlModel2.Store.PointSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="PointSet_Point4D" EntityType="AnrlModel2.Store.PointSet_Point4D" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CompetitionSubscriber" Association="AnrlModel2.Store.CompetitionSubscriber">
       <End Role="Competition" EntitySet="CompetitionSet" />
       <End Role="Subscriber" EntitySet="SubscriberSet" />
@@ -86,10 +85,6 @@
       <End Role="Flight" EntitySet="FlightSet" />
       <End Role="Penalty" EntitySet="PenaltySet" />
     </AssociationSet>
-    <AssociationSet Name="FlightPoint4D" Association="AnrlModel2.Store.FlightPoint4D">
-      <End Role="Flight" EntitySet="FlightSet" />
-      <End Role="Point4D" EntitySet="PointSet_Point4D" />
-    </AssociationSet>
     <AssociationSet Name="CompetitionTeam" Association="AnrlModel2.Store.CompetitionTeam">
       <End Role="Competition" EntitySet="CompetitionSet" />
       <End Role="Team" EntitySet="TeamSet" />
@@ -98,9 +93,9 @@
       <End Role="Competition" EntitySet="CompetitionSet" />
       <End Role="Parcour" EntitySet="ParcourSet" />
     </AssociationSet>
-    <AssociationSet Name="FK_Point4D_inherits_Point" Association="AnrlModel2.Store.FK_Point4D_inherits_Point">
+    <AssociationSet Name="FlightPoint" Association="AnrlModel2.Store.FlightPoint">
+      <End Role="Flight" EntitySet="FlightSet" />
       <End Role="Point" EntitySet="PointSet" />
-      <End Role="Point4D" EntitySet="PointSet_Point4D" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="CompetitionSet">
@@ -218,13 +213,7 @@
     <Property Name="altitude" Type="float" Nullable="false" />
     <Property Name="longitude" Type="float" Nullable="false" />
     <Property Name="latitude" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PointSet_Point4D">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
     <Property Name="Timestamp" Type="bigint" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Flight_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="CompetitionSubscriber">
@@ -447,20 +436,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FlightPoint4D">
-    <End Role="Flight" Type="AnrlModel2.Store.FlightSet" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Point4D" Type="AnrlModel2.Store.PointSet_Point4D" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Flight">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Point4D">
-        <PropertyRef Name="Flight_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="CompetitionTeam">
     <End Role="Competition" Type="AnrlModel2.Store.CompetitionSet" Multiplicity="1" />
     <End Role="Team" Type="AnrlModel2.Store.TeamSet" Multiplicity="*" />
@@ -487,17 +462,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Point4D_inherits_Point">
-    <End Role="Point" Type="AnrlModel2.Store.PointSet" Multiplicity="1">
+  <Association Name="FlightPoint">
+    <End Role="Flight" Type="AnrlModel2.Store.FlightSet" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
-    <End Role="Point4D" Type="AnrlModel2.Store.PointSet_Point4D" Multiplicity="0..1" />
+    <End Role="Point" Type="AnrlModel2.Store.PointSet" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Point">
+      <Principal Role="Flight">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Point4D">
-        <PropertyRef Name="Id" />
+      <Dependent Role="Point">
+        <PropertyRef Name="Flight_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -585,10 +560,6 @@
             <End Role="Penalty" EntitySet="PenaltySet" />
           </AssociationSet>
           <EntitySet Name="PointSet" EntityType="AnrlModel2.Point" />
-          <AssociationSet Name="FlightPoint4D" Association="AnrlModel2.FlightPoint4D">
-            <End Role="Flight" EntitySet="FlightSet" />
-            <End Role="Point4D" EntitySet="PointSet" />
-          </AssociationSet>
           <AssociationSet Name="CompetitionTeam" Association="AnrlModel2.CompetitionTeam">
             <End Role="Competition" EntitySet="CompetitionSet" />
             <End Role="Team" EntitySet="TeamSet" />
@@ -597,7 +568,11 @@
             <End Role="Competition" EntitySet="CompetitionSet" />
             <End Role="Parcour" EntitySet="ParcourSet" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FlightPoint" Association="AnrlModel2.FlightPoint">
+            <End Role="Flight" EntitySet="FlightSet" />
+            <End Role="Point" EntitySet="PointSet" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Competition">
           <Key>
             <PropertyRef Name="Id" />
@@ -732,6 +707,8 @@
           <Property Name="altitude" Type="Double" Nullable="false" />
           <Property Name="longitude" Type="Double" Nullable="false" />
           <Property Name="latitude" Type="Double" Nullable="false" />
+          <Property Name="Timestamp" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Flight" Relationship="AnrlModel2.FlightPoint" FromRole="Point" ToRole="Flight" />
           </EntityType>
         <Association Name="PointLine">
           <End Type="AnrlModel2.Point" Role="Point" Multiplicity="1" >
@@ -794,8 +771,8 @@
           <Property Name="TimeStartLine" Type="Int64" Nullable="false" />
           <Property Name="TimeEndLine" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Penalty" Relationship="AnrlModel2.FlightPenalty" FromRole="Flight" ToRole="Penalty" />
-          <NavigationProperty Name="Point4D" Relationship="AnrlModel2.FlightPoint4D" FromRole="Flight" ToRole="Point4D" />
           <Property Name="StartID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Point" Relationship="AnrlModel2.FlightPoint" FromRole="Flight" ToRole="Point" />
         </EntityType>
         <Association Name="QualificationRoundFlight">
           <End Type="AnrlModel2.QualificationRound" Role="QualificationRound" Multiplicity="1" >
@@ -823,16 +800,6 @@
           </End>
           <End Type="AnrlModel2.Penalty" Role="Penalty" Multiplicity="*" />
         </Association>
-        <EntityType Name="Point4D" BaseType="AnrlModel2.Point">
-          <Property Name="Timestamp" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Flight" Relationship="AnrlModel2.FlightPoint4D" FromRole="Point4D" ToRole="Flight" />
-        </EntityType>
-        <Association Name="FlightPoint4D">
-          <End Type="AnrlModel2.Flight" Role="Flight" Multiplicity="1" >
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="AnrlModel2.Point4D" Role="Point4D" Multiplicity="*" />
-        </Association>
         <Association Name="CompetitionTeam">
           <End Type="AnrlModel2.Competition" Role="Competition" Multiplicity="1" >
           </End>
@@ -843,6 +810,12 @@
             <OnDelete Action="Cascade" />
           </End>
           <End Type="AnrlModel2.Parcour" Role="Parcour" Multiplicity="*" />
+        </Association>
+        <Association Name="FlightPoint">
+          <End Type="AnrlModel2.Flight" Role="Flight" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="AnrlModel2.Point" Role="Point" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -955,11 +928,6 @@
           <ScalarProperty Name="altitude" ColumnName="altitude" />
           <ScalarProperty Name="longitude" ColumnName="longitude" />
           <ScalarProperty Name="latitude" ColumnName="latitude" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(AnrlModel2.Point4D)">
-        <MappingFragment StoreEntitySet="PointSet_Point4D">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1103,14 +1071,6 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="FlightPoint4D" TypeName="AnrlModel2.FlightPoint4D" StoreEntitySet="PointSet_Point4D">
-      <EndProperty Name="Flight">
-        <ScalarProperty Name="Id" ColumnName="Flight_Id" />
-      </EndProperty>
-      <EndProperty Name="Point4D">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="CompetitionTeam" TypeName="AnrlModel2.CompetitionTeam" StoreEntitySet="TeamSet">
       <EndProperty Name="Competition">
         <ScalarProperty Name="Id" ColumnName="Competition_Id" />
@@ -1124,6 +1084,14 @@
         <ScalarProperty Name="Id" ColumnName="Competition_Id" />
       </EndProperty>
       <EndProperty Name="Parcour">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FlightPoint" TypeName="AnrlModel2.FlightPoint" StoreEntitySet="PointSet">
+      <EndProperty Name="Flight">
+        <ScalarProperty Name="Id" ColumnName="Flight_Id" />
+      </EndProperty>
+      <EndProperty Name="Point">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

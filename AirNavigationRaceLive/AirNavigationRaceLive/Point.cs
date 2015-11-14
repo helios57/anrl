@@ -18,5 +18,8 @@ namespace AirNavigationRaceLive
         public double altitude { get; set; }
         public double longitude { get; set; }
         public double latitude { get; set; }
+        public long Timestamp { get; set; }
+    
+        public virtual Flight Flight { get; set; }
     }
 }

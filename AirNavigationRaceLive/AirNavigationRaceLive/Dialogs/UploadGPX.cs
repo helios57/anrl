@@ -37,14 +37,16 @@ namespace AirNavigationRaceLive.Dialogs
         {
             if (textBoxPositions.Tag != null)
             {
-                List<Point4D> list = textBoxPositions.Tag as List<Point4D>;
-                this.ct.Point4D.Clear();
-                foreach(Point4D point in list)
+                List<Point> list = textBoxPositions.Tag as List<Point>;
+                Client.DBContext.PointSet.RemoveRange(ct.Point);
+                this.ct.Point.Clear();
+                foreach (Point point in list)
                 {
-                    this.ct.Point4D.Add(point);
+                    this.ct.Point.Add(point);
                 }
                 Client.DBContext.SaveChanges();
                 GeneratePenalty.CalculateAndPersistPenaltyPoints(Client, ct);
+                OnFinish.Invoke(null, null);
                 Close();
             }
         }
@@ -66,7 +68,7 @@ namespace AirNavigationRaceLive.Dialogs
             OpenFileDialog ofd = sender as OpenFileDialog;
             try
             {
-                List<Point4D> list = Importer.GPSdataFromGPX(ofd.FileName);
+                List<Point> list = Importer.GPSdataFromGPX(ofd.FileName);
                 textBoxPositions.Text = list.Count.ToString();
                 textBoxPositions.Tag = list;
             }

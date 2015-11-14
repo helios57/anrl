@@ -18,7 +18,7 @@ namespace AirNavigationRaceLive
         public Flight()
         {
             this.Penalty = new HashSet<Penalty>();
-            this.Point4D = new HashSet<Point4D>();
+            this.Point = new HashSet<Point>();
         }
     
         public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace AirNavigationRaceLive
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Penalty> Penalty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Point4D> Point4D { get; set; }
+        public virtual ICollection<Point> Point { get; set; }
     }
 }

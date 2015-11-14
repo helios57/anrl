@@ -112,7 +112,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 Tracker t = new Tracker(flight.Id);
                 t.Color = Color.FromName(flight.Team.Color);
-                foreach (Point4D data in flight.Point4D)
+                foreach (Point data in flight.Point)
                 {
                     t.Pointlist.Add(new Points((decimal)data.longitude, (decimal)data.latitude, (decimal)data.altitude));
                 }

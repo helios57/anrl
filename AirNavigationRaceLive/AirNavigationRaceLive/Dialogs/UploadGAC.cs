@@ -44,7 +44,7 @@ namespace AirNavigationRaceLive.Dialogs
             try
             {
                 DateTime dt = dateGAC.Value;
-                List<Point4D> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, ofd.FileName);
+                List<Point> list = Importer.GPSdataFromGAC(dt.Year, dt.Month, dt.Day, ofd.FileName);
                 textBoxPositions.Text = list.Count.ToString();
                 textBoxPositions.Tag = list;
             }
@@ -63,14 +63,15 @@ namespace AirNavigationRaceLive.Dialogs
         {
             if (textBoxPositions.Tag != null)
             {
-                List<Point4D> list = textBoxPositions.Tag as List<Point4D>;
-                ct.Point4D.Clear();
-                foreach(Point4D point in list)
+                List<Point> list = textBoxPositions.Tag as List<Point>;
+                Client.DBContext.PointSet.RemoveRange(ct.Point);
+                foreach (Point point in list)
                 {
-                    ct.Point4D.Add(point);
+                    ct.Point.Add(point);
                 }
                 Client.DBContext.SaveChanges();
                 GeneratePenalty.CalculateAndPersistPenaltyPoints(Client, ct);
+                OnFinish.Invoke(null, null);
                 Close();
             }
         }
