@@ -99,6 +99,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8BAFD6E5AE7049158E0BFC42389EE90F"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8DF12DB37DA1885B772186076E9716E9"
         "OwnerKey" = "8:_477C6A3A38C3FAA5D4BA4A96F90390B5"
         "MsmSig" = "8:_UNDEFINED"
@@ -477,6 +483,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8BAFD6E5AE7049158E0BFC42389EE90F"
+            {
+            "SourcePath" = "8:..\\AirNavigationRaceLive\\Resources\\ANR_LOGO.ico"
+            "TargetName" = "8:ANR_LOGO.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_591FD7206AD24FD39F1681DA4C4B2366"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8DF12DB37DA1885B772186076E9716E9"
             {
             "AssemblyRegister" = "3:1"
@@ -610,7 +636,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_3A5DB726206A48E4A06288A8286AFF15"
             {
             "Name" = "8:#1916"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:DesktopFolder"
@@ -633,7 +659,7 @@
             "{1525181F-901A-416C-8A58-119130FE478E}:_5A0393D7C29D4065AB9AE5747235C031"
             {
             "Name" = "8:#1919"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
@@ -656,9 +682,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:AirNavigationRaceLiveInstaller"
+        "ProductName" = "8:AirNavigationRace"
         "ProductCode" = "8:{E3E1B141-1A26-4213-B728-E9260C2710A6}"
-        "PackageCode" = "8:{97819B00-2AA7-4C71-A338-3DD5A2878D6C}"
+        "PackageCode" = "8:{CB65AD72-6AB0-4AAF-AA97-18C60C0EA942}"
         "UpgradeCode" = "8:{7CC2B53C-D5A1-482F-8B00-18B38ECBFFDF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -668,10 +694,10 @@
         "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:SharpSoft"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
-        "Title" = "8:AirNavigationRaceLiveInstaller"
+        "ARPHELPLINK" = "8:http://SharpSoft.ch"
+        "Title" = "8:AirNavigationRace"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:SharpSoft.ch"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:SharpSoft.ch"
@@ -778,6 +804,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_2C1CF400B92C4EEAA81B8BFD4D3B905E"
+            {
+            "Name" = "8:AirNavigationRace"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_3A5DB726206A48E4A06288A8286AFF15"
+            "Folder" = "8:_3A5DB726206A48E4A06288A8286AFF15"
+            "WorkingFolder" = "8:_3A5DB726206A48E4A06288A8286AFF15"
+            "Icon" = "8:_8BAFD6E5AE7049158E0BFC42389EE90F"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A2698105F693491FAF77C639A5C477D7"
+            {
+            "Name" = "8:AirNavigationRace"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_5A0393D7C29D4065AB9AE5747235C031"
+            "Folder" = "8:_5A0393D7C29D4065AB9AE5747235C031"
+            "WorkingFolder" = "8:_5A0393D7C29D4065AB9AE5747235C031"
+            "Icon" = "8:_8BAFD6E5AE7049158E0BFC42389EE90F"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
