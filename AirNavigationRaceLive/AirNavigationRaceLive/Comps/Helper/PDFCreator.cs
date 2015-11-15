@@ -97,7 +97,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             pg.Format.Alignment = ParagraphAlignment.Left;
             pg.Format.KeepTogether = false;
             pg.Format.KeepWithNext = false;
-            pg.Format.AddTabStop(Unit.FromCentimeter(22));
+            pg.Format.AddTabStop(Unit.FromCentimeter(21));
 
             FormattedText ft = pg.AddFormattedText(competitionName);
             ft.Bold = true;
@@ -106,10 +106,10 @@ namespace AirNavigationRaceLive.Comps.Helper
 
 
             Image logo = pg.AddImage(@"Resources\ANR_LOGO.jpg");
-            logo.Height = Unit.FromCentimeter(2);
-            logo.Width = Unit.FromCentimeter(2);
+            logo.Height = Unit.FromCentimeter(1.912);
+            logo.Width = Unit.FromCentimeter(2.873);
             logo.LockAspectRatio = true;
-            logo.Left = Unit.FromCentimeter(22);
+            logo.Left = Unit.FromCentimeter(21);
             logo.Top = Unit.FromCentimeter(0);
         }
 
@@ -523,6 +523,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             sec.AddParagraph("Qualification Round: " + competition.Name);
             sec.AddParagraph("Startlist");
+            sec.AddParagraph("");
 
             Table table = sec.AddTable();
             table.Borders.Visible = true;
