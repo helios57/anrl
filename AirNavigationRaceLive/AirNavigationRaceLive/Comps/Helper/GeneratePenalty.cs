@@ -102,7 +102,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     if (seconds > 1)
                     {
                         Penalty penalty = new Penalty();
-                        penalty.Points = Math.Min(seconds * 3, 200);
+                        penalty.Points = Math.Min((seconds-1) * 3, 200);
                         penalty.Reason = "Crossed Start-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)flight.TimeStartLine).ToLongTimeString();
                         result.Add(penalty);
                     }
@@ -116,7 +116,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                     if (seconds>1)
                     {
                         Penalty penalty = new Penalty();
-                        penalty.Points = Math.Min(seconds * 3, 200);
+                        penalty.Points = Math.Min((seconds-1) * 3, 200);
                         penalty.Reason = "Crossed End-Line at " + new DateTime((Int64)crossTime).ToLongTimeString() + " instead of expected " + new DateTime((Int64)flight.TimeEndLine).ToLongTimeString();
                         result.Add(penalty);
                     }
