@@ -158,7 +158,8 @@ namespace AirNavigationRaceLive.Comps
 
                 foreach (Flight flight in flights)
                 {
-                    Color Color = Color.FromName(flight.Team.Color);
+                    //Color Color = Color.FromName(flight.Team.Color);
+                    Color Color = Color.Black;
                     List<System.Drawing.Point> points = new List<System.Drawing.Point>();
                     foreach (Point gd in flight.Point)
                     {

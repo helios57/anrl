@@ -506,6 +506,7 @@
       <LastGenOutput>AnrlModel2.Context.cs</LastGenOutput>
       <DependentUpon>AnrlModel2.edmx</DependentUpon>
     </Content>
+    <Content Include="AnrlModel2.edmx.sql" />
     <Content Include="AnrlModel2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AnrlModel2.cs</LastGenOutput>

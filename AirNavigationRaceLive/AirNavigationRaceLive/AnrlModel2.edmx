@@ -214,7 +214,7 @@
     <Property Name="longitude" Type="float" Nullable="false" />
     <Property Name="latitude" Type="float" Nullable="false" />
     <Property Name="Timestamp" Type="bigint" Nullable="false" />
-    <Property Name="Flight_Id" Type="int" Nullable="false" />
+    <Property Name="Flight_Id" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="CompetitionSubscriber">
     <End Role="Competition" Type="AnrlModel2.Store.CompetitionSet" Multiplicity="1">
@@ -463,7 +463,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FlightPoint">
-    <End Role="Flight" Type="AnrlModel2.Store.FlightSet" Multiplicity="1">
+    <End Role="Flight" Type="AnrlModel2.Store.FlightSet" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
     </End>
     <End Role="Point" Type="AnrlModel2.Store.PointSet" Multiplicity="*" />
@@ -812,7 +812,7 @@
           <End Type="AnrlModel2.Parcour" Role="Parcour" Multiplicity="*" />
         </Association>
         <Association Name="FlightPoint">
-          <End Type="AnrlModel2.Flight" Role="Flight" Multiplicity="1" >
+          <End Type="AnrlModel2.Flight" Role="Flight" Multiplicity="0..1" >
             <OnDelete Action="Cascade" />
           </End>
           <End Type="AnrlModel2.Point" Role="Point" Multiplicity="*" />
@@ -1094,6 +1094,7 @@
       <EndProperty Name="Point">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
+      <Condition ColumnName="Flight_Id" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
