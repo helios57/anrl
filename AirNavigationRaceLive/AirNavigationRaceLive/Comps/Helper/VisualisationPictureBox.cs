@@ -46,7 +46,7 @@ namespace AirNavigationRaceLive.Comps
             float lineThickness = 2f;
             if (pe != null && pe.ClipRectangle.Bottom == -4)
             {
-                lineThickness = 14f;
+                lineThickness = 7f;
             }
             Pen.Width = lineThickness;
             #region parcour
