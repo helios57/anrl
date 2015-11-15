@@ -386,7 +386,7 @@ namespace AirNavigationRaceLive.Comps
 
             textBoxStartId.Text = starID.ToString();
             textBoxStartId.Tag = new Flight();
-            if (comboBoxTeam.SelectedIndex == -1)
+            if (comboBoxTeam.SelectedIndex == -1&& comboBoxTeam.Items.Count>0)
             {
                 comboBoxRoute.SelectedIndex = 0;
                 comboBoxTeam.SelectedIndex = 0;
@@ -414,7 +414,7 @@ namespace AirNavigationRaceLive.Comps
         {
             Flight ct = textBoxStartId.Tag as Flight;
             QualificationRound c = textName.Tag as QualificationRound;
-            if (c != null && ct != null)
+            if (c != null && ct != null && comboBoxTeam.SelectedItem!=null)
             {
                 List<Flight> toDelete = c.Flight.Where(p => p == ct).ToList();
                 foreach (Flight t in toDelete)
@@ -484,9 +484,15 @@ namespace AirNavigationRaceLive.Comps
             {
                 return;
             }
-            int startid = int.Parse(textBoxStartId.Text.ToString());
-            startid++;
-            textBoxStartId.Text = startid.ToString();
+            try {
+                int startid = int.Parse(textBoxStartId.Text.ToString());
+                startid++;
+                textBoxStartId.Text = startid.ToString();
+            }catch(Exception ex)
+            {
+                ex.ToString();
+                return;
+            }
             //Route um eins erhöhen
             if (comboBoxRoute.SelectedIndex == comboBoxRoute.Items.Count - 1)
             {

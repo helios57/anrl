@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnImportSwitched = new System.Windows.Forms.Button();
             this.btnImportDxfWGS = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -71,7 +72,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.channelWide = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnImportSwitched = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -93,18 +93,19 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 533F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel6, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.793103F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 96.20689F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1110, 580);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.71222F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.28778F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(2960, 1383);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -112,9 +113,10 @@
             this.panel1.Controls.Add(this.comboBoxMaps);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(8, 7);
+            this.panel1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(194, 15);
+            this.panel1.Size = new System.Drawing.Size(517, 64);
             this.panel1.TabIndex = 1;
             // 
             // comboBoxMaps
@@ -122,18 +124,20 @@
             this.comboBoxMaps.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxMaps.FormattingEnabled = true;
-            this.comboBoxMaps.Location = new System.Drawing.Point(40, -3);
+            this.comboBoxMaps.Location = new System.Drawing.Point(111, 18);
+            this.comboBoxMaps.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.comboBoxMaps.Name = "comboBoxMaps";
-            this.comboBoxMaps.Size = new System.Drawing.Size(151, 21);
+            this.comboBoxMaps.Size = new System.Drawing.Size(396, 39);
             this.comboBoxMaps.TabIndex = 1;
             this.comboBoxMaps.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaps_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(78, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Map:";
             // 
@@ -148,9 +152,10 @@
             this.flowLayoutPanel1.Controls.Add(this.panel4);
             this.flowLayoutPanel1.Controls.Add(this.btnSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 24);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 85);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(194, 553);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(517, 1291);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnClear
@@ -158,22 +163,38 @@
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClear.Location = new System.Drawing.Point(3, 3);
+            this.btnClear.Location = new System.Drawing.Point(8, 7);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(190, 23);
+            this.btnClear.Size = new System.Drawing.Size(507, 55);
             this.btnClear.TabIndex = 11;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnImportSwitched
+            // 
+            this.btnImportSwitched.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImportSwitched.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnImportSwitched.Location = new System.Drawing.Point(8, 76);
+            this.btnImportSwitched.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnImportSwitched.Name = "btnImportSwitched";
+            this.btnImportSwitched.Size = new System.Drawing.Size(507, 55);
+            this.btnImportSwitched.TabIndex = 23;
+            this.btnImportSwitched.Text = "Import DXF (WGS84 Switched)";
+            this.btnImportSwitched.UseVisualStyleBackColor = true;
+            this.btnImportSwitched.Click += new System.EventHandler(this.btnImportSwitched_Click);
             // 
             // btnImportDxfWGS
             // 
             this.btnImportDxfWGS.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImportDxfWGS.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnImportDxfWGS.Location = new System.Drawing.Point(3, 61);
+            this.btnImportDxfWGS.Location = new System.Drawing.Point(8, 145);
+            this.btnImportDxfWGS.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnImportDxfWGS.Name = "btnImportDxfWGS";
-            this.btnImportDxfWGS.Size = new System.Drawing.Size(190, 23);
+            this.btnImportDxfWGS.Size = new System.Drawing.Size(507, 55);
             this.btnImportDxfWGS.TabIndex = 22;
             this.btnImportDxfWGS.Text = "Import DXF (WGS84)";
             this.btnImportDxfWGS.UseVisualStyleBackColor = true;
@@ -184,9 +205,10 @@
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnImport.Location = new System.Drawing.Point(3, 90);
+            this.btnImport.Location = new System.Drawing.Point(8, 214);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(190, 23);
+            this.btnImport.Size = new System.Drawing.Size(507, 55);
             this.btnImport.TabIndex = 0;
             this.btnImport.Text = "Import DXF (CH1904)";
             this.btnImport.UseVisualStyleBackColor = true;
@@ -202,78 +224,88 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.fldCursorX);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(3, 119);
+            this.groupBox1.Location = new System.Drawing.Point(8, 283);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(187, 61);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.groupBox1.Size = new System.Drawing.Size(499, 145);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cursor";
             // 
             // fldLongitude
             // 
-            this.fldLongitude.Location = new System.Drawing.Point(115, 35);
+            this.fldLongitude.Location = new System.Drawing.Point(307, 83);
+            this.fldLongitude.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldLongitude.Name = "fldLongitude";
             this.fldLongitude.ReadOnly = true;
-            this.fldLongitude.Size = new System.Drawing.Size(66, 20);
+            this.fldLongitude.Size = new System.Drawing.Size(169, 38);
             this.fldLongitude.TabIndex = 7;
             // 
             // fldLatitude
             // 
-            this.fldLatitude.Location = new System.Drawing.Point(115, 9);
+            this.fldLatitude.Location = new System.Drawing.Point(307, 21);
+            this.fldLatitude.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldLatitude.Name = "fldLatitude";
             this.fldLatitude.ReadOnly = true;
-            this.fldLatitude.Size = new System.Drawing.Size(66, 20);
+            this.fldLatitude.Size = new System.Drawing.Size(169, 38);
             this.fldLatitude.TabIndex = 6;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(56, 35);
+            this.label8.Location = new System.Drawing.Point(149, 83);
+            this.label8.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.Size = new System.Drawing.Size(141, 32);
             this.label8.TabIndex = 5;
             this.label8.Text = "longitude:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(56, 16);
+            this.label7.Location = new System.Drawing.Point(149, 38);
+            this.label7.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.Size = new System.Drawing.Size(117, 32);
             this.label7.TabIndex = 4;
             this.label7.Text = "latitude:";
             // 
             // fldCursorY
             // 
-            this.fldCursorY.Location = new System.Drawing.Point(19, 32);
+            this.fldCursorY.Location = new System.Drawing.Point(51, 76);
+            this.fldCursorY.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldCursorY.Name = "fldCursorY";
             this.fldCursorY.ReadOnly = true;
-            this.fldCursorY.Size = new System.Drawing.Size(31, 20);
+            this.fldCursorY.Size = new System.Drawing.Size(76, 38);
             this.fldCursorY.TabIndex = 3;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 35);
+            this.label6.Location = new System.Drawing.Point(8, 83);
+            this.label6.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.Size = new System.Drawing.Size(42, 32);
             this.label6.TabIndex = 2;
             this.label6.Text = "Y:";
             // 
             // fldCursorX
             // 
-            this.fldCursorX.Location = new System.Drawing.Point(19, 13);
+            this.fldCursorX.Location = new System.Drawing.Point(51, 31);
+            this.fldCursorX.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldCursorX.Name = "fldCursorX";
             this.fldCursorX.ReadOnly = true;
-            this.fldCursorX.Size = new System.Drawing.Size(31, 20);
+            this.fldCursorX.Size = new System.Drawing.Size(76, 38);
             this.fldCursorX.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 16);
+            this.label4.Location = new System.Drawing.Point(8, 38);
+            this.label4.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
+            this.label4.Size = new System.Drawing.Size(42, 32);
             this.label4.TabIndex = 0;
             this.label4.Text = "X:";
             // 
@@ -295,36 +327,41 @@
             this.lineBox.Controls.Add(this.numLatA);
             this.lineBox.Controls.Add(this.label9);
             this.lineBox.Enabled = false;
-            this.lineBox.Location = new System.Drawing.Point(3, 186);
+            this.lineBox.Location = new System.Drawing.Point(8, 442);
+            this.lineBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lineBox.Name = "lineBox";
-            this.lineBox.Size = new System.Drawing.Size(187, 176);
+            this.lineBox.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.lineBox.Size = new System.Drawing.Size(499, 420);
             this.lineBox.TabIndex = 18;
             this.lineBox.TabStop = false;
             this.lineBox.Text = "Line";
             // 
             // fldLineTyp
             // 
-            this.fldLineTyp.Location = new System.Drawing.Point(78, 13);
+            this.fldLineTyp.Location = new System.Drawing.Point(208, 31);
+            this.fldLineTyp.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldLineTyp.Name = "fldLineTyp";
             this.fldLineTyp.ReadOnly = true;
-            this.fldLineTyp.Size = new System.Drawing.Size(100, 20);
+            this.fldLineTyp.Size = new System.Drawing.Size(260, 38);
             this.fldLineTyp.TabIndex = 14;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(7, 16);
+            this.label16.Location = new System.Drawing.Point(19, 38);
+            this.label16.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(48, 13);
+            this.label16.Size = new System.Drawing.Size(124, 32);
             this.label16.TabIndex = 13;
             this.label16.Text = "Line Typ";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(7, 118);
+            this.label15.Location = new System.Drawing.Point(19, 281);
+            this.label15.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(165, 13);
+            this.label15.Size = new System.Drawing.Size(442, 32);
             this.label15.TabIndex = 12;
             this.label15.Text = "Point O is used for the Orientation";
             // 
@@ -336,19 +373,21 @@
             0,
             0,
             262144});
-            this.numLongO.Location = new System.Drawing.Point(79, 152);
+            this.numLongO.Location = new System.Drawing.Point(211, 362);
+            this.numLongO.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numLongO.Name = "numLongO";
             this.numLongO.ReadOnly = true;
-            this.numLongO.Size = new System.Drawing.Size(100, 20);
+            this.numLongO.Size = new System.Drawing.Size(267, 38);
             this.numLongO.TabIndex = 11;
             this.numLongO.ValueChanged += new System.EventHandler(this.numLongO_ValueChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 154);
+            this.label13.Location = new System.Drawing.Point(16, 367);
+            this.label13.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(68, 13);
+            this.label13.Size = new System.Drawing.Size(179, 32);
             this.label13.TabIndex = 10;
             this.label13.Text = "Longitude O:";
             // 
@@ -360,19 +399,21 @@
             0,
             0,
             262144});
-            this.numLatO.Location = new System.Drawing.Point(79, 133);
+            this.numLatO.Location = new System.Drawing.Point(211, 317);
+            this.numLatO.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numLatO.Name = "numLatO";
             this.numLatO.ReadOnly = true;
-            this.numLatO.Size = new System.Drawing.Size(100, 20);
+            this.numLatO.Size = new System.Drawing.Size(267, 38);
             this.numLatO.TabIndex = 9;
             this.numLatO.ValueChanged += new System.EventHandler(this.numLatO_ValueChanged);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 135);
+            this.label14.Location = new System.Drawing.Point(16, 322);
+            this.label14.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(59, 13);
+            this.label14.Size = new System.Drawing.Size(155, 32);
             this.label14.TabIndex = 8;
             this.label14.Text = "Latitude O:";
             // 
@@ -384,19 +425,21 @@
             0,
             0,
             262144});
-            this.numLongB.Location = new System.Drawing.Point(78, 97);
+            this.numLongB.Location = new System.Drawing.Point(208, 231);
+            this.numLongB.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numLongB.Name = "numLongB";
             this.numLongB.ReadOnly = true;
-            this.numLongB.Size = new System.Drawing.Size(100, 20);
+            this.numLongB.Size = new System.Drawing.Size(267, 38);
             this.numLongB.TabIndex = 7;
             this.numLongB.ValueChanged += new System.EventHandler(this.numLongB_ValueChanged);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 99);
+            this.label11.Location = new System.Drawing.Point(13, 236);
+            this.label11.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 13);
+            this.label11.Size = new System.Drawing.Size(176, 32);
             this.label11.TabIndex = 6;
             this.label11.Text = "Longitude B:";
             // 
@@ -408,19 +451,21 @@
             0,
             0,
             262144});
-            this.numLatB.Location = new System.Drawing.Point(78, 78);
+            this.numLatB.Location = new System.Drawing.Point(208, 186);
+            this.numLatB.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numLatB.Name = "numLatB";
             this.numLatB.ReadOnly = true;
-            this.numLatB.Size = new System.Drawing.Size(100, 20);
+            this.numLatB.Size = new System.Drawing.Size(267, 38);
             this.numLatB.TabIndex = 5;
             this.numLatB.ValueChanged += new System.EventHandler(this.numLatB_ValueChanged);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(5, 80);
+            this.label12.Location = new System.Drawing.Point(13, 191);
+            this.label12.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(58, 13);
+            this.label12.Size = new System.Drawing.Size(152, 32);
             this.label12.TabIndex = 4;
             this.label12.Text = "Latitude B:";
             // 
@@ -432,19 +477,21 @@
             0,
             0,
             262144});
-            this.numLongA.Location = new System.Drawing.Point(79, 55);
+            this.numLongA.Location = new System.Drawing.Point(211, 131);
+            this.numLongA.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numLongA.Name = "numLongA";
             this.numLongA.ReadOnly = true;
-            this.numLongA.Size = new System.Drawing.Size(100, 20);
+            this.numLongA.Size = new System.Drawing.Size(267, 38);
             this.numLongA.TabIndex = 3;
             this.numLongA.ValueChanged += new System.EventHandler(this.numLongA_ValueChanged);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 57);
+            this.label10.Location = new System.Drawing.Point(16, 136);
+            this.label10.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 13);
+            this.label10.Size = new System.Drawing.Size(176, 32);
             this.label10.TabIndex = 2;
             this.label10.Text = "Longitude A:";
             // 
@@ -456,19 +503,21 @@
             0,
             0,
             262144});
-            this.numLatA.Location = new System.Drawing.Point(79, 36);
+            this.numLatA.Location = new System.Drawing.Point(211, 86);
+            this.numLatA.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numLatA.Name = "numLatA";
             this.numLatA.ReadOnly = true;
-            this.numLatA.Size = new System.Drawing.Size(100, 20);
+            this.numLatA.Size = new System.Drawing.Size(267, 38);
             this.numLatA.TabIndex = 1;
             this.numLatA.ValueChanged += new System.EventHandler(this.numLatA_ValueChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 38);
+            this.label9.Location = new System.Drawing.Point(16, 91);
+            this.label9.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 13);
+            this.label9.Size = new System.Drawing.Size(152, 32);
             this.label9.TabIndex = 0;
             this.label9.Text = "Latitude A:";
             // 
@@ -479,32 +528,36 @@
             this.panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel4.Controls.Add(this.fldName);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(3, 368);
+            this.panel4.Location = new System.Drawing.Point(8, 876);
+            this.panel4.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(190, 28);
+            this.panel4.Size = new System.Drawing.Size(507, 67);
             this.panel4.TabIndex = 21;
             // 
             // fldName
             // 
-            this.fldName.Location = new System.Drawing.Point(78, 3);
+            this.fldName.Location = new System.Drawing.Point(208, 7);
+            this.fldName.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldName.Name = "fldName";
-            this.fldName.Size = new System.Drawing.Size(100, 20);
+            this.fldName.Size = new System.Drawing.Size(260, 38);
             this.fldName.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 7);
+            this.label5.Location = new System.Drawing.Point(8, 17);
+            this.label5.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.Size = new System.Drawing.Size(98, 32);
             this.label5.TabIndex = 0;
             this.label5.Text = "Name:";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(3, 402);
+            this.btnSave.Location = new System.Drawing.Point(8, 957);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(187, 23);
+            this.btnSave.Size = new System.Drawing.Size(499, 55);
             this.btnSave.TabIndex = 19;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -515,15 +568,17 @@
             this.panel6.AutoScroll = true;
             this.panel6.Controls.Add(this.PictureBox1);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(203, 3);
+            this.panel6.Location = new System.Drawing.Point(541, 7);
+            this.panel6.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.panel6.Name = "panel6";
             this.tableLayoutPanel1.SetRowSpan(this.panel6, 2);
-            this.panel6.Size = new System.Drawing.Size(904, 574);
+            this.panel6.Size = new System.Drawing.Size(2411, 1369);
             this.panel6.TabIndex = 3;
             // 
             // PictureBox1
             // 
-            this.PictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.PictureBox1.Location = new System.Drawing.Point(8, 7);
+            this.PictureBox1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.PictureBox1.Name = "PictureBox1";
             this.PictureBox1.Size = new System.Drawing.Size(500, 500);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -539,7 +594,7 @@
             // 
             this.parcourLength.Location = new System.Drawing.Point(0, 0);
             this.parcourLength.Name = "parcourLength";
-            this.parcourLength.Size = new System.Drawing.Size(120, 20);
+            this.parcourLength.Size = new System.Drawing.Size(120, 38);
             this.parcourLength.TabIndex = 0;
             // 
             // label2
@@ -553,7 +608,7 @@
             // 
             this.channelWide.Location = new System.Drawing.Point(0, 0);
             this.channelWide.Name = "channelWide";
-            this.channelWide.Size = new System.Drawing.Size(120, 20);
+            this.channelWide.Size = new System.Drawing.Size(120, 38);
             this.channelWide.TabIndex = 0;
             // 
             // label3
@@ -563,26 +618,14 @@
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 0;
             // 
-            // btnImportSwitched
-            // 
-            this.btnImportSwitched.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImportSwitched.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnImportSwitched.Location = new System.Drawing.Point(3, 32);
-            this.btnImportSwitched.Name = "btnImportSwitched";
-            this.btnImportSwitched.Size = new System.Drawing.Size(190, 23);
-            this.btnImportSwitched.TabIndex = 23;
-            this.btnImportSwitched.Text = "Import DXF (WGS84 Switched)";
-            this.btnImportSwitched.UseVisualStyleBackColor = true;
-            this.btnImportSwitched.Click += new System.EventHandler(this.btnImportSwitched_Click);
-            // 
             // ParcourImport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "ParcourImport";
-            this.Size = new System.Drawing.Size(1110, 580);
+            this.Size = new System.Drawing.Size(2960, 1383);
             this.Load += new System.EventHandler(this.ParcourGen_Load);
             this.VisibleChanged += new System.EventHandler(this.ParcourGen_VisibleChanged);
             this.tableLayoutPanel1.ResumeLayout(false);
