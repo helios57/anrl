@@ -17,6 +17,7 @@ namespace AirNavigationRaceLive.Comps
     {
         private Client.DataAccess Client;
         private ToolTip Tooltip;
+        private Map m;
 
         public MapControl(Client.DataAccess iClient)
         {
@@ -85,25 +86,34 @@ namespace AirNavigationRaceLive.Comps
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnDelete.Enabled = false;
-            btnSelectMap.Enabled = false;
-            btnSelectWorldFile.Enabled = false;
-            btnSave.Enabled = false;
-            fldName.Enabled = false;
+
             ListItem li = listBox1.SelectedItem as ListItem;
             if (li != null)
             {
-                fldName.Text = li.getMap().Name;
-                fldSizeX.Text = li.getMap().XSize.ToString();
-                fldSizeY.Text = li.getMap().YSize.ToString();
-                fldRotationX.Text = li.getMap().XRot.ToString();
-                fldRotationY.Text = li.getMap().YRot.ToString();
-                fldX.Text = li.getMap().XTopLeft.ToString();
-                fldY.Text = li.getMap().YTopLeft.ToString();
+                m = li.getMap();
+                fldName.Text = m.Name;
+                fldSizeX.Text = m.XSize.ToString();
+                fldSizeY.Text = m.YSize.ToString();
+                fldRotationX.Text = m.XRot.ToString();
+                fldRotationY.Text = m.YRot.ToString();
+                fldX.Text = m.XTopLeft.ToString();
+                fldY.Text = m.YTopLeft.ToString();
 
-                MemoryStream ms = new MemoryStream(li.getMap().Picture.Data);
+                MemoryStream ms = new MemoryStream(m.Picture.Data);
                 PictureBox1.Image = System.Drawing.Image.FromStream(ms);
                 btnDelete.Enabled = true;
+                btnSave.Enabled = true;
+                btnSelectMap.Enabled = true;
+                btnSelectWorldFile.Enabled = true;
+                fldName.Enabled = true;
+            }
+            else
+            {
+                btnDelete.Enabled = false;
+                btnSelectMap.Enabled = false;
+                btnSelectWorldFile.Enabled = false;
+                btnSave.Enabled = false;
+                fldName.Enabled = false;
             }
         }
 
@@ -120,6 +130,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnNew_Click(object sender, EventArgs e)
         {
+            m = new Map();
             fldName.Text = "";
             fldSizeX.Text = "";
             fldSizeY.Text = "";
@@ -198,8 +209,6 @@ namespace AirNavigationRaceLive.Comps
                 btnSelectMap.Enabled = false;
                 btnSelectWorldFile.Enabled = false;
                 btnSave.Enabled = false;
-                fldName.Enabled = false;
-                Map m = new Map();
                 m.Name = fldName.Text;
                 m.XSize = Double.Parse(fldSizeX.Text, NumberFormatInfo.InvariantInfo);
                 m.YSize = Double.Parse(fldSizeY.Text, NumberFormatInfo.InvariantInfo);
@@ -212,7 +221,10 @@ namespace AirNavigationRaceLive.Comps
                 m.Picture = new Picture();
                 m.Picture.Data = ms.ToArray();
                 m.Competition = Client.SelectedCompetition;
-                Client.DBContext.MapSet.Add(m);
+                if (m.Id == 0)
+                {
+                    Client.DBContext.MapSet.Add(m);
+                }
                 Client.DBContext.SaveChanges();
                 loadMaps();
             }

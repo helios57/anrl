@@ -427,7 +427,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(599, 54);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
@@ -481,7 +481,6 @@
             // fldName
             // 
             this.fldName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fldName.Enabled = false;
             this.fldName.Location = new System.Drawing.Point(307, 7);
             this.fldName.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.fldName.Name = "fldName";
