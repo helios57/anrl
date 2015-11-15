@@ -299,9 +299,9 @@ namespace AirNavigationRaceLive.Comps.Helper
             Document doc = new Document();
             doc.Info.Author = "Luc.Baumann@sharpsoft.ch";
             doc.Info.Comment = "Generated from ANRL Client on " + DateTime.Now.ToString();
-            doc.Info.Keywords = "ANRL Crewlist";
-            doc.Info.Subject = "Crewlist";
-            doc.Info.Title = "Crewlist";
+            doc.Info.Keywords = "ANRL Toplist";
+            doc.Info.Subject = "Toplist";
+            doc.Info.Title = "Toplist";
             doc.UseCmykColor = true;
             doc.DefaultPageSetup.PageFormat = PageFormat.A4;
             doc.DefaultPageSetup.Orientation = Orientation.Landscape;
@@ -315,11 +315,13 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             AddCompetitionAndLogo(c, sec);
             sec.AddParagraph("");
-            sec.AddParagraph("Participants list");
+            sec.AddParagraph("Toplist");
+            sec.AddParagraph("");
 
             Table table = sec.AddTable();
             table.Borders.Visible = true;
 
+            table.AddColumn(Unit.FromCentimeter(2));
             table.AddColumn(Unit.FromCentimeter(2));
             table.AddColumn(Unit.FromCentimeter(2.5));
             table.AddColumn(Unit.FromCentimeter(4));
@@ -329,27 +331,30 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             Row row = table.AddRow();
             row.Shading.Color = Colors.Gray;
-            row.Cells[0].AddParagraph("Points");
-            row.Cells[1].AddParagraph("Nationality");
-            row.Cells[2].AddParagraph("Pilot Lastname");
-            row.Cells[3].AddParagraph("Pilot Firstname");
-            row.Cells[4].AddParagraph("Navigator Lastname");
-            row.Cells[5].AddParagraph("Navigator Firstname");
+            row.Cells[0].AddParagraph("Rank");
+            row.Cells[1].AddParagraph("Points");
+            row.Cells[2].AddParagraph("Nationality");
+            row.Cells[3].AddParagraph("Pilot Lastname");
+            row.Cells[4].AddParagraph("Pilot Firstname");
+            row.Cells[5].AddParagraph("Navigator Lastname");
+            row.Cells[6].AddParagraph("Navigator Firstname");
 
+            int rank = 1;
             foreach (Toplist top in toplist)
             {
                 Team t = top.ct.Team;
                 Row r = table.AddRow();
-                r.Cells[0].AddParagraph(top.sum.ToString());
-                r.Cells[1].AddParagraph(t.Nationality);
+                r.Cells[0].AddParagraph(rank+++"");
+                r.Cells[1].AddParagraph(top.sum.ToString());
+                r.Cells[2].AddParagraph(t.Nationality);
                 Subscriber pilot = t.Pilot;
-                r.Cells[2].AddParagraph(pilot.LastName);
-                r.Cells[3].AddParagraph(pilot.FirstName);
+                r.Cells[3].AddParagraph(pilot.LastName);
+                r.Cells[4].AddParagraph(pilot.FirstName);
                 if (t.Navigator!=null)
                 {
                     Subscriber navigator = t.Navigator;
-                    r.Cells[4].AddParagraph(navigator.LastName);
-                    r.Cells[5].AddParagraph(navigator.FirstName);
+                    r.Cells[5].AddParagraph(navigator.LastName);
+                    r.Cells[6].AddParagraph(navigator.FirstName);
                 }
             }
 

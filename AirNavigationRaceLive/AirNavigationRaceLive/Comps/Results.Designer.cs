@@ -57,6 +57,7 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnExportToplist = new System.Windows.Forms.Button();
             this.btnUploadGPX = new System.Windows.Forms.Button();
+            this.btnExportAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.visualisationPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -216,12 +217,13 @@
             // btnPdf
             // 
             this.btnPdf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPdf.Enabled = false;
             this.btnPdf.Location = new System.Drawing.Point(275, 1152);
             this.btnPdf.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnPdf.Name = "btnPdf";
-            this.btnPdf.Size = new System.Drawing.Size(429, 55);
+            this.btnPdf.Size = new System.Drawing.Size(320, 55);
             this.btnPdf.TabIndex = 113;
-            this.btnPdf.Text = "Export Results to PDF";
+            this.btnPdf.Text = "Export Result to PDF";
             this.btnPdf.UseVisualStyleBackColor = true;
             this.btnPdf.Click += new System.EventHandler(this.btnPdf_Click);
             // 
@@ -346,10 +348,23 @@
             this.btnUploadGPX.UseVisualStyleBackColor = true;
             this.btnUploadGPX.Click += new System.EventHandler(this.btnUploadGPX_Click);
             // 
+            // btnExportAll
+            // 
+            this.btnExportAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportAll.Location = new System.Drawing.Point(611, 1152);
+            this.btnExportAll.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnExportAll.Name = "btnExportAll";
+            this.btnExportAll.Size = new System.Drawing.Size(93, 55);
+            this.btnExportAll.TabIndex = 119;
+            this.btnExportAll.Text = "All";
+            this.btnExportAll.UseVisualStyleBackColor = true;
+            this.btnExportAll.Click += new System.EventHandler(this.btnExportAll_Click);
+            // 
             // Results
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExportAll);
             this.Controls.Add(this.btnUploadGPX);
             this.Controls.Add(this.btnExportToplist);
             this.Controls.Add(this.btnRefresh);
@@ -411,5 +426,6 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnExportToplist;
         private System.Windows.Forms.Button btnUploadGPX;
+        private System.Windows.Forms.Button btnExportAll;
     }
 }
