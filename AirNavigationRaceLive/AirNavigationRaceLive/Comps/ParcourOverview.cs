@@ -35,10 +35,10 @@ namespace AirNavigationRaceLive.Comps
         }
         #region load
 
-        class ListItem
+        class ListItem:ListViewItem
         {
             private Parcour parcour;
-            public ListItem(Parcour iParcour)
+            public ListItem(Parcour iParcour) :base(iParcour.Name )
             {
                 parcour = iParcour;
             }
@@ -84,9 +84,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListItem li = listBox1.SelectedItem as ListItem;
-            if (li != null)
+            if (listBox1.SelectedItems.Count==1)
             {
+                ListItem li = listBox1.SelectedItems[0] as ListItem;
                 Parcour parcour = li.getParcour();
                 if (parcour.Id!=0)
                 {
@@ -99,9 +99,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ListItem li = listBox1.SelectedItem as ListItem;
-            if (li != null)
+            if (listBox1.SelectedItems.Count==1)
             {
+                ListItem li = listBox1.SelectedItems[0] as ListItem;
                 deleteToolStripMenuItem.Enabled = true;
                 Map map = li.getParcour().Map;
 
@@ -347,9 +347,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            ListItem li = listBox1.SelectedItem as ListItem;
-            if (li != null && PictureBox1.PrintOutImage!= null)
+            if (listBox1.SelectedItems.Count==1 && PictureBox1.PrintOutImage!= null)
             {
+                ListItem li = listBox1.SelectedItems[0] as ListItem;
                 String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
                 DirectoryInfo di = Directory.CreateDirectory(dirPath);
                 if (!di.Exists)
@@ -363,9 +363,9 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExport100k_Click(object sender, EventArgs e)
         {
-            ListItem li = listBox1.SelectedItem as ListItem;
-            if (li != null && PictureBox1.PrintOutImage != null)
+            if (listBox1.SelectedItems.Count==1 && PictureBox1.PrintOutImage != null)
             {
+                ListItem li = listBox1.SelectedItems[0] as ListItem;
                 String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
                 DirectoryInfo di = Directory.CreateDirectory(dirPath);
                 if (!di.Exists)
@@ -377,5 +377,13 @@ namespace AirNavigationRaceLive.Comps
             }
         }
 
+        private void listBox1_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            string newName = e.Label;
+            ListItem item =listBox1.Items[e.Item] as ListItem;
+            Parcour p = item.getParcour();
+            p.Name = newName;
+            Client.DBContext.SaveChanges();
+        }
     }
 }

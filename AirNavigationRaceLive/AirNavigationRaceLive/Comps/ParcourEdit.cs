@@ -320,6 +320,7 @@ namespace AirNavigationRaceLive.Comps
             else
             {
                 Parcour p = new Parcour();
+                p.Competition = Client.SelectedCompetition;
                 p.Name = fldName.Text;
                 foreach(Line l in activeParcour.Line)
                 {
