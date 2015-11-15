@@ -97,10 +97,8 @@ namespace AirNavigationRaceLive.Comps
                 foreach (ListViewItem lvi in listViewFlights.Items)
                 {
                     ComboBoxFlights item = lvi as ComboBoxFlights;
-                    item.penalty.Clear();
-                    item.penalty.AddRange(item.flight.Penalty);
                     int sum = 0;
-                    foreach (Penalty p in item.penalty)
+                    foreach (Penalty p in item.flight.Penalty)
                     {
                         sum += p.Points;
                     }
@@ -135,6 +133,7 @@ namespace AirNavigationRaceLive.Comps
             {
                 comboBoxCompetition.Items.Add(new CompetitionComboEntry(c));
             }
+            updateEnablement();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -142,9 +141,25 @@ namespace AirNavigationRaceLive.Comps
             textBoxPenaltyID.Text = "0";
             textBoxPoints.Text = "0";
             textBoxReason.Text = "";
-            textBoxPenaltyID.Tag = new Penalty(); ;
+            textBoxPenaltyID.Tag = new Penalty();
+            updateEnablement();
         }
+        private void updateEnablement()
+        {
+            bool penaltyEditable = textBoxPenaltyID.Tag != null;
+            if (!penaltyEditable)
+            {
+                textBoxPenaltyID.Text = "";
+                textBoxPoints.Text = "0";
+                textBoxReason.Text = "";
+            }
 
+            textBoxPoints.Enabled = penaltyEditable;
+            textBoxReason.Enabled = penaltyEditable;
+            btnAdd.Enabled = penaltyEditable;
+            btnDelete.Enabled = penaltyEditable;
+            btnPdf.Enabled = listViewFlights.SelectedItems.Count > 0;
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (listViewFlights.SelectedItems.Count == 1 && textBoxPenaltyID.Tag != null)
@@ -159,58 +174,32 @@ namespace AirNavigationRaceLive.Comps
                     {
                         competitionTeam.flight.Penalty.Add(p);
                     }
-                    if (!competitionTeam.penalty.Contains(p))
-                    {
-                        competitionTeam.penalty.Add(p);
-                    }
                     Client.DBContext.SaveChanges();
+                    textBoxPenaltyID.Tag = null;
                     listViewCompetitionTeam_SelectedIndexChanged(null, null);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Exception occured, this mostly happen when you typed non-Integer to the Points-Field\n" + ex.ToString());
                 }
+                updatePoints();
+                updateEnablement();
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (listViewFlights.SelectedItems.Count == 1)
+            if (listViewFlights.SelectedItems.Count == 1 && textBoxPenaltyID.Tag != null)
             {
                 ComboBoxFlights competitionTeam = listViewFlights.SelectedItems[0] as ComboBoxFlights;
-                if (listViewPenalty.SelectedItems.Count == 1)
-                {
-                    ListViewItem lvi = listViewPenalty.SelectedItems[0];
-                    Penalty p = lvi.Tag as Penalty;
-                    competitionTeam.penalty.Remove(p);
-                    if (competitionTeam.flight.Penalty.Contains(p))
-                    {
-                        competitionTeam.flight.Penalty.Remove(p);
-                        Client.DBContext.SaveChanges();
-                    }
-                    listViewCompetitionTeam_SelectedIndexChanged(null, null);
-                }
-            }
-        }
-
-        private void btnSubmit_Click(object sender, EventArgs e)
-        {
-            if (listViewFlights.SelectedItems.Count == 1)
-            {
-                ComboBoxFlights competitionTeam = listViewFlights.SelectedItems[0] as ComboBoxFlights;
-                foreach (ListViewItem lvi in listViewPenalty.Items)
-                {
-                    Penalty penalty = lvi.Tag as Penalty;
-                    if (!competitionTeam.flight.Penalty.Contains(penalty))
-                    {
-                        competitionTeam.flight.Penalty.Add(penalty);
-                    }
-                    Client.DBContext.SaveChanges();
-                }
-                competitionTeam.penalty.Clear();
-                competitionTeam.penalty.AddRange(competitionTeam.flight.Penalty);
+                Penalty p = textBoxPenaltyID.Tag as Penalty;
+                Client.DBContext.PenaltySet.Remove(p);
+                Client.DBContext.SaveChanges();
+                textBoxPenaltyID.Tag = null;
                 listViewCompetitionTeam_SelectedIndexChanged(null, null);
             }
+            updatePoints();
+            updateEnablement();
         }
 
         private void listViewPenalty_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,6 +213,14 @@ namespace AirNavigationRaceLive.Comps
                 textBoxPoints.Text = p.Points.ToString();
                 textBoxReason.Text = p.Reason;
             }
+            else
+            {
+                textBoxPenaltyID.Text = "";
+                textBoxPenaltyID.Tag = null;
+                textBoxPoints.Text = "0";
+                textBoxReason.Text = "";
+            }
+            updateEnablement();
         }
 
         private void btnPdf_Click(object sender, EventArgs e)
@@ -268,7 +265,6 @@ namespace AirNavigationRaceLive.Comps
 
         private void listViewCompetitionTeam_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (listViewFlights.SelectedItems.Count == 1)
             {
                 btnUpload.Enabled = true;
@@ -279,7 +275,7 @@ namespace AirNavigationRaceLive.Comps
                 visualisationPictureBox1.SetData(flights);
                 visualisationPictureBox1.Invalidate();
                 List<ListViewItem> ppp = new List<ListViewItem>();
-                foreach (Penalty p in comboFlights.penalty)
+                foreach (Penalty p in comboFlights.flight.Penalty)
                 {
                     ListViewItem lvi = new ListViewItem(new String[] { p.Id.ToString(), p.Points.ToString(), p.Reason });
                     lvi.Tag = p;
@@ -291,8 +287,10 @@ namespace AirNavigationRaceLive.Comps
             {
                 btnUpload.Enabled = false;
                 btnUploadGPX.Enabled = false;
+                textBoxPenaltyID.Tag = null;
+                listViewPenalty.Items.Clear();
             }
-            btnPdf.Enabled = listViewFlights.SelectedItems.Count > 0;
+            updateEnablement();
         }
 
         private void btnUpload_Click(object sender, EventArgs e)
@@ -363,12 +361,11 @@ namespace AirNavigationRaceLive.Comps
                 upload.Show();
             }
         }
-        
+
     }
     public class ComboBoxFlights : ListViewItem
     {
         public readonly Flight flight;
-        public readonly List<Penalty> penalty = new List<Penalty>();
         public ComboBoxFlights(Flight team, string[] display)
             : base(display)
         {

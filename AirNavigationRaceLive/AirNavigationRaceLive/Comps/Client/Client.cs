@@ -11,25 +11,30 @@ using AirNavigationRaceLive.Comps.Helper;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection;
+using AirNavigationRaceLive.Properties;
 
 namespace AirNavigationRaceLive.Comps.Client
 {
     public class DataAccess
     {
         private DataAccess(){
-
-            String dbPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AirNavigationRace";
+            SaveFileDialog dbLocationDialog = new SaveFileDialog();
+            dbLocationDialog.RestoreDirectory = true;
+            dbLocationDialog.Title = "Select a Folder where ANR will maintain its internal DataBase (anrl.mdf)";
+            dbLocationDialog.FileName = "anrl.mdf";
+            dbLocationDialog.OverwritePrompt=false;
+            dbLocationDialog.ShowDialog();
+            string dbPath = dbLocationDialog.FileName.Replace("anrl.mdf","");
+            if (dbPath == null || dbPath == "")
+            {
+                dbPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\AirNavigationRace";
+            }
             if (!Directory.Exists(dbPath))
             {
                 Directory.CreateDirectory(dbPath);
             }
             AppDomain.CurrentDomain.SetData("DataDirectory", dbPath);
             DB.Database.CreateIfNotExists();
-            if (!DB.Database.CompatibleWithModel(false))
-            {
-                DB.Database.Delete();
-                DB.Database.CreateIfNotExists();
-            }
         }
         private static DataAccess instance = new DataAccess();
         private AnrlModel2Container DB = new AnrlModel2Container();

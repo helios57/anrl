@@ -17,11 +17,13 @@ namespace AirNavigationRaceLive
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Parcour()
         {
+            this.Alpha = 40;
             this.Line = new HashSet<Line>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Alpha { get; set; }
     
         public virtual Map Map { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

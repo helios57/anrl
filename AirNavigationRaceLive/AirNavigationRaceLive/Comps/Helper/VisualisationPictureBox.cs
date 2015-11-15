@@ -22,6 +22,7 @@ namespace AirNavigationRaceLive.Comps
         public void SetParcour(Parcour iParcour)
         {
             Parcour = iParcour;
+            Brush = new SolidBrush(Color.FromArgb((255*iParcour.Alpha)/100, 255, 0, 0));
         }
         public void SetConverter(Converter iConverter)
         {

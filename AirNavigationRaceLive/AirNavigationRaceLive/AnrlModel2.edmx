@@ -180,6 +180,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Alpha" Type="int" Nullable="false" DefaultValue="40" />
     <Property Name="Map_Id" Type="int" Nullable="false" />
     <Property Name="Competition_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -743,6 +744,7 @@
           <NavigationProperty Name="Map" Relationship="AnrlModel2.MapParcour" FromRole="Parcour" ToRole="Map" />
           <NavigationProperty Name="Line" Relationship="AnrlModel2.ParcourLine" FromRole="Parcour" ToRole="Line" />
           <NavigationProperty Name="Competition" Relationship="AnrlModel2.CompetitionParcour" FromRole="Parcour" ToRole="Competition" />
+          <Property Name="Alpha" Type="Int32" Nullable="false" DefaultValue="40" />
         </EntityType>
         <Association Name="MapParcour">
           <End Type="AnrlModel2.Map" Role="Map" Multiplicity="1" >
@@ -897,6 +899,7 @@
         <MappingFragment StoreEntitySet="ParcourSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alpha" ColumnName="Alpha" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -19,12 +19,13 @@ namespace AirNavigationRaceLive.Comps
         private System.Drawing.Pen Pen = new Pen(new SolidBrush(Color.Red), 2f);
         private System.Drawing.Pen PenHover = new Pen(new SolidBrush(Color.White), 4f);
         private System.Drawing.Pen PenSelected = new Pen(new SolidBrush(Color.Blue), 6f);
-        private SolidBrush Brush = new SolidBrush(Color.FromArgb(40, 255, 0, 0));
+        private SolidBrush Brush = new SolidBrush(Color.FromArgb(70, 255, 0, 0));
         private volatile bool pdf = false;
 
         public void SetParcour(Parcour iParcour)
         {
             Parcour = iParcour;
+            Brush = new SolidBrush(Color.FromArgb((255*iParcour.Alpha)/100, 255, 0, 0));
         }
         public void SetConverter(Converter iConverter)
         {

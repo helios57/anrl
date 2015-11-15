@@ -288,7 +288,7 @@ namespace AirNavigationRaceLive.Comps.Helper
             foreach (ComboBoxFlights cbct in competitionTeam)
             {
                 int sum = 0;
-                foreach (Penalty penalty in cbct.penalty)
+                foreach (Penalty penalty in cbct.flight.Penalty)
                 {
                     sum += penalty.Points;
                 }
@@ -436,7 +436,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 gfx.DrawString("Points ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine), XUnit.FromCentimeter(3)));
                 gfx.DrawString("Reason ", new XFont("Verdana", 11, XFontStyle.Bold), XBrushes.Black, new XPoint(XUnit.FromCentimeter(offsetLine + 2), XUnit.FromCentimeter(3)));
 
-                foreach (Penalty penalty in cbct.penalty)
+                foreach (Penalty penalty in cbct.flight.Penalty)
                 {
                     sum += penalty.Points;
                     line++;

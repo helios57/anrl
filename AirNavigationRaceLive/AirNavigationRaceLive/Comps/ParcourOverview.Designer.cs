@@ -32,6 +32,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.listBox1 = new System.Windows.Forms.ListView();
+            this.columnHeaderParcour = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,8 +64,8 @@
             this.btnExport = new System.Windows.Forms.Button();
             this.btnExport100k = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.columnHeaderParcour = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PictureBox1 = new AirNavigationRaceLive.Comps.ParcourPictureBox();
+            this.trackBarAlpha = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -78,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numLatA)).BeginInit();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAlpha)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -104,6 +106,7 @@
             this.flowLayoutPanel1.Controls.Add(this.lineBox);
             this.flowLayoutPanel1.Controls.Add(this.btnExport);
             this.flowLayoutPanel1.Controls.Add(this.btnExport100k);
+            this.flowLayoutPanel1.Controls.Add(this.trackBarAlpha);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(8, 14);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
@@ -132,6 +135,10 @@
             this.listBox1.View = System.Windows.Forms.View.List;
             this.listBox1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listBox1_AfterLabelEdit);
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // columnHeaderParcour
+            // 
+            this.columnHeaderParcour.Text = "Parcour";
             // 
             // contextMenuStrip1
             // 
@@ -485,10 +492,6 @@
             this.panel6.Size = new System.Drawing.Size(2411, 1369);
             this.panel6.TabIndex = 3;
             // 
-            // columnHeaderParcour
-            // 
-            this.columnHeaderParcour.Text = "Parcour";
-            // 
             // PictureBox1
             // 
             this.PictureBox1.Location = new System.Drawing.Point(8, 7);
@@ -500,6 +503,17 @@
             this.PictureBox1.TabStop = false;
             this.PictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_Click);
             this.PictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseMove);
+            // 
+            // trackBarAlpha
+            // 
+            this.trackBarAlpha.AutoSize = false;
+            this.trackBarAlpha.Location = new System.Drawing.Point(3, 1279);
+            this.trackBarAlpha.Maximum = 100;
+            this.trackBarAlpha.Name = "trackBarAlpha";
+            this.trackBarAlpha.Size = new System.Drawing.Size(504, 50);
+            this.trackBarAlpha.TabIndex = 22;
+            this.trackBarAlpha.Value = 40;
+            this.trackBarAlpha.Scroll += new System.EventHandler(this.trackBarAlpha_Scroll);
             // 
             // ParcourOverview
             // 
@@ -527,6 +541,7 @@
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAlpha)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -569,5 +584,6 @@
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnExport100k;
         private System.Windows.Forms.ColumnHeader columnHeaderParcour;
+        private System.Windows.Forms.TrackBar trackBarAlpha;
     }
 }

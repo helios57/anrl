@@ -35,10 +35,10 @@ namespace AirNavigationRaceLive.Comps
         }
         #region load
 
-        class ListItem:ListViewItem
+        class ListItem : ListViewItem
         {
             private Parcour parcour;
-            public ListItem(Parcour iParcour) :base(iParcour.Name )
+            public ListItem(Parcour iParcour) : base(iParcour.Name)
             {
                 parcour = iParcour;
             }
@@ -84,11 +84,11 @@ namespace AirNavigationRaceLive.Comps
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems.Count==1)
+            if (listBox1.SelectedItems.Count == 1)
             {
                 ListItem li = listBox1.SelectedItems[0] as ListItem;
                 Parcour parcour = li.getParcour();
-                if (parcour.Id!=0)
+                if (parcour.Id != 0)
                 {
                     Client.DBContext.ParcourSet.Remove(parcour);
                 }
@@ -99,7 +99,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems.Count==1)
+            if (listBox1.SelectedItems.Count == 1)
             {
                 ListItem li = listBox1.SelectedItems[0] as ListItem;
                 deleteToolStripMenuItem.Enabled = true;
@@ -115,6 +115,7 @@ namespace AirNavigationRaceLive.Comps
                 SetHoverLine(null);
                 SetSelectedLine(null);
                 PictureBox1.Invalidate();
+                trackBarAlpha.Value = li.getParcour().Alpha;
             }
         }
 
@@ -347,7 +348,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems.Count==1 && PictureBox1.PrintOutImage!= null)
+            if (listBox1.SelectedItems.Count == 1 && PictureBox1.PrintOutImage != null)
             {
                 ListItem li = listBox1.SelectedItems[0] as ListItem;
                 String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
@@ -356,14 +357,14 @@ namespace AirNavigationRaceLive.Comps
                 {
                     di.Create();
                 }
-                PDFCreator.CreateParcourPDF(PictureBox1, Client,li.getParcour().Name, dirPath + 
-                    @"\Parcour_"+li.getParcour().Id +"_"+li.getParcour().Name+"_"+DateTime.Now.ToString("yyyyMMddhhmmss")+".pdf");
+                PDFCreator.CreateParcourPDF(PictureBox1, Client, li.getParcour().Name, dirPath +
+                    @"\Parcour_" + li.getParcour().Id + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
             }
         }
 
         private void btnExport100k_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItems.Count==1 && PictureBox1.PrintOutImage != null)
+            if (listBox1.SelectedItems.Count == 1 && PictureBox1.PrintOutImage != null)
             {
                 ListItem li = listBox1.SelectedItems[0] as ListItem;
                 String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
@@ -380,10 +381,24 @@ namespace AirNavigationRaceLive.Comps
         private void listBox1_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
             string newName = e.Label;
-            ListItem item =listBox1.Items[e.Item] as ListItem;
-            Parcour p = item.getParcour();
-            p.Name = newName;
-            Client.DBContext.SaveChanges();
+            if (newName != null && newName != "")
+            {
+                ListItem item = listBox1.Items[e.Item] as ListItem;
+                Parcour p = item.getParcour();
+                p.Name = newName;
+                Client.DBContext.SaveChanges();
+            }
+        }
+
+        private void trackBarAlpha_Scroll(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems.Count == 1)
+            {
+                ListItem li = listBox1.SelectedItems[0] as ListItem;
+                li.getParcour().Alpha = trackBarAlpha.Value;
+                PictureBox1.SetParcour(li.getParcour());
+                PictureBox1.Invalidate();
+            }
         }
     }
 }
