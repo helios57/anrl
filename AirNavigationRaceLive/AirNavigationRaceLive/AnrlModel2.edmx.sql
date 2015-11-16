@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/15/2015 17:48:05
+-- Date Created: 11/16/2015 01:26:28
 -- Generated from EDMX file: C:\workspace\VS2015\Anrl\anrl\AirNavigationRaceLive\AirNavigationRaceLive\AnrlModel2.edmx
 -- --------------------------------------------------
 
@@ -176,9 +176,6 @@ GO
 CREATE TABLE [dbo].[QualificationRoundSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] varchar(50)  NOT NULL,
-    [TimeTakeOff] bigint  NOT NULL,
-    [TimeStartLine] bigint  NOT NULL,
-    [TimeEndLine] bigint  NOT NULL,
     [Competition_Id] int  NOT NULL,
     [TakeOffLine_Id] int  NOT NULL,
     [Parcour_Id] int  NOT NULL

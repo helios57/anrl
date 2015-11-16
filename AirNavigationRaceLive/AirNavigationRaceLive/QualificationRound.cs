@@ -22,9 +22,6 @@ namespace AirNavigationRaceLive
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public long TimeTakeOff { get; set; }
-        public long TimeStartLine { get; set; }
-        public long TimeEndLine { get; set; }
     
         public virtual Competition Competition { get; set; }
         public virtual Line TakeOffLine { get; set; }

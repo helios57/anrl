@@ -498,6 +498,9 @@
     <None Include="Resources\PDFTemplates\Competitor_list.pdf" />
     <None Include="Resources\PDFTemplates\Start_list.doc" />
     <None Include="Resources\PDFTemplates\Start_list.pdf" />
+    <None Include="Resources\Template.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="dlls\GMap.NET.Core.dll">

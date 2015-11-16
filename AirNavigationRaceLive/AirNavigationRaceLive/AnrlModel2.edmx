@@ -156,9 +156,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-    <Property Name="TimeTakeOff" Type="bigint" Nullable="false" />
-    <Property Name="TimeStartLine" Type="bigint" Nullable="false" />
-    <Property Name="TimeEndLine" Type="bigint" Nullable="false" />
     <Property Name="Competition_Id" Type="int" Nullable="false" />
     <Property Name="TakeOffLine_Id" Type="int" Nullable="false" />
     <Property Name="Parcour_Id" Type="int" Nullable="false" />
@@ -676,9 +673,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TimeTakeOff" Type="Int64" Nullable="false" />
-          <Property Name="TimeStartLine" Type="Int64" Nullable="false" />
-          <Property Name="TimeEndLine" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Competition" Relationship="AnrlModel2.CompetitionQualificationRound" FromRole="QualificationRound" ToRole="Competition" />
           <NavigationProperty Name="TakeOffLine" Relationship="AnrlModel2.LineQualificationRound" FromRole="QualificationRound" ToRole="Line" />
           <NavigationProperty Name="Parcour" Relationship="AnrlModel2.ParcourQualificationRound" FromRole="QualificationRound" ToRole="Parcour" />
@@ -880,9 +874,6 @@
         <MappingFragment StoreEntitySet="QualificationRoundSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="TimeTakeOff" ColumnName="TimeTakeOff" />
-          <ScalarProperty Name="TimeStartLine" ColumnName="TimeStartLine" />
-          <ScalarProperty Name="TimeEndLine" ColumnName="TimeEndLine" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
