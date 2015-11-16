@@ -82,9 +82,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 if (intersectionTakeOff != -1)
                 {
                     haveCrossedTakeOff = true;
-                    double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
-                    double diff = crossTime - flight.TimeTakeOff;
-                    int seconds = (int)Math.Floor(diff / tickOfSecond);
+                    long crossTime = (long) Math.Floor(l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
+                    long diff = crossTime - flight.TimeTakeOff;
+                    int seconds = (int)(diff / tickOfSecond);
+                    if (diff < 0)
+                    {
+                        seconds++;
+                    }
                     if (seconds > 60 || seconds < 0)
                     {
                         Penalty penalty = new Penalty();
@@ -96,9 +100,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 if (intersectionStart != -1)
                 {
                     haveCrossedStart = true;
-                    double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
-                    double diff = crossTime - flight.TimeStartLine;
-                    int seconds = (int)Math.Floor(Math.Abs(diff / tickOfSecond));
+                    long crossTime = (long)Math.Floor(l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionStart);
+                    long diff = crossTime - flight.TimeStartLine;
+                    int seconds = (int)Math.Abs(diff / tickOfSecond);
+                    if (diff < 0)
+                    {
+                        seconds++;
+                    }
                     if (seconds > 1)
                     {
                         Penalty penalty = new Penalty();
@@ -110,9 +118,13 @@ namespace AirNavigationRaceLive.Comps.Helper
                 if (intersectionEnd != -1)
                 {
                     haveCrossedEnd = true;
-                    double crossTime = (l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionEnd);
-                    double diff = crossTime - flight.TimeEndLine;
-                    int seconds = (int)Math.Floor(Math.Abs(diff / tickOfSecond));
+                    long crossTime = (long)Math.Floor(l.TimestamStart + (l.TimestamEnd - l.TimestamStart) * intersectionEnd);
+                    long diff = crossTime - flight.TimeEndLine;
+                    int seconds = (int)(Math.Abs(diff / tickOfSecond));
+                    if (diff < 0)
+                    {
+                        seconds++;
+                    }
                     if (seconds>1)
                     {
                         Penalty penalty = new Penalty();
