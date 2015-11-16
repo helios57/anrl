@@ -57,10 +57,9 @@
             this.addLandingResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adjustResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.visualisationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.creditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -308,6 +307,13 @@
             this.visualisationToolStripMenuItem.Text = "Visualisation";
             this.visualisationToolStripMenuItem.Click += new System.EventHandler(this.visualisationToolStripMenuItem_Click);
             // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.exportToolStripMenuItem.Text = "Import/Export";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
             // creditsToolStripMenuItem
             // 
             this.creditsToolStripMenuItem.Name = "creditsToolStripMenuItem";
@@ -323,21 +329,6 @@
             this.MainPanel.Size = new System.Drawing.Size(956, 667);
             this.MainPanel.TabIndex = 2;
             this.MainPanel.Resize += new System.EventHandler(this.MainPanel_Resize);
-            // 
-            // exportToolStripMenuItem
-            // 
-            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportKMLToolStripMenuItem});
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.exportToolStripMenuItem.Text = "Export";
-            // 
-            // exportKMLToolStripMenuItem
-            // 
-            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
-            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exportKMLToolStripMenuItem.Text = "Export KML";
-            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
             // AirNavigationRaceLiveMain
             // 
@@ -394,7 +385,6 @@
         private System.Windows.Forms.ToolStripMenuItem importFromMapsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateSingleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
     }
 }
 

@@ -33,6 +33,7 @@ namespace AirNavigationRaceLive
         private Results Results;
         private MapSelection MapSelection;
         private MapImportFromMaps MapImportFromMaps;
+        private ImportExport ImportExport;
 
         public static void SetStatusText(String text)
         {
@@ -59,6 +60,7 @@ namespace AirNavigationRaceLive
         public void UpdateEnablement()
         {
             Boolean connected = Client.SelectedCompetition != null;
+            competitionToolStripMenuItem.Enabled = Client != null;
             mapToolStripMenuItem.Enabled = connected;
             parcourToolStripMenuItem.Enabled = connected;
             overviewZoomedToolStripMenuItem.Enabled = connected;
@@ -79,8 +81,6 @@ namespace AirNavigationRaceLive
             visualisationToolStripMenuItem.Enabled = connected;
             editToolStripMenuItem.Enabled = connected;
             exportToolStripMenuItem.Enabled = connected;
-            exportKMLToolStripMenuItem.Enabled = connected;
-            competitionToolStripMenuItem.Enabled = Client != null;
         }
 
         private void AirNavigationRaceLive_Load(object sender, EventArgs e)
@@ -339,9 +339,13 @@ namespace AirNavigationRaceLive
             enableControl(ParcourEditSingle);
         }
 
-        private void exportKMLToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ExportKML(Client).Show();
+            if (ImportExport == null)
+            {
+                ImportExport = new ImportExport(Client);
+            }
+            enableControl(ImportExport);
         }
     }
 }
