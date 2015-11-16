@@ -12,6 +12,7 @@ using MigraDoc.Rendering;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.DocumentObjectModel.Shapes;
 using NetworkObjects;
+using PdfSharp.Drawing.Layout;
 
 namespace AirNavigationRaceLive.Comps.Helper
 {
@@ -113,7 +114,14 @@ namespace AirNavigationRaceLive.Comps.Helper
             logo.Top = Unit.FromCentimeter(0);
         }
 
-        public static void CreateParcourPDF(ParcourPictureBox picBox, Client.DataAccess c, String parcourName, String pathToPDF)
+        private static void AddLogo(XGraphics gfx, PdfPage page)
+        {
+            XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
+            XRect point = new XRect(page.Width - XUnit.FromCentimeter(3), XUnit.FromCentimeter(1), Unit.FromCentimeter(2.873), Unit.FromCentimeter(1.912));
+            gfx.DrawImage(logo, point);
+        }
+
+        public static void CreateParcourPDF(ParcourPictureBox picBox, Client.DataAccess c, String parcourName, String pathToPDF, String overlayText)
         {
             //PdfDocument doc = new PdfDocument(@"Resources\PDFTemplates\Competition_Map.pdf");
             PdfDocument doc = new PdfDocument();
@@ -232,19 +240,19 @@ namespace AirNavigationRaceLive.Comps.Helper
             gfx.DrawImage(XImage.FromFile(@"Resources\Summe.png"),
                 new XPoint(Unit.FromMillimeter(startX + 1), Unit.FromMillimeter(startY + rowHeight * 14 + 2)));
 
+            if (overlayText != null && overlayText != "")
+            {
+                XRect rect = new XRect(new XPoint(Unit.FromMillimeter(startX - 80 - 2), Unit.FromMillimeter(startY + rowHeight * 14 + 2 - 16)), new XSize(Unit.FromCentimeter(8), Unit.FromCentimeter(3.6)));
+                gfx.DrawRectangle(XBrushes.White, rect);
+                XTextFormatter tf = new XTextFormatter(gfx);
+                tf.DrawString(overlayText, new XFont("Verdana", 13, XFontStyle.Bold), XBrushes.Black, rect, XStringFormats.TopLeft);
+            }
             doc.Save(pathToPDF);
             doc.Close();
             Process.Start(pathToPDF);
         }
 
-        private static void AddLogo(XGraphics gfx, PdfPage page)
-        {
-            XImage logo = XImage.FromFile(@"Resources\ANR_LOGO.jpg");
-            XRect rect = new XRect(page.Width - XUnit.FromCentimeter(3), XUnit.FromCentimeter(1), XUnit.FromCentimeter(2), XUnit.FromCentimeter(2));
-            gfx.DrawImage(logo, rect);
-        }
-
-        public static void CreateParcourPDF100k(ParcourPictureBox picBox, Client.DataAccess c, String parcourName, String pathToPDF)
+        public static void CreateParcourPDF100k(ParcourPictureBox picBox, Client.DataAccess c, String parcourName, String pathToPDF, String overlayText)
         {
             PdfDocument doc = new PdfDocument();
             doc.Info.Author = "Luc@sharpsoft.ch";
@@ -277,7 +285,13 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             gfx.DrawImage(image, XUnit.FromCentimeter(1), XUnit.FromCentimeter(4), page.Width.Point * (distX / page.Width.Centimeter), page.Height.Point * (distY / page.Height.Centimeter));
 
-
+            if (overlayText != null && overlayText != "")
+            {
+                XRect rect = new XRect(new XPoint(Unit.FromCentimeter(page.Width.Centimeter - 8), Unit.FromCentimeter(page.Height.Centimeter-4)), new XSize(Unit.FromCentimeter(8), Unit.FromCentimeter(3.6)));
+                gfx.DrawRectangle(XBrushes.White, rect);
+                XTextFormatter tf = new XTextFormatter(gfx);
+                tf.DrawString(overlayText, new XFont("Verdana", 13, XFontStyle.Bold), XBrushes.Black, rect, XStringFormats.TopLeft);
+            }
             doc.Save(pathToPDF);
             doc.Close();
             Process.Start(pathToPDF);
@@ -344,13 +358,13 @@ namespace AirNavigationRaceLive.Comps.Helper
             {
                 Team t = top.ct.Team;
                 Row r = table.AddRow();
-                r.Cells[0].AddParagraph(rank+++"");
+                r.Cells[0].AddParagraph(rank++ + "");
                 r.Cells[1].AddParagraph(top.sum.ToString());
                 r.Cells[2].AddParagraph(t.Nationality);
                 Subscriber pilot = t.Pilot;
                 r.Cells[3].AddParagraph(pilot.LastName);
                 r.Cells[4].AddParagraph(pilot.FirstName);
-                if (t.Navigator!=null)
+                if (t.Navigator != null)
                 {
                     Subscriber navigator = t.Navigator;
                     r.Cells[5].AddParagraph(navigator.LastName);
@@ -365,7 +379,7 @@ namespace AirNavigationRaceLive.Comps.Helper
 
             Process.Start(pathToPDF);
         }
-        class Toplist :IComparable
+        class Toplist : IComparable
         {
             public Toplist(Flight ct,
             int sum)
@@ -569,7 +583,7 @@ namespace AirNavigationRaceLive.Comps.Helper
                 Subscriber pilot = teams.Pilot;
                 r.Cells[3].AddParagraph(pilot.LastName);
                 r.Cells[4].AddParagraph(pilot.FirstName);
-                if (teams.Navigator!=null)
+                if (teams.Navigator != null)
                 {
                     Subscriber navigator = teams.Navigator;
                     r.Cells[5].AddParagraph(navigator.LastName);

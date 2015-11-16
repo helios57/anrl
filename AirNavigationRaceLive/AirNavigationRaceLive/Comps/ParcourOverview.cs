@@ -9,6 +9,7 @@ using System.IO;
 using AirNavigationRaceLive.Comps.Model;
 using AirNavigationRaceLive.Comps.Helper;
 using NetworkObjects;
+using AirNavigationRaceLive.Dialogs;
 
 namespace AirNavigationRaceLive.Comps
 {
@@ -357,8 +358,11 @@ namespace AirNavigationRaceLive.Comps
                 {
                     di.Create();
                 }
+                TextOverlayDialog dialog = new TextOverlayDialog();
+                dialog.ShowDialog();
+                String freitext = dialog.text;
                 PDFCreator.CreateParcourPDF(PictureBox1, Client, li.getParcour().Name, dirPath +
-                    @"\Parcour_" + li.getParcour().Id + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+                    @"\Parcour_" + li.getParcour().Id + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf", freitext);
             }
         }
 
@@ -373,8 +377,11 @@ namespace AirNavigationRaceLive.Comps
                 {
                     di.Create();
                 }
+                TextOverlayDialog dialog = new TextOverlayDialog();
+                dialog.ShowDialog();
+                String freitext = dialog.text;
                 PDFCreator.CreateParcourPDF100k(PictureBox1, Client, li.getParcour().Name, dirPath +
-                    @"\Parcour_" + li.getParcour().Id + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
+                    @"\Parcour_" + li.getParcour().Id + "_" + li.getParcour().Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf", freitext);
             }
         }
 
