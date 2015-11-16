@@ -119,5 +119,15 @@ namespace AirNavigationRaceLive.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+        /// </summary>
+        internal static byte[] Template {
+            get {
+                object obj = ResourceManager.GetObject("Template", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

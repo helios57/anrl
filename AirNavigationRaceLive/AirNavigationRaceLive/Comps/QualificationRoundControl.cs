@@ -73,7 +73,8 @@ namespace AirNavigationRaceLive.Comps
                 ComboParcour cp = new ComboParcour(c);
                 parcours.Items.Add(cp);
             }
-            if (parcours.Items.Count > 0) {
+            if (parcours.Items.Count > 0)
+            {
                 parcours.SelectedIndex = 0;
             }
             UpdateEnablement();
@@ -161,12 +162,12 @@ namespace AirNavigationRaceLive.Comps
         private void SetTimes()
         {
             DateTime time = DateTime.Now;
-            timeTakeOffIntervall.Value = new DateTime(time.Year,time.Month,time.Day,time.Hour,1,0);
+            timeTakeOffIntervall.Value = new DateTime(time.Year, time.Month, time.Day, time.Hour, 1, 0);
             timeParcourLength.Value = new DateTime(time.Year, time.Month, time.Day, time.Hour, 12, 0);
-            timeParcourIntervall.Value = new DateTime(time.Year,time.Month,time.Day,time.Hour,20,0);
+            timeParcourIntervall.Value = new DateTime(time.Year, time.Month, time.Day, time.Hour, 20, 0);
             timeTakeOffStartgate.Value = new DateTime(time.Year, time.Month, time.Day, time.Hour, 12, 0);
             timeTakeOff.Value = time;
-            timeStart.Value = timeTakeOff.Value.AddMinutes(timeTakeOffStartgate.Value.Minute+((comboBoxRoute.Items.Count-1)*timeTakeOffIntervall.Value.Minute));
+            timeStart.Value = timeTakeOff.Value.AddMinutes(timeTakeOffStartgate.Value.Minute + ((comboBoxRoute.Items.Count - 1) * timeTakeOffIntervall.Value.Minute));
             timeEnd.Value = timeStart.Value.AddMinutes(timeParcourLength.Value.Minute);
         }
 
@@ -247,8 +248,7 @@ namespace AirNavigationRaceLive.Comps
                 QualificationRound c = textName.Tag as QualificationRound;
                 c.Parcour = (parcours.SelectedItem as ComboParcour).p;
                 c.Name = textName.Text;
-
-
+                
                 Vector start = new Vector(double.Parse(takeOffLeftLongitude.Text, NumberFormatInfo.InvariantInfo), double.Parse(takeOffLeftLatitude.Text, NumberFormatInfo.InvariantInfo), 0);
                 Vector end = new Vector(double.Parse(takeOffRightLongitude.Text, NumberFormatInfo.InvariantInfo), double.Parse(takeOffRightLatitude.Text, NumberFormatInfo.InvariantInfo), 0);
                 Vector o = Vector.Middle(start, end) - Vector.Orthogonal(end - start);
@@ -257,12 +257,21 @@ namespace AirNavigationRaceLive.Comps
                 line.B = Factory.newGPSPoint(end.X, end.Y, end.Z);
                 line.O = Factory.newGPSPoint(o.X, o.Y, o.Z);
                 c.TakeOffLine = line;
-                c.Flight.Clear();
+                List<Flight> toDelete = new List<Flight>();
+                toDelete.AddRange(c.Flight);
                 foreach (ListViewItem lvi in listViewCompetitionTeam.Items)
                 {
-                    c.Flight.Add(lvi.Tag as Flight);
+                    Flight f = lvi.Tag as Flight;
+                    f.QualificationRound = c;
+                    if (f.Id == 0)
+                    {
+                        Client.DBContext.FlightSet.Add(f);
+                    }
+                    toDelete.Remove(f);
                 }
-                if (c.Id==0)
+                Client.DBContext.FlightSet.RemoveRange(toDelete);
+
+                if (c.Id == 0)
                 {
                     Client.DBContext.QualificationRoundSet.Add(c);
                 }
@@ -346,7 +355,7 @@ namespace AirNavigationRaceLive.Comps
 
             listViewCompetitionTeam.Items.Clear();
             List<Flight> teams = new List<Flight>(c.Flight);
-            teams.Sort((p,q)=>p.StartID.CompareTo(q.StartID));
+            teams.Sort((p, q) => p.StartID.CompareTo(q.StartID));
             foreach (Flight ct in teams)
             {
                 ListViewItem lvi2 = new ListViewItem(new string[] { ct.StartID.ToString(), ct.Team.CNumber, ct.Team.AC, getTeamDsc(ct.Team), new DateTime(ct.TimeTakeOff).ToShortTimeString(), new DateTime(ct.TimeStartLine).ToShortTimeString(), new DateTime(ct.TimeEndLine).ToShortTimeString(), getRouteText(ct.Route) });
@@ -360,7 +369,7 @@ namespace AirNavigationRaceLive.Comps
             Subscriber pilot = team.Pilot;
             StringBuilder sb = new StringBuilder();
             sb.Append(pilot.LastName).Append(" ").Append(pilot.FirstName);
-            if (team.Navigator!=null)
+            if (team.Navigator != null)
             {
                 Subscriber navi = team.Navigator;
                 sb.Append(" - ").Append(navi.LastName).Append(" ").Append(navi.FirstName);
@@ -386,7 +395,7 @@ namespace AirNavigationRaceLive.Comps
 
             textBoxStartId.Text = starID.ToString();
             textBoxStartId.Tag = new Flight();
-            if (comboBoxTeam.SelectedIndex == -1&& comboBoxTeam.Items.Count>0)
+            if (comboBoxTeam.SelectedIndex == -1 && comboBoxTeam.Items.Count > 0)
             {
                 comboBoxRoute.SelectedIndex = 0;
                 comboBoxTeam.SelectedIndex = 0;
@@ -399,12 +408,8 @@ namespace AirNavigationRaceLive.Comps
             if (listViewCompetitionTeam.SelectedItems.Count == 1 && listViewCompetition.SelectedItems.Count == 1)
             {
                 Flight ct = listViewCompetitionTeam.SelectedItems[0].Tag as Flight;
-                QualificationRound c = listViewCompetition.SelectedItems[0].Tag as QualificationRound;
-                List<Flight> toDelete= c.Flight.Where(p => p == ct).ToList();
-                foreach(Flight t in toDelete)
-                {
-                    c.Flight.Remove(t);
-                }
+                Client.DBContext.FlightSet.Remove(ct);
+                Client.DBContext.SaveChanges();
                 listViewCompetition_SelectedIndexChanged(null, null);
             }
             UpdateEnablement();
@@ -414,13 +419,8 @@ namespace AirNavigationRaceLive.Comps
         {
             Flight ct = textBoxStartId.Tag as Flight;
             QualificationRound c = textName.Tag as QualificationRound;
-            if (c != null && ct != null && comboBoxTeam.SelectedItem!=null)
+            if (c != null && ct != null && comboBoxTeam.SelectedItem != null)
             {
-                List<Flight> toDelete = c.Flight.Where(p => p == ct).ToList();
-                foreach (Flight t in toDelete)
-                {
-                    c.Flight.Remove(t);
-                }
                 ct.StartID = Int32.Parse(textBoxStartId.Text);
                 DateTime TakeOff = mergeDateTime(timeTakeOff.Value, date.Value);
                 DateTime Start = mergeDateTime(timeStart.Value, date.Value);
@@ -432,12 +432,17 @@ namespace AirNavigationRaceLive.Comps
                 ct.Team = comboTeam.p;
                 ComboRoute route = comboBoxRoute.SelectedItem as ComboRoute;
                 ct.Route = (int)(route.p);
-                c.Flight.Add(ct);
-                if (c.Id==0)
+                ct.QualificationRound = c;
+                if (ct.Id == 0)
+                {
+                    Client.DBContext.FlightSet.Add(ct);
+                }
+                if (c.Id == 0)
                 {
                     c.Competition = Client.SelectedCompetition;
                     Client.DBContext.QualificationRoundSet.Add(c);
                 }
+                Client.DBContext.SaveChanges();
                 updateList(c);
             }
             UpdateEnablement();
@@ -466,15 +471,15 @@ namespace AirNavigationRaceLive.Comps
             QualificationRound c = textName.Tag as QualificationRound;
             if (c != null)
             {
-            String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
-            DirectoryInfo di = Directory.CreateDirectory(dirPath);
-            if (!di.Exists)
-            {
-                di.Create();
+                String dirPath = System.Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) + @"\AirNavigationRace\";
+                DirectoryInfo di = Directory.CreateDirectory(dirPath);
+                if (!di.Exists)
+                {
+                    di.Create();
+                }
+                PDFCreator.CreateStartListPDF(c, Client, dirPath +
+                    @"\StartList_" + c.Id + "_" + c.Name + "_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
             }
-            PDFCreator.CreateStartListPDF(c, Client, dirPath +
-                @"\StartList_" +  c.Id+"_"+c.Name+"_" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".pdf");
-        }
         }
 
         private void btnAddCompetitionTeam_Click(object sender, EventArgs e)
@@ -484,11 +489,13 @@ namespace AirNavigationRaceLive.Comps
             {
                 return;
             }
-            try {
+            try
+            {
                 int startid = int.Parse(textBoxStartId.Text.ToString());
                 startid++;
                 textBoxStartId.Text = startid.ToString();
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ex.ToString();
                 return;
@@ -499,7 +506,7 @@ namespace AirNavigationRaceLive.Comps
                 comboBoxRoute.SelectedIndex = 0;
                 timeStart.Value = timeStart.Value.AddMinutes(timeParcourIntervall.Value.Minute);
                 timeEnd.Value = timeStart.Value.AddMinutes(timeParcourLength.Value.Minute);
-                timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeParcourIntervall.Value.Minute - ((comboBoxRoute.Items.Count-1) * timeTakeOffIntervall.Value.Minute));
+                timeTakeOff.Value = timeTakeOff.Value.AddMinutes(timeParcourIntervall.Value.Minute - ((comboBoxRoute.Items.Count - 1) * timeTakeOffIntervall.Value.Minute));
             }
             else
             {
@@ -514,7 +521,7 @@ namespace AirNavigationRaceLive.Comps
 
         }
 
-        
+
     }
     class ComboParcour
     {

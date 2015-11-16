@@ -54,7 +54,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>
     </DefineConstants>
@@ -180,6 +180,12 @@
     <Compile Include="Comps\Helper\Factory.cs" />
     <Compile Include="Comps\Helper\ParcourGeneratorSingle.cs" />
     <Compile Include="Comps\Helper\ParcourModelSingle.cs" />
+    <Compile Include="Comps\ImportExport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Comps\ImportExport.Designer.cs">
+      <DependentUpon>ImportExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comps\Model\PointTemporaer.cs" />
     <Compile Include="Comps\ParcourEditSingle.cs">
       <SubType>UserControl</SubType>
@@ -388,6 +394,9 @@
     <EmbeddedResource Include="Comps\CompetitionControl.resx">
       <DependentUpon>CompetitionControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comps\ImportExport.resx">
+      <DependentUpon>ImportExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Comps\ParcourEditSingle.resx">
       <DependentUpon>ParcourEditSingle.cs</DependentUpon>
