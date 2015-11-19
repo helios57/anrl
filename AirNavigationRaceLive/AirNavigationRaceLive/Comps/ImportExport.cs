@@ -41,7 +41,7 @@ namespace AirNavigationRaceLive.Comps
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnExportExcel.Enabled = comboBoxQualificationRound.SelectedItem != null;
-            btnSyncExcel.Enabled = false;//TODO btnExportExcel.Enabled;
+            btnSyncExcel.Enabled = btnExportExcel.Enabled;
         }
 
         private void btnExportExcel_Click(object sender, EventArgs e)
@@ -78,8 +78,7 @@ namespace AirNavigationRaceLive.Comps
                     i++;
                 }
                 i = 2;
-                List<Flight> flights = item.q.Flight.ToList();//.OrderBy(p => p.StartID).ToList();
-                foreach (Flight f in flights)
+                foreach (Flight f in item.q.Flight.OrderBy(p => p.StartID))
                 {
                     StartList.Cells[("A" + i)].Value = f.StartID;
                     StartList.Cells[("B" + i)].Value = int.Parse(f.Team.CNumber);

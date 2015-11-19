@@ -51,7 +51,7 @@ namespace AirNavigationRaceLive.Dialogs
         private void ExportKML_Load(object sender, EventArgs e)
         {
             parcour.Items.Clear();
-            foreach (Parcour p in Client.DBContext.ParcourSet)
+            foreach (Parcour p in Client.SelectedCompetition.Parcour)
             {
                 parcour.Items.Add(new Item(p));
             }

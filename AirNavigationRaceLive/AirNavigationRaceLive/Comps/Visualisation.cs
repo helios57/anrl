@@ -153,7 +153,7 @@ namespace AirNavigationRaceLive.Comps
 
         private void Visualisation_Load(object sender, EventArgs e)
         {
-            List<QualificationRound> comps = Client.DBContext.QualificationRoundSet.ToList();
+            List<QualificationRound> comps = Client.SelectedCompetition.QualificationRound.ToList();
             comboBox1.Items.Clear();
             foreach (QualificationRound c in comps)
             {

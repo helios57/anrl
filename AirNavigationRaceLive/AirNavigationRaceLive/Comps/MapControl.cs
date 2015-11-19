@@ -43,7 +43,7 @@ namespace AirNavigationRaceLive.Comps
         private void loadMaps()
         {
             listBox1.Items.Clear();
-            List<Map> maps = Client.DBContext.MapSet.ToList();
+            List<Map> maps = Client.SelectedCompetition.Map.ToList();
             foreach (Map m in maps)
             {
                 listBox1.Items.Add(new ListItem(m));

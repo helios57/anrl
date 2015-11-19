@@ -37,37 +37,42 @@
             // 
             // btnExportKLM
             // 
-            this.btnExportKLM.Location = new System.Drawing.Point(4, 4);
+            this.btnExportKLM.Location = new System.Drawing.Point(11, 10);
+            this.btnExportKLM.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnExportKLM.Name = "btnExportKLM";
-            this.btnExportKLM.Size = new System.Drawing.Size(183, 23);
+            this.btnExportKLM.Size = new System.Drawing.Size(488, 55);
             this.btnExportKLM.TabIndex = 0;
             this.btnExportKLM.Text = "Export KLM";
             this.btnExportKLM.UseVisualStyleBackColor = true;
             this.btnExportKLM.Click += new System.EventHandler(this.btnExportKLM_Click);
             // 
-            // comboBox1
+            // comboBoxQualificationRound
             // 
             this.comboBoxQualificationRound.FormattingEnabled = true;
-            this.comboBoxQualificationRound.Location = new System.Drawing.Point(110, 80);
-            this.comboBoxQualificationRound.Name = "comboBox1";
-            this.comboBoxQualificationRound.Size = new System.Drawing.Size(186, 21);
+            this.comboBoxQualificationRound.Location = new System.Drawing.Point(293, 191);
+            this.comboBoxQualificationRound.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.comboBoxQualificationRound.Name = "comboBoxQualificationRound";
+            this.comboBoxQualificationRound.Size = new System.Drawing.Size(489, 39);
             this.comboBoxQualificationRound.TabIndex = 1;
             this.comboBoxQualificationRound.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 83);
+            this.label1.Location = new System.Drawing.Point(11, 198);
+            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.Size = new System.Drawing.Size(267, 32);
             this.label1.TabIndex = 2;
             this.label1.Text = "QualificationRound:";
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Location = new System.Drawing.Point(146, 119);
+            this.btnExportExcel.Enabled = false;
+            this.btnExportExcel.Location = new System.Drawing.Point(389, 284);
+            this.btnExportExcel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.Size = new System.Drawing.Size(150, 23);
+            this.btnExportExcel.Size = new System.Drawing.Size(400, 55);
             this.btnExportExcel.TabIndex = 3;
             this.btnExportExcel.Text = "Export Excel";
             this.btnExportExcel.UseVisualStyleBackColor = true;
@@ -75,9 +80,11 @@
             // 
             // btnSyncExcel
             // 
-            this.btnSyncExcel.Location = new System.Drawing.Point(146, 148);
+            this.btnSyncExcel.Enabled = false;
+            this.btnSyncExcel.Location = new System.Drawing.Point(389, 353);
+            this.btnSyncExcel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnSyncExcel.Name = "btnSyncExcel";
-            this.btnSyncExcel.Size = new System.Drawing.Size(150, 23);
+            this.btnSyncExcel.Size = new System.Drawing.Size(400, 55);
             this.btnSyncExcel.TabIndex = 4;
             this.btnSyncExcel.Text = "Syncronize Excel";
             this.btnSyncExcel.UseVisualStyleBackColor = true;
@@ -85,15 +92,16 @@
             // 
             // ImportExport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnSyncExcel);
             this.Controls.Add(this.btnExportExcel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxQualificationRound);
             this.Controls.Add(this.btnExportKLM);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "ImportExport";
-            this.Size = new System.Drawing.Size(696, 436);
+            this.Size = new System.Drawing.Size(1856, 1040);
             this.Load += new System.EventHandler(this.ImportExport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -50,7 +50,7 @@ namespace AirNavigationRaceLive.Comps
         private void loadMaps()
         {
             comboBoxParcours.Items.Clear();
-            List<Parcour> parcours = Client.DBContext.ParcourSet.ToList();
+            List<Parcour> parcours = Client.SelectedCompetition.Parcour.ToList();
             foreach (Parcour p in parcours)
             {
                 comboBoxParcours.Items.Add(new ListItem(p));
