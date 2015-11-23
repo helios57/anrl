@@ -442,7 +442,6 @@ namespace AirNavigationRaceLive.Comps
                     c.Competition = Client.SelectedCompetition;
                     Client.DBContext.QualificationRoundSet.Add(c);
                 }
-                Client.DBContext.SaveChanges();
                 updateList(c);
             }
             UpdateEnablement();
