@@ -199,12 +199,12 @@ namespace AirNavigationRaceLive.Comps
             }
             Client.DBContext.SaveChanges();
             i = 2;
-            string date = null;
+            DateTime? date=null;
             while (i < 200)
             {
                 if (i == 2)
                 {
-                    date = StartList.Cells[("J" + i)].Value as string;
+                    date = StartList.Cells[("J" + i)].Value as DateTime?;
                 }
                 double? startId = StartList.Cells[("A" + i)].Value as double?;
                 double? cNumber = StartList.Cells[("B" + i)].Value as double?;
@@ -212,7 +212,7 @@ namespace AirNavigationRaceLive.Comps
                 double? start = StartList.Cells[("F" + i)].Value as double?;
                 double? end = StartList.Cells[("G" + i)].Value as double?;
                 string route = StartList.Cells[("H" + i)].Value as string;
-                if (date != null && takeOff != null && start != null && end != null && date != "" && startId.HasValue && cNumber.HasValue && takeOff.HasValue && start.HasValue && end.HasValue && route != null)
+                if (date != null && date.HasValue && takeOff != null && start != null && end != null &&  startId.HasValue && cNumber.HasValue && takeOff.HasValue && start.HasValue && end.HasValue && route != null)
                 {
                     Flight f = null;
                     if (item.q.Flight.Any(p => p.StartID == startId.Value))
@@ -228,7 +228,7 @@ namespace AirNavigationRaceLive.Comps
                     }
                     f.Team = Client.SelectedCompetition.Team.First(p => p.CNumber == ((int)cNumber.Value).ToString());
                     f.Route = (int)Enum.Parse(typeof(Route), route, true);
-                    DateTime d = DateTime.ParseExact(date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                    DateTime d = date.Value;
                     DateTime to = DateTime.FromOADate(takeOff.Value);
                     DateTime st = DateTime.FromOADate(start.Value);
                     DateTime en = DateTime.FromOADate(end.Value);
