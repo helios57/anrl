@@ -29,7 +29,7 @@ namespace AirNavigationRaceLive.Comps
             new ExportKML(Client).Show();
         }
 
-        private void ImportExport_Load(object sender, EventArgs e)
+        public void ImportExport_Load(object sender, EventArgs e)
         {
             List<QualificationRound> rounds = Client.SelectedCompetition.QualificationRound.ToList();
             comboBoxQualificationRound.Items.Clear();

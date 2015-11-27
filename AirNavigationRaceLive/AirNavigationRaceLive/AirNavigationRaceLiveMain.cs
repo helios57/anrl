@@ -345,6 +345,7 @@ namespace AirNavigationRaceLive
             {
                 ImportExport = new ImportExport(Client);
             }
+            ImportExport.ImportExport_Load(null, null);
             enableControl(ImportExport);
         }
     }
